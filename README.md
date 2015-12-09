@@ -12,9 +12,9 @@ The XAML Behavrios for Perspex is port of [Windows UWP](https://github.com/Micro
 
 XamlBehaviors is delivered as a NuGet package.
 
-You can find the packages here: ([NuGet](https://www.nuget.org/packages/XamlBehaviors/) or by using nightly build feed:
-1) Add `https://www.myget.org/F/xamlbehaviors-nightly/api/v2` to your package sources
-2) Update your package using XamlBehaviors feed
+You can find the packages here [NuGet](https://www.nuget.org/packages/XamlBehaviors/) or by using nightly build feed:
+* Add `https://www.myget.org/F/xamlbehaviors-nightly/api/v2` to your package sources
+* Update your package using `XamlBehaviors` feed
 
 You can install the package like this:
 
