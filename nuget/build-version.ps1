@@ -20,7 +20,7 @@ Copy-Item ..\src\Perspex.Xaml.Interactions\bin\Release\Perspex.Xaml.Interactions
 
 foreach($pkg in $Packages)
 {
-    (gc Perspex.Xaml.Behavior\$pkg.nuspec).replace('#VERSION#', $args[0]) | sc $pkg\$pkg.nuspec
+    (gc Perspex.Xaml.Behaviors\$pkg.nuspec).replace('#VERSION#', $args[0]) | sc $pkg\$pkg.nuspec
 }
 
 foreach($pkg in $Packages)
