@@ -1,0 +1,21 @@
+version: 1.0.{build}
+os: Visual Studio 2015
+before_build:
+- nuget restore XamlBehaviors.sln
+
+environment:
+  myget_key:
+    secure: xhYvrWYPHdNI+mQD+f4Zu3baL7fqW+nO/hYXJdN070Lej8wpa6gfrLi1NGtnQlAs
+
+configuration:
+  - Release
+
+after_test:
+- ps: nuget\build-appveyor.ps1
+
+artifacts:
+  - path: nuget\*.nupkg
+
+build:
+  project: XamlBehaviors.sln
+  verbosity: minimal
