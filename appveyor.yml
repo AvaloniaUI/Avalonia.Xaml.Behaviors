@@ -1,7 +1,8 @@
 version: 1.0.{build}
 os: Visual Studio 2015
 before_build:
-- nuget restore XamlBehaviors.sln -source "https://www.nuget.org/api/v2/;https://www.myget.org/F/perspex-nightly/api/v2"
+- cmd: >-
+    restore.cmd
 
 environment:
   myget_key:
