@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>Perspex</id>
+    <id>Perspex.Xaml.Behaviors</id>
     <version>#VERSION#</version>
-    <authors>Perspex Team</authors>
-    <owners>stevenk</owners>
+    <authors>XamlBehaviors</authors>
+    <owners>wieslaw.soltes</owners>
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
-    <projectUrl>https://github.com/Perspex/Perspex/</projectUrl>
+    <projectUrl>https://github.com/XamlBehaviors/XamlBehaviors/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>The Perspex UI framework</description>
+    <description>>Easily add interactivity to your Perspex apps using XAML Behaviors. Behaviors encapsulate reusable functionalities for elements that can be easily added to your XAML without the need for more imperative code.</description>
     <releaseNotes>Initial alpha release.</releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>Perspex</tags>
+    <tags>Perspex Behavior Action Behaviors Actions Managed C# Interaction Interactivity Interactions Xaml</tags>
     <dependencies>
       <dependency id="Serilog" version="1.5.9" />
       <dependency id="Splat" version="1.6.2" />
