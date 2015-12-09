@@ -8,7 +8,7 @@
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
     <projectUrl>https://github.com/XamlBehaviors/XamlBehaviors/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>>Easily add interactivity to your Perspex apps using XAML Behaviors. Behaviors encapsulate reusable functionalities for elements that can be easily added to your XAML without the need for more imperative code.</description>
+    <description>Easily add interactivity to your Perspex apps using XAML Behaviors. Behaviors encapsulate reusable functionalities for elements that can be easily added to your XAML without the need for more imperative code.</description>
     <releaseNotes>Initial alpha release.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Perspex Behavior Action Behaviors Actions Managed C# Interaction Interactivity Interactions Xaml</tags>
