@@ -105,7 +105,7 @@ namespace Perspex.Xaml.Interactions.Core
 
         /// <summary>
         /// Gets or sets the source object from which this behavior listens for events.
-        /// If <seealso cref="SourceObject"/> is not set, the source will default to <seealso cref="AssociatedObject"/>. This is a dependency property.
+        /// If <seealso cref="SourceObject"/> is not set, the source will default to <seealso cref="Behavior.AssociatedObject"/>. This is a dependency property.
         /// </summary>
         public object SourceObject
         {

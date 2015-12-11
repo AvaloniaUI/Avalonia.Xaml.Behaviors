@@ -32,10 +32,16 @@ namespace Perspex.Xaml.Interactions.Core
             });
         }
 
+        /// <summary>
+        /// Identifies the <seealso cref="MethodName"/> dependency property.
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly PerspexProperty MethodNameProperty =
             PerspexProperty.Register<CallMethodAction, string>("MethodName");
 
+        /// <summary>
+        /// Identifies the <seealso cref="TargetObject"/> dependency property.
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly PerspexProperty TargetObjectProperty =
             PerspexProperty.Register<CallMethodAction, object>("TargetObject");
