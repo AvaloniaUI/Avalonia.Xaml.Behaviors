@@ -12,11 +12,6 @@ namespace Perspex.Xaml.Interactivity
     /// </summary>
     public sealed class Interaction
     {
-        /// <remarks>
-        /// CA1053: Static holder types should not have public constructors
-        /// </remarks>
-        private Interaction() { }
-
         static Interaction()
         {
             BehaviorsProperty.Changed.Subscribe(e =>
@@ -44,10 +39,8 @@ namespace Perspex.Xaml.Interactivity
         /// <summary>
         /// Gets or sets the <see cref="BehaviorCollection"/> associated with a specified object.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly PerspexProperty<BehaviorCollection> BehaviorsProperty =
-            PerspexProperty.RegisterAttached<Interaction, PerspexObject, BehaviorCollection>(
-                "Behaviors");
+            PerspexProperty.RegisterAttached<Interaction, PerspexObject, BehaviorCollection>("Behaviors");
 
         /// <summary>
         /// Gets the <see cref="BehaviorCollection"/> associated with a specified object.
@@ -66,14 +59,14 @@ namespace Perspex.Xaml.Interactivity
                 behaviorCollection = new BehaviorCollection();
                 obj.SetValue(Interaction.BehaviorsProperty, behaviorCollection);
 
-                var frameworkElement = obj as Control;
+                var control = obj as Control;
 
-                if (frameworkElement != null)
+                if (control != null)
                 {
-                    frameworkElement.AttachedToVisualTree -= FrameworkElement_Loaded;
-                    frameworkElement.AttachedToVisualTree += FrameworkElement_Loaded;
-                    frameworkElement.DetachedFromVisualTree -= FrameworkElement_Unloaded;
-                    frameworkElement.DetachedFromVisualTree += FrameworkElement_Unloaded;
+                    control.AttachedToVisualTree -= Control_Loaded;
+                    control.AttachedToVisualTree += Control_Loaded;
+                    control.DetachedFromVisualTree -= Control_Unloaded;
+                    control.DetachedFromVisualTree += Control_Unloaded;
                 }
             }
 
@@ -119,7 +112,7 @@ namespace Perspex.Xaml.Interactivity
             return results;
         }
 
-        private static void FrameworkElement_Loaded(object sender, VisualTreeAttachmentEventArgs e)
+        private static void Control_Loaded(object sender, VisualTreeAttachmentEventArgs e)
         {
             var d = sender as PerspexObject;
 
@@ -129,7 +122,7 @@ namespace Perspex.Xaml.Interactivity
             }
         }
 
-        private static void FrameworkElement_Unloaded(object sender, VisualTreeAttachmentEventArgs e)
+        private static void Control_Unloaded(object sender, VisualTreeAttachmentEventArgs e)
         {
             var d = sender as PerspexObject;
 

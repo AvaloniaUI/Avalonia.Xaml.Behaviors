@@ -46,7 +46,6 @@
     <Compile Include="CustomPropertyValueEditor.cs" />
     <Compile Include="CustomPropertyValueEditorAttribute.cs" />
     <Compile Include="DefaultEventAttribute.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IAction.cs" />
     <Compile Include="IBehavior.cs" />
     <Compile Include="Interaction.cs" />

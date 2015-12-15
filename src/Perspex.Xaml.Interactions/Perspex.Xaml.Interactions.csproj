@@ -54,7 +54,6 @@
     <Compile Include="Core\EventTriggerBehavior.cs" />
     <Compile Include="Core\InvokeCommandAction.cs" />
     <Compile Include="Core\TypeConverterHelper.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

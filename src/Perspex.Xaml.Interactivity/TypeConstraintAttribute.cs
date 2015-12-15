@@ -6,7 +6,7 @@ using System;
 namespace Perspex.Xaml.Interactivity
 {
     /// <summary>
-    /// Specifies type constraints on the AssociatedObject of  <see cref="IBehavior"/>.
+    /// Specifies type constraints on the AssociatedObject of <see cref="IBehavior"/>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public sealed class TypeConstraintAttribute : Attribute

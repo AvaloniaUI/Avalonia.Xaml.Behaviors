@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Perspex.Controls;
-using Perspex.Controls.Primitives;
-using Perspex.Xaml.Interactivity;
 using AppContainerUITestMethod = Xunit.FactAttribute;
 using Xunit;
 

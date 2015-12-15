@@ -98,7 +98,6 @@ namespace Perspex.Xaml.Interactivity
                 {
                     this.oldCollection.Add(this.VerifiedAttach(newItem));
                 }
-
 #if DEBUG
                 this.VerifyOldCollectionIntegrity();
 #endif
@@ -151,7 +150,6 @@ namespace Perspex.Xaml.Interactivity
                     Debug.Assert(false, "Unsupported collection operation attempted.");
                     break;
             }
-
 #if DEBUG
             this.VerifyOldCollectionIntegrity();
 #endif

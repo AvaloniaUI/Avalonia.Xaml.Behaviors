@@ -16,21 +16,18 @@ namespace Perspex.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="PropertyName"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly PerspexProperty PropertyNameProperty =
             PerspexProperty.Register<ChangePropertyAction, string>("PropertyName");
 
         /// <summary>
         /// Identifies the <seealso cref="TargetObject"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly PerspexProperty TargetObjectProperty =
             PerspexProperty.Register<ChangePropertyAction, object>("TargetObject");
 
         /// <summary>
         /// Identifies the <seealso cref="Value"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly PerspexProperty ValueProperty =
             PerspexProperty.Register<ChangePropertyAction, object>("Value");
 
@@ -46,7 +43,6 @@ namespace Perspex.Xaml.Interactions.Core
         /// <summary>
         /// Gets or sets the value to set. This is a dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
         public object Value
         {
             get { return this.GetValue(ChangePropertyAction.ValueProperty); }

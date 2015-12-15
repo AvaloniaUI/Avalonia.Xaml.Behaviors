@@ -17,6 +17,8 @@ namespace Perspex.Xaml.Interactions.Core
     [ContentPropertyAttribute("Actions")]
     public sealed class EventTriggerBehavior : Behavior
     {
+        private const string EventNameDefaultValue = "Loaded";
+
         static EventTriggerBehavior()
         {
             EventNameProperty.Changed.Subscribe(e =>
@@ -44,21 +46,18 @@ namespace Perspex.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="Actions"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly PerspexProperty ActionsProperty =
             PerspexProperty.Register<EventTriggerBehavior, ActionCollection>("Actions");
 
         /// <summary>
         /// Identifies the <seealso cref="EventName"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly PerspexProperty EventNameProperty =
-            PerspexProperty.Register<EventTriggerBehavior, string>("EventName", "Loaded");
+            PerspexProperty.Register<EventTriggerBehavior, string>("EventName", EventNameDefaultValue);
 
         /// <summary>
         /// Identifies the <seealso cref="SourceObject"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly PerspexProperty SourceObjectProperty =
             PerspexProperty.Register<EventTriggerBehavior, object>("SourceObject");
 
@@ -68,13 +67,6 @@ namespace Perspex.Xaml.Interactions.Core
         private bool isWindowsRuntimeEvent;
         private Func<Delegate, EventRegistrationToken> addEventHandlerMethod;
         private Action<EventRegistrationToken> removeEventHandlerMethod;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EventTriggerBehavior"/> class.
-        /// </summary>
-        public EventTriggerBehavior()
-        {
-        }
 
         /// <summary>
         /// Gets the collection of actions associated with the behavior. This is a dependency property.
@@ -89,7 +81,6 @@ namespace Perspex.Xaml.Interactions.Core
                     actionCollection = new ActionCollection();
                     this.SetValue(EventTriggerBehavior.ActionsProperty, actionCollection);
                 }
-
                 return actionCollection;
             }
         }
@@ -170,7 +161,7 @@ namespace Perspex.Xaml.Interactions.Core
                 return;
             }
 
-            if (eventName != "Loaded")
+            if (eventName != EventNameDefaultValue)
             {
                 Type sourceObjectType = this.resolvedSource.GetType();
                 EventInfo info = sourceObjectType.GetRuntimeEvent(this.EventName);
@@ -217,7 +208,7 @@ namespace Perspex.Xaml.Interactions.Core
                 return;
             }
 
-            if (eventName != "Loaded")
+            if (eventName != EventNameDefaultValue)
             {
                 if (this.eventHandler == null)
                 {
@@ -247,17 +238,6 @@ namespace Perspex.Xaml.Interactions.Core
         private void OnEvent(object sender, object eventArgs)
         {
             Interaction.ExecuteActions(this.resolvedSource, this.Actions, eventArgs);
-        }
-
-        private static void OnSourceObjectChanged(PerspexObject dependencyObject, PerspexPropertyChangedEventArgs args)
-        {
-            EventTriggerBehavior behavior = (EventTriggerBehavior)dependencyObject;
-            behavior.SetResolvedSource(behavior.ComputeResolvedSource());
-        }
-
-        private static void OnEventNameChanged(PerspexObject dependencyObject, PerspexPropertyChangedEventArgs args)
-        {
-
         }
 
         internal static bool IsElementLoaded(Control element)

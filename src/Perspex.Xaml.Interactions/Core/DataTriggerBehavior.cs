@@ -24,28 +24,24 @@ namespace Perspex.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="Actions"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly PerspexProperty ActionsProperty =
             PerspexProperty.Register<DataTriggerBehavior, ActionCollection>("Actions");
 
         /// <summary>
         /// Identifies the <seealso cref="Binding"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly PerspexProperty BindingProperty =
             PerspexProperty.Register<DataTriggerBehavior, object>("Binding");
 
         /// <summary>
         /// Identifies the <seealso cref="ComparisonCondition"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly PerspexProperty ComparisonConditionProperty =
             PerspexProperty.Register<DataTriggerBehavior, ComparisonConditionType>("ComparisonCondition", ComparisonConditionType.Equal);
 
         /// <summary>
         /// Identifies the <seealso cref="Value"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly PerspexProperty ValueProperty =
             PerspexProperty.Register<DataTriggerBehavior, object>("Value");
 
@@ -88,7 +84,6 @@ namespace Perspex.Xaml.Interactions.Core
         /// <summary>
         /// Gets or sets the value to be compared with the value of <see cref="DataTriggerBehavior.Binding"/>. This is a dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
         public object Value
         {
             get { return (object)this.GetValue(DataTriggerBehavior.ValueProperty); }

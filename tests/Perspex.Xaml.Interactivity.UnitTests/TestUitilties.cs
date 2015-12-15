@@ -1,5 +1,4 @@
 ﻿using System;
-using Perspex;
 using Xunit;
 
 namespace Perspex.Xaml.Interactivity.UnitTests
