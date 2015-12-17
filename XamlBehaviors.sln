@@ -24,6 +24,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{64E611
 		src\Shared\SharedAssemblyInfo.cs = src\Shared\SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{CDCCA856-FCE5-49EB-AC3B-2C571853EDB7}"
+	ProjectSection(SolutionItems) = preProject
+		nuget\build-appveyor.ps1 = nuget\build-appveyor.ps1
+		nuget\build-version.ps1 = nuget\build-version.ps1
+		nuget\build.ps1 = nuget\build.ps1
+		nuget\include.ps1 = nuget\include.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "template", "template", "{68CC071A-72F8-4EBD-8FE8-2E6EF25656F8}"
+	ProjectSection(SolutionItems) = preProject
+		nuget\template\Perspex.Xaml.Behaviors.nuspec = nuget\template\Perspex.Xaml.Behaviors.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -193,5 +206,6 @@ Global
 		{EA113F1A-D8D7-4142-9948-353270E7EBAE} = {9B9E3891-2366-4253-A952-D08BCEB71098}
 		{C2229490-39CA-4192-A28C-1B5EC186E027} = {C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}
 		{80D2C64D-B560-475D-941F-D5F28DDB2591} = {C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}
+		{68CC071A-72F8-4EBD-8FE8-2E6EF25656F8} = {CDCCA856-FCE5-49EB-AC3B-2C571853EDB7}
 	EndGlobalSection
 EndGlobal
