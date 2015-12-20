@@ -7,14 +7,13 @@ using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Perspex.Xaml.Interactivity;
 using Perspex.Controls;
-using OmniXaml.Attributes;
+using Perspex.Metadata;
 
 namespace Perspex.Xaml.Interactions.Core
 {
     /// <summary>
     /// A behavior that listens for a specified event on its source and executes its actions when that event is fired.
     /// </summary>
-    [ContentPropertyAttribute("Actions")]
     public sealed class EventTriggerBehavior : Behavior
     {
         private const string EventNameDefaultValue = "Loaded";
@@ -71,6 +70,7 @@ namespace Perspex.Xaml.Interactions.Core
         /// <summary>
         /// Gets the collection of actions associated with the behavior. This is a dependency property.
         /// </summary>
+        [Content]
         public ActionCollection Actions
         {
             get

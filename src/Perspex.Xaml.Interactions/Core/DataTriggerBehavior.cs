@@ -4,14 +4,13 @@
 using System;
 using System.Globalization;
 using Perspex.Xaml.Interactivity;
-using OmniXaml.Attributes;
+using Perspex.Metadata;
 
 namespace Perspex.Xaml.Interactions.Core
 {
     /// <summary>
     /// A behavior that performs actions when the bound data meets a specified condition.
     /// </summary>
-    [ContentPropertyAttribute("Actions")]
     public sealed class DataTriggerBehavior : Behavior
     {
         static DataTriggerBehavior()
@@ -48,6 +47,7 @@ namespace Perspex.Xaml.Interactions.Core
         /// <summary>
         /// Gets the collection of actions associated with the behavior. This is a dependency property.
         /// </summary>
+        [Content]
         public ActionCollection Actions
         {
             get
