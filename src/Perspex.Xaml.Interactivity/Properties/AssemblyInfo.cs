@@ -7,5 +7,3 @@ using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle("Perspex.Xaml.Interactivity")]
 [assembly: InternalsVisibleTo("Perspex.Xaml.Interactivity.UnitTests")]
-
-[assembly: XmlnsDefinition("https://github.com/perspex", "Perspex.Xaml.Interactivity")]
