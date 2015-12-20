@@ -172,6 +172,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Perspex.Xaml.Interactions\Perspex.Xaml.Interactions.csproj">
+      <Project>{ed03eead-938f-447b-bf0b-30857ae78bff}</Project>
+      <Name>Perspex.Xaml.Interactions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Perspex.Xaml.Interactivity\Perspex.Xaml.Interactivity.csproj">
+      <Project>{14006eb4-66e9-4b58-bf5f-5a1983bf4621}</Project>
+      <Name>Perspex.Xaml.Interactivity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XamlTestApplicationPcl\XamlTestApplicationPcl.csproj">
       <Project>{ea113f1a-d8d7-4142-9948-353270e7ebae}</Project>
       <Name>XamlTestApplicationPcl</Name>
