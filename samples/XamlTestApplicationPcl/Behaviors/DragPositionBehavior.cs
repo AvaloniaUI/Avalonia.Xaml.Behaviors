@@ -6,44 +6,55 @@ using Perspex.Xaml.Interactivity;
 
 namespace XamlTestApplication.Behaviors
 {
-    public class DragPositionBehavior : PerspexObject, IBehavior
+    public class DragPositionBehavior : Behavior
     {
-        public PerspexObject AssociatedObject { get; set; }
-
-        public void Attach(PerspexObject associatedObject)
-        {
-            if ((associatedObject != AssociatedObject) && !Design.IsDesignMode)
-            {
-                AssociatedObject = associatedObject;
-                var fe = AssociatedObject as Control;
-                if (fe != null)
-                {
-                    fe.PointerPressed += AssociatedObject_PointerPressed;
-                }
-            }
-        }
-
         private Control parent = null;
         private Point prevPoint;
 
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+
+            var control = AssociatedObject as Control;
+            if (control != null)
+            {
+                control.PointerPressed += AssociatedObject_PointerPressed;
+            }
+        }
+
+        protected override void OnDetaching()
+        {
+            base.OnDetaching();
+
+            var control = AssociatedObject as Control;
+            if (control != null)
+            {
+                control.PointerPressed -= AssociatedObject_PointerPressed;
+            }
+
+            parent = null;
+        }
+
         private void AssociatedObject_PointerPressed(object sender, PointerPressEventArgs e)
         {
-            var fe = AssociatedObject as Control;
-            parent = (Control)fe.Parent;
+            var control = AssociatedObject as Control;
+            parent = (Control)control.Parent;
 
-            if (!(fe.RenderTransform is TranslateTransform))
-                fe.RenderTransform = new TranslateTransform();
+            if (!(control.RenderTransform is TranslateTransform))
+            {
+                control.RenderTransform = new TranslateTransform();
+            }
 
             prevPoint = e.GetPosition(parent);
             parent.PointerMoved += Parent_PointerMoved;
             parent.PointerReleased += Parent_PointerReleased;
         }
 
-        private void Parent_PointerMoved(object o, PointerEventArgs args)
+        private void Parent_PointerMoved(object sender, PointerEventArgs args)
         {
-            var fe = AssociatedObject as Control;
+            var control = AssociatedObject as Control;
             var pos = args.GetPosition(parent);
-            var tr = (TranslateTransform)fe.RenderTransform;
+            var tr = (TranslateTransform)control.RenderTransform;
             tr.X += pos.X - prevPoint.X;
             tr.Y += pos.Y - prevPoint.Y;
             prevPoint = pos;
@@ -54,18 +65,6 @@ namespace XamlTestApplication.Behaviors
             parent.PointerMoved -= Parent_PointerMoved;
             parent.PointerReleased -= Parent_PointerReleased;
             parent = null;
-        }
-
-        public void Detach()
-        {
-            var fe = AssociatedObject as Control;
-            if (fe != null)
-            {
-                fe.PointerPressed -= AssociatedObject_PointerPressed;
-            }
-
-            parent = null;
-            AssociatedObject = null;
         }
     }
 }
