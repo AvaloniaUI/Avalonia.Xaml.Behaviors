@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\xunit.runner.visualstudio.2.0.1\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.2.0.1\build\net20\xunit.runner.visualstudio.props')" />
-  <Import Project="..\..\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props" Condition="Exists('..\..\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props')" />
+  <Import Project="..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -36,63 +35,63 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Perspex.Animation, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.Animation.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.Animation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Application, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.Application.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.Application.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Base, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.Base.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.Base.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Controls, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.Controls.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.Controls.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Diagnostics, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.Diagnostics.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.Diagnostics.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.HtmlRenderer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.HtmlRenderer.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.HtmlRenderer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Input, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.Input.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.Input.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Interactivity, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Layout, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.Layout.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.Layout.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Markup, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.Markup.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.Markup.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Markup.Xaml, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.Markup.Xaml.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.Markup.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.ReactiveUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.ReactiveUI.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.ReactiveUI.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.SceneGraph, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.SceneGraph.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.SceneGraph.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Styling, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.Styling.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.Styling.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Themes.Default, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.9999.0.985-nightly\lib\portable-windows8+net45\Perspex.Themes.Default.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.991-nightly\lib\portable-windows8+net45\Perspex.Themes.Default.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
@@ -139,12 +138,16 @@
       <HintPath>..\..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="xunit.assert, Version=2.0.0.2929, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\xunit.assert.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.assert.dll</HintPath>
+    <Reference Include="xunit.assert, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.assert.2.1.0\lib\dotnet\xunit.assert.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="xunit.core, Version=2.0.0.2929, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\xunit.extensibility.core.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
+    <Reference Include="xunit.core, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.extensibility.core.2.1.0\lib\dotnet\xunit.core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.execution.desktop, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -165,8 +168,7 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props'))" />
-    <Error Condition="!Exists('..\..\packages\xunit.runner.visualstudio.2.0.1\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.runner.visualstudio.2.0.1\build\net20\xunit.runner.visualstudio.props'))" />
+    <Error Condition="!Exists('..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
