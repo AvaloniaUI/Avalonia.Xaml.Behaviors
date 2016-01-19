@@ -19,3 +19,20 @@ You can find the packages here [NuGet](https://www.nuget.org/packages/XamlBehavi
 You can install the package like this:
 
 `Install-Package Perspex.Xaml.Behaviors -Pre`
+
+### Package Dependencies
+
+* Perspex
+* Rx-Core
+* Rx-Interfaces
+* Rx-Linq
+* Rx-Main
+* Rx-PlatformServices
+* Serilog
+* Splat
+* Sprache
+
+### Package Sources
+
+* https://www.nuget.org/api/v2/
+* https://www.myget.org/F/perspex-nightly/api/v2
