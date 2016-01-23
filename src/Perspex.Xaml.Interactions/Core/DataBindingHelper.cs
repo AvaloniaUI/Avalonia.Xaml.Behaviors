@@ -68,18 +68,7 @@ namespace Perspex.Xaml.Interactions.Core
             IBinding binding = target.GetValue(property) as IBinding;
             if (binding != null)
             {
-                var mode = binding.Mode;
-
-                if (mode == BindingMode.Default)
-                {
-                    mode = property.DefaultBindingMode;
-                }
-
-                target.Bind(
-                    property, 
-                    binding.CreateSubject(target, property),
-                    mode,
-                    binding.Priority);
+                target.Bind(property, binding);
             }
         }
     }
