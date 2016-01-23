@@ -4,8 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Perspex.Data;
 using Perspex.Xaml.Interactivity;
-using Perspex.Markup.Xaml.Data;
 
 namespace Perspex.Xaml.Interactions.Core
 {
@@ -65,10 +65,21 @@ namespace Perspex.Xaml.Interactions.Core
 
         private static void RefreshBinding(PerspexObject target, PerspexProperty property)
         {
-            IXamlBinding binding = target.GetValue(property) as IXamlBinding;
+            IBinding binding = target.GetValue(property) as IBinding;
             if (binding != null)
             {
-                binding.Bind(target, property);
+                var mode = binding.Mode;
+
+                if (mode == BindingMode.Default)
+                {
+                    mode = property.DefaultBindingMode;
+                }
+
+                target.Bind(
+                    property, 
+                    binding.CreateSubject(target, property),
+                    mode,
+                    binding.Priority);
             }
         }
     }
