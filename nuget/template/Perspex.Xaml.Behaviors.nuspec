@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Easily add interactivity to your Perspex apps using XAML Behaviors. Behaviors encapsulate reusable functionalities for elements that can be easily added to your XAML without the need for more imperative code.</description>
     <releaseNotes>Initial alpha release.</releaseNotes>
-    <copyright>Copyright 2015</copyright>
+    <copyright>Copyright 2016</copyright>
     <tags>Perspex Behavior Action Behaviors Actions Managed C# Interaction Interactivity Interactions Xaml</tags>
     <dependencies>
       <dependency id="Serilog" version="1.5.9" />
