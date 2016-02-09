@@ -1,0 +1,36 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "/src/Perspex.Xaml.Interactions/Perspex.Xaml.Interactions.csproj",
+            "/src/Perspex.Xaml.Interactivity/Perspex.Xaml.Interactivity.csproj"
+          ],
+          "exclude": [ "**/bin/**", "**/obj/**" ], 
+          "cwd": ".."
+        }
+      ],
+      "dest": "api"
+    },
+  ],
+  "build": {
+    "content":
+      [
+        {
+          "files": ["**/*.yml", "index.md", "tutorial/*.md"],
+        }
+      ],
+    "resource": [
+        {
+          "files": ["images/**"]
+        }
+    ],
+    "overwrite": "apidoc/*.md",
+    "globalMetadata": {
+      "_appTitle": "XamlBehaviors Website"
+    },
+    "dest": "_site",
+    "template": "default"
+  }
+}
