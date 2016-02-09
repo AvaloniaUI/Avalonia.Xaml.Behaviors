@@ -36,3 +36,12 @@ You can install the package like this:
 
 * https://www.nuget.org/api/v2/
 * https://www.myget.org/F/perspex-nightly/api/v2
+
+## Resources
+
+* [Project website and API Reference.](http://xamlbehaviors.github.io/)
+* [GitHub source code repository.](https://github.com/XamlBehaviors/XamlBehaviors)
+
+## License
+
+XAML Behaviors is licensed under the [MIT license](LICENSE.TXT).
