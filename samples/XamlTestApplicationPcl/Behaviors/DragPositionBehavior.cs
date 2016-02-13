@@ -35,7 +35,7 @@ namespace XamlTestApplication.Behaviors
             parent = null;
         }
 
-        private void AssociatedObject_PointerPressed(object sender, PointerPressEventArgs e)
+        private void AssociatedObject_PointerPressed(object sender, PointerPressedEventArgs e)
         {
             var control = AssociatedObject as Control;
             parent = (Control)control.Parent;
