@@ -21,7 +21,7 @@
       <dependency id="Rx-Linq" version="2.2.5" />
       <dependency id="Rx-Main" version="2.2.5" />
       <dependency id="Rx-PlatformServices" version="2.2.5" />
-      <dependency id="Perspex" version="9999.0.1202-nightly" />
+      <dependency id="Perspex" version="9999.0.1211-nightly" />
     </dependencies>
   </metadata>
 </package>
