@@ -1,6 +1,5 @@
 ﻿using Perspex;
 using Perspex.Markup.Xaml;
-using Perspex.Themes.Default;
 
 namespace XamlTestApplication
 {
@@ -12,7 +11,6 @@ namespace XamlTestApplication
         {
             RegisterServices();
             RegisterPlatform();
-            Styles = new DefaultTheme();
             InitializeComponent();
         }
 
