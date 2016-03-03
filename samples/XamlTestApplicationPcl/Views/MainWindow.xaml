@@ -14,6 +14,7 @@
                 <SolidColorBrush x:Key="RedBrush">Red</SolidColorBrush>
                 <SolidColorBrush x:Key="BlueBrush">Blue</SolidColorBrush>
                 <SolidColorBrush x:Key="YellowBrush">Yellow</SolidColorBrush>
+                <SolidColorBrush x:Key="PinkBrush">Pink</SolidColorBrush>
             </Style.Resources>
         </Style>
     </Window.Styles>
@@ -23,7 +24,25 @@
                 <!-- TODO -->
             </TabItem>
             <TabItem Header="ChangePropertyAction">
-                <!-- TODO -->
+                <Grid RowDefinitions="5*,*">
+                    <Rectangle Name="ChangePropertyRectangle" Grid.Row="0" Margin="5" Fill="{StyleResource PinkBrush}" Stroke="{StyleResource GrayBrush}" StrokeThickness="5"/>
+                    <Grid ColumnDefinitions="*,*" Grid.Row="1">
+                        <Button Name="button1" Content="Yellow" Grid.Column="0" Margin="5,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <i:Interaction.Behaviors>
+                                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #button1}">
+                                    <ia:ChangePropertyAction TargetObject="{Binding #ChangePropertyRectangle}" PropertyName="Fill" Value="{StyleResource YellowBrush}"/>
+                                </ia:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                        </Button>
+                        <Button Name="button2" Content="Pink" Grid.Column="1" Margin="5,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <i:Interaction.Behaviors>
+                                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #button2}">
+                                    <ia:ChangePropertyAction TargetObject="{Binding #ChangePropertyRectangle}" PropertyName="Fill" Value="{StyleResource PinkBrush}"/>
+                                </ia:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                        </Button>
+                    </Grid>
+                </Grid>
             </TabItem>
             <TabItem Header="CustomAction">
                 <!-- TODO -->
