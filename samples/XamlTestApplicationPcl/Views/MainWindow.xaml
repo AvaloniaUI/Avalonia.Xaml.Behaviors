@@ -6,8 +6,34 @@
         xmlns:ia="clr-namespace:Perspex.Xaml.Interactions.Core;assembly=Perspex.Xaml.Interactions"
         xmlns:behaviors="clr-namespace:XamlTestApplication.Behaviors;assembly=XamlTestApplicationPcl"
         Title="XamlBehaviors Test Application" Width="800" Height="600">
+    <Window.Styles>
+        <Style>
+            <Style.Resources>
+                <SolidColorBrush x:Key="BlueBrush">Blue</SolidColorBrush>
+                <SolidColorBrush x:Key="YellowBrush">Yellow</SolidColorBrush>
+            </Style.Resources>
+        </Style>
+    </Window.Styles>
     <Grid>
         <TabControl>
+            <TabItem Header="DataTriggerBehavior">
+                <Grid RowDefinitions="5*,*">
+                    <Rectangle Name="DataTriggerRectangle" Grid.Row="0" Fill="Blue" Stroke="Gray" StrokeThickness="5">
+                        <i:Interaction.Behaviors>
+                            <ia:DataTriggerBehavior Binding="{Binding #slider.Value}" ComparisonCondition="GreaterThan" Value="50">
+                                <ia:ChangePropertyAction TargetObject="{Binding #DataTriggerRectangle}" PropertyName="Fill" Value="{StyleResource YellowBrush}"/>
+                            </ia:DataTriggerBehavior>
+                            <ia:DataTriggerBehavior Binding="{Binding #slider.Value}" ComparisonCondition="LessThanOrEqual" Value="50">
+                                <ia:ChangePropertyAction TargetObject="{Binding #DataTriggerRectangle}" PropertyName="Fill" Value="{StyleResource BlueBrush}"/>
+                            </ia:DataTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </Rectangle>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding #slider.Value}" VerticalAlignment="Center" Width="50" Foreground="Gray"/>
+                        <Slider Name="slider" Width="150" IsSnapToTickEnabled="True" TickFrequency="1"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
             <TabItem Header="EventTriggerBehavior">
                 <Grid RowDefinitions="Auto,100">
                     <TextBox Name="textBox" Text="Hello" Grid.Row="0"/>
