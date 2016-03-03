@@ -9,6 +9,9 @@
     <Window.Styles>
         <Style>
             <Style.Resources>
+                <SolidColorBrush x:Key="BlackBrush">Black</SolidColorBrush> 
+                <SolidColorBrush x:Key="GrayBrush">Gray</SolidColorBrush>
+                <SolidColorBrush x:Key="RedBrush">Red</SolidColorBrush>
                 <SolidColorBrush x:Key="BlueBrush">Blue</SolidColorBrush>
                 <SolidColorBrush x:Key="YellowBrush">Yellow</SolidColorBrush>
             </Style.Resources>
@@ -26,8 +29,8 @@
                 <!-- TODO -->
             </TabItem>
             <TabItem Header="CustomBehavior">
-                <Grid>
-                    <Ellipse Fill="Red" Stroke="Black" Height="125" Width="125" StrokeThickness="0">
+                <Grid Background="{StyleResource GrayBrush}">
+                    <Ellipse Fill="{StyleResource RedBrush}" Stroke="{StyleResource BlackBrush}" Height="125" Width="125" StrokeThickness="0"  HorizontalAlignment="Stretch">
                         <i:Interaction.Behaviors>
                             <behaviors:DragPositionBehavior/>
                         </i:Interaction.Behaviors>
@@ -36,7 +39,7 @@
             </TabItem>
             <TabItem Header="DataTriggerBehavior">
                 <Grid RowDefinitions="5*,*">
-                    <Rectangle Name="DataTriggerRectangle" Grid.Row="0" Fill="Blue" Stroke="Gray" StrokeThickness="5">
+                    <Rectangle Name="DataTriggerRectangle" Grid.Row="0" Fill="{StyleResource BlueBrush}" Stroke="{StyleResource GrayBrush}" StrokeThickness="5">
                         <i:Interaction.Behaviors>
                             <ia:DataTriggerBehavior Binding="{Binding #slider.Value}" ComparisonCondition="GreaterThan" Value="50">
                                 <ia:ChangePropertyAction TargetObject="{Binding #DataTriggerRectangle}" PropertyName="Fill" Value="{StyleResource YellowBrush}"/>
@@ -47,7 +50,7 @@
                         </i:Interaction.Behaviors>
                     </Rectangle>
                     <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="{Binding #slider.Value}" VerticalAlignment="Center" Width="50" Foreground="Gray"/>
+                        <TextBlock Text="{Binding #slider.Value}" VerticalAlignment="Center" Width="50" Foreground="{StyleResource GrayBrush}"/>
                         <Slider Name="slider" Width="150" IsSnapToTickEnabled="True" TickFrequency="1"/>
                     </StackPanel>
                 </Grid>
