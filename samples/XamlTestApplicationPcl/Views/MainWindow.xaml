@@ -13,8 +13,8 @@
                     <TextBox Name="textBox" Text="Hello" Grid.Row="0"/>
                     <Button Name="button" Content="Change Property" Grid.Row="1">
                         <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding ElementName=button}">
-                                <ia:ChangePropertyAction TargetObject="{Binding ElementName=textBox}" PropertyName="Text" Value="World"/>
+                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #button}">
+                                <ia:ChangePropertyAction TargetObject="{Binding #textBox}" PropertyName="Text" Value="World"/>
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </Button>
