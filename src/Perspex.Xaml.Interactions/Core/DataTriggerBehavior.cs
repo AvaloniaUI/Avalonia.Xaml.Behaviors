@@ -207,10 +207,16 @@ namespace Perspex.Xaml.Interactions.Core
 
             DataBindingHelper.RefreshDataBindingsOnActions(dataTriggerBehavior.Actions);
 
-            // Some value has changed--either the binding value, reference value, or the comparison condition. Re-evaluate the equation.
-            if (DataTriggerBehavior.Compare(dataTriggerBehavior.Binding, dataTriggerBehavior.ComparisonCondition, dataTriggerBehavior.Value))
+            // NOTE: In UWP version binding and value null checks are not present, Perspex throws exception as Bindings are null when first initialized.
+            var bidning = dataTriggerBehavior.Binding;
+            var value = dataTriggerBehavior.Value;
+            if (bidning != null && value != null)
             {
-                Interaction.ExecuteActions(dataTriggerBehavior.AssociatedObject, dataTriggerBehavior.Actions, args);
+                // Some value has changed--either the binding value, reference value, or the comparison condition. Re-evaluate the equation.
+                if (DataTriggerBehavior.Compare(dataTriggerBehavior.Binding, dataTriggerBehavior.ComparisonCondition, dataTriggerBehavior.Value))
+                {
+                    Interaction.ExecuteActions(dataTriggerBehavior.AssociatedObject, dataTriggerBehavior.Actions, args);
+                }
             }
         }
     }
