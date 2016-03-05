@@ -7,6 +7,10 @@
         xmlns:behaviors="clr-namespace:XamlTestApplication.Behaviors;assembly=XamlTestApplicationPcl"
         Title="XamlBehaviors Test Application" Width="800" Height="600">
     <Window.Styles>
+        <Style Selector="TabStripItem">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
         <Style>
             <Style.Resources>
                 <SolidColorBrush x:Key="BlackBrush">Black</SolidColorBrush> 
