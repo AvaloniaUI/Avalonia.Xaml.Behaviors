@@ -3,7 +3,7 @@
 
 using System.ComponentModel;
 
-namespace XamlTestApplication.ViewModels
+namespace XamlTestApplication.ViewModels.Core
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
