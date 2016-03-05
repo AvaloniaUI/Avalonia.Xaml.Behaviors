@@ -67,7 +67,7 @@
             </TabItem>
             <TabItem Header="CustomBehavior">
                 <Grid Background="{StyleResource GrayBrush}">
-                    <Ellipse Fill="{StyleResource RedBrush}" Stroke="{StyleResource BlackBrush}" Height="125" Width="125" StrokeThickness="0"  HorizontalAlignment="Stretch">
+                    <Ellipse Fill="{StyleResource RedBrush}" Stroke="{StyleResource BlackBrush}" Height="125" Width="125" StrokeThickness="0" HorizontalAlignment="Stretch">
                         <i:Interaction.Behaviors>
                             <behaviors:DragPositionBehavior/>
                         </i:Interaction.Behaviors>
