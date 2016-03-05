@@ -49,7 +49,7 @@ namespace XamlTestApplication.ViewModels
             Position = 100.0;
             MoveLeftCommand = new Command((param) => Position -= 5.0);
             MoveRightCommand = new Command((param) => Position += 5.0);
-            MoveLeftCommand = new Command((param) => Position = 0.0);
+            ResetMoveCommand = new Command((param) => Position = 100.0);
         }
 
         public void IncrementCount()
