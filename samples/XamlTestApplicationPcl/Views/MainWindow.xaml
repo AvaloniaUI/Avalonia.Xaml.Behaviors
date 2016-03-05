@@ -27,16 +27,16 @@
                 <Grid RowDefinitions="5*,*">
                     <Rectangle Name="ChangePropertyRectangle" Grid.Row="0" Margin="5" Fill="{StyleResource PinkBrush}" Stroke="{StyleResource GrayBrush}" StrokeThickness="5"/>
                     <Grid ColumnDefinitions="*,*" Grid.Row="1">
-                        <Button Name="button1" Content="Yellow" Grid.Column="0" Margin="5,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Button Name="yellowButton" Content="Yellow" Grid.Column="0" Margin="5,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <i:Interaction.Behaviors>
-                                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #button1}">
+                                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #yellowButton}">
                                     <ia:ChangePropertyAction TargetObject="{Binding #ChangePropertyRectangle}" PropertyName="Fill" Value="{StyleResource YellowBrush}"/>
                                 </ia:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                         </Button>
-                        <Button Name="button2" Content="Pink" Grid.Column="1" Margin="5,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Button Name="pinkButton" Content="Pink" Grid.Column="1" Margin="5,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <i:Interaction.Behaviors>
-                                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #button2}">
+                                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #pinkButton}">
                                     <ia:ChangePropertyAction TargetObject="{Binding #ChangePropertyRectangle}" PropertyName="Fill" Value="{StyleResource PinkBrush}"/>
                                 </ia:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
@@ -77,9 +77,9 @@
             <TabItem Header="EventTriggerBehavior">
                 <Grid RowDefinitions="Auto,100">
                     <TextBox Name="textBox" Text="Hello" Grid.Row="0"/>
-                    <Button Name="button" Content="Change Property" Grid.Row="1">
+                    <Button Name="changePropertyButton" Content="Change Property" Grid.Row="1">
                         <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #button}">
+                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #changePropertyButton}">
                                 <ia:ChangePropertyAction TargetObject="{Binding #textBox}" PropertyName="Text" Value="World"/>
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
