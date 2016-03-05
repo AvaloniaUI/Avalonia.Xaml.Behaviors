@@ -9,6 +9,7 @@ namespace XamlTestApplication.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private int _count;
+        private double _position;
 
         public int Count
         {
@@ -23,6 +24,19 @@ namespace XamlTestApplication.ViewModels
             }
         }
 
+        public double Position
+        {
+            get { return _position; }
+            set
+            {
+                if (value != _position)
+                {
+                    _position = value;
+                    OnPropertyChanged(nameof(Position));
+                }
+            }
+        }
+
         public ICommand MoveLeftCommand { get; set; }
 
         public ICommand MoveRightCommand { get; set; }
@@ -32,6 +46,7 @@ namespace XamlTestApplication.ViewModels
         public MainWindowViewModel()
         {
             Count = 0;
+            Position = 100.0;
             MoveLeftCommand = new Command((param) => Position -= 5.0);
             MoveRightCommand = new Command((param) => Position += 5.0);
             MoveLeftCommand = new Command((param) => Position = 0.0);
