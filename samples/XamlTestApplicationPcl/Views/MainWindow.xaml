@@ -21,7 +21,25 @@
     <Grid>
         <TabControl>
             <TabItem Header="CallMethodAction">
-                <!-- TODO -->
+                <Grid RowDefinitions="5*,*" ColumnDefinitions="50*,5,50*">
+                    <Border BorderThickness="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5" Background="{StyleResource PinkBrush}" BorderBrush="{StyleResource GrayBrush}">
+                        <TextBlock Text="{Binding Count}" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StyleResource YellowBrush}"/>
+                    </Border>
+                    <Button x:Name="decrementButton" Content="Decrement" Grid.Row="1" Grid.Column="0" Margin="0,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #decrementButton}">
+                                <ia:CallMethodAction TargetObject="{Binding}" MethodName="DecrementCount"/>
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </Button>
+                    <Button x:Name="incrementButton" Content="Increment" Grid.Row="1" Grid.Column="2" Margin="5,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #incrementButton}">
+                                <ia:CallMethodAction TargetObject="{Binding}" MethodName="IncrementCount"/>
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </Button>
+                </Grid>
             </TabItem>
             <TabItem Header="ChangePropertyAction">
                 <Grid RowDefinitions="5*,*">
