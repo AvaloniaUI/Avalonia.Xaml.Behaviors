@@ -126,7 +126,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="CustomAction">
-                <Grid  RowDefinitions="*,2*">
+                <Grid RowDefinitions="*,2*">
                     <Button Name="popupButton" Content="Click Me" HorizontalAlignment="Stretch" Grid.Row="0" Margin="5" VerticalAlignment="Stretch" FontSize="20">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #popupButton}">
