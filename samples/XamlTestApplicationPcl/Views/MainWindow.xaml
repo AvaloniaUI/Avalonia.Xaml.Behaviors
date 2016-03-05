@@ -5,6 +5,7 @@
         xmlns:i="clr-namespace:Perspex.Xaml.Interactivity;assembly=Perspex.Xaml.Interactivity"
         xmlns:ia="clr-namespace:Perspex.Xaml.Interactions.Core;assembly=Perspex.Xaml.Interactions"
         xmlns:behaviors="clr-namespace:XamlTestApplication.Behaviors;assembly=XamlTestApplicationPcl"
+        xmlns:actions="clr-namespace:XamlTestApplication.Actions;assembly=XamlTestApplicationPcl"
         Title="XamlBehaviors Test Application" Width="800" Height="600">
     <Window.Styles>
         <Style Selector="TabStripItem">
@@ -67,7 +68,15 @@
                 </Grid>
             </TabItem>
             <TabItem Header="CustomAction">
-                <!-- TODO -->
+                <Grid  RowDefinitions="*,2*">
+                    <Button Name="popupButton" Content="Click Me" HorizontalAlignment="Stretch" Grid.Row="0" Margin="5" VerticalAlignment="Stretch" FontSize="20">
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #popupButton}">
+                                <actions:PopupAction/>
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </Button>
+                </Grid>
             </TabItem>
             <TabItem Header="CustomBehavior">
                 <Grid Background="{StyleResource GrayBrush}" Margin="5">
