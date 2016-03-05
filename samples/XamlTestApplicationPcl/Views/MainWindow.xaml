@@ -29,14 +29,14 @@
                     <Border BorderThickness="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5" Background="{StyleResource PinkBrush}" BorderBrush="{StyleResource GrayBrush}">
                         <TextBlock Text="{Binding Count}" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StyleResource YellowBrush}"/>
                     </Border>
-                    <Button x:Name="decrementButton" Content="Decrement" Grid.Row="1" Grid.Column="0" Margin="0,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="decrementButton" Content="Decrement" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #decrementButton}">
                                 <ia:CallMethodAction TargetObject="{Binding}" MethodName="DecrementCount"/>
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </Button>
-                    <Button x:Name="incrementButton" Content="Increment" Grid.Row="1" Grid.Column="2" Margin="5,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="incrementButton" Content="Increment" Grid.Row="1" Grid.Column="2" Margin="0,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #incrementButton}">
                                 <ia:CallMethodAction TargetObject="{Binding}" MethodName="IncrementCount"/>
@@ -70,7 +70,7 @@
                 <!-- TODO -->
             </TabItem>
             <TabItem Header="CustomBehavior">
-                <Grid Background="{StyleResource GrayBrush}">
+                <Grid Background="{StyleResource GrayBrush}" Margin="5">
                     <Ellipse Fill="{StyleResource RedBrush}" Stroke="{StyleResource BlackBrush}" Height="125" Width="125" StrokeThickness="0" HorizontalAlignment="Stretch">
                         <i:Interaction.Behaviors>
                             <behaviors:DragPositionBehavior/>
@@ -98,8 +98,8 @@
             </TabItem>
             <TabItem Header="EventTriggerBehavior">
                 <Grid RowDefinitions="Auto,100">
-                    <TextBox Name="textBox" Text="Hello" Grid.Row="0"/>
-                    <Button Name="changePropertyButton" Content="Change Property" Grid.Row="1">
+                    <TextBox Name="textBox" Text="Hello" Grid.Row="0" Margin="5"/>
+                    <Button Name="changePropertyButton" Content="Change Property" Grid.Row="1" Margin="5,0,5,5">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #changePropertyButton}">
                                 <ia:ChangePropertyAction TargetObject="{Binding #textBox}" PropertyName="Text" Value="World"/>
