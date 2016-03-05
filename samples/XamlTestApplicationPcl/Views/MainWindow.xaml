@@ -14,7 +14,7 @@
         </Style>
         <Style>
             <Style.Resources>
-                <SolidColorBrush x:Key="BlackBrush">Black</SolidColorBrush> 
+                <SolidColorBrush x:Key="BlackBrush">Black</SolidColorBrush>
                 <SolidColorBrush x:Key="GrayBrush">Gray</SolidColorBrush>
                 <SolidColorBrush x:Key="RedBrush">Red</SolidColorBrush>
                 <SolidColorBrush x:Key="BlueBrush">Blue</SolidColorBrush>
