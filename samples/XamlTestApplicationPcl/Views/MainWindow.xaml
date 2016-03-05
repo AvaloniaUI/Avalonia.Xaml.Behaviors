@@ -89,7 +89,7 @@
             </TabItem>
             <TabItem Header="DataTriggerBehavior">
                 <Grid RowDefinitions="5*,*">
-                    <Rectangle Name="DataTriggerRectangle" Grid.Row="0" Fill="{StyleResource BlueBrush}" Stroke="{StyleResource GrayBrush}" StrokeThickness="5">
+                    <Rectangle Name="DataTriggerRectangle" Grid.Row="0" Margin="5" Fill="{StyleResource BlueBrush}" Stroke="{StyleResource GrayBrush}" StrokeThickness="5">
                         <i:Interaction.Behaviors>
                             <ia:DataTriggerBehavior Binding="{Binding #slider.Value}" ComparisonCondition="GreaterThan" Value="50">
                                 <ia:ChangePropertyAction TargetObject="{Binding #DataTriggerRectangle}" PropertyName="Fill" Value="{StyleResource YellowBrush}"/>
@@ -99,7 +99,7 @@
                             </ia:DataTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </Rectangle>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Grid.Row="1" Margin="5,0,5,5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="{Binding #slider.Value}" VerticalAlignment="Center" Width="50" Foreground="{StyleResource GrayBrush}"/>
                         <Slider Name="slider" Width="150" IsSnapToTickEnabled="True" TickFrequency="1"/>
                     </StackPanel>
