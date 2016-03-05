@@ -105,7 +105,32 @@
                 </Grid>
             </TabItem>
             <TabItem Header="InvokeCommandAction">
-                <!-- TODO -->
+                <Grid RowDefinitions="5*,*" ColumnDefinitions="30*,5,30*,5,30*">
+                    <Canvas Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="5" Background="{StyleResource GrayBrush}">
+                        <Ellipse Canvas.Left="{Binding Position}" Canvas.Top="200" Fill="{StyleResource RedBrush}" Stroke="{StyleResource YellowBrush}" StrokeThickness="5" Height="100" Width="100"/>
+                    </Canvas>
+                    <Button x:Name="moveLeftButton" Content="Move Left" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #moveLeftButton}">
+                                <ia:InvokeCommandAction Command="{Binding MoveLeftCommand}"/>
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </Button>
+                    <Button x:Name="resetMoveButton" Content="Reset Move" Grid.Row="1" Grid.Column="2" Margin="0,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #resetMoveButton}">
+                                <ia:InvokeCommandAction Command="{Binding ResetMoveCommand}"/>
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </Button>
+                    <Button x:Name="moveRightButton" Content="Move Right" Grid.Row="1" Grid.Column="4" Margin="0,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #moveRightButton}">
+                                <ia:InvokeCommandAction Command="{Binding MoveRightCommand}"/>
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </Button>
+                </Grid>
             </TabItem>  
         </TabControl>
     </Grid>
