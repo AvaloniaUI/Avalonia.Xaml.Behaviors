@@ -9,7 +9,7 @@ namespace Perspex.Xaml.Interactions.Core
     /// <summary>
     /// A helper class that enables converting values specified in markup (strings) to their object representation.
     /// </summary>
-    internal static class TypeConverterHelper
+    public static class TypeConverterHelper
     {
         /// <summary>
         /// Converts string representation of a value to its object representation.
