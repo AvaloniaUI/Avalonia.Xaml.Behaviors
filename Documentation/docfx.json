@@ -31,6 +31,6 @@
       "_appTitle": "XamlBehaviors Website"
     },
     "dest": "_site",
-    "template": "default"
+    "template": [ "default", "template"]
   }
 }
