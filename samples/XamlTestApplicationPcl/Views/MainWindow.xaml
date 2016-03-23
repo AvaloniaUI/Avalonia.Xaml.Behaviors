@@ -104,7 +104,6 @@
             </TabItem>
             <TabItem Header="InvokeCommandAction">
                 <Grid RowDefinitions="5*,*" ColumnDefinitions="30*,5,30*,5,30*">
-                    <!-- TODO: Waiting for Perspex fix. -->
                     <Canvas Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="5" Background="{StyleResource GrayBrush}">
                         <Ellipse Canvas.Left="{Binding Position, Mode=TwoWay}" Canvas.Top="200" Fill="{StyleResource RedBrush}" Stroke="{StyleResource YellowBrush}" StrokeThickness="5" Height="100" Width="100"/>
                     </Canvas>
