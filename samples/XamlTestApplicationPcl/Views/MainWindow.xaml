@@ -131,14 +131,21 @@
                 </Grid>
             </TabItem>
             <TabItem Header="CustomAction">
-                <Grid RowDefinitions="*,2*">
-                    <Button Name="popupButton" Content="Click Me" HorizontalAlignment="Stretch" Grid.Row="0" Margin="5" VerticalAlignment="Stretch" FontSize="20">
+                <Grid RowDefinitions="Auto,*">
+                    <TextBlock Text="Move Pointer" Name="position" Grid.Row="0" Margin="5" Background="{StyleResource GrayBrush}" Foreground="{StyleResource YellowBrush}" FontSize="14" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <Border Name="border" Grid.Row="1" Margin="5,0,5,5" Background="{StyleResource GrayBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #popupButton}">
-                                <actions:PopupAction/>
+                            <behaviors:ShowPointerPositionBehavior TargetTextBlock="{Binding #position}"/>
+                            <ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="{Binding #border}">
+                                <actions:PopupAction>
+                                    <Border Background="Yellow" BorderBrush="Red" BorderThickness="1" Padding="5">
+                                        <TextBlock Text="Hello from xaml!" Foreground="Red"/>
+                                    </Border>
+                                </actions:PopupAction>
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
-                    </Button>
+                        <TextBlock Text="Click Me" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                    </Border>
                 </Grid>
             </TabItem>
             <TabItem Header="CustomBehavior">

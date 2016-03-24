@@ -1,26 +1,38 @@
 ﻿using Perspex;
 using Perspex.Controls;
 using Perspex.Controls.Primitives;
-using Perspex.Media;
+using Perspex.Metadata;
 using Perspex.Xaml.Interactivity;
 
 namespace XamlTestApplication.Actions
 {
     public class PopupAction : PerspexObject, IAction
     {
+        public static readonly PerspexProperty ChildProperty =
+            PerspexProperty.Register<PopupAction, Control>(nameof(Child));
+
+        [Content]
+        public Control Child
+        {
+            get { return (Control)this.GetValue(ChildProperty); }
+            set { this.SetValue(ChildProperty, value); }
+        }
+
+        private Popup _popup = null;
+
         public object Execute(object sender, object parameter)
         {
-            new Popup()
+            if (_popup == null)
             {
-                PlacementMode = PlacementMode.Pointer,
-                PlacementTarget = sender as Control,
-                StaysOpen = false,
-                Child = new TextBlock
+                _popup = new Popup()
                 {
-                    Text = "Hello from custom action!",
-                    Background = Brushes.Gray
-                }
-            }.Open();
+                    PlacementMode = PlacementMode.Pointer,
+                    PlacementTarget = sender as Control,
+                    StaysOpen = false
+                };
+            }
+            _popup.Child = Child;
+            _popup.Open();
             return null;
         }
     }
