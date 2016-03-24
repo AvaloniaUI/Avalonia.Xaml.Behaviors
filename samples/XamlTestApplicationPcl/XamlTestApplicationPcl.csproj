@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Actions\PopupAction.cs" />
     <Compile Include="Behaviors\DragPositionBehavior.cs" />
+    <Compile Include="Behaviors\ShowPointerPositionBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Core\Command.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
