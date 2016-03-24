@@ -138,8 +138,11 @@
                             <behaviors:ShowPointerPositionBehavior TargetTextBlock="{Binding #position}"/>
                             <ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="{Binding #border}">
                                 <actions:PopupAction>
-                                    <Border Background="Yellow" BorderBrush="Red" BorderThickness="1" Padding="5">
-                                        <TextBlock Text="Hello from xaml!" Foreground="Red"/>
+                                    <Border DataContext="{Binding Count}" Background="Yellow" BorderBrush="Red" BorderThickness="1" Padding="5">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Count: " Foreground="Red"/>
+                                            <TextBlock Text="{Binding}" Foreground="Red"/>
+                                        </StackPanel>
                                     </Border>
                                 </actions:PopupAction>
                             </ia:EventTriggerBehavior>
