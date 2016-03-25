@@ -82,6 +82,17 @@ namespace Perspex.Xaml.Interactions.Core
                 return false;
             }
 
+            PerspexObject perspexObject = targetObject as PerspexObject;
+            if (perspexObject != null)
+            {
+                PerspexProperty perspexProperty = PerspexPropertyRegistry.Instance.FindRegistered(perspexObject, this.PropertyName);
+                if (perspexProperty != null)
+                {
+                    this.UpdatePerspexPropertyValue(perspexObject, perspexProperty);
+                    return true;
+                }
+            }
+
             this.UpdatePropertyValue(targetObject);
             return true;
         }
@@ -158,6 +169,77 @@ namespace Perspex.Xaml.Interactions.Core
                     "Cannot find a property named {0} on type {1}.",
                     this.PropertyName,
                     targetTypeName));
+            }
+        }
+
+        private void UpdatePerspexPropertyValue(PerspexObject perspexObject, PerspexProperty property)
+        {
+            this.ValidatePerspexProperty(property);
+
+            Exception innerException = null;
+            try
+            {
+                object result = null;
+                string valueAsString = null;
+                Type propertyType = property.PropertyType;
+                TypeInfo propertyTypeInfo = propertyType.GetTypeInfo();
+                if (this.Value == null)
+                {
+                    // The result can be null if the type is generic (nullable), or the default value of the type in question
+                    result = propertyTypeInfo.IsValueType ? Activator.CreateInstance(propertyType) : null;
+                }
+                else if (propertyTypeInfo.IsAssignableFrom(this.Value.GetType().GetTypeInfo()))
+                {
+                    result = this.Value;
+                }
+                else
+                {
+                    valueAsString = this.Value.ToString();
+                    result = propertyTypeInfo.IsEnum ? Enum.Parse(propertyType, valueAsString, false) :
+                        TypeConverterHelper.Convert(valueAsString, propertyType.FullName);
+                }
+
+                perspexObject.SetValue(property, result);
+            }
+            catch (FormatException e)
+            {
+                innerException = e;
+            }
+            catch (ArgumentException e)
+            {
+                innerException = e;
+            }
+
+            if (innerException != null)
+            {
+                throw new ArgumentException(string.Format(
+                    CultureInfo.CurrentCulture,
+                    "Cannot assign value of type {0} to property {1} of type {2}. The {1} property can be assigned only values of type {2}.",
+                    this.Value?.GetType().Name ?? "null",
+                    this.PropertyName,
+                    perspexObject?.GetType().Name ?? "null"),
+                    innerException);
+            }
+        }
+
+        /// <summary>
+        /// Ensures the property is not null and can be written to.
+        /// </summary>
+        private void ValidatePerspexProperty(PerspexProperty property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentException(string.Format(
+                    CultureInfo.CurrentCulture,
+                    "Cannot find a property named {0}.",
+                    this.PropertyName));
+            }
+            else if (property.IsReadOnly)
+            {
+                throw new ArgumentException(string.Format(
+                    CultureInfo.CurrentCulture,
+                    "Cannot find a property named {0}.",
+                    this.PropertyName));
             }
         }
     }
