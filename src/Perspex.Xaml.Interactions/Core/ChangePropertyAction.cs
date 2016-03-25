@@ -14,49 +14,49 @@ namespace Perspex.Xaml.Interactions.Core
     public sealed class ChangePropertyAction : PerspexObject, IAction
     {
         /// <summary>
-        /// Identifies the <seealso cref="PropertyName"/> dependency property.
+        /// Identifies the <seealso cref="PropertyName"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty PropertyNameProperty =
-            PerspexProperty.Register<ChangePropertyAction, string>("PropertyName");
+        public static readonly PerspexProperty<string> PropertyNameProperty =
+            PerspexProperty.Register<ChangePropertyAction, string>(nameof(PropertyName));
 
         /// <summary>
-        /// Identifies the <seealso cref="TargetObject"/> dependency property.
+        /// Identifies the <seealso cref="TargetObject"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty TargetObjectProperty =
-            PerspexProperty.Register<ChangePropertyAction, object>("TargetObject");
+        public static readonly PerspexProperty<object> TargetObjectProperty =
+            PerspexProperty.Register<ChangePropertyAction, object>(nameof(TargetObject));
 
         /// <summary>
-        /// Identifies the <seealso cref="Value"/> dependency property.
+        /// Identifies the <seealso cref="Value"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty ValueProperty =
-            PerspexProperty.Register<ChangePropertyAction, object>("Value");
+        public static readonly PerspexProperty<object> ValueProperty =
+            PerspexProperty.Register<ChangePropertyAction, object>(nameof(Value));
 
         /// <summary>
-        /// Gets or sets the name of the property to change. This is a dependency property.
+        /// Gets or sets the name of the property to change. This is a perspex property.
         /// </summary>
         public string PropertyName
         {
-            get { return (string)this.GetValue(ChangePropertyAction.PropertyNameProperty); }
-            set { this.SetValue(ChangePropertyAction.PropertyNameProperty, value); }
+            get { return this.GetValue(PropertyNameProperty); }
+            set { this.SetValue(PropertyNameProperty, value); }
         }
 
         /// <summary>
-        /// Gets or sets the value to set. This is a dependency property.
+        /// Gets or sets the value to set. This is a perspex property.
         /// </summary>
         public object Value
         {
-            get { return this.GetValue(ChangePropertyAction.ValueProperty); }
-            set { this.SetValue(ChangePropertyAction.ValueProperty, value); }
+            get { return this.GetValue(ValueProperty); }
+            set { this.SetValue(ValueProperty, value); }
         }
 
         /// <summary>
         /// Gets or sets the object whose property will be changed.
-        /// If <seealso cref="TargetObject"/> is not set or cannot be resolved, the sender of <seealso cref="Execute"/> will be used. This is a dependency property.
+        /// If <seealso cref="TargetObject"/> is not set or cannot be resolved, the sender of <seealso cref="Execute"/> will be used. This is a perspex property.
         /// </summary>
         public object TargetObject
         {
-            get { return (object)this.GetValue(ChangePropertyAction.TargetObjectProperty); }
-            set { this.SetValue(ChangePropertyAction.TargetObjectProperty, value); }
+            get { return this.GetValue(TargetObjectProperty); }
+            set { this.SetValue(TargetObjectProperty, value); }
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Perspex.Xaml.Interactions.Core
         public object Execute(object sender, object parameter)
         {
             object targetObject;
-            if (this.GetValue(ChangePropertyAction.TargetObjectProperty) != PerspexProperty.UnsetValue)
+            if (this.GetValue(TargetObjectProperty) != PerspexProperty.UnsetValue)
             {
                 targetObject = this.TargetObject;
             }

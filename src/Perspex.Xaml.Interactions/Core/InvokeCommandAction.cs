@@ -13,86 +13,86 @@ namespace Perspex.Xaml.Interactions.Core
     public sealed class InvokeCommandAction : PerspexObject, IAction
     {
         /// <summary>
-        /// Identifies the <seealso cref="Command"/> dependency property.
+        /// Identifies the <seealso cref="Command"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty CommandProperty =
-            PerspexProperty.Register<InvokeCommandAction, ICommand>("Command");
+        public static readonly PerspexProperty<ICommand> CommandProperty =
+            PerspexProperty.Register<InvokeCommandAction, ICommand>(nameof(Command));
 
         /// <summary>
-        /// Identifies the <seealso cref="CommandParameter"/> dependency property.
+        /// Identifies the <seealso cref="CommandParameter"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty CommandParameterProperty =
-            PerspexProperty.Register<InvokeCommandAction, object>("CommandParameter");
+        public static readonly PerspexProperty<object> CommandParameterProperty =
+            PerspexProperty.Register<InvokeCommandAction, object>(nameof(CommandParameter));
 
         /// <summary>
-        /// Identifies the <seealso cref="InputConverter"/> dependency property.
+        /// Identifies the <seealso cref="InputConverter"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty InputConverterProperty =
-            PerspexProperty.Register<InvokeCommandAction, IValueConverter>("InputConverter");
+        public static readonly PerspexProperty<IValueConverter> InputConverterProperty =
+            PerspexProperty.Register<InvokeCommandAction, IValueConverter>(nameof(InputConverter));
 
         /// <summary>
-        /// Identifies the <seealso cref="InputConverterParameter"/> dependency property.
+        /// Identifies the <seealso cref="InputConverterParameter"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty InputConverterParameterProperty =
-            PerspexProperty.Register<InvokeCommandAction, object>("InputConverterParameter");
+        public static readonly PerspexProperty<object> InputConverterParameterProperty =
+            PerspexProperty.Register<InvokeCommandAction, object>(nameof(InputConverterParameter));
 
         /// <summary>
-        /// Identifies the <seealso cref="InputConverterLanguage"/> dependency property.
+        /// Identifies the <seealso cref="InputConverterLanguage"/> perspex property.
         /// </summary>
         /// <remarks>The string.Empty used for default value string means the invariant culture.</remarks>
-        public static readonly PerspexProperty InputConverterLanguageProperty =
-            PerspexProperty.Register<InvokeCommandAction, string>("InputConverterLanguage", string.Empty);
+        public static readonly PerspexProperty<string> InputConverterLanguageProperty =
+            PerspexProperty.Register<InvokeCommandAction, string>(nameof(InputConverterLanguage), string.Empty);
 
         /// <summary>
-        /// Gets or sets the command this action should invoke. This is a dependency property.
+        /// Gets or sets the command this action should invoke. This is a perspex property.
         /// </summary>
         public ICommand Command
         {
-            get { return (ICommand)this.GetValue(InvokeCommandAction.CommandProperty); }
-            set { this.SetValue(InvokeCommandAction.CommandProperty, value); }
+            get { return this.GetValue(CommandProperty); }
+            set { this.SetValue(CommandProperty, value); }
         }
 
         /// <summary>
         /// Gets or sets the parameter that is passed to <see cref="System.Windows.Input.ICommand.Execute(object)"/>.
         /// If this is not set, the parameter from the <seealso cref="Execute(object, object)"/> method will be used.
-        /// This is an optional dependency property.
+        /// This is an optional perspex property.
         /// </summary>
         public object CommandParameter
         {
-            get { return this.GetValue(InvokeCommandAction.CommandParameterProperty); }
-            set { this.SetValue(InvokeCommandAction.CommandParameterProperty, value); }
+            get { return this.GetValue(CommandParameterProperty); }
+            set { this.SetValue(CommandParameterProperty, value); }
         }
 
         /// <summary>
         /// Gets or sets the converter that is run on the parameter from the <seealso cref="Execute(object, object)"/> method.
-        /// This is an optional dependency property.
+        /// This is an optional perspex property.
         /// </summary>
         public IValueConverter InputConverter
         {
-            get { return (IValueConverter)this.GetValue(InvokeCommandAction.InputConverterProperty); }
-            set { this.SetValue(InvokeCommandAction.InputConverterProperty, value); }
+            get { return this.GetValue(InputConverterProperty); }
+            set { this.SetValue(InputConverterProperty, value); }
         }
 
         /// <summary>
         /// Gets or sets the parameter that is passed to the <see cref="IValueConverter.Convert"/>
         /// method of <see cref="InputConverter"/>.
-        /// This is an optional dependency property.
+        /// This is an optional perspex property.
         /// </summary>
         public object InputConverterParameter
         {
-            get { return this.GetValue(InvokeCommandAction.InputConverterParameterProperty); }
-            set { this.SetValue(InvokeCommandAction.InputConverterParameterProperty, value); }
+            get { return this.GetValue(InputConverterParameterProperty); }
+            set { this.SetValue(InputConverterParameterProperty, value); }
         }
 
         /// <summary>
         /// Gets or sets the language that is passed to the <see cref="IValueConverter.Convert"/>
         /// method of <see cref="InputConverter"/>.
-        /// This is an optional dependency property.
+        /// This is an optional perspex property.
         /// </summary>
         public string InputConverterLanguage
         {
-            get { return (string)this.GetValue(InvokeCommandAction.InputConverterLanguageProperty); }
-            set { this.SetValue(InvokeCommandAction.InputConverterLanguageProperty, value); }
+            get { return this.GetValue(InputConverterLanguageProperty); }
+            set { this.SetValue(InputConverterLanguageProperty, value); }
         }
 
         /// <summary>

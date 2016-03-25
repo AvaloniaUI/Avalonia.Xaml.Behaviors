@@ -8,7 +8,7 @@ using System.Globalization;
 namespace Perspex.Xaml.Interactivity
 {
     /// <summary>
-    /// A base class for behaviors, implementing the basic plumbing of IBehavior
+    /// A base class for behaviors, implementing the basic plumbing of <see cref="IBehavior"/>.
     /// </summary>
     public abstract class Behavior : PerspexObject, IBehavior
     {

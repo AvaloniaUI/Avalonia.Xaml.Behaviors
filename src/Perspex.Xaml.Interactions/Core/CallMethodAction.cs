@@ -33,37 +33,37 @@ namespace Perspex.Xaml.Interactions.Core
         }
 
         /// <summary>
-        /// Identifies the <seealso cref="MethodName"/> dependency property.
+        /// Identifies the <seealso cref="MethodName"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty MethodNameProperty =
-            PerspexProperty.Register<CallMethodAction, string>("MethodName");
+        public static readonly PerspexProperty<string> MethodNameProperty =
+            PerspexProperty.Register<CallMethodAction, string>(nameof(MethodName));
 
         /// <summary>
-        /// Identifies the <seealso cref="TargetObject"/> dependency property.
+        /// Identifies the <seealso cref="TargetObject"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty TargetObjectProperty =
-            PerspexProperty.Register<CallMethodAction, object>("TargetObject");
+        public static readonly PerspexProperty<object> TargetObjectProperty =
+            PerspexProperty.Register<CallMethodAction, object>(nameof(TargetObject));
 
         private Type targetObjectType;
         private List<MethodDescriptor> methodDescriptors = new List<MethodDescriptor>();
         private MethodDescriptor cachedMethodDescriptor;
 
         /// <summary>
-        /// Gets or sets the name of the method to invoke. This is a dependency property.
+        /// Gets or sets the name of the method to invoke. This is a perspex property.
         /// </summary>
         public string MethodName
         {
-            get { return (string)this.GetValue(CallMethodAction.MethodNameProperty); }
-            set { this.SetValue(CallMethodAction.MethodNameProperty, value); }
+            get { return this.GetValue(MethodNameProperty); }
+            set { this.SetValue(MethodNameProperty, value); }
         }
 
         /// <summary>
-        /// Gets or sets the object that exposes the method of interest. This is a dependency property.
+        /// Gets or sets the object that exposes the method of interest. This is a perspex property.
         /// </summary>
         public object TargetObject
         {
-            get { return this.GetValue(CallMethodAction.TargetObjectProperty); }
-            set { this.SetValue(CallMethodAction.TargetObjectProperty, value); }
+            get { return this.GetValue(TargetObjectProperty); }
+            set { this.SetValue(TargetObjectProperty, value); }
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Perspex.Xaml.Interactions.Core
         public object Execute(object sender, object parameter)
         {
             object target;
-            if (this.GetValue(CallMethodAction.TargetObjectProperty) != PerspexProperty.UnsetValue)
+            if (this.GetValue(TargetObjectProperty) != PerspexProperty.UnsetValue)
             {
                 target = this.TargetObject;
             }

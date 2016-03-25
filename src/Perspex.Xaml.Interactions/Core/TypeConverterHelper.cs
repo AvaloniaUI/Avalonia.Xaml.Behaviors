@@ -18,14 +18,14 @@ namespace Perspex.Xaml.Interactions.Core
         /// <param name="destinationTypeFullName">The full name of the destination type.</param>
         /// <returns>Object representation of the string value.</returns>
         /// <exception cref="ArgumentNullException">destinationTypeFullName cannot be null.</exception>
-        public static Object Convert(string value, string destinationTypeFullName)
+        public static object Convert(string value, string destinationTypeFullName)
         {
             if (string.IsNullOrEmpty(destinationTypeFullName))
             {
-                throw new ArgumentNullException("destinationTypeFullName");
+                throw new ArgumentNullException(nameof(destinationTypeFullName));
             }
 
-            string scope = TypeConverterHelper.GetScope(destinationTypeFullName);
+            string scope = GetScope(destinationTypeFullName);
 
             // Value types in the "System" namespace must be special cased due to a bug in the xaml compiler
             if (string.Equals(scope, "System", StringComparison.Ordinal))
@@ -51,7 +51,7 @@ namespace Perspex.Xaml.Interactions.Core
             return null;
         }
 
-        private static String GetScope(string name)
+        private static string GetScope(string name)
         {
             int indexOfLastPeriod = name.LastIndexOf('.');
             if (indexOfLastPeriod != name.Length - 1)
@@ -62,7 +62,7 @@ namespace Perspex.Xaml.Interactions.Core
             return name;
         }
 
-        private static String GetType(string name)
+        private static string GetType(string name)
         {
             int indexOfLastPeriod = name.LastIndexOf('.');
             if (indexOfLastPeriod != name.Length - 1)

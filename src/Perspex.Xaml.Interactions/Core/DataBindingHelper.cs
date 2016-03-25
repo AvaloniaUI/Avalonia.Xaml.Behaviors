@@ -11,13 +11,13 @@ namespace Perspex.Xaml.Interactions.Core
 {
     internal static class DataBindingHelper
     {
-        private static readonly Dictionary<Type, List<PerspexProperty>> DependenciesPropertyCache = new Dictionary<Type, List<PerspexProperty>>();
+        private static readonly Dictionary<Type, List<PerspexProperty>> PerspexPropertyCache = new Dictionary<Type, List<PerspexProperty>>();
 
         /// <summary>
         /// Ensures that all binding expression on actions are up to date.
         /// </summary>
         /// <remarks>
-        /// DataTriggerBehavior fires during data binding phase. Since the ActionCollection is a child of the behavior,
+        /// <see cref="DataTriggerBehavior"/> fires during data binding phase. Since the <see cref="ActionCollection"/> is a child of the behavior,
         /// bindings on the action  may not be up-to-date. This routine is called before the action
         /// is executed in order to guarantee that all bindings are refreshed with the most current data.
         /// </remarks>
@@ -25,18 +25,18 @@ namespace Perspex.Xaml.Interactions.Core
         {
             foreach (PerspexObject action in actions)
             {
-                foreach (PerspexProperty property in DataBindingHelper.GetDependencyProperties(action.GetType()))
+                foreach (PerspexProperty property in GetPerspexProperties(action.GetType()))
                 {
-                    DataBindingHelper.RefreshBinding(action, property);
+                    RefreshBinding(action, property);
                 }
             }
         }
 
-        private static IEnumerable<PerspexProperty> GetDependencyProperties(Type type)
+        private static IEnumerable<PerspexProperty> GetPerspexProperties(Type type)
         {
             List<PerspexProperty> propertyList = null;
 
-            if (!DataBindingHelper.DependenciesPropertyCache.TryGetValue(type, out propertyList))
+            if (!PerspexPropertyCache.TryGetValue(type, out propertyList))
             {
                 propertyList = new List<PerspexProperty>();
 
@@ -57,7 +57,7 @@ namespace Perspex.Xaml.Interactions.Core
                     type = type.GetTypeInfo().BaseType;
                 }
 
-                DataBindingHelper.DependenciesPropertyCache[type] = propertyList;
+                PerspexPropertyCache[type] = propertyList;
             }
 
             return propertyList;

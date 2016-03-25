@@ -21,42 +21,42 @@ namespace Perspex.Xaml.Interactions.Core
         }
 
         /// <summary>
-        /// Identifies the <seealso cref="Actions"/> dependency property.
+        /// Identifies the <seealso cref="Actions"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty ActionsProperty =
-            PerspexProperty.Register<DataTriggerBehavior, ActionCollection>("Actions");
+        public static readonly PerspexProperty<ActionCollection> ActionsProperty =
+            PerspexProperty.Register<DataTriggerBehavior, ActionCollection>(nameof(Actions));
 
         /// <summary>
-        /// Identifies the <seealso cref="Binding"/> dependency property.
+        /// Identifies the <seealso cref="Binding"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty BindingProperty =
-            PerspexProperty.Register<DataTriggerBehavior, object>("Binding");
+        public static readonly PerspexProperty<object> BindingProperty =
+            PerspexProperty.Register<DataTriggerBehavior, object>(nameof(Binding));
 
         /// <summary>
-        /// Identifies the <seealso cref="ComparisonCondition"/> dependency property.
+        /// Identifies the <seealso cref="ComparisonCondition"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty ComparisonConditionProperty =
-            PerspexProperty.Register<DataTriggerBehavior, ComparisonConditionType>("ComparisonCondition", ComparisonConditionType.Equal);
+        public static readonly PerspexProperty<ComparisonConditionType> ComparisonConditionProperty =
+            PerspexProperty.Register<DataTriggerBehavior, ComparisonConditionType>(nameof(ComparisonCondition), ComparisonConditionType.Equal);
 
         /// <summary>
-        /// Identifies the <seealso cref="Value"/> dependency property.
+        /// Identifies the <seealso cref="Value"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty ValueProperty =
-            PerspexProperty.Register<DataTriggerBehavior, object>("Value");
+        public static readonly PerspexProperty<object> ValueProperty =
+            PerspexProperty.Register<DataTriggerBehavior, object>(nameof(Value));
 
         /// <summary>
-        /// Gets the collection of actions associated with the behavior. This is a dependency property.
+        /// Gets the collection of actions associated with the behavior. This is a perspex property.
         /// </summary>
         [Content]
         public ActionCollection Actions
         {
             get
             {
-                ActionCollection actionCollection = (ActionCollection)this.GetValue(DataTriggerBehavior.ActionsProperty);
+                ActionCollection actionCollection = this.GetValue(ActionsProperty);
                 if (actionCollection == null)
                 {
                     actionCollection = new ActionCollection();
-                    this.SetValue(DataTriggerBehavior.ActionsProperty, actionCollection);
+                    this.SetValue(ActionsProperty, actionCollection);
                 }
 
                 return actionCollection;
@@ -64,30 +64,30 @@ namespace Perspex.Xaml.Interactions.Core
         }
 
         /// <summary>
-        /// Gets or sets the bound object that the <see cref="DataTriggerBehavior"/> will listen to. This is a dependency property.
+        /// Gets or sets the bound object that the <see cref="DataTriggerBehavior"/> will listen to. This is a perspex property.
         /// </summary>
         public object Binding
         {
-            get { return (object)this.GetValue(DataTriggerBehavior.BindingProperty); }
-            set { this.SetValue(DataTriggerBehavior.BindingProperty, value); }
+            get { return this.GetValue(BindingProperty); }
+            set { this.SetValue(BindingProperty, value); }
         }
 
         /// <summary>
-        /// Gets or sets the type of comparison to be performed between <see cref="DataTriggerBehavior.Binding"/> and <see cref="DataTriggerBehavior.Value"/>. This is a dependency property.
+        /// Gets or sets the type of comparison to be performed between <see cref="DataTriggerBehavior.Binding"/> and <see cref="DataTriggerBehavior.Value"/>. This is a perspex property.
         /// </summary>
         public ComparisonConditionType ComparisonCondition
         {
-            get { return (ComparisonConditionType)this.GetValue(DataTriggerBehavior.ComparisonConditionProperty); }
-            set { this.SetValue(DataTriggerBehavior.ComparisonConditionProperty, value); }
+            get { return this.GetValue(ComparisonConditionProperty); }
+            set { this.SetValue(ComparisonConditionProperty, value); }
         }
 
         /// <summary>
-        /// Gets or sets the value to be compared with the value of <see cref="DataTriggerBehavior.Binding"/>. This is a dependency property.
+        /// Gets or sets the value to be compared with the value of <see cref="DataTriggerBehavior.Binding"/>. This is a perspex property.
         /// </summary>
         public object Value
         {
-            get { return (object)this.GetValue(DataTriggerBehavior.ValueProperty); }
-            set { this.SetValue(DataTriggerBehavior.ValueProperty, value); }
+            get { return this.GetValue(ValueProperty); }
+            set { this.SetValue(ValueProperty, value); }
         }
 
         private static bool Compare(object leftOperand, ComparisonConditionType operatorType, object rightOperand)
@@ -101,7 +101,7 @@ namespace Perspex.Xaml.Interactions.Core
             IComparable rightComparableOperand = rightOperand as IComparable;
             if ((leftComparableOperand != null) && (rightComparableOperand != null))
             {
-                return DataTriggerBehavior.EvaluateComparable(leftComparableOperand, operatorType, rightComparableOperand);
+                return EvaluateComparable(leftComparableOperand, operatorType, rightComparableOperand);
             }
 
             switch (operatorType)
@@ -197,9 +197,9 @@ namespace Perspex.Xaml.Interactions.Core
             return false;
         }
 
-        private static void OnValueChanged(PerspexObject dependencyObject, PerspexPropertyChangedEventArgs args)
+        private static void OnValueChanged(PerspexObject perspexObject, PerspexPropertyChangedEventArgs args)
         {
-            DataTriggerBehavior dataTriggerBehavior = (DataTriggerBehavior)dependencyObject;
+            DataTriggerBehavior dataTriggerBehavior = (DataTriggerBehavior)perspexObject;
             if (dataTriggerBehavior.AssociatedObject == null)
             {
                 return;
@@ -213,7 +213,7 @@ namespace Perspex.Xaml.Interactions.Core
             if (bidning != null && value != null)
             {
                 // Some value has changed--either the binding value, reference value, or the comparison condition. Re-evaluate the equation.
-                if (DataTriggerBehavior.Compare(dataTriggerBehavior.Binding, dataTriggerBehavior.ComparisonCondition, dataTriggerBehavior.Value))
+                if (Compare(dataTriggerBehavior.Binding, dataTriggerBehavior.ComparisonCondition, dataTriggerBehavior.Value))
                 {
                     Interaction.ExecuteActions(dataTriggerBehavior.AssociatedObject, dataTriggerBehavior.Actions, args);
                 }

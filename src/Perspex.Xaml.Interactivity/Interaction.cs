@@ -51,13 +51,13 @@ namespace Perspex.Xaml.Interactivity
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
-            BehaviorCollection behaviorCollection = (BehaviorCollection)obj.GetValue(Interaction.BehaviorsProperty);
+            BehaviorCollection behaviorCollection = obj.GetValue(BehaviorsProperty);
             if (behaviorCollection == null)
             {
                 behaviorCollection = new BehaviorCollection();
-                obj.SetValue(Interaction.BehaviorsProperty, behaviorCollection);
+                obj.SetValue(BehaviorsProperty, behaviorCollection);
 
                 var control = obj as Control;
 
@@ -82,9 +82,9 @@ namespace Perspex.Xaml.Interactivity
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
-            obj.SetValue(Interaction.BehaviorsProperty, value);
+            obj.SetValue(BehaviorsProperty, value);
         }
 
         /// <summary>
@@ -103,9 +103,9 @@ namespace Perspex.Xaml.Interactivity
                 return results;
             }
 
-            foreach (PerspexObject dependencyObject in actions)
+            foreach (PerspexObject perspexObject in actions)
             {
-                IAction action = (IAction)dependencyObject;
+                IAction action = (IAction)perspexObject;
                 results.Add(action.Execute(sender, parameter));
             }
 

@@ -43,22 +43,22 @@ namespace Perspex.Xaml.Interactions.Core
         }
 
         /// <summary>
-        /// Identifies the <seealso cref="Actions"/> dependency property.
+        /// Identifies the <seealso cref="Actions"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty ActionsProperty =
-            PerspexProperty.Register<EventTriggerBehavior, ActionCollection>("Actions");
+        public static readonly PerspexProperty<ActionCollection> ActionsProperty =
+            PerspexProperty.Register<EventTriggerBehavior, ActionCollection>(nameof(Actions));
 
         /// <summary>
-        /// Identifies the <seealso cref="EventName"/> dependency property.
+        /// Identifies the <seealso cref="EventName"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty EventNameProperty =
-            PerspexProperty.Register<EventTriggerBehavior, string>("EventName", EventNameDefaultValue);
+        public static readonly PerspexProperty<string> EventNameProperty =
+            PerspexProperty.Register<EventTriggerBehavior, string>(nameof(EventName), EventNameDefaultValue);
 
         /// <summary>
-        /// Identifies the <seealso cref="SourceObject"/> dependency property.
+        /// Identifies the <seealso cref="SourceObject"/> perspex property.
         /// </summary>
-        public static readonly PerspexProperty SourceObjectProperty =
-            PerspexProperty.Register<EventTriggerBehavior, object>("SourceObject");
+        public static readonly PerspexProperty<object> SourceObjectProperty =
+            PerspexProperty.Register<EventTriggerBehavior, object>(nameof(SourceObject));
 
         private object resolvedSource;
         private Delegate eventHandler;
@@ -68,40 +68,40 @@ namespace Perspex.Xaml.Interactions.Core
         private Action<EventRegistrationToken> removeEventHandlerMethod;
 
         /// <summary>
-        /// Gets the collection of actions associated with the behavior. This is a dependency property.
+        /// Gets the collection of actions associated with the behavior. This is a perspex property.
         /// </summary>
         [Content]
         public ActionCollection Actions
         {
             get
             {
-                ActionCollection actionCollection = (ActionCollection)this.GetValue(EventTriggerBehavior.ActionsProperty);
+                ActionCollection actionCollection = this.GetValue(ActionsProperty);
                 if (actionCollection == null)
                 {
                     actionCollection = new ActionCollection();
-                    this.SetValue(EventTriggerBehavior.ActionsProperty, actionCollection);
+                    this.SetValue(ActionsProperty, actionCollection);
                 }
                 return actionCollection;
             }
         }
 
         /// <summary>
-        /// Gets or sets the name of the event to listen for. This is a dependency property.
+        /// Gets or sets the name of the event to listen for. This is a perspex property.
         /// </summary>
         public string EventName
         {
-            get { return (string)this.GetValue(EventTriggerBehavior.EventNameProperty); }
-            set { this.SetValue(EventTriggerBehavior.EventNameProperty, value); }
+            get { return this.GetValue(EventNameProperty); }
+            set { this.SetValue(EventNameProperty, value); }
         }
 
         /// <summary>
         /// Gets or sets the source object from which this behavior listens for events.
-        /// If <seealso cref="SourceObject"/> is not set, the source will default to <seealso cref="Behavior.AssociatedObject"/>. This is a dependency property.
+        /// If <seealso cref="SourceObject"/> is not set, the source will default to <seealso cref="Behavior.AssociatedObject"/>. This is a perspex property.
         /// </summary>
         public object SourceObject
         {
-            get { return (object)this.GetValue(EventTriggerBehavior.SourceObjectProperty); }
-            set { this.SetValue(EventTriggerBehavior.SourceObjectProperty, value); }
+            get { return this.GetValue(SourceObjectProperty); }
+            set { this.SetValue(SourceObjectProperty, value); }
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace Perspex.Xaml.Interactions.Core
         {
             // If the SourceObject property is set at all, we want to use it. It is possible that it is data
             // bound and bindings haven't been evaluated yet. Plus, this makes the API more predictable.
-            if (this.GetValue(EventTriggerBehavior.SourceObjectProperty) != PerspexProperty.UnsetValue)
+            if (this.GetValue(SourceObjectProperty) != PerspexProperty.UnsetValue)
             {
                 return this.SourceObject;
             }
@@ -177,7 +177,7 @@ namespace Perspex.Xaml.Interactions.Core
                 MethodInfo methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
                 this.eventHandler = methodInfo.CreateDelegate(info.EventHandlerType, this);
 
-                this.isWindowsRuntimeEvent = EventTriggerBehavior.IsWindowsRuntimeType(info.EventHandlerType);
+                this.isWindowsRuntimeEvent = IsWindowsRuntimeType(info.EventHandlerType);
                 if (this.isWindowsRuntimeEvent)
                 {
                     this.addEventHandlerMethod = add => (EventRegistrationToken)info.AddMethod.Invoke(this.resolvedSource, new object[] { add });
@@ -193,7 +193,7 @@ namespace Perspex.Xaml.Interactions.Core
             else if (!this.isLoadedEventRegistered)
             {
                 Control element = this.resolvedSource as Control;
-                if (element != null && !EventTriggerBehavior.IsElementLoaded(element))
+                if (element != null && !IsElementLoaded(element))
                 {
                     this.isLoadedEventRegistered = true;
                     element.AttachedToVisualTree += this.OnEvent;
