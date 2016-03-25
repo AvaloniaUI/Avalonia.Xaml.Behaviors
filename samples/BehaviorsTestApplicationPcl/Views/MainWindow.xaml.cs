@@ -4,9 +4,9 @@
 using Perspex.Controls;
 using Perspex.Diagnostics;
 using Perspex.Markup.Xaml;
-using XamlTestApplication.ViewModels;
+using BehaviorsTestApplication.ViewModels;
 
-namespace XamlTestApplication.Views
+namespace BehaviorsTestApplication.Views
 {
     public class MainWindow : Window
     {

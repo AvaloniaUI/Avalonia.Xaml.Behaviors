@@ -5,9 +5,9 @@ using Perspex.Logging.Serilog;
 using Serilog;
 using System;
 
-namespace XamlTestApplication
+namespace BehaviorsTestApplication
 {
-    public class App : XamlTestApp
+    public class App : BehaviorsTestApp
     {
         public App()
         {

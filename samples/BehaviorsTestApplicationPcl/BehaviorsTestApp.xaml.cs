@@ -1,13 +1,13 @@
 ﻿using Perspex;
 using Perspex.Markup.Xaml;
 
-namespace XamlTestApplication
+namespace BehaviorsTestApplication
 {
-    public abstract class XamlTestApp : Application
+    public abstract class BehaviorsTestApp : Application
     {
         protected abstract void RegisterPlatform();
 
-        public XamlTestApp()
+        public BehaviorsTestApp()
         {
             RegisterServices();
             RegisterPlatform();
@@ -17,7 +17,7 @@ namespace XamlTestApplication
         private void InitializeComponent()
         {
             var loader = new PerspexXamlLoader();
-            loader.Load(typeof(XamlTestApp), this);
+            loader.Load(typeof(BehaviorsTestApp), this);
         }
     }
 }

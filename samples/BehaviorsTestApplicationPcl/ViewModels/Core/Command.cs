@@ -4,7 +4,7 @@
 using System;
 using System.Windows.Input;
 
-namespace XamlTestApplication.ViewModels.Core
+namespace BehaviorsTestApplication.ViewModels.Core
 {
     public class Command : ICommand
     {

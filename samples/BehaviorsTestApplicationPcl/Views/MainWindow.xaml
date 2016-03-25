@@ -1,11 +1,11 @@
-﻿<Window x:Class="XamlTestApplication.MainWindow"
+﻿<Window x:Class="BehaviorsTestApplication.MainWindow"
         xmlns="https://github.com/perspex"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="clr-namespace:XamlTestApplication.ViewModels;assembly=XamlTestApplicationPcl"
+        xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplicationPcl"
         xmlns:i="clr-namespace:Perspex.Xaml.Interactivity;assembly=Perspex.Xaml.Interactivity"
         xmlns:ia="clr-namespace:Perspex.Xaml.Interactions.Core;assembly=Perspex.Xaml.Interactions"
-        xmlns:behaviors="clr-namespace:XamlTestApplication.Behaviors;assembly=XamlTestApplicationPcl"
-        xmlns:actions="clr-namespace:XamlTestApplication.Actions;assembly=XamlTestApplicationPcl"
+        xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplicationPcl"
+        xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplicationPcl"
         Title="XamlBehaviors Test Application" Width="800" Height="600">
     <Window.Styles>
         <Style Selector="TabStripItem">

@@ -5,7 +5,7 @@ using Perspex.Metadata;
 using Perspex.Xaml.Interactivity;
 using System;
 
-namespace XamlTestApplication.Actions
+namespace BehaviorsTestApplication.Actions
 {
     public class PopupAction : PerspexObject, IAction
     {

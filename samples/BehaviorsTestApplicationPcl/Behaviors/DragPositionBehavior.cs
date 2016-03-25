@@ -4,7 +4,7 @@ using Perspex.Input;
 using Perspex.Media;
 using Perspex.Xaml.Interactivity;
 
-namespace XamlTestApplication.Behaviors
+namespace BehaviorsTestApplication.Behaviors
 {
     public class DragPositionBehavior : Behavior
     {

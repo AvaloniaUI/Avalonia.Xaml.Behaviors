@@ -2,7 +2,7 @@
 using Perspex.Controls;
 using Perspex.Xaml.Interactivity;
 
-namespace XamlTestApplication.Behaviors
+namespace BehaviorsTestApplication.Behaviors
 {
     public sealed class ShowPointerPositionBehavior : Behavior<Control>
     {

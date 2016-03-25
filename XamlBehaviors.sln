@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C5A00AC3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{9B9E3891-2366-4253-A952-D08BCEB71098}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamlTestApplication", "samples\XamlTestApplication\XamlTestApplication.csproj", "{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplication", "samples\BehaviorsTestApplication\BehaviorsTestApplication.csproj", "{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamlTestApplicationPcl", "samples\XamlTestApplicationPcl\XamlTestApplicationPcl.csproj", "{EA113F1A-D8D7-4142-9948-353270E7EBAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplicationPcl", "samples\BehaviorsTestApplicationPcl\BehaviorsTestApplicationPcl.csproj", "{EA113F1A-D8D7-4142-9948-353270E7EBAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perspex.Xaml.Interactivity", "src\Perspex.Xaml.Interactivity\Perspex.Xaml.Interactivity.csproj", "{14006EB4-66E9-4B58-BF5F-5A1983BF4621}"
 EndProject

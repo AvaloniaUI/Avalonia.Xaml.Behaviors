@@ -3,9 +3,9 @@
 
 using System.Windows.Threading;
 using Perspex;
-using XamlTestApplication.Views;
+using BehaviorsTestApplication.Views;
 
-namespace XamlTestApplication
+namespace BehaviorsTestApplication
 {
     internal class Program
     {

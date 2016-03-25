@@ -2,9 +2,9 @@
 // Licensed under the MIT license. See licence.md file in the project root for full license information.
 
 using System.Windows.Input;
-using XamlTestApplication.ViewModels.Core;
+using BehaviorsTestApplication.ViewModels.Core;
 
-namespace XamlTestApplication.ViewModels
+namespace BehaviorsTestApplication.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
