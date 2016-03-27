@@ -14,27 +14,13 @@ namespace BehaviorsTestApplication.ViewModels
         public int Count
         {
             get { return _count; }
-            set
-            {
-                if (value != _count)
-                {
-                    _count = value;
-                    OnPropertyChanged(nameof(Count));
-                }
-            }
+            set { Update(ref _count, value); }
         }
 
         public double Position
         {
             get { return _position; }
-            set
-            {
-                if (value != _position)
-                {
-                    _position = value;
-                    OnPropertyChanged(nameof(Position));
-                }
-            }
+            set { Update(ref _position, value); }
         }
 
         public ICommand MoveLeftCommand { get; set; }
@@ -52,14 +38,8 @@ namespace BehaviorsTestApplication.ViewModels
             ResetMoveCommand = new Command((param) => Position = 100.0);
         }
 
-        public void IncrementCount()
-        {
-            Count++;
-        }
+        public void IncrementCount() => Count++;
 
-        public void DecrementCount(object sender, object parameter)
-        {
-            Count--;
-        }
+        public void DecrementCount(object sender, object parameter) => Count--;
     }
 }

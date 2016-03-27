@@ -6,43 +6,31 @@ using Perspex.Xaml.Interactivity;
 
 namespace BehaviorsTestApplication.Behaviors
 {
-    public class DragPositionBehavior : Behavior
+    public class DragPositionBehavior : Behavior<Control>
     {
-        private Control parent = null;
+        private IControl parent = null;
         private Point prevPoint;
 
         protected override void OnAttached()
         {
             base.OnAttached();
-
-            var control = AssociatedObject as Control;
-            if (control != null)
-            {
-                control.PointerPressed += AssociatedObject_PointerPressed;
-            }
+            AssociatedObject.PointerPressed += AssociatedObject_PointerPressed;
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
-
-            var control = AssociatedObject as Control;
-            if (control != null)
-            {
-                control.PointerPressed -= AssociatedObject_PointerPressed;
-            }
-
+            AssociatedObject.PointerPressed -= AssociatedObject_PointerPressed;
             parent = null;
         }
 
         private void AssociatedObject_PointerPressed(object sender, PointerPressedEventArgs e)
         {
-            var control = AssociatedObject as Control;
-            parent = (Control)control.Parent;
+            parent = AssociatedObject.Parent;
 
-            if (!(control.RenderTransform is TranslateTransform))
+            if (!(AssociatedObject.RenderTransform is TranslateTransform))
             {
-                control.RenderTransform = new TranslateTransform();
+                AssociatedObject.RenderTransform = new TranslateTransform();
             }
 
             prevPoint = e.GetPosition(parent);
@@ -52,9 +40,8 @@ namespace BehaviorsTestApplication.Behaviors
 
         private void Parent_PointerMoved(object sender, PointerEventArgs args)
         {
-            var control = AssociatedObject as Control;
             var pos = args.GetPosition(parent);
-            var tr = (TranslateTransform)control.RenderTransform;
+            var tr = (TranslateTransform)AssociatedObject.RenderTransform;
             tr.X += pos.X - prevPoint.X;
             tr.Y += pos.Y - prevPoint.Y;
             prevPoint = pos;
