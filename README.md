@@ -6,7 +6,7 @@
 
 **XamlBehaviors** is a port of [Windows UWP](https://github.com/Microsoft/XamlBehaviors) version of XAML Behaviors for [Perspex](https://github.com/Perspex/Perspex) XAML.
 
-XAML Behaviors is an easy-to-use means of adding common and reusable interactivity to your [Perspex](https://github.com/Perspex/Perspex) applications with minimal code. It is available for managed applications. Use of XAML Behaviors is governed by the MIT License. 
+XAML Behaviors is an easy-to-use means of adding common and reusable interactivity to your [Perspex](https://github.com/Perspex/Perspex) applications with minimal code. Perspex port is available only for managed applications. Use of XAML Behaviors is governed by the MIT License. 
 
 <a href='https://www.youtube.com/watch?v=pffBS-yQ_uM' target='_blank'>![](https://i.ytimg.com/vi/pffBS-yQ_uM/hqdefault.jpg)<a/>
 
