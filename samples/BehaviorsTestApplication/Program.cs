@@ -1,9 +1,11 @@
 ﻿// Copyright (c) The Perspex Project. All rights reserved.
 // Licensed under the MIT license. See licence.md file in the project root for full license information.
 
-using System.Windows.Threading;
-using Perspex;
 using BehaviorsTestApplication.Views;
+using Perspex;
+using Perspex.Logging.Serilog;
+using Serilog;
+using System.Windows.Threading;
 
 namespace BehaviorsTestApplication
 {
@@ -13,14 +15,23 @@ namespace BehaviorsTestApplication
         {
             var foo = Dispatcher.CurrentDispatcher;
 
-            App application = new App
-            {
+            InitializeLogging();
 
-            };
+            new BehaviorsTestApp()
+                   .UseWin32()
+                   .UseDirect2D()
+                   .LoadFromXaml()
+                   .RunWithMainWindow<MainWindow>();
+        }
 
-            var window = new MainWindow();
-            window.Show();
-            Application.Current.Run(window);
+        private static void InitializeLogging()
+        {
+#if DEBUG
+            SerilogLogger.Initialize(new LoggerConfiguration()
+                .MinimumLevel.Warning()
+                .WriteTo.Trace(outputTemplate: "{Area}: {Message}")
+                .CreateLogger());
+#endif
         }
     }
 }
