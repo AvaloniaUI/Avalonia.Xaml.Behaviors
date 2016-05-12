@@ -1,22 +1,32 @@
-version: 1.0.{build}
-os: Visual Studio 2015
-before_build:
-- cmd: >-
-    restore.cmd
-
+version: 0.2.0.{build}
+skip_tags: true
+image: Visual Studio 2015
+configuration: Release
 environment:
   myget_key:
     secure: xhYvrWYPHdNI+mQD+f4Zu3baL7fqW+nO/hYXJdN070Lej8wpa6gfrLi1NGtnQlAs
-
-configuration:
-  - Release
-
-after_test:
-- ps: nuget\build-appveyor.ps1
-
-artifacts:
-  - path: nuget\*.nupkg
-
+before_build:
+- cmd: restore.cmd
 build:
   project: XamlBehaviors.sln
   verbosity: minimal
+after_test:
+- ps: nuget\build-appveyor.ps1
+artifacts:
+  - path: nuget\*.nupkg
+deploy:
+- provider: GitHub
+  tag: $(appveyor_build_version)
+  release: $(appveyor_build_version)
+  auth_token:
+    secure: 6jHUhHqAmyx5NOZWctCi0A72lGgaGxhT5tRWnBNMz1JYHOgg1PEID1DFEG1jiQeO
+  prerelease: true
+  on:
+    branch: master
+notifications:
+- provider: Webhook
+  url: https://webhooks.gitter.im/e/f7554af63b89ca85701d
+  method: POST
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true
