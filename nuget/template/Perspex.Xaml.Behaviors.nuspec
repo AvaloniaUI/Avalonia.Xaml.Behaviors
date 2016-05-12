@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>Perspex.Xaml.Behaviors</id>
+    <id>Avalonia.Xaml.Behaviors</id>
     <version>#VERSION#</version>
     <authors>XamlBehaviors</authors>
     <owners>wieslaw.soltes</owners>
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
     <projectUrl>https://github.com/XamlBehaviors/XamlBehaviors/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Easily add interactivity to your Perspex apps using XAML Behaviors. Behaviors encapsulate reusable functionalities for elements that can be easily added to your XAML without the need for more imperative code.</description>
+    <description>Easily add interactivity to your Avalonia apps using XAML Behaviors. Behaviors encapsulate reusable functionalities for elements that can be easily added to your XAML without the need for more imperative code.</description>
     <releaseNotes>Initial alpha release.</releaseNotes>
     <copyright>Copyright 2016</copyright>
-    <tags>Perspex Behavior Action Behaviors Actions Managed C# Interaction Interactivity Interactions Xaml</tags>
+    <tags>Avalonia Behavior Action Behaviors Actions Managed C# Interaction Interactivity Interactions Xaml</tags>
     <dependencies>
       <dependency id="Serilog" version="1.5.14" />
       <dependency id="Splat" version="1.6.2" />
@@ -21,7 +21,7 @@
       <dependency id="Rx-Linq" version="2.2.5" />
       <dependency id="Rx-Main" version="2.2.5" />
       <dependency id="Rx-PlatformServices" version="2.2.5" />
-      <dependency id="Perspex" version="9999.0.1492-nightly" />
+      <dependency id="Avalonia" version="0.2.0.1510-alpha" />
     </dependencies>
   </metadata>
 </package>

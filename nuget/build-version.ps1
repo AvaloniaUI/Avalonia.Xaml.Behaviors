@@ -8,19 +8,19 @@ foreach($pkg in $Packages)
 }
 
 rm -Force -Recurse *.nupkg -ErrorAction SilentlyContinue
-Copy-Item template Perspex.Xaml.Behaviors -Recurse
-sv lib "Perspex.Xaml.Behaviors\lib\portable-windows8+net45"
+Copy-Item template Avalonia.Xaml.Behaviors -Recurse
+sv lib "Avalonia.Xaml.Behaviors\lib\portable-windows8+net45"
 
 mkdir $lib -ErrorAction SilentlyContinue
 
-Copy-Item ..\src\Perspex.Xaml.Interactivity\bin\Release\Perspex.Xaml.Interactivity.dll $lib
-Copy-Item ..\src\Perspex.Xaml.Interactivity\bin\Release\Perspex.Xaml.Interactivity.xml $lib
-Copy-Item ..\src\Perspex.Xaml.Interactions\bin\Release\Perspex.Xaml.Interactions.dll $lib
-Copy-Item ..\src\Perspex.Xaml.Interactions\bin\Release\Perspex.Xaml.Interactions.xml $lib
+Copy-Item ..\src\Avalonia.Xaml.Interactivity\bin\Release\Avalonia.Xaml.Interactivity.dll $lib
+Copy-Item ..\src\Avalonia.Xaml.Interactivity\bin\Release\Avalonia.Xaml.Interactivity.xml $lib
+Copy-Item ..\src\Avalonia.Xaml.Interactions\bin\Release\Avalonia.Xaml.Interactions.dll $lib
+Copy-Item ..\src\Avalonia.Xaml.Interactions\bin\Release\Avalonia.Xaml.Interactions.xml $lib
 
 foreach($pkg in $Packages)
 {
-    (gc Perspex.Xaml.Behaviors\$pkg.nuspec).replace('#VERSION#', $args[0]) | sc $pkg\$pkg.nuspec
+    (gc Avalonia.Xaml.Behaviors\$pkg.nuspec).replace('#VERSION#', $args[0]) | sc $pkg\$pkg.nuspec
 }
 
 foreach($pkg in $Packages)

@@ -4,7 +4,7 @@ set maxRetries=5
 
 :RESTORE
 
-nuget restore XamlBehaviors.sln -source "https://www.nuget.org/api/v2/;https://www.myget.org/F/perspex-nightly/api/v2"
+nuget restore XamlBehaviors.sln -source "https://www.nuget.org/api/v2/;https://www.myget.org/F/avalonia-ci/api/v2"
 
 IF NOT ERRORLEVEL 1 GOTO :EOF
 

@@ -1,8 +1,8 @@
-﻿using Perspex;
-using Perspex.Controls;
-using Perspex.Input;
-using Perspex.Media;
-using Perspex.Xaml.Interactivity;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Media;
+using Avalonia.Xaml.Interactivity;
 
 namespace BehaviorsTestApplication.Behaviors
 {

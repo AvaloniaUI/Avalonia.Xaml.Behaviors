@@ -4,9 +4,9 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/w7t8lmqflmd62bft?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/xamlbehaviors)
 
-**XamlBehaviors** is a port of [Windows UWP](https://github.com/Microsoft/XamlBehaviors) version of XAML Behaviors for [Perspex](https://github.com/Perspex/Perspex) XAML.
+**XamlBehaviors** is a port of [Windows UWP](https://github.com/Microsoft/XamlBehaviors) version of XAML Behaviors for [Avalonia](https://github.com/AvaloniaUI/Avalonia) XAML.
 
-XAML Behaviors is an easy-to-use means of adding common and reusable interactivity to your [Perspex](https://github.com/Perspex/Perspex) applications with minimal code. Perspex port is available only for managed applications. Use of XAML Behaviors is governed by the MIT License. 
+XAML Behaviors is an easy-to-use means of adding common and reusable interactivity to your [Avalonia](https://github.com/AvaloniaUI/Avalonia) applications with minimal code. Avalonia port is available only for managed applications. Use of XAML Behaviors is governed by the MIT License. 
 
 <a href='https://www.youtube.com/watch?v=pffBS-yQ_uM' target='_blank'>![](https://i.ytimg.com/vi/pffBS-yQ_uM/hqdefault.jpg)<a/>
 
@@ -20,11 +20,11 @@ You can find the packages here [NuGet](https://www.nuget.org/packages/XamlBehavi
 
 You can install the package like this:
 
-`Install-Package Perspex.Xaml.Behaviors -Pre`
+`Install-Package Avalonia.Xaml.Behaviors -Pre`
 
 ### Package Dependencies
 
-* Perspex
+* Avalonia
 * Rx-Core
 * Rx-Interfaces
 * Rx-Linq
@@ -37,7 +37,7 @@ You can install the package like this:
 ### Package Sources
 
 * https://www.nuget.org/api/v2/
-* https://www.myget.org/F/perspex-nightly/api/v2
+* https://www.myget.org/F/avalonia-ci/api/v2
 
 ## Resources
 
