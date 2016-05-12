@@ -5,6 +5,8 @@ configuration: Release
 environment:
   myget_key:
     secure: xhYvrWYPHdNI+mQD+f4Zu3baL7fqW+nO/hYXJdN070Lej8wpa6gfrLi1NGtnQlAs
+nuget:
+  disable_publish_on_pr: true
 before_build:
 - cmd: restore.cmd
 build:
