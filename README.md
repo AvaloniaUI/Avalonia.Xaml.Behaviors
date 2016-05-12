@@ -1,7 +1,6 @@
 # XAML Behaviors
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/XamlBehaviors/XamlBehaviors?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
 [![Build status](https://ci.appveyor.com/api/projects/status/w7t8lmqflmd62bft?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/xamlbehaviors)
 
 **XamlBehaviors** is a port of [Windows UWP](https://github.com/Microsoft/XamlBehaviors) version of XAML Behaviors for [Avalonia](https://github.com/AvaloniaUI/Avalonia) XAML.
