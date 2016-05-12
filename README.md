@@ -37,7 +37,7 @@ You can install the package like this:
 ### Package Sources
 
 * https://www.nuget.org/api/v2/
-* https://www.myget.org/F/avalonia-nightly/api/v2
+* https://www.myget.org/F/avalonia-ci/api/v2
 
 ## Resources
 
