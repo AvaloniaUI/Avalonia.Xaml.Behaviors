@@ -1,16 +1,16 @@
-﻿using Perspex;
-using Perspex.Controls;
-using Perspex.Controls.Primitives;
-using Perspex.Metadata;
-using Perspex.Xaml.Interactivity;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Metadata;
+using Avalonia.Xaml.Interactivity;
 using System;
 
 namespace BehaviorsTestApplication.Actions
 {
-    public class PopupAction : PerspexObject, IAction
+    public class PopupAction : AvaloniaObject, IAction
     {
-        public static readonly PerspexProperty<Control> ChildProperty =
-            PerspexProperty.Register<PopupAction, Control>(nameof(Child));
+        public static readonly AvaloniaProperty<Control> ChildProperty =
+            AvaloniaProperty.Register<PopupAction, Control>(nameof(Child));
 
         [Content]
         public Control Child

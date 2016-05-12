@@ -1,13 +1,13 @@
-﻿using Perspex;
-using Perspex.Controls;
-using Perspex.Xaml.Interactivity;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Xaml.Interactivity;
 
 namespace BehaviorsTestApplication.Behaviors
 {
     public sealed class ShowPointerPositionBehavior : Behavior<Control>
     {
-        public static readonly PerspexProperty TargetTextBlockProperty =
-            PerspexProperty.Register<ShowPointerPositionBehavior, TextBlock>(nameof(TargetTextBlock));
+        public static readonly AvaloniaProperty TargetTextBlockProperty =
+            AvaloniaProperty.Register<ShowPointerPositionBehavior, TextBlock>(nameof(TargetTextBlock));
 
         public TextBlock TargetTextBlock
         {
@@ -15,7 +15,7 @@ namespace BehaviorsTestApplication.Behaviors
             set { this.SetValue(TargetTextBlockProperty, value); }
         }
 
-        private void AssociatedObject_PointerMoved(object sender, Perspex.Input.PointerEventArgs e)
+        private void AssociatedObject_PointerMoved(object sender, Avalonia.Input.PointerEventArgs e)
         {
             if (TargetTextBlock != null)
             {

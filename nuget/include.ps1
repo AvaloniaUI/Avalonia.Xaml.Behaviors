@@ -1,1 +1,1 @@
-$Packages = @("Perspex.Xaml.Behaviors")
+$Packages = @("Avalonia.Xaml.Behaviors")

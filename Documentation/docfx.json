@@ -4,8 +4,8 @@
       "src": [
         {
           "files": [
-            "/src/Perspex.Xaml.Interactions/Perspex.Xaml.Interactions.csproj",
-            "/src/Perspex.Xaml.Interactivity/Perspex.Xaml.Interactivity.csproj"
+            "/src/Avalonia.Xaml.Interactions/Avalonia.Xaml.Interactions.csproj",
+            "/src/Avalonia.Xaml.Interactivity/Avalonia.Xaml.Interactivity.csproj"
           ],
           "exclude": [ "**/bin/**", "**/obj/**" ], 
           "cwd": ".."

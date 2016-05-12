@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
@@ -11,13 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplication", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplicationPcl", "samples\BehaviorsTestApplicationPcl\BehaviorsTestApplicationPcl.csproj", "{EA113F1A-D8D7-4142-9948-353270E7EBAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perspex.Xaml.Interactivity", "src\Perspex.Xaml.Interactivity\Perspex.Xaml.Interactivity.csproj", "{14006EB4-66E9-4B58-BF5F-5A1983BF4621}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactivity", "src\Avalonia.Xaml.Interactivity\Avalonia.Xaml.Interactivity.csproj", "{14006EB4-66E9-4B58-BF5F-5A1983BF4621}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perspex.Xaml.Interactions", "src\Perspex.Xaml.Interactions\Perspex.Xaml.Interactions.csproj", "{ED03EEAD-938F-447B-BF0B-30857AE78BFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions", "src\Avalonia.Xaml.Interactions\Avalonia.Xaml.Interactions.csproj", "{ED03EEAD-938F-447B-BF0B-30857AE78BFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perspex.Xaml.Interactivity.UnitTests", "tests\Perspex.Xaml.Interactivity.UnitTests\Perspex.Xaml.Interactivity.UnitTests.csproj", "{C2229490-39CA-4192-A28C-1B5EC186E027}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactivity.UnitTests", "tests\Avalonia.Xaml.Interactivity.UnitTests\Avalonia.Xaml.Interactivity.UnitTests.csproj", "{C2229490-39CA-4192-A28C-1B5EC186E027}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perspex.Xaml.Interactions.UnitTests", "tests\Perspex.Xaml.Interactions.UnitTests\Perspex.Xaml.Interactions.UnitTests.csproj", "{80D2C64D-B560-475D-941F-D5F28DDB2591}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.UnitTests", "tests\Avalonia.Xaml.Interactions.UnitTests\Avalonia.Xaml.Interactions.UnitTests.csproj", "{80D2C64D-B560-475D-941F-D5F28DDB2591}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{64E61195-33F1-49EF-8521-1E413940D7AA}"
 	ProjectSection(SolutionItems) = preProject
@@ -34,7 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{CDCCA856
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "template", "template", "{68CC071A-72F8-4EBD-8FE8-2E6EF25656F8}"
 	ProjectSection(SolutionItems) = preProject
-		nuget\template\Perspex.Xaml.Behaviors.nuspec = nuget\template\Perspex.Xaml.Behaviors.nuspec
+		nuget\template\Avalonia.Xaml.Behaviors.nuspec = nuget\template\Avalonia.Xaml.Behaviors.nuspec
 	EndProjectSection
 EndProject
 Global
