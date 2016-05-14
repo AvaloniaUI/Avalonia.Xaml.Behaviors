@@ -1,12 +1,13 @@
 using Avalonia;
+using Avalonia.Markup.Xaml;
 
 namespace BehaviorsTestApplication
 {
     public class BehaviorsTestApp : Application
     {
-        public BehaviorsTestApp()
+        public override void Initialize()
         {
-            RegisterServices();
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

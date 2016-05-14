@@ -4,6 +4,7 @@
 using BehaviorsTestApplication.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 
 namespace BehaviorsTestApplication.Views
 {
@@ -18,7 +19,7 @@ namespace BehaviorsTestApplication.Views
 
         private void InitializeComponent()
         {
-            this.LoadFromXaml();
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

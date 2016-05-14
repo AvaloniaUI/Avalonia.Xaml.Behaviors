@@ -3,6 +3,7 @@
 
 using BehaviorsTestApplication.Views;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Logging.Serilog;
 using Serilog;
 using System.Windows.Threading;
@@ -17,11 +18,10 @@ namespace BehaviorsTestApplication
 
             InitializeLogging();
 
-            new BehaviorsTestApp()
+            AppBuilder.Configure<BehaviorsTestApp>()
                    .UseWin32()
-                   .UseDirect2D()
-                   .LoadFromXaml()
-                   .RunWithMainWindow<MainWindow>();
+                   .UseDirect2D1()
+                   .Start<MainWindow>();
         }
 
         private static void InitializeLogging()
