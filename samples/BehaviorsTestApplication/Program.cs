@@ -19,9 +19,9 @@ namespace BehaviorsTestApplication
             InitializeLogging();
 
             AppBuilder.Configure<BehaviorsTestApp>()
-                   .UseWin32()
-                   .UseDirect2D1()
-                   .Start<MainWindow>();
+                .UseWin32()
+                .UseDirect2D1()
+                .Start<MainWindow>();
         }
 
         private static void InitializeLogging()
