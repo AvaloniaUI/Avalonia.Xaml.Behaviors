@@ -4,14 +4,13 @@
 using System;
 using System.Globalization;
 using Avalonia.Xaml.Interactivity;
-using Avalonia.Metadata;
 
 namespace Avalonia.Xaml.Interactions.Core
 {
     /// <summary>
     /// A behavior that performs actions when the bound data meets a specified condition.
     /// </summary>
-    public sealed class DataTriggerBehavior : Behavior
+    public sealed class DataTriggerBehavior : Trigger
     {
         static DataTriggerBehavior()
         {
@@ -19,12 +18,6 @@ namespace Avalonia.Xaml.Interactions.Core
             ComparisonConditionProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
             ValueProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
         }
-
-        /// <summary>
-        /// Identifies the <seealso cref="Actions"/> avalonia property.
-        /// </summary>
-        public static readonly AvaloniaProperty<ActionCollection> ActionsProperty =
-            AvaloniaProperty.Register<DataTriggerBehavior, ActionCollection>(nameof(Actions));
 
         /// <summary>
         /// Identifies the <seealso cref="Binding"/> avalonia property.
@@ -43,25 +36,6 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public static readonly AvaloniaProperty<object> ValueProperty =
             AvaloniaProperty.Register<DataTriggerBehavior, object>(nameof(Value));
-
-        /// <summary>
-        /// Gets the collection of actions associated with the behavior. This is a avalonia property.
-        /// </summary>
-        [Content]
-        public ActionCollection Actions
-        {
-            get
-            {
-                ActionCollection actionCollection = this.GetValue(ActionsProperty);
-                if (actionCollection == null)
-                {
-                    actionCollection = new ActionCollection();
-                    this.SetValue(ActionsProperty, actionCollection);
-                }
-
-                return actionCollection;
-            }
-        }
 
         /// <summary>
         /// Gets or sets the bound object that the <see cref="DataTriggerBehavior"/> will listen to. This is a avalonia property.
