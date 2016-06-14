@@ -7,14 +7,13 @@ using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Avalonia.Xaml.Interactivity;
 using Avalonia.Controls;
-using Avalonia.Metadata;
 
 namespace Avalonia.Xaml.Interactions.Core
 {
     /// <summary>
     /// A behavior that listens for a specified event on its source and executes its actions when that event is fired.
     /// </summary>
-    public sealed class EventTriggerBehavior : Behavior
+    public sealed class EventTriggerBehavior : Trigger
     {
         private const string EventNameDefaultValue = "Loaded";
 
@@ -43,12 +42,6 @@ namespace Avalonia.Xaml.Interactions.Core
         }
 
         /// <summary>
-        /// Identifies the <seealso cref="Actions"/> avalonia property.
-        /// </summary>
-        public static readonly AvaloniaProperty<ActionCollection> ActionsProperty =
-            AvaloniaProperty.Register<EventTriggerBehavior, ActionCollection>(nameof(Actions));
-
-        /// <summary>
         /// Identifies the <seealso cref="EventName"/> avalonia property.
         /// </summary>
         public static readonly AvaloniaProperty<string> EventNameProperty =
@@ -66,24 +59,6 @@ namespace Avalonia.Xaml.Interactions.Core
         private bool isWindowsRuntimeEvent;
         private Func<Delegate, EventRegistrationToken> addEventHandlerMethod;
         private Action<EventRegistrationToken> removeEventHandlerMethod;
-
-        /// <summary>
-        /// Gets the collection of actions associated with the behavior. This is a avalonia property.
-        /// </summary>
-        [Content]
-        public ActionCollection Actions
-        {
-            get
-            {
-                ActionCollection actionCollection = this.GetValue(ActionsProperty);
-                if (actionCollection == null)
-                {
-                    actionCollection = new ActionCollection();
-                    this.SetValue(ActionsProperty, actionCollection);
-                }
-                return actionCollection;
-            }
-        }
 
         /// <summary>
         /// Gets or sets the name of the event to listen for. This is a avalonia property.
