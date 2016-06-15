@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See licence.md file in the project root for full license information.
 
 using BehaviorsTestApplication.Views;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Logging.Serilog;
 using Serilog;
@@ -19,8 +18,7 @@ namespace BehaviorsTestApplication
             InitializeLogging();
 
             AppBuilder.Configure<BehaviorsTestApp>()
-                .UseWin32()
-                .UseDirect2D1()
+                .UsePlatformDetect()
                 .Start<MainWindow>();
         }
 
