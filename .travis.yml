@@ -1,0 +1,15 @@
+language: csharp
+mono:
+  - nightly
+solution: XamlBehaviors.sln
+before_install:
+  - mkdir -p .nuget
+  - wget -O .nuget/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+install:
+  - sudo apt-get install -y gtk-sharp2
+  - mono .nuget/nuget.exe restore XamlBehaviors.sln -source "https://www.nuget.org/api/v2/;https://www.myget.org/F/avalonia-ci/api/v2"
+  - mono .nuget/nuget.exe install xunit.runner.console -Version 2.1.0 -OutputDirectory testrunner
+script:
+  - xbuild /p:Configuration=Release XamlBehaviors.sln
+  - mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/Avalonia.Xaml.Interactions.UnitTests/bin/Release/Avalonia.Xaml.Interactions.UnitTests.dll
+  - mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/Avalonia.Xaml.Interactivity.UnitTests/bin/Release/Avalonia.Xaml.Interactivity.UnitTests.dll
