@@ -21,7 +21,7 @@
       <dependency id="Rx-Linq" version="2.2.5" />
       <dependency id="Rx-Main" version="2.2.5" />
       <dependency id="Rx-PlatformServices" version="2.2.5" />
-      <dependency id="Avalonia" version="0.2.0.1682-alpha" />
+      <dependency id="Avalonia" version="0.2.0.1683-alpha" />
     </dependencies>
   </metadata>
 </package>
