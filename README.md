@@ -25,11 +25,11 @@ You can install the package like this:
 ### Package Dependencies
 
 * Avalonia
-* Rx-Core
-* Rx-Interfaces
-* Rx-Linq
-* Rx-Main
-* Rx-PlatformServices
+* System.Reactive
+* System.Reactive.Core
+* System.Reactive.Interfaces
+* System.Reactive.Linq
+* System.Reactive.PlatformServices
 * Serilog
 * Splat
 * Sprache
