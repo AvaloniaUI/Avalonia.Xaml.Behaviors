@@ -3,6 +3,7 @@
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/XamlBehaviors/XamlBehaviors?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Build status](https://ci.appveyor.com/api/projects/status/w7t8lmqflmd62bft?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/xamlbehaviors)
 [![Build Status](https://travis-ci.org/XamlBehaviors/XamlBehaviors.svg?branch=master)](https://travis-ci.org/XamlBehaviors/XamlBehaviors)
+[![xamlbehaviors-nightly MyGet Build Status](https://www.myget.org/BuildSource/Badge/xamlbehaviors-nightly?identifier=0def1b34-552c-4f37-9185-9bf0bec4ed0a)](https://www.myget.org/)
 
 **XamlBehaviors** is a port of [Windows UWP](https://github.com/Microsoft/XamlBehaviors) version of XAML Behaviors for [Avalonia](https://github.com/AvaloniaUI/Avalonia) XAML.
 
