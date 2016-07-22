@@ -3,6 +3,10 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Avalonia.Metadata;
 
 [assembly: AssemblyTitle("Avalonia.Xaml.Interactions")]
 [assembly: InternalsVisibleTo("Avalonia.Xaml.Interactions.UnitTests")]
+
+[assembly: XmlnsDefinition("https://github.com/xamlbehaviors", "Avalonia.Xaml.Interactions")]
+[assembly: XmlnsDefinition("https://github.com/xamlbehaviors", "Avalonia.Xaml.Interactions.Core")]
