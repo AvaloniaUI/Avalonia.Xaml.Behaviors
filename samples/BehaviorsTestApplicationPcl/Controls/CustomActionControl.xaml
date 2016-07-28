@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="BehaviorsTestApplication.Controls.CustomActionControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplicationPcl"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplicationPcl"
+             xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplicationPcl">
+    <Grid RowDefinitions="Auto,*">
+        <TextBlock Text="Move Pointer" Name="position" Grid.Row="0" Margin="5" Background="{StyleResource GrayBrush}" Foreground="{StyleResource YellowBrush}" FontSize="14" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Border Name="border" Grid.Row="1" Margin="5,0,5,5" Background="{StyleResource GrayBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <i:Interaction.Behaviors>
+                <behaviors:ShowPointerPositionBehavior TargetTextBlock="{Binding #position}"/>
+                <ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="{Binding #border}">
+                    <actions:PopupAction>
+                        <Border DataContext="{Binding Count}" Background="Yellow" BorderBrush="Red" BorderThickness="1" Padding="5">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Count: " Foreground="Red"/>
+                                <TextBlock Text="{Binding}" Foreground="Red"/>
+                            </StackPanel>
+                        </Border>
+                    </actions:PopupAction>
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+            <TextBlock Text="Click Me" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        </Border>
+    </Grid>
+</UserControl>

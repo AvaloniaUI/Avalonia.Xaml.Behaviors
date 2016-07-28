@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="BehaviorsTestApplication.Controls.ChangePropertyActionControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplicationPcl"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplicationPcl"
+             xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplicationPcl">
+    <Grid RowDefinitions="5*,*" ColumnDefinitions="50*,5,50*">
+        <Rectangle Name="ChangePropertyRectangle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5" Fill="{StyleResource PinkBrush}" Stroke="{StyleResource GrayBrush}" StrokeThickness="5"/>
+        <Button Name="pinkButton" Content="Pink" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #pinkButton}">
+                    <ia:ChangePropertyAction TargetObject="{Binding #ChangePropertyRectangle}" PropertyName="Fill" Value="{StyleResource PinkBrush}"/>
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </Button>
+        <Button Name="yellowButton" Content="Yellow" Grid.Row="1" Grid.Column="2" Margin="0,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #yellowButton}">
+                    <ia:ChangePropertyAction TargetObject="{Binding #ChangePropertyRectangle}" PropertyName="Fill" Value="{StyleResource YellowBrush}"/>
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </Button>
+    </Grid>
+</UserControl>

@@ -34,28 +34,65 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <EmbeddedResource Include="Views\MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Actions\PopupAction.cs" />
     <Compile Include="Behaviors\DragPositionBehavior.cs" />
     <Compile Include="Behaviors\ShowPointerPositionBehavior.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Core\Command.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\Core\ViewModelBase.cs" />
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="BehaviorsTestApp.xaml.cs">
       <DependentUpon>BehaviorsTestApp.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CallMethodActionControl.xaml.cs">
+      <DependentUpon>CallMethodActionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChangePropertyActionControl.xaml.cs">
+      <DependentUpon>ChangePropertyActionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CustomActionControl.xaml.cs">
+      <DependentUpon>CustomActionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CustomBehaviorControl.xaml.cs">
+      <DependentUpon>CustomBehaviorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataTriggerBehaviorControl.xaml.cs">
+      <DependentUpon>DataTriggerBehaviorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EventTriggerBehaviorControl.xaml.cs">
+      <DependentUpon>EventTriggerBehaviorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InvokeCommandActionControl.xaml.cs">
+      <DependentUpon>InvokeCommandActionControl.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="BehaviorsTestApp.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CallMethodActionControl.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ChangePropertyActionControl.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DataTriggerBehaviorControl.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EventTriggerBehaviorControl.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\InvokeCommandActionControl.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CustomActionControl.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CustomBehaviorControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
