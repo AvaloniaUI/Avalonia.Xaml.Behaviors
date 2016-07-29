@@ -1,172 +1,35 @@
 <Window x:Class="BehaviorsTestApplication.MainWindow"
         xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplicationPcl"
-        xmlns:xb="https://github.com/xamlbehaviors"
-        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-        xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplicationPcl"
-        xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplicationPcl"
+        xmlns:controls="clr-namespace:BehaviorsTestApplication.Controls;assembly=BehaviorsTestApplicationPcl"
         Title="XamlBehaviors Test Application" Width="800" Height="600">
     <Window.Styles>
         <Style Selector="TabStripItem">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
-        <Style>
-            <Style.Resources>
-                <SolidColorBrush x:Key="BlackBrush">Black</SolidColorBrush>
-                <SolidColorBrush x:Key="GrayBrush">Gray</SolidColorBrush>
-                <SolidColorBrush x:Key="RedBrush">Red</SolidColorBrush>
-                <SolidColorBrush x:Key="BlueBrush">Blue</SolidColorBrush>
-                <SolidColorBrush x:Key="YellowBrush">Yellow</SolidColorBrush>
-                <SolidColorBrush x:Key="PinkBrush">Pink</SolidColorBrush>
-            </Style.Resources>
-        </Style>
     </Window.Styles>
-    <Grid>
-        <TabControl>
-            <TabItem Header="CallMethodAction">
-                <Grid RowDefinitions="5*,*" ColumnDefinitions="30*,5,30*,5,30*">
-                    <Border BorderThickness="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="5" Background="{StyleResource PinkBrush}" BorderBrush="{StyleResource GrayBrush}">
-                        <TextBlock Text="{Binding Count}" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StyleResource YellowBrush}"/>
-                    </Border>
-                    <Button x:Name="decrementButton" Content="Decrement" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #decrementButton}">
-                                <ia:CallMethodAction TargetObject="{Binding}" MethodName="DecrementCount"/>
-                            </ia:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </Button>
-                    <Button Name="resetButton" Content="Reset" Grid.Row="1" Grid.Column="2" Margin="0,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #resetButton}">
-                                <ia:ChangePropertyAction TargetObject="{Binding}" PropertyName="Count" Value="0"/>
-                            </ia:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </Button>
-                    <!-- You can use custom namespace https://github.com/xamlbehaviors for all xaml behaviors. -->
-                    <Button x:Name="incrementButton" Content="Increment" Grid.Row="1" Grid.Column="4" Margin="0,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <xb:Interaction.Behaviors>
-                            <xb:EventTriggerBehavior EventName="Click" SourceObject="{Binding #incrementButton}">
-                                <xb:CallMethodAction TargetObject="{Binding}" MethodName="IncrementCount"/>
-                            </xb:EventTriggerBehavior>
-                        </xb:Interaction.Behaviors>
-                    </Button>
-                </Grid>
-            </TabItem>
-            <TabItem Header="ChangePropertyAction">
-                <Grid RowDefinitions="5*,*" ColumnDefinitions="50*,5,50*">
-                    <Rectangle Name="ChangePropertyRectangle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5" Fill="{StyleResource PinkBrush}" Stroke="{StyleResource GrayBrush}" StrokeThickness="5"/>
-                    <Button Name="pinkButton" Content="Pink" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #pinkButton}">
-                                <ia:ChangePropertyAction TargetObject="{Binding #ChangePropertyRectangle}" PropertyName="Fill" Value="{StyleResource PinkBrush}"/>
-                            </ia:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </Button>
-                    <Button Name="yellowButton" Content="Yellow" Grid.Row="1" Grid.Column="2" Margin="0,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #yellowButton}">
-                                <ia:ChangePropertyAction TargetObject="{Binding #ChangePropertyRectangle}" PropertyName="Fill" Value="{StyleResource YellowBrush}"/>
-                            </ia:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </Button>
-                </Grid>
-            </TabItem>
-            <TabItem Header="DataTriggerBehavior">
-                <Grid RowDefinitions="5*,*">
-                    <Rectangle Name="DataTriggerRectangle" Grid.Row="0" Margin="5" Fill="{StyleResource BlueBrush}" Stroke="{StyleResource GrayBrush}" StrokeThickness="5">
-                        <i:Interaction.Behaviors>
-                            <ia:DataTriggerBehavior Binding="{Binding #slider.Value}" ComparisonCondition="GreaterThan" Value="50">
-                                <ia:ChangePropertyAction TargetObject="{Binding #DataTriggerRectangle}" PropertyName="Fill" Value="{StyleResource YellowBrush}"/>
-                            </ia:DataTriggerBehavior>
-                            <ia:DataTriggerBehavior Binding="{Binding #slider.Value}" ComparisonCondition="LessThanOrEqual" Value="50">
-                                <ia:ChangePropertyAction TargetObject="{Binding #DataTriggerRectangle}" PropertyName="Fill" Value="{StyleResource BlueBrush}"/>
-                            </ia:DataTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </Rectangle>
-                    <StackPanel Grid.Row="1" Margin="5,0,5,5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="{Binding #slider.Value}" VerticalAlignment="Center" Width="50" Foreground="{StyleResource GrayBrush}"/>
-                        <Slider Name="slider" Width="200" IsSnapToTickEnabled="True" TickFrequency="1"/>
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-            <TabItem Header="EventTriggerBehavior">
-                <Grid RowDefinitions="Auto,100">
-                    <TextBox Name="textBox" Text="Hello" Grid.Row="0" Margin="5"/>
-                    <Button Name="changePropertyButton" Content="Change Property" Grid.Row="1" Margin="5,0,5,5">
-                        <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #changePropertyButton}">
-                                <ia:ChangePropertyAction TargetObject="{Binding #textBox}" PropertyName="Text" Value="World"/>
-                            </ia:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </Button>
-                </Grid>
-            </TabItem>
-            <TabItem Header="InvokeCommandAction">
-                <Grid RowDefinitions="5*,*" ColumnDefinitions="30*,5,30*,5,30*">
-                    <Canvas Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="5" Background="{StyleResource GrayBrush}">
-                        <Ellipse Canvas.Left="{Binding Position, Mode=TwoWay}" Canvas.Top="200" Fill="{StyleResource RedBrush}" Stroke="{StyleResource YellowBrush}" StrokeThickness="5" Height="100" Width="100"/>
-                    </Canvas>
-                    <Button x:Name="moveLeftButton" Content="Move Left" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #moveLeftButton}">
-                                <ia:InvokeCommandAction Command="{Binding MoveLeftCommand}"/>
-                            </ia:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </Button>
-                    <Button x:Name="resetMoveButton" Content="Reset Move" Grid.Row="1" Grid.Column="2" Margin="0,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #resetMoveButton}">
-                                <ia:InvokeCommandAction Command="{Binding ResetMoveCommand}"/>
-                            </ia:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </Button>
-                    <Button x:Name="moveRightButton" Content="Move Right" Grid.Row="1" Grid.Column="4" Margin="0,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #moveRightButton}">
-                                <ia:InvokeCommandAction Command="{Binding MoveRightCommand}"/>
-                            </ia:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </Button>
-                </Grid>
-            </TabItem>
-            <TabItem Header="CustomAction">
-                <Grid RowDefinitions="Auto,*">
-                    <TextBlock Text="Move Pointer" Name="position" Grid.Row="0" Margin="5" Background="{StyleResource GrayBrush}" Foreground="{StyleResource YellowBrush}" FontSize="14" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                    <Border Name="border" Grid.Row="1" Margin="5,0,5,5" Background="{StyleResource GrayBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <i:Interaction.Behaviors>
-                            <behaviors:ShowPointerPositionBehavior TargetTextBlock="{Binding #position}"/>
-                            <ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="{Binding #border}">
-                                <actions:PopupAction>
-                                    <Border DataContext="{Binding Count}" Background="Yellow" BorderBrush="Red" BorderThickness="1" Padding="5">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Count: " Foreground="Red"/>
-                                            <TextBlock Text="{Binding}" Foreground="Red"/>
-                                        </StackPanel>
-                                    </Border>
-                                </actions:PopupAction>
-                            </ia:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                        <TextBlock Text="Click Me" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-                    </Border>
-                </Grid>
-            </TabItem>
-            <TabItem Header="CustomBehavior">
-                <Grid Background="{StyleResource GrayBrush}" Margin="5">
-                    <Ellipse Fill="{StyleResource RedBrush}" Stroke="{StyleResource BlackBrush}" Height="125" Width="125" StrokeThickness="0" HorizontalAlignment="Left">
-                        <i:Interaction.Behaviors>
-                            <behaviors:DragPositionBehavior/>
-                        </i:Interaction.Behaviors>
-                    </Ellipse>
-                    <Ellipse Fill="{StyleResource BlueBrush}" Stroke="{StyleResource BlackBrush}" Height="125" Width="125" StrokeThickness="0" HorizontalAlignment="Right">
-                        <i:Interaction.Behaviors>
-                            <behaviors:DragPositionBehavior/>
-                        </i:Interaction.Behaviors>
-                    </Ellipse>
-                </Grid>
-            </TabItem>
-        </TabControl>
-    </Grid>
+    <TabControl>
+        <TabItem Header="CallMethodAction">
+            <controls:CallMethodActionControl/>
+        </TabItem>
+        <TabItem Header="ChangePropertyAction">
+            <controls:ChangePropertyActionControl/>
+        </TabItem>
+        <TabItem Header="DataTriggerBehavior">
+            <controls:DataTriggerBehaviorControl/>
+        </TabItem>
+        <TabItem Header="EventTriggerBehavior">
+            <controls:EventTriggerBehaviorControl/>
+        </TabItem>
+        <TabItem Header="InvokeCommandAction">
+            <controls:InvokeCommandActionControl/>
+        </TabItem>
+        <TabItem Header="CustomAction">
+            <controls:CustomActionControl/>
+        </TabItem>
+        <TabItem Header="CustomBehavior">
+            <controls:CustomBehaviorControl/>
+        </TabItem>
+    </TabControl>
 </Window>

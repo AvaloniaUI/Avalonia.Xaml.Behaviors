@@ -1,11 +1,10 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{9B9E3891-2366-4253-A952-D08BCEB71098}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{9B9E3891-2366-4253-A952-D08BCEB71098}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplication", "samples\BehaviorsTestApplication\BehaviorsTestApplication.csproj", "{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}"
 EndProject
@@ -36,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "template", "template", "{68
 	ProjectSection(SolutionItems) = preProject
 		nuget\template\Avalonia.Xaml.Behaviors.nuspec = nuget\template\Avalonia.Xaml.Behaviors.nuspec
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{84224365-32B6-46AF-85A2-45640E6D7EEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

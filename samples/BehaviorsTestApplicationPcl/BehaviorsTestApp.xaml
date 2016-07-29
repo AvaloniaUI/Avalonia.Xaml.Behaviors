@@ -4,5 +4,6 @@
     <Application.Styles>
         <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
         <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
+        <!--<StyleInclude Source="resm:BehaviorsTestApplication.Styles.Brushes.xaml?assembly=BehaviorsTestApplicationPcl"/>-->
     </Application.Styles>
 </Application>

@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="BehaviorsTestApplication.Controls.EventTriggerBehaviorControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplicationPcl"
+             xmlns:xb="https://github.com/xamlbehaviors"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplicationPcl"
+             xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplicationPcl">
+    <UserControl.Styles>
+        <StyleInclude Source="resm:BehaviorsTestApplication.Styles.Brushes.xaml?assembly=BehaviorsTestApplicationPcl"/>
+    </UserControl.Styles>
+    <UserControl.Styles>
+        <Style>
+            <Style.Resources>
+                <SolidColorBrush x:Key="BlackBrush">Black</SolidColorBrush>
+                <SolidColorBrush x:Key="GrayBrush">Gray</SolidColorBrush>
+                <SolidColorBrush x:Key="RedBrush">Red</SolidColorBrush>
+                <SolidColorBrush x:Key="BlueBrush">Blue</SolidColorBrush>
+                <SolidColorBrush x:Key="YellowBrush">Yellow</SolidColorBrush>
+                <SolidColorBrush x:Key="PinkBrush">Pink</SolidColorBrush>
+            </Style.Resources>
+        </Style>
+    </UserControl.Styles>
+    <Grid RowDefinitions="Auto,100">
+        <TextBox Name="textBox" Text="Hello" Grid.Row="0" Margin="5"/>
+        <Button Name="changePropertyButton" Content="Change Property" Grid.Row="1" Margin="5,0,5,5">
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #changePropertyButton}">
+                    <ia:ChangePropertyAction TargetObject="{Binding #textBox}" PropertyName="Text" Value="World"/>
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </Button>
+    </Grid>
+</UserControl>
