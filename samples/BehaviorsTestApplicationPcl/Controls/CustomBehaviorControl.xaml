@@ -6,6 +6,9 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplicationPcl"
              xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplicationPcl">
+    <UserControl.Styles>
+        <StyleInclude Source="resm:BehaviorsTestApplication.Styles.Brushes.xaml?assembly=BehaviorsTestApplicationPcl"/>
+    </UserControl.Styles>
     <Grid Background="{StyleResource GrayBrush}" Margin="5">
         <Ellipse Fill="{StyleResource RedBrush}" Stroke="{StyleResource BlackBrush}" Height="125" Width="125" StrokeThickness="0" HorizontalAlignment="Left">
             <i:Interaction.Behaviors>

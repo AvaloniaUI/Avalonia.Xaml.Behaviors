@@ -8,6 +8,9 @@
              xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplicationPcl"
              xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplicationPcl">
     <UserControl.Styles>
+        <StyleInclude Source="resm:BehaviorsTestApplication.Styles.Brushes.xaml?assembly=BehaviorsTestApplicationPcl"/>
+    </UserControl.Styles>
+    <UserControl.Styles>
         <Style>
             <Style.Resources>
                 <SolidColorBrush x:Key="BlackBrush">Black</SolidColorBrush>

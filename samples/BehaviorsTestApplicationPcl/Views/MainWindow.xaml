@@ -1,37 +1,35 @@
 <Window x:Class="BehaviorsTestApplication.MainWindow"
         xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplicationPcl"
-        xmlns:xb="https://github.com/xamlbehaviors"
-        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-        xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplicationPcl"
-        xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplicationPcl"
         xmlns:controls="clr-namespace:BehaviorsTestApplication.Controls;assembly=BehaviorsTestApplicationPcl"
         Title="XamlBehaviors Test Application" Width="800" Height="600">
-    <Grid>
-        <TabControl>
-            <TabItem Header="CallMethodAction">
-                <controls:CallMethodActionControl/>
-            </TabItem>
-            <TabItem Header="ChangePropertyAction">
-                <controls:ChangePropertyActionControl/>
-            </TabItem>
-            <TabItem Header="DataTriggerBehavior">
-                <controls:DataTriggerBehaviorControl/>
-            </TabItem>
-            <TabItem Header="EventTriggerBehavior">
-                <controls:EventTriggerBehaviorControl/>
-            </TabItem>
-            <TabItem Header="InvokeCommandAction">
-                <controls:InvokeCommandActionControl/>
-            </TabItem>
-            <TabItem Header="CustomAction">
-                <controls:CustomActionControl/>
-            </TabItem>
-            <TabItem Header="CustomBehavior">
-                <controls:CustomBehaviorControl/>
-            </TabItem>
-        </TabControl>
-    </Grid>
+    <Window.Styles>
+        <Style Selector="TabStripItem">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+    </Window.Styles>
+    <TabControl>
+        <TabItem Header="CallMethodAction">
+            <controls:CallMethodActionControl/>
+        </TabItem>
+        <TabItem Header="ChangePropertyAction">
+            <controls:ChangePropertyActionControl/>
+        </TabItem>
+        <TabItem Header="DataTriggerBehavior">
+            <controls:DataTriggerBehaviorControl/>
+        </TabItem>
+        <TabItem Header="EventTriggerBehavior">
+            <controls:EventTriggerBehaviorControl/>
+        </TabItem>
+        <TabItem Header="InvokeCommandAction">
+            <controls:InvokeCommandActionControl/>
+        </TabItem>
+        <TabItem Header="CustomAction">
+            <controls:CustomActionControl/>
+        </TabItem>
+        <TabItem Header="CustomBehavior">
+            <controls:CustomBehaviorControl/>
+        </TabItem>
+    </TabControl>
 </Window>

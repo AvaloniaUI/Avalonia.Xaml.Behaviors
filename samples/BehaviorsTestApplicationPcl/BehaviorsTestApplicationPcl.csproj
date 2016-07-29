@@ -74,6 +74,9 @@
     <EmbeddedResource Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Styles\Brushes.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CallMethodActionControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>

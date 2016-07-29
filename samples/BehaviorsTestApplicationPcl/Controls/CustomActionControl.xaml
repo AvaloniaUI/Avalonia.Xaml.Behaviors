@@ -6,6 +6,9 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplicationPcl"
              xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplicationPcl">
+    <UserControl.Styles>
+        <StyleInclude Source="resm:BehaviorsTestApplication.Styles.Brushes.xaml?assembly=BehaviorsTestApplicationPcl"/>
+    </UserControl.Styles>
     <Grid RowDefinitions="Auto,*">
         <TextBlock Text="Move Pointer" Name="position" Grid.Row="0" Margin="5" Background="{StyleResource GrayBrush}" Foreground="{StyleResource YellowBrush}" FontSize="14" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <Border Name="border" Grid.Row="1" Margin="5,0,5,5" Background="{StyleResource GrayBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

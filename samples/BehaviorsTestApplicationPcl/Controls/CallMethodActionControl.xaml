@@ -7,6 +7,9 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplicationPcl"
              xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplicationPcl">
+    <UserControl.Styles>
+        <StyleInclude Source="resm:BehaviorsTestApplication.Styles.Brushes.xaml?assembly=BehaviorsTestApplicationPcl"/>
+    </UserControl.Styles>
     <Grid RowDefinitions="5*,*" ColumnDefinitions="30*,5,30*,5,30*">
         <Border BorderThickness="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="5" Background="{StyleResource PinkBrush}" BorderBrush="{StyleResource GrayBrush}">
             <TextBlock Text="{Binding Count}" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StyleResource YellowBrush}"/>

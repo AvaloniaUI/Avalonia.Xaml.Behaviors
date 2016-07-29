@@ -6,6 +6,9 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplicationPcl"
              xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplicationPcl">
+    <UserControl.Styles>
+        <StyleInclude Source="resm:BehaviorsTestApplication.Styles.Brushes.xaml?assembly=BehaviorsTestApplicationPcl"/>
+    </UserControl.Styles>
     <Grid RowDefinitions="5*,*" ColumnDefinitions="50*,5,50*">
         <Rectangle Name="ChangePropertyRectangle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5" Fill="{StyleResource PinkBrush}" Stroke="{StyleResource GrayBrush}" StrokeThickness="5"/>
         <Button Name="pinkButton" Content="Pink" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
