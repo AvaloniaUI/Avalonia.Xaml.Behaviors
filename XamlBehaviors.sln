@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactivity
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.UnitTests", "tests\Avalonia.Xaml.Interactions.UnitTests\Avalonia.Xaml.Interactions.UnitTests.csproj", "{80D2C64D-B560-475D-941F-D5F28DDB2591}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{64E61195-33F1-49EF-8521-1E413940D7AA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{64E61195-33F1-49EF-8521-1E413940D7AA}"
 	ProjectSection(SolutionItems) = preProject
 		src\Shared\SharedAssemblyInfo.cs = src\Shared\SharedAssemblyInfo.cs
 	EndProjectSection
