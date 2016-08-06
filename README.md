@@ -10,6 +10,30 @@ XAML Behaviors is an easy-to-use means of adding common and reusable interactivi
 
 <a href='https://www.youtube.com/watch?v=pffBS-yQ_uM' target='_blank'>![](https://i.ytimg.com/vi/pffBS-yQ_uM/hqdefault.jpg)<a/>
 
+## Example Usage
+
+Example of using Behaviors in an `Avalonia`  XAML application:
+
+```XAML
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+        Width="500" Height="400">
+    <Grid RowDefinitions="Auto,100">
+        <TextBox Name="textBox" Text="Hello" Grid.Row="0" Margin="5"/>
+        <Button Name="changePropertyButton" Content="Change Property" Grid.Row="1" Margin="5,0,5,5">
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #changePropertyButton}">
+                    <ia:ChangePropertyAction TargetObject="{Binding #textBox}" PropertyName="Text" Value="World"/>
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </Button>
+    </Grid>
+</Window>
+```
+
+More examples can be found in [sample application](https://github.com/XamlBehaviors/XamlBehaviors/tree/master/samples/BehaviorsTestApplicationPcl/Controls).
+
 ## NuGet
 
 XamlBehaviors is delivered as a NuGet package.
