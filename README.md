@@ -14,7 +14,7 @@ XAML Behaviors is an easy-to-use means of adding common and reusable interactivi
 
 XamlBehaviors is delivered as a NuGet package.
 
-You can find the packages here [NuGet](https://www.nuget.org/packages/XamlBehaviors/) or by using nightly build feed:
+You can find the packages here [NuGet](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors/) or by using nightly build feed:
 * Add `https://www.myget.org/F/xamlbehaviors-nightly/api/v2` to your package sources
 * Update your package using `XamlBehaviors` feed
 
@@ -36,7 +36,7 @@ You can install the package like this:
 
 ### Package Sources
 
-* https://www.nuget.org/api/v2/
+* https://api.nuget.org/v3/index.json
 * https://www.myget.org/F/avalonia-ci/api/v2
 
 ## Resources

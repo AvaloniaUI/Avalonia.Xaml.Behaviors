@@ -3,11 +3,10 @@ $scriptpath = $MyInvocation.MyCommand.Path
 $dir = Split-Path $scriptpath
 Push-Location $dir
 
-
 sv version $env:APPVEYOR_BUILD_NUMBER
 #sv version "1-debug"
 
-sv version 0.2.0.$version-nightly
+sv version 0.4.0.$version-nightly
 sv key $env:myget_key
 
 . ".\include.ps1"
@@ -31,5 +30,3 @@ if ([string]::IsNullOrWhiteSpace($pullreq))
         }
     }
 }
-
-
