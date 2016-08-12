@@ -1,8 +1,6 @@
 image: Visual Studio 2015
 platform:
-- AnyCPU
-- x86
-- x64
+- Any CPU
 configuration:
 - Release
 environment:
