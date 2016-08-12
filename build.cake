@@ -231,7 +231,7 @@ Task("Build")
     {
         MSBuild(MSBuildSolution, settings => {
             settings.SetConfiguration(configuration);
-            settings.WithProperty("Platform", platform);
+            settings.WithProperty("Platform", "\"" + platform + "\"");
             settings.SetVerbosity(Verbosity.Minimal);
         });
     }
@@ -239,7 +239,7 @@ Task("Build")
     {
         XBuild(XBuildSolution, settings => {
             settings.SetConfiguration(configuration);
-            settings.WithProperty("Platform", platform);
+            settings.WithProperty("Platform", "\"" + platform + "\"");
             settings.SetVerbosity(Verbosity.Minimal);
         });
     }
