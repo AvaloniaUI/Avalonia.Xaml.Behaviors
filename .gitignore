@@ -156,3 +156,10 @@ $RECYCLE.BIN/
 #################
 *.userprefs
 *.nugetreferenceswitcher
+
+#################
+## Cake
+#################
+tools/
+.nuget
+artifacts/

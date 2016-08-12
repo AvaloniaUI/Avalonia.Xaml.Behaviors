@@ -4,15 +4,18 @@ os:
   - osx
 mono:
   - latest
-solution: XamlBehaviors.sln
-before_install:
-  - mkdir -p .nuget
-  - wget -O .nuget/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
-install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y gtk-sharp2 ; fi
-  - mono .nuget/nuget.exe restore XamlBehaviors.sln -source "https://www.nuget.org/api/v2/;https://www.myget.org/F/avalonia-ci/api/v2"
-  - mono .nuget/nuget.exe install xunit.runner.console -Version 2.1.0 -OutputDirectory testrunner
 script:
-  - xbuild /p:Configuration=Release XamlBehaviors.sln
-  - mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/Avalonia.Xaml.Interactions.UnitTests/bin/Release/Avalonia.Xaml.Interactions.UnitTests.dll
-  - mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/Avalonia.Xaml.Interactivity.UnitTests/bin/Release/Avalonia.Xaml.Interactivity.UnitTests.dll
+  - sudo chmod +x build.sh
+  - ./build.sh --target "Travis" --platform "Any CPU" --configuration "Release"
+notifications:
+  email: false
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/c56f9b5ff1c558c0db90
+    on_success: change
+    on_failure: always
+    on_start: never
+cache:
+  directories:
+    - packages
+    - tools

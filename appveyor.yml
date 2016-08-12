@@ -1,30 +1,20 @@
-version: 0.4.1.{build}
-skip_tags: true
 image: Visual Studio 2015
-configuration: Release
+platform:
+- Any CPU
+configuration:
+- Release
 environment:
-  myget_key:
+  NUGET_API_KEY:
+    secure: iSkm19DNdKOLxxCvHiaKikWXy25ZMwGBKpv+EgEprliGl0qX5HtKohLmwJsLnx5O
+  NUGET_API_URL: https://www.nuget.org/api/v2/package
+  MYGET_API_KEY:
     secure: xhYvrWYPHdNI+mQD+f4Zu3baL7fqW+nO/hYXJdN070Lej8wpa6gfrLi1NGtnQlAs
-nuget:
-  disable_publish_on_pr: true
+  MYGET_API_URL: https://www.myget.org/F/xamlbehaviors-nightly/api/v2/package
 before_build:
-- cmd: restore.cmd
-build:
-  project: XamlBehaviors.sln
-  verbosity: minimal
-after_test:
-- ps: nuget\build-appveyor.ps1
-artifacts:
-  - path: nuget\*.nupkg
-deploy:
-- provider: GitHub
-  tag: $(appveyor_build_version)
-  release: $(appveyor_build_version)
-  auth_token:
-    secure: 6jHUhHqAmyx5NOZWctCi0A72lGgaGxhT5tRWnBNMz1JYHOgg1PEID1DFEG1jiQeO
-  prerelease: true
-  on:
-    branch: master
+- cmd: git submodule update --init
+build_script:
+- ps: .\build.ps1 -Target "AppVeyor" -Platform "$env:platform" -Configuration "$env:configuration"
+test: off
 notifications:
 - provider: Webhook
   url: https://webhooks.gitter.im/e/f7554af63b89ca85701d
@@ -32,3 +22,6 @@ notifications:
   on_build_success: true
   on_build_failure: true
   on_build_status_changed: true
+cache:
+- packages -> src\**\packages.config, tests\**\packages.config
+- tools -> build.cake, tools\packages.config
