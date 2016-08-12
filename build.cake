@@ -137,8 +137,6 @@ var nuspecNuGetSettings = new List<NuGetPackSettings>();
 
 nuspecNuGetSettings.Add(nuspecNuGetBehaviors);
 
-nuspecNuGetSettings.ForEach((nuspec) => SetNuGetNuspecCommonProperties(nuspec));
-
 var nugetPackages = nuspecNuGetSettings.Select(nuspec => {
     return nuspec.OutputDirectory.CombineWithFilePath(string.Concat(nuspec.Id, ".", nuspec.Version, ".nupkg"));
 }).ToArray();
