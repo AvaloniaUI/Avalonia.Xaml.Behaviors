@@ -5,7 +5,6 @@ os:
 mono:
   - latest
 script:
-  - sudo chmod +x build.sh
   - ./build.sh --target "Travis" --platform "Any CPU" --configuration "Release"
 notifications:
   email: false
