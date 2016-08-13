@@ -125,14 +125,14 @@ var nuspecNuGetBehaviors = new NuGetPackSettings()
     Files = new []
     {
         // Avalonia.Xaml.Interactivity
-        new NuSpecContent { Source = "Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/Avalonia.Xaml.Interactivity.dll", Target = "lib/portable-windows8+net45" },
-        new NuSpecContent { Source = "Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/Avalonia.Xaml.Interactivity.xml", Target = "lib/portable-windows8+net45" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/Avalonia.Xaml.Interactivity.dll", Target = "lib/portable-windows8+net45" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/Avalonia.Xaml.Interactivity.xml", Target = "lib/portable-windows8+net45" },
         // Avalonia.Xaml.Interactions
-        new NuSpecContent { Source = "Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/Avalonia.Xaml.Interactions.dll", Target = "lib/portable-windows8+net45" },
-        new NuSpecContent { Source = "Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/Avalonia.Xaml.Interactions.xml", Target = "lib/portable-windows8+net45" }
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/Avalonia.Xaml.Interactions.dll", Target = "lib/portable-windows8+net45" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/Avalonia.Xaml.Interactions.xml", Target = "lib/portable-windows8+net45" }
     },
-    BasePath = Directory("./src/"),
-    OutputDirectory = nugetRoot.Combine("Avalonia.Xaml.Behaviors")
+    BasePath = Directory("./"),
+    OutputDirectory = nugetRoot
 };
 
 var nuspecNuGetSettings = new List<NuGetPackSettings>();
@@ -142,8 +142,6 @@ nuspecNuGetSettings.Add(nuspecNuGetBehaviors);
 var nugetPackages = nuspecNuGetSettings.Select(nuspec => {
     return nuspec.OutputDirectory.CombineWithFilePath(string.Concat(nuspec.Id, ".", nuspec.Version, ".nupkg"));
 }).ToArray();
-
-var nupkgNuGetDirs = nuspecNuGetSettings.Select(nuspec => nuspec.OutputDirectory);
 
 ///////////////////////////////////////////////////////////////////////////////
 // INFORMATION
@@ -188,7 +186,6 @@ Task("Clean")
     CleanDirectory(artifactsDir);
     CleanDirectory(testResultsDir);
     CleanDirectory(nugetRoot);
-    CleanDirectories(nupkgNuGetDirs);
 });
 
 Task("Restore-NuGet-Packages")
