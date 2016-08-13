@@ -43,6 +43,9 @@ var XBuildSolution = "./XamlBehaviors.sln";
 // PARAMETERS
 ///////////////////////////////////////////////////////////////////////////////
 
+var isPlatformAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "Any CPU");
+var isPlatformX86 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x86");
+var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
 var isLocalBuild = BuildSystem.IsLocalBuild;
 var isRunningOnUnix = IsRunningOnUnix();
 var isRunningOnWindows = IsRunningOnWindows();
@@ -56,7 +59,6 @@ var isReleasable = StringComparer.OrdinalIgnoreCase.Equals(ReleasePlatform, plat
                    && StringComparer.OrdinalIgnoreCase.Equals(ReleaseConfiguration, configuration);
 var isMyGetRelease = !isTagged && isReleasable;
 var isNuGetRelease = isTagged && isReleasable;
-var isAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "Any CPU");
 
 ///////////////////////////////////////////////////////////////////////////////
 // VERSION
@@ -86,7 +88,7 @@ var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");
 var nugetRoot = artifactsDir.Combine("nuget");
 
-var dirSuffix = isAnyCPU ? configuration : platform + "/" + configuration;
+var dirSuffix = isPlatformAnyCPU ? configuration : platform + "/" + configuration;
 
 var buildDirs = 
     GetDirectories("./src/**/bin/" + dirSuffix) + 
@@ -251,7 +253,7 @@ Task("Run-Unit-Tests")
 {
     string pattern = "./tests/**/bin/" + dirSuffix + "/*.UnitTests.dll";
 
-    if (platform == "x86")
+    if (isPlatformAnyCPU || isPlatformX86)
     {
         XUnit2(pattern, new XUnit2Settings { 
             ToolPath = "./tools/xunit.runner.console/tools/xunit.console.x86.exe",
