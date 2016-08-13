@@ -23,20 +23,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{64E611
 		src\Shared\SharedAssemblyInfo.cs = src\Shared\SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{CDCCA856-FCE5-49EB-AC3B-2C571853EDB7}"
-	ProjectSection(SolutionItems) = preProject
-		nuget\build-appveyor.ps1 = nuget\build-appveyor.ps1
-		nuget\build-version.ps1 = nuget\build-version.ps1
-		nuget\build.ps1 = nuget\build.ps1
-		nuget\include.ps1 = nuget\include.ps1
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "template", "template", "{68CC071A-72F8-4EBD-8FE8-2E6EF25656F8}"
-	ProjectSection(SolutionItems) = preProject
-		nuget\template\Avalonia.Xaml.Behaviors.nuspec = nuget\template\Avalonia.Xaml.Behaviors.nuspec
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{84224365-32B6-46AF-85A2-45640E6D7EEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{2913483A-3E55-44AE-86BB-88511F372191}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		build.sh = build.sh
+		NuGet.Config = NuGet.Config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -209,6 +206,5 @@ Global
 		{ED03EEAD-938F-447B-BF0B-30857AE78BFF} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
 		{C2229490-39CA-4192-A28C-1B5EC186E027} = {C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}
 		{80D2C64D-B560-475D-941F-D5F28DDB2591} = {C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}
-		{68CC071A-72F8-4EBD-8FE8-2E6EF25656F8} = {CDCCA856-FCE5-49EB-AC3B-2C571853EDB7}
 	EndGlobalSection
 EndGlobal
