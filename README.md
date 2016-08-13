@@ -37,6 +37,35 @@ Example of using Behaviors in an `Avalonia`  XAML application:
 
 More examples can be found in [sample application](https://github.com/XamlBehaviors/XamlBehaviors/tree/master/samples/BehaviorsTestApplicationPcl/Controls).
 
+## Building XAML Behaviors
+
+First, clone the repository or download the latest zip.
+```
+git clone https://github.com/XamlBehaviors/XamlBehaviors.git
+git submodule update --init --recursive
+```
+
+### Build using IDE
+
+* [Visual Studio Community 2015](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx) for `Windows` builds.
+* [MonoDevelop](http://www.monodevelop.com/) for `Linux` builds.
+
+Open `XamlBehaviors.sln` in selected IDE and run `Build` command.
+
+### Build on Windows using script
+
+Open up a Powershell prompt and execute the bootstrapper script:
+```PowerShell
+PS> .\build.ps1 -Target "Default" -Platform "Any CPU" -Configuration "Release"
+```
+
+### Build on Linux/OSX using script
+
+Open up a terminal prompt and execute the bootstrapper script:
+```Bash
+$ ./build.sh --target "Default" --platform "Any CPU" --configuration "Release"
+```
+
 ## NuGet
 
 XamlBehaviors is delivered as a NuGet package.
