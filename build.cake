@@ -102,7 +102,7 @@ var buildDirs =
 // NUGET NUSPECS
 ///////////////////////////////////////////////////////////////////////////////
 
-var AvaloniaVersion = "0.4.1-build1860-alpha";
+var AvaloniaVersion = "0.4.1-build1936-alpha";
 
 var nuspecNuGetBehaviors = new NuGetPackSettings()
 {
