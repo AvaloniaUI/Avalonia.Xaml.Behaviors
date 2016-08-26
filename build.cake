@@ -163,7 +163,7 @@ var nuspecNuGetBehaviors = new NuGetPackSettings()
     Tags = new [] { "Avalonia", "Behavior", "Action", "Behaviors", "Actions", "Managed", "C#", "Interaction", "Interactivity", "Interactions", "Xaml" },
     Dependencies = new []
     {
-        new NuSpecDependency() { Id = "Avalonia", Version = AvaloniaVersion }
+        new NuSpecDependency { Id = "Avalonia", Version = AvaloniaVersion }
     },
     Files = new []
     {
