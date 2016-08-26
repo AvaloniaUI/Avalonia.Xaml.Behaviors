@@ -102,7 +102,48 @@ var buildDirs =
 // NUGET NUSPECS
 ///////////////////////////////////////////////////////////////////////////////
 
-var AvaloniaVersion = "0.4.1-build1936-alpha";
+// Key: Package Id
+// Value is Tuple where Item1: Package Version, Item2: The packages.config file path.
+var packageVersions = new Dictionary<string, IList<Tuple<string,string>>>();
+
+System.IO.Directory.EnumerateFiles(((DirectoryPath)Directory("./src")).FullPath, "packages.config", SearchOption.AllDirectories).ToList().ForEach(fileName =>
+{
+    var file = new PackageReferenceFile(fileName);
+    foreach (PackageReference packageReference in file.GetPackageReferences())
+    {
+        IList<Tuple<string, string>> versions;
+        packageVersions.TryGetValue(packageReference.Id, out versions);
+        if (versions == null)
+        {
+            versions = new List<Tuple<string, string>>();
+            packageVersions[packageReference.Id] = versions;
+        }
+        versions.Add(Tuple.Create(packageReference.Version.ToString(), fileName));
+    }
+});
+
+Information("Checking installed NuGet package dependencies versions:");
+
+packageVersions.ToList().ForEach(package =>
+{
+    var packageVersion = package.Value.First().Item1;
+    bool isValidVersion = package.Value.All(x => x.Item1 == packageVersion);
+    if (!isValidVersion)
+    {
+        Information("Error: package {0} has multiple versions installed:", package.Key);
+        foreach (var v in package.Value)
+        {
+            Information("{0}, file: {1}", v.Item1, v.Item2);
+        }
+        throw new Exception("Detected multiple NuGet package version installed for different projects.");
+    }
+});
+
+Information("Setting NuGet package dependencies versions:");
+
+var AvaloniaVersion = packageVersions["Avalonia"].FirstOrDefault().Item1;
+
+Information("Package: Avalonia, version: {0}", AvaloniaVersion);
 
 var nuspecNuGetBehaviors = new NuGetPackSettings()
 {

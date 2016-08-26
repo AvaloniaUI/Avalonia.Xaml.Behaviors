@@ -10,7 +10,7 @@
         </Style>
     </Window.Styles>
     <TabControl>
-        <TabItem Header="CallMethodAction">
+        <TabItem Header="CallMethodAction" IsSelected="True">
             <controls:CallMethodActionControl/>
         </TabItem>
         <TabItem Header="ChangePropertyAction">
