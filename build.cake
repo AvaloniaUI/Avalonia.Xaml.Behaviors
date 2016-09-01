@@ -323,17 +323,6 @@ Task("Create-NuGet-Packages")
     }
 });
 
-Task("Upload-AppVeyor-Artifacts")
-    .IsDependentOn("Create-NuGet-Packages")
-    .WithCriteria(() => isRunningOnAppVeyor)
-    .Does(() =>
-{
-    foreach(var nupkg in nugetPackages)
-    {
-        AppVeyor.UploadArtifact(nupkg.FullPath);
-    }
-});
-
 Task("Publish-MyGet")
     .IsDependentOn("Create-NuGet-Packages")
     .WithCriteria(() => !isLocalBuild)
@@ -413,7 +402,6 @@ Task("Default")
   .IsDependentOn("Package");
 
 Task("AppVeyor")
-  .IsDependentOn("Upload-AppVeyor-Artifacts")
   .IsDependentOn("Publish-MyGet")
   .IsDependentOn("Publish-NuGet");
 
