@@ -25,3 +25,4 @@ notifications:
 artifacts:
   - path: artifacts\test-results\*.xml
   - path: artifacts\nuget\*.nupkg
+  - path: artifacts\zip\*.zip
