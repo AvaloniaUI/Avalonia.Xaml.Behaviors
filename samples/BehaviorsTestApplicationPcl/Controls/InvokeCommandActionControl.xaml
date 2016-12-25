@@ -1,4 +1,6 @@
-﻿<UserControl x:Class="BehaviorsTestApplication.Controls.InvokeCommandActionControl"
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="BehaviorsTestApplication.Controls.InvokeCommandActionControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplicationPcl"
