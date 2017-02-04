@@ -164,7 +164,7 @@ var coreLibraries = new string[][]
 };
 
 var coreLibrariesFiles = coreLibraries.Select((lib) => {
-    return (FilePath)context.File(lib[0] + lib[1] + "/bin/" + dirSuffix + "/" + lib[1] + lib[2]);
+    return (FilePath)File(lib[0] + lib[1] + "/bin/" + dirSuffix + "/" + lib[1] + lib[2]);
 }).ToList();
 
 var coreLibrariesNuSpecContent = coreLibrariesFiles.Select((file) => {
