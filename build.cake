@@ -208,7 +208,10 @@ var nuspecNuGetBehaviors = new NuGetPackSettings()
         new NuSpecDependency() { Id = "NETStandard.Library", TargetFramework = "netcoreapp1.0", Version = "1.6.0" },
         new NuSpecDependency() { Id = "Microsoft.NETCore.Portable.Compatibility", TargetFramework = "netcoreapp1.0", Version = "1.0.1" }
     },
-    Files = coreLibrariesNuSpecContent.Concat(win32CoreLibrariesNuSpecContent).Concat(net45RuntimePlatform).ToList(),
+    Files = coreLibrariesNuSpecContent
+        .Concat(win32CoreLibrariesNuSpecContent)
+        .Concat(netcoreappCoreLibrariesNuSpecContent)
+        .ToList(),
     BasePath = Directory("./"),
     OutputDirectory = nugetRoot
 };
