@@ -1,8 +1,4 @@
-# XAML Behaviors Documentation
-
-* [API Reference](http://xamlbehaviors.github.io/)
-
-## Building
+# Avalonia XAML Behaviors Documentation
 
 Download and unzip `docfx.zip` into `Documentation` folder from [DocFX project site](https://github.com/dotnet/docfx/releases).
 
