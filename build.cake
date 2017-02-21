@@ -35,7 +35,7 @@ var configuration = Argument("configuration", "Release");
 // CONFIGURATION
 ///////////////////////////////////////////////////////////////////////////////
 
-var MainRepo = "XamlBehaviors/XamlBehaviors";
+var MainRepo = "wieslawsoltes/XamlBehaviors";
 var MasterBranch = "master";
 var AssemblyInfoPath = File("./src/Shared/SharedAssemblyInfo.cs");
 var ReleasePlatform = "Any CPU";
@@ -192,7 +192,7 @@ var nuspecNuGetBehaviors = new NuGetPackSettings()
     Authors = new [] { "XamlBehaviors" },
     Owners = new [] { "wieslaw.soltes" },
     LicenseUrl = new Uri("http://opensource.org/licenses/MIT"),
-    ProjectUrl = new Uri("https://github.com/XamlBehaviors/XamlBehaviors/"),
+    ProjectUrl = new Uri("https://github.com/wieslawsoltes/XamlBehaviors/"),
     RequireLicenseAcceptance = false,
     Symbols = false,
     NoPackageAnalysis = true,
