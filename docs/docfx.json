@@ -28,7 +28,7 @@
     ],
     "overwrite": "apidoc/*.md",
     "globalMetadata": {
-      "_appTitle": "XamlBehaviors Website"
+      "_appTitle": "Avalonia XamlBehaviors Website"
     },
     "dest": "_site",
     "template": [ "default", "template"]
