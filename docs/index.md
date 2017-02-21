@@ -1,3 +1,3 @@
-# XamlBehaviors Documentation Site
+# Avalonia XamlBehaviors Documentation Site
 
-Welcome to the XamlBehaviors documentation site.
+Welcome to the Avalonia XamlBehaviors documentation site.
