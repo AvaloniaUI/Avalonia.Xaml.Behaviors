@@ -1,9 +1,9 @@
 # XAML Behaviors
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/XamlBehaviors/XamlBehaviors?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://badges.gitter.im/wieslawsoltes/AvaloniaBehaviors.svg)](https://gitter.im/wieslawsoltes/AvaloniaBehaviors?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/w7t8lmqflmd62bft?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/xamlbehaviors)
-[![Build Status](https://travis-ci.org/XamlBehaviors/XamlBehaviors.svg?branch=master)](https://travis-ci.org/XamlBehaviors/XamlBehaviors)
+[![Build Status](https://travis-ci.org/XamlBehaviors/XamlBehaviors.svg?branch=master)](https://travis-ci.org/wieslawsoltes/XamlBehaviors)
 
 [![NuGet](https://img.shields.io/nuget/v/Avalonia.Xaml.Behaviors.svg)](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors) [![MyGet](https://img.shields.io/myget/xamlbehaviors-nightly/vpre/Avalonia.Xaml.Behaviors.svg?label=myget)](https://www.myget.org/gallery/xamlbehaviors-nightly) 
 
@@ -35,13 +35,13 @@ Example of using Behaviors in an `Avalonia`  XAML application:
 </Window>
 ```
 
-More examples can be found in [sample application](https://github.com/XamlBehaviors/XamlBehaviors/tree/master/samples/BehaviorsTestApplicationPcl/Controls).
+More examples can be found in [sample application](https://github.com/wieslawsoltes/XamlBehaviors/tree/master/samples/BehaviorsTestApplicationPcl/Controls).
 
 ## Building XAML Behaviors
 
 First, clone the repository or download the latest zip.
 ```
-git clone https://github.com/XamlBehaviors/XamlBehaviors.git
+git clone https://github.com/wieslawsoltes/XamlBehaviors.git
 git submodule update --init --recursive
 ```
 
@@ -97,8 +97,7 @@ You can install the package like this:
 
 ## Resources
 
-* [Project website and API Reference.](http://xamlbehaviors.github.io/)
-* [GitHub source code repository.](https://github.com/XamlBehaviors/XamlBehaviors)
+* [GitHub source code repository.](https://github.com/wieslawsoltes/XamlBehaviors)
 
 ## License
 
