@@ -7,9 +7,9 @@
 
 [![NuGet](https://img.shields.io/nuget/v/Avalonia.Xaml.Behaviors.svg)](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors) [![MyGet](https://img.shields.io/myget/xamlbehaviors-nightly/vpre/Avalonia.Xaml.Behaviors.svg?label=myget)](https://www.myget.org/gallery/xamlbehaviors-nightly) 
 
-**XamlBehaviors** is a port of [Windows UWP](https://github.com/Microsoft/XamlBehaviors) version of XAML Behaviors for [Avalonia](https://github.com/AvaloniaUI/Avalonia) XAML.
+**AvaloniaBehaviors** is a port of [Windows UWP](https://github.com/Microsoft/XamlBehaviors) version of XAML Behaviors for [Avalonia](https://github.com/AvaloniaUI/Avalonia) XAML.
 
-XAML Behaviors is an easy-to-use means of adding common and reusable interactivity to your [Avalonia](https://github.com/AvaloniaUI/Avalonia) applications with minimal code. Avalonia port is available only for managed applications. Use of XAML Behaviors is governed by the MIT License. 
+Avalonia XAML Behaviors is an easy-to-use means of adding common and reusable interactivity to your [Avalonia](https://github.com/AvaloniaUI/Avalonia) applications with minimal code. Avalonia port is available only for managed applications. Use of XAML Behaviors is governed by the MIT License. 
 
 <a href='https://www.youtube.com/watch?v=pffBS-yQ_uM' target='_blank'>![](https://i.ytimg.com/vi/pffBS-yQ_uM/hqdefault.jpg)<a/>
 
@@ -37,7 +37,7 @@ Example of using Behaviors in an `Avalonia`  XAML application:
 
 More examples can be found in [sample application](https://github.com/wieslawsoltes/XamlBehaviors/tree/master/samples/BehaviorsTestApplicationPcl/Controls).
 
-## Building XAML Behaviors
+## Building Avalonia XAML Behaviors
 
 First, clone the repository or download the latest zip.
 ```
@@ -68,7 +68,7 @@ $ ./build.sh --target "Default" --platform "Any CPU" --configuration "Release"
 
 ## NuGet
 
-XamlBehaviors is delivered as a NuGet package.
+Avalonia XamlBehaviors is delivered as a NuGet package.
 
 You can find the packages here [NuGet](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors/) or by using nightly build feed:
 * Add `https://www.myget.org/F/xamlbehaviors-nightly/api/v2` to your package sources
@@ -101,4 +101,4 @@ You can install the package like this:
 
 ## License
 
-XAML Behaviors is licensed under the [MIT license](LICENSE.TXT).
+Avalonia XAML Behaviors is licensed under the [MIT license](LICENSE.TXT).
