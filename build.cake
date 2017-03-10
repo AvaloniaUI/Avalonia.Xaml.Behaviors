@@ -369,6 +369,8 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
+    if(!isRunningOnWindows)
+       return;
     var assemblies = GetFiles("./tests/**/bin/" + dirSuffix + "/" + UnitTestsFramework + "/*.UnitTests.dll");
     var settings = new XUnit2Settings { 
         ToolPath = (isPlatformAnyCPU || isPlatformX86) ? 
