@@ -1,14 +1,14 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{9B9E3891-2366-4253-A952-D08BCEB71098}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplication", "samples\BehaviorsTestApplication\BehaviorsTestApplication.csproj", "{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplication.Desktop", "samples\BehaviorsTestApplication.Desktop\BehaviorsTestApplication.Desktop.csproj", "{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplicationPcl", "samples\BehaviorsTestApplicationPcl\BehaviorsTestApplicationPcl.csproj", "{EA113F1A-D8D7-4142-9948-353270E7EBAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplication", "samples\BehaviorsTestApplication\BehaviorsTestApplication.csproj", "{EA113F1A-D8D7-4142-9948-353270E7EBAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactivity", "src\Avalonia.Xaml.Interactivity\Avalonia.Xaml.Interactivity.csproj", "{14006EB4-66E9-4B58-BF5F-5A1983BF4621}"
 EndProject
@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{2913483A
 		build.sh = build.sh
 		NuGet.Config = NuGet.Config
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BehaviorsTestApplication.NetCore", "samples\BehaviorsTestApplication.NetCore\BehaviorsTestApplication.NetCore.csproj", "{92E7FFBA-3917-4BD2-9674-822D19B00B81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -195,6 +197,30 @@ Global
 		{80D2C64D-B560-475D-941F-D5F28DDB2591}.Release|iPhone.Build.0 = Release|Any CPU
 		{80D2C64D-B560-475D-941F-D5F28DDB2591}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{80D2C64D-B560-475D-941F-D5F28DDB2591}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Release|iPhone.Build.0 = Release|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -206,5 +232,6 @@ Global
 		{ED03EEAD-938F-447B-BF0B-30857AE78BFF} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
 		{C2229490-39CA-4192-A28C-1B5EC186E027} = {C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}
 		{80D2C64D-B560-475D-941F-D5F28DDB2591} = {C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}
+		{92E7FFBA-3917-4BD2-9674-822D19B00B81} = {9B9E3891-2366-4253-A952-D08BCEB71098}
 	EndGlobalSection
 EndGlobal

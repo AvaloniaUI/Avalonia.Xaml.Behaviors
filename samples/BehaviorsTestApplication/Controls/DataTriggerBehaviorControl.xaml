@@ -3,13 +3,13 @@
 <UserControl x:Class="BehaviorsTestApplication.Controls.DataTriggerBehaviorControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplicationPcl"
+             xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplication"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplicationPcl"
-             xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplicationPcl">
+             xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplication"
+             xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplication">
     <UserControl.Styles>
-        <StyleInclude Source="resm:BehaviorsTestApplication.Styles.Brushes.xaml?assembly=BehaviorsTestApplicationPcl"/>
+        <StyleInclude Source="resm:BehaviorsTestApplication.Styles.Brushes.xaml?assembly=BehaviorsTestApplication"/>
     </UserControl.Styles>
     <Grid RowDefinitions="5*,*">
         <Rectangle Name="DataTriggerRectangle" Grid.Row="0" Margin="5" Fill="{StyleResource BlueBrush}" Stroke="{StyleResource GrayBrush}" StrokeThickness="5">

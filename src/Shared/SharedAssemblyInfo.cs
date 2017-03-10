@@ -4,9 +4,9 @@
 using System.Reflection;
 using System.Resources;
 
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Wiesław Šoltés")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCopyright("Copyright \u00A9 2016")]
+[assembly: AssemblyCopyright("Copyright © Wiesław Šoltés 2016")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyProduct("Avalonia")]
