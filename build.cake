@@ -337,7 +337,7 @@ Task("Build")
     }
 });
 
-void RunCoreTest(string dir, bool net461Only)
+void RunCoreTest(string dir, bool isRunningOnWindows, bool net461Only)
 {
     Information("Running tests from " + dir);
     DotNetCoreRestore(dir);
@@ -360,8 +360,8 @@ Task("Run-Net-Core-Unit-Tests")
     .IsDependentOn("Clean")
     .Does(() => 
 {
-    RunCoreTest("./tests/Avalonia.Xaml.Interactivity.UnitTests", false);
-    RunCoreTest("./tests/Avalonia.Xaml.Interactions.UnitTests", false);
+    RunCoreTest("./tests/Avalonia.Xaml.Interactivity.UnitTests", isRunningOnWindows, false);
+    RunCoreTest("./tests/Avalonia.Xaml.Interactions.UnitTests", isRunningOnWindows, false);
 });
 
 Task("Run-Unit-Tests")
