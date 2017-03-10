@@ -42,7 +42,7 @@ var ReleasePlatform = "Any CPU";
 var ReleaseConfiguration = "Release";
 var MSBuildSolution = "./XamlBehaviors.sln";
 var XBuildSolution = "./XamlBehaviors.sln";
-var UnitTestsFramework = "net45";
+var UnitTestsFramework = "net461";
 
 ///////////////////////////////////////////////////////////////////////////////
 // PARAMETERS
