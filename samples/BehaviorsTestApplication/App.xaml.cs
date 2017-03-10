@@ -6,7 +6,7 @@ using Avalonia.Markup.Xaml;
 
 namespace BehaviorsTestApplication
 {
-    public class BehaviorsTestApp : Application
+    public class App : Application
     {
         public override void Initialize()
         {

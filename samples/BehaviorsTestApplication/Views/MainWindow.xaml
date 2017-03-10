@@ -3,7 +3,7 @@
 <Window x:Class="BehaviorsTestApplication.MainWindow"
         xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:BehaviorsTestApplication.Controls;assembly=BehaviorsTestApplicationPcl"
+        xmlns:controls="clr-namespace:BehaviorsTestApplication.Controls;assembly=BehaviorsTestApplication"
         Title="XamlBehaviors Test Application" Width="800" Height="600">
     <Window.Styles>
         <Style Selector="TabStripItem">

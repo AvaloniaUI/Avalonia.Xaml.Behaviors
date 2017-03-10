@@ -2,14 +2,15 @@
 // ADDINS
 ///////////////////////////////////////////////////////////////////////////////
 
-#addin "nuget:?package=Polly&version=4.2.0"
+#addin "nuget:?package=Polly&version=5.0.6"
 #addin "nuget:?package=NuGet.Core&version=2.12.0"
 
 ///////////////////////////////////////////////////////////////////////////////
 // TOOLS
 ///////////////////////////////////////////////////////////////////////////////
 
-#tool "nuget:?package=xunit.runner.console&version=2.1.0"
+#tool "nuget:?package=xunit.runner.console&version=2.2.0"
+#tool "nuget:https://dotnet.myget.org/F/nuget-build/?package=NuGet.CommandLine&version=4.3.0-beta1-2361&prerelease"
 
 ///////////////////////////////////////////////////////////////////////////////
 // USINGS
@@ -18,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using Polly;
 using NuGet;
 
@@ -40,6 +42,7 @@ var ReleasePlatform = "Any CPU";
 var ReleaseConfiguration = "Release";
 var MSBuildSolution = "./XamlBehaviors.sln";
 var XBuildSolution = "./XamlBehaviors.sln";
+var UnitTestsFramework = "net45";
 
 ///////////////////////////////////////////////////////////////////////////////
 // PARAMETERS
@@ -106,19 +109,25 @@ var buildDirs =
 // Value is Tuple where Item1: Package Version, Item2: The packages.config file path.
 var packageVersions = new Dictionary<string, IList<Tuple<string,string>>>();
 
-System.IO.Directory.EnumerateFiles(((DirectoryPath)Directory("./src")).FullPath, "packages.config", SearchOption.AllDirectories).ToList().ForEach(fileName =>
+System.IO.Directory.EnumerateFiles(
+    ((DirectoryPath)Directory("./src")).FullPath,"*.csproj", SearchOption.AllDirectories).ToList().ForEach(fileName =>
 {
-    var file = new PackageReferenceFile(fileName);
-    foreach (PackageReference packageReference in file.GetPackageReferences())
+    var xdoc = XDocument.Load(fileName);
+    foreach (var reference in xdoc.Descendants().Where(x => x.Name.LocalName == "PackageReference"))
     {
+        var name = reference.Attribute("Include").Value;
+        var versionAttribute = reference.Attribute("Version");
+        var version = versionAttribute != null 
+            ? versionAttribute.Value 
+            : reference.Elements().First(x=>x.Name.LocalName == "Version").Value;
         IList<Tuple<string, string>> versions;
-        packageVersions.TryGetValue(packageReference.Id, out versions);
+        packageVersions.TryGetValue(name, out versions);
         if (versions == null)
         {
             versions = new List<Tuple<string, string>>();
-            packageVersions[packageReference.Id] = versions;
+            packageVersions[name] = versions;
         }
-        versions.Add(Tuple.Create(packageReference.Version.ToString(), fileName));
+        versions.Add(Tuple.Create(version, fileName));
     }
 });
 
@@ -154,12 +163,12 @@ var coreLibraries = new string[][]
 };
 
 var coreLibrariesFiles = coreLibraries.Select((lib) => {
-    return (FilePath)File(lib[0] + lib[1] + "/bin/" + dirSuffix + "/" + lib[1] + lib[2]);
+    return (FilePath)File(lib[0] + lib[1] + "/bin/" + dirSuffix + "/netstandard1.1/" + lib[1] + lib[2]);
 }).ToList();
 
 var coreLibrariesNuSpecContent = coreLibrariesFiles.Select((file) => {
     return new NuSpecContent { 
-        Source = file.FullPath, Target = "lib/portable-windows8+net45" 
+        Source = file.FullPath, Target = "lib/netstandard1.1" 
     };
 });
 
@@ -281,25 +290,42 @@ Task("Restore-NuGet-Packages")
             if(isRunningOnWindows)
             {
                 NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
+                    ToolPath = "./tools/NuGet.CommandLine/tools/NuGet.exe",
                     ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
                 });
             }
             else
             {
                 NuGetRestore(XBuildSolution, new NuGetRestoreSettings {
+                    ToolPath = "./tools/NuGet.CommandLine/tools/NuGet.exe",
                     ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
                 });
             }
         });
 });
 
+void DotNetCoreBuild()
+{
+    DotNetCoreRestore("./samples/BehaviorsTestApplication.NetCore");
+    DotNetBuild("./samples/BehaviorsTestApplication.NetCore");
+}
+
+Task("DotNetCoreBuild")
+    .IsDependentOn("Clean")
+    .Does(() => 
+{
+    DotNetCoreBuild();
+});
+
 Task("Build")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
-    if(isRunningOnWindows)
+    if (isRunningOnWindows)
     {
         MSBuild(MSBuildSolution, settings => {
+            settings.WithProperty("UseRoslynPathHack", "true");
+            settings.UseToolVersion(MSBuildToolVersion.VS2017);
             settings.SetConfiguration(configuration);
             settings.WithProperty("Platform", "\"" + platform + "\"");
             settings.SetVerbosity(Verbosity.Minimal);
@@ -307,37 +333,56 @@ Task("Build")
     }
     else
     {
-        XBuild(XBuildSolution, settings => {
-            settings.SetConfiguration(configuration);
-            settings.WithProperty("Platform", "\"" + platform + "\"");
-            settings.SetVerbosity(Verbosity.Minimal);
-        });
+        DotNetCoreBuild();
     }
 });
 
+void RunCoreTest(string dir, bool net461Only)
+{
+    Information("Running tests from " + dir);
+    DotNetCoreRestore(dir);
+    var frameworks = new List<string>() { "netcoreapp1.1" };
+    if (isRunningOnWindows)
+        frameworks.Add("net461");
+    foreach(var fw in frameworks)
+    {
+        if(fw != "net461" && net461Only)
+            continue;
+        Information("Running for " + fw);
+        DotNetCoreTest(System.IO.Path.Combine(
+            dir, 
+            System.IO.Path.GetFileName(dir) + ".csproj"),
+            new DotNetCoreTestSettings { Framework = fw });
+    }
+}
+
+Task("Run-Net-Core-Unit-Tests")
+    .IsDependentOn("Clean")
+    .Does(() => 
+{
+    RunCoreTest("./tests/Avalonia.Xaml.Interactivity.UnitTests", false);
+    RunCoreTest("./tests/Avalonia.Xaml.Interactions.UnitTests", false);
+});
+
 Task("Run-Unit-Tests")
+    .IsDependentOn("Run-Net-Core-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    string pattern = "./tests/**/bin/" + dirSuffix + "/*.UnitTests.dll";
-
-    if (isPlatformAnyCPU || isPlatformX86)
+    var assemblies = GetFiles("./tests/**/bin/" + dirSuffix + "/" + UnitTestsFramework + "/*.UnitTests.dll");
+    var settings = new XUnit2Settings { 
+        ToolPath = (isPlatformAnyCPU || isPlatformX86) ? 
+            "./tools/xunit.runner.console/tools/xunit.console.x86.exe" :
+            "./tools/xunit.runner.console/tools/xunit.console.exe",
+        OutputDirectory = testResultsDir,
+        XmlReportV1 = true,
+        NoAppDomain = true,
+        Parallelism = ParallelismOption.None,
+        ShadowCopy = false
+    };
+    foreach (var assembly in assemblies)
     {
-        XUnit2(pattern, new XUnit2Settings { 
-            ToolPath = "./tools/xunit.runner.console/tools/xunit.console.x86.exe",
-            OutputDirectory = testResultsDir,
-            XmlReportV1 = true,
-            NoAppDomain = true
-        });
-    }
-    else
-    {
-        XUnit2(pattern, new XUnit2Settings { 
-            ToolPath = "./tools/xunit.runner.console/tools/xunit.console.exe",
-            OutputDirectory = testResultsDir,
-            XmlReportV1 = true,
-            NoAppDomain = true
-        });
+        XUnit2(assembly.FullPath, settings);
     }
 });
 
@@ -427,14 +472,20 @@ Task("Package")
   .IsDependentOn("Create-NuGet-Packages");
 
 Task("Default")
-  .IsDependentOn("Package");
+    .Does(() =>
+{
+    if (isRunningOnWindows)
+        RunTarget("Package");
+    else
+        RunTarget("Run-Net-Core-Unit-Tests");
+});
 
 Task("AppVeyor")
   .IsDependentOn("Publish-MyGet")
   .IsDependentOn("Publish-NuGet");
 
 Task("Travis")
-  .IsDependentOn("Run-Unit-Tests");
+  .IsDependentOn("Run-Net-Core-Unit-Tests");
 
 ///////////////////////////////////////////////////////////////////////////////
 // EXECUTE
