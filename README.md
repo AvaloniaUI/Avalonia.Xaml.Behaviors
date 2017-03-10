@@ -35,13 +35,13 @@ Example of using Behaviors in an `Avalonia`  XAML application:
 </Window>
 ```
 
-More examples can be found in [sample application](https://github.com/wieslawsoltes/XamlBehaviors/tree/master/samples/BehaviorsTestApplicationPcl/Controls).
+More examples can be found in [sample application](https://github.com/wieslawsoltes/AvaloniaBehaviors/tree/master/samples/BehaviorsTestApplicationPcl/Controls).
 
 ## Building Avalonia XAML Behaviors
 
 First, clone the repository or download the latest zip.
 ```
-git clone https://github.com/wieslawsoltes/XamlBehaviors.git
+git clone https://github.com/wieslawsoltes/AvaloniaBehaviors.git
 git submodule update --init --recursive
 ```
 
@@ -50,7 +50,7 @@ git submodule update --init --recursive
 * [Visual Studio Community 2017](https://www.visualstudio.com/pl/vs/community/) for `Windows` builds.
 * [MonoDevelop](http://www.monodevelop.com/) for `Linux` builds.
 
-Open `XamlBehaviors.sln` in selected IDE and run `Build` command.
+Open `AvaloniaBehaviors.sln` in selected IDE and run `Build` command.
 
 ### Build on Windows using script
 
@@ -97,7 +97,7 @@ You can install the package like this:
 
 ## Resources
 
-* [GitHub source code repository.](https://github.com/wieslawsoltes/XamlBehaviors)
+* [GitHub source code repository.](https://github.com/wieslawsoltes/AvaloniaBehaviors)
 
 ## License
 

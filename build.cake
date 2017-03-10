@@ -35,13 +35,13 @@ var configuration = Argument("configuration", "Release");
 // CONFIGURATION
 ///////////////////////////////////////////////////////////////////////////////
 
-var MainRepo = "wieslawsoltes/XamlBehaviors";
+var MainRepo = "wieslawsoltes/AvaloniaBehaviors";
 var MasterBranch = "master";
 var AssemblyInfoPath = File("./src/Shared/SharedAssemblyInfo.cs");
 var ReleasePlatform = "Any CPU";
 var ReleaseConfiguration = "Release";
-var MSBuildSolution = "./XamlBehaviors.sln";
-var XBuildSolution = "./XamlBehaviors.sln";
+var MSBuildSolution = "./AvaloniaBehaviors.sln";
+var XBuildSolution = "./AvaloniaBehaviors.sln";
 var UnitTestsFramework = "net461";
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -188,10 +188,10 @@ var nuspecNuGetBehaviors = new NuGetPackSettings()
 {
     Id = "Avalonia.Xaml.Behaviors",
     Version = version,
-    Authors = new [] { "XamlBehaviors" },
+    Authors = new [] { "wieslaw.soltes" },
     Owners = new [] { "wieslaw.soltes" },
     LicenseUrl = new Uri("http://opensource.org/licenses/MIT"),
-    ProjectUrl = new Uri("https://github.com/wieslawsoltes/XamlBehaviors/"),
+    ProjectUrl = new Uri("https://github.com/wieslawsoltes/AvaloniaBehaviors/"),
     RequireLicenseAcceptance = false,
     Symbols = false,
     NoPackageAnalysis = true,
@@ -227,7 +227,7 @@ var nugetPackages = nuspecNuGetSettings.Select(nuspec => {
 // INFORMATION
 ///////////////////////////////////////////////////////////////////////////////
 
-Information("Building version {0} of XamlBehaviors ({1}, {2}, {3}) using version {4} of Cake.", 
+Information("Building version {0} of AvaloniaBehaviors ({1}, {2}, {3}) using version {4} of Cake.", 
     version,
     platform,
     configuration,
