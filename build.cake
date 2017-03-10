@@ -106,18 +106,18 @@ var buildDirs =
 ///////////////////////////////////////////////////////////////////////////////
 
 // Key: Package Id
-// Value is Tuple where Item1: Package Version, Item2: The packages.config file path.
+// Value is Tuple where Item1: Package Version, Item2: The *.csproj file path.
 var packageVersions = new Dictionary<string, IList<Tuple<string,string>>>();
 
-System.IO.Directory.EnumerateFiles(
-    ((DirectoryPath)Directory("./src")).FullPath,"*.csproj", SearchOption.AllDirectories).ToList().ForEach(fileName =>
-{
+System.IO.Directory.EnumerateFiles(((DirectoryPath)Directory("./src")).FullPath, "*.csproj", SearchOption.AllDirectories)
+    .ToList()
+    .ForEach(fileName => {
     var xdoc = XDocument.Load(fileName);
     foreach (var reference in xdoc.Descendants().Where(x => x.Name.LocalName == "PackageReference"))
     {
         var name = reference.Attribute("Include").Value;
         var versionAttribute = reference.Attribute("Version");
-        var version = versionAttribute != null 
+        var packageVersion = versionAttribute != null 
             ? versionAttribute.Value 
             : reference.Elements().First(x=>x.Name.LocalName == "Version").Value;
         IList<Tuple<string, string>> versions;
@@ -127,7 +127,7 @@ System.IO.Directory.EnumerateFiles(
             versions = new List<Tuple<string, string>>();
             packageVersions[name] = versions;
         }
-        versions.Add(Tuple.Create(version, fileName));
+        versions.Add(Tuple.Create(packageVersion, fileName));
     }
 });
 
