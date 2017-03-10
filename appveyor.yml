@@ -31,3 +31,6 @@ notifications:
 artifacts:
   - path: artifacts\test-results\*.xml
   - path: artifacts\nuget\*.nupkg
+cache:
+  - gtk-sharp-2.12.26.msi
+  - dotnet-1.0.1.exe
