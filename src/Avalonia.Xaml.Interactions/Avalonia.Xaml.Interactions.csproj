@@ -31,7 +31,7 @@
     </Compile>
     <Compile Include="**\*.cs" Exclude="obj\**" />
   </ItemGroup>
-  <Import Project="$(MSBuildThisFileDirectory)..\..\avalonia.props" />
+  <Import Project="$(MSBuildThisFileDirectory)..\..\build\Avalonia.props" />
   <ItemGroup>
     <ProjectReference Include="..\Avalonia.Xaml.Interactivity\Avalonia.Xaml.Interactivity.csproj" />
   </ItemGroup>

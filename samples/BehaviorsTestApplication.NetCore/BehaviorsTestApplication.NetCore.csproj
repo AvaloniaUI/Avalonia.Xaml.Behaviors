@@ -5,8 +5,8 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
 
-  <Import Project="$(MSBuildThisFileDirectory)..\..\avalonia.props" />
-  <Import Project="$(MSBuildThisFileDirectory)..\..\avalonia.netcore.props" />
+  <Import Project="$(MSBuildThisFileDirectory)..\..\build\Avalonia.props" />
+  <Import Project="$(MSBuildThisFileDirectory)..\..\build\Avalonia.NetCore.props" />
 
   <ItemGroup>
     <ProjectReference Include="..\BehaviorsTestApplication\BehaviorsTestApplication.csproj" />
