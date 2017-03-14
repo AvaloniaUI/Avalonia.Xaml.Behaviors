@@ -54,11 +54,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.4.1-build2842-alpha" />
-    <PackageReference Include="Avalonia.Cairo" Version="0.4.1-build2842-alpha" />
-    <PackageReference Include="Avalonia.Direct2D1" Version="0.4.1-build2842-alpha" />
-    <PackageReference Include="Avalonia.Gtk" Version="0.4.1-build2842-alpha" />
-    <PackageReference Include="Avalonia.Win32" Version="0.4.1-build2842-alpha" />
+    <PackageReference Include="Avalonia" Version="0.4.1-build2859-alpha" />
+    <PackageReference Include="Avalonia.Cairo" Version="0.4.1-build2859-alpha" />
+    <PackageReference Include="Avalonia.Direct2D1" Version="0.4.1-build2859-alpha" />
+    <PackageReference Include="Avalonia.Gtk" Version="0.4.1-build2859-alpha" />
+    <PackageReference Include="Avalonia.Win32" Version="0.4.1-build2859-alpha" />
     <PackageReference Include="Serilog" Version="2.4.0" />
     <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
     <PackageReference Include="SharpDX" Version="3.1.1" />
