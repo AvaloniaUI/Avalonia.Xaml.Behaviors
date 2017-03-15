@@ -4,7 +4,6 @@
 using System;
 using System.Globalization;
 using System.Reflection;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Avalonia.Xaml.Interactivity;
 using Avalonia.Controls;
 
@@ -56,9 +55,6 @@ namespace Avalonia.Xaml.Interactions.Core
         private object resolvedSource;
         private Delegate eventHandler;
         private bool isLoadedEventRegistered;
-        private bool isWindowsRuntimeEvent;
-        private Func<Delegate, EventRegistrationToken> addEventHandlerMethod;
-        private Action<EventRegistrationToken> removeEventHandlerMethod;
 
         /// <summary>
         /// Gets or sets the name of the event to listen for. This is a avalonia property.
@@ -151,19 +147,7 @@ namespace Avalonia.Xaml.Interactions.Core
 
                 MethodInfo methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
                 this.eventHandler = methodInfo.CreateDelegate(info.EventHandlerType, this);
-
-                this.isWindowsRuntimeEvent = IsWindowsRuntimeType(info.EventHandlerType);
-                if (this.isWindowsRuntimeEvent)
-                {
-                    this.addEventHandlerMethod = add => (EventRegistrationToken)info.AddMethod.Invoke(this.resolvedSource, new object[] { add });
-                    this.removeEventHandlerMethod = token => info.RemoveMethod.Invoke(this.resolvedSource, new object[] { token });
-
-                    WindowsRuntimeMarshal.AddEventHandler(this.addEventHandlerMethod, this.removeEventHandlerMethod, this.eventHandler);
-                }
-                else
-                {
-                    info.AddEventHandler(this.resolvedSource, this.eventHandler);
-                }
+                info.AddEventHandler(this.resolvedSource, this.eventHandler);
             }
             else if (!this.isLoadedEventRegistered)
             {
@@ -191,15 +175,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 }
 
                 EventInfo info = this.resolvedSource.GetType().GetRuntimeEvent(eventName);
-                if (this.isWindowsRuntimeEvent)
-                {
-                    WindowsRuntimeMarshal.RemoveEventHandler(this.removeEventHandlerMethod, this.eventHandler);
-                }
-                else
-                {
-                    info.RemoveEventHandler(this.resolvedSource, this.eventHandler);
-                }
-
+                info.RemoveEventHandler(this.resolvedSource, this.eventHandler);
                 this.eventHandler = null;
             }
             else if (this.isLoadedEventRegistered)
@@ -223,16 +199,6 @@ namespace Avalonia.Xaml.Interactions.Core
             }
 
             return (element.Parent != null);
-        }
-
-        private static bool IsWindowsRuntimeType(Type type)
-        {
-            if (type != null)
-            {
-                return type.AssemblyQualifiedName.EndsWith("ContentType=WindowsRuntime", StringComparison.Ordinal);
-            }
-
-            return false;
         }
     }
 }
