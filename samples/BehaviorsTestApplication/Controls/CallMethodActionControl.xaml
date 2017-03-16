@@ -4,7 +4,6 @@
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplication"
-             xmlns:xb="https://github.com/xamlbehaviors"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplication"
@@ -32,11 +31,11 @@
         </Button>
         <!-- You can use custom namespace https://github.com/xamlbehaviors for all xaml behaviors. -->
         <Button x:Name="incrementButton" Content="Increment" Grid.Row="1" Grid.Column="4" Margin="0,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <xb:Interaction.Behaviors>
-                <xb:EventTriggerBehavior EventName="Click" SourceObject="{Binding #incrementButton}">
-                    <xb:CallMethodAction TargetObject="{Binding}" MethodName="IncrementCount"/>
-                </xb:EventTriggerBehavior>
-            </xb:Interaction.Behaviors>
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #incrementButton}">
+                    <ia:CallMethodAction TargetObject="{Binding}" MethodName="IncrementCount"/>
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
         </Button>
     </Grid>
 </UserControl>
