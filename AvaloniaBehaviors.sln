@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}"
 EndProject
@@ -26,23 +26,40 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{84224365-32B6-46AF-85A2-45640E6D7EEB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{2913483A-3E55-44AE-86BB-88511F372191}"
-	ProjectSection(SolutionItems) = preProject
-		.travis.yml = .travis.yml
-		appveyor.yml = appveyor.yml
-		build.cake = build.cake
-		build.ps1 = build.ps1
-		build.sh = build.sh
-		NuGet.Config = NuGet.Config
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BehaviorsTestApplication.NetCore", "samples\BehaviorsTestApplication.NetCore\BehaviorsTestApplication.NetCore.csproj", "{92E7FFBA-3917-4BD2-9674-822D19B00B81}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{789E7B59-1F4D-447F-91B1-5255F1931DE6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{B2A2C125-D28D-4F26-9795-A4DD4D671D99}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		_config.yml = _config.yml
+		appveyor.yml = appveyor.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cake", "cake", "{776090F3-4069-4F60-BC0E-8BAEE10F5C97}"
+	ProjectSection(SolutionItems) = preProject
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		build.sh = build.sh
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{40A43022-EBA7-4E1D-8BB0-2691E41B5622}"
 	ProjectSection(SolutionItems) = preProject
 		build\Avalonia.Desktop.props = build\Avalonia.Desktop.props
 		build\Avalonia.NetCore.props = build\Avalonia.NetCore.props
 		build\Avalonia.props = build\Avalonia.props
 		build\XUnit.props = build\XUnit.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{721A55B7-C5B0-44E2-803A-56E291C672FE}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet.Config = NuGet.Config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{8A0733E3-A184-4BD4-8CB7-478977F3F5FB}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.TXT = LICENSE.TXT
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
@@ -241,5 +258,10 @@ Global
 		{C2229490-39CA-4192-A28C-1B5EC186E027} = {C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}
 		{80D2C64D-B560-475D-941F-D5F28DDB2591} = {C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}
 		{92E7FFBA-3917-4BD2-9674-822D19B00B81} = {9B9E3891-2366-4253-A952-D08BCEB71098}
+		{B2A2C125-D28D-4F26-9795-A4DD4D671D99} = {2913483A-3E55-44AE-86BB-88511F372191}
+		{776090F3-4069-4F60-BC0E-8BAEE10F5C97} = {2913483A-3E55-44AE-86BB-88511F372191}
+		{40A43022-EBA7-4E1D-8BB0-2691E41B5622} = {2913483A-3E55-44AE-86BB-88511F372191}
+		{721A55B7-C5B0-44E2-803A-56E291C672FE} = {2913483A-3E55-44AE-86BB-88511F372191}
+		{8A0733E3-A184-4BD4-8CB7-478977F3F5FB} = {2913483A-3E55-44AE-86BB-88511F372191}
 	EndGlobalSection
 EndGlobal
