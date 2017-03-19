@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
 
+  <Import Project="$(MSBuildThisFileDirectory)..\..\build\Rx.props" />
   <Import Project="$(MSBuildThisFileDirectory)..\..\build\Avalonia.props" />
   <Import Project="$(MSBuildThisFileDirectory)..\..\build\Avalonia.NetCore.props" />
 

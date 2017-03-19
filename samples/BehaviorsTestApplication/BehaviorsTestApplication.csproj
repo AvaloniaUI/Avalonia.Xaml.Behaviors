@@ -33,6 +33,7 @@
     </Compile>
     <EmbeddedResource Include="**\*.xaml" />
   </ItemGroup>
+  <Import Project="$(MSBuildThisFileDirectory)..\..\build\Rx.props" />
   <Import Project="$(MSBuildThisFileDirectory)..\..\build\Avalonia.props" />
   <ItemGroup>
     <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions\Avalonia.Xaml.Interactions.csproj" />
