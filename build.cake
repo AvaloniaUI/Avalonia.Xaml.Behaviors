@@ -41,7 +41,6 @@ var AssemblyInfoPath = File("./src/Shared/SharedAssemblyInfo.cs");
 var ReleasePlatform = "Any CPU";
 var ReleaseConfiguration = "Release";
 var MSBuildSolution = "./AvaloniaBehaviors.sln";
-var XBuildSolution = "./AvaloniaBehaviors.sln";
 var UnitTestsFramework = "net461";
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -264,13 +263,6 @@ Task("Restore-NuGet-Packages")
             if(isRunningOnWindows)
             {
                 NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
-                    ToolPath = "./tools/NuGet.CommandLine/tools/NuGet.exe",
-                    ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
-                });
-            }
-            else
-            {
-                NuGetRestore(XBuildSolution, new NuGetRestoreSettings {
                     ToolPath = "./tools/NuGet.CommandLine/tools/NuGet.exe",
                     ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
                 });
