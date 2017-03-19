@@ -154,36 +154,6 @@ var AvaloniaVersion = packageVersions["Avalonia"].FirstOrDefault().Item1;
 
 Information("Package: Avalonia, version: {0}", AvaloniaVersion);
 
-var coreLibraries = new string[][]
-{
-    new [] { "./src/", "Avalonia.Xaml.Interactivity", ".dll" },
-    new [] { "./src/", "Avalonia.Xaml.Interactivity", ".xml" },
-    new [] { "./src/", "Avalonia.Xaml.Interactions", ".dll" },
-    new [] { "./src/", "Avalonia.Xaml.Interactions", ".xml" },
-};
-
-var coreLibrariesFiles = coreLibraries.Select((lib) => {
-    return (FilePath)File(lib[0] + lib[1] + "/bin/" + dirSuffix + "/netstandard1.1/" + lib[1] + lib[2]);
-}).ToList();
-
-var coreLibrariesNuSpecContent = coreLibrariesFiles.Select((file) => {
-    return new NuSpecContent { 
-        Source = file.FullPath, Target = "lib/netstandard1.1" 
-    };
-});
-
-var win32CoreLibrariesNuSpecContent = coreLibrariesFiles.Select((file) => {
-    return new NuSpecContent { 
-        Source = file.FullPath, Target = "lib/net45" 
-    };
-});
-
-var netcoreappCoreLibrariesNuSpecContent = coreLibrariesFiles.Select((file) => {
-    return new NuSpecContent { 
-        Source = file.FullPath, Target = "lib/netcoreapp1.0" 
-    };
-});
-
 var nuspecNuGetBehaviors = new NuGetPackSettings()
 {
     Id = "Avalonia.Xaml.Behaviors",
@@ -200,17 +170,21 @@ var nuspecNuGetBehaviors = new NuGetPackSettings()
     Tags = new [] { "Avalonia", "Behavior", "Action", "Behaviors", "Actions", "Managed", "C#", "Interaction", "Interactivity", "Interactions", "Xaml" },
     Dependencies = new []
     {
-        // Avalonia
         new NuSpecDependency { Id = "Avalonia", Version = AvaloniaVersion },
-        //.NET Core
-        new NuSpecDependency() { Id = "System.Threading.ThreadPool", TargetFramework = "netcoreapp1.0", Version = "4.3.0" },
-        new NuSpecDependency() { Id = "NETStandard.Library", TargetFramework = "netcoreapp1.0", Version = "1.6.0" },
-        new NuSpecDependency() { Id = "Microsoft.NETCore.Portable.Compatibility", TargetFramework = "netcoreapp1.0", Version = "1.0.1" }
     },
-    Files = coreLibrariesNuSpecContent
-        .Concat(win32CoreLibrariesNuSpecContent)
-        .Concat(netcoreappCoreLibrariesNuSpecContent)
-        .ToList(),
+    Files = new []
+    {
+        // netstandard1.1
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactivity.dll", Target = "lib/netstandard1.1" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactivity.xml", Target = "lib/netstandard1.1" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactions.dll", Target = "lib/netstandard1.1" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactions.xml", Target = "lib/netstandard1.1" },
+        // net45
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactivity.dll", Target = "lib/net45" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactivity.xml", Target = "lib/net45" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactions.dll", Target = "lib/net45" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactions.xml", Target = "lib/net45" }
+    },
     BasePath = Directory("./"),
     OutputDirectory = nugetRoot
 };
