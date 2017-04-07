@@ -4,6 +4,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/w7t8lmqflmd62bft?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/xamlbehaviors)
 [![Build Status](https://travis-ci.org/wieslawsoltes/AvaloniaBehaviors.svg?branch=master)](https://travis-ci.org/wieslawsoltes/AvaloniaBehaviors)
+[![CircleCI](https://circleci.com/gh/wieslawsoltes/AvaloniaBehaviors/tree/master.svg?style=svg)](https://circleci.com/gh/wieslawsoltes/AvaloniaBehaviors/tree/master)
 
 [![NuGet](https://img.shields.io/nuget/v/Avalonia.Xaml.Behaviors.svg)](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors) [![MyGet](https://img.shields.io/myget/xamlbehaviors-nightly/vpre/Avalonia.Xaml.Behaviors.svg?label=myget)](https://www.myget.org/gallery/xamlbehaviors-nightly) 
 
