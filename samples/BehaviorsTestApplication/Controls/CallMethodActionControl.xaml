@@ -29,7 +29,6 @@
                 </ia:EventTriggerBehavior>
             </i:Interaction.Behaviors>
         </Button>
-        <!-- You can use custom namespace https://github.com/xamlbehaviors for all xaml behaviors. -->
         <Button x:Name="incrementButton" Content="Increment" Grid.Row="1" Grid.Column="4" Margin="0,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <i:Interaction.Behaviors>
                 <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #incrementButton}">
