@@ -38,7 +38,7 @@ Example of using Behaviors in an `Avalonia`  XAML application:
 </Window>
 ```
 
-More examples can be found in [sample application](https://github.com/wieslawsoltes/AvaloniaBehaviors/tree/master/samples/BehaviorsTestApplicationPcl/Controls).
+More examples can be found in [sample application](https://github.com/wieslawsoltes/AvaloniaBehaviors/tree/master/samples/BehaviorsTestApplication/Controls).
 
 ## Building Avalonia XAML Behaviors
 
