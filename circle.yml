@@ -11,3 +11,6 @@ jobs:
       - checkout
       - run: dotnet restore samples/BehaviorsTestApplication.NetCore
       - run: dotnet build samples/BehaviorsTestApplication.NetCore/BehaviorsTestApplication.NetCore.csproj
+    notify:
+      webhooks:
+        - url: https://webhooks.gitter.im/e/8b396be7e49e711c841c
