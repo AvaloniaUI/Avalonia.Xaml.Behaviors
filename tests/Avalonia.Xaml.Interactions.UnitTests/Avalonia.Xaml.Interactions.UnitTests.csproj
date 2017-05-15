@@ -34,5 +34,4 @@
     <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions\Avalonia.Xaml.Interactions.csproj" />
     <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactivity\Avalonia.Xaml.Interactivity.csproj" />
   </ItemGroup>
-  <Import Condition="'$(TargetFramework)' == 'net461'" Project="$(MSBuildThisFileDirectory)..\..\samples\Shared\nuget.workaround.targets" />
 </Project>
