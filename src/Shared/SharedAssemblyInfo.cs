@@ -6,7 +6,7 @@ using System.Resources;
 
 [assembly: AssemblyCompany("Wiesław Šoltés")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCopyright("Copyright © Wiesław Šoltés 2016")]
+[assembly: AssemblyCopyright("Copyright © Wiesław Šoltés 2017")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyProduct("Avalonia")]
