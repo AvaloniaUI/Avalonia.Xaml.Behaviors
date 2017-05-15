@@ -165,7 +165,7 @@ var nuspecNuGetBehaviors = new NuGetPackSettings()
     Symbols = false,
     NoPackageAnalysis = true,
     Description = "Easily add interactivity to your Avalonia apps using XAML Behaviors. Behaviors encapsulate reusable functionalities for elements that can be easily added to your XAML without the need for more imperative code.",
-    Copyright = "Copyright 2016",
+    Copyright = "Copyright 2017",
     Tags = new [] { "Avalonia", "Behavior", "Action", "Behaviors", "Actions", "Managed", "C#", "Interaction", "Interactivity", "Interactions", "Xaml" },
     Dependencies = new []
     {
