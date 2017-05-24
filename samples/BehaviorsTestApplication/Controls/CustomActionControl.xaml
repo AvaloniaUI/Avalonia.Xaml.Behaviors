@@ -6,8 +6,7 @@
              xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplication"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:behaviors="clr-namespace:BehaviorsTestApplication.Behaviors;assembly=BehaviorsTestApplication"
-             xmlns:actions="clr-namespace:BehaviorsTestApplication.Actions;assembly=BehaviorsTestApplication">
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom">
     <UserControl.Styles>
         <StyleInclude Source="resm:BehaviorsTestApplication.Styles.Brushes.xaml?assembly=BehaviorsTestApplication"/>
     </UserControl.Styles>
@@ -15,16 +14,16 @@
         <TextBlock Text="Move Pointer" Name="position" Grid.Row="0" Margin="5" Background="{StyleResource GrayBrush}" Foreground="{StyleResource YellowBrush}" FontSize="14" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <Border Name="border" Grid.Row="1" Margin="5,0,5,5" Background="{StyleResource GrayBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <i:Interaction.Behaviors>
-                <behaviors:ShowPointerPositionBehavior TargetTextBlock="{Binding #position}"/>
+                <iac:ShowPointerPositionBehavior TargetTextBlock="{Binding #position}"/>
                 <ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="{Binding #border}">
-                    <actions:PopupAction>
+                    <iac:PopupAction>
                         <Border DataContext="{Binding Count}" Background="Yellow" BorderBrush="Red" BorderThickness="1" Padding="5">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Count: " Foreground="Red"/>
                                 <TextBlock Text="{Binding}" Foreground="Red"/>
                             </StackPanel>
                         </Border>
-                    </actions:PopupAction>
+                    </iac:PopupAction>
                 </ia:EventTriggerBehavior>
             </i:Interaction.Behaviors>
             <TextBlock Text="Click Me" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
