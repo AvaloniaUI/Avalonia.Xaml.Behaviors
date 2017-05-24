@@ -73,13 +73,24 @@ $ ./build.sh --target "Default" --platform "Any CPU" --configuration "Release"
 
 Avalonia XamlBehaviors is delivered as a NuGet package.
 
-You can find the packages here [NuGet](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors/) or by using nightly build feed:
+You can find the packages here [NuGet](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors/) and install the package like this:
+
+`Install-Package Avalonia.Xaml.Behaviors`
+
+or by using nightly build feed:
 * Add `https://www.myget.org/F/xamlbehaviors-nightly/api/v2` to your package sources
 * Update your package using `XamlBehaviors` feed
 
-You can install the package like this:
+and install the package like this:
 
 `Install-Package Avalonia.Xaml.Behaviors -Pre`
+
+### NuGet Packages
+
+* [Avalonia.Xaml.Interactivity](https://www.nuget.org/packages/Avalonia.Xaml.Interactivity/) - Core library.
+* [Avalonia.Xaml.Interactions](https://www.nuget.org/packages/Avalonia.Xaml.Interactions/) - Default actions and behaviors.
+* [Avalonia.Xaml.Interactions.Custom](https://www.nuget.org/packages/Avalonia.Xaml.Interactions.Custom/) - Custom actions and behaviors.
+* [Avalonia.Xaml.Behaviors](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors/) - Meta package containing core library and default actions and behaviors
 
 ### Package Dependencies
 
