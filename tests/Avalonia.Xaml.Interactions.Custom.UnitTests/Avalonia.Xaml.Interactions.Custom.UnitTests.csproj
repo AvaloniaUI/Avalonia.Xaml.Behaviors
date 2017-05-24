@@ -31,7 +31,7 @@
   <Import Project="$(MSBuildThisFileDirectory)..\..\build\Avalonia.props" />
   <Import Project="$(MSBuildThisFileDirectory)..\..\build\XUnit.props" />
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions\Avalonia.Xaml.Interactions.Custom.csproj" />
+    <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions.Custom\Avalonia.Xaml.Interactions.Custom.csproj" />
     <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactivity\Avalonia.Xaml.Interactivity.csproj" />
   </ItemGroup>
 </Project>
