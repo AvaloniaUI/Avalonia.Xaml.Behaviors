@@ -5,7 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Xaml.Interactivity;
 
-namespace Avalonia.Xaml.Interactions.Core
+namespace Avalonia.Xaml.Interactions.Custom
 {
     /// <summary>
     /// Focuses the AssociatedObject on PointerPressed event.
