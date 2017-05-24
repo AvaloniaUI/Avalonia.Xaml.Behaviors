@@ -61,7 +61,7 @@
       <Project>{ed03eead-938f-447b-bf0b-30857ae78bff}</Project>
       <Name>Avalonia.Xaml.Interactions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions\Avalonia.Xaml.Interactions.Custom.csproj">
+    <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions.Custom\Avalonia.Xaml.Interactions.Custom.csproj">
       <Project>{7239203a-1743-42e8-a867-3ac38c39dc2b}</Project>
       <Name>Avalonia.Xaml.Interactions</Name>
     </ProjectReference>
