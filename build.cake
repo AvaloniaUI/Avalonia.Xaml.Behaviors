@@ -156,8 +156,8 @@ var nuspecNuGetInteractivity = new NuGetPackSettings()
 {
     Id = "Avalonia.Xaml.Interactivity",
     Version = version,
-    Authors = new [] { "wieslaw.soltes" },
-    Owners = new [] { "wieslaw.soltes" },
+    Authors = new [] { "wieslawsoltes" },
+    Owners = new [] { "wieslawsoltes" },
     LicenseUrl = new Uri("http://opensource.org/licenses/MIT"),
     ProjectUrl = new Uri("https://github.com/wieslawsoltes/AvaloniaBehaviors/"),
     RequireLicenseAcceptance = false,
@@ -187,8 +187,8 @@ var nuspecNuGetInteractions = new NuGetPackSettings()
 {
     Id = "Avalonia.Xaml.Interactions",
     Version = version,
-    Authors = new [] { "wieslaw.soltes" },
-    Owners = new [] { "wieslaw.soltes" },
+    Authors = new [] { "wieslawsoltes" },
+    Owners = new [] { "wieslawsoltes" },
     LicenseUrl = new Uri("http://opensource.org/licenses/MIT"),
     ProjectUrl = new Uri("https://github.com/wieslawsoltes/AvaloniaBehaviors/"),
     RequireLicenseAcceptance = false,
@@ -218,8 +218,8 @@ var nuspecNuGetInteractionsCustom = new NuGetPackSettings()
 {
     Id = "Avalonia.Xaml.Interactions.Custom",
     Version = version,
-    Authors = new [] { "wieslaw.soltes" },
-    Owners = new [] { "wieslaw.soltes" },
+    Authors = new [] { "wieslawsoltes" },
+    Owners = new [] { "wieslawsoltes" },
     LicenseUrl = new Uri("http://opensource.org/licenses/MIT"),
     ProjectUrl = new Uri("https://github.com/wieslawsoltes/AvaloniaBehaviors/"),
     RequireLicenseAcceptance = false,
@@ -249,8 +249,8 @@ var nuspecNuGetBehaviors = new NuGetPackSettings()
 {
     Id = "Avalonia.Xaml.Behaviors",
     Version = version,
-    Authors = new [] { "wieslaw.soltes" },
-    Owners = new [] { "wieslaw.soltes" },
+    Authors = new [] { "wieslawsoltes" },
+    Owners = new [] { "wieslawsoltes" },
     LicenseUrl = new Uri("http://opensource.org/licenses/MIT"),
     ProjectUrl = new Uri("https://github.com/wieslawsoltes/AvaloniaBehaviors/"),
     RequireLicenseAcceptance = false,
