@@ -5,7 +5,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Xaml.Interactivity;
 
-namespace Avalonia.Xaml.Interactions.Core
+namespace Avalonia.Xaml.Interactions.Custom
 {
     /// <summary>
     /// Focuses the AssociatedObject when attached to visual tree.
