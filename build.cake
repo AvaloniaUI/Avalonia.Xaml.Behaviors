@@ -152,6 +152,99 @@ var AvaloniaVersion = packageVersions["Avalonia"].FirstOrDefault().Item1;
 
 Information("Package: Avalonia, version: {0}", AvaloniaVersion);
 
+var nuspecNuGetInteractivity = new NuGetPackSettings()
+{
+    Id = "Avalonia.Xaml.Interactivity",
+    Version = version,
+    Authors = new [] { "wieslaw.soltes" },
+    Owners = new [] { "wieslaw.soltes" },
+    LicenseUrl = new Uri("http://opensource.org/licenses/MIT"),
+    ProjectUrl = new Uri("https://github.com/wieslawsoltes/AvaloniaBehaviors/"),
+    RequireLicenseAcceptance = false,
+    Symbols = false,
+    NoPackageAnalysis = true,
+    Description = "Easily add interactivity to your Avalonia apps using XAML Behaviors. Behaviors encapsulate reusable functionalities for elements that can be easily added to your XAML without the need for more imperative code.",
+    Copyright = "Copyright 2017",
+    Tags = new [] { "Avalonia", "Behavior", "Action", "Behaviors", "Actions", "Managed", "C#", "Interaction", "Interactivity", "Interactions", "Xaml" },
+    Dependencies = new []
+    {
+        new NuSpecDependency { Id = "Avalonia", Version = AvaloniaVersion }
+    },
+    Files = new []
+    {
+        // netstandard1.1
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactivity.dll", Target = "lib/netstandard1.1" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactivity.xml", Target = "lib/netstandard1.1" },
+        // net45
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactivity.dll", Target = "lib/net45" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactivity.xml", Target = "lib/net45" }
+    },
+    BasePath = Directory("./"),
+    OutputDirectory = nugetRoot
+};
+
+var nuspecNuGetInteractions = new NuGetPackSettings()
+{
+    Id = "Avalonia.Xaml.Interactions",
+    Version = version,
+    Authors = new [] { "wieslaw.soltes" },
+    Owners = new [] { "wieslaw.soltes" },
+    LicenseUrl = new Uri("http://opensource.org/licenses/MIT"),
+    ProjectUrl = new Uri("https://github.com/wieslawsoltes/AvaloniaBehaviors/"),
+    RequireLicenseAcceptance = false,
+    Symbols = false,
+    NoPackageAnalysis = true,
+    Description = "Easily add interactivity to your Avalonia apps using XAML Behaviors. Behaviors encapsulate reusable functionalities for elements that can be easily added to your XAML without the need for more imperative code.",
+    Copyright = "Copyright 2017",
+    Tags = new [] { "Avalonia", "Behavior", "Action", "Behaviors", "Actions", "Managed", "C#", "Interaction", "Interactivity", "Interactions", "Xaml" },
+    Dependencies = new []
+    {
+        new NuSpecDependency { Id = "Avalonia.Xaml.Interactivity", Version = version }
+    },
+    Files = new []
+    {
+        // netstandard1.1
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactions.dll", Target = "lib/netstandard1.1" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactions.xml", Target = "lib/netstandard1.1" },
+        // net45
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactions.dll", Target = "lib/net45" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactions.xml", Target = "lib/net45" }
+    },
+    BasePath = Directory("./"),
+    OutputDirectory = nugetRoot
+};
+
+var nuspecNuGetInteractionsCustom = new NuGetPackSettings()
+{
+    Id = "Avalonia.Xaml.Interactions.Custom",
+    Version = version,
+    Authors = new [] { "wieslaw.soltes" },
+    Owners = new [] { "wieslaw.soltes" },
+    LicenseUrl = new Uri("http://opensource.org/licenses/MIT"),
+    ProjectUrl = new Uri("https://github.com/wieslawsoltes/AvaloniaBehaviors/"),
+    RequireLicenseAcceptance = false,
+    Symbols = false,
+    NoPackageAnalysis = true,
+    Description = "Easily add interactivity to your Avalonia apps using XAML Behaviors. Behaviors encapsulate reusable functionalities for elements that can be easily added to your XAML without the need for more imperative code.",
+    Copyright = "Copyright 2017",
+    Tags = new [] { "Avalonia", "Behavior", "Action", "Behaviors", "Actions", "Managed", "C#", "Interaction", "Interactivity", "Interactions", "Xaml" },
+    Dependencies = new []
+    {
+        new NuSpecDependency { Id = "Avalonia.Xaml.Interactivity", Version = version }
+    },
+    Files = new []
+    {
+        // netstandard1.1
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions.Custom/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactions.Custom.dll", Target = "lib/netstandard1.1" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions.Custom/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactions.Custom.xml", Target = "lib/netstandard1.1" },
+        // net45
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions.Custom/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactions.Custom.dll", Target = "lib/net45" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions.Custom/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactions.Custom.xml", Target = "lib/net45" }
+    },
+    BasePath = Directory("./"),
+    OutputDirectory = nugetRoot
+};
+
 var nuspecNuGetBehaviors = new NuGetPackSettings()
 {
     Id = "Avalonia.Xaml.Behaviors",
@@ -168,20 +261,8 @@ var nuspecNuGetBehaviors = new NuGetPackSettings()
     Tags = new [] { "Avalonia", "Behavior", "Action", "Behaviors", "Actions", "Managed", "C#", "Interaction", "Interactivity", "Interactions", "Xaml" },
     Dependencies = new []
     {
-        new NuSpecDependency { Id = "Avalonia", Version = AvaloniaVersion },
-    },
-    Files = new []
-    {
-        // netstandard1.1
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactivity.dll", Target = "lib/netstandard1.1" },
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactivity.xml", Target = "lib/netstandard1.1" },
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactions.dll", Target = "lib/netstandard1.1" },
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/netstandard1.1/" + "Avalonia.Xaml.Interactions.xml", Target = "lib/netstandard1.1" },
-        // net45
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactivity.dll", Target = "lib/net45" },
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactivity.xml", Target = "lib/net45" },
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactions.dll", Target = "lib/net45" },
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/net45/" + "Avalonia.Xaml.Interactions.xml", Target = "lib/net45" }
+        new NuSpecDependency { Id = "Avalonia.Xaml.Interactivity", Version = version },
+        new NuSpecDependency { Id = "Avalonia.Xaml.Interactions", Version = version }
     },
     BasePath = Directory("./"),
     OutputDirectory = nugetRoot
@@ -189,6 +270,9 @@ var nuspecNuGetBehaviors = new NuGetPackSettings()
 
 var nuspecNuGetSettings = new List<NuGetPackSettings>();
 
+nuspecNuGetSettings.Add(nuspecNuGetInteractivity);
+nuspecNuGetSettings.Add(nuspecNuGetInteractions);
+nuspecNuGetSettings.Add(nuspecNuGetInteractionsCustom);
 nuspecNuGetSettings.Add(nuspecNuGetBehaviors);
 
 var nugetPackages = nuspecNuGetSettings.Select(nuspec => {
@@ -325,6 +409,7 @@ Task("Run-Net-Core-Unit-Tests")
 {
     RunCoreTest("./tests/Avalonia.Xaml.Interactivity.UnitTests", isRunningOnWindows, false);
     RunCoreTest("./tests/Avalonia.Xaml.Interactions.UnitTests", isRunningOnWindows, false);
+    RunCoreTest("./tests/Avalonia.Xaml.Interactions.Custom.UnitTests", isRunningOnWindows, false);
 });
 
 Task("Run-Unit-Tests")
