@@ -1,16 +1,16 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See licence.md file in the project root for full license information.
 
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Metadata;
 using Avalonia.Xaml.Interactivity;
-using System;
 
-namespace BehaviorsTestApplication.Actions
+namespace Avalonia.Xaml.Interactions.Core
 {
-    public class PopupAction : AvaloniaObject, IAction
+    public sealed class PopupAction : AvaloniaObject, IAction
     {
         public static readonly AvaloniaProperty<Control> ChildProperty =
             AvaloniaProperty.Register<PopupAction, Control>(nameof(Child));
