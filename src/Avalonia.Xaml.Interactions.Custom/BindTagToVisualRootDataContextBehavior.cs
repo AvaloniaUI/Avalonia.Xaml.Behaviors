@@ -7,7 +7,7 @@ using Avalonia.Controls;
 using Avalonia.VisualTree;
 using Avalonia.Xaml.Interactivity;
 
-namespace Avalonia.Xaml.Interactions.Core
+namespace Avalonia.Xaml.Interactions.Custom
 {
     /// <summary>
     /// Binds AssociatedObject object Tag property to root visual DataContext.
