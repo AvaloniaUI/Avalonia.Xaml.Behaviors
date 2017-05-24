@@ -12,14 +12,18 @@ namespace Avalonia.Xaml.Interactions.Core
     /// </summary>
     public sealed class ToggleIsExpandedOnDoubleTappedBehavior : Behavior<Control>
     {
-        /// <inheritdoc/>
+        /// <summary>
+        /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
+        /// </summary>
         protected override void OnAttached()
         {
             base.OnAttached();
             AssociatedObject.DoubleTapped += DoubleTapped;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
+        /// </summary>
         protected override void OnDetaching()
         {
             base.OnDetaching();
