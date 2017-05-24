@@ -53,15 +53,15 @@ namespace Avalonia.Xaml.Interactivity
             {
                 throw new ArgumentNullException(nameof(obj));
             }
+
             BehaviorCollection behaviorCollection = obj.GetValue(BehaviorsProperty);
             if (behaviorCollection == null)
             {
                 behaviorCollection = new BehaviorCollection();
                 obj.SetValue(BehaviorsProperty, behaviorCollection);
 
-                var control = obj as Control;
 
-                if (control != null)
+                if (obj is Control control)
                 {
                     control.AttachedToVisualTree -= Control_Loaded;
                     control.AttachedToVisualTree += Control_Loaded;
@@ -90,7 +90,7 @@ namespace Avalonia.Xaml.Interactivity
         /// <summary>
         /// Executes all actions in the <see cref="ActionCollection"/> and returns their results.
         /// </summary>
-        /// <param name="sender">The <see cref="System.Object"/> which will be passed on to the action.</param>
+        /// <param name="sender">The <see cref="object"/> which will be passed on to the action.</param>
         /// <param name="actions">The set of actions to execute.</param>
         /// <param name="parameter">The value of this parameter is determined by the calling behavior.</param>
         /// <returns>Returns the results of the actions.</returns>
@@ -114,9 +114,7 @@ namespace Avalonia.Xaml.Interactivity
 
         private static void Control_Loaded(object sender, VisualTreeAttachmentEventArgs e)
         {
-            var d = sender as AvaloniaObject;
-
-            if (d != null)
+            if (sender is AvaloniaObject d)
             {
                 GetBehaviors(d).Attach(d);
             }
@@ -124,9 +122,7 @@ namespace Avalonia.Xaml.Interactivity
 
         private static void Control_Unloaded(object sender, VisualTreeAttachmentEventArgs e)
         {
-            var d = sender as AvaloniaObject;
-
-            if (d != null)
+            if (sender is AvaloniaObject d)
             {
                 GetBehaviors(d).Detach();
             }

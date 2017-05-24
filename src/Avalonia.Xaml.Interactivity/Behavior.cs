@@ -21,28 +21,26 @@ namespace Avalonia.Xaml.Interactivity
         /// Attaches the behavior to the specified <see cref="AvaloniaObject"/>.
         /// </summary>
         /// <param name="associatedObject">The <see cref="AvaloniaObject"/> to which to attach.</param>
-        /// <exception cref="System.ArgumentNullException"><paramref name="associatedObject"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="associatedObject"/> is null.</exception>
         public void Attach(AvaloniaObject associatedObject)
         {
-            if (associatedObject == this.AssociatedObject)
+            if (associatedObject == AssociatedObject)
             {
                 return;
             }
 
-            if (this.AssociatedObject != null)
+            if (AssociatedObject != null)
             {
                 throw new InvalidOperationException(string.Format(
                     CultureInfo.CurrentCulture,
                     "An instance of a behavior cannot be attached to more than one object at a time.",
                     associatedObject,
-                    this.AssociatedObject));
+                    AssociatedObject));
             }
 
             Debug.Assert(associatedObject != null, "Cannot attach the behavior to a null object.");
+            AssociatedObject = associatedObject ?? throw new ArgumentNullException(nameof(associatedObject));
 
-            if (associatedObject == null) throw new ArgumentNullException(nameof(associatedObject));
-
-            AssociatedObject = associatedObject;
             OnAttached();
         }
 

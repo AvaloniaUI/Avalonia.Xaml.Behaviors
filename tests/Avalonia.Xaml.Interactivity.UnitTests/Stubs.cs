@@ -27,7 +27,7 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
 
         public StubBehavior()
         {
-            this.Actions = new ActionCollection();
+            Actions = new ActionCollection();
         }
 
         public AvaloniaObject AssociatedObject
@@ -38,19 +38,19 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
 
         public void Attach(AvaloniaObject AvaloniaObject)
         {
-            this.AssociatedObject = AvaloniaObject;
-            this.AttachCount++;
+            AssociatedObject = AvaloniaObject;
+            AttachCount++;
         }
 
         public void Detach()
         {
-            this.AssociatedObject = null;
-            this.DetachCount++;
+            AssociatedObject = null;
+            DetachCount++;
         }
 
         public IEnumerable<object> Execute(object sender, object parameter)
         {
-            return Interaction.ExecuteActions(sender, this.Actions, parameter);
+            return Interaction.ExecuteActions(sender, Actions, parameter);
         }
     }
 
@@ -60,7 +60,7 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
 
         public StubAction()
         {
-            this.returnValue = null;
+            returnValue = null;
         }
 
         public StubAction(object returnValue)
@@ -88,10 +88,10 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
 
         public object Execute(object sender, object parameter)
         {
-            this.ExecuteCount++;
-            this.Sender = sender;
-            this.Parameter = parameter;
-            return this.returnValue;
+            ExecuteCount++;
+            Sender = sender;
+            Parameter = parameter;
+            return returnValue;
         }
     }
 }

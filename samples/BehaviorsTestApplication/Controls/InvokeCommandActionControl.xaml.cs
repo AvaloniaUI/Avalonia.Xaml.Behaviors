@@ -10,7 +10,7 @@ namespace BehaviorsTestApplication.Controls
     {
         public InvokeCommandActionControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

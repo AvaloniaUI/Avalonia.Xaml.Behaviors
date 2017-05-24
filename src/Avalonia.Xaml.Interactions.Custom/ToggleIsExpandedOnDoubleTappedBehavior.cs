@@ -2,13 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom
 {
     /// <summary>
-    /// Toggles IsExpanded property of the associated TreeViewItem control on DoubleTapped event.
+    /// Toggles <see cref="TreeViewItem.IsExpanded"/> property of the associated <see cref="TreeViewItem"/> control on <see cref="InputElement.DoubleTapped"/> event.
     /// </summary>
     public sealed class ToggleIsExpandedOnDoubleTappedBehavior : Behavior<Control>
     {
@@ -32,10 +33,9 @@ namespace Avalonia.Xaml.Interactions.Custom
 
         private void DoubleTapped(object sender, RoutedEventArgs args)
         {
-            var treeViewItem = AssociatedObject.Parent as TreeViewItem;
-            if (treeViewItem != null)
+            if (AssociatedObject.Parent is TreeViewItem item)
             {
-                treeViewItem.IsExpanded = !treeViewItem.IsExpanded;
+                item.IsExpanded = !item.IsExpanded;
             }
         }
     }

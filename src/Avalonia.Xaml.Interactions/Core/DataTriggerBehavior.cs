@@ -42,8 +42,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public object Binding
         {
-            get { return this.GetValue(BindingProperty); }
-            set { this.SetValue(BindingProperty, value); }
+            get => GetValue(BindingProperty);
+            set => SetValue(BindingProperty, value);
         }
 
         /// <summary>
@@ -51,8 +51,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public ComparisonConditionType ComparisonCondition
         {
-            get { return this.GetValue(ComparisonConditionProperty); }
-            set { this.SetValue(ComparisonConditionProperty, value); }
+            get => GetValue(ComparisonConditionProperty);
+            set => SetValue(ComparisonConditionProperty, value);
         }
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public object Value
         {
-            get { return this.GetValue(ValueProperty); }
-            set { this.SetValue(ValueProperty, value); }
+            get => GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
 
         private static bool Compare(object leftOperand, ComparisonConditionType operatorType, object rightOperand)

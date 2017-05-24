@@ -48,8 +48,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public ICommand Command
         {
-            get { return this.GetValue(CommandProperty); }
-            set { this.SetValue(CommandProperty, value); }
+            get => GetValue(CommandProperty);
+            set => SetValue(CommandProperty, value);
         }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public object CommandParameter
         {
-            get { return this.GetValue(CommandParameterProperty); }
-            set { this.SetValue(CommandParameterProperty, value); }
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
         }
 
         /// <summary>
@@ -69,8 +69,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public IValueConverter InputConverter
         {
-            get { return this.GetValue(InputConverterProperty); }
-            set { this.SetValue(InputConverterProperty, value); }
+            get => GetValue(InputConverterProperty);
+            set => SetValue(InputConverterProperty, value);
         }
 
         /// <summary>
@@ -80,8 +80,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public object InputConverterParameter
         {
-            get { return this.GetValue(InputConverterParameterProperty); }
-            set { this.SetValue(InputConverterParameterProperty, value); }
+            get => GetValue(InputConverterParameterProperty);
+            set => SetValue(InputConverterParameterProperty, value);
         }
 
         /// <summary>
@@ -91,47 +91,47 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public string InputConverterLanguage
         {
-            get { return this.GetValue(InputConverterLanguageProperty); }
-            set { this.SetValue(InputConverterLanguageProperty, value); }
+            get => GetValue(InputConverterLanguageProperty);
+            set => SetValue(InputConverterLanguageProperty, value);
         }
 
         /// <summary>
         /// Executes the action.
         /// </summary>
-        /// <param name="sender">The <see cref="System.Object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
+        /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
         /// <param name="parameter">The value of this parameter is determined by the caller.</param>
         /// <returns>True if the command is successfully executed; else false.</returns>
         public object Execute(object sender, object parameter)
         {
-            if (this.Command == null)
+            if (Command == null)
             {
                 return false;
             }
 
             object resolvedParameter;
-            if (this.CommandParameter != null)
+            if (CommandParameter != null)
             {
-                resolvedParameter = this.CommandParameter;
+                resolvedParameter = CommandParameter;
             }
-            else if (this.InputConverter != null)
+            else if (InputConverter != null)
             {
-                resolvedParameter = this.InputConverter.Convert(
+                resolvedParameter = InputConverter.Convert(
                     parameter,
                     typeof(object),
-                    this.InputConverterParameter,
-                    new System.Globalization.CultureInfo(this.InputConverterLanguage));
+                    InputConverterParameter,
+                    new System.Globalization.CultureInfo(InputConverterLanguage));
             }
             else
             {
                 resolvedParameter = parameter;
             }
 
-            if (!this.Command.CanExecute(resolvedParameter))
+            if (!Command.CanExecute(resolvedParameter))
             {
                 return false;
             }
 
-            this.Command.Execute(resolvedParameter);
+            Command.Execute(resolvedParameter);
             return true;
         }
     }

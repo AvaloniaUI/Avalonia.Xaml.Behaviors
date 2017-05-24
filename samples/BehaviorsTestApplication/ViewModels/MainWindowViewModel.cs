@@ -13,14 +13,14 @@ namespace BehaviorsTestApplication.ViewModels
 
         public int Count
         {
-            get { return _count; }
-            set { Update(ref _count, value); }
+            get => _count;
+            set => Update(ref _count, value);
         }
 
         public double Position
         {
-            get { return _position; }
-            set { Update(ref _position, value); }
+            get => _position;
+            set => Update(ref _position, value);
         }
 
         public ICommand MoveLeftCommand { get; set; }
