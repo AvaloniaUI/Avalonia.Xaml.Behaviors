@@ -5,7 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
 
-namespace Avalonia.Xaml.Interactions.Core
+namespace Avalonia.Xaml.Interactions.Custom
 {
     /// <summary>
     /// Toggles IsExpanded property of the associated TreeViewItem control on DoubleTapped event.
