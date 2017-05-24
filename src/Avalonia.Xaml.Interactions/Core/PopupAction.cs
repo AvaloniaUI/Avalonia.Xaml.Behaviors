@@ -10,11 +10,23 @@ using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Core
 {
+    /// <summary>
+    /// An action that displays a Popup for the associated control when executed.
+    /// </summary>
+    /// <remarks>If the associated control is of type IControl than popup inherits control DataContext.</remarks>
     public sealed class PopupAction : AvaloniaObject, IAction
     {
+        private Popup _popup = null;
+    
+        /// <summary>
+        /// Identifies the <seealso cref="ChildProperty"/> avalonia property.
+        /// </summary>
         public static readonly AvaloniaProperty<Control> ChildProperty =
             AvaloniaProperty.Register<PopupAction, Control>(nameof(Child));
 
+        /// <summary>
+        /// Gets or sets the popup Child control. This is a avalonia property.
+        /// </summary>
         [Content]
         public Control Child
         {
@@ -22,8 +34,7 @@ namespace Avalonia.Xaml.Interactions.Core
             set { this.SetValue(ChildProperty, value); }
         }
 
-        private Popup _popup = null;
-
+        /// <inheritdoc/>
         public object Execute(object sender, object parameter)
         {
             if (_popup == null)
