@@ -8,7 +8,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Metadata;
 using Avalonia.Xaml.Interactivity;
 
-namespace Avalonia.Xaml.Interactions.Core
+namespace Avalonia.Xaml.Interactions.Custom
 {
     /// <summary>
     /// An action that displays a Popup for the associated control when executed.
