@@ -7,7 +7,7 @@ using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Xaml.Interactivity;
 
-namespace Avalonia.Xaml.Interactions.Core
+namespace Avalonia.Xaml.Interactions.Custom
 {
     /// <summary>
     /// A behavior that allows controls to be moved around the canvas using RenderTransform of AssociatedObject.
