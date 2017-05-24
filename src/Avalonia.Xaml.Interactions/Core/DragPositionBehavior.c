@@ -7,9 +7,9 @@ using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Xaml.Interactivity;
 
-namespace BehaviorsTestApplication.Behaviors
+namespace Avalonia.Xaml.Interactions.Core
 {
-    public class DragPositionBehavior : Behavior<Control>
+    public sealed class DragPositionBehavior : Behavior<Control>
     {
         private IControl parent = null;
         private Point prevPoint;
