@@ -7,7 +7,7 @@ using System.ComponentModel;
 namespace Avalonia.Xaml.Interactivity
 {
     /// <summary>
-    /// A base class for behaviors, implementing the basic plumbing of ITrigger
+    /// A base class for behaviors, implementing the basic plumbing of <seealso cref="ITrigger"/>.
     /// </summary>
     /// <typeparam name="T">The object type to attach to</typeparam>
     public abstract class Trigger<T> : Trigger where T : AvaloniaObject
