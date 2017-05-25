@@ -8,7 +8,7 @@ using Avalonia.Collections;
 namespace Avalonia.Xaml.Interactivity
 {
     /// <summary>
-    /// Represents a collection of IActions.
+    /// Represents a collection of <see cref="IAction"/>.
     /// </summary>
     public sealed class ActionCollection : AvaloniaList<AvaloniaObject>
     {
