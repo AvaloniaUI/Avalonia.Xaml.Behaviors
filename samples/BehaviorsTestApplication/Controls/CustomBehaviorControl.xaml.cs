@@ -10,7 +10,7 @@ namespace BehaviorsTestApplication.Controls
     {
         public CustomBehaviorControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

@@ -10,7 +10,7 @@ namespace BehaviorsTestApplication.Controls
     {
         public DataTriggerBehaviorControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

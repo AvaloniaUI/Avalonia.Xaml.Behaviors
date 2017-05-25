@@ -34,9 +34,7 @@ namespace Avalonia.Xaml.Interactions.Core
 
         private static IEnumerable<AvaloniaProperty> GetAvaloniaProperties(Type type)
         {
-            List<AvaloniaProperty> propertyList = null;
-
-            if (!AvaloniaPropertyCache.TryGetValue(type, out propertyList))
+            if (!AvaloniaPropertyCache.TryGetValue(type, out List<AvaloniaProperty> propertyList))
             {
                 propertyList = new List<AvaloniaProperty>();
 
@@ -46,8 +44,7 @@ namespace Avalonia.Xaml.Interactions.Core
                     {
                         if (fieldInfo.IsPublic && fieldInfo.FieldType == typeof(AvaloniaProperty))
                         {
-                            AvaloniaProperty property = fieldInfo.GetValue(null) as AvaloniaProperty;
-                            if (property != null)
+                            if (fieldInfo.GetValue(null) is AvaloniaProperty property)
                             {
                                 propertyList.Add(property);
                             }
@@ -65,8 +62,7 @@ namespace Avalonia.Xaml.Interactions.Core
 
         private static void RefreshBinding(AvaloniaObject target, AvaloniaProperty property)
         {
-            IBinding binding = target.GetValue(property) as IBinding;
-            if (binding != null)
+            if (target.GetValue(property) is IBinding binding)
             {
                 target.Bind(property, binding);
             }

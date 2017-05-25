@@ -1,14 +1,14 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See licence.md file in the project root for full license information.
 
-using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom
 {
     /// <summary>
-    /// A behavior that that displays cursor position on PointerMoved event for the AssociatedObject using TargetTextBlock.Text property.
+    /// A behavior that displays cursor position on <see cref="InputElement.PointerMoved"/> event for the <see cref="Behavior{T}.AssociatedObject"/> using <see cref="TextBlock.Text"/> property.
     /// </summary>
     public sealed class ShowPointerPositionBehavior : Behavior<Control>
     {
@@ -23,8 +23,8 @@ namespace Avalonia.Xaml.Interactions.Custom
         /// </summary>
         public TextBlock TargetTextBlock
         {
-            get { return (TextBlock)this.GetValue(TargetTextBlockProperty); }
-            set { this.SetValue(TargetTextBlockProperty, value); }
+            get => (TextBlock)GetValue(TargetTextBlockProperty);
+            set => SetValue(TargetTextBlockProperty, value);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnAttached()
         {
             base.OnAttached();
-            this.AssociatedObject.PointerMoved += AssociatedObject_PointerMoved;
+            AssociatedObject.PointerMoved += AssociatedObject_PointerMoved;
         }
 
         /// <summary>
@@ -42,14 +42,14 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            this.AssociatedObject.PointerMoved -= AssociatedObject_PointerMoved;
+            AssociatedObject.PointerMoved -= AssociatedObject_PointerMoved;
         }
 
-        private void AssociatedObject_PointerMoved(object sender, Avalonia.Input.PointerEventArgs e)
+        private void AssociatedObject_PointerMoved(object sender, PointerEventArgs e)
         {
             if (TargetTextBlock != null)
             {
-                TargetTextBlock.Text = e.GetPosition(this.AssociatedObject).ToString();
+                TargetTextBlock.Text = e.GetPosition(AssociatedObject).ToString();
             }
         }
     }

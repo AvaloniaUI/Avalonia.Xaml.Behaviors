@@ -8,7 +8,7 @@ using Avalonia.Xaml.Interactivity;
 namespace Avalonia.Xaml.Interactions.Custom
 {
     /// <summary>
-    /// Sets IsSelected property to true of the associated ListBoxItem control on PointerMoved event.
+    /// Sets <see cref="ListBoxItem.IsSelected"/> property to true of the associated <see cref="ListBoxItem"/> control on <see cref="InputElement.PointerMoved"/> event.
     /// </summary>
     public sealed class SelectListBoxItemOnPointerMovedBehavior : Behavior<Control>
     {
@@ -32,11 +32,10 @@ namespace Avalonia.Xaml.Interactions.Custom
 
         private void PointerMoved(object sender, PointerEventArgs args)
         {
-            var listBoxItem = AssociatedObject.Parent as ListBoxItem;
-            if (listBoxItem != null)
+            if (AssociatedObject.Parent is ListBoxItem item)
             {
-                listBoxItem.IsSelected = true;
-                listBoxItem.Focus();
+                item.IsSelected = true;
+                item.Focus();
             }
         }
     }

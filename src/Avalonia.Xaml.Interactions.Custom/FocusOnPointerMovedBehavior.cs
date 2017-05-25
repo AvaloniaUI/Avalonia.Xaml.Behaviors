@@ -8,7 +8,7 @@ using Avalonia.Xaml.Interactivity;
 namespace Avalonia.Xaml.Interactions.Custom
 {
     /// <summary>
-    /// Focuses the AssociatedObject on PointerMoved event.
+    /// Focuses the <see cref="Behavior.AssociatedObject"/> on <see cref="InputElement.PointerMoved"/> event.
     /// </summary>
     public sealed class FocusOnPointerMovedBehavior : Behavior<Control>
     {

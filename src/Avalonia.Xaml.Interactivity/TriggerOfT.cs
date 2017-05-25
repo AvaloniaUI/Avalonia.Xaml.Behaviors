@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
+using System.ComponentModel;
 
 namespace Avalonia.Xaml.Interactivity
 {
@@ -14,11 +15,8 @@ namespace Avalonia.Xaml.Interactivity
         /// <summary>
         /// Gets the object to which this behavior is attached.
         /// </summary>
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public new T AssociatedObject
-        {
-            get { return base.AssociatedObject as T; }
-        }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new T AssociatedObject => base.AssociatedObject as T;
 
         /// <summary>
         /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
@@ -30,7 +28,7 @@ namespace Avalonia.Xaml.Interactivity
         {
             base.OnAttached();
 
-            if (this.AssociatedObject == null)
+            if (AssociatedObject == null)
             {
                 string actualType = base.AssociatedObject.GetType().FullName;
                 string expectedType = typeof(T).FullName;

@@ -24,11 +24,11 @@ namespace Avalonia.Xaml.Interactivity
         {
             get
             {
-                ActionCollection actionCollection = this.GetValue(ActionsProperty);
+                ActionCollection actionCollection = GetValue(ActionsProperty);
                 if (actionCollection == null)
                 {
                     actionCollection = new ActionCollection();
-                    this.SetValue(ActionsProperty, actionCollection);
+                    SetValue(ActionsProperty, actionCollection);
                 }
 
                 return actionCollection;

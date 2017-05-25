@@ -10,7 +10,7 @@ namespace BehaviorsTestApplication.Controls
     {
         public ChangePropertyActionControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

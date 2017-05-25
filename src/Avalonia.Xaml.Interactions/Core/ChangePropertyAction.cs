@@ -36,8 +36,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public string PropertyName
         {
-            get { return this.GetValue(PropertyNameProperty); }
-            set { this.SetValue(PropertyNameProperty, value); }
+            get => GetValue(PropertyNameProperty);
+            set => SetValue(PropertyNameProperty, value);
         }
 
         /// <summary>
@@ -45,8 +45,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public object Value
         {
-            get { return this.GetValue(ValueProperty); }
-            set { this.SetValue(ValueProperty, value); }
+            get => GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
 
         /// <summary>
@@ -55,53 +55,52 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public object TargetObject
         {
-            get { return this.GetValue(TargetObjectProperty); }
-            set { this.SetValue(TargetObjectProperty, value); }
+            get => GetValue(TargetObjectProperty);
+            set => SetValue(TargetObjectProperty, value);
         }
 
         /// <summary>
         /// Executes the action.
         /// </summary>
-        /// <param name="sender">The <see cref="System.Object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
+        /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
         /// <param name="parameter">The value of this parameter is determined by the caller.</param>
         /// <returns>True if updating the property value succeeds; else false.</returns>
         public object Execute(object sender, object parameter)
         {
             object targetObject;
-            if (this.GetValue(TargetObjectProperty) != AvaloniaProperty.UnsetValue)
+            if (GetValue(TargetObjectProperty) != AvaloniaProperty.UnsetValue)
             {
-                targetObject = this.TargetObject;
+                targetObject = TargetObject;
             }
             else
             {
                 targetObject = sender;
             }
 
-            if (targetObject == null || this.PropertyName == null)
+            if (targetObject == null || PropertyName == null)
             {
                 return false;
             }
 
-            AvaloniaObject avaloniaObject = targetObject as AvaloniaObject;
-            if (avaloniaObject != null)
+            if (targetObject is AvaloniaObject avaloniaObject)
             {
-                AvaloniaProperty avaloniaProperty = AvaloniaPropertyRegistry.Instance.FindRegistered(avaloniaObject, this.PropertyName);
+                AvaloniaProperty avaloniaProperty = AvaloniaPropertyRegistry.Instance.FindRegistered(avaloniaObject, PropertyName);
                 if (avaloniaProperty != null)
                 {
-                    this.UpdateAvaloniaPropertyValue(avaloniaObject, avaloniaProperty);
+                    UpdateAvaloniaPropertyValue(avaloniaObject, avaloniaProperty);
                     return true;
                 }
             }
 
-            this.UpdatePropertyValue(targetObject);
+            UpdatePropertyValue(targetObject);
             return true;
         }
 
         private void UpdatePropertyValue(object targetObject)
         {
             Type targetType = targetObject.GetType();
-            PropertyInfo propertyInfo = targetType.GetRuntimeProperty(this.PropertyName);
-            this.ValidateProperty(targetType.Name, propertyInfo);
+            PropertyInfo propertyInfo = targetType.GetRuntimeProperty(PropertyName);
+            ValidateProperty(targetType.Name, propertyInfo);
 
             Exception innerException = null;
             try
@@ -110,18 +109,18 @@ namespace Avalonia.Xaml.Interactions.Core
                 string valueAsString = null;
                 Type propertyType = propertyInfo.PropertyType;
                 TypeInfo propertyTypeInfo = propertyType.GetTypeInfo();
-                if (this.Value == null)
+                if (Value == null)
                 {
                     // The result can be null if the type is generic (nullable), or the default value of the type in question
                     result = propertyTypeInfo.IsValueType ? Activator.CreateInstance(propertyType) : null;
                 }
-                else if (propertyTypeInfo.IsAssignableFrom(this.Value.GetType().GetTypeInfo()))
+                else if (propertyTypeInfo.IsAssignableFrom(Value.GetType().GetTypeInfo()))
                 {
-                    result = this.Value;
+                    result = Value;
                 }
                 else
                 {
-                    valueAsString = this.Value.ToString();
+                    valueAsString = Value.ToString();
                     result = propertyTypeInfo.IsEnum ? Enum.Parse(propertyType, valueAsString, false) :
                         TypeConverterHelper.Convert(valueAsString, propertyType.FullName);
                 }
@@ -142,8 +141,8 @@ namespace Avalonia.Xaml.Interactions.Core
                 throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,
                     "Cannot assign value of type {0} to property {1} of type {2}. The {1} property can be assigned only values of type {2}.",
-                    this.Value != null ? this.Value.GetType().Name : "null",
-                    this.PropertyName,
+                    Value != null ? Value.GetType().Name : "null",
+                    PropertyName,
                     propertyInfo.PropertyType.Name),
                     innerException);
             }
@@ -159,7 +158,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,
                     "Cannot find a property named {0} on type {1}.",
-                    this.PropertyName,
+                    PropertyName,
                     targetTypeName));
             }
             else if (!propertyInfo.CanWrite)
@@ -167,14 +166,14 @@ namespace Avalonia.Xaml.Interactions.Core
                 throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,
                     "Cannot find a property named {0} on type {1}.",
-                    this.PropertyName,
+                    PropertyName,
                     targetTypeName));
             }
         }
 
         private void UpdateAvaloniaPropertyValue(AvaloniaObject avaloniaObject, AvaloniaProperty property)
         {
-            this.ValidateAvaloniaProperty(property);
+            ValidateAvaloniaProperty(property);
 
             Exception innerException = null;
             try
@@ -183,18 +182,18 @@ namespace Avalonia.Xaml.Interactions.Core
                 string valueAsString = null;
                 Type propertyType = property.PropertyType;
                 TypeInfo propertyTypeInfo = propertyType.GetTypeInfo();
-                if (this.Value == null)
+                if (Value == null)
                 {
                     // The result can be null if the type is generic (nullable), or the default value of the type in question
                     result = propertyTypeInfo.IsValueType ? Activator.CreateInstance(propertyType) : null;
                 }
-                else if (propertyTypeInfo.IsAssignableFrom(this.Value.GetType().GetTypeInfo()))
+                else if (propertyTypeInfo.IsAssignableFrom(Value.GetType().GetTypeInfo()))
                 {
-                    result = this.Value;
+                    result = Value;
                 }
                 else
                 {
-                    valueAsString = this.Value.ToString();
+                    valueAsString = Value.ToString();
                     result = propertyTypeInfo.IsEnum ? Enum.Parse(propertyType, valueAsString, false) :
                         TypeConverterHelper.Convert(valueAsString, propertyType.FullName);
                 }
@@ -215,8 +214,8 @@ namespace Avalonia.Xaml.Interactions.Core
                 throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,
                     "Cannot assign value of type {0} to property {1} of type {2}. The {1} property can be assigned only values of type {2}.",
-                    this.Value?.GetType().Name ?? "null",
-                    this.PropertyName,
+                    Value?.GetType().Name ?? "null",
+                    PropertyName,
                     avaloniaObject?.GetType().Name ?? "null"),
                     innerException);
             }
@@ -232,14 +231,14 @@ namespace Avalonia.Xaml.Interactions.Core
                 throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,
                     "Cannot find a property named {0}.",
-                    this.PropertyName));
+                    PropertyName));
             }
             else if (property.IsReadOnly)
             {
                 throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,
                     "Cannot find a property named {0}.",
-                    this.PropertyName));
+                    PropertyName));
             }
         }
     }

@@ -10,7 +10,7 @@ namespace BehaviorsTestApplication.Controls
     {
         public CallMethodActionControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

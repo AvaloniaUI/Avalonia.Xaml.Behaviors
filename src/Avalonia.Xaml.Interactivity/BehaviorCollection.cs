@@ -23,7 +23,7 @@ namespace Avalonia.Xaml.Interactivity
         /// </summary>
         public BehaviorCollection()
         {
-            this.CollectionChanged += BehaviorCollection_CollectionChanged;
+            CollectionChanged += BehaviorCollection_CollectionChanged;
         }
 
         /// <summary>
@@ -42,23 +42,23 @@ namespace Avalonia.Xaml.Interactivity
         /// <exception cref="InvalidOperationException">The <see cref="BehaviorCollection"/> is already attached to a different <see cref="AvaloniaObject"/>.</exception>
         public void Attach(AvaloniaObject associatedObject)
         {
-            if (associatedObject == this.AssociatedObject)
+            if (associatedObject == AssociatedObject)
             {
                 return;
             }
 
-            if (this.AssociatedObject != null)
+            if (AssociatedObject != null)
             {
                 throw new InvalidOperationException("An instance of a behavior cannot be attached to more than one object at a time.");
             }
 
             Debug.Assert(associatedObject != null, "The previous checks should keep us from ever setting null here.");
-            this.AssociatedObject = associatedObject;
+            AssociatedObject = associatedObject;
 
             foreach (AvaloniaObject item in this)
             {
                 IBehavior behavior = (IBehavior)item;
-                behavior.Attach(this.AssociatedObject);
+                behavior.Attach(AssociatedObject);
             }
         }
 
@@ -76,15 +76,15 @@ namespace Avalonia.Xaml.Interactivity
                 }
             }
 
-            this.AssociatedObject = null;
-            this.oldCollection.Clear();
+            AssociatedObject = null;
+            oldCollection.Clear();
         }
 
         private void BehaviorCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
         {
             if (eventArgs.Action == NotifyCollectionChangedAction.Reset)
             {
-                foreach (IBehavior behavior in this.oldCollection)
+                foreach (IBehavior behavior in oldCollection)
                 {
                     if (behavior.AssociatedObject != null)
                     {
@@ -92,14 +92,14 @@ namespace Avalonia.Xaml.Interactivity
                     }
                 }
 
-                this.oldCollection.Clear();
+                oldCollection.Clear();
 
                 foreach (AvaloniaObject newItem in this)
                 {
-                    this.oldCollection.Add(this.VerifiedAttach(newItem));
+                    oldCollection.Add(VerifiedAttach(newItem));
                 }
 #if DEBUG
-                this.VerifyOldCollectionIntegrity();
+                VerifyOldCollectionIntegrity();
 #endif
                 return;
             }
@@ -110,7 +110,7 @@ namespace Avalonia.Xaml.Interactivity
                     {
                         int eventIndex = eventArgs.NewStartingIndex;
                         AvaloniaObject changedItem = (AvaloniaObject)eventArgs.NewItems[0];
-                        this.oldCollection.Insert(eventIndex, this.VerifiedAttach(changedItem));
+                        oldCollection.Insert(eventIndex, VerifiedAttach(changedItem));
                     }
                     break;
 
@@ -121,13 +121,13 @@ namespace Avalonia.Xaml.Interactivity
 
                         AvaloniaObject changedItem = (AvaloniaObject)eventArgs.NewItems[0];
 
-                        IBehavior oldItem = this.oldCollection[eventIndex];
+                        IBehavior oldItem = oldCollection[eventIndex];
                         if (oldItem.AssociatedObject != null)
                         {
                             oldItem.Detach();
                         }
 
-                        this.oldCollection[eventIndex] = this.VerifiedAttach(changedItem);
+                        oldCollection[eventIndex] = VerifiedAttach(changedItem);
                     }
                     break;
 
@@ -136,13 +136,13 @@ namespace Avalonia.Xaml.Interactivity
                         int eventIndex = eventArgs.OldStartingIndex;
                         AvaloniaObject changedItem = (AvaloniaObject)eventArgs.OldItems[0];
 
-                        IBehavior oldItem = this.oldCollection[eventIndex];
+                        IBehavior oldItem = oldCollection[eventIndex];
                         if (oldItem.AssociatedObject != null)
                         {
                             oldItem.Detach();
                         }
 
-                        this.oldCollection.RemoveAt(eventIndex);
+                        oldCollection.RemoveAt(eventIndex);
                     }
                     break;
 
@@ -151,7 +151,7 @@ namespace Avalonia.Xaml.Interactivity
                     break;
             }
 #if DEBUG
-            this.VerifyOldCollectionIntegrity();
+            VerifyOldCollectionIntegrity();
 #endif
         }
 
@@ -163,14 +163,14 @@ namespace Avalonia.Xaml.Interactivity
                 throw new InvalidOperationException("Only IBehavior types are supported in a BehaviorCollection.");
             }
 
-            if (this.oldCollection.Contains(behavior))
+            if (oldCollection.Contains(behavior))
             {
                 throw new InvalidOperationException("Cannot add an instance of a behavior to a BehaviorCollection more than once.");
             }
 
-            if (this.AssociatedObject != null)
+            if (AssociatedObject != null)
             {
-                behavior.Attach(this.AssociatedObject);
+                behavior.Attach(AssociatedObject);
             }
 
             return behavior;
@@ -179,12 +179,12 @@ namespace Avalonia.Xaml.Interactivity
         [Conditional("DEBUG")]
         private void VerifyOldCollectionIntegrity()
         {
-            bool isValid = (this.Count == this.oldCollection.Count);
+            bool isValid = Count == oldCollection.Count;
             if (isValid)
             {
-                for (int i = 0; i < this.Count; i++)
+                for (int i = 0; i < Count; i++)
                 {
-                    if (this[i] != this.oldCollection[i])
+                    if (this[i] != oldCollection[i])
                     {
                         isValid = false;
                         break;

@@ -61,8 +61,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public string EventName
         {
-            get { return this.GetValue(EventNameProperty); }
-            set { this.SetValue(EventNameProperty, value); }
+            get => GetValue(EventNameProperty);
+            set => SetValue(EventNameProperty, value);
         }
 
         /// <summary>
@@ -71,8 +71,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         public object SourceObject
         {
-            get { return this.GetValue(SourceObjectProperty); }
-            set { this.SetValue(SourceObjectProperty, value); }
+            get => GetValue(SourceObjectProperty);
+            set => SetValue(SourceObjectProperty, value);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Avalonia.Xaml.Interactions.Core
         protected override void OnAttached()
         {
             base.OnAttached();
-            this.SetResolvedSource(this.ComputeResolvedSource());
+            SetResolvedSource(ComputeResolvedSource());
         }
 
         /// <summary>
@@ -90,26 +90,26 @@ namespace Avalonia.Xaml.Interactions.Core
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            this.SetResolvedSource(null);
+            SetResolvedSource(null);
         }
 
         private void SetResolvedSource(object newSource)
         {
-            if (this.AssociatedObject == null || this.resolvedSource == newSource)
+            if (AssociatedObject == null || resolvedSource == newSource)
             {
                 return;
             }
 
-            if (this.resolvedSource != null)
+            if (resolvedSource != null)
             {
-                this.UnregisterEvent(this.EventName);
+                UnregisterEvent(EventName);
             }
 
-            this.resolvedSource = newSource;
+            resolvedSource = newSource;
 
-            if (this.resolvedSource != null)
+            if (resolvedSource != null)
             {
-                this.RegisterEvent(this.EventName);
+                RegisterEvent(EventName);
             }
         }
 
@@ -117,12 +117,12 @@ namespace Avalonia.Xaml.Interactions.Core
         {
             // If the SourceObject property is set at all, we want to use it. It is possible that it is data
             // bound and bindings haven't been evaluated yet. Plus, this makes the API more predictable.
-            if (this.GetValue(SourceObjectProperty) != AvaloniaProperty.UnsetValue)
+            if (GetValue(SourceObjectProperty) != AvaloniaProperty.UnsetValue)
             {
-                return this.SourceObject;
+                return SourceObject;
             }
 
-            return this.AssociatedObject;
+            return AssociatedObject;
         }
 
         private void RegisterEvent(string eventName)
@@ -134,28 +134,27 @@ namespace Avalonia.Xaml.Interactions.Core
 
             if (eventName != EventNameDefaultValue)
             {
-                Type sourceObjectType = this.resolvedSource.GetType();
-                EventInfo info = sourceObjectType.GetRuntimeEvent(this.EventName);
+                Type sourceObjectType = resolvedSource.GetType();
+                EventInfo info = sourceObjectType.GetRuntimeEvent(EventName);
                 if (info == null)
                 {
                     throw new ArgumentException(string.Format(
                         CultureInfo.CurrentCulture,
                         "Cannot find an event named {0} on type {1}.",
-                        this.EventName,
+                        EventName,
                         sourceObjectType.Name));
                 }
 
                 MethodInfo methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
-                this.eventHandler = methodInfo.CreateDelegate(info.EventHandlerType, this);
-                info.AddEventHandler(this.resolvedSource, this.eventHandler);
+                eventHandler = methodInfo.CreateDelegate(info.EventHandlerType, this);
+                info.AddEventHandler(resolvedSource, eventHandler);
             }
-            else if (!this.isLoadedEventRegistered)
+            else if (!isLoadedEventRegistered)
             {
-                Control element = this.resolvedSource as Control;
-                if (element != null && !IsElementLoaded(element))
+                if (resolvedSource is Control element && !IsElementLoaded(element))
                 {
-                    this.isLoadedEventRegistered = true;
-                    element.AttachedToVisualTree += this.OnEvent;
+                    isLoadedEventRegistered = true;
+                    element.AttachedToVisualTree += OnEvent;
                 }
             }
         }
@@ -169,26 +168,26 @@ namespace Avalonia.Xaml.Interactions.Core
 
             if (eventName != EventNameDefaultValue)
             {
-                if (this.eventHandler == null)
+                if (eventHandler == null)
                 {
                     return;
                 }
 
-                EventInfo info = this.resolvedSource.GetType().GetRuntimeEvent(eventName);
-                info.RemoveEventHandler(this.resolvedSource, this.eventHandler);
-                this.eventHandler = null;
+                EventInfo info = resolvedSource.GetType().GetRuntimeEvent(eventName);
+                info.RemoveEventHandler(resolvedSource, eventHandler);
+                eventHandler = null;
             }
-            else if (this.isLoadedEventRegistered)
+            else if (isLoadedEventRegistered)
             {
-                this.isLoadedEventRegistered = false;
-                Control element = (Control)this.resolvedSource;
-                element.AttachedToVisualTree -= this.OnEvent;
+                isLoadedEventRegistered = false;
+                Control element = (Control)resolvedSource;
+                element.AttachedToVisualTree -= OnEvent;
             }
         }
 
         private void OnEvent(object sender, object eventArgs)
         {
-            Interaction.ExecuteActions(this.resolvedSource, this.Actions, eventArgs);
+            Interaction.ExecuteActions(resolvedSource, Actions, eventArgs);
         }
 
         internal static bool IsElementLoaded(Control element)
