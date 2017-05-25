@@ -10,7 +10,7 @@ using Avalonia.Collections;
 namespace Avalonia.Xaml.Interactivity
 {
     /// <summary>
-    /// Represents a collection of IBehaviors with a shared <see cref="AssociatedObject"/>.
+    /// Represents a collection of <see cref="IBehavior"/>'s with a shared <see cref="AssociatedObject"/>.
     /// </summary>
     public sealed class BehaviorCollection : AvaloniaList<AvaloniaObject>
     {
