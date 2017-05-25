@@ -179,7 +179,7 @@ namespace Avalonia.Xaml.Interactivity
         [Conditional("DEBUG")]
         private void VerifyOldCollectionIntegrity()
         {
-            bool isValid = (Count == oldCollection.Count);
+            bool isValid = Count == oldCollection.Count;
             if (isValid)
             {
                 for (int i = 0; i < Count; i++)
