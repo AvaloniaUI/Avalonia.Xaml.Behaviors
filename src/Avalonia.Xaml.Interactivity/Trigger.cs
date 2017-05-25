@@ -6,7 +6,7 @@ using Avalonia.Metadata;
 namespace Avalonia.Xaml.Interactivity
 {
     /// <summary>
-    /// A base class for behaviors, implementing the basic plumbing of ITrigger
+    /// A base class for behaviors, implementing the basic plumbing of <seealso cref="ITrigger"/>.
     /// </summary>
     public abstract class Trigger : Behavior, ITrigger
     {
