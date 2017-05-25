@@ -60,7 +60,6 @@ namespace Avalonia.Xaml.Interactivity
                 behaviorCollection = new BehaviorCollection();
                 obj.SetValue(BehaviorsProperty, behaviorCollection);
 
-
                 if (obj is Control control)
                 {
                     control.AttachedToVisualTree -= Control_Loaded;
