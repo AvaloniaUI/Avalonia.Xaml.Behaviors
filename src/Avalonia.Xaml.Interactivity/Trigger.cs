@@ -13,8 +13,10 @@ namespace Avalonia.Xaml.Interactivity
         /// <summary>
         /// Identifies the <seealso cref="Actions"/> avalonia property.
         /// </summary>
-        public static readonly DirectProperty<Trigger, ActionCollection> ActionsProperty =
-            AvaloniaProperty.RegisterDirect<Trigger, ActionCollection>(nameof(Actions), o => o.Actions);
+        public static readonly AvaloniaProperty<ActionCollection> ActionsProperty =
+            AvaloniaProperty.RegisterDirect<Trigger, ActionCollection>(nameof(Actions), t => t.Actions);
+
+        private ActionCollection _actions;
 
         /// <summary>
         /// Gets the collection of actions associated with the behavior. This is a avalonia property.
@@ -24,14 +26,10 @@ namespace Avalonia.Xaml.Interactivity
         {
             get
             {
-                ActionCollection actionCollection = GetValue(ActionsProperty);
-                if (actionCollection == null)
-                {
-                    actionCollection = new ActionCollection();
-                    SetValue(ActionsProperty, actionCollection);
-                }
+                if (_actions == null)
+                    _actions = new ActionCollection();
 
-                return actionCollection;
+                return _actions;
             }
         }
     }
