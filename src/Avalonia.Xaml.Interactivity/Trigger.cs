@@ -13,8 +13,8 @@ namespace Avalonia.Xaml.Interactivity
         /// <summary>
         /// Identifies the <seealso cref="Actions"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<ActionCollection> ActionsProperty =
-            AvaloniaProperty.Register<Trigger, ActionCollection>(nameof(Actions));
+        public static readonly DirectProperty<Trigger, ActionCollection> ActionsProperty =
+            AvaloniaProperty.RegisterDirect<Trigger, ActionCollection>(nameof(Actions), o => o.Actions);
 
         /// <summary>
         /// Gets the collection of actions associated with the behavior. This is a avalonia property.
