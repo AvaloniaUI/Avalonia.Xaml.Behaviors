@@ -163,3 +163,4 @@ $RECYCLE.BIN/
 tools/
 .nuget
 artifacts/
+*.ide
