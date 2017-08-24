@@ -33,7 +33,7 @@
                     <ia:CallMethodAction TargetObject="{Binding}" MethodName="DecrementCount"/>
                 </ia:EventTriggerBehavior>
             </i:Interaction.Behaviors>
-            <TextBlock x:Name="text" Text="Click Me" Foreground="{StyleResource WhiteBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="text" Text="{Binding Count}" Foreground="{StyleResource WhiteBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Border>
     </Grid>
 </UserControl>
