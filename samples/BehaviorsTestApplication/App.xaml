@@ -6,6 +6,15 @@
     <Application.Styles>
         <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
         <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
-        <!--<StyleInclude Source="resm:BehaviorsTestApplication.Styles.Brushes.xaml?assembly=BehaviorsTestApplication"/>-->
     </Application.Styles>
+    <Application.Resources>
+        <SolidColorBrush x:Key="BlackBrush">Black</SolidColorBrush>
+        <SolidColorBrush x:Key="WhiteBrush">White</SolidColorBrush>
+        <SolidColorBrush x:Key="GrayBrush">Gray</SolidColorBrush>
+        <SolidColorBrush x:Key="RedBrush">Red</SolidColorBrush>
+        <SolidColorBrush x:Key="GreenBrush">Green</SolidColorBrush>
+        <SolidColorBrush x:Key="BlueBrush">Blue</SolidColorBrush>
+        <SolidColorBrush x:Key="YellowBrush">Yellow</SolidColorBrush>
+        <SolidColorBrush x:Key="PinkBrush">Pink</SolidColorBrush>
+    </Application.Resources>
 </Application>

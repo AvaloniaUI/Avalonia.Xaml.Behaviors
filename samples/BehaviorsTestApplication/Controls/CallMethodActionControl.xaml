@@ -7,12 +7,9 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom">
-    <UserControl.Styles>
-        <StyleInclude Source="resm:BehaviorsTestApplication.Styles.Brushes.xaml?assembly=BehaviorsTestApplication"/>
-    </UserControl.Styles>
     <Grid RowDefinitions="5*,*" ColumnDefinitions="30*,5,30*,5,30*">
-        <Border BorderThickness="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="5" Background="{StyleResource PinkBrush}" BorderBrush="{StyleResource GrayBrush}">
-            <TextBlock Text="{Binding Count}" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StyleResource YellowBrush}"/>
+        <Border BorderThickness="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="5" Background="{DynamicResource PinkBrush}" BorderBrush="{DynamicResource GrayBrush}">
+            <TextBlock Text="{Binding Count}" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource YellowBrush}"/>
         </Border>
         <Button x:Name="decrementButton" Content="Decrement" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <i:Interaction.Behaviors>

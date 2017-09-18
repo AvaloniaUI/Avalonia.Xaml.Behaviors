@@ -7,9 +7,6 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom">
-    <UserControl.Styles>
-        <StyleInclude Source="resm:BehaviorsTestApplication.Styles.Brushes.xaml?assembly=BehaviorsTestApplication"/>
-    </UserControl.Styles>
     <Grid RowDefinitions="Auto,100">
         <TextBox Name="textBox" Text="Hello" Grid.Row="0" Margin="5"/>
         <Button Name="changePropertyButton" Content="Change Property" Grid.Row="1" Margin="5,0,5,5">

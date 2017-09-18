@@ -8,32 +8,22 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom">
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-        <Border x:Name="button" Background="{StyleResource GreenBrush}" Width="100" Height="50" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Border.Styles>
-                <Style>
-                    <Style.Resources>
-                        <SolidColorBrush x:Key="RedBrush">Red</SolidColorBrush>
-                        <SolidColorBrush x:Key="GreenBrush">Green</SolidColorBrush>
-                        <SolidColorBrush x:Key="WhiteBrush">White</SolidColorBrush>
-                        <SolidColorBrush x:Key="YellowBrush">Yellow</SolidColorBrush>
-                    </Style.Resources>
-                </Style>
-            </Border.Styles>
+        <Border x:Name="button" Background="{DynamicResource GreenBrush}" Width="100" Height="50" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Center">
             <i:Interaction.Behaviors>
                 <ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="{Binding #button}">
                     <iac:CaptureMouseDeviceAction/>
-                    <ia:ChangePropertyAction TargetObject="{Binding #button}" PropertyName="Background" Value="{StyleResource RedBrush}"/>
-                    <ia:ChangePropertyAction TargetObject="{Binding #text}" PropertyName="Foreground" Value="{StyleResource YellowBrush}"/>
+                    <ia:ChangePropertyAction TargetObject="{Binding #button}" PropertyName="Background" Value="{DynamicResource RedBrush}"/>
+                    <ia:ChangePropertyAction TargetObject="{Binding #text}" PropertyName="Foreground" Value="{DynamicResource YellowBrush}"/>
                     <ia:CallMethodAction TargetObject="{Binding}" MethodName="IncrementCount"/>
                 </ia:EventTriggerBehavior>
                 <ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="{Binding #button}">
                     <iac:ReleaseMouseDeviceAction/>
-                    <ia:ChangePropertyAction TargetObject="{Binding #button}" PropertyName="Background" Value="{StyleResource GreenBrush}"/>
-                    <ia:ChangePropertyAction TargetObject="{Binding #text}" PropertyName="Foreground" Value="{StyleResource WhiteBrush}"/>
+                    <ia:ChangePropertyAction TargetObject="{Binding #button}" PropertyName="Background" Value="{DynamicResource GreenBrush}"/>
+                    <ia:ChangePropertyAction TargetObject="{Binding #text}" PropertyName="Foreground" Value="{DynamicResource WhiteBrush}"/>
                     <ia:CallMethodAction TargetObject="{Binding}" MethodName="DecrementCount"/>
                 </ia:EventTriggerBehavior>
             </i:Interaction.Behaviors>
-            <TextBlock x:Name="text" Text="{Binding Count}" Foreground="{StyleResource WhiteBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="text" Text="{Binding Count}" Foreground="{DynamicResource WhiteBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Border>
     </Grid>
 </UserControl>
