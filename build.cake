@@ -172,9 +172,9 @@ var nuspecNuGetInteractivity = new NuGetPackSettings()
     },
     Files = new []
     {
-        // netstandard1.3
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/netstandard1.3/" + "Avalonia.Xaml.Interactivity.dll", Target = "lib/netstandard1.3" },
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/netstandard1.3/" + "Avalonia.Xaml.Interactivity.xml", Target = "lib/netstandard1.3" },
+        // netstandard2.0
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/netstandard2.0/" + "Avalonia.Xaml.Interactivity.dll", Target = "lib/netstandard2.0" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/netstandard2.0/" + "Avalonia.Xaml.Interactivity.xml", Target = "lib/netstandard2.0" },
         // net461
         new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/net461/" + "Avalonia.Xaml.Interactivity.dll", Target = "lib/net461" },
         new NuSpecContent { Source = "src/Avalonia.Xaml.Interactivity/bin/" + dirSuffix + "/net461/" + "Avalonia.Xaml.Interactivity.xml", Target = "lib/net461" }
@@ -203,9 +203,9 @@ var nuspecNuGetInteractions = new NuGetPackSettings()
     },
     Files = new []
     {
-        // netstandard1.3
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/netstandard1.3/" + "Avalonia.Xaml.Interactions.dll", Target = "lib/netstandard1.3" },
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/netstandard1.3/" + "Avalonia.Xaml.Interactions.xml", Target = "lib/netstandard1.3" },
+        // netstandard2.0
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/netstandard2.0/" + "Avalonia.Xaml.Interactions.dll", Target = "lib/netstandard2.0" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/netstandard2.0/" + "Avalonia.Xaml.Interactions.xml", Target = "lib/netstandard2.0" },
         // net461
         new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/net461/" + "Avalonia.Xaml.Interactions.dll", Target = "lib/net461" },
         new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions/bin/" + dirSuffix + "/net461/" + "Avalonia.Xaml.Interactions.xml", Target = "lib/net461" }
@@ -234,9 +234,9 @@ var nuspecNuGetInteractionsCustom = new NuGetPackSettings()
     },
     Files = new []
     {
-        // netstandard1.3
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions.Custom/bin/" + dirSuffix + "/netstandard1.3/" + "Avalonia.Xaml.Interactions.Custom.dll", Target = "lib/netstandard1.3" },
-        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions.Custom/bin/" + dirSuffix + "/netstandard1.3/" + "Avalonia.Xaml.Interactions.Custom.xml", Target = "lib/netstandard1.3" },
+        // netstandard2.0
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions.Custom/bin/" + dirSuffix + "/netstandard2.0/" + "Avalonia.Xaml.Interactions.Custom.dll", Target = "lib/netstandard2.0" },
+        new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions.Custom/bin/" + dirSuffix + "/netstandard2.0/" + "Avalonia.Xaml.Interactions.Custom.xml", Target = "lib/netstandard2.0" },
         // net461
         new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions.Custom/bin/" + dirSuffix + "/net461/" + "Avalonia.Xaml.Interactions.Custom.dll", Target = "lib/net461" },
         new NuSpecContent { Source = "src/Avalonia.Xaml.Interactions.Custom/bin/" + dirSuffix + "/net461/" + "Avalonia.Xaml.Interactions.Custom.xml", Target = "lib/net461" }
