@@ -388,7 +388,7 @@ void RunCoreTest(string dir, bool isRunningOnWindows, bool net461Only)
 {
     Information("Running tests from " + dir);
     DotNetCoreRestore(dir);
-    var frameworks = new List<string>() { "netcoreapp1.1" };
+    var frameworks = new List<string>() { "netcoreapp2.0" };
     if (isRunningOnWindows)
         frameworks.Add("net461");
     foreach(var fw in frameworks)
