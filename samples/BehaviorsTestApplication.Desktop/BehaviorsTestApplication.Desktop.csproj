@@ -59,6 +59,7 @@
   <Import Project="$(MSBuildThisFileDirectory)..\..\build\Rx.props" />
   <Import Project="$(MSBuildThisFileDirectory)..\..\build\Avalonia.props" />
   <Import Project="$(MSBuildThisFileDirectory)..\..\build\Avalonia.Desktop.props" />
+  <Import Project="$(MSBuildThisFileDirectory)..\..\build\NetFX.props" />
   <ItemGroup>
     <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions\Avalonia.Xaml.Interactions.csproj">
       <Project>{ed03eead-938f-447b-bf0b-30857ae78bff}</Project>
