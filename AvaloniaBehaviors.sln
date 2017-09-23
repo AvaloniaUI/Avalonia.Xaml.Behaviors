@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}"
 EndProject
@@ -8,19 +8,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{9B9E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplication.Desktop", "samples\BehaviorsTestApplication.Desktop\BehaviorsTestApplication.Desktop.csproj", "{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplication", "samples\BehaviorsTestApplication\BehaviorsTestApplication.csproj", "{EA113F1A-D8D7-4142-9948-353270E7EBAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BehaviorsTestApplication", "samples\BehaviorsTestApplication\BehaviorsTestApplication.csproj", "{EA113F1A-D8D7-4142-9948-353270E7EBAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactivity", "src\Avalonia.Xaml.Interactivity\Avalonia.Xaml.Interactivity.csproj", "{14006EB4-66E9-4B58-BF5F-5A1983BF4621}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Xaml.Interactivity", "src\Avalonia.Xaml.Interactivity\Avalonia.Xaml.Interactivity.csproj", "{14006EB4-66E9-4B58-BF5F-5A1983BF4621}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions", "src\Avalonia.Xaml.Interactions\Avalonia.Xaml.Interactions.csproj", "{ED03EEAD-938F-447B-BF0B-30857AE78BFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Xaml.Interactions", "src\Avalonia.Xaml.Interactions\Avalonia.Xaml.Interactions.csproj", "{ED03EEAD-938F-447B-BF0B-30857AE78BFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.Custom", "src\Avalonia.Xaml.Interactions.Custom\Avalonia.Xaml.Interactions.Custom.csproj", "{7239203A-1743-42E8-A867-3AC38C39DC2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Xaml.Interactions.Custom", "src\Avalonia.Xaml.Interactions.Custom\Avalonia.Xaml.Interactions.Custom.csproj", "{7239203A-1743-42E8-A867-3AC38C39DC2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactivity.UnitTests", "tests\Avalonia.Xaml.Interactivity.UnitTests\Avalonia.Xaml.Interactivity.UnitTests.csproj", "{C2229490-39CA-4192-A28C-1B5EC186E027}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Xaml.Interactivity.UnitTests", "tests\Avalonia.Xaml.Interactivity.UnitTests\Avalonia.Xaml.Interactivity.UnitTests.csproj", "{C2229490-39CA-4192-A28C-1B5EC186E027}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.UnitTests", "tests\Avalonia.Xaml.Interactions.UnitTests\Avalonia.Xaml.Interactions.UnitTests.csproj", "{80D2C64D-B560-475D-941F-D5F28DDB2591}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Xaml.Interactions.UnitTests", "tests\Avalonia.Xaml.Interactions.UnitTests\Avalonia.Xaml.Interactions.UnitTests.csproj", "{80D2C64D-B560-475D-941F-D5F28DDB2591}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.Custom.UnitTests", "tests\Avalonia.Xaml.Interactions.Custom.UnitTests\Avalonia.Xaml.Interactions.Custom.UnitTests.csproj", "{DB7F8167-7437-4218-B825-5ECF94721FC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Xaml.Interactions.Custom.UnitTests", "tests\Avalonia.Xaml.Interactions.Custom.UnitTests\Avalonia.Xaml.Interactions.Custom.UnitTests.csproj", "{DB7F8167-7437-4218-B825-5ECF94721FC0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{64E61195-33F1-49EF-8521-1E413940D7AA}"
 	ProjectSection(SolutionItems) = preProject
@@ -52,6 +52,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{40A43022
 		build\Avalonia.Desktop.props = build\Avalonia.Desktop.props
 		build\Avalonia.NetCore.props = build\Avalonia.NetCore.props
 		build\Avalonia.props = build\Avalonia.props
+		build\NetFX.props = build\NetFX.props
 		build\Rx.props = build\Rx.props
 		build\XUnit.props = build\XUnit.props
 	EndProjectSection
@@ -318,5 +319,8 @@ Global
 		{40A43022-EBA7-4E1D-8BB0-2691E41B5622} = {2913483A-3E55-44AE-86BB-88511F372191}
 		{721A55B7-C5B0-44E2-803A-56E291C672FE} = {2913483A-3E55-44AE-86BB-88511F372191}
 		{8A0733E3-A184-4BD4-8CB7-478977F3F5FB} = {2913483A-3E55-44AE-86BB-88511F372191}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E64CD420-15B1-487C-9806-41EBE6DC15A4}
 	EndGlobalSection
 EndGlobal
