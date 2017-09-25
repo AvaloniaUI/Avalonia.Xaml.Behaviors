@@ -423,8 +423,8 @@ Task("Run-Unit-Tests")
     var assemblies = GetFiles("./tests/**/bin/" + dirSuffix + "/" + UnitTestsFramework + "/*.UnitTests.dll");
     var settings = new XUnit2Settings { 
         ToolPath = (isPlatformAnyCPU || isPlatformX86) ? 
-            "./tools/xunit.runner.console/tools/xunit.console.x86.exe" :
-            "./tools/xunit.runner.console/tools/xunit.console.exe",
+            Context.Tools.Resolve("xunit.console.x86.exe") :
+            Context.Tools.Resolve("xunit.console.exe"),
         OutputDirectory = testResultsDir,
         XmlReportV1 = true,
         NoAppDomain = true,
