@@ -4,27 +4,19 @@
 using Avalonia;
 using Avalonia.Logging.Serilog;
 using BehaviorsTestApplication.Views;
-using Serilog;
 
 namespace BehaviorsTestApplication.Desktop
 {
     internal class Program
     {
+        public static AppBuilder BuildAvaloniaApp()
+            => AppBuilder.Configure<App>()
+                         .UsePlatformDetect()
+                         .LogToDebug();
+
         private static void Main()
         {
-            AppBuilder.Configure<App>()
-                .UsePlatformDetect()
-                .Start<MainWindow>();
-        }
-
-        private static void InitializeLogging()
-        {
-#if DEBUG
-            SerilogLogger.Initialize(new LoggerConfiguration()
-                .MinimumLevel.Warning()
-                .WriteTo.Trace(outputTemplate: "{Area}: {Message}")
-                .CreateLogger());
-#endif
+            BuildAvaloniaApp().Start<MainWindow>();
         }
     }
 }
