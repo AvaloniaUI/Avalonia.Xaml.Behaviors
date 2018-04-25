@@ -6,13 +6,13 @@ using System.Resources;
 
 [assembly: AssemblyCompany("Wiesław Šoltés")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCopyright("Copyright © Wiesław Šoltés 2017")]
+[assembly: AssemblyCopyright("Copyright © Wiesław Šoltés 2018")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyProduct("Avalonia")]
 [assembly: AssemblyTrademark("")]
 [assembly: NeutralResourcesLanguage("en")]
 
-[assembly: AssemblyVersion("0.6.1")]
-[assembly: AssemblyFileVersion("0.6.1")]
-[assembly: AssemblyInformationalVersion("0.6.1")]
+[assembly: AssemblyVersion("0.6.2")]
+[assembly: AssemblyFileVersion("0.6.2")]
+[assembly: AssemblyInformationalVersion("0.6.2")]
