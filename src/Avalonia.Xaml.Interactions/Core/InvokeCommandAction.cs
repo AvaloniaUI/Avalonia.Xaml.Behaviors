@@ -3,7 +3,7 @@
 
 using System.Windows.Input;
 using Avalonia.Xaml.Interactivity;
-using Avalonia.Markup;
+using Avalonia.Data.Converters;
 
 namespace Avalonia.Xaml.Interactions.Core
 {
