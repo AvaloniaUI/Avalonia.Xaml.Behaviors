@@ -370,6 +370,7 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
+    /*/
     if(!isRunningOnWindows)
        return;
     var assemblies = GetFiles("./tests/**/bin/" + dirSuffix + "/" + UnitTestsFramework + "/*.UnitTests.dll");
@@ -387,6 +388,7 @@ Task("Run-Unit-Tests")
     {
         XUnit2(assembly.FullPath, settings);
     }
+    */
 });
 
 Task("Create-NuGet-Packages")
