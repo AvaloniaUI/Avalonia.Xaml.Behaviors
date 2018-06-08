@@ -15,7 +15,6 @@ namespace Avalonia.Xaml.Interactivity
         /// <summary>
         /// Gets the object to which this behavior is attached.
         /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public new T AssociatedObject => base.AssociatedObject as T;
 
         /// <summary>
