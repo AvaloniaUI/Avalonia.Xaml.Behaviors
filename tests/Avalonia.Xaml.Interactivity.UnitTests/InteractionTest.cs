@@ -14,10 +14,12 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
         [AppContainerUITestMethod]
         public void SetBehaviors_MultipleBehaviors_AllAttached()
         {
-            BehaviorCollection behaviorCollection = new BehaviorCollection();
-            behaviorCollection.Add(new StubBehavior());
-            behaviorCollection.Add(new StubBehavior());
-            behaviorCollection.Add(new StubBehavior());
+            BehaviorCollection behaviorCollection = new BehaviorCollection
+            {
+                new StubBehavior(),
+                new StubBehavior(),
+                new StubBehavior()
+            };
 
             Button button = new Button();
             Interaction.SetBehaviors(button, behaviorCollection);
@@ -75,10 +77,12 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
         [AppContainerUITestMethod]
         public void SetBehaviors_ManualDetachThenNull_DoesNotDoubleDetach()
         {
-            BehaviorCollection behaviorCollection = new BehaviorCollection();
-            behaviorCollection.Add(new StubBehavior());
-            behaviorCollection.Add(new StubBehavior());
-            behaviorCollection.Add(new StubBehavior());
+            BehaviorCollection behaviorCollection = new BehaviorCollection
+            {
+                new StubBehavior(),
+                new StubBehavior(),
+                new StubBehavior()
+            };
 
             Button button = new Button();
             Interaction.SetBehaviors(button, behaviorCollection);
@@ -104,16 +108,18 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
             IEnumerable<object> result = Interaction.ExecuteActions(null, null, null);
 
             Assert.NotNull(result);
-            Assert.Equal(0, result.Count()); // "Calling ExecuteActions with a null ActionCollection should return an empty enumerable."
+            Assert.Empty(result); // "Calling ExecuteActions with a null ActionCollection should return an empty enumerable."
         }
 
         [AppContainerUITestMethod]
         public void ExecuteActions_MultipleActions_AllActionsExecuted()
         {
-            ActionCollection actions = new ActionCollection();
-            actions.Add(new StubAction());
-            actions.Add(new StubAction());
-            actions.Add(new StubAction());
+            ActionCollection actions = new ActionCollection
+            {
+                new StubAction(),
+                new StubAction(),
+                new StubAction()
+            };
 
             Button sender = new Button();
             string parameterString = "TestString";
