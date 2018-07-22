@@ -41,7 +41,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// Identifies the <seealso cref="TargetObject"/> avalonia property.
         /// </summary>
         public static readonly AvaloniaProperty<object> TargetObjectProperty =
-            AvaloniaProperty.Register<CallMethodAction, object>(nameof(TargetObject));
+            AvaloniaProperty.Register<CallMethodAction, object>(nameof(TargetObject), AvaloniaProperty.UnsetValue);
 
         private Type targetObjectType;
         private List<MethodDescriptor> methodDescriptors = new List<MethodDescriptor>();

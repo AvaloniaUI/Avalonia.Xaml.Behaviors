@@ -23,7 +23,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// Identifies the <seealso cref="TargetObject"/> avalonia property.
         /// </summary>
         public static readonly AvaloniaProperty<object> TargetObjectProperty =
-            AvaloniaProperty.Register<ChangePropertyAction, object>(nameof(TargetObject));
+            AvaloniaProperty.Register<ChangePropertyAction, object>(nameof(TargetObject), AvaloniaProperty.UnsetValue);
 
         /// <summary>
         /// Identifies the <seealso cref="Value"/> avalonia property.
