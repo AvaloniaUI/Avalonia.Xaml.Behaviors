@@ -50,7 +50,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// Identifies the <seealso cref="SourceObject"/> avalonia property.
         /// </summary>
         public static readonly AvaloniaProperty<object> SourceObjectProperty =
-            AvaloniaProperty.Register<EventTriggerBehavior, object>(nameof(SourceObject));
+            AvaloniaProperty.Register<EventTriggerBehavior, object>(nameof(SourceObject), AvaloniaProperty.UnsetValue);
 
         private object resolvedSource;
         private Delegate eventHandler;
