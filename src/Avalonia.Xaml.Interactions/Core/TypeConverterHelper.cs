@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using System.Linq;
 
 namespace Avalonia.Xaml.Interactions.Core
 {
@@ -15,15 +16,17 @@ namespace Avalonia.Xaml.Interactions.Core
         /// Converts string representation of a value to its object representation.
         /// </summary>
         /// <param name="value">The value to convert.</param>
-        /// <param name="destinationTypeFullName">The full name of the destination type.</param>
+        /// <param name="destinationType">The destination type.</param>
         /// <returns>Object representation of the string value.</returns>
-        /// <exception cref="ArgumentNullException">destinationTypeFullName cannot be null.</exception>
-        public static object Convert(string value, string destinationTypeFullName)
+        /// <exception cref="ArgumentNullException">destinationType cannot be null.</exception>
+        public static object Convert(string value, Type destinationType)
         {
-            if (string.IsNullOrEmpty(destinationTypeFullName))
+            if (destinationType == null)
             {
-                throw new ArgumentNullException(nameof(destinationTypeFullName));
+                throw new ArgumentNullException(nameof(destinationType));
             }
+
+            var destinationTypeFullName = destinationType.FullName;
 
             string scope = GetScope(destinationTypeFullName);
 
@@ -46,6 +49,25 @@ namespace Avalonia.Xaml.Interactions.Core
                 {
                     return double.Parse(value, CultureInfo.CurrentCulture);
                 }
+            }
+
+            try
+            {
+                if (destinationType.BaseType == typeof(Enum))
+                    return Enum.Parse(destinationType, value);
+
+                if (destinationType.GetInterfaces().Any(t => t == typeof(IConvertible)))
+                {
+                    return (value as IConvertible).ToType(destinationType, CultureInfo.InvariantCulture);
+                }
+            }
+            catch (ArgumentException)
+            {
+                // not an enum
+            }
+            catch (InvalidCastException)
+            {
+                // not able to convert to anything
             }
 
             return null;
