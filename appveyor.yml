@@ -32,3 +32,5 @@ notifications:
 artifacts:
   - path: artifacts\test-results\*.xml
   - path: artifacts\nuget\*.nupkg
+cache:
+  - dotnet-sdk-2.1.401-win-x64.exe
