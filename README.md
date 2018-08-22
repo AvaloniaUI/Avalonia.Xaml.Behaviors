@@ -57,16 +57,32 @@ Open `AvaloniaBehaviors.sln` in selected IDE and run `Build` command.
 
 ### Build on Windows using script
 
-Open up a Powershell prompt and execute the bootstrapper script:
-```PowerShell
-PS> .\build.ps1 -Target "Default" -Platform "Any CPU" -Configuration "Release"
+* [.NET Core](https://www.microsoft.com/net/download?initial-os=windows).
+
+Open up a command-prompt and execute the commands:
+```
+dotnet tool install -g Cake.Tool --version 0.30.0
+dotnet cake build.cake -Target="Default" -Platform=Any CPU" -Configuration="Release"
 ```
 
-### Build on Linux/OSX using script
+### Build on Linux using script
 
-Open up a terminal prompt and execute the bootstrapper script:
-```Bash
-$ ./build.sh --target "Default" --platform "Any CPU" --configuration "Release"
+* [.NET Core](https://www.microsoft.com/net/download?initial-os=linux).
+
+Open up a terminal prompt and execute the commands:
+```
+dotnet tool install -g Cake.Tool --version 0.30.0
+dotnet cake build.cake --target="Default" --platform=Any CPU" --configuration="Release"
+```
+
+### Build on OSX using script
+
+* [.NET Core](https://www.microsoft.com/net/download?initial-os=macos).
+
+Open up a terminal prompt and execute the commands:
+```
+dotnet tool install -g Cake.Tool --version 0.30.0
+dotnet cake build.cake --target="Default" --platform=Any CPU" --configuration="Release"
 ```
 
 ## NuGet
