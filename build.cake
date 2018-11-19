@@ -531,14 +531,6 @@ Task("AppVeyor")
   .IsDependentOn("Publish-MyGet")
   .IsDependentOn("Publish-NuGet");
 
-Task("Travis")
-  .IsDependentOn("Run-Unit-Tests-NetCore")
-  .IsDependentOn("Build-NetCore");
-
-Task("CircleCI")
-  .IsDependentOn("Run-Unit-Tests-NetCore")
-  .IsDependentOn("Build-NetCore");
-
 Task("Azure-Windows")
   .IsDependentOn("Run-Unit-Tests-NetCore")
   .IsDependentOn("Build-NetCore");
