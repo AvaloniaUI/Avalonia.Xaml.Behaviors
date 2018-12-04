@@ -6,8 +6,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C5A00AC3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{9B9E3891-2366-4253-A952-D08BCEB71098}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplication.Desktop", "samples\BehaviorsTestApplication.Desktop\BehaviorsTestApplication.Desktop.csproj", "{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BehaviorsTestApplication", "samples\BehaviorsTestApplication\BehaviorsTestApplication.csproj", "{EA113F1A-D8D7-4142-9948-353270E7EBAE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Xaml.Interactivity", "src\Avalonia.Xaml.Interactivity\Avalonia.Xaml.Interactivity.csproj", "{14006EB4-66E9-4B58-BF5F-5A1983BF4621}"
@@ -22,32 +20,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Xaml.Interactions.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Xaml.Interactions.Custom.UnitTests", "tests\Avalonia.Xaml.Interactions.Custom.UnitTests\Avalonia.Xaml.Interactions.Custom.UnitTests.csproj", "{DB7F8167-7437-4218-B825-5ECF94721FC0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{64E61195-33F1-49EF-8521-1E413940D7AA}"
-	ProjectSection(SolutionItems) = preProject
-		src\Shared\SharedAssemblyInfo.cs = src\Shared\SharedAssemblyInfo.cs
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{84224365-32B6-46AF-85A2-45640E6D7EEB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{2913483A-3E55-44AE-86BB-88511F372191}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		build.cake = build.cake
+		.nuke = .nuke
+		build.ps1 = build.ps1
+		build.sh = build.sh
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BehaviorsTestApplication.NetCore", "samples\BehaviorsTestApplication.NetCore\BehaviorsTestApplication.NetCore.csproj", "{92E7FFBA-3917-4BD2-9674-822D19B00B81}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{B2A2C125-D28D-4F26-9795-A4DD4D671D99}"
-	ProjectSection(SolutionItems) = preProject
-		_config.yml = _config.yml
-		appveyor.yml = appveyor.yml
-		azure-pipelines.yml = azure-pipelines.yml
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{40A43022-EBA7-4E1D-8BB0-2691E41B5622}"
 	ProjectSection(SolutionItems) = preProject
 		build\Avalonia.Desktop.props = build\Avalonia.Desktop.props
 		build\Avalonia.props = build\Avalonia.props
+		build\Base.props = build\Base.props
+		build\EmbedXaml.props = build\EmbedXaml.props
 		build\NetFX.props = build\NetFX.props
 		build\Rx.props = build\Rx.props
 		build\XUnit.props = build\XUnit.props
@@ -70,6 +60,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{0B395300-CAC
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\build\_build.csproj", "{005E7A00-4EA8-43F6-868E-1F8965D39CAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -86,30 +78,6 @@ Global
 		Release|iPhoneSimulator = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.AppStore|Any CPU.Build.0 = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.AppStore|iPhone.Build.0 = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Release|iPhone.Build.0 = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{EA113F1A-D8D7-4142-9948-353270E7EBAE}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{EA113F1A-D8D7-4142-9948-353270E7EBAE}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{EA113F1A-D8D7-4142-9948-353270E7EBAE}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
@@ -302,12 +270,35 @@ Global
 		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Release|iPhone.Build.0 = Release|Any CPU
 		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{92E7FFBA-3917-4BD2-9674-822D19B00B81}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Release|iPhone.Build.0 = Release|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{78CAFE33-DBEB-4132-8A28-81CFE8A4933C} = {9B9E3891-2366-4253-A952-D08BCEB71098}
 		{EA113F1A-D8D7-4142-9948-353270E7EBAE} = {9B9E3891-2366-4253-A952-D08BCEB71098}
 		{14006EB4-66E9-4B58-BF5F-5A1983BF4621} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
 		{ED03EEAD-938F-447B-BF0B-30857AE78BFF} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
@@ -316,11 +307,10 @@ Global
 		{80D2C64D-B560-475D-941F-D5F28DDB2591} = {C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}
 		{DB7F8167-7437-4218-B825-5ECF94721FC0} = {C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}
 		{92E7FFBA-3917-4BD2-9674-822D19B00B81} = {9B9E3891-2366-4253-A952-D08BCEB71098}
-		{B2A2C125-D28D-4F26-9795-A4DD4D671D99} = {2913483A-3E55-44AE-86BB-88511F372191}
 		{40A43022-EBA7-4E1D-8BB0-2691E41B5622} = {2913483A-3E55-44AE-86BB-88511F372191}
 		{721A55B7-C5B0-44E2-803A-56E291C672FE} = {2913483A-3E55-44AE-86BB-88511F372191}
-		{8A0733E3-A184-4BD4-8CB7-478977F3F5FB} = {2913483A-3E55-44AE-86BB-88511F372191}
 		{0B395300-CACE-470D-81A9-69B922FB79DE} = {2913483A-3E55-44AE-86BB-88511F372191}
+		{005E7A00-4EA8-43F6-868E-1F8965D39CAA} = {2913483A-3E55-44AE-86BB-88511F372191}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E64CD420-15B1-487C-9806-41EBE6DC15A4}

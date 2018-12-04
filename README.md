@@ -58,8 +58,7 @@ Open `AvaloniaBehaviors.sln` in selected IDE and run `Build` command.
 
 Open up a command-prompt and execute the commands:
 ```
-dotnet tool install -g Cake.Tool --version 0.30.0
-dotnet cake build.cake -Target="Default" -Platform=Any CPU" -Configuration="Release"
+.\build.ps1
 ```
 
 ### Build on Linux using script
@@ -68,8 +67,7 @@ dotnet cake build.cake -Target="Default" -Platform=Any CPU" -Configuration="Rele
 
 Open up a terminal prompt and execute the commands:
 ```
-dotnet tool install -g Cake.Tool --version 0.30.0
-dotnet cake build.cake --target="Default" --platform=Any CPU" --configuration="Release"
+./build.sh
 ```
 
 ### Build on OSX using script
@@ -78,8 +76,7 @@ dotnet cake build.cake --target="Default" --platform=Any CPU" --configuration="R
 
 Open up a terminal prompt and execute the commands:
 ```
-dotnet tool install -g Cake.Tool --version 0.30.0
-dotnet cake build.cake --target="Default" --platform=Any CPU" --configuration="Release"
+./build.sh
 ```
 
 ## NuGet
