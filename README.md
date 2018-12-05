@@ -2,8 +2,7 @@
 
 [![Gitter](https://badges.gitter.im/wieslawsoltes/AvaloniaBehaviors.svg)](https://gitter.im/wieslawsoltes/AvaloniaBehaviors?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/w7t8lmqflmd62bft?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/xamlbehaviors)
-[![Build Status](https://dev.azure.com/wieslawsoltes/AvaloniaBehaviors/_apis/build/status/wieslawsoltes.AvaloniaBehaviors)](https://dev.azure.com/wieslawsoltes/AvaloniaBehaviors/_build/latest?definitionId=1)
+[![Build status](https://dev.azure.com/wieslawsoltes/AvaloniaBehaviors/_apis/build/status/AvaloniaBehaviors)](https://dev.azure.com/wieslawsoltes/AvaloniaBehaviors/_build/latest?definitionId=-1)
 
 [![NuGet](https://img.shields.io/nuget/v/Avalonia.Xaml.Behaviors.svg)](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors) [![MyGet](https://img.shields.io/myget/xamlbehaviors-nightly/vpre/Avalonia.Xaml.Behaviors.svg?label=myget)](https://www.myget.org/gallery/xamlbehaviors-nightly) 
 
@@ -58,8 +57,7 @@ Open `AvaloniaBehaviors.sln` in selected IDE and run `Build` command.
 
 Open up a command-prompt and execute the commands:
 ```
-dotnet tool install -g Cake.Tool --version 0.30.0
-dotnet cake build.cake -Target="Default" -Platform=Any CPU" -Configuration="Release"
+.\build.ps1
 ```
 
 ### Build on Linux using script
@@ -68,8 +66,7 @@ dotnet cake build.cake -Target="Default" -Platform=Any CPU" -Configuration="Rele
 
 Open up a terminal prompt and execute the commands:
 ```
-dotnet tool install -g Cake.Tool --version 0.30.0
-dotnet cake build.cake --target="Default" --platform=Any CPU" --configuration="Release"
+./build.sh
 ```
 
 ### Build on OSX using script
@@ -78,8 +75,7 @@ dotnet cake build.cake --target="Default" --platform=Any CPU" --configuration="R
 
 Open up a terminal prompt and execute the commands:
 ```
-dotnet tool install -g Cake.Tool --version 0.30.0
-dotnet cake build.cake --target="Default" --platform=Any CPU" --configuration="Release"
+./build.sh
 ```
 
 ## NuGet
