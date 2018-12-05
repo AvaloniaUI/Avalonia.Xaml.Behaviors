@@ -2,10 +2,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <OutputType>Library</OutputType>
-    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     <IncludeBuildOutput>False</IncludeBuildOutput>
   </PropertyGroup>
 
@@ -17,10 +13,6 @@
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Avalonia.props" />
-
-  <ItemGroup>
-    <Compile Include="**\*.cs" Exclude="obj\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Avalonia.Xaml.Interactivity\Avalonia.Xaml.Interactivity.csproj" />
