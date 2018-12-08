@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28315.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}"
 EndProject
@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{2913483A
 		.nuke = .nuke
 		build.ps1 = build.ps1
 		build.sh = build.sh
+		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BehaviorsTestApplication.NetCore", "samples\BehaviorsTestApplication.NetCore\BehaviorsTestApplication.NetCore.csproj", "{92E7FFBA-3917-4BD2-9674-822D19B00B81}"
