@@ -2,7 +2,7 @@
 
 [![Gitter](https://badges.gitter.im/wieslawsoltes/AvaloniaBehaviors.svg)](https://gitter.im/wieslawsoltes/AvaloniaBehaviors?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-[![Build status](https://dev.azure.com/wieslawsoltes/AvaloniaBehaviors/_apis/build/status/AvaloniaBehaviors)](https://dev.azure.com/wieslawsoltes/AvaloniaBehaviors/_build/latest?definitionId=-1)
+[![Build Status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/Sources/AvaloniaBehaviors?branchName=master)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=53?branchName=master)
 
 [![NuGet](https://img.shields.io/nuget/v/Avalonia.Xaml.Behaviors.svg)](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors) [![MyGet](https://img.shields.io/myget/xamlbehaviors-nightly/vpre/Avalonia.Xaml.Behaviors.svg?label=myget)](https://www.myget.org/gallery/xamlbehaviors-nightly) 
 
