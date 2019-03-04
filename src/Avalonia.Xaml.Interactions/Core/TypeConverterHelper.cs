@@ -47,7 +47,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 }
                 else if (string.Equals(destinationTypeFullName, typeof(double).FullName, StringComparison.Ordinal))
                 {
-                    return double.Parse(value, CultureInfo.CurrentCulture);
+                    return double.Parse(value, CultureInfo.InvariantCulture);
                 }
             }
 
