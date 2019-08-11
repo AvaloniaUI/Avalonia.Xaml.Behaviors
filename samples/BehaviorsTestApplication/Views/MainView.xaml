@@ -1,0 +1,39 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="BehaviorsTestApplication.Views.MainView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:BehaviorsTestApplication.Controls;assembly=BehaviorsTestApplication">
+    <UserControl.Styles>
+        <Style Selector="TabStripItem">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+    </UserControl.Styles>
+    <TabControl>
+        <TabItem Header="CallMethodAction">
+            <controls:CallMethodActionControl/>
+        </TabItem>
+        <TabItem Header="ChangePropertyAction">
+            <controls:ChangePropertyActionControl/>
+        </TabItem>
+        <TabItem Header="DataTriggerBehavior">
+            <controls:DataTriggerBehaviorControl/>
+        </TabItem>
+        <TabItem Header="EventTriggerBehavior">
+            <controls:EventTriggerBehaviorControl/>
+        </TabItem>
+        <TabItem Header="InvokeCommandAction">
+            <controls:InvokeCommandActionControl/>
+        </TabItem>
+        <TabItem Header="CustomAction">
+            <controls:CustomActionControl/>
+        </TabItem>
+        <TabItem Header="CustomBehavior">
+            <controls:CustomBehaviorControl/>
+        </TabItem>
+        <TabItem Header="Advanced">
+            <controls:AdvancedControl/>
+        </TabItem>
+    </TabControl>
+</UserControl>

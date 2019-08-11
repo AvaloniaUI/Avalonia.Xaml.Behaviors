@@ -2,7 +2,9 @@
 // Licensed under the MIT license. See licence.md file in the project root for full license information.
 
 using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using BehaviorsTestApplication.Views;
 
 namespace BehaviorsTestApplication
 {
@@ -11,6 +13,19 @@ namespace BehaviorsTestApplication
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+        }
+
+        public override void OnFrameworkInitializationCompleted()
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
+            {
+                desktopLifetime.MainWindow = new MainWindow();
+            }
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
+            {
+                singleViewLifetime.MainView = new MainView();
+            }
+            base.OnFrameworkInitializationCompleted();
         }
     }
 }

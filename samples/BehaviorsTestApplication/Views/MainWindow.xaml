@@ -3,38 +3,7 @@
 <Window x:Class="BehaviorsTestApplication.Views.MainWindow"
         xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:BehaviorsTestApplication.Controls;assembly=BehaviorsTestApplication"
+        xmlns:views="clr-namespace:BehaviorsTestApplication.Views;assembly=BehaviorsTestApplication"
         Title="XamlBehaviors Test Application" Width="800" Height="600">
-    <Window.Styles>
-        <Style Selector="TabStripItem">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="FontSize" Value="16"/>
-        </Style>
-    </Window.Styles>
-    <TabControl>
-        <TabItem Header="CallMethodAction">
-            <controls:CallMethodActionControl/>
-        </TabItem>
-        <TabItem Header="ChangePropertyAction">
-            <controls:ChangePropertyActionControl/>
-        </TabItem>
-        <TabItem Header="DataTriggerBehavior">
-            <controls:DataTriggerBehaviorControl/>
-        </TabItem>
-        <TabItem Header="EventTriggerBehavior">
-            <controls:EventTriggerBehaviorControl/>
-        </TabItem>
-        <TabItem Header="InvokeCommandAction">
-            <controls:InvokeCommandActionControl/>
-        </TabItem>
-        <TabItem Header="CustomAction">
-            <controls:CustomActionControl/>
-        </TabItem>
-        <TabItem Header="CustomBehavior">
-            <controls:CustomBehaviorControl/>
-        </TabItem>
-        <TabItem Header="Advanced">
-            <controls:AdvancedControl/>
-        </TabItem>
-    </TabControl>
+    <views:MainView/>
 </Window>
