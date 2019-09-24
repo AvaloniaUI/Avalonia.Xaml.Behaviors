@@ -5,25 +5,25 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
 {
     public class StubAction : AvaloniaObject, IAction
     {
-        private readonly object returnValue;
+        private readonly object? returnValue;
 
         public StubAction()
         {
             returnValue = null;
         }
 
-        public StubAction(object returnValue)
+        public StubAction(object? returnValue)
         {
             this.returnValue = returnValue;
         }
 
-        public object Sender
+        public object? Sender
         {
             get;
             private set;
         }
 
-        public object Parameter
+        public object? Parameter
         {
             get;
             private set;
@@ -35,7 +35,7 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
             private set;
         }
 
-        public object Execute(object sender, object parameter)
+        public object? Execute(object? sender, object? parameter)
         {
             ExecuteCount++;
             Sender = sender;
