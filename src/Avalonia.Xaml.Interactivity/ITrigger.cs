@@ -11,6 +11,6 @@ namespace Avalonia.Xaml.Interactivity
         /// <summary>
         /// Gets the collection of actions associated with the behavior.
         /// </summary>
-        ActionCollection Actions { get; }
+        ActionCollection? Actions { get; }
     }
 }

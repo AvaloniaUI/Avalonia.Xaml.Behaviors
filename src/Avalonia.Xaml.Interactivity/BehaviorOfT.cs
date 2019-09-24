@@ -11,12 +11,12 @@ namespace Avalonia.Xaml.Interactivity
     /// and allow for typed associated objects.
     /// </summary>
     /// <typeparam name="T">The object type to attach to</typeparam>
-    public abstract class Behavior<T> : Behavior where T : AvaloniaObject
+    public abstract class Behavior<T> : Behavior where T : notnull, AvaloniaObject
     {
         /// <summary>
         /// Gets the object to which this behavior is attached.
         /// </summary>
-        public new T AssociatedObject => base.AssociatedObject as T;
+        public new T? AssociatedObject => base.AssociatedObject as T;
 
         /// <summary>
         /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
@@ -28,7 +28,7 @@ namespace Avalonia.Xaml.Interactivity
         {
             base.OnAttached();
 
-            if (AssociatedObject == null)
+            if (AssociatedObject == null && base.AssociatedObject != null)
             {
                 string actualType = base.AssociatedObject.GetType().FullName;
                 string expectedType = typeof(T).FullName;
