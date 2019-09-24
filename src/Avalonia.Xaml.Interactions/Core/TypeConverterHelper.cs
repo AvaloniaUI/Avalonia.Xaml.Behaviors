@@ -19,7 +19,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <param name="destinationType">The destination type.</param>
         /// <returns>Object representation of the string value.</returns>
         /// <exception cref="ArgumentNullException">destinationType cannot be null.</exception>
-        public static object Convert(string value, Type destinationType)
+        public static object? Convert(string value, Type destinationType)
         {
             if (destinationType == null)
             {

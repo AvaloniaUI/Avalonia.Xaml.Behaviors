@@ -93,11 +93,11 @@ namespace Avalonia.Xaml.Interactivity
         /// <param name="actions">The set of actions to execute.</param>
         /// <param name="parameter">The value of this parameter is determined by the calling behavior.</param>
         /// <returns>Returns the results of the actions.</returns>
-        public static IEnumerable<object> ExecuteActions(object sender, ActionCollection actions, object parameter)
+        public static IEnumerable<object> ExecuteActions(object? sender, ActionCollection? actions, object parameter)
         {
             List<object> results = new List<object>();
 
-            if (actions == null)
+            if (actions == null || sender == null)
             {
                 return results;
             }

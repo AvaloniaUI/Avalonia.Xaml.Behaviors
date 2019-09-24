@@ -102,11 +102,11 @@ namespace Avalonia.Xaml.Interactions.Core
             PropertyInfo propertyInfo = targetType.GetRuntimeProperty(PropertyName);
             ValidateProperty(targetType.Name, propertyInfo);
 
-            Exception innerException = null;
+            Exception? innerException = null;
             try
             {
-                object result = null;
-                string valueAsString = null;
+                object? result = null;
+                string? valueAsString = null;
                 Type propertyType = propertyInfo.PropertyType;
                 TypeInfo propertyTypeInfo = propertyType.GetTypeInfo();
                 if (Value == null)
@@ -175,11 +175,11 @@ namespace Avalonia.Xaml.Interactions.Core
         {
             ValidateAvaloniaProperty(property);
 
-            Exception innerException = null;
+            Exception? innerException = null;
             try
             {
-                object result = null;
-                string valueAsString = null;
+                object? result = null;
+                string? valueAsString = null;
                 Type propertyType = property.PropertyType;
                 TypeInfo propertyTypeInfo = propertyType.GetTypeInfo();
                 if (Value == null)

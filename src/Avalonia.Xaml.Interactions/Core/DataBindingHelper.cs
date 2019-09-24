@@ -21,8 +21,12 @@ namespace Avalonia.Xaml.Interactions.Core
         /// bindings on the action  may not be up-to-date. This routine is called before the action
         /// is executed in order to guarantee that all bindings are refreshed with the most current data.
         /// </remarks>
-        public static void RefreshDataBindingsOnActions(ActionCollection actions)
+        public static void RefreshDataBindingsOnActions(ActionCollection? actions)
         {
+            if (actions == null)
+            {
+                return;
+            }
             foreach (AvaloniaObject action in actions)
             {
                 foreach (AvaloniaProperty property in GetAvaloniaProperties(action.GetType()))
@@ -54,7 +58,10 @@ namespace Avalonia.Xaml.Interactions.Core
                     type = type.GetTypeInfo().BaseType;
                 }
 
-                AvaloniaPropertyCache[type] = propertyList;
+                if (type != null)
+                {
+                    AvaloniaPropertyCache[type] = propertyList; 
+                }
             }
 
             return propertyList;

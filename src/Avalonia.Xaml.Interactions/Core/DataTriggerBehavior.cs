@@ -64,15 +64,15 @@ namespace Avalonia.Xaml.Interactions.Core
             set => SetValue(ValueProperty, value);
         }
 
-        private static bool Compare(object leftOperand, ComparisonConditionType operatorType, object rightOperand)
+        private static bool Compare(object? leftOperand, ComparisonConditionType operatorType, object? rightOperand)
         {
             if (leftOperand != null && rightOperand != null)
             {
                 rightOperand = TypeConverterHelper.Convert(rightOperand.ToString(), leftOperand.GetType());
             }
 
-            IComparable leftComparableOperand = leftOperand as IComparable;
-            IComparable rightComparableOperand = rightOperand as IComparable;
+            IComparable? leftComparableOperand = leftOperand as IComparable;
+            IComparable? rightComparableOperand = rightOperand as IComparable;
             if ((leftComparableOperand != null) && (rightComparableOperand != null))
             {
                 return EvaluateComparable(leftComparableOperand, operatorType, rightComparableOperand);
@@ -127,7 +127,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </summary>
         private static bool EvaluateComparable(IComparable leftOperand, ComparisonConditionType operatorType, IComparable rightOperand)
         {
-            object convertedOperand = null;
+            object? convertedOperand = null;
             try
             {
                 convertedOperand = Convert.ChangeType(rightOperand, leftOperand.GetType(), CultureInfo.CurrentCulture);

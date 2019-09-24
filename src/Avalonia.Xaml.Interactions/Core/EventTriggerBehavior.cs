@@ -52,8 +52,8 @@ namespace Avalonia.Xaml.Interactions.Core
         public static readonly AvaloniaProperty<object> SourceObjectProperty =
             AvaloniaProperty.Register<EventTriggerBehavior, object>(nameof(SourceObject), AvaloniaProperty.UnsetValue);
 
-        private object resolvedSource;
-        private Delegate eventHandler;
+        private object? resolvedSource;
+        private Delegate? eventHandler;
         private bool isLoadedEventRegistered;
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Avalonia.Xaml.Interactions.Core
             SetResolvedSource(null);
         }
 
-        private void SetResolvedSource(object newSource)
+        private void SetResolvedSource(object? newSource)
         {
             if (AssociatedObject == null || resolvedSource == newSource)
             {
@@ -113,7 +113,7 @@ namespace Avalonia.Xaml.Interactions.Core
             }
         }
 
-        private object ComputeResolvedSource()
+        private object? ComputeResolvedSource()
         {
             // If the SourceObject property is set at all, we want to use it. It is possible that it is data
             // bound and bindings haven't been evaluated yet. Plus, this makes the API more predictable.
@@ -134,20 +134,23 @@ namespace Avalonia.Xaml.Interactions.Core
 
             if (eventName != EventNameDefaultValue)
             {
-                Type sourceObjectType = resolvedSource.GetType();
-                EventInfo info = sourceObjectType.GetRuntimeEvent(EventName);
-                if (info == null)
+                if (resolvedSource != null)
                 {
-                    throw new ArgumentException(string.Format(
-                        CultureInfo.CurrentCulture,
-                        "Cannot find an event named {0} on type {1}.",
-                        EventName,
-                        sourceObjectType.Name));
-                }
+                    Type sourceObjectType = resolvedSource.GetType();
+                    EventInfo info = sourceObjectType.GetRuntimeEvent(EventName);
+                    if (info == null)
+                    {
+                        throw new ArgumentException(string.Format(
+                            CultureInfo.CurrentCulture,
+                            "Cannot find an event named {0} on type {1}.",
+                            EventName,
+                            sourceObjectType.Name));
+                    }
 
-                MethodInfo methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
-                eventHandler = methodInfo.CreateDelegate(info.EventHandlerType, this);
-                info.AddEventHandler(resolvedSource, eventHandler);
+                    MethodInfo methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
+                    eventHandler = methodInfo.CreateDelegate(info.EventHandlerType, this);
+                    info.AddEventHandler(resolvedSource, eventHandler); 
+                }
             }
             else if (!isLoadedEventRegistered)
             {
@@ -173,15 +176,21 @@ namespace Avalonia.Xaml.Interactions.Core
                     return;
                 }
 
-                EventInfo info = resolvedSource.GetType().GetRuntimeEvent(eventName);
-                info.RemoveEventHandler(resolvedSource, eventHandler);
+                if (resolvedSource != null)
+                {
+                    EventInfo info = resolvedSource.GetType().GetRuntimeEvent(eventName);
+                    info.RemoveEventHandler(resolvedSource, eventHandler); 
+                }
                 eventHandler = null;
             }
             else if (isLoadedEventRegistered)
             {
                 isLoadedEventRegistered = false;
-                Control element = (Control)resolvedSource;
-                element.AttachedToVisualTree -= OnEvent;
+                if (resolvedSource != null)
+                {
+                    Control element = (Control)resolvedSource;
+                    element.AttachedToVisualTree -= OnEvent; 
+                }
             }
         }
 
