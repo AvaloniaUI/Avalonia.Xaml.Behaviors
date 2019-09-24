@@ -105,7 +105,11 @@ namespace Avalonia.Xaml.Interactivity
             foreach (AvaloniaObject avaloniaObject in actions)
             {
                 IAction action = (IAction)avaloniaObject;
-                results.Add(action.Execute(sender, parameter));
+                object? result = action.Execute(sender, parameter);
+                if (result != null)
+                {
+                    results.Add(result);
+                }
             }
 
             return results;
