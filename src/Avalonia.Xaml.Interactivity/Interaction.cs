@@ -97,7 +97,7 @@ namespace Avalonia.Xaml.Interactivity
         {
             List<object> results = new List<object>();
 
-            if (actions == null || sender == null)
+            if (actions == null)
             {
                 return results;
             }

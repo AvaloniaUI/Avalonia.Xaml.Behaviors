@@ -74,9 +74,9 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
         /// <param name="parameter">The value of this parameter is determined by the caller.</param>
         /// <returns>True if the method is called; else false.</returns>
-        public object? Execute(object sender, object parameter)
+        public object? Execute(object? sender, object? parameter)
         {
-            object target;
+            object? target;
             if (GetValue(TargetObjectProperty) != AvaloniaProperty.UnsetValue)
             {
                 target = TargetObject;
@@ -116,15 +116,20 @@ namespace Avalonia.Xaml.Interactions.Core
             }
             else if (parameters.Length == 2)
             {
-                methodDescriptor.MethodInfo.Invoke(target, new object[] { target, parameter });
+                methodDescriptor.MethodInfo.Invoke(target, new object[] { target, parameter! });
                 return true;
             }
 
             return false;
         }
 
-        private MethodDescriptor? FindBestMethod(object parameter)
+        private MethodDescriptor? FindBestMethod(object? parameter)
         {
+            if (parameter == null)
+            {
+                return cachedMethodDescriptor;
+            }
+
             TypeInfo parameterTypeInfo = parameter.GetType().GetTypeInfo();
 
             if (parameterTypeInfo == null)
