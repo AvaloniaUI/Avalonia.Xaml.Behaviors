@@ -13,7 +13,7 @@ namespace Avalonia.Xaml.Interactions.Custom
     /// </summary>
     public sealed class BindTagToVisualRootDataContextBehavior : Behavior<Control>
     {
-        private IDisposable _disposable;
+        private IDisposable? _disposable;
 
         /// <inheritdoc/>
         protected override void OnAttached()
