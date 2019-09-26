@@ -33,7 +33,10 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.PointerMoved += AssociatedObject_PointerMoved;
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.PointerMoved += AssociatedObject_PointerMoved; 
+            }
         }
 
         /// <summary>
@@ -42,7 +45,10 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.PointerMoved -= AssociatedObject_PointerMoved;
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.PointerMoved -= AssociatedObject_PointerMoved; 
+            }
         }
 
         private void AssociatedObject_PointerMoved(object sender, PointerEventArgs e)

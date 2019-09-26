@@ -18,7 +18,10 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.PointerPressed += PointerPressed;
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.PointerPressed += PointerPressed; 
+            }
         }
 
         /// <summary>
@@ -27,12 +30,15 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.PointerPressed -= PointerPressed;
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.PointerPressed -= PointerPressed; 
+            }
         }
 
         private void PointerPressed(object sender, PointerPressedEventArgs e)
         {
-            AssociatedObject.Focus();
+            AssociatedObject?.Focus();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Avalonia.Xaml.Interactivity
         /// <summary>
         /// Gets the <see cref="AvaloniaObject"/> to which the <see cref="BehaviorCollection"/> is attached.
         /// </summary>
-        public AvaloniaObject AssociatedObject
+        public AvaloniaObject? AssociatedObject
         {
             get;
             private set;
@@ -40,7 +40,7 @@ namespace Avalonia.Xaml.Interactivity
         /// </summary>
         /// <param name="associatedObject">The <see cref="AvaloniaObject"/> to which to attach.</param>
         /// <exception cref="InvalidOperationException">The <see cref="BehaviorCollection"/> is already attached to a different <see cref="AvaloniaObject"/>.</exception>
-        public void Attach(AvaloniaObject associatedObject)
+        public void Attach(AvaloniaObject? associatedObject)
         {
             if (associatedObject == AssociatedObject)
             {
@@ -155,10 +155,9 @@ namespace Avalonia.Xaml.Interactivity
 #endif
         }
 
-        private IBehavior VerifiedAttach(AvaloniaObject item)
+        private IBehavior VerifiedAttach(AvaloniaObject? item)
         {
-            IBehavior behavior = item as IBehavior;
-            if (behavior == null)
+            if (!(item is IBehavior behavior))
             {
                 throw new InvalidOperationException("Only IBehavior types are supported in a BehaviorCollection.");
             }

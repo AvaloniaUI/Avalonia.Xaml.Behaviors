@@ -4,6 +4,13 @@
     <OutputType>WinExe</OutputType>
     <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
     <IsPackable>False</IsPackable>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PublishTrimmed>False</PublishTrimmed>
+    <PublishSingleFile>False</PublishSingleFile>
+    <PublishReadyToRun>True</PublishReadyToRun>
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />

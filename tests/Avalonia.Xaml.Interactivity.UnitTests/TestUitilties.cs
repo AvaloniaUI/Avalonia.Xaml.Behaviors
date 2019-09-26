@@ -32,7 +32,7 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
             Assert.Equal(0, behavior.DetachCount); // "The Behavior should not be detached."
         }
 
-        public static void AssertAttached(StubBehavior behavior, AvaloniaObject associatedObject)
+        public static void AssertAttached(StubBehavior behavior, AvaloniaObject? associatedObject)
         {
             Assert.Equal(1, behavior.AttachCount); // "The behavior should be attached."
             Assert.Equal(associatedObject, behavior.AssociatedObject); // "The AssociatedObject of the Behavior should be what it was attached to."

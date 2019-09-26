@@ -13,7 +13,7 @@ namespace Avalonia.Xaml.Interactions.Custom
     /// </summary>
     public sealed class DragPositionBehavior : Behavior<Control>
     {
-        private IControl _parent = null;
+        private IControl? _parent = null;
         private Point _previous;
 
         /// <summary>
@@ -22,7 +22,10 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.PointerPressed += AssociatedObject_PointerPressed;
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.PointerPressed += AssociatedObject_PointerPressed; 
+            }
         }
 
         /// <summary>
@@ -31,38 +34,52 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.PointerPressed -= AssociatedObject_PointerPressed;
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.PointerPressed -= AssociatedObject_PointerPressed; 
+            }
             _parent = null;
         }
 
         private void AssociatedObject_PointerPressed(object sender, PointerPressedEventArgs e)
         {
-            _parent = AssociatedObject.Parent;
-
-            if (!(AssociatedObject.RenderTransform is TranslateTransform))
+            if (AssociatedObject != null)
             {
-                AssociatedObject.RenderTransform = new TranslateTransform();
-            }
+                _parent = AssociatedObject.Parent;
 
-            _previous = e.GetPosition(_parent);
-            _parent.PointerMoved += Parent_PointerMoved;
-            _parent.PointerReleased += Parent_PointerReleased;
+                if (!(AssociatedObject.RenderTransform is TranslateTransform))
+                {
+                    AssociatedObject.RenderTransform = new TranslateTransform();
+                }
+
+                _previous = e.GetPosition(_parent);
+                _parent.PointerMoved += Parent_PointerMoved;
+                _parent.PointerReleased += Parent_PointerReleased; 
+            }
         }
 
         private void Parent_PointerMoved(object sender, PointerEventArgs args)
         {
-            var pos = args.GetPosition(_parent);
-            var tr = (TranslateTransform)AssociatedObject.RenderTransform;
-            tr.X += pos.X - _previous.X;
-            tr.Y += pos.Y - _previous.Y;
-            _previous = pos;
+            if (AssociatedObject != null)
+            {
+                var pos = args.GetPosition(_parent);
+                if (AssociatedObject.RenderTransform is TranslateTransform tr)
+                {
+                    tr.X += pos.X - _previous.X;
+                    tr.Y += pos.Y - _previous.Y;
+                }
+                _previous = pos; 
+            }
         }
 
         private void Parent_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
-            _parent.PointerMoved -= Parent_PointerMoved;
-            _parent.PointerReleased -= Parent_PointerReleased;
-            _parent = null;
+            if (_parent != null)
+            {
+                _parent.PointerMoved -= Parent_PointerMoved;
+                _parent.PointerReleased -= Parent_PointerReleased;
+                _parent = null; 
+            }
         }
     }
 }

@@ -17,7 +17,10 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.AttachedToVisualTree += AttachedToVisualTree;
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.AttachedToVisualTree += AttachedToVisualTree; 
+            }
         }
 
         /// <summary>
@@ -26,12 +29,15 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.AttachedToVisualTree -= AttachedToVisualTree;
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.AttachedToVisualTree -= AttachedToVisualTree; 
+            }
         }
 
         private void AttachedToVisualTree(object sender, VisualTreeAttachmentEventArgs e)
         {
-            AssociatedObject.Focus();
+            AssociatedObject?.Focus();
         }
     }
 }
