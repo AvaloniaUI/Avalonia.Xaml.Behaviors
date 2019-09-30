@@ -18,7 +18,10 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.PointerMoved += PointerMoved;
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.PointerMoved += PointerMoved; 
+            }
         }
 
         /// <summary>
@@ -27,12 +30,15 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.PointerMoved -= PointerMoved;
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.PointerMoved -= PointerMoved; 
+            }
         }
 
         private void PointerMoved(object sender, PointerEventArgs args)
         {
-            if (AssociatedObject.Parent is ListBoxItem item)
+            if (AssociatedObject != null && AssociatedObject.Parent is ListBoxItem item)
             {
                 item.IsSelected = true;
                 item.Focus();

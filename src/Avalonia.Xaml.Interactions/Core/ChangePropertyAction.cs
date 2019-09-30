@@ -65,9 +65,9 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
         /// <param name="parameter">The value of this parameter is determined by the caller.</param>
         /// <returns>True if updating the property value succeeds; else false.</returns>
-        public object Execute(object sender, object parameter)
+        public object? Execute(object? sender, object? parameter)
         {
-            object targetObject;
+            object? targetObject;
             if (GetValue(TargetObjectProperty) != AvaloniaProperty.UnsetValue)
             {
                 targetObject = TargetObject;
@@ -102,11 +102,11 @@ namespace Avalonia.Xaml.Interactions.Core
             PropertyInfo propertyInfo = targetType.GetRuntimeProperty(PropertyName);
             ValidateProperty(targetType.Name, propertyInfo);
 
-            Exception innerException = null;
+            Exception? innerException = null;
             try
             {
-                object result = null;
-                string valueAsString = null;
+                object? result = null;
+                string? valueAsString = null;
                 Type propertyType = propertyInfo.PropertyType;
                 TypeInfo propertyTypeInfo = propertyType.GetTypeInfo();
                 if (Value == null)
@@ -175,11 +175,11 @@ namespace Avalonia.Xaml.Interactions.Core
         {
             ValidateAvaloniaProperty(property);
 
-            Exception innerException = null;
+            Exception? innerException = null;
             try
             {
-                object result = null;
-                string valueAsString = null;
+                object? result = null;
+                string? valueAsString = null;
                 Type propertyType = property.PropertyType;
                 TypeInfo propertyTypeInfo = propertyType.GetTypeInfo();
                 if (Value == null)

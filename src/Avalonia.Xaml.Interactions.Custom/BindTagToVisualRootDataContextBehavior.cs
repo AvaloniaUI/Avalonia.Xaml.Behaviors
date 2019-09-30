@@ -13,20 +13,26 @@ namespace Avalonia.Xaml.Interactions.Custom
     /// </summary>
     public sealed class BindTagToVisualRootDataContextBehavior : Behavior<Control>
     {
-        private IDisposable _disposable;
+        private IDisposable? _disposable;
 
         /// <inheritdoc/>
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.AttachedToVisualTree += AttachedToVisualTree;
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.AttachedToVisualTree += AttachedToVisualTree; 
+            }
         }
 
         /// <inheritdoc/>
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.AttachedToVisualTree -= AttachedToVisualTree;
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.AttachedToVisualTree -= AttachedToVisualTree; 
+            }
             _disposable?.Dispose();
         }
 
@@ -35,7 +41,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             _disposable = BindDataContextToTag((IControl)AssociatedObject.GetVisualRoot(), AssociatedObject);
         }
 
-        private static IDisposable BindDataContextToTag(IControl source, IControl target)
+        private static IDisposable? BindDataContextToTag(IControl source, IControl? target)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));

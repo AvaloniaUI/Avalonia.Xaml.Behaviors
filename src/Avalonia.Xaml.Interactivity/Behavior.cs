@@ -15,14 +15,14 @@ namespace Avalonia.Xaml.Interactivity
         /// <summary>
         /// Gets the <see cref="AvaloniaObject"/> to which the behavior is attached.
         /// </summary>
-        public AvaloniaObject AssociatedObject { get; private set; }
+        public AvaloniaObject? AssociatedObject { get; private set; }
 
         /// <summary>
         /// Attaches the behavior to the specified <see cref="AvaloniaObject"/>.
         /// </summary>
         /// <param name="associatedObject">The <see cref="AvaloniaObject"/> to which to attach.</param>
         /// <exception cref="ArgumentNullException"><paramref name="associatedObject"/> is null.</exception>
-        public void Attach(AvaloniaObject associatedObject)
+        public void Attach(AvaloniaObject? associatedObject)
         {
             if (associatedObject == AssociatedObject)
             {

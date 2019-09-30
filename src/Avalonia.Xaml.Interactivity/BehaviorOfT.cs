@@ -16,7 +16,7 @@ namespace Avalonia.Xaml.Interactivity
         /// <summary>
         /// Gets the object to which this behavior is attached.
         /// </summary>
-        public new T AssociatedObject => base.AssociatedObject as T;
+        public new T? AssociatedObject => base.AssociatedObject as T;
 
         /// <summary>
         /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
@@ -28,7 +28,7 @@ namespace Avalonia.Xaml.Interactivity
         {
             base.OnAttached();
 
-            if (AssociatedObject == null)
+            if (AssociatedObject == null && base.AssociatedObject != null)
             {
                 string actualType = base.AssociatedObject.GetType().FullName;
                 string expectedType = typeof(T).FullName;

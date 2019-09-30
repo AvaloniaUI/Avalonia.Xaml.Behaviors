@@ -8,12 +8,14 @@ namespace BehaviorsTestApplication.ViewModels.Core
 {
     public class Command : ICommand
     {
-        private Action<object> _execute;
-        private Predicate<object> _canExecute;
+        private Action<object>? _execute;
+        private Predicate<object>? _canExecute;
 
         public event EventHandler CanExecuteChanged;
 
-        public Command(Action<object> execute = null, Predicate<object> canExecute = null)
+#pragma warning disable CS8618
+        public Command(Action<object>? execute = null, Predicate<object>? canExecute = null)
+#pragma warning restore CS8618
         {
             _execute = execute;
             _canExecute = canExecute;
