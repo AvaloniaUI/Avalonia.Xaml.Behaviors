@@ -16,19 +16,19 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="PropertyName"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<string> PropertyNameProperty =
+        public static readonly StyledProperty<string> PropertyNameProperty =
             AvaloniaProperty.Register<ChangePropertyAction, string>(nameof(PropertyName));
 
         /// <summary>
         /// Identifies the <seealso cref="TargetObject"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<object> TargetObjectProperty =
+        public static readonly StyledProperty<object> TargetObjectProperty =
             AvaloniaProperty.Register<ChangePropertyAction, object>(nameof(TargetObject), AvaloniaProperty.UnsetValue);
 
         /// <summary>
         /// Identifies the <seealso cref="Value"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<object> ValueProperty =
+        public static readonly StyledProperty<object> ValueProperty =
             AvaloniaProperty.Register<ChangePropertyAction, object>(nameof(Value));
 
         /// <summary>

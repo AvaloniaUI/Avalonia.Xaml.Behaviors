@@ -15,32 +15,32 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="Command"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<ICommand> CommandProperty =
+        public static readonly StyledProperty<ICommand> CommandProperty =
             AvaloniaProperty.Register<InvokeCommandAction, ICommand>(nameof(Command));
 
         /// <summary>
         /// Identifies the <seealso cref="CommandParameter"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<object> CommandParameterProperty =
+        public static readonly StyledProperty<object> CommandParameterProperty =
             AvaloniaProperty.Register<InvokeCommandAction, object>(nameof(CommandParameter));
 
         /// <summary>
         /// Identifies the <seealso cref="InputConverter"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<IValueConverter> InputConverterProperty =
+        public static readonly StyledProperty<IValueConverter> InputConverterProperty =
             AvaloniaProperty.Register<InvokeCommandAction, IValueConverter>(nameof(InputConverter));
 
         /// <summary>
         /// Identifies the <seealso cref="InputConverterParameter"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<object> InputConverterParameterProperty =
+        public static readonly StyledProperty<object> InputConverterParameterProperty =
             AvaloniaProperty.Register<InvokeCommandAction, object>(nameof(InputConverterParameter));
 
         /// <summary>
         /// Identifies the <seealso cref="InputConverterLanguage"/> avalonia property.
         /// </summary>
         /// <remarks>The string.Empty used for default value string means the invariant culture.</remarks>
-        public static readonly AvaloniaProperty<string> InputConverterLanguageProperty =
+        public static readonly StyledProperty<string> InputConverterLanguageProperty =
             AvaloniaProperty.Register<InvokeCommandAction, string>(nameof(InputConverterLanguage), string.Empty);
 
         /// <summary>

@@ -4,6 +4,7 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.LogicalTree;
 using Avalonia.Metadata;
 using Avalonia.Xaml.Interactivity;
 
@@ -20,7 +21,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         /// <summary>
         /// Identifies the <seealso cref="ChildProperty"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<Control> ChildProperty =
+        public static readonly StyledProperty<Control> ChildProperty =
             AvaloniaProperty.Register<PopupAction, Control>(nameof(Child));
 
         /// <summary>
@@ -55,6 +56,7 @@ namespace Avalonia.Xaml.Interactions.Custom
                     BindToDataContext(control, _popup);
                 }
             }
+            ((ISetLogicalParent)_popup).SetParent(sender as ILogical);
             _popup.Child = Child;
             _popup.Open();
             return null;

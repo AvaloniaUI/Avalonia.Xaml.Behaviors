@@ -14,27 +14,27 @@ namespace Avalonia.Xaml.Interactions.Core
     {
         static DataTriggerBehavior()
         {
-            BindingProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
-            ComparisonConditionProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
-            ValueProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
+            BindingProperty.Changed.AddClassHandler<DataTriggerBehavior>(OnValueChanged);
+            ComparisonConditionProperty.Changed.AddClassHandler<DataTriggerBehavior>(OnValueChanged);
+            ValueProperty.Changed.AddClassHandler<DataTriggerBehavior>(OnValueChanged);
         }
 
         /// <summary>
         /// Identifies the <seealso cref="Binding"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<object> BindingProperty =
+        public static readonly StyledProperty<object> BindingProperty =
             AvaloniaProperty.Register<DataTriggerBehavior, object>(nameof(Binding));
 
         /// <summary>
         /// Identifies the <seealso cref="ComparisonCondition"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<ComparisonConditionType> ComparisonConditionProperty =
+        public static readonly StyledProperty<ComparisonConditionType> ComparisonConditionProperty =
             AvaloniaProperty.Register<DataTriggerBehavior, ComparisonConditionType>(nameof(ComparisonCondition), ComparisonConditionType.Equal);
 
         /// <summary>
         /// Identifies the <seealso cref="Value"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<object> ValueProperty =
+        public static readonly StyledProperty<object> ValueProperty =
             AvaloniaProperty.Register<DataTriggerBehavior, object>(nameof(Value));
 
         /// <summary>
@@ -171,9 +171,8 @@ namespace Avalonia.Xaml.Interactions.Core
             return false;
         }
 
-        private static void OnValueChanged(AvaloniaObject avaloniaObject, AvaloniaPropertyChangedEventArgs args)
+        private static void OnValueChanged(DataTriggerBehavior dataTriggerBehavior, AvaloniaPropertyChangedEventArgs args)
         {
-            DataTriggerBehavior dataTriggerBehavior = (DataTriggerBehavior)avaloniaObject;
             if (dataTriggerBehavior.AssociatedObject == null)
             {
                 return;

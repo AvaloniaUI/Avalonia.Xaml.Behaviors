@@ -37,13 +37,13 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="MethodName"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<string> MethodNameProperty =
+        public static readonly StyledProperty<string> MethodNameProperty =
             AvaloniaProperty.Register<CallMethodAction, string>(nameof(MethodName));
 
         /// <summary>
         /// Identifies the <seealso cref="TargetObject"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<object> TargetObjectProperty =
+        public static readonly StyledProperty<object> TargetObjectProperty =
             AvaloniaProperty.Register<CallMethodAction, object>(nameof(TargetObject), AvaloniaProperty.UnsetValue);
 
         private Type? targetObjectType;

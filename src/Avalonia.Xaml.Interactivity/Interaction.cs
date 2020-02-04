@@ -31,7 +31,7 @@ namespace Avalonia.Xaml.Interactivity
 
                 if (newCollection != null && e.Sender != null)
                 {
-                    newCollection.Attach(e.Sender);
+                    newCollection.Attach(e.Sender as AvaloniaObject ?? throw new InvalidOperationException());
                 }
             });
         }
@@ -39,7 +39,7 @@ namespace Avalonia.Xaml.Interactivity
         /// <summary>
         /// Gets or sets the <see cref="BehaviorCollection"/> associated with a specified object.
         /// </summary>
-        public static readonly AvaloniaProperty<BehaviorCollection?> BehaviorsProperty =
+        public static readonly AttachedProperty<BehaviorCollection?> BehaviorsProperty =
             AvaloniaProperty.RegisterAttached<Interaction, AvaloniaObject, BehaviorCollection?>("Behaviors");
 
         /// <summary>

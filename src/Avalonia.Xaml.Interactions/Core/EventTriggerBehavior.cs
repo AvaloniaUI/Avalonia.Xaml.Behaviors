@@ -43,13 +43,13 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="EventName"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<string> EventNameProperty =
+        public static readonly StyledProperty<string> EventNameProperty =
             AvaloniaProperty.Register<EventTriggerBehavior, string>(nameof(EventName), EventNameDefaultValue);
 
         /// <summary>
         /// Identifies the <seealso cref="SourceObject"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<object> SourceObjectProperty =
+        public static readonly StyledProperty<object> SourceObjectProperty =
             AvaloniaProperty.Register<EventTriggerBehavior, object>(nameof(SourceObject), AvaloniaProperty.UnsetValue);
 
         private object? resolvedSource;
