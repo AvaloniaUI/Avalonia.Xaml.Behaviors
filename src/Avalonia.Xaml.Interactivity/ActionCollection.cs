@@ -10,7 +10,7 @@ namespace Avalonia.Xaml.Interactivity
     /// <summary>
     /// Represents a collection of <see cref="IAction"/>'s.
     /// </summary>
-    public sealed class ActionCollection : AvaloniaList<AvaloniaObject>
+    public sealed class ActionCollection : AvaloniaList<IAvaloniaObject>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ActionCollection"/> class.
@@ -26,19 +26,19 @@ namespace Avalonia.Xaml.Interactivity
 
             if (collectionChange == NotifyCollectionChangedAction.Reset)
             {
-                foreach (AvaloniaObject item in this)
+                foreach (var item in this)
                 {
                     VerifyType(item);
                 }
             }
             else if (collectionChange == NotifyCollectionChangedAction.Add || collectionChange == NotifyCollectionChangedAction.Replace)
             {
-                AvaloniaObject changedItem = (AvaloniaObject)eventArgs.NewItems[0];
+                var changedItem = (IAvaloniaObject)eventArgs.NewItems[0];
                 VerifyType(changedItem);
             }
         }
 
-        private static void VerifyType(AvaloniaObject item)
+        private static void VerifyType(IAvaloniaObject item)
         {
             if (!(item is IAction))
             {

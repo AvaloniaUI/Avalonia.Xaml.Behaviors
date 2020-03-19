@@ -27,7 +27,7 @@ namespace Avalonia.Xaml.Interactions.Core
             {
                 return;
             }
-            foreach (AvaloniaObject action in actions)
+            foreach (var action in actions)
             {
                 foreach (AvaloniaProperty property in GetAvaloniaProperties(action.GetType()))
                 {
@@ -42,7 +42,7 @@ namespace Avalonia.Xaml.Interactions.Core
             {
                 propertyList = new List<AvaloniaProperty>();
 
-                while (type != null && type != typeof(AvaloniaObject))
+                while (type != null && type != typeof(IAvaloniaObject))
                 {
                     foreach (FieldInfo fieldInfo in type.GetRuntimeFields())
                     {
@@ -67,7 +67,7 @@ namespace Avalonia.Xaml.Interactions.Core
             return propertyList;
         }
 
-        private static void RefreshBinding(AvaloniaObject target, AvaloniaProperty property)
+        private static void RefreshBinding(IAvaloniaObject target, AvaloniaProperty property)
         {
             if (target.GetValue(property) is IBinding binding)
             {

@@ -22,19 +22,19 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="Binding"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<object> BindingProperty =
+        public static readonly StyledProperty<object> BindingProperty =
             AvaloniaProperty.Register<DataTriggerBehavior, object>(nameof(Binding));
 
         /// <summary>
         /// Identifies the <seealso cref="ComparisonCondition"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<ComparisonConditionType> ComparisonConditionProperty =
+        public static readonly StyledProperty<ComparisonConditionType> ComparisonConditionProperty =
             AvaloniaProperty.Register<DataTriggerBehavior, ComparisonConditionType>(nameof(ComparisonCondition), ComparisonConditionType.Equal);
 
         /// <summary>
         /// Identifies the <seealso cref="Value"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<object> ValueProperty =
+        public static readonly StyledProperty<object> ValueProperty =
             AvaloniaProperty.Register<DataTriggerBehavior, object>(nameof(Value));
 
         /// <summary>
@@ -166,12 +166,14 @@ namespace Avalonia.Xaml.Interactions.Core
 
                 case ComparisonConditionType.GreaterThanOrEqual:
                     return comparison >= 0;
+                default:
+                    break;
             }
 
             return false;
         }
 
-        private static void OnValueChanged(AvaloniaObject avaloniaObject, AvaloniaPropertyChangedEventArgs args)
+        private static void OnValueChanged(IAvaloniaObject avaloniaObject, AvaloniaPropertyChangedEventArgs args)
         {
             DataTriggerBehavior dataTriggerBehavior = (DataTriggerBehavior)avaloniaObject;
             if (dataTriggerBehavior.AssociatedObject == null)

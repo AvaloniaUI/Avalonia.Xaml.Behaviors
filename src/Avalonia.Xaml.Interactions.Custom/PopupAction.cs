@@ -20,7 +20,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         /// <summary>
         /// Identifies the <seealso cref="ChildProperty"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<Control> ChildProperty =
+        public static readonly StyledProperty<Control> ChildProperty =
             AvaloniaProperty.Register<PopupAction, Control>(nameof(Child));
 
         /// <summary>

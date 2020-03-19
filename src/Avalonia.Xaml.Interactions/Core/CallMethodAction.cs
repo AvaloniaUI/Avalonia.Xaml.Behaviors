@@ -37,18 +37,18 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="MethodName"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<string> MethodNameProperty =
+        public static readonly StyledProperty<string> MethodNameProperty =
             AvaloniaProperty.Register<CallMethodAction, string>(nameof(MethodName));
 
         /// <summary>
         /// Identifies the <seealso cref="TargetObject"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty<object> TargetObjectProperty =
+        public static readonly StyledProperty<object> TargetObjectProperty =
             AvaloniaProperty.Register<CallMethodAction, object>(nameof(TargetObject), AvaloniaProperty.UnsetValue);
 
-        private Type? targetObjectType;
-        private List<MethodDescriptor> methodDescriptors = new List<MethodDescriptor>();
-        private MethodDescriptor? cachedMethodDescriptor;
+        private Type? _targetObjectType;
+        private readonly List<MethodDescriptor> methodDescriptors = new List<MethodDescriptor>();
+        private MethodDescriptor? _cachedMethodDescriptor;
 
         /// <summary>
         /// Gets or sets the name of the method to invoke. This is a avalonia property.
@@ -102,7 +102,7 @@ namespace Avalonia.Xaml.Interactions.Core
                         CultureInfo.CurrentCulture,
                         "Cannot find method named {0} on object of type {1} that matches the expected signature.",
                         MethodName,
-                        targetObjectType));
+                        _targetObjectType));
                 }
 
                 return false;
@@ -127,14 +127,14 @@ namespace Avalonia.Xaml.Interactions.Core
         {
             if (parameter == null)
             {
-                return cachedMethodDescriptor;
+                return _cachedMethodDescriptor;
             }
 
             TypeInfo parameterTypeInfo = parameter.GetType().GetTypeInfo();
 
             if (parameterTypeInfo == null)
             {
-                return cachedMethodDescriptor;
+                return _cachedMethodDescriptor;
             }
 
             MethodDescriptor? mostDerivedMethod = null;
@@ -153,17 +153,17 @@ namespace Avalonia.Xaml.Interactions.Core
                 }
             }
 
-            return mostDerivedMethod ?? cachedMethodDescriptor;
+            return mostDerivedMethod ?? _cachedMethodDescriptor;
         }
 
         private void UpdateTargetType(Type newTargetType)
         {
-            if (newTargetType == targetObjectType)
+            if (newTargetType == _targetObjectType)
             {
                 return;
             }
 
-            targetObjectType = newTargetType;
+            _targetObjectType = newTargetType;
 
             UpdateMethodDescriptors();
         }
@@ -171,16 +171,16 @@ namespace Avalonia.Xaml.Interactions.Core
         private void UpdateMethodDescriptors()
         {
             methodDescriptors.Clear();
-            cachedMethodDescriptor = null;
+            _cachedMethodDescriptor = null;
 
-            if (string.IsNullOrEmpty(MethodName) || targetObjectType == null)
+            if (string.IsNullOrEmpty(MethodName) || _targetObjectType == null)
             {
                 return;
             }
 
             // Find all public methods that match the given name  and have either no parameters,
             // or two parameters where the first is of type Object.
-            foreach (MethodInfo method in targetObjectType.GetRuntimeMethods())
+            foreach (MethodInfo method in _targetObjectType.GetRuntimeMethods())
             {
                 if (string.Equals(method.Name, MethodName, StringComparison.Ordinal)
                     && method.ReturnType == typeof(void)
@@ -190,7 +190,7 @@ namespace Avalonia.Xaml.Interactions.Core
                     if (parameters.Length == 0)
                     {
                         // There can be only one parameterless method of the given name.
-                        cachedMethodDescriptor = new MethodDescriptor(method, parameters);
+                        _cachedMethodDescriptor = new MethodDescriptor(method, parameters);
                     }
                     else if (parameters.Length == 2 && parameters[0].ParameterType == typeof(object))
                     {
@@ -202,21 +202,21 @@ namespace Avalonia.Xaml.Interactions.Core
             // We didn't find a parameterless method, so we want to find a method that accepts null
             // as a second parameter, but if we have more than one of these it is ambiguous which
             // we should call, so we do nothing.
-            if (cachedMethodDescriptor == null)
+            if (_cachedMethodDescriptor == null)
             {
                 foreach (MethodDescriptor method in methodDescriptors)
                 {
                     TypeInfo? typeInfo = method.SecondParameterTypeInfo;
                     if (typeInfo != null && (!typeInfo.IsValueType || (typeInfo.IsGenericType && typeInfo.GetGenericTypeDefinition() == typeof(Nullable<>))))
                     {
-                        if (cachedMethodDescriptor != null)
+                        if (_cachedMethodDescriptor != null)
                         {
-                            cachedMethodDescriptor = null;
+                            _cachedMethodDescriptor = null;
                             return;
                         }
                         else
                         {
-                            cachedMethodDescriptor = method;
+                            _cachedMethodDescriptor = method;
                         }
                     }
                 }

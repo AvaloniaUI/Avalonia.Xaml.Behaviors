@@ -12,11 +12,11 @@ namespace Avalonia.Xaml.Interactivity
     /// <summary>
     /// Represents a collection of <see cref="IBehavior"/>'s with a shared <see cref="AssociatedObject"/>.
     /// </summary>
-    public sealed class BehaviorCollection : AvaloniaList<AvaloniaObject>
+    public sealed class BehaviorCollection : AvaloniaList<IAvaloniaObject>
     {
         // After a VectorChanged event we need to compare the current state of the collection
         // with the old collection so that we can call Detach on all removed items.
-        private readonly List<IBehavior> oldCollection = new List<IBehavior>();
+        private readonly List<IBehavior> _oldCollection = new List<IBehavior>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BehaviorCollection"/> class.
@@ -27,20 +27,20 @@ namespace Avalonia.Xaml.Interactivity
         }
 
         /// <summary>
-        /// Gets the <see cref="AvaloniaObject"/> to which the <see cref="BehaviorCollection"/> is attached.
+        /// Gets the <see cref="IAvaloniaObject"/> to which the <see cref="BehaviorCollection"/> is attached.
         /// </summary>
-        public AvaloniaObject? AssociatedObject
+        public IAvaloniaObject? AssociatedObject
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// Attaches the collection of behaviors to the specified <see cref="AvaloniaObject"/>.
+        /// Attaches the collection of behaviors to the specified <see cref="IAvaloniaObject"/>.
         /// </summary>
-        /// <param name="associatedObject">The <see cref="AvaloniaObject"/> to which to attach.</param>
-        /// <exception cref="InvalidOperationException">The <see cref="BehaviorCollection"/> is already attached to a different <see cref="AvaloniaObject"/>.</exception>
-        public void Attach(AvaloniaObject? associatedObject)
+        /// <param name="associatedObject">The <see cref="IAvaloniaObject"/> to which to attach.</param>
+        /// <exception cref="InvalidOperationException">The <see cref="BehaviorCollection"/> is already attached to a different <see cref="IAvaloniaObject"/>.</exception>
+        public void Attach(IAvaloniaObject? associatedObject)
         {
             if (associatedObject == AssociatedObject)
             {
@@ -55,7 +55,7 @@ namespace Avalonia.Xaml.Interactivity
             Debug.Assert(associatedObject != null, "The previous checks should keep us from ever setting null here.");
             AssociatedObject = associatedObject;
 
-            foreach (AvaloniaObject item in this)
+            foreach (var item in this)
             {
                 IBehavior behavior = (IBehavior)item;
                 behavior.Attach(AssociatedObject);
@@ -67,7 +67,7 @@ namespace Avalonia.Xaml.Interactivity
         /// </summary>
         public void Detach()
         {
-            foreach (AvaloniaObject item in this)
+            foreach (var item in this)
             {
                 IBehavior behaviorItem = (IBehavior)item;
                 if (behaviorItem.AssociatedObject != null)
@@ -77,14 +77,14 @@ namespace Avalonia.Xaml.Interactivity
             }
 
             AssociatedObject = null;
-            oldCollection.Clear();
+            _oldCollection.Clear();
         }
 
         private void BehaviorCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
         {
             if (eventArgs.Action == NotifyCollectionChangedAction.Reset)
             {
-                foreach (IBehavior behavior in oldCollection)
+                foreach (IBehavior behavior in _oldCollection)
                 {
                     if (behavior.AssociatedObject != null)
                     {
@@ -92,11 +92,11 @@ namespace Avalonia.Xaml.Interactivity
                     }
                 }
 
-                oldCollection.Clear();
+                _oldCollection.Clear();
 
-                foreach (AvaloniaObject newItem in this)
+                foreach (var newItem in this)
                 {
-                    oldCollection.Add(VerifiedAttach(newItem));
+                    _oldCollection.Add(VerifiedAttach(newItem));
                 }
 #if DEBUG
                 VerifyOldCollectionIntegrity();
@@ -109,8 +109,8 @@ namespace Avalonia.Xaml.Interactivity
                 case NotifyCollectionChangedAction.Add:
                     {
                         int eventIndex = eventArgs.NewStartingIndex;
-                        AvaloniaObject changedItem = (AvaloniaObject)eventArgs.NewItems[0];
-                        oldCollection.Insert(eventIndex, VerifiedAttach(changedItem));
+                        var changedItem = (IAvaloniaObject)eventArgs.NewItems[0];
+                        _oldCollection.Insert(eventIndex, VerifiedAttach(changedItem));
                     }
                     break;
 
@@ -119,30 +119,30 @@ namespace Avalonia.Xaml.Interactivity
                         int eventIndex = eventArgs.OldStartingIndex;
                         eventIndex = eventIndex == -1 ? 0 : eventIndex;
 
-                        AvaloniaObject changedItem = (AvaloniaObject)eventArgs.NewItems[0];
+                        var changedItem = (IAvaloniaObject)eventArgs.NewItems[0];
 
-                        IBehavior oldItem = oldCollection[eventIndex];
+                        IBehavior oldItem = _oldCollection[eventIndex];
                         if (oldItem.AssociatedObject != null)
                         {
                             oldItem.Detach();
                         }
 
-                        oldCollection[eventIndex] = VerifiedAttach(changedItem);
+                        _oldCollection[eventIndex] = VerifiedAttach(changedItem);
                     }
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
                     {
                         int eventIndex = eventArgs.OldStartingIndex;
-                        AvaloniaObject changedItem = (AvaloniaObject)eventArgs.OldItems[0];
+                        var changedItem = (IAvaloniaObject)eventArgs.OldItems[0];
 
-                        IBehavior oldItem = oldCollection[eventIndex];
+                        IBehavior oldItem = _oldCollection[eventIndex];
                         if (oldItem.AssociatedObject != null)
                         {
                             oldItem.Detach();
                         }
 
-                        oldCollection.RemoveAt(eventIndex);
+                        _oldCollection.RemoveAt(eventIndex);
                     }
                     break;
 
@@ -155,14 +155,14 @@ namespace Avalonia.Xaml.Interactivity
 #endif
         }
 
-        private IBehavior VerifiedAttach(AvaloniaObject? item)
+        private IBehavior VerifiedAttach(IAvaloniaObject? item)
         {
             if (!(item is IBehavior behavior))
             {
                 throw new InvalidOperationException("Only IBehavior types are supported in a BehaviorCollection.");
             }
 
-            if (oldCollection.Contains(behavior))
+            if (_oldCollection.Contains(behavior))
             {
                 throw new InvalidOperationException("Cannot add an instance of a behavior to a BehaviorCollection more than once.");
             }
@@ -178,12 +178,12 @@ namespace Avalonia.Xaml.Interactivity
         [Conditional("DEBUG")]
         private void VerifyOldCollectionIntegrity()
         {
-            bool isValid = Count == oldCollection.Count;
+            bool isValid = Count == _oldCollection.Count;
             if (isValid)
             {
                 for (int i = 0; i < Count; i++)
                 {
-                    if (this[i] != oldCollection[i])
+                    if (this[i] != _oldCollection[i])
                     {
                         isValid = false;
                         break;

@@ -30,13 +30,13 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
             Actions = new ActionCollection();
         }
 
-        public AvaloniaObject? AssociatedObject
+        public IAvaloniaObject? AssociatedObject
         {
             get;
             private set;
         }
 
-        public void Attach(AvaloniaObject? avaloniaObject)
+        public void Attach(IAvaloniaObject? avaloniaObject)
         {
             AssociatedObject = avaloniaObject;
             AttachCount++;

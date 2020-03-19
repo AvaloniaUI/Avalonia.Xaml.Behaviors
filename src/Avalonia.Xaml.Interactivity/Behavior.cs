@@ -13,16 +13,16 @@ namespace Avalonia.Xaml.Interactivity
     public abstract class Behavior : AvaloniaObject, IBehavior
     {
         /// <summary>
-        /// Gets the <see cref="AvaloniaObject"/> to which the behavior is attached.
+        /// Gets the <see cref="IAvaloniaObject"/> to which the behavior is attached.
         /// </summary>
-        public AvaloniaObject? AssociatedObject { get; private set; }
+        public IAvaloniaObject? AssociatedObject { get; private set; }
 
         /// <summary>
-        /// Attaches the behavior to the specified <see cref="AvaloniaObject"/>.
+        /// Attaches the behavior to the specified <see cref="IAvaloniaObject"/>.
         /// </summary>
-        /// <param name="associatedObject">The <see cref="AvaloniaObject"/> to which to attach.</param>
+        /// <param name="associatedObject">The <see cref="IAvaloniaObject"/> to which to attach.</param>
         /// <exception cref="ArgumentNullException"><paramref name="associatedObject"/> is null.</exception>
-        public void Attach(AvaloniaObject? associatedObject)
+        public void Attach(IAvaloniaObject? associatedObject)
         {
             if (associatedObject == AssociatedObject)
             {

@@ -5,16 +5,16 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
 {
     public class StubAction : AvaloniaObject, IAction
     {
-        private readonly object? returnValue;
+        private readonly object? _returnValue;
 
         public StubAction()
         {
-            returnValue = null;
+            _returnValue = null;
         }
 
         public StubAction(object? returnValue)
         {
-            this.returnValue = returnValue;
+            this._returnValue = returnValue;
         }
 
         public object? Sender
@@ -40,7 +40,7 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
             ExecuteCount++;
             Sender = sender;
             Parameter = parameter;
-            return returnValue;
+            return _returnValue;
         }
     }
 }

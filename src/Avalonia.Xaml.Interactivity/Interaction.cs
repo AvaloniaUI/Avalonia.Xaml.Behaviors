@@ -16,8 +16,8 @@ namespace Avalonia.Xaml.Interactivity
         {
             BehaviorsProperty.Changed.Subscribe(e =>
             {
-                BehaviorCollection oldCollection = (BehaviorCollection)e.OldValue;
-                BehaviorCollection newCollection = (BehaviorCollection)e.NewValue;
+                var oldCollection = (BehaviorCollection?)e.OldValue;
+                var newCollection = (BehaviorCollection?)e.NewValue;
 
                 if (oldCollection == newCollection)
                 {
@@ -39,22 +39,22 @@ namespace Avalonia.Xaml.Interactivity
         /// <summary>
         /// Gets or sets the <see cref="BehaviorCollection"/> associated with a specified object.
         /// </summary>
-        public static readonly AvaloniaProperty<BehaviorCollection?> BehaviorsProperty =
-            AvaloniaProperty.RegisterAttached<Interaction, AvaloniaObject, BehaviorCollection?>("Behaviors");
+        public static readonly AttachedProperty<BehaviorCollection?> BehaviorsProperty =
+            AvaloniaProperty.RegisterAttached<Interaction, IAvaloniaObject, BehaviorCollection?>("Behaviors");
 
         /// <summary>
         /// Gets the <see cref="BehaviorCollection"/> associated with a specified object.
         /// </summary>
-        /// <param name="obj">The <see cref="AvaloniaObject"/> from which to retrieve the <see cref="BehaviorCollection"/>.</param>
+        /// <param name="obj">The <see cref="IAvaloniaObject"/> from which to retrieve the <see cref="BehaviorCollection"/>.</param>
         /// <returns>A <see cref="BehaviorCollection"/> containing the behaviors associated with the specified object.</returns>
-        public static BehaviorCollection? GetBehaviors(AvaloniaObject obj)
+        public static BehaviorCollection? GetBehaviors(IAvaloniaObject obj)
         {
             if (obj == null)
             {
                 throw new ArgumentNullException(nameof(obj));
             }
 
-            BehaviorCollection? behaviorCollection = obj.GetValue(BehaviorsProperty);
+            BehaviorCollection? behaviorCollection = (BehaviorCollection?)obj.GetValue(BehaviorsProperty);
             if (behaviorCollection == null)
             {
                 behaviorCollection = new BehaviorCollection();
@@ -75,9 +75,9 @@ namespace Avalonia.Xaml.Interactivity
         /// <summary>
         /// Sets the <see cref="BehaviorCollection"/> associated with a specified object.
         /// </summary>
-        /// <param name="obj">The <see cref="AvaloniaObject"/> on which to set the <see cref="BehaviorCollection"/>.</param>
+        /// <param name="obj">The <see cref="IAvaloniaObject"/> on which to set the <see cref="BehaviorCollection"/>.</param>
         /// <param name="value">The <see cref="BehaviorCollection"/> associated with the object.</param>
-        public static void SetBehaviors(AvaloniaObject obj, BehaviorCollection? value)
+        public static void SetBehaviors(IAvaloniaObject obj, BehaviorCollection? value)
         {
             if (obj == null)
             {
@@ -102,7 +102,7 @@ namespace Avalonia.Xaml.Interactivity
                 return results;
             }
 
-            foreach (AvaloniaObject avaloniaObject in actions)
+            foreach (var avaloniaObject in actions)
             {
                 IAction action = (IAction)avaloniaObject;
                 object? result = action.Execute(sender, parameter);
@@ -117,7 +117,7 @@ namespace Avalonia.Xaml.Interactivity
 
         private static void Control_Loaded(object sender, VisualTreeAttachmentEventArgs e)
         {
-            if (sender is AvaloniaObject d)
+            if (sender is IAvaloniaObject d)
             {
                 GetBehaviors(d)?.Attach(d);
             }
@@ -125,7 +125,7 @@ namespace Avalonia.Xaml.Interactivity
 
         private static void Control_Unloaded(object sender, VisualTreeAttachmentEventArgs e)
         {
-            if (sender is AvaloniaObject d)
+            if (sender is IAvaloniaObject d)
             {
                 GetBehaviors(d)?.Detach();
             }
