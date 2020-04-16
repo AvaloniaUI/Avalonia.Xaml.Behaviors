@@ -4,7 +4,9 @@
 
 [![Build status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/Sources/AvaloniaBehaviors)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=53)
 
-[![NuGet](https://img.shields.io/nuget/v/Avalonia.Xaml.Behaviors.svg)](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors) [![MyGet](https://img.shields.io/myget/xamlbehaviors-nightly/vpre/Avalonia.Xaml.Behaviors.svg?label=myget)](https://www.myget.org/gallery/xamlbehaviors-nightly) 
+[![NuGet](https://img.shields.io/nuget/v/Avalonia.Xaml.Behaviors.svg)](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors)
+[![NuGet](https://img.shields.io/nuget/dt/Avalonia.Xaml.Interactivity.svg)](https://www.nuget.org/packages/Avalonia.Xaml.Interactivity)
+[![MyGet](https://img.shields.io/myget/xamlbehaviors-nightly/vpre/Avalonia.Xaml.Behaviors.svg?label=myget)](https://www.myget.org/gallery/xamlbehaviors-nightly) 
 
 **AvaloniaBehaviors** is a port of [Windows UWP](https://github.com/Microsoft/XamlBehaviors) version of XAML Behaviors for [Avalonia](https://github.com/AvaloniaUI/Avalonia) XAML.
 
