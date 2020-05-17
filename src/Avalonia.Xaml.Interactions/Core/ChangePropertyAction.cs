@@ -22,8 +22,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="TargetObject"/> avalonia property.
         /// </summary>
-        public static readonly StyledProperty<object> TargetObjectProperty =
-            AvaloniaProperty.Register<ChangePropertyAction, object>(nameof(TargetObject), AvaloniaProperty.UnsetValue);
+        public static readonly StyledProperty<object?> TargetObjectProperty =
+            AvaloniaProperty.Register<ChangePropertyAction, object?>(nameof(TargetObject), null);
 
         /// <summary>
         /// Identifies the <seealso cref="Value"/> avalonia property.
@@ -53,7 +53,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// Gets or sets the object whose property will be changed.
         /// If <seealso cref="TargetObject"/> is not set or cannot be resolved, the sender of <seealso cref="Execute"/> will be used. This is a avalonia property.
         /// </summary>
-        public object TargetObject
+        public object? TargetObject
         {
             get => GetValue(TargetObjectProperty);
             set => SetValue(TargetObjectProperty, value);
@@ -68,7 +68,7 @@ namespace Avalonia.Xaml.Interactions.Core
         public object? Execute(object? sender, object? parameter)
         {
             object? targetObject;
-            if (GetValue(TargetObjectProperty) != AvaloniaProperty.UnsetValue)
+            if (GetValue(TargetObjectProperty) != null)
             {
                 targetObject = TargetObject;
             }

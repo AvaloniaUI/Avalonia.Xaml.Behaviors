@@ -56,8 +56,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="SourceObject"/> avalonia property.
         /// </summary>
-        public static readonly StyledProperty<object> SourceObjectProperty =
-            AvaloniaProperty.Register<EventTriggerBehavior, object>(nameof(SourceObject), AvaloniaProperty.UnsetValue);
+        public static readonly StyledProperty<object?> SourceObjectProperty =
+            AvaloniaProperty.Register<EventTriggerBehavior, object?>(nameof(SourceObject), null);
 
         private object? _resolvedSource;
         private Delegate? _eventHandler;
@@ -76,7 +76,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// Gets or sets the source object from which this behavior listens for events.
         /// If <seealso cref="SourceObject"/> is not set, the source will default to <seealso cref="Behavior.AssociatedObject"/>. This is a avalonia property.
         /// </summary>
-        public object SourceObject
+        public object? SourceObject
         {
             get => GetValue(SourceObjectProperty);
             set => SetValue(SourceObjectProperty, value);
@@ -124,7 +124,7 @@ namespace Avalonia.Xaml.Interactions.Core
         {
             // If the SourceObject property is set at all, we want to use it. It is possible that it is data
             // bound and bindings haven't been evaluated yet. Plus, this makes the API more predictable.
-            if (GetValue(SourceObjectProperty) != AvaloniaProperty.UnsetValue)
+            if (GetValue(SourceObjectProperty) != null)
             {
                 return SourceObject;
             }

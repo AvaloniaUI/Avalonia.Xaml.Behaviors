@@ -43,8 +43,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="TargetObject"/> avalonia property.
         /// </summary>
-        public static readonly StyledProperty<object> TargetObjectProperty =
-            AvaloniaProperty.Register<CallMethodAction, object>(nameof(TargetObject), AvaloniaProperty.UnsetValue);
+        public static readonly StyledProperty<object?> TargetObjectProperty =
+            AvaloniaProperty.Register<CallMethodAction, object?>(nameof(TargetObject), null);
 
         private Type? _targetObjectType;
         private readonly List<MethodDescriptor> methodDescriptors = new List<MethodDescriptor>();
@@ -62,7 +62,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Gets or sets the object that exposes the method of interest. This is a avalonia property.
         /// </summary>
-        public object TargetObject
+        public object? TargetObject
         {
             get => GetValue(TargetObjectProperty);
             set => SetValue(TargetObjectProperty, value);
@@ -77,7 +77,7 @@ namespace Avalonia.Xaml.Interactions.Core
         public object? Execute(object? sender, object? parameter)
         {
             object? target;
-            if (GetValue(TargetObjectProperty) != AvaloniaProperty.UnsetValue)
+            if (GetValue(TargetObjectProperty) != null)
             {
                 target = TargetObject;
             }
