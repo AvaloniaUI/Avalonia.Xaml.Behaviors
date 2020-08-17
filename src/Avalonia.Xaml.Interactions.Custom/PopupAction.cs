@@ -47,7 +47,7 @@ namespace Avalonia.Xaml.Interactions.Custom
                 {
                     PlacementMode = PlacementMode.Pointer,
                     PlacementTarget = sender as Control,
-                    StaysOpen = false
+                    IsLightDismissEnabled = false
                 };
 
                 if (sender is IControl control)
