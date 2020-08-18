@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace BehaviorsTestApplication.Controls
+namespace BehaviorsTestApplication.Pages
 {
     public class DataTriggerBehaviorControl : UserControl
     {

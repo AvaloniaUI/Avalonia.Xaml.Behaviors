@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Views.MainView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:controls="clr-namespace:BehaviorsTestApplication.Controls;assembly=BehaviorsTestApplication">
+             xmlns:pages="clr-namespace:BehaviorsTestApplication.Pages;assembly=BehaviorsTestApplication">
     <UserControl.Styles>
         <Style Selector="TabStripItem">
             <Setter Property="Margin" Value="5"/>
@@ -10,28 +10,28 @@
     </UserControl.Styles>
     <TabControl>
         <TabItem Header="CallMethodAction">
-            <controls:CallMethodActionControl/>
+            <pages:CallMethodActionControl/>
         </TabItem>
         <TabItem Header="ChangePropertyAction">
-            <controls:ChangePropertyActionControl/>
+            <pages:ChangePropertyActionControl/>
         </TabItem>
         <TabItem Header="DataTriggerBehavior">
-            <controls:DataTriggerBehaviorControl/>
+            <pages:DataTriggerBehaviorControl/>
         </TabItem>
         <TabItem Header="EventTriggerBehavior">
-            <controls:EventTriggerBehaviorControl/>
+            <pages:EventTriggerBehaviorControl/>
         </TabItem>
         <TabItem Header="InvokeCommandAction">
-            <controls:InvokeCommandActionControl/>
+            <pages:InvokeCommandActionControl/>
         </TabItem>
         <TabItem Header="CustomAction">
-            <controls:CustomActionControl/>
+            <pages:CustomActionControl/>
         </TabItem>
         <TabItem Header="CustomBehavior">
-            <controls:CustomBehaviorControl/>
+            <pages:CustomBehaviorControl/>
         </TabItem>
         <TabItem Header="Advanced">
-            <controls:AdvancedControl/>
+            <pages:AdvancedControl/>
         </TabItem>
     </TabControl>
 </UserControl>

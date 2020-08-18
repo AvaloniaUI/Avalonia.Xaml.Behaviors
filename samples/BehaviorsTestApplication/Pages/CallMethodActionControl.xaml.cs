@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace BehaviorsTestApplication.Controls
+namespace BehaviorsTestApplication.Pages
 {
-    public class ChangePropertyActionControl : UserControl
+    public class CallMethodActionControl : UserControl
     {
-        public ChangePropertyActionControl()
+        public CallMethodActionControl()
         {
             InitializeComponent();
         }
