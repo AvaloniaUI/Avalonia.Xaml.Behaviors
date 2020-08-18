@@ -1,7 +1,4 @@
-﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
-namespace Avalonia.Xaml.Interactivity
+﻿namespace Avalonia.Xaml.Interactivity
 {
     /// <summary>
     /// Interface implemented by all custom actions.
