@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 
@@ -56,6 +57,12 @@ namespace Avalonia.Xaml.Interactions.Core
                 if (destinationType.GetInterfaces().Any(t => t == typeof(IConvertible)))
                 {
                     return (value as IConvertible).ToType(destinationType, CultureInfo.InvariantCulture);
+                }
+
+                var converter = TypeDescriptor.GetConverter(destinationType);
+                if (converter != null)
+                {
+                    return converter.ConvertFromInvariantString(value);
                 }
             }
             catch (ArgumentException)
