@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using Avalonia.Xaml.Interactivity;
 
@@ -10,6 +11,38 @@ namespace Avalonia.Xaml.Interactions.Core
     /// </summary>
     public sealed class ChangePropertyAction : AvaloniaObject, IAction
     {
+        private static readonly char[] s_trimChars = { '(', ')' };
+        private static readonly char[] s_separator = { '.' };
+
+        private static AvaloniaProperty? FindAttachedProperty(object? targetObject, string propertyName)
+        {
+            if (targetObject == null)
+            {
+                return null;
+            }
+            var targetType = targetObject.GetType();
+            var registeredAttached = AvaloniaPropertyRegistry.Instance.GetRegisteredAttached(targetType);
+            var registeredAttachedCount = registeredAttached.Count;
+            var propertyNames = propertyName.Trim().Trim(s_trimChars).Split(s_separator);
+            if (propertyNames.Count() != 2)
+            {
+                return null;
+            }
+            if (propertyNames[0] != targetType.Name)
+            {
+                return null;
+            }
+            for (var i = 0; i < registeredAttachedCount; i++)
+            {
+                var avaloniaProperty = registeredAttached[i];
+                if (avaloniaProperty.Name == propertyNames[1])
+                {
+                    return avaloniaProperty;
+                }
+            }
+            return null;
+        }
+
         /// <summary>
         /// Identifies the <seealso cref="PropertyName"/> avalonia property.
         /// </summary>
@@ -81,11 +114,25 @@ namespace Avalonia.Xaml.Interactions.Core
 
             if (targetObject is IAvaloniaObject avaloniaObject)
             {
-                AvaloniaProperty avaloniaProperty = AvaloniaPropertyRegistry.Instance.FindRegistered(avaloniaObject, PropertyName);
-                if (avaloniaProperty != null)
+                if (PropertyName.Contains("."))
                 {
-                    UpdateAvaloniaPropertyValue(avaloniaObject, avaloniaProperty);
-                    return true;
+                    var avaloniaProperty = FindAttachedProperty(targetObject, PropertyName);
+                    if (avaloniaProperty != null)
+                    {
+                        UpdateAvaloniaPropertyValue(avaloniaObject, avaloniaProperty);
+                        return true;
+                    }
+
+                    return false;
+                }
+                else
+                {
+                    var avaloniaProperty = AvaloniaPropertyRegistry.Instance.FindRegistered(avaloniaObject, PropertyName);
+                    if (avaloniaProperty != null)
+                    {
+                        UpdateAvaloniaPropertyValue(avaloniaObject, avaloniaProperty);
+                        return true;
+                    }
                 }
             }
 
