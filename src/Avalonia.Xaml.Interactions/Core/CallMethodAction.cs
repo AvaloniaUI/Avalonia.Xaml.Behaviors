@@ -16,17 +16,22 @@ namespace Avalonia.Xaml.Interactions.Core
         {
             MethodNameProperty.Changed.Subscribe(e =>
             {
-                CallMethodAction callMethodAction = (CallMethodAction)e.Sender;
-                callMethodAction.UpdateMethodDescriptors();
+                if (e.Sender is CallMethodAction callMethodAction)
+                {
+                    callMethodAction.UpdateMethodDescriptors();
+                }
             });
 
             TargetObjectProperty.Changed.Subscribe(e =>
             {
-                CallMethodAction callMethodAction = (CallMethodAction)e.Sender;
-                if (e.NewValue != null)
+                if (e.Sender is CallMethodAction callMethodAction)
                 {
-                    Type newType = e.NewValue.GetType();
-                    callMethodAction.UpdateTargetType(newType); 
+                    var newValue = e.NewValue.GetValueOrDefault();
+                    if (newValue is { })
+                    {
+                        var newType = newValue.GetType();
+                        callMethodAction.UpdateTargetType(newType); 
+                    }
                 }
             });
         }
@@ -74,7 +79,7 @@ namespace Avalonia.Xaml.Interactions.Core
         public object? Execute(object? sender, object? parameter)
         {
             object? target;
-            if (GetValue(TargetObjectProperty) != null)
+            if (GetValue(TargetObjectProperty) is { })
             {
                 target = TargetObject;
             }
@@ -83,17 +88,17 @@ namespace Avalonia.Xaml.Interactions.Core
                 target = sender;
             }
 
-            if (target == null || string.IsNullOrEmpty(MethodName))
+            if (target is null || string.IsNullOrEmpty(MethodName))
             {
                 return false;
             }
 
             UpdateTargetType(target.GetType());
 
-            MethodDescriptor? methodDescriptor = FindBestMethod(parameter);
-            if (methodDescriptor == null)
+            var methodDescriptor = FindBestMethod(parameter);
+            if (methodDescriptor is null)
             {
-                if (TargetObject != null)
+                if (TargetObject is { })
                 {
                     throw new ArgumentException(string.Format(
                         CultureInfo.CurrentCulture,
@@ -105,7 +110,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 return false;
             }
 
-            ParameterInfo[] parameters = methodDescriptor.Parameters;
+            var parameters = methodDescriptor.Parameters;
             if (parameters.Length == 0)
             {
                 methodDescriptor.MethodInfo.Invoke(target, parameters: null);
@@ -122,14 +127,14 @@ namespace Avalonia.Xaml.Interactions.Core
 
         private MethodDescriptor? FindBestMethod(object? parameter)
         {
-            if (parameter == null)
+            if (parameter is null)
             {
                 return _cachedMethodDescriptor;
             }
 
-            TypeInfo parameterTypeInfo = parameter.GetType().GetTypeInfo();
+            var parameterTypeInfo = parameter.GetType().GetTypeInfo();
 
-            if (parameterTypeInfo == null)
+            if (parameterTypeInfo is null)
             {
                 return _cachedMethodDescriptor;
             }
@@ -139,11 +144,11 @@ namespace Avalonia.Xaml.Interactions.Core
             // Loop over the methods looking for the one whose type is closest to the type of the given parameter.
             foreach (MethodDescriptor currentMethod in methodDescriptors)
             {
-                TypeInfo? currentTypeInfo = currentMethod.SecondParameterTypeInfo;
+                var currentTypeInfo = currentMethod.SecondParameterTypeInfo;
 
-                if (currentTypeInfo != null && currentTypeInfo.IsAssignableFrom(parameterTypeInfo))
+                if (currentTypeInfo is { } && currentTypeInfo.IsAssignableFrom(parameterTypeInfo))
                 {
-                    if (mostDerivedMethod == null || !currentTypeInfo.IsAssignableFrom(mostDerivedMethod.SecondParameterTypeInfo))
+                    if (mostDerivedMethod is null || !currentTypeInfo.IsAssignableFrom(mostDerivedMethod.SecondParameterTypeInfo))
                     {
                         mostDerivedMethod = currentMethod;
                     }
@@ -170,20 +175,20 @@ namespace Avalonia.Xaml.Interactions.Core
             methodDescriptors.Clear();
             _cachedMethodDescriptor = null;
 
-            if (string.IsNullOrEmpty(MethodName) || _targetObjectType == null)
+            if (string.IsNullOrEmpty(MethodName) || _targetObjectType is null)
             {
                 return;
             }
 
             // Find all public methods that match the given name  and have either no parameters,
             // or two parameters where the first is of type Object.
-            foreach (MethodInfo method in _targetObjectType.GetRuntimeMethods())
+            foreach (var method in _targetObjectType.GetRuntimeMethods())
             {
                 if (string.Equals(method.Name, MethodName, StringComparison.Ordinal)
                     && method.ReturnType == typeof(void)
                     && method.IsPublic)
                 {
-                    ParameterInfo[] parameters = method.GetParameters();
+                    var parameters = method.GetParameters();
                     if (parameters.Length == 0)
                     {
                         // There can be only one parameterless method of the given name.
@@ -199,14 +204,14 @@ namespace Avalonia.Xaml.Interactions.Core
             // We didn't find a parameterless method, so we want to find a method that accepts null
             // as a second parameter, but if we have more than one of these it is ambiguous which
             // we should call, so we do nothing.
-            if (_cachedMethodDescriptor == null)
+            if (_cachedMethodDescriptor is null)
             {
-                foreach (MethodDescriptor method in methodDescriptors)
+                foreach (var method in methodDescriptors)
                 {
-                    TypeInfo? typeInfo = method.SecondParameterTypeInfo;
-                    if (typeInfo != null && (!typeInfo.IsValueType || (typeInfo.IsGenericType && typeInfo.GetGenericTypeDefinition() == typeof(Nullable<>))))
+                    var typeInfo = method.SecondParameterTypeInfo;
+                    if (typeInfo is { } && (!typeInfo.IsValueType || (typeInfo.IsGenericType && typeInfo.GetGenericTypeDefinition() == typeof(Nullable<>))))
                     {
-                        if (_cachedMethodDescriptor != null)
+                        if (_cachedMethodDescriptor is { })
                         {
                             _cachedMethodDescriptor = null;
                             return;

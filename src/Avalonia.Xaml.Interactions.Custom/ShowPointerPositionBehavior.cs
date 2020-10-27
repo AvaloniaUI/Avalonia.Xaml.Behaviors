@@ -30,7 +30,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnAttached()
         {
             base.OnAttached();
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 AssociatedObject.PointerMoved += AssociatedObject_PointerMoved; 
             }
@@ -42,7 +42,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 AssociatedObject.PointerMoved -= AssociatedObject_PointerMoved; 
             }
@@ -50,7 +50,7 @@ namespace Avalonia.Xaml.Interactions.Custom
 
         private void AssociatedObject_PointerMoved(object sender, PointerEventArgs e)
         {
-            if (TargetTextBlock != null)
+            if (TargetTextBlock is { })
             {
                 TargetTextBlock.Text = e.GetPosition(AssociatedObject).ToString();
             }

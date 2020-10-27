@@ -19,7 +19,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnAttached()
         {
             base.OnAttached();
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 AssociatedObject.PointerPressed += AssociatedObject_PointerPressed; 
             }
@@ -31,7 +31,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 AssociatedObject.PointerPressed -= AssociatedObject_PointerPressed; 
             }
@@ -40,7 +40,7 @@ namespace Avalonia.Xaml.Interactions.Custom
 
         private void AssociatedObject_PointerPressed(object sender, PointerPressedEventArgs e)
         {
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 _parent = AssociatedObject.Parent;
 
@@ -57,7 +57,7 @@ namespace Avalonia.Xaml.Interactions.Custom
 
         private void Parent_PointerMoved(object sender, PointerEventArgs args)
         {
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 var pos = args.GetPosition(_parent);
                 if (AssociatedObject.RenderTransform is TranslateTransform tr)
@@ -71,7 +71,7 @@ namespace Avalonia.Xaml.Interactions.Custom
 
         private void Parent_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
-            if (_parent != null)
+            if (_parent is { })
             {
                 _parent.PointerMoved -= Parent_PointerMoved;
                 _parent.PointerReleased -= Parent_PointerReleased;

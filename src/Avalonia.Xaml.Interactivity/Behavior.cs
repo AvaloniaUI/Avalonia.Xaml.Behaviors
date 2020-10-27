@@ -26,7 +26,7 @@ namespace Avalonia.Xaml.Interactivity
                 return;
             }
 
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 throw new InvalidOperationException(string.Format(
                     CultureInfo.CurrentCulture,
@@ -35,7 +35,7 @@ namespace Avalonia.Xaml.Interactivity
                     AssociatedObject));
             }
 
-            Debug.Assert(associatedObject != null, "Cannot attach the behavior to a null object.");
+            Debug.Assert(associatedObject is { }, "Cannot attach the behavior to a null object.");
             AssociatedObject = associatedObject ?? throw new ArgumentNullException(nameof(associatedObject));
 
             OnAttached();

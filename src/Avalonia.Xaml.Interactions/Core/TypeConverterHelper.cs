@@ -19,7 +19,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <exception cref="ArgumentNullException">destinationType cannot be null.</exception>
         public static object? Convert(string value, Type destinationType)
         {
-            if (destinationType == null)
+            if (destinationType is null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
             }
@@ -60,7 +60,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 }
 
                 var converter = TypeDescriptor.GetConverter(destinationType);
-                if (converter != null)
+                if (converter is { })
                 {
                     return converter.ConvertFromInvariantString(value);
                 }

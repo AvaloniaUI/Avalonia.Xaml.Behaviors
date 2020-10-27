@@ -14,7 +14,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnAttached()
         {
             base.OnAttached();
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 AssociatedObject.AttachedToVisualTree += AttachedToVisualTree; 
             }
@@ -26,7 +26,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 AssociatedObject.AttachedToVisualTree -= AttachedToVisualTree; 
             }

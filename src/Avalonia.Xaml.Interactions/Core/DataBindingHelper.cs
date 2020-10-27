@@ -20,7 +20,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// </remarks>
         public static void RefreshDataBindingsOnActions(ActionCollection? actions)
         {
-            if (actions == null)
+            if (actions is null)
             {
                 return;
             }
@@ -39,9 +39,9 @@ namespace Avalonia.Xaml.Interactions.Core
             {
                 propertyList = new List<AvaloniaProperty>();
 
-                while (type != null && type != typeof(IAvaloniaObject))
+                while (type is { } && type != typeof(IAvaloniaObject))
                 {
-                    foreach (FieldInfo fieldInfo in type.GetRuntimeFields())
+                    foreach (var fieldInfo in type.GetRuntimeFields())
                     {
                         if (fieldInfo.IsPublic && fieldInfo.FieldType == typeof(AvaloniaProperty))
                         {
@@ -55,7 +55,7 @@ namespace Avalonia.Xaml.Interactions.Core
                     type = type.GetTypeInfo().BaseType;
                 }
 
-                if (type != null)
+                if (type is { })
                 {
                     AvaloniaPropertyCache[type] = propertyList; 
                 }

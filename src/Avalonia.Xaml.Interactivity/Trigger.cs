@@ -23,7 +23,7 @@ namespace Avalonia.Xaml.Interactivity
         {
             get
             {
-                if (_actions == null)
+                if (_actions is null)
                 {
                     _actions = new ActionCollection();
                 }

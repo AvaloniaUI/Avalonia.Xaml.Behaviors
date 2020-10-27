@@ -100,17 +100,17 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <returns>True if the command is successfully executed; else false.</returns>
         public object? Execute(object? sender, object? parameter)
         {
-            if (Command == null)
+            if (Command is null)
             {
                 return false;
             }
 
             object? resolvedParameter;
-            if (CommandParameter != null)
+            if (CommandParameter is { })
             {
                 resolvedParameter = CommandParameter;
             }
-            else if (InputConverter != null)
+            else if (InputConverter is { })
             {
                 resolvedParameter = InputConverter.Convert(
                     parameter,

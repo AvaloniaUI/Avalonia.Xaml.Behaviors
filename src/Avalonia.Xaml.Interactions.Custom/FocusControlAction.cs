@@ -16,7 +16,10 @@ namespace Avalonia.Xaml.Interactions.Custom
         /// <returns>Returns null after executed.</returns>
         public object? Execute(object? sender, object? parameter)
         {
-            (sender as Control)?.Focus();
+            if (sender is Control control)
+            {
+                control.Focus();
+            }
             return null;
         }
     }

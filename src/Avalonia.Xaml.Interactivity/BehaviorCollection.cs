@@ -44,12 +44,12 @@ namespace Avalonia.Xaml.Interactivity
                 return;
             }
 
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 throw new InvalidOperationException("An instance of a behavior cannot be attached to more than one object at a time.");
             }
 
-            Debug.Assert(associatedObject != null, "The previous checks should keep us from ever setting null here.");
+            Debug.Assert(associatedObject is { }, "The previous checks should keep us from ever setting null here.");
             AssociatedObject = associatedObject;
 
             foreach (var item in this)
@@ -66,8 +66,7 @@ namespace Avalonia.Xaml.Interactivity
         {
             foreach (var item in this)
             {
-                IBehavior behaviorItem = (IBehavior)item;
-                if (behaviorItem.AssociatedObject != null)
+                if (item is IBehavior behaviorItem && behaviorItem.AssociatedObject is { })
                 {
                     behaviorItem.Detach();
                 }
@@ -81,9 +80,9 @@ namespace Avalonia.Xaml.Interactivity
         {
             if (eventArgs.Action == NotifyCollectionChangedAction.Reset)
             {
-                foreach (IBehavior behavior in _oldCollection)
+                foreach (var behavior in _oldCollection)
                 {
-                    if (behavior.AssociatedObject != null)
+                    if (behavior.AssociatedObject is { })
                     {
                         behavior.Detach();
                     }
@@ -118,8 +117,8 @@ namespace Avalonia.Xaml.Interactivity
 
                         var changedItem = (IAvaloniaObject)eventArgs.NewItems[0];
 
-                        IBehavior oldItem = _oldCollection[eventIndex];
-                        if (oldItem.AssociatedObject != null)
+                        var oldItem = _oldCollection[eventIndex];
+                        if (oldItem.AssociatedObject is { })
                         {
                             oldItem.Detach();
                         }
@@ -133,8 +132,8 @@ namespace Avalonia.Xaml.Interactivity
                         int eventIndex = eventArgs.OldStartingIndex;
                         var changedItem = (IAvaloniaObject)eventArgs.OldItems[0];
 
-                        IBehavior oldItem = _oldCollection[eventIndex];
-                        if (oldItem.AssociatedObject != null)
+                        var oldItem = _oldCollection[eventIndex];
+                        if (oldItem.AssociatedObject is { })
                         {
                             oldItem.Detach();
                         }
@@ -164,7 +163,7 @@ namespace Avalonia.Xaml.Interactivity
                 throw new InvalidOperationException("Cannot add an instance of a behavior to a BehaviorCollection more than once.");
             }
 
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 behavior.Attach(AssociatedObject);
             }

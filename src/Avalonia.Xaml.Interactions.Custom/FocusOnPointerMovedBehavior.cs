@@ -15,7 +15,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnAttached()
         {
             base.OnAttached();
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 AssociatedObject.PointerMoved += PointerMoved; 
             }
@@ -27,7 +27,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 AssociatedObject.PointerMoved -= PointerMoved; 
             }

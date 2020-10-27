@@ -38,7 +38,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         /// <returns>Returns null after executed.</returns>
         public object? Execute(object? sender, object? parameter)
         {
-            if (_popup == null)
+            if (_popup is null)
             {
                 _popup = new Popup()
                 {
@@ -59,18 +59,18 @@ namespace Avalonia.Xaml.Interactions.Custom
 
         private static void BindToDataContext(IControl source, IControl target)
         {
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            if (target == null)
+            if (target is null)
             {
                 throw new ArgumentNullException(nameof(target));
             }
 
             var data = source.GetObservable(Control.DataContextProperty);
-            if (data != null)
+            if (data is { })
             {
                 target.Bind(Control.DataContextProperty, data);
             }

@@ -63,14 +63,14 @@ namespace Avalonia.Xaml.Interactions.Core
 
         private static bool Compare(object? leftOperand, ComparisonConditionType operatorType, object? rightOperand)
         {
-            if (leftOperand != null && rightOperand != null)
+            if (leftOperand is { } && rightOperand is { })
             {
                 rightOperand = TypeConverterHelper.Convert(rightOperand.ToString(), leftOperand.GetType());
             }
 
-            IComparable? leftComparableOperand = leftOperand as IComparable;
-            IComparable? rightComparableOperand = rightOperand as IComparable;
-            if ((leftComparableOperand != null) && (rightComparableOperand != null))
+            var leftComparableOperand = leftOperand as IComparable;
+            var rightComparableOperand = rightOperand as IComparable;
+            if ((leftComparableOperand is { }) && (rightComparableOperand is { }))
             {
                 return EvaluateComparable(leftComparableOperand, operatorType, rightComparableOperand);
             }
@@ -88,21 +88,21 @@ namespace Avalonia.Xaml.Interactions.Core
                 case ComparisonConditionType.GreaterThan:
                 case ComparisonConditionType.GreaterThanOrEqual:
                     {
-                        if (leftComparableOperand == null && rightComparableOperand == null)
+                        if (leftComparableOperand is null && rightComparableOperand is null)
                         {
                             throw new ArgumentException(string.Format(
                                 CultureInfo.CurrentCulture,
                                 "Binding property of type {0} and Value property of type {1} cannot be used with operator {2}.",
-                                leftOperand != null ? leftOperand.GetType().Name : "null",
-                                rightOperand != null ? rightOperand.GetType().Name : "null",
+                                leftOperand is { } ? leftOperand.GetType().Name : "null",
+                                rightOperand is { } ? rightOperand.GetType().Name : "null",
                                 operatorType.ToString()));
                         }
-                        else if (leftComparableOperand == null)
+                        else if (leftComparableOperand is null)
                         {
                             throw new ArgumentException(string.Format(
                                 CultureInfo.CurrentCulture,
                                 "Binding property of type {0} cannot be used with operator {1}.",
-                                leftOperand != null ? leftOperand.GetType().Name : "null",
+                                leftOperand is { } ? leftOperand.GetType().Name : "null",
                                 operatorType.ToString()));
                         }
                         else
@@ -110,7 +110,7 @@ namespace Avalonia.Xaml.Interactions.Core
                             throw new ArgumentException(string.Format(
                                 CultureInfo.CurrentCulture,
                                 "Value property of type {0} cannot be used with operator {1}.",
-                                rightOperand != null ? rightOperand.GetType().Name : "null",
+                                rightOperand is { } ? rightOperand.GetType().Name : "null",
                                 operatorType.ToString()));
                         }
                     }
@@ -138,7 +138,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 // InvalidCastException: Convert.ChangeType(4.0d, typeof(Rectangle), ...);
             }
 
-            if (convertedOperand == null)
+            if (convertedOperand is null)
             {
                 return operatorType == ComparisonConditionType.NotEqual;
             }
@@ -172,8 +172,7 @@ namespace Avalonia.Xaml.Interactions.Core
 
         private static void OnValueChanged(IAvaloniaObject avaloniaObject, AvaloniaPropertyChangedEventArgs args)
         {
-            DataTriggerBehavior dataTriggerBehavior = (DataTriggerBehavior)avaloniaObject;
-            if (dataTriggerBehavior.AssociatedObject == null)
+            if (!(avaloniaObject is DataTriggerBehavior dataTriggerBehavior) || dataTriggerBehavior.AssociatedObject is null)
             {
                 return;
             }
@@ -182,7 +181,7 @@ namespace Avalonia.Xaml.Interactions.Core
 
             // NOTE: In UWP version binding null check is not present but Avalonia throws exception as Bindings are null when first initialized.
             var binding = dataTriggerBehavior.Binding;
-            if (binding != null)
+            if (binding is { })
             {
                 // Some value has changed--either the binding value, reference value, or the comparison condition. Re-evaluate the equation.
                 if (Compare(dataTriggerBehavior.Binding, dataTriggerBehavior.ComparisonCondition, dataTriggerBehavior.Value))

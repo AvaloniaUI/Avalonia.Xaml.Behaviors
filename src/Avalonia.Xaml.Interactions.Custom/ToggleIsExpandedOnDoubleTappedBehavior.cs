@@ -16,7 +16,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnAttached()
         {
             base.OnAttached();
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 AssociatedObject.DoubleTapped += DoubleTapped; 
             }
@@ -28,7 +28,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 AssociatedObject.DoubleTapped -= DoubleTapped; 
             }
@@ -36,7 +36,7 @@ namespace Avalonia.Xaml.Interactions.Custom
 
         private void DoubleTapped(object sender, RoutedEventArgs args)
         {
-            if (AssociatedObject != null && AssociatedObject.Parent is TreeViewItem item)
+            if (AssociatedObject is { } && AssociatedObject.Parent is TreeViewItem item)
             {
                 item.IsExpanded = !item.IsExpanded;
             }

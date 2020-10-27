@@ -17,21 +17,25 @@ namespace Avalonia.Xaml.Interactions.Core
         {
             EventNameProperty.Changed.Subscribe(e =>
             {
-                EventTriggerBehavior behavior = (EventTriggerBehavior)e.Sender;
-                if (behavior.AssociatedObject == null || behavior._resolvedSource == null)
+                if (!(e.Sender is EventTriggerBehavior behavior))
                 {
                     return;
                 }
 
-                var oldEventName = (string?)e.OldValue;
-                var newEventName = (string?)e.NewValue;
+                if (behavior.AssociatedObject is null || behavior._resolvedSource is null)
+                {
+                    return;
+                }
 
-                if (oldEventName != null)
+                var oldEventName = e.OldValue.GetValueOrDefault();
+                var newEventName = e.NewValue.GetValueOrDefault();
+
+                if (oldEventName is { })
                 {
                     behavior.UnregisterEvent(oldEventName);
                 }
 
-                if (newEventName != null)
+                if (newEventName is { })
                 {
                     behavior.RegisterEvent(newEventName);
                 }
@@ -39,8 +43,10 @@ namespace Avalonia.Xaml.Interactions.Core
 
             SourceObjectProperty.Changed.Subscribe(e =>
             {
-                EventTriggerBehavior behavior = (EventTriggerBehavior)e.Sender;
-                behavior.SetResolvedSource(behavior.ComputeResolvedSource());
+                if (e.Sender is EventTriggerBehavior behavior)
+                {
+                    behavior.SetResolvedSource(behavior.ComputeResolvedSource());
+                }
             });
         }
 
@@ -99,19 +105,19 @@ namespace Avalonia.Xaml.Interactions.Core
 
         private void SetResolvedSource(object? newSource)
         {
-            if (AssociatedObject == null || _resolvedSource == newSource)
+            if (AssociatedObject is null || _resolvedSource == newSource)
             {
                 return;
             }
 
-            if (_resolvedSource != null)
+            if (_resolvedSource is { })
             {
                 UnregisterEvent(EventName);
             }
 
             _resolvedSource = newSource;
 
-            if (_resolvedSource != null)
+            if (_resolvedSource is { })
             {
                 RegisterEvent(EventName);
             }
@@ -121,7 +127,7 @@ namespace Avalonia.Xaml.Interactions.Core
         {
             // If the SourceObject property is set at all, we want to use it. It is possible that it is data
             // bound and bindings haven't been evaluated yet. Plus, this makes the API more predictable.
-            if (GetValue(SourceObjectProperty) != null)
+            if (GetValue(SourceObjectProperty) is { })
             {
                 return SourceObject;
             }
@@ -138,11 +144,11 @@ namespace Avalonia.Xaml.Interactions.Core
 
             if (eventName != EventNameDefaultValue)
             {
-                if (_resolvedSource != null)
+                if (_resolvedSource is { })
                 {
-                    Type sourceObjectType = _resolvedSource.GetType();
-                    EventInfo info = sourceObjectType.GetRuntimeEvent(EventName);
-                    if (info == null)
+                    var sourceObjectType = _resolvedSource.GetType();
+                    var eventInfo = sourceObjectType.GetRuntimeEvent(EventName);
+                    if (eventInfo is null)
                     {
                         throw new ArgumentException(string.Format(
                             CultureInfo.CurrentCulture,
@@ -151,9 +157,9 @@ namespace Avalonia.Xaml.Interactions.Core
                             sourceObjectType.Name));
                     }
 
-                    MethodInfo methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
-                    _eventHandler = methodInfo.CreateDelegate(info.EventHandlerType, this);
-                    info.AddEventHandler(_resolvedSource, _eventHandler); 
+                    var methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
+                    _eventHandler = methodInfo.CreateDelegate(eventInfo.EventHandlerType, this);
+                    eventInfo.AddEventHandler(_resolvedSource, _eventHandler); 
                 }
             }
             else if (!_isLoadedEventRegistered)
@@ -175,22 +181,22 @@ namespace Avalonia.Xaml.Interactions.Core
 
             if (eventName != EventNameDefaultValue)
             {
-                if (_eventHandler == null)
+                if (_eventHandler is null)
                 {
                     return;
                 }
 
-                if (_resolvedSource != null)
+                if (_resolvedSource is { })
                 {
-                    EventInfo info = _resolvedSource.GetType().GetRuntimeEvent(eventName);
-                    info.RemoveEventHandler(_resolvedSource, _eventHandler); 
+                    var eventInfo = _resolvedSource.GetType().GetRuntimeEvent(eventName);
+                    eventInfo.RemoveEventHandler(_resolvedSource, _eventHandler); 
                 }
                 _eventHandler = null;
             }
             else if (_isLoadedEventRegistered)
             {
                 _isLoadedEventRegistered = false;
-                if (_resolvedSource != null)
+                if (_resolvedSource is { })
                 {
                     Control element = (Control)_resolvedSource;
                     element.AttachedToVisualTree -= OnEvent; 
@@ -205,12 +211,12 @@ namespace Avalonia.Xaml.Interactions.Core
 
         internal static bool IsElementLoaded(Control element)
         {
-            if (element == null)
+            if (element is null)
             {
                 return false;
             }
 
-            return (element.Parent != null);
+            return (element.Parent is { });
         }
     }
 }

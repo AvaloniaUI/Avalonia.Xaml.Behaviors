@@ -24,7 +24,7 @@ namespace Avalonia.Xaml.Interactivity
         {
             base.OnAttached();
 
-            if (AssociatedObject == null && base.AssociatedObject != null)
+            if (AssociatedObject is null && base.AssociatedObject is { })
             {
                 string actualType = base.AssociatedObject.GetType().FullName;
                 string expectedType = typeof(T).FullName;

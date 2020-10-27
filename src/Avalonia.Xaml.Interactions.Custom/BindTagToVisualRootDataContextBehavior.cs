@@ -16,7 +16,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnAttached()
         {
             base.OnAttached();
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 AssociatedObject.AttachedToVisualTree += AttachedToVisualTree; 
             }
@@ -26,7 +26,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 AssociatedObject.AttachedToVisualTree -= AttachedToVisualTree; 
             }
@@ -40,14 +40,14 @@ namespace Avalonia.Xaml.Interactions.Custom
 
         private static IDisposable? BindDataContextToTag(IControl source, IControl? target)
         {
-            if (source == null)
+            if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (target == null)
+            if (target is null)
                 throw new ArgumentNullException(nameof(target));
 
             var data = source.GetObservable(Control.DataContextProperty);
-            if (data != null)
+            if (data is { })
             {
                 return target.Bind(Control.TagProperty, data);
             }

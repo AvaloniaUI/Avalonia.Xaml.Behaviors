@@ -19,23 +19,23 @@ namespace Avalonia.Xaml.Interactivity
 
         private void ActionCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
         {
-            NotifyCollectionChangedAction collectionChange = eventArgs.Action;
+            var collectionChangedAction = eventArgs.Action;
 
-            if (collectionChange == NotifyCollectionChangedAction.Reset)
+            if (collectionChangedAction == NotifyCollectionChangedAction.Reset)
             {
                 foreach (var item in this)
                 {
                     VerifyType(item);
                 }
             }
-            else if (collectionChange == NotifyCollectionChangedAction.Add || collectionChange == NotifyCollectionChangedAction.Replace)
+            else if (collectionChangedAction == NotifyCollectionChangedAction.Add || collectionChangedAction == NotifyCollectionChangedAction.Replace)
             {
                 var changedItem = (IAvaloniaObject)eventArgs.NewItems[0];
                 VerifyType(changedItem);
             }
         }
 
-        private static void VerifyType(IAvaloniaObject item)
+        private static void VerifyType(IAvaloniaObject? item)
         {
             if (!(item is IAction))
             {

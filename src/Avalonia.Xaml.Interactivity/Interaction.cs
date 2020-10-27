@@ -13,20 +13,20 @@ namespace Avalonia.Xaml.Interactivity
         {
             BehaviorsProperty.Changed.Subscribe(e =>
             {
-                var oldCollection = (BehaviorCollection?)e.OldValue;
-                var newCollection = (BehaviorCollection?)e.NewValue;
+                var oldCollection = e.OldValue.GetValueOrDefault();
+                var newCollection = e.NewValue.GetValueOrDefault();
 
                 if (oldCollection == newCollection)
                 {
                     return;
                 }
 
-                if (oldCollection != null && oldCollection.AssociatedObject != null)
+                if (oldCollection is { } && oldCollection.AssociatedObject is { })
                 {
                     oldCollection.Detach();
                 }
 
-                if (newCollection != null && e.Sender != null)
+                if (newCollection is { } && e.Sender is { })
                 {
                     newCollection.Attach(e.Sender);
                 }
@@ -46,13 +46,13 @@ namespace Avalonia.Xaml.Interactivity
         /// <returns>A <see cref="BehaviorCollection"/> containing the behaviors associated with the specified object.</returns>
         public static BehaviorCollection? GetBehaviors(IAvaloniaObject obj)
         {
-            if (obj == null)
+            if (obj is null)
             {
                 throw new ArgumentNullException(nameof(obj));
             }
 
-            BehaviorCollection? behaviorCollection = (BehaviorCollection?)obj.GetValue(BehaviorsProperty);
-            if (behaviorCollection == null)
+            var behaviorCollection = (BehaviorCollection?)obj.GetValue(BehaviorsProperty);
+            if (behaviorCollection is null)
             {
                 behaviorCollection = new BehaviorCollection();
                 obj.SetValue(BehaviorsProperty, behaviorCollection);
@@ -76,7 +76,7 @@ namespace Avalonia.Xaml.Interactivity
         /// <param name="value">The <see cref="BehaviorCollection"/> associated with the object.</param>
         public static void SetBehaviors(IAvaloniaObject obj, BehaviorCollection? value)
         {
-            if (obj == null)
+            if (obj is null)
             {
                 throw new ArgumentNullException(nameof(obj));
             }
@@ -92,20 +92,22 @@ namespace Avalonia.Xaml.Interactivity
         /// <returns>Returns the results of the actions.</returns>
         public static IEnumerable<object> ExecuteActions(object? sender, ActionCollection? actions, object? parameter)
         {
-            List<object> results = new List<object>();
+            var results = new List<object>();
 
-            if (actions == null)
+            if (actions is null)
             {
                 return results;
             }
 
             foreach (var avaloniaObject in actions)
             {
-                IAction action = (IAction)avaloniaObject;
-                object? result = action.Execute(sender, parameter);
-                if (result != null)
+                if (avaloniaObject is IAction action)
                 {
-                    results.Add(result);
+                    var result = action.Execute(sender, parameter);
+                    if (result is { })
+                    {
+                        results.Add(result);
+                    }
                 }
             }
 
