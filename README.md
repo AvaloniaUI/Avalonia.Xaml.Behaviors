@@ -90,7 +90,7 @@ You can find the packages here [NuGet](https://www.nuget.org/packages/Avalonia.X
 
 or by using nightly build feed:
 * Add `https://www.myget.org/F/xamlbehaviors-nightly/api/v2` to your package sources
-* Alternative nightly build feed `https://pkgs.dev.azure.com/wieslawsoltes/GitHub/_packaging/CI/nuget/v3/index.json`
+* Alternative nightly build feed `https://pkgs.dev.azure.com/wieslawsoltes/GitHub/_packaging/Nightly/nuget/v3/index.json`
 * Update your package using `XamlBehaviors` feed
 
 and install the package like this:
