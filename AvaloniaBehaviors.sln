@@ -28,6 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{2913483A
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.nuke = .nuke
+		build\behaviors.public.snk = build\behaviors.public.snk
 		build.ps1 = build.ps1
 		build.sh = build.sh
 		global.json = global.json
@@ -43,6 +44,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{40A43022
 		build\Base.props = build\Base.props
 		build\EmbedXaml.props = build\EmbedXaml.props
 		build\ReferenceAssemblies.props = build\ReferenceAssemblies.props
+		build\SignAssembly.props = build\SignAssembly.props
+		build\SourceLink.props = build\SourceLink.props
 		build\XUnit.props = build\XUnit.props
 	EndProjectSection
 EndProject
