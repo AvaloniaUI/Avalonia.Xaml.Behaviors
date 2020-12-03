@@ -106,7 +106,7 @@ namespace Avalonia.Xaml.Interactions.Core
             }
 
             object? resolvedParameter;
-            if (CommandParameter is { })
+            if (IsSet(CommandParameterProperty))
             {
                 resolvedParameter = CommandParameter;
             }
