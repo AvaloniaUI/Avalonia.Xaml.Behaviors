@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
+    <TargetFramework>net5.0</TargetFramework>
     <IsPackable>False</IsPackable>
     <Nullable>enable</Nullable>
   </PropertyGroup>
