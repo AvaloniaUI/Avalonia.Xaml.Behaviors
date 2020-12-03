@@ -28,7 +28,7 @@ namespace Avalonia.Xaml.Interactivity
             {
                 string actualType = base.AssociatedObject.GetType().FullName;
                 string expectedType = typeof(T).FullName;
-                string message = string.Format("AssociatedObject is of type {0} but should be of type {1}.", actualType, expectedType);
+                string message = $"AssociatedObject is of type {actualType} but should be of type {expectedType}.";
                 throw new InvalidOperationException(message);
             }
         }
