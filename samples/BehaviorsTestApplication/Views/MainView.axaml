@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Views.MainView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:pages="clr-namespace:BehaviorsTestApplication.Pages;assembly=BehaviorsTestApplication">
+             xmlns:pages="using:BehaviorsTestApplication.Pages">
     <UserControl.Styles>
         <Style Selector="TabStripItem">
             <Setter Property="Margin" Value="5"/>

@@ -1,10 +1,8 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Pages.DataTriggerBehaviorControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplication"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom">
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core">
     <Grid RowDefinitions="5*,*">
         <Rectangle Name="DataTriggerRectangle" Grid.Row="0" Margin="5" Fill="{DynamicResource BlueBrush}" Stroke="{DynamicResource GrayBrush}" StrokeThickness="5">
             <i:Interaction.Behaviors>

@@ -1,10 +1,8 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Pages.EventTriggerBehaviorControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplication"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom">
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core">
     <Grid RowDefinitions="Auto,100">
         <TextBox Name="textBox" Text="Hello" Grid.Row="0" Margin="5"/>
         <Button Name="changePropertyButton" Content="Change Property" Grid.Row="1" Margin="5,0,5,5">

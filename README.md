@@ -20,8 +20,8 @@ Example of using Behaviors in an `Avalonia`  XAML application:
 
 ```XAML
 <Window xmlns="https://github.com/avaloniaui"
-        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+        xmlns:i="using:Avalonia.Xaml.Interactivity"
+        xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
         Width="500" Height="400">
     <Grid RowDefinitions="Auto,100">
         <TextBox Name="textBox" Text="Hello" Grid.Row="0" Margin="5"/>

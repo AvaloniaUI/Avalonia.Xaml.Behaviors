@@ -1,7 +1,7 @@
 <Window x:Class="BehaviorsTestApplication.Views.MainWindow"
         xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:views="clr-namespace:BehaviorsTestApplication.Views;assembly=BehaviorsTestApplication"
+        xmlns:views="using:BehaviorsTestApplication.Views"
         Title="XamlBehaviors Test Application" Width="800" Height="600">
     <views:MainView/>
 </Window>

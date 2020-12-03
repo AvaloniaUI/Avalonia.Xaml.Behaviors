@@ -1,10 +1,8 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Pages.CustomBehaviorControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels;assembly=BehaviorsTestApplication"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom">
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom">
     <Grid Background="{DynamicResource GrayBrush}" Margin="5">
         <Ellipse Fill="{DynamicResource RedBrush}" Stroke="{DynamicResource BlackBrush}" Height="125" Width="125" StrokeThickness="0" HorizontalAlignment="Left">
             <i:Interaction.Behaviors>
