@@ -1,7 +1,7 @@
 ﻿using System;
 using Avalonia;
 
-namespace BehaviorsTestApplication.NetCore
+namespace BehaviorsTestApplication
 {
     class Program
     {
