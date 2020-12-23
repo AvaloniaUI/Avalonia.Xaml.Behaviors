@@ -38,14 +38,17 @@ namespace Avalonia.Xaml.Interactions.Core
             }
         }
 
-        private static IEnumerable<AvaloniaProperty>? GetAvaloniaProperties(Type type)
+        private static IEnumerable<AvaloniaProperty>? GetAvaloniaProperties(Type? type)
         {
-            if (AvaloniaPropertyCache.TryGetValue(type, out var propertyList))
+            if (type is { })
             {
-                return propertyList;
+                if (AvaloniaPropertyCache.TryGetValue(type, out var propertyListCached))
+                {
+                    return propertyListCached;
+                }
             }
 
-            propertyList = new List<AvaloniaProperty>();
+            var propertyList = new List<AvaloniaProperty>();
 
             while (type is { } && type != typeof(IAvaloniaObject))
             {
@@ -60,11 +63,7 @@ namespace Avalonia.Xaml.Interactions.Core
                     }
                 }
 
-                var typeInfo = type.GetTypeInfo();
-                if (typeInfo is { } && typeInfo.BaseType is { })
-                {
-                    type = typeInfo.BaseType;
-                }
+                type = type.GetTypeInfo().BaseType;
             }
 
             if (type is { })
