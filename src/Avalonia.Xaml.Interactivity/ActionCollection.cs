@@ -17,7 +17,7 @@ namespace Avalonia.Xaml.Interactivity
             CollectionChanged += ActionCollection_CollectionChanged;
         }
 
-        private void ActionCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
+        private void ActionCollection_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs eventArgs)
         {
             var collectionChangedAction = eventArgs.Action;
 

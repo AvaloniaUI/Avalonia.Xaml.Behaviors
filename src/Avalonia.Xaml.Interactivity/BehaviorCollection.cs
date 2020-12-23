@@ -76,7 +76,7 @@ namespace Avalonia.Xaml.Interactivity
             _oldCollection.Clear();
         }
 
-        private void BehaviorCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
+        private void BehaviorCollection_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs eventArgs)
         {
             if (eventArgs.Action == NotifyCollectionChangedAction.Reset)
             {
