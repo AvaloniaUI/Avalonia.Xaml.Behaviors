@@ -99,22 +99,11 @@ and install the package like this:
 
 ### NuGet Packages
 
+* [Avalonia.Xaml.Behaviors](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors/) - Meta package containing core library and default actions and behaviors
 * [Avalonia.Xaml.Interactivity](https://www.nuget.org/packages/Avalonia.Xaml.Interactivity/) - Core library.
 * [Avalonia.Xaml.Interactions](https://www.nuget.org/packages/Avalonia.Xaml.Interactions/) - Default actions and behaviors.
+* [Avalonia.Xaml.Interactions.DragAndDrop](https://www.nuget.org/packages/Avalonia.Xaml.Interactions.DragAndDrop/) - Drag and drop behaviors.
 * [Avalonia.Xaml.Interactions.Custom](https://www.nuget.org/packages/Avalonia.Xaml.Interactions.Custom/) - Custom actions and behaviors.
-* [Avalonia.Xaml.Behaviors](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors/) - Meta package containing core library and default actions and behaviors
-
-### Package Dependencies
-
-* [Avalonia](https://www.nuget.org/packages/Avalonia/)
-* [System.Reactive](https://www.nuget.org/packages/System.Reactive/)
-* [System.Reactive.Core](https://www.nuget.org/packages/System.Reactive.Core/)
-* [System.Reactive.Interfaces](https://www.nuget.org/packages/System.Reactive.Interfaces/)
-* [System.Reactive.Linq](https://www.nuget.org/packages/System.Reactive.Linq/)
-* [System.Reactive.PlatformServices](https://www.nuget.org/packages/System.Reactive.PlatformServices/)
-* [Serilog](https://www.nuget.org/packages/Serilog/)
-* [Splat](https://www.nuget.org/packages/Splat/)
-* [Sprache](https://www.nuget.org/packages/Sprache/)
 
 ### Package Sources
 
