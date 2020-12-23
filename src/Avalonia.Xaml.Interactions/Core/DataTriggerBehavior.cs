@@ -26,7 +26,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// Identifies the <seealso cref="ComparisonCondition"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<ComparisonConditionType> ComparisonConditionProperty =
-            AvaloniaProperty.Register<DataTriggerBehavior, ComparisonConditionType>(nameof(ComparisonCondition), ComparisonConditionType.Equal);
+            AvaloniaProperty.Register<DataTriggerBehavior, ComparisonConditionType>(nameof(ComparisonCondition));
 
         /// <summary>
         /// Identifies the <seealso cref="Value"/> avalonia property.
@@ -67,7 +67,7 @@ namespace Avalonia.Xaml.Interactions.Core
             {
                 var value = rightOperand.ToString();
                 var destinationType = leftOperand.GetType();
-                if (value is { } && destinationType is { })
+                if (value is { })
                 {
                     rightOperand = TypeConverterHelper.Convert(value, destinationType);
                 }
@@ -75,7 +75,7 @@ namespace Avalonia.Xaml.Interactions.Core
 
             var leftComparableOperand = leftOperand as IComparable;
             var rightComparableOperand = rightOperand as IComparable;
-            if ((leftComparableOperand is { }) && (rightComparableOperand is { }))
+            if (leftComparableOperand is { } && (rightComparableOperand is { }))
             {
                 return EvaluateComparable(leftComparableOperand, operatorType, rightComparableOperand);
             }
@@ -83,10 +83,10 @@ namespace Avalonia.Xaml.Interactions.Core
             switch (operatorType)
             {
                 case ComparisonConditionType.Equal:
-                    return object.Equals(leftOperand, rightOperand);
+                    return Equals(leftOperand, rightOperand);
 
                 case ComparisonConditionType.NotEqual:
-                    return !object.Equals(leftOperand, rightOperand);
+                    return !Equals(leftOperand, rightOperand);
 
                 case ComparisonConditionType.LessThan:
                 case ComparisonConditionType.LessThanOrEqual:
@@ -98,8 +98,8 @@ namespace Avalonia.Xaml.Interactions.Core
                             throw new ArgumentException(string.Format(
                                 CultureInfo.CurrentCulture,
                                 "Binding property of type {0} and Value property of type {1} cannot be used with operator {2}.",
-                                leftOperand is { } ? leftOperand.GetType().Name : "null",
-                                rightOperand is { } ? rightOperand.GetType().Name : "null",
+                                leftOperand?.GetType().Name ?? "null",
+                                rightOperand?.GetType().Name ?? "null",
                                 operatorType.ToString()));
                         }
                         else if (leftComparableOperand is null)
@@ -107,7 +107,7 @@ namespace Avalonia.Xaml.Interactions.Core
                             throw new ArgumentException(string.Format(
                                 CultureInfo.CurrentCulture,
                                 "Binding property of type {0} cannot be used with operator {1}.",
-                                leftOperand is { } ? leftOperand.GetType().Name : "null",
+                                leftOperand?.GetType().Name ?? "null",
                                 operatorType.ToString()));
                         }
                         else
@@ -115,7 +115,7 @@ namespace Avalonia.Xaml.Interactions.Core
                             throw new ArgumentException(string.Format(
                                 CultureInfo.CurrentCulture,
                                 "Value property of type {0} cannot be used with operator {1}.",
-                                rightOperand is { } ? rightOperand.GetType().Name : "null",
+                                rightOperand?.GetType().Name ?? "null",
                                 operatorType.ToString()));
                         }
                     }
