@@ -105,7 +105,7 @@ namespace Avalonia.Xaml.Interactivity
                 case NotifyCollectionChangedAction.Add:
                     {
                         int eventIndex = eventArgs.NewStartingIndex;
-                        var changedItem = (IAvaloniaObject)eventArgs.NewItems[0];
+                        var changedItem = eventArgs.NewItems?[0] as IAvaloniaObject;
                         _oldCollection.Insert(eventIndex, VerifiedAttach(changedItem));
                     }
                     break;
@@ -115,7 +115,7 @@ namespace Avalonia.Xaml.Interactivity
                         int eventIndex = eventArgs.OldStartingIndex;
                         eventIndex = eventIndex == -1 ? 0 : eventIndex;
 
-                        var changedItem = (IAvaloniaObject)eventArgs.NewItems[0];
+                        var changedItem = eventArgs.NewItems?[0] as IAvaloniaObject;
 
                         var oldItem = _oldCollection[eventIndex];
                         if (oldItem.AssociatedObject is { })
@@ -130,7 +130,6 @@ namespace Avalonia.Xaml.Interactivity
                 case NotifyCollectionChangedAction.Remove:
                     {
                         int eventIndex = eventArgs.OldStartingIndex;
-                        var changedItem = (IAvaloniaObject)eventArgs.OldItems[0];
 
                         var oldItem = _oldCollection[eventIndex];
                         if (oldItem.AssociatedObject is { })
@@ -155,12 +154,12 @@ namespace Avalonia.Xaml.Interactivity
         {
             if (!(item is IBehavior behavior))
             {
-                throw new InvalidOperationException("Only IBehavior types are supported in a BehaviorCollection.");
+                throw new InvalidOperationException($"Only {nameof(IBehavior)} types are supported in a {nameof(BehaviorCollection)}.");
             }
 
             if (_oldCollection.Contains(behavior))
             {
-                throw new InvalidOperationException("Cannot add an instance of a behavior to a BehaviorCollection more than once.");
+                throw new InvalidOperationException($"Cannot add an instance of a behavior to a {nameof(BehaviorCollection)} more than once.");
             }
 
             if (AssociatedObject is { })

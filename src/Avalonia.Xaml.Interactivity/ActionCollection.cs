@@ -30,7 +30,7 @@ namespace Avalonia.Xaml.Interactivity
             }
             else if (collectionChangedAction == NotifyCollectionChangedAction.Add || collectionChangedAction == NotifyCollectionChangedAction.Replace)
             {
-                var changedItem = (IAvaloniaObject)eventArgs.NewItems[0];
+                var changedItem = eventArgs.NewItems?[0] as IAvaloniaObject;
                 VerifyType(changedItem);
             }
         }

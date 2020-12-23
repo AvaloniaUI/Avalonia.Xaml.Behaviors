@@ -114,7 +114,7 @@ namespace Avalonia.Xaml.Interactivity
             return results;
         }
 
-        private static void Control_Loaded(object sender, VisualTreeAttachmentEventArgs e)
+        private static void Control_Loaded(object? sender, VisualTreeAttachmentEventArgs e)
         {
             if (sender is IAvaloniaObject d)
             {
@@ -122,7 +122,7 @@ namespace Avalonia.Xaml.Interactivity
             }
         }
 
-        private static void Control_Unloaded(object sender, VisualTreeAttachmentEventArgs e)
+        private static void Control_Unloaded(object? sender, VisualTreeAttachmentEventArgs e)
         {
             if (sender is IAvaloniaObject d)
             {
