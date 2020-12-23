@@ -33,7 +33,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             }
         }
 
-        private void PointerMoved(object sender, PointerEventArgs args)
+        private void PointerMoved(object? sender, PointerEventArgs args)
         {
             if (AssociatedObject is { } && AssociatedObject.Parent is ListBoxItem item)
             {

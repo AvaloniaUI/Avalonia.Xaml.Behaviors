@@ -37,6 +37,6 @@ namespace BehaviorsTestApplication.ViewModels
 
         public void IncrementCount() => Count++;
 
-        public void DecrementCount(object sender, object parameter) => Count--;
+        public void DecrementCount(object? sender, object parameter) => Count--;
     }
 }

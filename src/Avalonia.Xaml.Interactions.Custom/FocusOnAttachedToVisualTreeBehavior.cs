@@ -32,7 +32,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             }
         }
 
-        private void AttachedToVisualTree(object sender, VisualTreeAttachmentEventArgs e)
+        private void AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
         {
             AssociatedObject?.Focus();
         }

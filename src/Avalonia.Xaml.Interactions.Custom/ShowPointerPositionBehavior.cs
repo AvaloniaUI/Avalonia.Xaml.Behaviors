@@ -48,7 +48,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             }
         }
 
-        private void AssociatedObject_PointerMoved(object sender, PointerEventArgs e)
+        private void AssociatedObject_PointerMoved(object? sender, PointerEventArgs e)
         {
             if (TargetTextBlock is { })
             {

@@ -45,7 +45,7 @@ namespace Avalonia.Xaml.Interactivity.UnitTests
             DetachCount++;
         }
 
-        public IEnumerable<object> Execute(object sender, object parameter)
+        public IEnumerable<object> Execute(object? sender, object parameter)
         {
             return Interaction.ExecuteActions(sender, Actions, parameter);
         }

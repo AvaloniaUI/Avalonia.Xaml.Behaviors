@@ -33,7 +33,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             _disposable?.Dispose();
         }
 
-        private void AttachedToVisualTree(object sender, VisualTreeAttachmentEventArgs e)
+        private void AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
         {
             _disposable = BindDataContextToTag((IControl)AssociatedObject.GetVisualRoot(), AssociatedObject);
         }

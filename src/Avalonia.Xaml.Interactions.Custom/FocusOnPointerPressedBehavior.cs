@@ -33,7 +33,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             }
         }
 
-        private void PointerPressed(object sender, PointerPressedEventArgs e)
+        private void PointerPressed(object? sender, PointerPressedEventArgs e)
         {
             AssociatedObject?.Focus();
         }

@@ -34,7 +34,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             }
         }
 
-        private void DoubleTapped(object sender, RoutedEventArgs args)
+        private void DoubleTapped(object? sender, RoutedEventArgs args)
         {
             if (AssociatedObject is { } && AssociatedObject.Parent is TreeViewItem item)
             {
