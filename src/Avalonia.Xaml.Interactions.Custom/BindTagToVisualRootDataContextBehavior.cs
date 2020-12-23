@@ -46,12 +46,8 @@ namespace Avalonia.Xaml.Interactions.Custom
             if (target is null)
                 throw new ArgumentNullException(nameof(target));
 
-            var data = source.GetObservable(Control.DataContextProperty);
-            if (data is { })
-            {
-                return target.Bind(Control.TagProperty, data);
-            }
-            return null;
+            var data = source.GetObservable(StyledElement.DataContextProperty);
+            return data is { } ? target.Bind(Control.TagProperty, data) : null;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -108,7 +107,7 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
                 var diff = _dragStartPoint - point;
                 if (Math.Abs(diff.X) > 3 || Math.Abs(diff.Y) > 3)
                 {
-                    if (_lock == true)
+                    if (_lock)
                     {
                         _lock = false;
                     }

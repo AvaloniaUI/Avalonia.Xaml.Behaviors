@@ -21,7 +21,7 @@ namespace Avalonia.Xaml.Interactivity
         /// <exception cref="ArgumentNullException"><paramref name="associatedObject"/> is null.</exception>
         public void Attach(IAvaloniaObject? associatedObject)
         {
-            if (associatedObject == AssociatedObject)
+            if (Equals(associatedObject, AssociatedObject))
             {
                 return;
             }
@@ -30,9 +30,7 @@ namespace Avalonia.Xaml.Interactivity
             {
                 throw new InvalidOperationException(string.Format(
                     CultureInfo.CurrentCulture,
-                    "An instance of a behavior cannot be attached to more than one object at a time.",
-                    associatedObject,
-                    AssociatedObject));
+                    "An instance of a behavior cannot be attached to more than one object at a time."));
             }
 
             Debug.Assert(associatedObject is { }, "Cannot attach the behavior to a null object.");

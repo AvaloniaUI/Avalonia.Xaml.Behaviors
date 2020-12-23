@@ -12,15 +12,15 @@ namespace Avalonia.Xaml.Interactions.Custom
         /// <summary>
         /// Identifies the <seealso cref="TargetTextBlockProperty"/> avalonia property.
         /// </summary>
-        public static readonly AvaloniaProperty TargetTextBlockProperty =
-            AvaloniaProperty.Register<ShowPointerPositionBehavior, TextBlock>(nameof(TargetTextBlock));
+        public static readonly StyledProperty<TextBlock?> TargetTextBlockProperty =
+            AvaloniaProperty.Register<ShowPointerPositionBehavior, TextBlock?>(nameof(TargetTextBlock));
 
         /// <summary>
         /// Gets or sets the target TextBlock object in which this behavior displays cursor position on PointerMoved event.
         /// </summary>
-        public TextBlock TargetTextBlock
+        public TextBlock? TargetTextBlock
         {
-            get => (TextBlock)GetValue(TargetTextBlockProperty);
+            get => GetValue(TargetTextBlockProperty);
             set => SetValue(TargetTextBlockProperty, value);
         }
 

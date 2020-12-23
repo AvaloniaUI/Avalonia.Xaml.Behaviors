@@ -19,8 +19,8 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="Binding"/> avalonia property.
         /// </summary>
-        public static readonly StyledProperty<object> BindingProperty =
-            AvaloniaProperty.Register<DataTriggerBehavior, object>(nameof(Binding));
+        public static readonly StyledProperty<object?> BindingProperty =
+            AvaloniaProperty.Register<DataTriggerBehavior, object?>(nameof(Binding));
 
         /// <summary>
         /// Identifies the <seealso cref="ComparisonCondition"/> avalonia property.
@@ -31,13 +31,13 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="Value"/> avalonia property.
         /// </summary>
-        public static readonly StyledProperty<object> ValueProperty =
-            AvaloniaProperty.Register<DataTriggerBehavior, object>(nameof(Value));
+        public static readonly StyledProperty<object?> ValueProperty =
+            AvaloniaProperty.Register<DataTriggerBehavior, object?>(nameof(Value));
 
         /// <summary>
         /// Gets or sets the bound object that the <see cref="DataTriggerBehavior"/> will listen to. This is a avalonia property.
         /// </summary>
-        public object Binding
+        public object? Binding
         {
             get => GetValue(BindingProperty);
             set => SetValue(BindingProperty, value);
@@ -55,7 +55,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Gets or sets the value to be compared with the value of <see cref="DataTriggerBehavior.Binding"/>. This is a avalonia property.
         /// </summary>
-        public object Value
+        public object? Value
         {
             get => GetValue(ValueProperty);
             set => SetValue(ValueProperty, value);
@@ -148,31 +148,17 @@ namespace Avalonia.Xaml.Interactions.Core
                 return operatorType == ComparisonConditionType.NotEqual;
             }
 
-            int comparison = leftOperand.CompareTo((IComparable)convertedOperand);
-            switch (operatorType)
+            var comparison = leftOperand.CompareTo((IComparable)convertedOperand);
+            return operatorType switch
             {
-                case ComparisonConditionType.Equal:
-                    return comparison == 0;
-
-                case ComparisonConditionType.NotEqual:
-                    return comparison != 0;
-
-                case ComparisonConditionType.LessThan:
-                    return comparison < 0;
-
-                case ComparisonConditionType.LessThanOrEqual:
-                    return comparison <= 0;
-
-                case ComparisonConditionType.GreaterThan:
-                    return comparison > 0;
-
-                case ComparisonConditionType.GreaterThanOrEqual:
-                    return comparison >= 0;
-                default:
-                    break;
-            }
-
-            return false;
+                ComparisonConditionType.Equal => comparison == 0,
+                ComparisonConditionType.NotEqual => comparison != 0,
+                ComparisonConditionType.LessThan => comparison < 0,
+                ComparisonConditionType.LessThanOrEqual => comparison <= 0,
+                ComparisonConditionType.GreaterThan => comparison > 0,
+                ComparisonConditionType.GreaterThanOrEqual => comparison >= 0,
+                _ => false
+            };
         }
 
         private static void OnValueChanged(IAvaloniaObject avaloniaObject, AvaloniaPropertyChangedEventArgs args)

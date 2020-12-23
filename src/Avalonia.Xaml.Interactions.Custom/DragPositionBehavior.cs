@@ -10,7 +10,7 @@ namespace Avalonia.Xaml.Interactions.Custom
     /// </summary>
     public sealed class DragPositionBehavior : Behavior<Control>
     {
-        private IControl? _parent = null;
+        private IControl? _parent;
         private Point _previous;
 
         /// <summary>

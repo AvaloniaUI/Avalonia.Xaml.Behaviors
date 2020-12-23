@@ -26,7 +26,7 @@ namespace Avalonia.Xaml.Interactivity
                     oldCollection.Detach();
                 }
 
-                if (newCollection is { } && e.Sender is { })
+                if (newCollection is { })
                 {
                     newCollection.Attach(e.Sender);
                 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -15,19 +14,19 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
         private object? _value;
         private bool _lock;
 
-        public static readonly StyledProperty<Type> DataTypeProperty =
-            AvaloniaProperty.Register<TypedDragBehavior, Type>(nameof(DataType));
+        public static readonly StyledProperty<Type?> DataTypeProperty =
+            AvaloniaProperty.Register<TypedDragBehavior, Type?>(nameof(DataType));
 
-        public static readonly StyledProperty<IDragHandler> HandlerProperty =
-            AvaloniaProperty.Register<TypedDragBehavior, IDragHandler>(nameof(Handler));
+        public static readonly StyledProperty<IDragHandler?> HandlerProperty =
+            AvaloniaProperty.Register<TypedDragBehavior, IDragHandler?>(nameof(Handler));
 
-        public Type DataType
+        public Type? DataType
         {
             get => GetValue(DataTypeProperty);
             set => SetValue(DataTypeProperty, value);
         }
 
-        public IDragHandler Handler
+        public IDragHandler? Handler
         {
             get => GetValue(HandlerProperty);
             set => SetValue(HandlerProperty, value);
@@ -81,7 +80,9 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             var properties = e.GetCurrentPoint(AssociatedObject).Properties;
             if (properties.IsLeftButtonPressed)
             {
-                if (e.Source is IControl control && DataType.IsAssignableFrom(control.DataContext?.GetType()) == true)
+                if (e.Source is IControl control 
+                    && DataType is not null
+                    &&  DataType.IsAssignableFrom(control.DataContext?.GetType()))
                 {
                     _dragStartPoint = e.GetPosition(null);
                     _triggerEvent = e;
@@ -111,7 +112,7 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
                 var diff = _dragStartPoint - point;
                 if (Math.Abs(diff.X) > 3 || Math.Abs(diff.Y) > 3)
                 {
-                    if (_lock == true)
+                    if (_lock)
                     {
                         _lock = false;
                     }

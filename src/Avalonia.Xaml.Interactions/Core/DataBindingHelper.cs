@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactions.Core
 {
     internal static class DataBindingHelper
     {
-        private static readonly Dictionary<Type, List<AvaloniaProperty>> AvaloniaPropertyCache = new Dictionary<Type, List<AvaloniaProperty>>();
+        private static readonly Dictionary<Type, List<AvaloniaProperty>> _avaloniaPropertyCache = new();
 
         /// <summary>
         /// Ensures that all binding expression on actions are up to date.
@@ -27,22 +27,18 @@ namespace Avalonia.Xaml.Interactions.Core
 
             foreach (var action in actions)
             {
-                var properties = GetAvaloniaProperties(action.GetType());
-                if (properties is { })
+                foreach (var property in GetAvaloniaProperties(action.GetType()))
                 {
-                    foreach (var property in properties)
-                    {
-                        RefreshBinding(action, property);
-                    }
+                    RefreshBinding(action, property);
                 }
             }
         }
 
-        private static IEnumerable<AvaloniaProperty>? GetAvaloniaProperties(Type? type)
+        private static IEnumerable<AvaloniaProperty> GetAvaloniaProperties(Type? type)
         {
             if (type is { })
             {
-                if (AvaloniaPropertyCache.TryGetValue(type, out var propertyListCached))
+                if (_avaloniaPropertyCache.TryGetValue(type, out var propertyListCached))
                 {
                     return propertyListCached;
                 }
@@ -68,7 +64,7 @@ namespace Avalonia.Xaml.Interactions.Core
 
             if (type is { })
             {
-                AvaloniaPropertyCache[type] = propertyList;
+                _avaloniaPropertyCache[type] = propertyList;
             }
 
             return propertyList;

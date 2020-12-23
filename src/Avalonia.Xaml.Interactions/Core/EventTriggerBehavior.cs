@@ -60,7 +60,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// Identifies the <seealso cref="SourceObject"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<object?> SourceObjectProperty =
-            AvaloniaProperty.Register<EventTriggerBehavior, object?>(nameof(SourceObject), null);
+            AvaloniaProperty.Register<EventTriggerBehavior, object?>(nameof(SourceObject));
 
         private object? _resolvedSource;
         private Delegate? _eventHandler;
@@ -158,7 +158,7 @@ namespace Avalonia.Xaml.Interactions.Core
                     }
 
                     var methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
-                    if (eventInfo is { } && methodInfo is { })
+                    if (methodInfo is { })
                     {
                         var eventHandlerType = eventInfo.EventHandlerType;
                         if (eventHandlerType is { })
@@ -206,12 +206,9 @@ namespace Avalonia.Xaml.Interactions.Core
             else if (_isLoadedEventRegistered)
             {
                 _isLoadedEventRegistered = false;
-                if (_resolvedSource is { })
+                if (_resolvedSource is Control element)
                 {
-                    if (_resolvedSource is Control element)
-                    {
-                        element.AttachedToVisualTree -= OnEvent; 
-                    }
+                    element.AttachedToVisualTree -= OnEvent; 
                 }
             }
         }
@@ -221,13 +218,8 @@ namespace Avalonia.Xaml.Interactions.Core
             Interaction.ExecuteActions(_resolvedSource, Actions, eventArgs);
         }
 
-        internal static bool IsElementLoaded(Control element)
+        private static bool IsElementLoaded(Control element)
         {
-            if (element is null)
-            {
-                return false;
-            }
-
             return (element.Parent is { });
         }
     }

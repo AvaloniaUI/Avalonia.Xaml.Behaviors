@@ -53,13 +53,13 @@ namespace Avalonia.Xaml.Interactions.Core
         /// Identifies the <seealso cref="TargetObject"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<object?> TargetObjectProperty =
-            AvaloniaProperty.Register<ChangePropertyAction, object?>(nameof(TargetObject), null);
+            AvaloniaProperty.Register<ChangePropertyAction, object?>(nameof(TargetObject));
 
         /// <summary>
         /// Identifies the <seealso cref="Value"/> avalonia property.
         /// </summary>
-        public static readonly StyledProperty<object> ValueProperty =
-            AvaloniaProperty.Register<ChangePropertyAction, object>(nameof(Value));
+        public static readonly StyledProperty<object?> ValueProperty =
+            AvaloniaProperty.Register<ChangePropertyAction, object?>(nameof(Value));
 
         /// <summary>
         /// Gets or sets the name of the property to change. This is a avalonia property.
@@ -73,7 +73,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Gets or sets the value to set. This is a avalonia property.
         /// </summary>
-        public object Value
+        public object? Value
         {
             get => GetValue(ValueProperty);
             set => SetValue(ValueProperty, value);
@@ -95,7 +95,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
         /// <param name="parameter">The value of this parameter is determined by the caller.</param>
         /// <returns>True if updating the property value succeeds; else false.</returns>
-        public object? Execute(object? sender, object? parameter)
+        public object Execute(object? sender, object? parameter)
         {
             object? targetObject;
             if (GetValue(TargetObjectProperty) is { })
@@ -107,7 +107,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 targetObject = sender;
             }
 
-            if (targetObject is null || PropertyName is null)
+            if (targetObject is null)
             {
                 return false;
             }
@@ -143,8 +143,8 @@ namespace Avalonia.Xaml.Interactions.Core
         private void UpdatePropertyValue(object targetObject)
         {
             var targetType = targetObject.GetType();
-            var targetTypeName = targetType?.Name;
-            var propertyInfo = targetType?.GetRuntimeProperty(PropertyName);
+            var targetTypeName = targetType.Name;
+            var propertyInfo = targetType.GetRuntimeProperty(PropertyName);
 
             if (propertyInfo is null)
             {
@@ -188,7 +188,7 @@ namespace Avalonia.Xaml.Interactions.Core
                     }
                 }
 
-                propertyInfo.SetValue(targetObject, result, new object[0]);
+                propertyInfo.SetValue(targetObject, result, Array.Empty<object>());
             }
             catch (FormatException e)
             {
@@ -204,7 +204,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,
                     "Cannot assign value of type {0} to property {1} of type {2}. The {1} property can be assigned only values of type {2}.",
-                    Value is { } ? Value.GetType().Name : "null",
+                    Value?.GetType().Name ?? "null",
                     PropertyName,
                     propertyInfo.PropertyType.Name),
                     innerException);
@@ -258,7 +258,7 @@ namespace Avalonia.Xaml.Interactions.Core
                     "Cannot assign value of type {0} to property {1} of type {2}. The {1} property can be assigned only values of type {2}.",
                     Value?.GetType().Name ?? "null",
                     PropertyName,
-                    avaloniaObject?.GetType().Name ?? "null"),
+                    avaloniaObject.GetType().Name),
                     innerException);
             }
         }
@@ -266,7 +266,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <summary>
         /// Ensures the property is not null and can be written to.
         /// </summary>
-        private void ValidateAvaloniaProperty(AvaloniaProperty property)
+        private void ValidateAvaloniaProperty(AvaloniaProperty? property)
         {
             if (property is null)
             {

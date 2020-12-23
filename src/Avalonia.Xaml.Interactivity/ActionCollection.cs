@@ -28,7 +28,8 @@ namespace Avalonia.Xaml.Interactivity
                     VerifyType(item);
                 }
             }
-            else if (collectionChangedAction == NotifyCollectionChangedAction.Add || collectionChangedAction == NotifyCollectionChangedAction.Replace)
+            else if (collectionChangedAction == NotifyCollectionChangedAction.Add 
+                     || collectionChangedAction == NotifyCollectionChangedAction.Replace)
             {
                 var changedItem = eventArgs.NewItems?[0] as IAvaloniaObject;
                 VerifyType(changedItem);
@@ -37,9 +38,14 @@ namespace Avalonia.Xaml.Interactivity
 
         private static void VerifyType(IAvaloniaObject? item)
         {
-            if (!(item is IAction))
+            if (item is null)
             {
-                throw new InvalidOperationException("Only IAction types are supported in an ActionCollection.");
+                return;
+            }
+            if (item is not IAction)
+            {
+                throw new InvalidOperationException(
+                    $"Only {nameof(IAction)} types are supported in an {nameof(ActionCollection)}.");
             }
         }
     }

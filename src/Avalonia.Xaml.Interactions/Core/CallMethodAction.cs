@@ -46,10 +46,10 @@ namespace Avalonia.Xaml.Interactions.Core
         /// Identifies the <seealso cref="TargetObject"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<object?> TargetObjectProperty =
-            AvaloniaProperty.Register<CallMethodAction, object?>(nameof(TargetObject), null);
+            AvaloniaProperty.Register<CallMethodAction, object?>(nameof(TargetObject));
 
         private Type? _targetObjectType;
-        private readonly List<MethodDescriptor> methodDescriptors = new List<MethodDescriptor>();
+        private readonly List<MethodDescriptor> _methodDescriptors = new();
         private MethodDescriptor? _cachedMethodDescriptor;
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
         /// <param name="parameter">The value of this parameter is determined by the caller.</param>
         /// <returns>True if the method is called; else false.</returns>
-        public object? Execute(object? sender, object? parameter)
+        public object Execute(object? sender, object? parameter)
         {
             object? target;
             if (GetValue(TargetObjectProperty) is { })
@@ -113,12 +113,13 @@ namespace Avalonia.Xaml.Interactions.Core
             var parameters = methodDescriptor.Parameters;
             if (parameters.Length == 0)
             {
-                methodDescriptor.MethodInfo.Invoke(target, parameters: null);
+                methodDescriptor.MethodInfo.Invoke(target, null);
                 return true;
             }
-            else if (parameters.Length == 2)
+
+            if (parameters.Length == 2)
             {
-                methodDescriptor.MethodInfo.Invoke(target, new object[] { target, parameter! });
+                methodDescriptor.MethodInfo.Invoke(target, new[] { target, parameter! });
                 return true;
             }
 
@@ -134,15 +135,10 @@ namespace Avalonia.Xaml.Interactions.Core
 
             var parameterTypeInfo = parameter.GetType().GetTypeInfo();
 
-            if (parameterTypeInfo is null)
-            {
-                return _cachedMethodDescriptor;
-            }
-
             MethodDescriptor? mostDerivedMethod = null;
 
             // Loop over the methods looking for the one whose type is closest to the type of the given parameter.
-            foreach (MethodDescriptor currentMethod in methodDescriptors)
+            foreach (MethodDescriptor currentMethod in _methodDescriptors)
             {
                 var currentTypeInfo = currentMethod.SecondParameterTypeInfo;
 
@@ -172,7 +168,7 @@ namespace Avalonia.Xaml.Interactions.Core
 
         private void UpdateMethodDescriptors()
         {
-            methodDescriptors.Clear();
+            _methodDescriptors.Clear();
             _cachedMethodDescriptor = null;
 
             if (string.IsNullOrEmpty(MethodName) || _targetObjectType is null)
@@ -196,7 +192,7 @@ namespace Avalonia.Xaml.Interactions.Core
                     }
                     else if (parameters.Length == 2 && parameters[0].ParameterType == typeof(object))
                     {
-                        methodDescriptors.Add(new MethodDescriptor(method, parameters));
+                        _methodDescriptors.Add(new MethodDescriptor(method, parameters));
                     }
                 }
             }
@@ -206,7 +202,7 @@ namespace Avalonia.Xaml.Interactions.Core
             // we should call, so we do nothing.
             if (_cachedMethodDescriptor is null)
             {
-                foreach (var method in methodDescriptors)
+                foreach (var method in _methodDescriptors)
                 {
                     var typeInfo = method.SecondParameterTypeInfo;
                     if (typeInfo is { } && (!typeInfo.IsValueType || (typeInfo.IsGenericType && typeInfo.GetGenericTypeDefinition() == typeof(Nullable<>))))
@@ -225,7 +221,7 @@ namespace Avalonia.Xaml.Interactions.Core
             }
         }
 
-        [DebuggerDisplay("{MethodInfo}")]
+        [DebuggerDisplay("{" + nameof(MethodInfo) + "}")]
         private class MethodDescriptor
         {
             public MethodDescriptor(MethodInfo methodInfo, ParameterInfo[] methodParameters)

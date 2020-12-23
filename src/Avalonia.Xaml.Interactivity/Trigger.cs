@@ -19,16 +19,6 @@ namespace Avalonia.Xaml.Interactivity
         /// Gets the collection of actions associated with the behavior. This is a avalonia property.
         /// </summary>
         [Content]
-        public ActionCollection? Actions
-        {
-            get
-            {
-                if (_actions is null)
-                {
-                    _actions = new ActionCollection();
-                }
-                return _actions;
-            }
-        }
+        public ActionCollection? Actions => _actions ??= new ActionCollection();
     }
 }

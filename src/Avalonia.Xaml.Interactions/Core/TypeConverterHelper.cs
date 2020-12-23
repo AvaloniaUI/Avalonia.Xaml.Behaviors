@@ -35,19 +35,22 @@ namespace Avalonia.Xaml.Interactions.Core
             // Value types in the "System" namespace must be special cased due to a bug in the xaml compiler
             if (string.Equals(scope, "System", StringComparison.Ordinal))
             {
-                if (string.Equals(destinationTypeFullName, (typeof(string).FullName), StringComparison.Ordinal))
+                if (string.Equals(destinationTypeFullName, typeof(string).FullName, StringComparison.Ordinal))
                 {
                     return value;
                 }
-                else if (string.Equals(destinationTypeFullName, typeof(bool).FullName, StringComparison.Ordinal))
+
+                if (string.Equals(destinationTypeFullName, typeof(bool).FullName, StringComparison.Ordinal))
                 {
                     return bool.Parse(value);
                 }
-                else if (string.Equals(destinationTypeFullName, typeof(int).FullName, StringComparison.Ordinal))
+
+                if (string.Equals(destinationTypeFullName, typeof(int).FullName, StringComparison.Ordinal))
                 {
                     return int.Parse(value, CultureInfo.InvariantCulture);
                 }
-                else if (string.Equals(destinationTypeFullName, typeof(double).FullName, StringComparison.Ordinal))
+
+                if (string.Equals(destinationTypeFullName, typeof(double).FullName, StringComparison.Ordinal))
                 {
                     return double.Parse(value, CultureInfo.InvariantCulture);
                 }
@@ -64,10 +67,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 }
 
                 var converter = TypeDescriptor.GetConverter(destinationType);
-                if (converter is { })
-                {
-                    return converter.ConvertFromInvariantString(value);
-                }
+                return converter.ConvertFromInvariantString(value);
             }
             catch (ArgumentException)
             {
@@ -87,17 +87,6 @@ namespace Avalonia.Xaml.Interactions.Core
             if (indexOfLastPeriod != name.Length - 1)
             {
                 return name.Substring(0, indexOfLastPeriod);
-            }
-
-            return name;
-        }
-
-        private static string GetType(string name)
-        {
-            int indexOfLastPeriod = name.LastIndexOf('.');
-            if (indexOfLastPeriod != name.Length - 1)
-            {
-                return name.Substring(++indexOfLastPeriod);
             }
 
             return name;
