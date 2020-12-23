@@ -26,7 +26,7 @@ namespace Avalonia.Xaml.Interactions.Core
 
             var destinationTypeFullName = destinationType.FullName;
 
-            string scope = GetScope(destinationTypeFullName);
+            var scope = GetScope(destinationTypeFullName);
 
             // Value types in the "System" namespace must be special cased due to a bug in the xaml compiler
             if (string.Equals(scope, "System", StringComparison.Ordinal))

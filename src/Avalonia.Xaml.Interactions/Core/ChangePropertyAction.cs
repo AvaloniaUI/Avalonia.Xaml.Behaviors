@@ -150,7 +150,6 @@ namespace Avalonia.Xaml.Interactions.Core
             try
             {
                 object? result = null;
-                string? valueAsString = null;
                 var propertyType = propertyInfo.PropertyType;
                 var propertyTypeInfo = propertyType.GetTypeInfo();
                 if (Value is null)
@@ -164,7 +163,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 }
                 else
                 {
-                    valueAsString = Value.ToString();
+                    var valueAsString = Value.ToString();
                     result = propertyTypeInfo.IsEnum ? Enum.Parse(propertyType, valueAsString, false) :
                         TypeConverterHelper.Convert(valueAsString, propertyType);
                 }
@@ -223,7 +222,6 @@ namespace Avalonia.Xaml.Interactions.Core
             try
             {
                 object? result = null;
-                string? valueAsString = null;
                 var propertyType = property.PropertyType;
                 var propertyTypeInfo = propertyType.GetTypeInfo();
                 if (Value is null)
@@ -237,7 +235,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 }
                 else
                 {
-                    valueAsString = Value.ToString();
+                    var valueAsString = Value.ToString();
                     result = propertyTypeInfo.IsEnum ? Enum.Parse(propertyType, valueAsString, false) :
                         TypeConverterHelper.Convert(valueAsString, propertyType);
                 }

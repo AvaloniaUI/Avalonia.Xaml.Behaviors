@@ -198,13 +198,15 @@ namespace Avalonia.Xaml.Interactions.Core
                 _isLoadedEventRegistered = false;
                 if (_resolvedSource is { })
                 {
-                    Control element = (Control)_resolvedSource;
-                    element.AttachedToVisualTree -= OnEvent; 
+                    if (_resolvedSource is Control element)
+                    {
+                        element.AttachedToVisualTree -= OnEvent; 
+                    }
                 }
             }
         }
 
-        private void OnEvent(object sender, object eventArgs)
+        private void OnEvent(object? sender, object eventArgs)
         {
             Interaction.ExecuteActions(_resolvedSource, Actions, eventArgs);
         }

@@ -24,6 +24,7 @@ namespace Avalonia.Xaml.Interactions.Core
             {
                 return;
             }
+
             foreach (var action in actions)
             {
                 foreach (AvaloniaProperty property in GetAvaloniaProperties(action.GetType()))
@@ -33,32 +34,34 @@ namespace Avalonia.Xaml.Interactions.Core
             }
         }
 
-        private static IEnumerable<AvaloniaProperty> GetAvaloniaProperties(Type type)
+        private static IEnumerable<AvaloniaProperty>? GetAvaloniaProperties(Type type)
         {
-            if (!AvaloniaPropertyCache.TryGetValue(type, out List<AvaloniaProperty> propertyList))
+            if (AvaloniaPropertyCache.TryGetValue(type, out List<AvaloniaProperty> propertyList))
             {
-                propertyList = new List<AvaloniaProperty>();
+                return propertyList;
+            }
 
-                while (type is { } && type != typeof(IAvaloniaObject))
+            propertyList = new List<AvaloniaProperty>();
+
+            while (type is { } && type != typeof(IAvaloniaObject))
+            {
+                foreach (var fieldInfo in type.GetRuntimeFields())
                 {
-                    foreach (var fieldInfo in type.GetRuntimeFields())
+                    if (fieldInfo.IsPublic && fieldInfo.FieldType == typeof(AvaloniaProperty))
                     {
-                        if (fieldInfo.IsPublic && fieldInfo.FieldType == typeof(AvaloniaProperty))
+                        if (fieldInfo.GetValue(null) is AvaloniaProperty property)
                         {
-                            if (fieldInfo.GetValue(null) is AvaloniaProperty property)
-                            {
-                                propertyList.Add(property);
-                            }
+                            propertyList.Add(property);
                         }
                     }
-
-                    type = type.GetTypeInfo().BaseType;
                 }
 
-                if (type is { })
-                {
-                    AvaloniaPropertyCache[type] = propertyList; 
-                }
+                type = type.GetTypeInfo().BaseType;
+            }
+
+            if (type is { })
+            {
+                AvaloniaPropertyCache[type] = propertyList;
             }
 
             return propertyList;
