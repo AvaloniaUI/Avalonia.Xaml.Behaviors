@@ -25,6 +25,10 @@ namespace Avalonia.Xaml.Interactions.Core
             }
 
             var destinationTypeFullName = destinationType.FullName;
+            if (destinationTypeFullName is null)
+            {
+                return null;
+            }
 
             var scope = GetScope(destinationTypeFullName);
 

@@ -143,8 +143,25 @@ namespace Avalonia.Xaml.Interactions.Core
         private void UpdatePropertyValue(object targetObject)
         {
             var targetType = targetObject.GetType();
-            var propertyInfo = targetType.GetRuntimeProperty(PropertyName);
-            ValidateProperty(targetType.Name, propertyInfo);
+            var targetTypeName = targetType?.Name;
+            var propertyInfo = targetType?.GetRuntimeProperty(PropertyName);
+
+            if (propertyInfo is null)
+            {
+                throw new ArgumentException(string.Format(
+                    CultureInfo.CurrentCulture,
+                    "Cannot find a property named {0} on type {1}.",
+                    PropertyName,
+                    targetTypeName));
+            }
+            else if (!propertyInfo.CanWrite)
+            {
+                throw new ArgumentException(string.Format(
+                    CultureInfo.CurrentCulture,
+                    "Cannot find a property named {0} on type {1}.",
+                    PropertyName,
+                    targetTypeName));
+            }
 
             Exception? innerException = null;
             try
@@ -164,8 +181,11 @@ namespace Avalonia.Xaml.Interactions.Core
                 else
                 {
                     var valueAsString = Value.ToString();
-                    result = propertyTypeInfo.IsEnum ? Enum.Parse(propertyType, valueAsString, false) :
-                        TypeConverterHelper.Convert(valueAsString, propertyType);
+                    if (valueAsString is { })
+                    {
+                        result = propertyTypeInfo.IsEnum ? Enum.Parse(propertyType, valueAsString, false) :
+                            TypeConverterHelper.Convert(valueAsString, propertyType);
+                    }
                 }
 
                 propertyInfo.SetValue(targetObject, result, new object[0]);
@@ -191,29 +211,6 @@ namespace Avalonia.Xaml.Interactions.Core
             }
         }
 
-        /// <summary>
-        /// Ensures the property is not null and can be written to.
-        /// </summary>
-        private void ValidateProperty(string targetTypeName, PropertyInfo propertyInfo)
-        {
-            if (propertyInfo is null)
-            {
-                throw new ArgumentException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    "Cannot find a property named {0} on type {1}.",
-                    PropertyName,
-                    targetTypeName));
-            }
-            else if (!propertyInfo.CanWrite)
-            {
-                throw new ArgumentException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    "Cannot find a property named {0} on type {1}.",
-                    PropertyName,
-                    targetTypeName));
-            }
-        }
-
         private void UpdateAvaloniaPropertyValue(IAvaloniaObject avaloniaObject, AvaloniaProperty property)
         {
             ValidateAvaloniaProperty(property);
@@ -236,8 +233,11 @@ namespace Avalonia.Xaml.Interactions.Core
                 else
                 {
                     var valueAsString = Value.ToString();
-                    result = propertyTypeInfo.IsEnum ? Enum.Parse(propertyType, valueAsString, false) :
-                        TypeConverterHelper.Convert(valueAsString, propertyType);
+                    if (valueAsString is { })
+                    {
+                        result = propertyTypeInfo.IsEnum ? Enum.Parse(propertyType, valueAsString, false) :
+                            TypeConverterHelper.Convert(valueAsString, propertyType);
+                    }
                 }
 
                 avaloniaObject.SetValue(property, result);

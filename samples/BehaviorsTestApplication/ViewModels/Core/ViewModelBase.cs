@@ -5,9 +5,7 @@ namespace BehaviorsTestApplication.ViewModels.Core
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
-#pragma warning disable CS8618
-        public event PropertyChangedEventHandler PropertyChanged;
-#pragma warning restore CS8618
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public void Notify([CallerMemberName] string propertyName = "")
         {

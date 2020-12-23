@@ -27,16 +27,20 @@ namespace Avalonia.Xaml.Interactions.Core
 
             foreach (var action in actions)
             {
-                foreach (AvaloniaProperty property in GetAvaloniaProperties(action.GetType()))
+                var properties = GetAvaloniaProperties(action.GetType());
+                if (properties is { })
                 {
-                    RefreshBinding(action, property);
+                    foreach (var property in properties)
+                    {
+                        RefreshBinding(action, property);
+                    }
                 }
             }
         }
 
         private static IEnumerable<AvaloniaProperty>? GetAvaloniaProperties(Type type)
         {
-            if (AvaloniaPropertyCache.TryGetValue(type, out List<AvaloniaProperty> propertyList))
+            if (AvaloniaPropertyCache.TryGetValue(type, out var propertyList))
             {
                 return propertyList;
             }
@@ -56,7 +60,11 @@ namespace Avalonia.Xaml.Interactions.Core
                     }
                 }
 
-                type = type.GetTypeInfo().BaseType;
+                var typeInfo = type.GetTypeInfo();
+                if (typeInfo is { } && typeInfo.BaseType is { })
+                {
+                    type = typeInfo.BaseType;
+                }
             }
 
             if (type is { })

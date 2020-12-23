@@ -65,7 +65,12 @@ namespace Avalonia.Xaml.Interactions.Core
         {
             if (leftOperand is { } && rightOperand is { })
             {
-                rightOperand = TypeConverterHelper.Convert(rightOperand.ToString(), leftOperand.GetType());
+                var value = rightOperand.ToString();
+                var destinationType = leftOperand.GetType();
+                if (value is { } && destinationType is { })
+                {
+                    rightOperand = TypeConverterHelper.Convert(value, destinationType);
+                }
             }
 
             var leftComparableOperand = leftOperand as IComparable;

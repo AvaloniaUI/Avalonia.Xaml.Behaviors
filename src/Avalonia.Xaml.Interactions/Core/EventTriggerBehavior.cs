@@ -158,8 +158,18 @@ namespace Avalonia.Xaml.Interactions.Core
                     }
 
                     var methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
-                    _eventHandler = methodInfo.CreateDelegate(eventInfo.EventHandlerType, this);
-                    eventInfo.AddEventHandler(_resolvedSource, _eventHandler); 
+                    if (eventInfo is { } && methodInfo is { })
+                    {
+                        var eventHandlerType = eventInfo.EventHandlerType;
+                        if (eventHandlerType is { })
+                        {
+                            _eventHandler = methodInfo.CreateDelegate(eventHandlerType, this);
+                            if (_eventHandler is { })
+                            {
+                                eventInfo.AddEventHandler(_resolvedSource, _eventHandler);
+                            }
+                        }
+                    }
                 }
             }
             else if (!_isLoadedEventRegistered)
@@ -189,7 +199,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 if (_resolvedSource is { })
                 {
                     var eventInfo = _resolvedSource.GetType().GetRuntimeEvent(eventName);
-                    eventInfo.RemoveEventHandler(_resolvedSource, _eventHandler); 
+                    eventInfo?.RemoveEventHandler(_resolvedSource, _eventHandler); 
                 }
                 _eventHandler = null;
             }
