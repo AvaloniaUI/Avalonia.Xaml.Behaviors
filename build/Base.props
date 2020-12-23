@@ -9,6 +9,7 @@
     <PackageProjectUrl>https://github.com/wieslawsoltes/AvaloniaBehaviors</PackageProjectUrl>
   </PropertyGroup>
   <PropertyGroup>
+    <AnalysisLevel>latest</AnalysisLevel>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
 </Project>
