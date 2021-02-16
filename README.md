@@ -14,44 +14,12 @@ Avalonia XAML Behaviors is an easy-to-use means of adding common and reusable in
 
 <a href='https://www.youtube.com/watch?v=pffBS-yQ_uM' target='_blank'>![](https://i.ytimg.com/vi/pffBS-yQ_uM/hqdefault.jpg)<a/>
 
-## Example Usage
-
-Example of using Behaviors in an `Avalonia`  XAML application:
-
-```XAML
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:i="using:Avalonia.Xaml.Interactivity"
-        xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
-        Width="500" Height="400">
-    <Grid RowDefinitions="Auto,100">
-        <TextBox Name="textBox" Text="Hello" Grid.Row="0" Margin="5"/>
-        <Button Name="changePropertyButton" Content="Change Property" Grid.Row="1" Margin="5,0,5,5">
-            <i:Interaction.Behaviors>
-                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #changePropertyButton}">
-                    <ia:ChangePropertyAction TargetObject="{Binding #textBox}" PropertyName="Text" Value="World"/>
-                </ia:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
-        </Button>
-    </Grid>
-</Window>
-```
-
-More examples can be found in [sample application](https://github.com/wieslawsoltes/AvaloniaBehaviors/tree/master/samples/BehaviorsTestApplication/Controls).
-
 ## Building Avalonia XAML Behaviors
 
 First, clone the repository or download the latest zip.
 ```
 git clone https://github.com/wieslawsoltes/AvaloniaBehaviors.git
-git submodule update --init --recursive
 ```
-
-### Build using IDE
-
-* [Visual Studio Community 2017](https://www.visualstudio.com/pl/vs/community/) for `Windows` builds.
-* [MonoDevelop](http://www.monodevelop.com/) for `Linux` builds.
-
-Open `AvaloniaBehaviors.sln` in selected IDE and run `Build` command.
 
 ### Build on Windows using script
 
@@ -96,14 +64,6 @@ or by using nightly build feed:
 and install the package like this:
 
 `Install-Package Avalonia.Xaml.Behaviors -Pre`
-
-### NuGet Packages
-
-* [Avalonia.Xaml.Behaviors](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors/) - Meta package containing core library and default actions and behaviors
-* [Avalonia.Xaml.Interactivity](https://www.nuget.org/packages/Avalonia.Xaml.Interactivity/) - Core library.
-* [Avalonia.Xaml.Interactions](https://www.nuget.org/packages/Avalonia.Xaml.Interactions/) - Default actions and behaviors.
-* [Avalonia.Xaml.Interactions.DragAndDrop](https://www.nuget.org/packages/Avalonia.Xaml.Interactions.DragAndDrop/) - Drag and drop behaviors.
-* [Avalonia.Xaml.Interactions.Custom](https://www.nuget.org/packages/Avalonia.Xaml.Interactions.Custom/) - Custom actions and behaviors.
 
 ### Package Sources
 
