@@ -96,42 +96,55 @@ namespace Avalonia.Xaml.Interactions.Core
         /// Executes the action.
         /// </summary>
         /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
-        /// <param name="parameter">The value of this parameter is determined by the caller.</param>
+        /// <param name="eventArgs">The value of this parameter is determined by the caller.</param>
         /// <returns>True if the command is successfully executed; else false.</returns>
-        public object Execute(object? sender, object? parameter)
+        public object Execute(object? sender, object? eventArgs)
         {
             if (Command is null)
             {
                 return false;
             }
 
-            object? resolvedParameter;
-            if (IsSet(CommandParameterProperty))
+            CommandParameters list = new();
+
+            list.Sender = sender;
+
+            if (InputConverter is { })
             {
-                resolvedParameter = CommandParameter;
-            }
-            else if (InputConverter is { })
-            {
-                resolvedParameter = InputConverter.Convert(
-                    parameter,
+                list.EventArgs = InputConverter.Convert(
+                    eventArgs,
                     typeof(object),
                     InputConverterParameter,
-                    InputConverterLanguage is { } ? 
+                    InputConverterLanguage is { } ?
                         new System.Globalization.CultureInfo(InputConverterLanguage)
                         : System.Globalization.CultureInfo.CurrentCulture);
             }
             else
             {
-                resolvedParameter = parameter;
+                list.EventArgs = eventArgs;
+
             }
 
-            if (!Command.CanExecute(resolvedParameter))
+            if (IsSet(CommandParameterProperty))
+            {
+                list.CommandParameter = CommandParameter;
+            }
+
+
+            if (!Command.CanExecute(list))
             {
                 return false;
             }
 
-            Command.Execute(resolvedParameter);
+            Command.Execute(list);
             return true;
         }
+    }
+
+    public struct CommandParameters
+    {
+        public object? Sender;
+        public object? EventArgs;
+        public object? CommandParameter;
     }
 }
