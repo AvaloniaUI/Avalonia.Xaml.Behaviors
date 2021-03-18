@@ -160,6 +160,11 @@ namespace Avalonia.Xaml.Interactions.Core
                 _ => false
             };
         }
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+            AssociatedObject.PropertyChanged += (o, e) => OnValueChanged(this, e);
+        }
 
         private static void OnValueChanged(IAvaloniaObject avaloniaObject, AvaloniaPropertyChangedEventArgs args)
         {
