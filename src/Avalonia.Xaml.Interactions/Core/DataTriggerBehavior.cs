@@ -169,6 +169,11 @@ namespace Avalonia.Xaml.Interactions.Core
             };
         }
 
+        protected override void OnAttached()
+        {
+            OnValueChanged(this, null);
+        }
+
         private static void OnValueChanged(IAvaloniaObject avaloniaObject, AvaloniaPropertyChangedEventArgs args)
         {
             if (!(avaloniaObject is DataTriggerBehavior dataTriggerBehavior) || dataTriggerBehavior.AssociatedObject is null)
