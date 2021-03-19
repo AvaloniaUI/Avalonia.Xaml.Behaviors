@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 
 namespace Avalonia.Xaml.Interactions.Core
 {
@@ -54,6 +55,24 @@ namespace Avalonia.Xaml.Interactions.Core
                 {
                     return double.Parse(value, CultureInfo.InvariantCulture);
                 }
+            }
+
+            var method = destinationType.GetMethod("Parse", 
+                    BindingFlags.Public | BindingFlags.Static, null, 
+                    new[] {typeof(string), typeof(CultureInfo)}, null);
+
+            if (method != null)
+            {
+                return method.Invoke(null, new object[] { value, CultureInfo.InvariantCulture });
+            }
+
+            method = destinationType.GetMethod("Parse", 
+                    BindingFlags.Public | BindingFlags.Static, null, 
+                    new[] {typeof(string)}, null);
+
+            if (method != null)
+            {
+                return method.Invoke(null, new object[] { value });
             }
 
             try
