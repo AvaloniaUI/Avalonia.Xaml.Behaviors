@@ -50,8 +50,11 @@ namespace Avalonia.Xaml.Interactions.Custom
                 }
 
                 _previous = e.GetPosition(_parent);
-                _parent.PointerMoved += Parent_PointerMoved;
-                _parent.PointerReleased += Parent_PointerReleased; 
+                if (_parent != null)
+                {
+                    _parent.PointerMoved += Parent_PointerMoved;
+                    _parent.PointerReleased += Parent_PointerReleased;
+                }
             }
         }
 
