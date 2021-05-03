@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:DragAndDropSample.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="using:Avalonia.Xaml.Interactivity"
+        xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
+        xmlns:b="using:DragAndDropSample.Behaviors"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="DragAndDropSample.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Width="450" WindowStartupLocation="CenterScreen"
+        Title="DragAndDropSample">
+
+    <Window.Resources>
+        <b:ItemsListBoxDropHandler x:Key="ItemsListBoxDropHandler" />
+    </Window.Resources>
+    
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <ListBox Items="{Binding Items}">
+        <i:Interaction.Behaviors>
+            <idd:ContextDropBehavior Context="{Binding}" 
+                                     Handler="{StaticResource ItemsListBoxDropHandler}" />
+        </i:Interaction.Behaviors>
+        <ListBox.Styles>
+            <Style Selector="ListBoxItem">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            </Style>
+        </ListBox.Styles>
+        <ListBox.ItemTemplate>
+            <DataTemplate DataType="vm:ItemViewModel">
+                <TextBlock Text="{Binding Title}" Background="Transparent">
+                    <i:Interaction.Behaviors>
+                        <idd:ContextDragBehavior Context="{Binding}" />
+                    </i:Interaction.Behaviors>
+                </TextBlock>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+
+</Window>
