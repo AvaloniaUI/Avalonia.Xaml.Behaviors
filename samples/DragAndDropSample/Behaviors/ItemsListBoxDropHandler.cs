@@ -30,7 +30,7 @@ namespace DragAndDropSample.Behaviors
             {
                 if (bExecute)
                 {
-                    var clone = new ItemViewModel() { Title = sourceItem.Title };
+                    var clone = new ItemViewModel() { Title = sourceItem.Title + "_copy" };
                     InsertItem(vm.Items, clone, targetIndex + 1);
                 }
                 return true;
