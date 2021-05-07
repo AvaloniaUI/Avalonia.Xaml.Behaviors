@@ -28,6 +28,15 @@
         <Setter Property="ZIndex" Value="1" />
     </Style>
     <!-- ListBoxItem Drag Styles -->
+    <Style Selector="ListBox.draggable">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style Selector="ListBox.draggable > ListBoxItem">
         <Setter Property="ZIndex" Value="0" />
         <Setter Property="(i:Interaction.Behaviors)">
