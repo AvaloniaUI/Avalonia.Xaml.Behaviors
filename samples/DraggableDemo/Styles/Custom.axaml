@@ -61,7 +61,7 @@
 
     <!-- TabItem Custom Styles -->
 
-    <Style Selector=":is(TabControl).custom > TabItem">
+    <Style Selector=":is(TabControl).custom > :is(TabItem)">
         <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="Padding" Value="12,0,12,0" />
         <Setter Property="Background" Value="WhiteSmoke" />
@@ -69,19 +69,19 @@
         <Setter Property="BorderThickness" Value="1" />
     </Style>
 
-    <Style Selector=":is(TabControl).custom > TabItem:selected">
+    <Style Selector=":is(TabControl).custom > :is(TabItem):selected">
         <Setter Property="Background" Value="White" />
     </Style>
 
-    <Style Selector=":is(TabControl).custom > TabItem:pointerover /template/ Border#PART_LayoutRoot">
+    <Style Selector=":is(TabControl).custom > :is(TabItem):pointerover /template/ Border#PART_LayoutRoot">
         <Setter Property="Background" Value="LightGray" />
     </Style>
 
-    <Style Selector=":is(TabControl).custom > TabItem:selected:pointerover /template/ Border#PART_LayoutRoot">
+    <Style Selector=":is(TabControl).custom > :is(TabItem):selected:pointerover /template/ Border#PART_LayoutRoot">
         <Setter Property="Background" Value="LightGray" />
     </Style>
 
-    <Style Selector=":is(TabControl).custom > TabItem:selected /template/ Border#PART_SelectedPipe">
+    <Style Selector=":is(TabControl).custom > :is(TabItem):selected /template/ Border#PART_SelectedPipe">
         <Setter Property="IsVisible" Value="False" />
     </Style>
 

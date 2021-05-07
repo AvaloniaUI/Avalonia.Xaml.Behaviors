@@ -15,7 +15,7 @@
         </Setter>
     </Style>
 
-    <Style Selector=":is(TabControl).draggable > TabItem">
+    <Style Selector=":is(TabControl).draggable > :is(TabItem)">
         <Setter Property="ZIndex" Value="0" />
         <Setter Property="(i:Interaction.Behaviors)">
             <id:SharedContentTemplate>
@@ -28,7 +28,7 @@
         </Setter>
     </Style>
 
-    <Style Selector=":is(TabControl).draggable > TabItem:pressed">
+    <Style Selector=":is(TabControl).draggable > :is(TabItem):pressed">
         <Setter Property="ZIndex" Value="1" />
     </Style>
 
@@ -44,7 +44,7 @@
         </Setter>
     </Style>
 
-    <Style Selector=":is(ListBox).draggable > ListBoxItem">
+    <Style Selector=":is(ListBox).draggable > :is(ListBoxItem)">
         <Setter Property="ZIndex" Value="0" />
         <Setter Property="(i:Interaction.Behaviors)">
             <id:SharedContentTemplate>
@@ -58,7 +58,7 @@
     </Style>
 
     <!-- TODO: ObjectTemplate requires https://github.com/AvaloniaUI/Avalonia/pull/5468 -->
-    <!--<Style Selector=":is(ListBox).draggable > ListBoxItem">
+    <!--<Style Selector=":is(ListBox).draggable > :is(ListBoxItem)">
         <Setter Property="ZIndex" Value="0" />
         <Setter Property="(i:Interaction.Behaviors)">
             <id:ObjectTemplate>
@@ -69,7 +69,7 @@
         </Setter>
     </Style>-->
 
-    <Style Selector=":is(ListBox).draggable > ListBoxItem:pressed">
+    <Style Selector=":is(ListBox).draggable > :is(ListBoxItem):pressed">
         <Setter Property="ZIndex" Value="1" />
     </Style>
 
