@@ -1,0 +1,73 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Styles.Resources>
+        <Thickness x:Key="TabControlTopPlacementItemMargin">0 0 0 2</Thickness>
+    </Styles.Resources>
+    <!-- TabControl Custom Styles -->
+    <Style Selector="TabControl.custom">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="{DynamicResource TabItemMargin}" />
+        <Setter Property="Background" Value="{DynamicResource TabControlBackground}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Margin="{TemplateBinding Margin}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}"
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                    <DockPanel>
+                        <Border Name="PART_ItemsPresenterBorder"
+                                DockPanel.Dock="{TemplateBinding TabStripPlacement}">
+                            <ItemsPresenter Name="PART_ItemsPresenter"
+                                            Items="{TemplateBinding Items}"
+                                            ItemsPanel="{TemplateBinding ItemsPanel}"
+                                            ItemTemplate="{TemplateBinding ItemTemplate}"/>
+                        </Border>
+                        <ContentPresenter Name="PART_SelectedContentHost"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Content="{TemplateBinding SelectedContent}"
+                                          ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="TabControl[TabStripPlacement=Left].custom /template/ ItemsPresenter#PART_ItemsPresenter > WrapPanel">
+        <Setter Property="Orientation" Value="Vertical" />
+    </Style>
+    <Style Selector="TabControl[TabStripPlacement=Right].custom /template/ ItemsPresenter#PART_ItemsPresenter > WrapPanel">
+        <Setter Property="Orientation" Value="Vertical" />
+    </Style>
+    <Style Selector="TabControl[TabStripPlacement=Top].custom /template/ ItemsPresenter#PART_ItemsPresenter">
+        <Setter Property="Margin" Value="{DynamicResource TabControlTopPlacementItemMargin}" />
+    </Style>
+    <Style Selector="TabControl.custom">
+        <Setter Property="Background" Value="LightGray" />
+    </Style>
+    <Style Selector="TabControl.custom /template/ Border#PART_ItemsPresenterBorder">
+        <Setter Property="Background" Value="DarkGray" />
+    </Style>
+    <!-- TabItem Custom Styles -->
+    <Style Selector="TabControl.custom > TabItem">
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Padding" Value="12,0,12,0" />
+        <Setter Property="Background" Value="WhiteSmoke" />
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="TabControl.custom > TabItem:selected">
+        <Setter Property="Background" Value="White" />
+    </Style>
+    <Style Selector="TabControl.custom > TabItem:pointerover /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="LightGray" />
+    </Style>
+    <Style Selector="TabControl.custom > TabItem:selected:pointerover /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="LightGray" />
+    </Style>
+    <Style Selector="TabControl.custom > TabItem:selected /template/ Border#PART_SelectedPipe">
+        <Setter Property="IsVisible" Value="False" />
+    </Style>
+</Styles>
