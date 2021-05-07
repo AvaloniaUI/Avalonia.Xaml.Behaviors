@@ -2,8 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
         xmlns:id="clr-namespace:Avalonia.Xaml.Interactions.Draggable;assembly=Avalonia.Xaml.Interactions">
+
     <!-- TabItem Drag Styles -->
-    <Style Selector="TabControl.draggable">
+
+    <Style Selector=":is(TabControl).draggable">
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
@@ -12,7 +14,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style Selector="TabControl.draggable > TabItem">
+
+    <Style Selector=":is(TabControl).draggable > TabItem">
         <Setter Property="ZIndex" Value="0" />
         <Setter Property="(i:Interaction.Behaviors)">
             <id:SharedContentTemplate>
@@ -24,11 +27,14 @@
             </id:SharedContentTemplate>
         </Setter>
     </Style>
-    <Style Selector="TabControl.draggable > TabItem:pressed">
+
+    <Style Selector=":is(TabControl).draggable > TabItem:pressed">
         <Setter Property="ZIndex" Value="1" />
     </Style>
+
     <!-- ListBoxItem Drag Styles -->
-    <Style Selector="ListBox.draggable">
+
+    <Style Selector=":is(ListBox).draggable">
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
@@ -37,7 +43,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style Selector="ListBox.draggable > ListBoxItem">
+
+    <Style Selector=":is(ListBox).draggable > ListBoxItem">
         <Setter Property="ZIndex" Value="0" />
         <Setter Property="(i:Interaction.Behaviors)">
             <id:SharedContentTemplate>
@@ -49,8 +56,9 @@
             </id:SharedContentTemplate>
         </Setter>
     </Style>
+
     <!-- TODO: ObjectTemplate requires https://github.com/AvaloniaUI/Avalonia/pull/5468 -->
-    <!--<Style Selector="ListBox.draggable > ListBoxItem">
+    <!--<Style Selector=":is(ListBox).draggable > ListBoxItem">
         <Setter Property="ZIndex" Value="0" />
         <Setter Property="(i:Interaction.Behaviors)">
             <id:ObjectTemplate>
@@ -60,11 +68,14 @@
             </id:ObjectTemplate>
         </Setter>
     </Style>-->
-    <Style Selector="ListBox.draggable > ListBoxItem:pressed">
+
+    <Style Selector=":is(ListBox).draggable > ListBoxItem:pressed">
         <Setter Property="ZIndex" Value="1" />
     </Style>
+
     <!-- Canvas Drag Styles -->
-    <Style Selector="Canvas.draggable > :is(Control)">
+
+    <Style Selector=":is(Canvas).draggable > :is(Control)">
         <Setter Property="(i:Interaction.Behaviors)">
             <id:SharedContentTemplate>
                 <id:SharedContent>
@@ -75,8 +86,10 @@
             </id:SharedContentTemplate>
         </Setter>
     </Style>
+
     <!-- ItemsControl Canvas Drag Styles -->
-    <Style Selector="ItemsControl.draggable > :is(ContentPresenter)">
+
+    <Style Selector=":is(ItemsControl).draggable > :is(ContentPresenter)">
         <Setter Property="(i:Interaction.Behaviors)">
             <id:SharedContentTemplate>
                 <id:SharedContent>
@@ -87,4 +100,5 @@
             </id:SharedContentTemplate>
         </Setter>
     </Style>
+
 </Styles>
