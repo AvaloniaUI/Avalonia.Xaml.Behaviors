@@ -1,10 +1,13 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
     <Styles.Resources>
         <Thickness x:Key="TabControlTopPlacementItemMargin">0 0 0 2</Thickness>
     </Styles.Resources>
+
     <!-- TabControl Custom Styles -->
-    <Style Selector="TabControl.custom">
+
+    <Style Selector=":is(TabControl).custom">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="{DynamicResource TabItemMargin}" />
         <Setter Property="Background" Value="{DynamicResource TabControlBackground}" />
@@ -35,39 +38,51 @@
             </ControlTemplate>
         </Setter>
     </Style>
-    <Style Selector="TabControl[TabStripPlacement=Left].custom /template/ ItemsPresenter#PART_ItemsPresenter > WrapPanel">
+
+    <Style Selector=":is(TabControl)[TabStripPlacement=Left].custom /template/ ItemsPresenter#PART_ItemsPresenter > WrapPanel">
         <Setter Property="Orientation" Value="Vertical" />
     </Style>
-    <Style Selector="TabControl[TabStripPlacement=Right].custom /template/ ItemsPresenter#PART_ItemsPresenter > WrapPanel">
+
+    <Style Selector=":is(TabControl)[TabStripPlacement=Right].custom /template/ ItemsPresenter#PART_ItemsPresenter > WrapPanel">
         <Setter Property="Orientation" Value="Vertical" />
     </Style>
-    <Style Selector="TabControl[TabStripPlacement=Top].custom /template/ ItemsPresenter#PART_ItemsPresenter">
+
+    <Style Selector=":is(TabControl)[TabStripPlacement=Top].custom /template/ ItemsPresenter#PART_ItemsPresenter">
         <Setter Property="Margin" Value="{DynamicResource TabControlTopPlacementItemMargin}" />
     </Style>
-    <Style Selector="TabControl.custom">
+
+    <Style Selector=":is(TabControl).custom">
         <Setter Property="Background" Value="LightGray" />
     </Style>
-    <Style Selector="TabControl.custom /template/ Border#PART_ItemsPresenterBorder">
+
+    <Style Selector=":is(TabControl).custom /template/ Border#PART_ItemsPresenterBorder">
         <Setter Property="Background" Value="DarkGray" />
     </Style>
+
     <!-- TabItem Custom Styles -->
-    <Style Selector="TabControl.custom > TabItem">
+
+    <Style Selector=":is(TabControl).custom > TabItem">
         <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="Padding" Value="12,0,12,0" />
         <Setter Property="Background" Value="WhiteSmoke" />
         <Setter Property="BorderBrush" Value="Black" />
         <Setter Property="BorderThickness" Value="1" />
     </Style>
-    <Style Selector="TabControl.custom > TabItem:selected">
+
+    <Style Selector=":is(TabControl).custom > TabItem:selected">
         <Setter Property="Background" Value="White" />
     </Style>
-    <Style Selector="TabControl.custom > TabItem:pointerover /template/ Border#PART_LayoutRoot">
+
+    <Style Selector=":is(TabControl).custom > TabItem:pointerover /template/ Border#PART_LayoutRoot">
         <Setter Property="Background" Value="LightGray" />
     </Style>
-    <Style Selector="TabControl.custom > TabItem:selected:pointerover /template/ Border#PART_LayoutRoot">
+
+    <Style Selector=":is(TabControl).custom > TabItem:selected:pointerover /template/ Border#PART_LayoutRoot">
         <Setter Property="Background" Value="LightGray" />
     </Style>
-    <Style Selector="TabControl.custom > TabItem:selected /template/ Border#PART_SelectedPipe">
+
+    <Style Selector=":is(TabControl).custom > TabItem:selected /template/ Border#PART_SelectedPipe">
         <Setter Property="IsVisible" Value="False" />
     </Style>
+
 </Styles>
