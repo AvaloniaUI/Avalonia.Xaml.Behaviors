@@ -1,0 +1,92 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DraggableDemo"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="550"
+        x:Class="DraggableDemo.MainWindow"
+        x:CompileBindings="True" x:DataType="local:MainWindow"
+        WindowState="Normal" WindowStartupLocation="CenterScreen"
+        Width="1000" Height="550"
+        Title="Draggable Controls Demo">
+
+    <Window.Styles>
+        <StyleInclude Source="avares://Avalonia.Xaml.Interactions/Draggable/Styles.axaml" />
+        <StyleInclude Source="/Styles/Custom.axaml" />
+        <Style Selector="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="ClipToBounds" Value="False" />
+        </Style>
+    </Window.Styles>
+
+    <TabControl Classes="draggable">
+
+        <TabItem Header="TabControl">
+            <TabControl Classes="draggable custom" Background="LightGray">
+                <TabItem Header="Tab1">
+                    <TextBlock Text="Tab1" />
+                </TabItem>
+                <TabItem Header="Tab2">
+                    <TextBlock Text="Tab2" />
+                </TabItem>
+                <TabItem Header="Tab3">
+                    <TextBlock Text="Tab3" />
+                </TabItem>
+            </TabControl>
+        </TabItem>
+
+        <TabItem Header="TabControl (Items)">
+            <TabControl Classes="draggable custom" Items="{Binding Items}" Background="LightGray"/>
+        </TabItem>
+
+        <TabItem Header="ListBox">
+            <ListBox Classes="draggable">
+                <ListBoxItem>
+                    <TextBlock Text="Item1" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock Text="Item2" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock Text="Item3" />
+                </ListBoxItem>
+            </ListBox>
+        </TabItem>
+
+        <TabItem Header="ListBox (Items)">
+            <ListBox Classes="draggable" Items="{Binding Items}" />
+        </TabItem>
+
+        <TabItem Header="Canvas">
+            <Canvas Classes="draggable" Width="500" Height="300" Background="LightGray">
+                <Rectangle Fill="Blue" Width="60" Height="40" Canvas.Left="20" Canvas.Top="10" />
+                <Ellipse Fill="Red" Width="50" Height="50" Canvas.Left="120" Canvas.Top="30" />
+                <TextBlock Text="Hello from Avalonia" Canvas.Left="40" Canvas.Top="100" />
+                <Panel Background="Purple" Width="80" Height="70" Canvas.Left="250" Canvas.Top="100" />
+            </Canvas>
+        </TabItem>
+
+        <TabItem Header="Canvas (Items)">
+            <ItemsControl Classes="draggable" Items="{Binding Items}" Width="500" Height="300" Background="LightGray">
+                <ItemsControl.Styles>
+                    <Style Selector="ItemsControl > ContentPresenter" x:DataType="local:Item">
+                        <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                    </Style>
+                </ItemsControl.Styles>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.DataTemplates>
+                    <DataTemplate DataType="local:Item">
+                        <Rectangle Fill="Black" Width="30" Height="30" />
+                    </DataTemplate>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+        </TabItem>
+    </TabControl>
+
+</Window>
