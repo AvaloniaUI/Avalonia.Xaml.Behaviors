@@ -168,8 +168,6 @@ namespace Avalonia.Xaml.Interactions.Core
                 return;
             }
 
-            DataBindingHelper.RefreshDataBindingsOnActions(dataTriggerBehavior.Actions);
-
             // NOTE: In UWP version binding null check is not present but Avalonia throws exception as Bindings are null when first initialized.
             var binding = dataTriggerBehavior.Binding;
             if (binding is { })
