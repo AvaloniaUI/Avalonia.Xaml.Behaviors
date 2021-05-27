@@ -46,13 +46,15 @@ namespace Avalonia.Xaml.Interactions.Custom
                 {
                     PlacementMode = PlacementMode.Pointer,
                     PlacementTarget = parent,
-                    IsLightDismissEnabled = false
+                    IsLightDismissEnabled = true
                 };
 
                 if (sender is IControl control)
                 {
                     BindToDataContext(control, _popup);
                 }
+
+                ((ISetLogicalParent)_popup).SetParent(parent);
             }
             _popup.Child = Child;
             _popup.Open();
