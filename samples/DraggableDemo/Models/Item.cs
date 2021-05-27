@@ -1,4 +1,4 @@
-namespace DraggableDemo
+namespace DraggableDemo.Models
 {
     public class Item
     {

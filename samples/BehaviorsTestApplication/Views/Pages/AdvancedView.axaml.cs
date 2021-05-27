@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace BehaviorsTestApplication.Pages
+namespace BehaviorsTestApplication.Views.Pages
 {
-    public class EventTriggerBehaviorControl : UserControl
+    public class AdvancedView : UserControl
     {
-        public EventTriggerBehaviorControl()
+        public AdvancedView()
         {
             InitializeComponent();
         }

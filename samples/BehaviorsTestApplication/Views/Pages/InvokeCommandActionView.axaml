@@ -1,29 +1,32 @@
-﻿<UserControl x:Class="BehaviorsTestApplication.Pages.InvokeCommandActionControl"
+﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.InvokeCommandActionView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core">
-    <Grid RowDefinitions="5*,*" ColumnDefinitions="30*,5,30*,5,30*">
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
+    <Grid RowDefinitions="*,Auto" ColumnDefinitions="30*,5,30*,5,30*">
         <Canvas Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="5" Background="{DynamicResource GrayBrush}">
             <Ellipse Canvas.Left="{Binding Position, Mode=TwoWay}" Canvas.Top="200" Fill="{DynamicResource RedBrush}" Stroke="{DynamicResource YellowBrush}" StrokeThickness="5" Height="100" Width="100"/>
         </Canvas>
-        <Button x:Name="moveLeftButton" Content="Move Left" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Button x:Name="MoveLeftButton" Content="Move Left" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5">
             <i:Interaction.Behaviors>
-                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #moveLeftButton}">
+                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #MoveLeftButton}">
                     <ia:InvokeCommandAction Command="{Binding MoveLeftCommand}"/>
                 </ia:EventTriggerBehavior>
             </i:Interaction.Behaviors>
         </Button>
-        <Button x:Name="resetMoveButton" Content="Reset Move" Grid.Row="1" Grid.Column="2" Margin="0,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Button x:Name="ResetMoveButton" Content="Reset Move" Grid.Row="1" Grid.Column="2" Margin="0,0,0,5">
             <i:Interaction.Behaviors>
-                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #resetMoveButton}">
+                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #ResetMoveButton}">
                     <ia:InvokeCommandAction Command="{Binding ResetMoveCommand}"/>
                 </ia:EventTriggerBehavior>
             </i:Interaction.Behaviors>
         </Button>
-        <Button x:Name="moveRightButton" Content="Move Right" Grid.Row="1" Grid.Column="4" Margin="0,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Button x:Name="MoveRightButton" Content="Move Right" Grid.Row="1" Grid.Column="4" Margin="0,0,5,5">
             <i:Interaction.Behaviors>
-                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #moveRightButton}">
+                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #MoveRightButton}">
                     <ia:InvokeCommandAction Command="{Binding MoveRightCommand}"/>
                 </ia:EventTriggerBehavior>
             </i:Interaction.Behaviors>

@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace BehaviorsTestApplication.Pages
+namespace BehaviorsTestApplication.Views.Pages
 {
-    public class ChangePropertyActionControl : UserControl
+    public class ValueChangedTriggerBehaviorView : UserControl
     {
-        public ChangePropertyActionControl()
+        public ValueChangedTriggerBehaviorView()
         {
             InitializeComponent();
         }

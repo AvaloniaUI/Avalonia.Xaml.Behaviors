@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactions.Core
     /// <summary>
     /// A helper class that enables converting values specified in markup (strings) to their object representation.
     /// </summary>
-    public static class TypeConverterHelper
+    internal static class TypeConverterHelper
     {
         /// <summary>
         /// Converts string representation of a value to its object representation.

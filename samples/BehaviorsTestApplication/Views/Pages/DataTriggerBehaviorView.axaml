@@ -1,22 +1,25 @@
-﻿<UserControl x:Class="BehaviorsTestApplication.Pages.DataTriggerBehaviorControl"
+﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.DataTriggerBehaviorView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core">
-    <Grid RowDefinitions="5*,*">
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
+    <Grid RowDefinitions="*,Auto">
         <Rectangle Name="DataTriggerRectangle" Grid.Row="0" Margin="5" Fill="{DynamicResource BlueBrush}" Stroke="{DynamicResource GrayBrush}" StrokeThickness="5">
             <i:Interaction.Behaviors>
-                <ia:DataTriggerBehavior Binding="{Binding #slider.Value}" ComparisonCondition="GreaterThan" Value="50">
+                <ia:DataTriggerBehavior Binding="{Binding #Slider.Value}" ComparisonCondition="GreaterThan" Value="50">
                     <ia:ChangePropertyAction TargetObject="{Binding #DataTriggerRectangle}" PropertyName="Fill" Value="{DynamicResource YellowBrush}"/>
                 </ia:DataTriggerBehavior>
-                <ia:DataTriggerBehavior Binding="{Binding #slider.Value}" ComparisonCondition="LessThanOrEqual" Value="50">
+                <ia:DataTriggerBehavior Binding="{Binding #Slider.Value}" ComparisonCondition="LessThanOrEqual" Value="50">
                     <ia:ChangePropertyAction TargetObject="{Binding #DataTriggerRectangle}" PropertyName="Fill" Value="{DynamicResource BlueBrush}"/>
                 </ia:DataTriggerBehavior>
             </i:Interaction.Behaviors>
         </Rectangle>
         <StackPanel Grid.Row="1" Margin="5,0,5,5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="{Binding #slider.Value}" VerticalAlignment="Center" Width="50" Foreground="{DynamicResource GrayBrush}"/>
-            <Slider Name="slider" Width="200" IsSnapToTickEnabled="True" TickFrequency="1"/>
+            <TextBlock Text="{Binding #Slider.Value}" VerticalAlignment="Center" Width="50" Foreground="{DynamicResource GrayBrush}"/>
+            <Slider Name="Slider" Width="400" IsSnapToTickEnabled="True" TickFrequency="1"/>
         </StackPanel>
     </Grid>
 </UserControl>

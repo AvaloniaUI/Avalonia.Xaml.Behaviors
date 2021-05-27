@@ -1,4 +1,7 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
+using Avalonia.Xaml.Interactions.Core;
+using Avalonia.Xaml.Interactivity;
 
 namespace DraggableDemo
 {
@@ -8,8 +11,12 @@ namespace DraggableDemo
             .StartWithClassicDesktopLifetime(args);
 
         public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure<App>()
-                .UsePlatformDetect()
-                .LogToTrace();
+        {
+            GC.KeepAlive(typeof(Interaction).Assembly);
+            GC.KeepAlive(typeof(ComparisonConditionType).Assembly);
+            return AppBuilder.Configure<App>()
+            .UsePlatformDetect()
+            .LogToTrace();
+        }
     }
 }

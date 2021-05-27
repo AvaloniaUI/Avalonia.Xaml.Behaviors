@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace BehaviorsTestApplication.Pages
+namespace BehaviorsTestApplication.Views.Pages
 {
-    public class CallMethodActionControl : UserControl
+    public class DataTriggerBehaviorView : UserControl
     {
-        public CallMethodActionControl()
+        public DataTriggerBehaviorView()
         {
             InitializeComponent();
         }
