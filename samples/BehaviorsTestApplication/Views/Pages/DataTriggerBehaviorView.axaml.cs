@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace BehaviorsTestApplication.Pages
+namespace BehaviorsTestApplication.Views.Pages
 {
-    public class CustomBehaviorControl : UserControl
+    public class DataTriggerBehaviorView : UserControl
     {
-        public CustomBehaviorControl()
+        public DataTriggerBehaviorView()
         {
             InitializeComponent();
         }

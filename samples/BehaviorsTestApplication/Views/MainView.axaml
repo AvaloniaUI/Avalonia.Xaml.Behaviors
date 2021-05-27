@@ -1,40 +1,40 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Views.MainView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:pages="using:BehaviorsTestApplication.Pages">
+             xmlns:pages="using:BehaviorsTestApplication.Views.Pages">
     <UserControl.Styles>
         <Style Selector="TabStripItem">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
     </UserControl.Styles>
-    <TabControl>
+    <TabControl TabStripPlacement="Left">
         <TabItem Header="CallMethodAction">
-            <pages:CallMethodActionControl/>
+            <pages:CallMethodActionView/>
         </TabItem>
         <TabItem Header="ChangePropertyAction">
-            <pages:ChangePropertyActionControl/>
+            <pages:ChangePropertyActionView/>
         </TabItem>
         <TabItem Header="DataTriggerBehavior">
-            <pages:DataTriggerBehaviorControl/>
+            <pages:DataTriggerBehaviorView/>
         </TabItem>
         <TabItem Header="ValueChangedTriggerBehavior">
-            <pages:ValueChangedTriggerBehaviorControl/>
+            <pages:ValueChangedTriggerBehaviorView/>
         </TabItem>
         <TabItem Header="EventTriggerBehavior">
-            <pages:EventTriggerBehaviorControl/>
+            <pages:EventTriggerBehaviorView/>
         </TabItem>
         <TabItem Header="InvokeCommandAction">
-            <pages:InvokeCommandActionControl/>
+            <pages:InvokeCommandActionView/>
         </TabItem>
         <TabItem Header="CustomAction">
-            <pages:CustomActionControl/>
+            <pages:CustomActionView/>
         </TabItem>
         <TabItem Header="CustomBehavior">
-            <pages:CustomBehaviorControl/>
+            <pages:CustomBehaviorView/>
         </TabItem>
         <TabItem Header="Advanced">
-            <pages:AdvancedControl/>
+            <pages:AdvancedView/>
         </TabItem>
     </TabControl>
 </UserControl>
