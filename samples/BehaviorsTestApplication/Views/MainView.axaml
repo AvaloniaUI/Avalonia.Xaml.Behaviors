@@ -1,7 +1,10 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Views.MainView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:pages="using:BehaviorsTestApplication.Views.Pages">
+             xmlns:pages="using:BehaviorsTestApplication.Views.Pages"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700">
     <UserControl.Styles>
         <Style Selector="TabStripItem">
             <Setter Property="Margin" Value="5"/>
@@ -27,13 +30,13 @@
         <TabItem Header="InvokeCommandAction">
             <pages:InvokeCommandActionView/>
         </TabItem>
-        <TabItem Header="CustomAction">
+        <TabItem Header="Custom Action">
             <pages:CustomActionView/>
         </TabItem>
-        <TabItem Header="CustomBehavior">
+        <TabItem Header="Custom Behavior">
             <pages:CustomBehaviorView/>
         </TabItem>
-        <TabItem Header="Advanced">
+        <TabItem Header="Advanced Behavior">
             <pages:AdvancedView/>
         </TabItem>
     </TabControl>

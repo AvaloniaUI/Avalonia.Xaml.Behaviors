@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
-             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom">
+             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450">
     <Grid RowDefinitions="Auto,*">
         <TextBlock Text="Move Pointer" Name="position" Grid.Row="0" Margin="5" Background="{DynamicResource GrayBrush}" Foreground="{DynamicResource YellowBrush}" FontSize="14" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <Border Name="border" Grid.Row="1" Margin="5,0,5,5" Background="{DynamicResource GrayBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

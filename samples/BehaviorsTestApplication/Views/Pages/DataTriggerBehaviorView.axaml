@@ -2,7 +2,10 @@
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core">
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450">
     <Grid RowDefinitions="5*,*">
         <Rectangle Name="DataTriggerRectangle" Grid.Row="0" Margin="5" Fill="{DynamicResource BlueBrush}" Stroke="{DynamicResource GrayBrush}" StrokeThickness="5">
             <i:Interaction.Behaviors>

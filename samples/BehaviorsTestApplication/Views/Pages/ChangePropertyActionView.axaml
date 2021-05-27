@@ -2,7 +2,10 @@
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core">
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450">
     <Grid RowDefinitions="5*,*" ColumnDefinitions="50*,5,50*">
         <Rectangle Name="ChangePropertyRectangle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5" Fill="{DynamicResource PinkBrush}" Stroke="{DynamicResource GrayBrush}" StrokeThickness="5"/>
         <Button Name="pinkButton" Content="Pink" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
