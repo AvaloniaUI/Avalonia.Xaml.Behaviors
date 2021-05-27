@@ -5,19 +5,19 @@
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450">
-    <Grid RowDefinitions="5*,*" ColumnDefinitions="50*,5,50*">
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
+    <Grid RowDefinitions="*,Auto" ColumnDefinitions="50*,5,50*">
         <Rectangle Name="ChangePropertyRectangle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5" Fill="{DynamicResource PinkBrush}" Stroke="{DynamicResource GrayBrush}" StrokeThickness="5"/>
-        <Button Name="pinkButton" Content="Pink" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Button Name="PinkButton" Content="Pink" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5">
             <i:Interaction.Behaviors>
-                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #pinkButton}">
+                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #PinkButton}">
                     <ia:ChangePropertyAction TargetObject="{Binding #ChangePropertyRectangle}" PropertyName="Fill" Value="{DynamicResource PinkBrush}"/>
                 </ia:EventTriggerBehavior>
             </i:Interaction.Behaviors>
         </Button>
-        <Button Name="yellowButton" Content="Yellow" Grid.Row="1" Grid.Column="2" Margin="0,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Button Name="YellowButton" Content="Yellow" Grid.Row="1" Grid.Column="2" Margin="0,0,5,5">
             <i:Interaction.Behaviors>
-                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #yellowButton}">
+                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #YellowButton}">
                     <ia:ChangePropertyAction TargetObject="{Binding #ChangePropertyRectangle}" PropertyName="Fill" Value="{DynamicResource YellowBrush}"/>
                 </ia:EventTriggerBehavior>
             </i:Interaction.Behaviors>

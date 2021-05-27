@@ -5,13 +5,13 @@
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450">
-    <Grid RowDefinitions="Auto,100">
-        <TextBox Name="textBox" Text="Hello" Grid.Row="0" Margin="5"/>
-        <Button Name="changePropertyButton" Content="Change Property" Grid.Row="1" Margin="5,0,5,5">
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
+    <Grid RowDefinitions="Auto,Auto">
+        <TextBox Name="TextBox" Text="Hello" Grid.Row="0" Margin="5"/>
+        <Button Name="ChangeProperty" Content="Change Property" Grid.Row="1" Margin="5,0,5,5">
             <i:Interaction.Behaviors>
-                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #changePropertyButton}">
-                    <ia:ChangePropertyAction TargetObject="{Binding #textBox}" PropertyName="Text" Value="World"/>
+                <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #ChangeProperty}">
+                    <ia:ChangePropertyAction TargetObject="{Binding #TextBox}" PropertyName="Text" Value="World"/>
                 </ia:EventTriggerBehavior>
             </i:Interaction.Behaviors>
         </Button>

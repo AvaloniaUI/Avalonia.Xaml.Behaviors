@@ -1,10 +1,6 @@
 <Application x:Class="BehaviorsTestApplication.App"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Application.Styles>
-        <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
-        <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
-    </Application.Styles>
     <Application.Resources>
         <SolidColorBrush x:Key="BlackBrush">Black</SolidColorBrush>
         <SolidColorBrush x:Key="WhiteBrush">White</SolidColorBrush>
@@ -15,4 +11,13 @@
         <SolidColorBrush x:Key="YellowBrush">Yellow</SolidColorBrush>
         <SolidColorBrush x:Key="PinkBrush">Pink</SolidColorBrush>
     </Application.Resources>
+    <Application.Styles>
+        <FluentTheme Mode="Light"/>
+        <Style Selector="Button">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Application.Styles>
 </Application>
