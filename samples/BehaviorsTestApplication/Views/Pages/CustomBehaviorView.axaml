@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.CustomBehaviorView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
+    <Grid Background="{DynamicResource GrayBrush}" Margin="5">
+        <Ellipse Fill="{DynamicResource RedBrush}" Stroke="{DynamicResource BlackBrush}" Height="125" Width="125" StrokeThickness="0" HorizontalAlignment="Left">
+            <i:Interaction.Behaviors>
+                <iac:DragPositionBehavior/>
+            </i:Interaction.Behaviors>
+        </Ellipse>
+        <Ellipse Fill="{DynamicResource BlueBrush}" Stroke="{DynamicResource BlackBrush}" Height="125" Width="125" StrokeThickness="0" HorizontalAlignment="Right">
+            <i:Interaction.Behaviors>
+                <iac:DragPositionBehavior/>
+            </i:Interaction.Behaviors>
+        </Ellipse>
+    </Grid>
+</UserControl>

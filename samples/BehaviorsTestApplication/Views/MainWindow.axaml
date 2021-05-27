@@ -2,6 +2,6 @@
         xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:views="using:BehaviorsTestApplication.Views"
-        Title="XamlBehaviors Test Application" Width="800" Height="600">
+        Title="XamlBehaviors Test Application" Width="1000" Height="700">
     <views:MainView/>
 </Window>

@@ -9,13 +9,6 @@ namespace Avalonia.Xaml.Interactions.Core
     /// </summary>
     public sealed class DataTriggerBehavior : Trigger
     {
-        static DataTriggerBehavior()
-        {
-            BindingProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
-            ComparisonConditionProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
-            ValueProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
-        }
-
         /// <summary>
         /// Identifies the <seealso cref="Binding"/> avalonia property.
         /// </summary>
@@ -59,6 +52,13 @@ namespace Avalonia.Xaml.Interactions.Core
         {
             get => GetValue(ValueProperty);
             set => SetValue(ValueProperty, value);
+        }
+
+        static DataTriggerBehavior()
+        {
+            BindingProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
+            ComparisonConditionProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
+            ValueProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
         }
 
         private static bool Compare(object? leftOperand, ComparisonConditionType operatorType, object? rightOperand)
@@ -163,21 +163,19 @@ namespace Avalonia.Xaml.Interactions.Core
 
         private static void OnValueChanged(IAvaloniaObject avaloniaObject, AvaloniaPropertyChangedEventArgs args)
         {
-            if (!(avaloniaObject is DataTriggerBehavior dataTriggerBehavior) || dataTriggerBehavior.AssociatedObject is null)
+            if (!(avaloniaObject is DataTriggerBehavior behavior) || behavior.AssociatedObject is null)
             {
                 return;
             }
 
-            DataBindingHelper.RefreshDataBindingsOnActions(dataTriggerBehavior.Actions);
-
             // NOTE: In UWP version binding null check is not present but Avalonia throws exception as Bindings are null when first initialized.
-            var binding = dataTriggerBehavior.Binding;
+            var binding = behavior.Binding;
             if (binding is { })
             {
                 // Some value has changed--either the binding value, reference value, or the comparison condition. Re-evaluate the equation.
-                if (Compare(dataTriggerBehavior.Binding, dataTriggerBehavior.ComparisonCondition, dataTriggerBehavior.Value))
+                if (Compare(behavior.Binding, behavior.ComparisonCondition, behavior.Value))
                 {
-                    Interaction.ExecuteActions(dataTriggerBehavior.AssociatedObject, dataTriggerBehavior.Actions, args);
+                    Interaction.ExecuteActions(behavior.AssociatedObject, behavior.Actions, args);
                 }
             }
         }
