@@ -4,8 +4,18 @@ using Avalonia.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.DragAndDrop
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class DropHandlerBase : IDropHandler
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="items"></param>
+        /// <param name="sourceIndex"></param>
+        /// <param name="targetIndex"></param>
+        /// <typeparam name="T"></typeparam>
         protected void MoveItem<T>(IList<T> items, int sourceIndex, int targetIndex)
         {
             if (sourceIndex < targetIndex)
@@ -26,6 +36,13 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="items"></param>
+        /// <param name="sourceIndex"></param>
+        /// <param name="targetIndex"></param>
+        /// <typeparam name="T"></typeparam>
         protected void SwapItem<T>(IList<T> items, int sourceIndex, int targetIndex)
         {
             var item1 = items[sourceIndex];
@@ -34,11 +51,25 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             items[sourceIndex] = item2;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="items"></param>
+        /// <param name="item"></param>
+        /// <param name="index"></param>
+        /// <typeparam name="T"></typeparam>
         protected void InsertItem<T>(IList<T> items, T item, int index)
         {
             items.Insert(index, item);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <param name="sourceContext"></param>
+        /// <param name="targetContext"></param>
         public virtual void Enter(object? sender, DragEventArgs e, object? sourceContext, object? targetContext)
         {
             if (Validate(sender, e, sourceContext, targetContext, null) == false)
@@ -53,6 +84,13 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <param name="sourceContext"></param>
+        /// <param name="targetContext"></param>
         public virtual void Over(object? sender, DragEventArgs e, object? sourceContext, object? targetContext)
         {
             if (Validate(sender, e, sourceContext, targetContext, null) == false)
@@ -67,6 +105,13 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <param name="sourceContext"></param>
+        /// <param name="targetContext"></param>
         public virtual void Drop(object? sender, DragEventArgs e, object? sourceContext, object? targetContext)
         {
             if (Execute(sender, e, sourceContext, targetContext, null) == false)
@@ -81,21 +126,49 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public virtual void Leave(object? sender, RoutedEventArgs e)
         {
             Cancel(sender, e);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <param name="sourceContext"></param>
+        /// <param name="targetContext"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
         public virtual bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
         {
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <param name="sourceContext"></param>
+        /// <param name="targetContext"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
         public virtual bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
         {
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public virtual void Cancel(object? sender, RoutedEventArgs e)
         {
         }

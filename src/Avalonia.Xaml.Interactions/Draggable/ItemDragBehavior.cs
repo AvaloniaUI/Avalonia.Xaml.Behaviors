@@ -12,6 +12,9 @@ using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Draggable
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ItemDragBehavior : Behavior<IControl>
     {
         private bool _enableDrag;
@@ -21,15 +24,24 @@ namespace Avalonia.Xaml.Interactions.Draggable
         private ItemsControl? _itemsControl;
         private IControl? _draggedContainer;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly StyledProperty<Orientation> OrientationProperty = 
             AvaloniaProperty.Register<ItemDragBehavior, Orientation>(nameof(Orientation));
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Orientation Orientation
         {
             get => GetValue(OrientationProperty);
             set => SetValue(OrientationProperty, value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -41,7 +53,10 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 AssociatedObject.AddHandler(InputElement.PointerMovedEvent, Moved, RoutingStrategies.Tunnel);
             }
         }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnDetaching()
         {
             base.OnDetaching();

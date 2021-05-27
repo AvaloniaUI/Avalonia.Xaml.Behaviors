@@ -7,30 +7,48 @@ using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.DragAndDrop
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class ContextDragBehavior : Behavior<Control>
     {
         private Point _dragStartPoint;
         private PointerEventArgs? _triggerEvent;
         private bool _lock;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly StyledProperty<object?> ContextProperty =
             AvaloniaProperty.Register<ContextDragBehavior, object?>(nameof(Context));
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly StyledProperty<IDragHandler?> HandlerProperty =
             AvaloniaProperty.Register<ContextDragBehavior, IDragHandler?>(nameof(Handler));
 
+        /// <summary>
+        /// 
+        /// </summary>
         public object? Context
         {
             get => GetValue(ContextProperty);
             set => SetValue(ContextProperty, value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IDragHandler? Handler
         {
             get => GetValue(HandlerProperty);
             set => SetValue(HandlerProperty, value);
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -39,6 +57,9 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             AssociatedObject?.AddHandler(InputElement.PointerMovedEvent, AssociatedObject_PointerMoved, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnDetaching()
         {
             base.OnDetaching();

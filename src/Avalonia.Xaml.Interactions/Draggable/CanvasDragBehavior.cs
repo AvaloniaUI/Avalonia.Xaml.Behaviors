@@ -7,6 +7,9 @@ using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Draggable
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CanvasDragBehavior : Behavior<Control>
     {
         private bool _enableDrag;
@@ -15,6 +18,9 @@ namespace Avalonia.Xaml.Interactions.Draggable
         private Control? _draggedContainer;
         private Control? _adorner;
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -26,7 +32,10 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 AssociatedObject.AddHandler(InputElement.PointerMovedEvent, Moved, RoutingStrategies.Tunnel);
             }
         }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnDetaching()
         {
             base.OnDetaching();

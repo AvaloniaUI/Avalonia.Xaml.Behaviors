@@ -7,6 +7,9 @@ using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.DragAndDrop
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class TypedDragBehavior : Behavior<Control>
     {
         private Point _dragStartPoint;
@@ -14,24 +17,39 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
         private object? _value;
         private bool _lock;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly StyledProperty<Type?> DataTypeProperty =
             AvaloniaProperty.Register<TypedDragBehavior, Type?>(nameof(DataType));
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly StyledProperty<IDragHandler?> HandlerProperty =
             AvaloniaProperty.Register<TypedDragBehavior, IDragHandler?>(nameof(Handler));
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Type? DataType
         {
             get => GetValue(DataTypeProperty);
             set => SetValue(DataTypeProperty, value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IDragHandler? Handler
         {
             get => GetValue(HandlerProperty);
             set => SetValue(HandlerProperty, value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -40,6 +58,9 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             AssociatedObject?.AddHandler(InputElement.PointerMovedEvent, AssociatedObject_PointerMoved, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnDetaching()
         {
             base.OnDetaching();

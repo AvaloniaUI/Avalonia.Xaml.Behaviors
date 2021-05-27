@@ -5,28 +5,49 @@ using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.DragAndDrop
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class ContextDropBehavior : Behavior<Control>
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static string DataFormat = nameof(Context);
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly StyledProperty<object?> ContextProperty =
             AvaloniaProperty.Register<ContextDropBehavior, object?>(nameof(Context));
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly StyledProperty<IDropHandler?> HandlerProperty =
             AvaloniaProperty.Register<ContextDropBehavior, IDropHandler?>(nameof(Handler));
 
+        /// <summary>
+        /// 
+        /// </summary>
         public object? Context
         {
             get => GetValue(ContextProperty);
             set => SetValue(ContextProperty, value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IDropHandler? Handler
         {
             get => GetValue(HandlerProperty);
             set => SetValue(HandlerProperty, value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -40,6 +61,9 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             AssociatedObject?.AddHandler(DragDrop.DropEvent, Drop);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnDetaching()
         {
             base.OnDetaching();

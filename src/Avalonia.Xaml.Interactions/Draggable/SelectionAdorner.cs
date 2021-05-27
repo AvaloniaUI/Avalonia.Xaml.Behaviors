@@ -5,8 +5,15 @@ using Avalonia.Media;
 
 namespace Avalonia.Xaml.Interactions.Draggable
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class SelectionAdorner : Control
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public override void Render(DrawingContext context)
         {
             var adornedElement = GetValue(AdornerLayer.AdornedElementProperty);
