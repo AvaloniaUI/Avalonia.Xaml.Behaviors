@@ -18,6 +18,9 @@
         <TabItem Header="DataTriggerBehavior">
             <pages:DataTriggerBehaviorControl/>
         </TabItem>
+        <TabItem Header="ValueChangedTriggerBehavior">
+            <pages:ValueChangedTriggerBehaviorControl/>
+        </TabItem>
         <TabItem Header="EventTriggerBehavior">
             <pages:EventTriggerBehaviorControl/>
         </TabItem>
