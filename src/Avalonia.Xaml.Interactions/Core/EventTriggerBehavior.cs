@@ -13,6 +13,41 @@ namespace Avalonia.Xaml.Interactions.Core
     {
         private const string EventNameDefaultValue = "Loaded";
 
+        /// <summary>
+        /// Identifies the <seealso cref="EventName"/> avalonia property.
+        /// </summary>
+        public static readonly StyledProperty<string> EventNameProperty =
+            AvaloniaProperty.Register<EventTriggerBehavior, string>(nameof(EventName), EventNameDefaultValue);
+
+        /// <summary>
+        /// Identifies the <seealso cref="SourceObject"/> avalonia property.
+        /// </summary>
+        public static readonly StyledProperty<object?> SourceObjectProperty =
+            AvaloniaProperty.Register<EventTriggerBehavior, object?>(nameof(SourceObject));
+
+        private object? _resolvedSource;
+        private Delegate? _eventHandler;
+        private bool _isLoadedEventRegistered;
+
+        /// <summary>
+        /// Gets or sets the name of the event to listen for. This is a avalonia property.
+        /// </summary>
+        public string EventName
+        {
+            get => GetValue(EventNameProperty);
+            set => SetValue(EventNameProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the source object from which this behavior listens for events.
+        /// If <seealso cref="SourceObject"/> is not set, the source will default to <seealso cref="Behavior.AssociatedObject"/>. This is a avalonia property.
+        /// </summary>
+        public object? SourceObject
+        {
+            get => GetValue(SourceObjectProperty);
+            set => SetValue(SourceObjectProperty, value);
+        }
+
         static EventTriggerBehavior()
         {
             EventNameProperty.Changed.Subscribe(e =>
@@ -48,41 +83,6 @@ namespace Avalonia.Xaml.Interactions.Core
                     behavior.SetResolvedSource(behavior.ComputeResolvedSource());
                 }
             });
-        }
-
-        /// <summary>
-        /// Identifies the <seealso cref="EventName"/> avalonia property.
-        /// </summary>
-        public static readonly StyledProperty<string> EventNameProperty =
-            AvaloniaProperty.Register<EventTriggerBehavior, string>(nameof(EventName), EventNameDefaultValue);
-
-        /// <summary>
-        /// Identifies the <seealso cref="SourceObject"/> avalonia property.
-        /// </summary>
-        public static readonly StyledProperty<object?> SourceObjectProperty =
-            AvaloniaProperty.Register<EventTriggerBehavior, object?>(nameof(SourceObject));
-
-        private object? _resolvedSource;
-        private Delegate? _eventHandler;
-        private bool _isLoadedEventRegistered;
-
-        /// <summary>
-        /// Gets or sets the name of the event to listen for. This is a avalonia property.
-        /// </summary>
-        public string EventName
-        {
-            get => GetValue(EventNameProperty);
-            set => SetValue(EventNameProperty, value);
-        }
-
-        /// <summary>
-        /// Gets or sets the source object from which this behavior listens for events.
-        /// If <seealso cref="SourceObject"/> is not set, the source will default to <seealso cref="Behavior.AssociatedObject"/>. This is a avalonia property.
-        /// </summary>
-        public object? SourceObject
-        {
-            get => GetValue(SourceObjectProperty);
-            set => SetValue(SourceObjectProperty, value);
         }
 
         /// <summary>

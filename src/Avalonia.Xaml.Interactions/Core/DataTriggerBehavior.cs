@@ -9,13 +9,6 @@ namespace Avalonia.Xaml.Interactions.Core
     /// </summary>
     public sealed class DataTriggerBehavior : Trigger
     {
-        static DataTriggerBehavior()
-        {
-            BindingProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
-            ComparisonConditionProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
-            ValueProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
-        }
-
         /// <summary>
         /// Identifies the <seealso cref="Binding"/> avalonia property.
         /// </summary>
@@ -59,6 +52,13 @@ namespace Avalonia.Xaml.Interactions.Core
         {
             get => GetValue(ValueProperty);
             set => SetValue(ValueProperty, value);
+        }
+
+        static DataTriggerBehavior()
+        {
+            BindingProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
+            ComparisonConditionProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
+            ValueProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
         }
 
         private static bool Compare(object? leftOperand, ComparisonConditionType operatorType, object? rightOperand)

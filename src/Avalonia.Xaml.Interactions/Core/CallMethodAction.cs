@@ -12,6 +12,40 @@ namespace Avalonia.Xaml.Interactions.Core
     /// </summary>
     public sealed class CallMethodAction : AvaloniaObject, IAction
     {
+        private Type? _targetObjectType;
+        private readonly List<MethodDescriptor> _methodDescriptors = new();
+        private MethodDescriptor? _cachedMethodDescriptor;
+
+        /// <summary>
+        /// Identifies the <seealso cref="MethodName"/> avalonia property.
+        /// </summary>
+        public static readonly StyledProperty<string> MethodNameProperty =
+            AvaloniaProperty.Register<CallMethodAction, string>(nameof(MethodName));
+
+        /// <summary>
+        /// Identifies the <seealso cref="TargetObject"/> avalonia property.
+        /// </summary>
+        public static readonly StyledProperty<object?> TargetObjectProperty =
+            AvaloniaProperty.Register<CallMethodAction, object?>(nameof(TargetObject));
+
+        /// <summary>
+        /// Gets or sets the name of the method to invoke. This is a avalonia property.
+        /// </summary>
+        public string MethodName
+        {
+            get => GetValue(MethodNameProperty);
+            set => SetValue(MethodNameProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the object that exposes the method of interest. This is a avalonia property.
+        /// </summary>
+        public object? TargetObject
+        {
+            get => GetValue(TargetObjectProperty);
+            set => SetValue(TargetObjectProperty, value);
+        }
+
         static CallMethodAction()
         {
             MethodNameProperty.Changed.Subscribe(e =>
@@ -34,40 +68,6 @@ namespace Avalonia.Xaml.Interactions.Core
                     }
                 }
             });
-        }
-
-        /// <summary>
-        /// Identifies the <seealso cref="MethodName"/> avalonia property.
-        /// </summary>
-        public static readonly StyledProperty<string> MethodNameProperty =
-            AvaloniaProperty.Register<CallMethodAction, string>(nameof(MethodName));
-
-        /// <summary>
-        /// Identifies the <seealso cref="TargetObject"/> avalonia property.
-        /// </summary>
-        public static readonly StyledProperty<object?> TargetObjectProperty =
-            AvaloniaProperty.Register<CallMethodAction, object?>(nameof(TargetObject));
-
-        private Type? _targetObjectType;
-        private readonly List<MethodDescriptor> _methodDescriptors = new();
-        private MethodDescriptor? _cachedMethodDescriptor;
-
-        /// <summary>
-        /// Gets or sets the name of the method to invoke. This is a avalonia property.
-        /// </summary>
-        public string MethodName
-        {
-            get => GetValue(MethodNameProperty);
-            set => SetValue(MethodNameProperty, value);
-        }
-
-        /// <summary>
-        /// Gets or sets the object that exposes the method of interest. This is a avalonia property.
-        /// </summary>
-        public object? TargetObject
-        {
-            get => GetValue(TargetObjectProperty);
-            set => SetValue(TargetObjectProperty, value);
         }
 
         /// <summary>
