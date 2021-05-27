@@ -2,6 +2,8 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.ReactiveUI;
+using Avalonia.Xaml.Interactions.Core;
+using Avalonia.Xaml.Interactivity;
 
 namespace DragAndDropSample
 {
@@ -16,9 +18,13 @@ namespace DragAndDropSample
 
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure<App>()
+        {
+            GC.KeepAlive(typeof(Interaction).Assembly);
+            GC.KeepAlive(typeof(ComparisonConditionType).Assembly);
+            return AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .LogToTrace()
                 .UseReactiveUI();
+        }
     }
 }
