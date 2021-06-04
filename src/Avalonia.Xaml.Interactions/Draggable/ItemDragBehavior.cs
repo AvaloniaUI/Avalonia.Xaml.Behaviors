@@ -167,7 +167,7 @@ namespace Avalonia.Xaml.Interactions.Draggable
 
         private void Moved(object? sender, PointerEventArgs e)
         {
-            if (_itemsControl?.Items is null || _draggedContainer is null || !_enableDrag)
+            if (_itemsControl?.Items is null || _draggedContainer?.RenderTransform is null || !_enableDrag)
             {
                 return;
             }
