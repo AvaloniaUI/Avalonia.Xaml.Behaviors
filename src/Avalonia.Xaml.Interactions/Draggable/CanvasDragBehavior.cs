@@ -30,6 +30,7 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, Released, RoutingStrategies.Tunnel);
                 AssociatedObject.AddHandler(InputElement.PointerPressedEvent, Pressed, RoutingStrategies.Tunnel);
                 AssociatedObject.AddHandler(InputElement.PointerMovedEvent, Moved, RoutingStrategies.Tunnel);
+                AssociatedObject.AddHandler(InputElement.PointerCaptureLostEvent, CaptureLost, RoutingStrategies.Tunnel);
             }
         }
 
@@ -45,6 +46,7 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, Released);
                 AssociatedObject.RemoveHandler(InputElement.PointerPressedEvent, Pressed);
                 AssociatedObject.RemoveHandler(InputElement.PointerMovedEvent, Moved);
+                AssociatedObject.RemoveHandler(InputElement.PointerCaptureLostEvent, CaptureLost);
             }
         }
 
@@ -95,17 +97,12 @@ namespace Avalonia.Xaml.Interactions.Draggable
 
         private void Released(object? sender, PointerReleasedEventArgs e)
         {
-            if (_enableDrag)
-            {
-                if (_parent is { } && _draggedContainer is { })
-                {
-                    // RemoveAdorner(_draggedContainer);
-                }
+            Released();
+        }
 
-                _enableDrag = false;
-                _parent = null;
-                _draggedContainer = null;
-            }
+        private void CaptureLost(object? sender, PointerCaptureLostEventArgs e)
+        {
+            Released();
         }
 
         private void Moved(object? sender, PointerEventArgs e)
@@ -123,6 +120,21 @@ namespace Avalonia.Xaml.Interactions.Draggable
             var top = Canvas.GetTop(_draggedContainer);
             Canvas.SetLeft(_draggedContainer, left + deltaX);
             Canvas.SetTop(_draggedContainer, top + deltaY);
+        }
+
+        private void Released()
+        {
+            if (_enableDrag)
+            {
+                if (_parent is { } && _draggedContainer is { })
+                {
+                    // RemoveAdorner(_draggedContainer);
+                }
+
+                _enableDrag = false;
+                _parent = null;
+                _draggedContainer = null;
+            }
         }
     }
 }

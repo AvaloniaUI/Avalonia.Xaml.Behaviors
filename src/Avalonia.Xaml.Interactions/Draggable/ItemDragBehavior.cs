@@ -51,6 +51,7 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, Released, RoutingStrategies.Tunnel);
                 AssociatedObject.AddHandler(InputElement.PointerPressedEvent, Pressed, RoutingStrategies.Tunnel);
                 AssociatedObject.AddHandler(InputElement.PointerMovedEvent, Moved, RoutingStrategies.Tunnel);
+                AssociatedObject.AddHandler(InputElement.PointerCaptureLostEvent, CaptureLost, RoutingStrategies.Tunnel);
             }
         }
 
@@ -66,6 +67,7 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, Released);
                 AssociatedObject.RemoveHandler(InputElement.PointerPressedEvent, Pressed);
                 AssociatedObject.RemoveHandler(InputElement.PointerMovedEvent, Moved);
+                AssociatedObject.RemoveHandler(InputElement.PointerCaptureLostEvent, CaptureLost);
             }
         }
 
@@ -87,6 +89,16 @@ namespace Avalonia.Xaml.Interactions.Draggable
         }
 
         private void Released(object? sender, PointerReleasedEventArgs e)
+        {
+            Released();
+        }
+
+        private void CaptureLost(object? sender, PointerCaptureLostEventArgs e)
+        {
+            Released();
+        }
+
+        private void Released()
         {
             if (_enableDrag)
             {
