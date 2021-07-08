@@ -36,11 +36,14 @@
         <TabItem Header="Custom Behavior">
             <pages:CustomBehaviorView/>
         </TabItem>
+        <TabItem Header="Advanced Behavior">
+            <pages:AdvancedView/>
+        </TabItem>
         <TabItem Header="Add/RemoveClassAction">
             <pages:AddRemoveClassActionView/>
         </TabItem>
-        <TabItem Header="Advanced Behavior">
-            <pages:AdvancedView/>
+        <TabItem Header="ResponsiveControlBehavior">
+            <pages:ResponsiveControlBehaviorView/>
         </TabItem>
     </TabControl>
 </UserControl>
