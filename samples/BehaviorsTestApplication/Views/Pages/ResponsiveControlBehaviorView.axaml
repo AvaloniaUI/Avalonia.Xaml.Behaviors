@@ -27,18 +27,23 @@
             <StackPanel.Styles>
                 <Style Selector="StackPanel">
                     <Setter Property="Spacing" Value="0"/>
+                    <Setter Property="(TextBlock.Foreground)" Value="Black"/>
                 </Style>
                 <Style Selector="StackPanel.small">
                     <Setter Property="Spacing" Value="10"/>
+                    <Setter Property="(TextBlock.Foreground)" Value="Purple"/>
                 </Style>
                 <Style Selector="StackPanel.medium">
                     <Setter Property="Spacing" Value="20"/>
+                    <Setter Property="(TextBlock.Foreground)" Value="Red"/>
                 </Style>
                 <Style Selector="StackPanel.large">
                     <Setter Property="Spacing" Value="30"/>
+                    <Setter Property="(TextBlock.Foreground)" Value="Blue"/>
                 </Style>
                 <Style Selector="StackPanel.wide">
                     <Setter Property="Spacing" Value="40"/>
+                    <Setter Property="(TextBlock.Foreground)" Value="Green"/>
                 </Style>
             </StackPanel.Styles>
             <i:Interaction.Behaviors>
