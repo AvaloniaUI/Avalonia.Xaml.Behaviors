@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.ResponsiveControlBehaviorView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ir="using:Avalonia.Xaml.Interactions.Responsive"
+             xmlns:converters="using:BehaviorsTestApplication.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
+    <DockPanel Background="{DynamicResource GrayBrush}" Margin="5">
+        <StackPanel Orientation="Horizontal" Spacing="5" Margin="5" DockPanel.Dock="Bottom">
+            <TextBlock Text="Width: " />
+            <TextBlock Text="{Binding #ResponsiveStackPanel.Bounds.Width}" />
+            <TextBlock Text=" Height: " />
+            <TextBlock Text="{Binding #ResponsiveStackPanel.Bounds.Height}" />
+            <TextBlock Text=" Classes: " />
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding Converter="{x:Static converters:ClassesToStringConverter.Instance}">
+                        <Binding ElementName="ResponsiveStackPanel" Path="Classes.Count"/>
+                        <Binding ElementName="ResponsiveStackPanel" Path="Classes"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
+        <StackPanel Name="ResponsiveStackPanel">
+            <StackPanel.Styles>
+                <Style Selector="StackPanel">
+                    <Setter Property="Spacing" Value="0"/>
+                    <Setter Property="(TextBlock.Foreground)" Value="Black"/>
+                </Style>
+                <Style Selector="StackPanel.small">
+                    <Setter Property="Spacing" Value="10"/>
+                    <Setter Property="(TextBlock.Foreground)" Value="Purple"/>
+                </Style>
+                <Style Selector="StackPanel.medium">
+                    <Setter Property="Spacing" Value="20"/>
+                    <Setter Property="(TextBlock.Foreground)" Value="Red"/>
+                </Style>
+                <Style Selector="StackPanel.large">
+                    <Setter Property="Spacing" Value="30"/>
+                    <Setter Property="(TextBlock.Foreground)" Value="Blue"/>
+                </Style>
+                <Style Selector="StackPanel.wide">
+                    <Setter Property="Spacing" Value="40"/>
+                    <Setter Property="(TextBlock.Foreground)" Value="Green"/>
+                </Style>
+            </StackPanel.Styles>
+            <i:Interaction.Behaviors>
+                <ir:ResponsiveControlBehavior>
+                    <ir:ResponsiveTrigger MinValue="0" MinOperator="GreaterThanOrEqual" MaxValue="500" MaxOperator="LessThan" Property="Width" ClassName="small"/>
+                    <ir:ResponsiveTrigger MinValue="500" MinOperator="GreaterThan" MaxValue="700" MaxOperator="LessThan" Property="Width" ClassName="medium"/>
+                    <ir:ResponsiveTrigger MinValue="700" MinOperator="GreaterThan" MaxValue="900" MaxOperator="LessThan" Property="Width" ClassName="large"/>
+                    <ir:ResponsiveTrigger MinValue="900" MinOperator="GreaterThan" MaxValue="Infinity" MaxOperator="LessThan" Property="Width" ClassName="wide"/>
+                </ir:ResponsiveControlBehavior>
+            </i:Interaction.Behaviors>
+            <TextBlock Text="Item1"/>
+            <TextBlock Text="Item2"/>
+            <TextBlock Text="Item3"/>
+            <TextBlock Text="Item4"/>
+            <TextBlock Text="Item5"/>
+            <TextBlock Text="Item7"/>
+            <TextBlock Text="Item8"/>
+        </StackPanel>
+    </DockPanel>
+</UserControl>
