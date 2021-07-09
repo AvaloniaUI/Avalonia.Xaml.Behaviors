@@ -10,14 +10,13 @@ namespace Avalonia.Xaml.Interactions.Responsive
     public sealed class ResponsiveControlBehavior : Behavior<Control>
     {
         private IDisposable? _disposable;
+        private AvaloniaList<ResponsiveTrigger>? _triggers;
 
         public static readonly StyledProperty<Control?> ControlProperty =
             AvaloniaProperty.Register<ResponsiveControlBehavior, Control?>(nameof(Control));
 
         public static readonly DirectProperty<ResponsiveControlBehavior, AvaloniaList<ResponsiveTrigger>?> TriggersProperty = 
             AvaloniaProperty.RegisterDirect<ResponsiveControlBehavior, AvaloniaList<ResponsiveTrigger>?>(nameof(Triggers), t => t._triggers);
-
-        private AvaloniaList<ResponsiveTrigger>? _triggers;
 
         public Control? Control
         {
