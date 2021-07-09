@@ -7,26 +7,44 @@ using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Responsive
 {
+    /// <summary>
+    /// Observes attached control Bounds property changes and if triggered sets or removes style classes.
+    /// </summary>
     public sealed class ResponsiveControlBehavior : Behavior<Control>
     {
         private IDisposable? _disposable;
         private AvaloniaList<ResponsiveTrigger>? _triggers;
 
+        /// <summary>
+        /// Identifies the <seealso cref="Control"/> avalonia property.
+        /// </summary>
         public static readonly StyledProperty<Control?> ControlProperty =
             AvaloniaProperty.Register<ResponsiveControlBehavior, Control?>(nameof(Control));
 
+        /// <summary>
+        /// Identifies the <seealso cref="Triggers"/> avalonia property.
+        /// </summary>
         public static readonly DirectProperty<ResponsiveControlBehavior, AvaloniaList<ResponsiveTrigger>?> TriggersProperty = 
             AvaloniaProperty.RegisterDirect<ResponsiveControlBehavior, AvaloniaList<ResponsiveTrigger>?>(nameof(Triggers), t => t._triggers);
 
+        /// <summary>
+        /// Gets or sets the target control that class name that should be added or removed when triggered. This is a avalonia property.
+        /// </summary>
         public Control? Control
         {
             get => GetValue(ControlProperty);
             set => SetValue(ControlProperty, value);
         }
 
+        /// <summary>
+        /// Gets responsive triggers collection. This is a avalonia property.
+        /// </summary>
         [Content]
         public AvaloniaList<ResponsiveTrigger>? Triggers => _triggers ??= new AvaloniaList<ResponsiveTrigger>();
 
+        /// <summary>
+        /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
+        /// </summary>
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -36,6 +54,9 @@ namespace Avalonia.Xaml.Interactions.Responsive
             }
         }
 
+        /// <summary>
+        /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
+        /// </summary>
         protected override void OnDetaching()
         {
             base.OnDetaching();
