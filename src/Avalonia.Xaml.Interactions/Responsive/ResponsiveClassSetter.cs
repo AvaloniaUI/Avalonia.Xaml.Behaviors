@@ -3,45 +3,51 @@
 namespace Avalonia.Xaml.Interactions.Responsive
 {
     /// <summary>
-    /// Responsive trigger serves as input condition for <see cref="ResponsiveControlBehavior"/> behavior.
+    /// Responsive class setter for <see cref="ResponsiveControlBehavior"/> behavior.
     /// </summary>
-    public class ResponsiveTrigger : AvaloniaObject
+    public class ResponsiveClassSetter : AvaloniaObject
     {
         /// <summary>
         /// Identifies the <seealso cref="MinValue"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<double> MinValueProperty =
-            AvaloniaProperty.Register<ResponsiveTrigger, double>(nameof(MinValue));
+            AvaloniaProperty.Register<ResponsiveClassSetter, double>(nameof(MinValue));
         
         /// <summary>
         /// Identifies the <seealso cref="MinOperator"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<ComparisonConditionType> MinOperatorProperty =
-            AvaloniaProperty.Register<ResponsiveTrigger, ComparisonConditionType>(nameof(MinOperator));
+            AvaloniaProperty.Register<ResponsiveClassSetter, ComparisonConditionType>(nameof(MinOperator));
 
         /// <summary>
         /// Identifies the <seealso cref="MaxValue"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<double> MaxValueProperty =
-            AvaloniaProperty.Register<ResponsiveTrigger, double>(nameof(MaxValue));
+            AvaloniaProperty.Register<ResponsiveClassSetter, double>(nameof(MaxValue));
 
         /// <summary>
         /// Identifies the <seealso cref="MaxOperator"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<ComparisonConditionType> MaxOperatorProperty =
-            AvaloniaProperty.Register<ResponsiveTrigger, ComparisonConditionType>(nameof(MaxOperator));
+            AvaloniaProperty.Register<ResponsiveClassSetter, ComparisonConditionType>(nameof(MaxOperator));
 
         /// <summary>
         /// Identifies the <seealso cref="Property"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<ResponsiveBoundsProperty> PropertyProperty =
-            AvaloniaProperty.Register<ResponsiveTrigger, ResponsiveBoundsProperty>(nameof(Property));
+            AvaloniaProperty.Register<ResponsiveClassSetter, ResponsiveBoundsProperty>(nameof(Property));
 
         /// <summary>
         /// Identifies the <seealso cref="ClassName"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<string> ClassNameProperty =
-            AvaloniaProperty.Register<ResponsiveTrigger, string>(nameof(ClassName));
+            AvaloniaProperty.Register<ResponsiveClassSetter, string>(nameof(ClassName));
+
+        /// <summary>
+        /// Identifies the <seealso cref="IsPseudoClass"/> avalonia property.
+        /// </summary>
+        public static readonly StyledProperty<bool> IsPseudoClassProperty =
+            AvaloniaProperty.Register<ResponsiveClassSetter, bool>(nameof(IsPseudoClass));
 
         /// <summary>
         /// Gets or sets minimum value used for property comparison. This is a avalonia property.
@@ -95,6 +101,15 @@ namespace Avalonia.Xaml.Interactions.Responsive
         {
             get => GetValue(ClassNameProperty);
             set => SetValue(ClassNameProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the flag whether ClassName is a PseudoClass. This is a avalonia property.
+        /// </summary>
+        public bool IsPseudoClass
+        {
+            get => GetValue(IsPseudoClassProperty);
+            set => SetValue(IsPseudoClassProperty, value);
         }
     }
 }

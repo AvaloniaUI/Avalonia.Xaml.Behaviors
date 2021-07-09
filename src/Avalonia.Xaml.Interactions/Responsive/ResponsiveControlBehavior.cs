@@ -13,7 +13,7 @@ namespace Avalonia.Xaml.Interactions.Responsive
     public sealed class ResponsiveControlBehavior : Behavior<Control>
     {
         private IDisposable? _disposable;
-        private AvaloniaList<ResponsiveTrigger>? _triggers;
+        private AvaloniaList<ResponsiveClassSetter>? _setters;
 
         /// <summary>
         /// Identifies the <seealso cref="Control"/> avalonia property.
@@ -22,10 +22,10 @@ namespace Avalonia.Xaml.Interactions.Responsive
             AvaloniaProperty.Register<ResponsiveControlBehavior, Control?>(nameof(Control));
 
         /// <summary>
-        /// Identifies the <seealso cref="Triggers"/> avalonia property.
+        /// Identifies the <seealso cref="Setters"/> avalonia property.
         /// </summary>
-        public static readonly DirectProperty<ResponsiveControlBehavior, AvaloniaList<ResponsiveTrigger>?> TriggersProperty = 
-            AvaloniaProperty.RegisterDirect<ResponsiveControlBehavior, AvaloniaList<ResponsiveTrigger>?>(nameof(Triggers), t => t._triggers);
+        public static readonly DirectProperty<ResponsiveControlBehavior, AvaloniaList<ResponsiveClassSetter>?> SettersProperty = 
+            AvaloniaProperty.RegisterDirect<ResponsiveControlBehavior, AvaloniaList<ResponsiveClassSetter>?>(nameof(Setters), t => t._setters);
 
         /// <summary>
         /// Gets or sets the target control that class name that should be added or removed when triggered. This is a avalonia property.
@@ -37,10 +37,10 @@ namespace Avalonia.Xaml.Interactions.Responsive
         }
 
         /// <summary>
-        /// Gets responsive triggers collection. This is a avalonia property.
+        /// Gets responsive setters collection. This is a avalonia property.
         /// </summary>
         [Content]
-        public AvaloniaList<ResponsiveTrigger>? Triggers => _triggers ??= new AvaloniaList<ResponsiveTrigger>();
+        public AvaloniaList<ResponsiveClassSetter>? Setters => _setters ??= new AvaloniaList<ResponsiveClassSetter>();
 
         /// <summary>
         /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
@@ -71,15 +71,15 @@ namespace Avalonia.Xaml.Interactions.Responsive
         private void AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
         {
             var target = GetValue(ControlProperty) is { } ? Control : AssociatedObject;
-            var triggers = Triggers;
+            var setters = Setters;
 
-            if (target is not null && triggers is not null)
+            if (target is not null && setters is not null)
             {
-                _disposable = ObserveBounds(target, triggers);
+                _disposable = ObserveBounds(target, setters);
             }
         }
 
-        private static IDisposable? ObserveBounds(Control target, AvaloniaList<ResponsiveTrigger> triggers)
+        private static IDisposable? ObserveBounds(Control target, AvaloniaList<ResponsiveClassSetter> setters)
         {
             if (target is null)
                 throw new ArgumentNullException(nameof(target));
@@ -87,12 +87,12 @@ namespace Avalonia.Xaml.Interactions.Responsive
             var data = target.GetObservable(Visual.BoundsProperty);
             return data.Subscribe(bounds =>
             {
-                foreach (var trigger in triggers)
+                foreach (var setter in setters)
                 {
-                    var minValue = trigger.MinValue;
-                    var maxValue = trigger.MaxValue;
+                    var minValue = setter.MinValue;
+                    var maxValue = setter.MaxValue;
 
-                    var property = trigger.Property switch
+                    var property = setter.Property switch
                     {
                         ResponsiveBoundsProperty.Width => bounds.Width,
                         ResponsiveBoundsProperty.Height => bounds.Height,
@@ -100,23 +100,37 @@ namespace Avalonia.Xaml.Interactions.Responsive
                     };
 
                     var enabled = 
-                        GetResult(trigger.MinOperator, property, minValue)
-                        && GetResult(trigger.MaxOperator, property, maxValue);
+                        GetResult(setter.MinOperator, property, minValue)
+                        && GetResult(setter.MaxOperator, property, maxValue);
 
-                    var className = trigger.ClassName;
+                    var className = setter.ClassName;
 
                     if (enabled)
                     {
                         if (!string.IsNullOrEmpty(className) && !target.Classes.Contains(className))
                         {
-                            target.Classes.Add(className);
+                            if (setter.IsPseudoClass)
+                            {
+                                ((IPseudoClasses)target.Classes).Add(className);
+                            }
+                            else
+                            {
+                                target.Classes.Add(className);
+                            }
                         }
                     }
                     else
                     {
                         if (!string.IsNullOrEmpty(className) && target.Classes.Contains(className))
                         {
-                            target.Classes.Remove(className);
+                            if (setter.IsPseudoClass)
+                            {
+                                ((IPseudoClasses)target.Classes).Remove(className);
+                            }
+                            else
+                            {
+                                target.Classes.Remove(className);
+                            }
                         }
                     }
                 }
