@@ -24,8 +24,8 @@ namespace Avalonia.Xaml.Interactions.Responsive
         /// <summary>
         /// Identifies the <seealso cref="Setters"/> avalonia property.
         /// </summary>
-        public static readonly DirectProperty<ResponsiveControlBehavior, AvaloniaList<ResponsiveClassSetter>?> SettersProperty = 
-            AvaloniaProperty.RegisterDirect<ResponsiveControlBehavior, AvaloniaList<ResponsiveClassSetter>?>(nameof(Setters), t => t._setters);
+        public static readonly DirectProperty<ResponsiveControlBehavior, AvaloniaList<ResponsiveClassSetter>> SettersProperty = 
+            AvaloniaProperty.RegisterDirect<ResponsiveControlBehavior, AvaloniaList<ResponsiveClassSetter>>(nameof(Setters), t => t.Setters);
 
         /// <summary>
         /// Gets or sets the target control that class name that should be added or removed when triggered. This is a avalonia property.
@@ -40,7 +40,7 @@ namespace Avalonia.Xaml.Interactions.Responsive
         /// Gets responsive setters collection. This is a avalonia property.
         /// </summary>
         [Content]
-        public AvaloniaList<ResponsiveClassSetter>? Setters => _setters ??= new AvaloniaList<ResponsiveClassSetter>();
+        public AvaloniaList<ResponsiveClassSetter> Setters => _setters ??= new AvaloniaList<ResponsiveClassSetter>();
 
         /// <summary>
         /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
@@ -83,9 +83,8 @@ namespace Avalonia.Xaml.Interactions.Responsive
         private void StartObserving()
         {
             var target = GetValue(ControlProperty) is { } ? Control : AssociatedObject;
-            var setters = Setters;
 
-            if (target is not null && setters is not null)
+            if (target is not null)
             {
                 _disposable = ObserveBounds(target);
             }
@@ -96,7 +95,7 @@ namespace Avalonia.Xaml.Interactions.Responsive
             _disposable?.Dispose();
         }
 
-        private IDisposable? ObserveBounds(Control target)
+        private IDisposable ObserveBounds(Control target)
         {
             if (target is null)
             {
@@ -148,7 +147,9 @@ namespace Avalonia.Xaml.Interactions.Responsive
         {
             return comparisonConditionType switch
             {
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 ComparisonConditionType.Equal => property == value,
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 ComparisonConditionType.NotEqual => property != value,
                 ComparisonConditionType.LessThan => property < value,
                 ComparisonConditionType.LessThanOrEqual => property <= value,
@@ -160,7 +161,7 @@ namespace Avalonia.Xaml.Interactions.Responsive
 
         private static void Add(Control target, string? className, bool isPseudoClass)
         {
-            if (string.IsNullOrEmpty(className) || target.Classes.Contains(className))
+            if (string.IsNullOrEmpty(className) || target.Classes.Contains(className!))
             {
                 return;
             }
@@ -171,13 +172,13 @@ namespace Avalonia.Xaml.Interactions.Responsive
             }
             else
             {
-                target.Classes.Add(className);
+                target.Classes.Add(className!);
             }
         }
 
         private static void Remove(Control target, string? className, bool isPseudoClass)
         {
-            if (string.IsNullOrEmpty(className) || !target.Classes.Contains(className))
+            if (string.IsNullOrEmpty(className) || !target.Classes.Contains(className!))
             {
                 return;
             }
@@ -188,7 +189,7 @@ namespace Avalonia.Xaml.Interactions.Responsive
             }
             else
             {
-                target.Classes.Remove(className);
+                target.Classes.Remove(className!);
             }
         }
     }
