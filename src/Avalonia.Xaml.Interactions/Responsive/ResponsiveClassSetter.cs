@@ -23,7 +23,7 @@ namespace Avalonia.Xaml.Interactions.Responsive
         /// Identifies the <seealso cref="MaxValue"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<double> MaxValueProperty =
-            AvaloniaProperty.Register<ResponsiveClassSetter, double>(nameof(MaxValue), 0.0);
+            AvaloniaProperty.Register<ResponsiveClassSetter, double>(nameof(MaxValue), double.PositiveInfinity);
 
         /// <summary>
         /// Identifies the <seealso cref="MaxOperator"/> avalonia property.
