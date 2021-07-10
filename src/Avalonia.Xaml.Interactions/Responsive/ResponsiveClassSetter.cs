@@ -8,34 +8,37 @@ namespace Avalonia.Xaml.Interactions.Responsive
     public class ResponsiveClassSetter : AvaloniaObject
     {
         /// <summary>
-        /// Identifies the <seealso cref="MinValue"/> avalonia property.
+        /// Identifies the <seealso cref="Minimum"/> avalonia property.
         /// </summary>
-        public static readonly StyledProperty<double> MinValueProperty =
-            AvaloniaProperty.Register<ResponsiveClassSetter, double>(nameof(MinValue), 0.0);
+        public static readonly StyledProperty<double> MinimumProperty =
+            AvaloniaProperty.Register<ResponsiveClassSetter, double>(nameof(Minimum), 0.0);
 
         /// <summary>
-        /// Identifies the <seealso cref="MinOperator"/> avalonia property.
+        /// Identifies the <seealso cref="MinimumOperator"/> avalonia property.
         /// </summary>
-        public static readonly StyledProperty<ComparisonConditionType> MinOperatorProperty =
-            AvaloniaProperty.Register<ResponsiveClassSetter, ComparisonConditionType>(nameof(MinOperator), ComparisonConditionType.GreaterThanOrEqual);
+        public static readonly StyledProperty<ComparisonConditionType> MinimumOperatorProperty =
+            AvaloniaProperty.Register<ResponsiveClassSetter, ComparisonConditionType>(nameof(MinimumOperator),
+                ComparisonConditionType.GreaterThanOrEqual);
 
         /// <summary>
-        /// Identifies the <seealso cref="MaxValue"/> avalonia property.
+        /// Identifies the <seealso cref="Maximum"/> avalonia property.
         /// </summary>
-        public static readonly StyledProperty<double> MaxValueProperty =
-            AvaloniaProperty.Register<ResponsiveClassSetter, double>(nameof(MaxValue), double.PositiveInfinity);
+        public static readonly StyledProperty<double> MaximumProperty =
+            AvaloniaProperty.Register<ResponsiveClassSetter, double>(nameof(Maximum), double.PositiveInfinity);
 
         /// <summary>
-        /// Identifies the <seealso cref="MaxOperator"/> avalonia property.
+        /// Identifies the <seealso cref="MaximumOperator"/> avalonia property.
         /// </summary>
-        public static readonly StyledProperty<ComparisonConditionType> MaxOperatorProperty =
-            AvaloniaProperty.Register<ResponsiveClassSetter, ComparisonConditionType>(nameof(MaxOperator), ComparisonConditionType.LessThan);
+        public static readonly StyledProperty<ComparisonConditionType> MaximumOperatorProperty =
+            AvaloniaProperty.Register<ResponsiveClassSetter, ComparisonConditionType>(nameof(MaximumOperator),
+                ComparisonConditionType.LessThan);
 
         /// <summary>
-        /// Identifies the <seealso cref="Property"/> avalonia property.
+        /// Identifies the <seealso cref="BoundsProperty"/> avalonia property.
         /// </summary>
-        public static readonly StyledProperty<ResponsiveBoundsProperty> PropertyProperty =
-            AvaloniaProperty.Register<ResponsiveClassSetter, ResponsiveBoundsProperty>(nameof(Property), ResponsiveBoundsProperty.Width);
+        public static readonly StyledProperty<ResponsiveBoundsProperty> BoundsPropertyProperty =
+            AvaloniaProperty.Register<ResponsiveClassSetter, ResponsiveBoundsProperty>(nameof(BoundsProperty),
+                ResponsiveBoundsProperty.Width);
 
         /// <summary>
         /// Identifies the <seealso cref="ClassName"/> avalonia property.
@@ -52,46 +55,46 @@ namespace Avalonia.Xaml.Interactions.Responsive
         /// <summary>
         /// Gets or sets minimum value used for property comparison. This is a avalonia property.
         /// </summary>
-        public double MinValue
+        public double Minimum
         {
-            get => GetValue(MinValueProperty);
-            set => SetValue(MinValueProperty, value);
+            get => GetValue(MinimumProperty);
+            set => SetValue(MinimumProperty, value);
         }
 
         /// <summary>
         /// Gets or sets minimum value comparison operator. This is a avalonia property.
         /// </summary>
-        public ComparisonConditionType MinOperator
+        public ComparisonConditionType MinimumOperator
         {
-            get => GetValue(MinOperatorProperty);
-            set => SetValue(MinOperatorProperty, value);
+            get => GetValue(MinimumOperatorProperty);
+            set => SetValue(MinimumOperatorProperty, value);
         }
 
         /// <summary>
         /// Gets or sets maximum value used for property comparison. This is a avalonia property.
         /// </summary>
-        public double MaxValue
+        public double Maximum
         {
-            get => GetValue(MaxValueProperty);
-            set => SetValue(MaxValueProperty, value);
+            get => GetValue(MaximumProperty);
+            set => SetValue(MaximumProperty, value);
         }
 
         /// <summary>
         /// Gets or sets maximum value comparison operator. This is a avalonia property.
         /// </summary>
-        public ComparisonConditionType MaxOperator
+        public ComparisonConditionType MaximumOperator
         {
-            get => GetValue(MaxOperatorProperty);
-            set => SetValue(MaxOperatorProperty, value);
+            get => GetValue(MaximumOperatorProperty);
+            set => SetValue(MaximumOperatorProperty, value);
         }
 
         /// <summary>
         /// Gets or sets Bounds property used for comparison. This is a avalonia property.
         /// </summary>
-        public ResponsiveBoundsProperty Property
+        public ResponsiveBoundsProperty BoundsProperty
         {
-            get => GetValue(PropertyProperty);
-            set => SetValue(PropertyProperty, value);
+            get => GetValue(BoundsPropertyProperty);
+            set => SetValue(BoundsPropertyProperty, value);
         }
 
         /// <summary>

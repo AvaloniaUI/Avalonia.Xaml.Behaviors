@@ -32,9 +32,9 @@
         </SplitView.Styles>
         <i:Interaction.Behaviors>
             <ir:ResponsiveControlBehavior>
-                <ir:ResponsiveClassSetter MinValue="0" MaxValue="500" ClassName="small"/>
-                <ir:ResponsiveClassSetter MinValue="500" MaxValue="900" ClassName="medium"/>
-                <ir:ResponsiveClassSetter MinValue="900" MaxValue="Infinity" ClassName="wide"/>
+                <ir:ResponsiveClassSetter Minimum="0" Maximum="500" ClassName="small"/>
+                <ir:ResponsiveClassSetter Minimum="500" Maximum="900" ClassName="medium"/>
+                <ir:ResponsiveClassSetter Minimum="900" Maximum="Infinity" ClassName="wide"/>
             </ir:ResponsiveControlBehavior>
         </i:Interaction.Behaviors>
         <SplitView.Pane>
@@ -87,12 +87,12 @@
                 </StackPanel.Styles>
                 <i:Interaction.Behaviors>
                     <ir:ResponsiveControlBehavior>
-                        <ir:ResponsiveClassSetter MinValue="0" MinOperator="GreaterThanOrEqual" MaxValue="500" MaxOperator="LessThan" Property="Width" ClassName="small"/>
-                        <ir:ResponsiveClassSetter MinValue="500" MinOperator="GreaterThanOrEqual" MaxValue="700" MaxOperator="LessThan" Property="Width" ClassName="medium"/>
-                        <ir:ResponsiveClassSetter MinValue="700" MinOperator="GreaterThanOrEqual" MaxValue="900" MaxOperator="LessThan" Property="Width" ClassName="large"/>
-                        <ir:ResponsiveClassSetter MinValue="900" MinOperator="GreaterThanOrEqual" MaxValue="Infinity" MaxOperator="LessThan" Property="Width" ClassName="wide"/>
-                        <ir:ResponsiveClassSetter MinValue="0" MinOperator="GreaterThanOrEqual" MaxValue="600" MaxOperator="LessThan" Property="Height" ClassName=":short" IsPseudoClass="True"/>
-                        <ir:ResponsiveClassSetter MinValue="600" MinOperator="GreaterThanOrEqual" MaxValue="Infinity" MaxOperator="LessThan" Property="Height" ClassName=":tall" IsPseudoClass="True"/>
+                        <ir:ResponsiveClassSetter Minimum="0" MinimumOperator="GreaterThanOrEqual" Maximum="500" MaximumOperator="LessThan" BoundsProperty="Width" ClassName="small"/>
+                        <ir:ResponsiveClassSetter Minimum="500" MinimumOperator="GreaterThanOrEqual" Maximum="700" MaximumOperator="LessThan" BoundsProperty="Width" ClassName="medium"/>
+                        <ir:ResponsiveClassSetter Minimum="700" MinimumOperator="GreaterThanOrEqual" Maximum="900" MaximumOperator="LessThan" BoundsProperty="Width" ClassName="large"/>
+                        <ir:ResponsiveClassSetter Minimum="900" MinimumOperator="GreaterThanOrEqual" Maximum="Infinity" MaximumOperator="LessThan" BoundsProperty="Width" ClassName="wide"/>
+                        <ir:ResponsiveClassSetter Minimum="0" MinimumOperator="GreaterThanOrEqual" Maximum="600" MaximumOperator="LessThan" BoundsProperty="Height" ClassName=":short" IsPseudoClass="True"/>
+                        <ir:ResponsiveClassSetter Minimum="600" MinimumOperator="GreaterThanOrEqual" Maximum="Infinity" MaximumOperator="LessThan" BoundsProperty="Height" ClassName=":tall" IsPseudoClass="True"/>
                     </ir:ResponsiveControlBehavior>
                 </i:Interaction.Behaviors>
                 <TextBlock Text="Item1"/>

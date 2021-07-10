@@ -48,10 +48,9 @@ namespace Avalonia.Xaml.Interactions.Responsive
         protected override void OnAttached()
         {
             base.OnAttached();
-            if (AssociatedObject is { })
-            {
-                AssociatedObject.AttachedToVisualTree += AttachedToVisualTree;
-            }
+
+            StopObserving();
+            StartObserving();
         }
 
         /// <summary>
@@ -60,62 +59,103 @@ namespace Avalonia.Xaml.Interactions.Responsive
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            if (AssociatedObject is { })
-            {
-                AssociatedObject.AttachedToVisualTree -= AttachedToVisualTree;
-            }
 
-            _disposable?.Dispose();
+            StopObserving();
         }
 
-        private void AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+        /// <inheritdoc/>
+        protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
+        {
+            base.OnPropertyChanged(change);
+
+            if (change.Property == ControlProperty)
+            {
+                StopObserving();
+                StartObserving();
+            }
+            else if (change.Property == SettersProperty)
+            {
+                StopObserving();
+                StartObserving();
+            }
+        }
+
+        private void StartObserving()
         {
             var target = GetValue(ControlProperty) is { } ? Control : AssociatedObject;
             var setters = Setters;
 
             if (target is not null && setters is not null)
             {
-                _disposable = ObserveBounds(target, setters);
+                _disposable = ObserveBounds(target);
             }
         }
 
-        private static IDisposable? ObserveBounds(Control target, AvaloniaList<ResponsiveClassSetter> setters)
+        private void StopObserving()
+        {
+            _disposable?.Dispose();
+        }
+
+        private IDisposable? ObserveBounds(Control target)
         {
             if (target is null)
-                throw new ArgumentNullException(nameof(target));
-
-            var data = target.GetObservable(Visual.BoundsProperty);
-            return data.Subscribe(bounds =>
             {
-                foreach (var setter in setters)
+                throw new ArgumentNullException(nameof(target));
+            }
+
+            return target.GetObservable(Visual.BoundsProperty)
+                         .Subscribe(bounds => ValueChanged(target, Setters, bounds));
+        }
+
+        private void ValueChanged(Control? target, AvaloniaList<ResponsiveClassSetter>? setters, Rect bounds)
+        {
+            if (target is null || setters is null)
+            {
+                return;
+            }
+
+            foreach (var setter in setters)
+            {
+                var minValue = setter.Minimum;
+                var maxValue = setter.Maximum;
+
+                var property = setter.BoundsProperty switch
                 {
-                    var minValue = setter.MinValue;
-                    var maxValue = setter.MaxValue;
+                    ResponsiveBoundsProperty.Width => bounds.Width,
+                    ResponsiveBoundsProperty.Height => bounds.Height,
+                    _ => throw new Exception("Invalid Bounds property.")
+                };
 
-                    var property = setter.Property switch
-                    {
-                        ResponsiveBoundsProperty.Width => bounds.Width,
-                        ResponsiveBoundsProperty.Height => bounds.Height,
-                        _ => throw new Exception("Invalid Bounds property.")
-                    };
+                var enabled =
+                    GetResult(setter.MinimumOperator, property, minValue)
+                    && GetResult(setter.MaximumOperator, property, maxValue);
 
-                    var enabled = 
-                        GetResult(setter.MinOperator, property, minValue)
-                        && GetResult(setter.MaxOperator, property, maxValue);
+                var className = setter.ClassName;
+                var isPseudoClass = setter.IsPseudoClass;
 
-                    var className = setter.ClassName;
-                    var isPseudoClass = setter.IsPseudoClass;
-
-                    if (enabled)
-                    {
-                        Add(target, className, isPseudoClass);
-                    }
-                    else
-                    {
-                        Remove(target, className, isPseudoClass);
-                    }
+                if (enabled)
+                {
+                    Add(target, className, isPseudoClass);
                 }
-            });
+                else
+                {
+                    Remove(target, className, isPseudoClass);
+                }
+            }
+        }
+
+        private bool GetResult(ComparisonConditionType comparisonConditionType, double property, double value)
+        {
+            return comparisonConditionType switch
+            {
+                ComparisonConditionType.Equal => property == value,
+                ComparisonConditionType.NotEqual => property != value,
+                ComparisonConditionType.LessThan => property < value,
+                ComparisonConditionType.LessThanOrEqual => property <= value,
+                ComparisonConditionType.GreaterThan => property > value,
+                ComparisonConditionType.GreaterThanOrEqual => property >= value,
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
 
         private static void Add(Control target, string? className, bool isPseudoClass)
@@ -150,20 +190,6 @@ namespace Avalonia.Xaml.Interactions.Responsive
             {
                 target.Classes.Remove(className);
             }
-        }
-
-        private static bool GetResult(ComparisonConditionType comparisonConditionType, double property, double value)
-        {
-            return comparisonConditionType switch
-            {
-                ComparisonConditionType.Equal => property == value,
-                ComparisonConditionType.NotEqual => property != value,
-                ComparisonConditionType.LessThan => property < value,
-                ComparisonConditionType.LessThanOrEqual => property <= value,
-                ComparisonConditionType.GreaterThan => property > value,
-                ComparisonConditionType.GreaterThanOrEqual => property >= value,
-                _ => throw new ArgumentOutOfRangeException()
-            };
         }
     }
 }
