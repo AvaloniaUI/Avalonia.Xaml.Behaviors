@@ -7,13 +7,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450">
-    <SplitView Margin="5">
+    <SplitView>
         <SplitView.Styles>
             <Style Selector="SplitView">
                 <Setter Property="PanePlacement" Value="Left"/>
                 <Setter Property="CompactPaneLength" Value="80"/>
                 <Setter Property="OpenPaneLength" Value="200"/>
-                <Setter Property="PaneBackground" Value="Gray"/>
+                <Setter Property="PaneBackground" Value="Transparent"/>
                 <Setter Property="IsPaneOpen" Value="False"/>
                 <Setter Property="DisplayMode" Value="Inline"/>
             </Style>
@@ -38,9 +38,9 @@
             </ir:ResponsiveControlBehavior>
         </i:Interaction.Behaviors>
         <SplitView.Pane>
-            <Border />
+            <Border Margin="5" Background="Gray" />
         </SplitView.Pane>
-        <DockPanel Background="{DynamicResource GrayBrush}" Margin="5">
+        <DockPanel Background="{DynamicResource GrayBrush}" Margin="0,5,0,5">
             <StackPanel Orientation="Horizontal" Spacing="5" Margin="5" DockPanel.Dock="Bottom">
                 <TextBlock Text="Width: " />
                 <TextBlock Text="{Binding #ResponsiveStackPanel.Bounds.Width}" />
@@ -56,7 +56,7 @@
                     </TextBlock.Text>
                 </TextBlock>
             </StackPanel>
-            <StackPanel Name="ResponsiveStackPanel">
+            <StackPanel Name="ResponsiveStackPanel" Margin="5">
                 <StackPanel.Styles>
                     <Style Selector="StackPanel:short">
                         <Setter Property="Background" Value="LightGray"/>
