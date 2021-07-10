@@ -17,8 +17,7 @@ namespace Avalonia.Xaml.Interactions.Responsive
         /// Identifies the <seealso cref="MinimumOperator"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<ComparisonConditionType> MinimumOperatorProperty =
-            AvaloniaProperty.Register<ResponsiveClassSetter, ComparisonConditionType>(nameof(MinimumOperator),
-                ComparisonConditionType.GreaterThanOrEqual);
+            AvaloniaProperty.Register<ResponsiveClassSetter, ComparisonConditionType>(nameof(MinimumOperator), ComparisonConditionType.GreaterThanOrEqual);
 
         /// <summary>
         /// Identifies the <seealso cref="Maximum"/> avalonia property.
@@ -30,15 +29,13 @@ namespace Avalonia.Xaml.Interactions.Responsive
         /// Identifies the <seealso cref="MaximumOperator"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<ComparisonConditionType> MaximumOperatorProperty =
-            AvaloniaProperty.Register<ResponsiveClassSetter, ComparisonConditionType>(nameof(MaximumOperator),
-                ComparisonConditionType.LessThan);
+            AvaloniaProperty.Register<ResponsiveClassSetter, ComparisonConditionType>(nameof(MaximumOperator), ComparisonConditionType.LessThan);
 
         /// <summary>
         /// Identifies the <seealso cref="BoundsProperty"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<ResponsiveBoundsProperty> BoundsPropertyProperty =
-            AvaloniaProperty.Register<ResponsiveClassSetter, ResponsiveBoundsProperty>(nameof(BoundsProperty),
-                ResponsiveBoundsProperty.Width);
+            AvaloniaProperty.Register<ResponsiveClassSetter, ResponsiveBoundsProperty>(nameof(BoundsProperty), ResponsiveBoundsProperty.Width);
 
         /// <summary>
         /// Identifies the <seealso cref="ClassName"/> avalonia property.
