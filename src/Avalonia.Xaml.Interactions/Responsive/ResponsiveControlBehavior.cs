@@ -104,37 +104,52 @@ namespace Avalonia.Xaml.Interactions.Responsive
                         && GetResult(setter.MaxOperator, property, maxValue);
 
                     var className = setter.ClassName;
+                    var isPseudoClass = setter.IsPseudoClass;
 
                     if (enabled)
                     {
-                        if (!string.IsNullOrEmpty(className) && !target.Classes.Contains(className))
-                        {
-                            if (setter.IsPseudoClass)
-                            {
-                                ((IPseudoClasses)target.Classes).Add(className);
-                            }
-                            else
-                            {
-                                target.Classes.Add(className);
-                            }
-                        }
+                        Add(target, className, isPseudoClass);
                     }
                     else
                     {
-                        if (!string.IsNullOrEmpty(className) && target.Classes.Contains(className))
-                        {
-                            if (setter.IsPseudoClass)
-                            {
-                                ((IPseudoClasses)target.Classes).Remove(className);
-                            }
-                            else
-                            {
-                                target.Classes.Remove(className);
-                            }
-                        }
+                        Remove(target, className, isPseudoClass);
                     }
                 }
             });
+        }
+
+        private static void Add(Control target, string? className, bool isPseudoClass)
+        {
+            if (string.IsNullOrEmpty(className) || target.Classes.Contains(className))
+            {
+                return;
+            }
+
+            if (isPseudoClass)
+            {
+                ((IPseudoClasses) target.Classes).Add(className);
+            }
+            else
+            {
+                target.Classes.Add(className);
+            }
+        }
+
+        private static void Remove(Control target, string? className, bool isPseudoClass)
+        {
+            if (string.IsNullOrEmpty(className) || !target.Classes.Contains(className))
+            {
+                return;
+            }
+
+            if (isPseudoClass)
+            {
+                ((IPseudoClasses) target.Classes).Remove(className);
+            }
+            else
+            {
+                target.Classes.Remove(className);
+            }
         }
 
         private static bool GetResult(ComparisonConditionType comparisonConditionType, double property, double value)
