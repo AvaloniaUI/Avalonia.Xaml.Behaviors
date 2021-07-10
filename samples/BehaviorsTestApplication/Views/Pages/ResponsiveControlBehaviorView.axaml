@@ -6,69 +6,103 @@
              xmlns:converters="using:BehaviorsTestApplication.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
-    <DockPanel Background="{DynamicResource GrayBrush}" Margin="5">
-        <StackPanel Orientation="Horizontal" Spacing="5" Margin="5" DockPanel.Dock="Bottom">
-            <TextBlock Text="Width: " />
-            <TextBlock Text="{Binding #ResponsiveStackPanel.Bounds.Width}" />
-            <TextBlock Text=" Height: " />
-            <TextBlock Text="{Binding #ResponsiveStackPanel.Bounds.Height}" />
-            <TextBlock Text=" Classes: " />
-            <TextBlock>
-                <TextBlock.Text>
-                    <MultiBinding Converter="{x:Static converters:ClassesToStringConverter.Instance}">
-                        <Binding ElementName="ResponsiveStackPanel" Path="Classes.Count"/>
-                        <Binding ElementName="ResponsiveStackPanel" Path="Classes"/>
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-        </StackPanel>
-        <StackPanel Name="ResponsiveStackPanel">
-            <StackPanel.Styles>
-                <Style Selector="StackPanel:short">
-                    <Setter Property="Background" Value="LightGray"/>
-                </Style>
-                <Style Selector="StackPanel:tall">
-                    <Setter Property="Background" Value="DarkGray"/>
-                </Style>
-                <Style Selector="StackPanel">
-                    <Setter Property="Spacing" Value="0"/>
-                    <Setter Property="(TextBlock.Foreground)" Value="Black"/>
-                </Style>
-                <Style Selector="StackPanel.small">
-                    <Setter Property="Spacing" Value="10"/>
-                    <Setter Property="(TextBlock.Foreground)" Value="Purple"/>
-                </Style>
-                <Style Selector="StackPanel.medium">
-                    <Setter Property="Spacing" Value="20"/>
-                    <Setter Property="(TextBlock.Foreground)" Value="Red"/>
-                </Style>
-                <Style Selector="StackPanel.large">
-                    <Setter Property="Spacing" Value="30"/>
-                    <Setter Property="(TextBlock.Foreground)" Value="Blue"/>
-                </Style>
-                <Style Selector="StackPanel.wide">
-                    <Setter Property="Spacing" Value="40"/>
-                    <Setter Property="(TextBlock.Foreground)" Value="Green"/>
-                </Style>
-            </StackPanel.Styles>
-            <i:Interaction.Behaviors>
-                <ir:ResponsiveControlBehavior>
-                    <ir:ResponsiveClassSetter MinValue="0" MinOperator="GreaterThanOrEqual" MaxValue="500" MaxOperator="LessThan" Property="Width" ClassName="small"/>
-                    <ir:ResponsiveClassSetter MinValue="500" MinOperator="GreaterThanOrEqual" MaxValue="700" MaxOperator="LessThan" Property="Width" ClassName="medium"/>
-                    <ir:ResponsiveClassSetter MinValue="700" MinOperator="GreaterThanOrEqual" MaxValue="900" MaxOperator="LessThan" Property="Width" ClassName="large"/>
-                    <ir:ResponsiveClassSetter MinValue="900" MinOperator="GreaterThanOrEqual" MaxValue="Infinity" MaxOperator="LessThan" Property="Width" ClassName="wide"/>
-                    <ir:ResponsiveClassSetter MinValue="0" MinOperator="GreaterThanOrEqual" MaxValue="600" MaxOperator="LessThan" Property="Height" ClassName=":short" IsPseudoClass="True"/>
-                    <ir:ResponsiveClassSetter MinValue="600" MinOperator="GreaterThanOrEqual" MaxValue="Infinity" MaxOperator="LessThan" Property="Height" ClassName=":tall" IsPseudoClass="True"/>
-                </ir:ResponsiveControlBehavior>
-            </i:Interaction.Behaviors>
-            <TextBlock Text="Item1"/>
-            <TextBlock Text="Item2"/>
-            <TextBlock Text="Item3"/>
-            <TextBlock Text="Item4"/>
-            <TextBlock Text="Item5"/>
-            <TextBlock Text="Item7"/>
-            <TextBlock Text="Item8"/>
-        </StackPanel>
-    </DockPanel>
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450">
+    <SplitView Margin="5">
+        <SplitView.Styles>
+            <Style Selector="SplitView">
+                <Setter Property="PanePlacement" Value="Left"/>
+                <Setter Property="CompactPaneLength" Value="80"/>
+                <Setter Property="OpenPaneLength" Value="200"/>
+                <Setter Property="PaneBackground" Value="Gray"/>
+                <Setter Property="IsPaneOpen" Value="False"/>
+                <Setter Property="DisplayMode" Value="Inline"/>
+            </Style>
+            <Style Selector="SplitView.small">
+                <Setter Property="IsPaneOpen" Value="False"/>
+                <Setter Property="DisplayMode" Value="Inline"/>
+            </Style>
+            <Style Selector="SplitView.medium">
+                <Setter Property="IsPaneOpen" Value="False"/>
+                <Setter Property="DisplayMode" Value="CompactInline"/>
+            </Style>
+            <Style Selector="SplitView.wide">
+                <Setter Property="IsPaneOpen" Value="True"/>
+                <Setter Property="DisplayMode" Value="Inline"/>
+            </Style>
+        </SplitView.Styles>
+        <i:Interaction.Behaviors>
+            <ir:ResponsiveControlBehavior>
+                <ir:ResponsiveClassSetter MinValue="0" MaxValue="500" ClassName="small"/>
+                <ir:ResponsiveClassSetter MinValue="500" MaxValue="900" ClassName="medium"/>
+                <ir:ResponsiveClassSetter MinValue="900" MaxValue="Infinity" ClassName="wide"/>
+            </ir:ResponsiveControlBehavior>
+        </i:Interaction.Behaviors>
+        <SplitView.Pane>
+            <Border />
+        </SplitView.Pane>
+        <DockPanel Background="{DynamicResource GrayBrush}" Margin="5">
+            <StackPanel Orientation="Horizontal" Spacing="5" Margin="5" DockPanel.Dock="Bottom">
+                <TextBlock Text="Width: " />
+                <TextBlock Text="{Binding #ResponsiveStackPanel.Bounds.Width}" />
+                <TextBlock Text=" Height: " />
+                <TextBlock Text="{Binding #ResponsiveStackPanel.Bounds.Height}" />
+                <TextBlock Text=" Classes: " />
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{x:Static converters:ClassesToStringConverter.Instance}">
+                            <Binding ElementName="ResponsiveStackPanel" Path="Classes.Count"/>
+                            <Binding ElementName="ResponsiveStackPanel" Path="Classes"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Name="ResponsiveStackPanel">
+                <StackPanel.Styles>
+                    <Style Selector="StackPanel:short">
+                        <Setter Property="Background" Value="LightGray"/>
+                    </Style>
+                    <Style Selector="StackPanel:tall">
+                        <Setter Property="Background" Value="DarkGray"/>
+                    </Style>
+                    <Style Selector="StackPanel">
+                        <Setter Property="Spacing" Value="0"/>
+                        <Setter Property="(TextBlock.Foreground)" Value="Black"/>
+                    </Style>
+                    <Style Selector="StackPanel.small">
+                        <Setter Property="Spacing" Value="10"/>
+                        <Setter Property="(TextBlock.Foreground)" Value="Purple"/>
+                    </Style>
+                    <Style Selector="StackPanel.medium">
+                        <Setter Property="Spacing" Value="20"/>
+                        <Setter Property="(TextBlock.Foreground)" Value="Red"/>
+                    </Style>
+                    <Style Selector="StackPanel.large">
+                        <Setter Property="Spacing" Value="30"/>
+                        <Setter Property="(TextBlock.Foreground)" Value="Blue"/>
+                    </Style>
+                    <Style Selector="StackPanel.wide">
+                        <Setter Property="Spacing" Value="40"/>
+                        <Setter Property="(TextBlock.Foreground)" Value="Green"/>
+                    </Style>
+                </StackPanel.Styles>
+                <i:Interaction.Behaviors>
+                    <ir:ResponsiveControlBehavior>
+                        <ir:ResponsiveClassSetter MinValue="0" MinOperator="GreaterThanOrEqual" MaxValue="500" MaxOperator="LessThan" Property="Width" ClassName="small"/>
+                        <ir:ResponsiveClassSetter MinValue="500" MinOperator="GreaterThanOrEqual" MaxValue="700" MaxOperator="LessThan" Property="Width" ClassName="medium"/>
+                        <ir:ResponsiveClassSetter MinValue="700" MinOperator="GreaterThanOrEqual" MaxValue="900" MaxOperator="LessThan" Property="Width" ClassName="large"/>
+                        <ir:ResponsiveClassSetter MinValue="900" MinOperator="GreaterThanOrEqual" MaxValue="Infinity" MaxOperator="LessThan" Property="Width" ClassName="wide"/>
+                        <ir:ResponsiveClassSetter MinValue="0" MinOperator="GreaterThanOrEqual" MaxValue="600" MaxOperator="LessThan" Property="Height" ClassName=":short" IsPseudoClass="True"/>
+                        <ir:ResponsiveClassSetter MinValue="600" MinOperator="GreaterThanOrEqual" MaxValue="Infinity" MaxOperator="LessThan" Property="Height" ClassName=":tall" IsPseudoClass="True"/>
+                    </ir:ResponsiveControlBehavior>
+                </i:Interaction.Behaviors>
+                <TextBlock Text="Item1"/>
+                <TextBlock Text="Item2"/>
+                <TextBlock Text="Item3"/>
+                <TextBlock Text="Item4"/>
+                <TextBlock Text="Item5"/>
+                <TextBlock Text="Item7"/>
+                <TextBlock Text="Item8"/>
+            </StackPanel>
+        </DockPanel>
+    </SplitView>
 </UserControl>
