@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450">
-    <SplitView>
+    <SplitView Name="SplitView">
         <SplitView.Styles>
             <Style Selector="SplitView">
                 <Setter Property="PanePlacement" Value="Left"/>
@@ -40,7 +40,7 @@
         <SplitView.Pane>
             <Border Margin="5" Background="Gray" />
         </SplitView.Pane>
-        <DockPanel Background="{DynamicResource GrayBrush}" Margin="0,5,0,5">
+        <DockPanel Name="DockPanel" Background="{DynamicResource GrayBrush}" Margin="0,5,0,5">
             <StackPanel Orientation="Horizontal" Spacing="5" Margin="5" DockPanel.Dock="Bottom">
                 <TextBlock Text="Width: " />
                 <TextBlock Text="{Binding #ResponsiveStackPanel.Bounds.Width}" />
@@ -86,12 +86,12 @@
                     </Style>
                 </StackPanel.Styles>
                 <i:Interaction.Behaviors>
-                    <ir:ResponsiveControlBehavior>
+                    <ir:ResponsiveControlBehavior SourceControl="{Binding #DockPanel}" TargetControl="{Binding #ResponsiveStackPanel}">
                         <ir:ResponsiveClassSetter Minimum="0" MinimumOperator="GreaterThanOrEqual" Maximum="500" MaximumOperator="LessThan" BoundsProperty="Width" ClassName="small"/>
                         <ir:ResponsiveClassSetter Minimum="500" MinimumOperator="GreaterThanOrEqual" Maximum="700" MaximumOperator="LessThan" BoundsProperty="Width" ClassName="medium"/>
                         <ir:ResponsiveClassSetter Minimum="700" MinimumOperator="GreaterThanOrEqual" Maximum="900" MaximumOperator="LessThan" BoundsProperty="Width" ClassName="large"/>
                         <ir:ResponsiveClassSetter Minimum="900" MinimumOperator="GreaterThanOrEqual" Maximum="Infinity" MaximumOperator="LessThan" BoundsProperty="Width" ClassName="wide"/>
-                        <ir:ResponsiveClassSetter Minimum="0" MinimumOperator="GreaterThanOrEqual" Maximum="600" MaximumOperator="LessThan" BoundsProperty="Height" ClassName=":short" IsPseudoClass="True"/>
+                        <ir:ResponsiveClassSetter Minimum="0" MinimumOperator="GreaterThanOrEqual" Maximum="600" MaximumOperator="LessThan" BoundsProperty="Height" ClassName=":short" IsPseudoClass="True" TargetControl="{Binding #ResponsiveStackPanel}"/>
                         <ir:ResponsiveClassSetter Minimum="600" MinimumOperator="GreaterThanOrEqual" Maximum="Infinity" MaximumOperator="LessThan" BoundsProperty="Height" ClassName=":tall" IsPseudoClass="True"/>
                     </ir:ResponsiveControlBehavior>
                 </i:Interaction.Behaviors>
