@@ -16,10 +16,16 @@ namespace Avalonia.Xaml.Interactions.Responsive
         private AvaloniaList<ResponsiveClassSetter>? _setters;
 
         /// <summary>
-        /// Identifies the <seealso cref="Control"/> avalonia property.
+        /// Identifies the <seealso cref="SourceControl"/> avalonia property.
         /// </summary>
-        public static readonly StyledProperty<Control?> ControlProperty =
-            AvaloniaProperty.Register<ResponsiveControlBehavior, Control?>(nameof(Control));
+        public static readonly StyledProperty<Control?> SourceControlProperty =
+            AvaloniaProperty.Register<ResponsiveControlBehavior, Control?>(nameof(SourceControl));
+
+        /// <summary>
+        /// Identifies the <seealso cref="TargetControl"/> avalonia property.
+        /// </summary>
+        public static readonly StyledProperty<Control?> TargetControlProperty =
+            AvaloniaProperty.Register<ResponsiveControlBehavior, Control?>(nameof(TargetControl));
 
         /// <summary>
         /// Identifies the <seealso cref="Setters"/> avalonia property.
@@ -28,12 +34,21 @@ namespace Avalonia.Xaml.Interactions.Responsive
             AvaloniaProperty.RegisterDirect<ResponsiveControlBehavior, AvaloniaList<ResponsiveClassSetter>>(nameof(Setters), t => t.Setters);
 
         /// <summary>
-        /// Gets or sets the target control that class name that should be added or removed when triggered. This is a avalonia property.
+        /// Gets or sets the the source control that <see cref="Visual.BoundsProperty"/> property are observed from, if not set <see cref="Behavior{T}.AssociatedObject"/> is used. This is a avalonia property.
         /// </summary>
-        public Control? Control
+        public Control? SourceControl
         {
-            get => GetValue(ControlProperty);
-            set => SetValue(ControlProperty, value);
+            get => GetValue(SourceControlProperty);
+            set => SetValue(SourceControlProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the target control that class name that should be added or removed when triggered, if not set <see cref="Behavior{T}.AssociatedObject"/> is used or <see cref="ResponsiveClassSetter.TargetControl"/> from <see cref="ResponsiveClassSetter"/>. This is a avalonia property.
+        /// </summary>
+        public Control? TargetControl
+        {
+            get => GetValue(TargetControlProperty);
+            set => SetValue(TargetControlProperty, value);
         }
 
         /// <summary>
@@ -43,7 +58,7 @@ namespace Avalonia.Xaml.Interactions.Responsive
         public AvaloniaList<ResponsiveClassSetter> Setters => _setters ??= new AvaloniaList<ResponsiveClassSetter>();
 
         /// <summary>
-        /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
+        /// Called after the behavior is attached to the <see cref="Behavior{T}.AssociatedObject"/>.
         /// </summary>
         protected override void OnAttached()
         {
@@ -63,30 +78,15 @@ namespace Avalonia.Xaml.Interactions.Responsive
             StopObserving();
         }
 
-        /// <inheritdoc/>
-        protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
-        {
-            base.OnPropertyChanged(change);
-
-            if (change.Property == ControlProperty)
-            {
-                StopObserving();
-                StartObserving();
-            }
-            else if (change.Property == SettersProperty)
-            {
-                StopObserving();
-                StartObserving();
-            }
-        }
-
         private void StartObserving()
         {
-            var target = GetValue(ControlProperty) is { } ? Control : AssociatedObject;
+            var sourceControl = GetValue(SourceControlProperty) is { } 
+                ? SourceControl 
+                : AssociatedObject;
 
-            if (target is not null)
+            if (sourceControl is not null)
             {
-                _disposable = ObserveBounds(target);
+                _disposable = ObserveBounds(sourceControl);
             }
         }
 
@@ -95,20 +95,20 @@ namespace Avalonia.Xaml.Interactions.Responsive
             _disposable?.Dispose();
         }
 
-        private IDisposable ObserveBounds(Control target)
+        private IDisposable ObserveBounds(Control sourceControl)
         {
-            if (target is null)
+            if (sourceControl is null)
             {
-                throw new ArgumentNullException(nameof(target));
+                throw new ArgumentNullException(nameof(sourceControl));
             }
 
-            return target.GetObservable(Visual.BoundsProperty)
-                         .Subscribe(bounds => ValueChanged(target, Setters, bounds));
+            return sourceControl.GetObservable(Visual.BoundsProperty)
+                                .Subscribe(bounds => ValueChanged(sourceControl, Setters, bounds));
         }
 
-        private void ValueChanged(Control? target, AvaloniaList<ResponsiveClassSetter>? setters, Rect bounds)
+        private void ValueChanged(Control? sourceControl, AvaloniaList<ResponsiveClassSetter>? setters, Rect bounds)
         {
-            if (target is null || setters is null)
+            if (sourceControl is null || setters is null)
             {
                 return;
             }
@@ -131,14 +131,26 @@ namespace Avalonia.Xaml.Interactions.Responsive
 
                 var className = setter.ClassName;
                 var isPseudoClass = setter.IsPseudoClass;
+                var targetControl = setter.GetValue(ResponsiveClassSetter.TargetControlProperty) is { } 
+                    ? setter.TargetControl 
+                    : GetValue(TargetControlProperty) is { } 
+                        ? TargetControl 
+                        : AssociatedObject;
 
-                if (enabled)
+                if (targetControl is { })
                 {
-                    Add(target, className, isPseudoClass);
+                    if (enabled)
+                    {
+                        Add(targetControl, className, isPseudoClass);
+                    }
+                    else
+                    {
+                        Remove(targetControl, className, isPseudoClass);
+                    }
                 }
                 else
                 {
-                    Remove(target, className, isPseudoClass);
+                    throw new ArgumentNullException(nameof(targetControl));
                 }
             }
         }
@@ -159,37 +171,37 @@ namespace Avalonia.Xaml.Interactions.Responsive
             };
         }
 
-        private static void Add(Control target, string? className, bool isPseudoClass)
+        private static void Add(Control targetControl, string? className, bool isPseudoClass)
         {
-            if (string.IsNullOrEmpty(className) || target.Classes.Contains(className!))
+            if (string.IsNullOrEmpty(className) || targetControl.Classes.Contains(className!))
             {
                 return;
             }
 
             if (isPseudoClass)
             {
-                ((IPseudoClasses) target.Classes).Add(className);
+                ((IPseudoClasses) targetControl.Classes).Add(className);
             }
             else
             {
-                target.Classes.Add(className!);
+                targetControl.Classes.Add(className!);
             }
         }
 
-        private static void Remove(Control target, string? className, bool isPseudoClass)
+        private static void Remove(Control targetControl, string? className, bool isPseudoClass)
         {
-            if (string.IsNullOrEmpty(className) || !target.Classes.Contains(className!))
+            if (string.IsNullOrEmpty(className) || !targetControl.Classes.Contains(className!))
             {
                 return;
             }
 
             if (isPseudoClass)
             {
-                ((IPseudoClasses) target.Classes).Remove(className);
+                ((IPseudoClasses) targetControl.Classes).Remove(className);
             }
             else
             {
-                target.Classes.Remove(className!);
+                targetControl.Classes.Remove(className!);
             }
         }
     }
