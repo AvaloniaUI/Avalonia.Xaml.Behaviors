@@ -1,4 +1,6 @@
-﻿using Avalonia.Xaml.Interactions.Core;
+﻿using Avalonia.Controls;
+using Avalonia.Xaml.Interactions.Core;
+using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Responsive
 {
@@ -49,6 +51,12 @@ namespace Avalonia.Xaml.Interactions.Responsive
         public static readonly StyledProperty<bool> IsPseudoClassProperty =
             AvaloniaProperty.Register<ResponsiveClassSetter, bool>(nameof(IsPseudoClass), false);
 
+        /// <summary>
+        /// Identifies the <seealso cref="TargetControl"/> avalonia property.
+        /// </summary>
+        public static readonly StyledProperty<Control?> TargetControlProperty =
+            AvaloniaProperty.Register<ResponsiveClassSetter, Control?>(nameof(TargetControl));
+        
         /// <summary>
         /// Gets or sets minimum value used for property comparison. This is a avalonia property.
         /// </summary>
@@ -110,6 +118,15 @@ namespace Avalonia.Xaml.Interactions.Responsive
         {
             get => GetValue(IsPseudoClassProperty);
             set => SetValue(IsPseudoClassProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the target control that class name that should be added or removed when triggered, if not set <see cref="Behavior{T}.AssociatedObject"/> is used or <see cref="ResponsiveControlBehavior.TargetControl"/> from <see cref="ResponsiveControlBehavior"/>. This is a avalonia property.
+        /// </summary>
+        public Control? TargetControl
+        {
+            get => GetValue(TargetControlProperty);
+            set => SetValue(TargetControlProperty, value);
         }
     }
 }
