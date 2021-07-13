@@ -8,30 +8,30 @@ using Avalonia.Xaml.Interactivity;
 namespace Avalonia.Xaml.Interactions.Responsive
 {
     /// <summary>
-    /// Observes attached control Bounds property changes and if triggered sets or removes style classes.
+    /// Observes <see cref="Behavior{T}.AssociatedObject"/> control or <see cref="SourceControl"/> control <see cref="Visual.Bounds"/> property changes and if triggered sets or removes style classes when conditions from <see cref="AdaptiveClassSetter"/> are met.
     /// </summary>
-    public sealed class ResponsiveControlBehavior : Behavior<Control>
+    public sealed class AdaptiveBehavior : Behavior<Control>
     {
         private IDisposable? _disposable;
-        private AvaloniaList<ResponsiveClassSetter>? _setters;
+        private AvaloniaList<AdaptiveClassSetter>? _setters;
 
         /// <summary>
         /// Identifies the <seealso cref="SourceControl"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<Control?> SourceControlProperty =
-            AvaloniaProperty.Register<ResponsiveControlBehavior, Control?>(nameof(SourceControl));
+            AvaloniaProperty.Register<AdaptiveBehavior, Control?>(nameof(SourceControl));
 
         /// <summary>
         /// Identifies the <seealso cref="TargetControl"/> avalonia property.
         /// </summary>
         public static readonly StyledProperty<Control?> TargetControlProperty =
-            AvaloniaProperty.Register<ResponsiveControlBehavior, Control?>(nameof(TargetControl));
+            AvaloniaProperty.Register<AdaptiveBehavior, Control?>(nameof(TargetControl));
 
         /// <summary>
         /// Identifies the <seealso cref="Setters"/> avalonia property.
         /// </summary>
-        public static readonly DirectProperty<ResponsiveControlBehavior, AvaloniaList<ResponsiveClassSetter>> SettersProperty = 
-            AvaloniaProperty.RegisterDirect<ResponsiveControlBehavior, AvaloniaList<ResponsiveClassSetter>>(nameof(Setters), t => t.Setters);
+        public static readonly DirectProperty<AdaptiveBehavior, AvaloniaList<AdaptiveClassSetter>> SettersProperty = 
+            AvaloniaProperty.RegisterDirect<AdaptiveBehavior, AvaloniaList<AdaptiveClassSetter>>(nameof(Setters), t => t.Setters);
 
         /// <summary>
         /// Gets or sets the the source control that <see cref="Visual.BoundsProperty"/> property are observed from, if not set <see cref="Behavior{T}.AssociatedObject"/> is used. This is a avalonia property.
@@ -43,7 +43,7 @@ namespace Avalonia.Xaml.Interactions.Responsive
         }
 
         /// <summary>
-        /// Gets or sets the target control that class name that should be added or removed when triggered, if not set <see cref="Behavior{T}.AssociatedObject"/> is used or <see cref="ResponsiveClassSetter.TargetControl"/> from <see cref="ResponsiveClassSetter"/>. This is a avalonia property.
+        /// Gets or sets the target control that class name that should be added or removed when triggered, if not set <see cref="Behavior{T}.AssociatedObject"/> is used or <see cref="AdaptiveClassSetter.TargetControl"/> from <see cref="AdaptiveClassSetter"/>. This is a avalonia property.
         /// </summary>
         public Control? TargetControl
         {
@@ -52,10 +52,10 @@ namespace Avalonia.Xaml.Interactions.Responsive
         }
 
         /// <summary>
-        /// Gets responsive setters collection. This is a avalonia property.
+        /// Gets adaptive class setters collection. This is a avalonia property.
         /// </summary>
         [Content]
-        public AvaloniaList<ResponsiveClassSetter> Setters => _setters ??= new AvaloniaList<ResponsiveClassSetter>();
+        public AvaloniaList<AdaptiveClassSetter> Setters => _setters ??= new AvaloniaList<AdaptiveClassSetter>();
 
         /// <summary>
         /// Called after the behavior is attached to the <see cref="Behavior{T}.AssociatedObject"/>.
@@ -106,7 +106,7 @@ namespace Avalonia.Xaml.Interactions.Responsive
                                 .Subscribe(bounds => ValueChanged(sourceControl, Setters, bounds));
         }
 
-        private void ValueChanged(Control? sourceControl, AvaloniaList<ResponsiveClassSetter>? setters, Rect bounds)
+        private void ValueChanged(Control? sourceControl, AvaloniaList<AdaptiveClassSetter>? setters, Rect bounds)
         {
             if (sourceControl is null || setters is null)
             {
@@ -115,23 +115,31 @@ namespace Avalonia.Xaml.Interactions.Responsive
 
             foreach (var setter in setters)
             {
-                var minValue = setter.Minimum;
-                var maxValue = setter.Maximum;
+                var isMinOrMaxWidthSet = setter.IsSet(AdaptiveClassSetter.MinWidthProperty)
+                                         || setter.IsSet(AdaptiveClassSetter.MaxWidthProperty);
+                var widthConditionTriggered = GetResult(setter.MinWidthOperator, bounds.Width, setter.MinWidth)
+                                              && GetResult(setter.MaxWidthOperator, bounds.Width, setter.MaxWidth);
 
-                var property = setter.BoundsProperty switch
+                var isMinOrMaxHeightSet = setter.IsSet(AdaptiveClassSetter.MinHeightProperty)
+                                           || setter.IsSet(AdaptiveClassSetter.MaxHeightProperty);
+                var heightConditionTriggered = GetResult(setter.MinHeightOperator, bounds.Height, setter.MinHeight)
+                                               && GetResult(setter.MaxHeightOperator, bounds.Height, setter.MaxHeight);
+
+                var isAddClassTriggered = false;
+                if (isMinOrMaxWidthSet && !isMinOrMaxHeightSet)
                 {
-                    ResponsiveBoundsProperty.Width => bounds.Width,
-                    ResponsiveBoundsProperty.Height => bounds.Height,
-                    _ => throw new Exception("Invalid Bounds property.")
-                };
+                    isAddClassTriggered = widthConditionTriggered;
+                }
+                else if (!isMinOrMaxWidthSet && isMinOrMaxHeightSet)
+                {
+                    isAddClassTriggered = heightConditionTriggered;
+                }
+                else if (isMinOrMaxWidthSet && isMinOrMaxHeightSet)
+                {
+                    isAddClassTriggered = widthConditionTriggered && heightConditionTriggered;
+                }
 
-                var enabled =
-                    GetResult(setter.MinimumOperator, property, minValue)
-                    && GetResult(setter.MaximumOperator, property, maxValue);
-
-                var className = setter.ClassName;
-                var isPseudoClass = setter.IsPseudoClass;
-                var targetControl = setter.GetValue(ResponsiveClassSetter.TargetControlProperty) is { } 
+                var targetControl = setter.GetValue(AdaptiveClassSetter.TargetControlProperty) is { } 
                     ? setter.TargetControl 
                     : GetValue(TargetControlProperty) is { } 
                         ? TargetControl 
@@ -139,7 +147,10 @@ namespace Avalonia.Xaml.Interactions.Responsive
 
                 if (targetControl is { })
                 {
-                    if (enabled)
+                    var className = setter.ClassName;
+                    var isPseudoClass = setter.IsPseudoClass;
+
+                    if (isAddClassTriggered)
                     {
                         Add(targetControl, className, isPseudoClass);
                     }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.ResponsiveControlBehaviorView"
+﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.AdaptiveBehaviorView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
@@ -31,11 +31,11 @@
             </Style>
         </SplitView.Styles>
         <i:Interaction.Behaviors>
-            <ir:ResponsiveControlBehavior>
-                <ir:ResponsiveClassSetter Minimum="0" Maximum="500" ClassName="small"/>
-                <ir:ResponsiveClassSetter Minimum="500" Maximum="900" ClassName="medium"/>
-                <ir:ResponsiveClassSetter Minimum="900" Maximum="Infinity" ClassName="wide"/>
-            </ir:ResponsiveControlBehavior>
+            <ir:AdaptiveBehavior>
+                <ir:AdaptiveClassSetter MinWidth="0" MaxWidth="500" ClassName="small"/>
+                <ir:AdaptiveClassSetter MinWidth="500" MaxWidth="900" ClassName="medium"/>
+                <ir:AdaptiveClassSetter MinWidth="900" MaxWidth="Infinity" ClassName="wide"/>
+            </ir:AdaptiveBehavior>
         </i:Interaction.Behaviors>
         <SplitView.Pane>
             <Border Margin="5" Background="Gray" />
@@ -64,6 +64,12 @@
                     <Style Selector="StackPanel:tall">
                         <Setter Property="Background" Value="DarkGray"/>
                     </Style>
+                    <Style Selector="StackPanel:pointerover:short">
+                        <Setter Property="Background" Value="Yellow"/>
+                    </Style>
+                    <Style Selector="StackPanel:pointerover:tall">
+                        <Setter Property="Background" Value="Cyan"/>
+                    </Style>
                     <Style Selector="StackPanel">
                         <Setter Property="Spacing" Value="0"/>
                         <Setter Property="(TextBlock.Foreground)" Value="Black"/>
@@ -86,14 +92,15 @@
                     </Style>
                 </StackPanel.Styles>
                 <i:Interaction.Behaviors>
-                    <ir:ResponsiveControlBehavior SourceControl="{Binding #DockPanel}" TargetControl="{Binding #ResponsiveStackPanel}">
-                        <ir:ResponsiveClassSetter Minimum="0" MinimumOperator="GreaterThanOrEqual" Maximum="500" MaximumOperator="LessThan" BoundsProperty="Width" ClassName="small"/>
-                        <ir:ResponsiveClassSetter Minimum="500" MinimumOperator="GreaterThanOrEqual" Maximum="700" MaximumOperator="LessThan" BoundsProperty="Width" ClassName="medium"/>
-                        <ir:ResponsiveClassSetter Minimum="700" MinimumOperator="GreaterThanOrEqual" Maximum="900" MaximumOperator="LessThan" BoundsProperty="Width" ClassName="large"/>
-                        <ir:ResponsiveClassSetter Minimum="900" MinimumOperator="GreaterThanOrEqual" Maximum="Infinity" MaximumOperator="LessThan" BoundsProperty="Width" ClassName="wide"/>
-                        <ir:ResponsiveClassSetter Minimum="0" MinimumOperator="GreaterThanOrEqual" Maximum="600" MaximumOperator="LessThan" BoundsProperty="Height" ClassName=":short" IsPseudoClass="True" TargetControl="{Binding #ResponsiveStackPanel}"/>
-                        <ir:ResponsiveClassSetter Minimum="600" MinimumOperator="GreaterThanOrEqual" Maximum="Infinity" MaximumOperator="LessThan" BoundsProperty="Height" ClassName=":tall" IsPseudoClass="True"/>
-                    </ir:ResponsiveControlBehavior>
+                    <ir:AdaptiveBehavior SourceControl="{Binding #DockPanel}" TargetControl="{Binding #ResponsiveStackPanel}">
+                        <ir:AdaptiveClassSetter MinWidth="0" MinWidthOperator="GreaterThanOrEqual" MaxWidth="500" MaxWidthOperator="LessThan" ClassName="small"/>
+                        <ir:AdaptiveClassSetter MinWidth="500" MinWidthOperator="GreaterThanOrEqual" MaxWidth="700" MaxWidthOperator="LessThan" ClassName="medium"/>
+                        <ir:AdaptiveClassSetter MinWidth="700" MinWidthOperator="GreaterThanOrEqual" MaxWidth="900" MaxWidthOperator="LessThan" ClassName="large"/>
+                        <ir:AdaptiveClassSetter MinWidth="900" MinWidthOperator="GreaterThanOrEqual" MaxWidth="Infinity" MaxWidthOperator="LessThan" ClassName="wide"/>
+                        <ir:AdaptiveClassSetter MinHeight="0" MinWidthOperator="GreaterThanOrEqual" MaxHeight="600" MaxWidthOperator="LessThan" ClassName=":short" IsPseudoClass="True" TargetControl="{Binding #ResponsiveStackPanel}"/>
+                        <ir:AdaptiveClassSetter MinHeight="600" MinWidthOperator="GreaterThanOrEqual" MaxHeight="Infinity" MaxWidthOperator="LessThan" ClassName=":tall" IsPseudoClass="True"/>
+                        <ir:AdaptiveClassSetter MinWidth="1280" MinHeight="720" ClassName=":hd-ready" IsPseudoClass="True"/>
+                    </ir:AdaptiveBehavior>
                 </i:Interaction.Behaviors>
                 <TextBlock Text="Item1"/>
                 <TextBlock Text="Item2"/>

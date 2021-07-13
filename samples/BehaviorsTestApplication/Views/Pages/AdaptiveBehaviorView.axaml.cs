@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 
 namespace BehaviorsTestApplication.Views.Pages
 {
-    public class ResponsiveControlBehaviorView : UserControl
+    public class AdaptiveBehaviorView : UserControl
     {
-        public ResponsiveControlBehaviorView()
+        public AdaptiveBehaviorView()
         {
             InitializeComponent();
         }

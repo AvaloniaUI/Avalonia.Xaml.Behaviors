@@ -41,8 +41,8 @@
         <TabItem Header="Add/RemoveClassAction">
             <pages:AddRemoveClassActionView/>
         </TabItem>
-        <TabItem Header="ResponsiveControlBehavior">
-            <pages:ResponsiveControlBehaviorView/>
+        <TabItem Header="AdaptiveBehavior">
+            <pages:AdaptiveBehaviorView/>
         </TabItem>
     </TabControl>
 </UserControl>
