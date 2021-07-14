@@ -64,8 +64,11 @@ namespace Avalonia.Xaml.Interactions.Responsive
         {
             base.OnAttached();
 
-            StopObserving();
-            StartObserving();
+            if (AssociatedObject is { })
+            {
+	            AssociatedObject.AttachedToVisualTree += AssociatedObject_OnAttachedToVisualTree;
+	            AssociatedObject.DetachedFromVisualTree += AssociatedObject_OnDetachedFromVisualTree;
+            }
         }
 
         /// <summary>
@@ -75,7 +78,22 @@ namespace Avalonia.Xaml.Interactions.Responsive
         {
             base.OnDetaching();
 
-            StopObserving();
+            if (AssociatedObject is { })
+            {
+	            AssociatedObject.AttachedToVisualTree -= AssociatedObject_OnAttachedToVisualTree;
+	            AssociatedObject.DetachedFromVisualTree -= AssociatedObject_OnDetachedFromVisualTree;
+            }
+        }
+
+        private void AssociatedObject_OnAttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+        {
+	        StopObserving();
+	        StartObserving();
+        }
+
+        private void AssociatedObject_OnDetachedFromVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+        {
+	        StopObserving();
         }
 
         private void StartObserving()
