@@ -30,7 +30,7 @@ namespace Avalonia.Xaml.Interactions.Custom
 
         private static void OnValueChanged(IAvaloniaObject avaloniaObject, AvaloniaPropertyChangedEventArgs args)
         {
-            if (!(avaloniaObject is ValueChangedTriggerBehavior behavior) || behavior.AssociatedObject is null)
+            if (avaloniaObject is not ValueChangedTriggerBehavior behavior || behavior.AssociatedObject is null)
             {
                 return;
             }
