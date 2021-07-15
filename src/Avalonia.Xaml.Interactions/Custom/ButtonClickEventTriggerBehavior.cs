@@ -57,7 +57,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             }
         }
 
-        private void AssociatedObject_OnClick(object sender, RoutedEventArgs e)
+        private void AssociatedObject_OnClick(object? sender, RoutedEventArgs e)
         {
             if (AssociatedObject is { } && KeyModifiers == _savedKeyModifiers)
             {
@@ -65,12 +65,12 @@ namespace Avalonia.Xaml.Interactions.Custom
             }
         }
 
-        private void Button_OnKeyDown(object sender, KeyEventArgs e)
+        private void Button_OnKeyDown(object? sender, KeyEventArgs e)
         {
             _savedKeyModifiers = e.KeyModifiers;
         }
 
-        private void Button_OnKeyUp(object sender, KeyEventArgs e)
+        private void Button_OnKeyUp(object? sender, KeyEventArgs e)
         {
             _savedKeyModifiers = KeyModifiers.None;
         }
