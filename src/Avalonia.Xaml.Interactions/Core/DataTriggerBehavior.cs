@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Core
     /// <summary>
     /// A behavior that performs actions when the bound data meets a specified condition.
     /// </summary>
-    public sealed class DataTriggerBehavior : Trigger
+    public class DataTriggerBehavior : Trigger
     {
         /// <summary>
         /// Identifies the <seealso cref="Binding"/> avalonia property.

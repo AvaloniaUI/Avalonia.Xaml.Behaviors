@@ -9,7 +9,7 @@ namespace Avalonia.Xaml.Interactions.Core
     /// <summary>
     /// A behavior that listens for a specified event on its source and executes its actions when that event is fired.
     /// </summary>
-    public sealed class EventTriggerBehavior : Trigger
+    public class EventTriggerBehavior : Trigger
     {
         private const string EventNameDefaultValue = "Loaded";
 
