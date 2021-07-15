@@ -11,7 +11,7 @@ namespace Avalonia.Xaml.Interactions.Core
     /// </summary>
     public class EventTriggerBehavior : Trigger
     {
-        private const string EventNameDefaultValue = "Loaded";
+        private const string EventNameDefaultValue = "AttachedToVisualTree";
 
         /// <summary>
         /// Identifies the <seealso cref="EventName"/> avalonia property.
