@@ -6,7 +6,12 @@
              xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:BehaviorsTestApplication.ViewModels"
+             x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
     <Grid>
         <TextBlock Name="Text" HorizontalAlignment="Center" VerticalAlignment="Center">
             <i:Interaction.Behaviors>

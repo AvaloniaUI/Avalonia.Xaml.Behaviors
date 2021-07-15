@@ -5,7 +5,12 @@
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:BehaviorsTestApplication.ViewModels"
+             x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
     <Grid RowDefinitions="*,Auto" ColumnDefinitions="30*,5,30*,5,30*">
         <Border BorderThickness="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="5" Background="{DynamicResource PinkBrush}" BorderBrush="{DynamicResource GrayBrush}">
             <TextBlock Text="{Binding Count}" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource YellowBrush}"/>
