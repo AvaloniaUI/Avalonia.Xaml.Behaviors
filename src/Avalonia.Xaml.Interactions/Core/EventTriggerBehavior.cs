@@ -52,7 +52,7 @@ namespace Avalonia.Xaml.Interactions.Core
         {
             EventNameProperty.Changed.Subscribe(e =>
             {
-                if (!(e.Sender is EventTriggerBehavior behavior))
+                if (e.Sender is not EventTriggerBehavior behavior)
                 {
                     return;
                 }
