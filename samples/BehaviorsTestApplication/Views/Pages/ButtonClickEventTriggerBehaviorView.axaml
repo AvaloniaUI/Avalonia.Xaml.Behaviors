@@ -34,7 +34,7 @@
             </i:Interaction.Behaviors>
         </Button>
         -->
-        <Button Content="Left (Control), Reset (Hold Control+Shift), Right (Hold Shift)" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Margin="5,0,0,5">
+        <Button Content="Left (Hold Control), Reset (Hold Control+Shift), Right (Hold Shift)" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Margin="5,0,0,5">
             <i:Interaction.Behaviors>
                 <ic:ButtonClickEventTriggerBehavior KeyModifiers="Control">
                     <ia:InvokeCommandAction Command="{Binding MoveLeftCommand}"/>
