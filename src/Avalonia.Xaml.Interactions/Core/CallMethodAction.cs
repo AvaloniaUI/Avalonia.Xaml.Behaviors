@@ -76,7 +76,7 @@ namespace Avalonia.Xaml.Interactions.Core
         /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
         /// <param name="parameter">The value of this parameter is determined by the caller.</param>
         /// <returns>True if the method is called; else false.</returns>
-        public object Execute(object? sender, object? parameter)
+        public virtual object Execute(object? sender, object? parameter)
         {
             object? target;
             if (GetValue(TargetObjectProperty) is { })
