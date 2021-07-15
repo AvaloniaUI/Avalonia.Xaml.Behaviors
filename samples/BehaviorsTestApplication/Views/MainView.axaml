@@ -49,5 +49,8 @@
         <TabItem Header="AdaptiveBehavior">
             <pages:AdaptiveBehaviorView/>
         </TabItem>
+        <TabItem Header="NthChildBehavior">
+            <pages:NthChildBehaviorView/>
+        </TabItem>
     </TabControl>
 </UserControl>

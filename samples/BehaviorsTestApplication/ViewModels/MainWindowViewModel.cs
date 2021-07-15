@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Windows.Input;
 using BehaviorsTestApplication.ViewModels.Core;
@@ -10,6 +11,7 @@ namespace BehaviorsTestApplication.ViewModels
         private int _value;
         private int _count;
         private double _position;
+        private List<string> _items;
 
         public int Count
         {
@@ -21,6 +23,12 @@ namespace BehaviorsTestApplication.ViewModels
         {
             get => _position;
             set => Update(ref _position, value);
+        }
+
+        public List<string> Items
+        {
+            get => _items;
+            set => Update(ref _items, value);
         }
 
         public IObservable<int> Values { get; }
@@ -38,6 +46,15 @@ namespace BehaviorsTestApplication.ViewModels
             MoveLeftCommand = new Command((param) => Position -= 5.0);
             MoveRightCommand = new Command((param) => Position += 5.0);
             ResetMoveCommand = new Command((param) => Position = 100.0);
+            Items = new List<string>()
+            {
+                "First Item",
+                "Second Item",
+                "Third Item",
+                "Fourth Item",
+                "Fifth Item",
+                "Sixth Item"
+            };
             Values = Observable.Interval(TimeSpan.FromSeconds(1)).Select(_ => _value++);
         }
 
