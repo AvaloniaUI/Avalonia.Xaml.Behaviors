@@ -163,7 +163,7 @@ namespace Avalonia.Xaml.Interactions.Core
 
         private static void OnValueChanged(IAvaloniaObject avaloniaObject, AvaloniaPropertyChangedEventArgs args)
         {
-            if (!(avaloniaObject is DataTriggerBehavior behavior) || behavior.AssociatedObject is null)
+            if (avaloniaObject is not DataTriggerBehavior behavior || behavior.AssociatedObject is null)
             {
                 return;
             }
