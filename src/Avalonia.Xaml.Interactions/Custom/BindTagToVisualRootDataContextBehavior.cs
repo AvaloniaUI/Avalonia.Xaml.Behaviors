@@ -18,7 +18,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             base.OnAttached();
             if (AssociatedObject is { })
             {
-                AssociatedObject.AttachedToVisualTree += AttachedToVisualTree; 
+                AssociatedObject.AttachedToVisualTree += AssociatedObject_AttachedToVisualTree; 
             }
         }
 
@@ -28,12 +28,12 @@ namespace Avalonia.Xaml.Interactions.Custom
             base.OnDetaching();
             if (AssociatedObject is { })
             {
-                AssociatedObject.AttachedToVisualTree -= AttachedToVisualTree; 
+                AssociatedObject.AttachedToVisualTree -= AssociatedObject_AttachedToVisualTree; 
             }
             _disposable?.Dispose();
         }
 
-        private void AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+        private void AssociatedObject_AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
         {
             _disposable = BindDataContextToTag((IControl)AssociatedObject.GetVisualRoot(), AssociatedObject);
         }

@@ -59,10 +59,10 @@ namespace Avalonia.Xaml.Interactivity
 
                 if (obj is Control control)
                 {
-                    control.AttachedToVisualTree -= Control_Loaded;
-                    control.AttachedToVisualTree += Control_Loaded;
-                    control.DetachedFromVisualTree -= Control_Unloaded;
-                    control.DetachedFromVisualTree += Control_Unloaded;
+                    control.AttachedToVisualTree -= Control_AttachedToVisualTree;
+                    control.AttachedToVisualTree += Control_AttachedToVisualTree;
+                    control.DetachedFromVisualTree -= Control_DetachedFromVisualTree;
+                    control.DetachedFromVisualTree += Control_DetachedFromVisualTree;
                 }
             }
 
@@ -114,7 +114,7 @@ namespace Avalonia.Xaml.Interactivity
             return results;
         }
 
-        private static void Control_Loaded(object? sender, VisualTreeAttachmentEventArgs e)
+        private static void Control_AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
         {
             if (sender is IAvaloniaObject d)
             {
@@ -122,7 +122,7 @@ namespace Avalonia.Xaml.Interactivity
             }
         }
 
-        private static void Control_Unloaded(object? sender, VisualTreeAttachmentEventArgs e)
+        private static void Control_DetachedFromVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
         {
             if (sender is IAvaloniaObject d)
             {
