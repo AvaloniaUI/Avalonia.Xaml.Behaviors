@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactivity
     /// <summary>
     /// Represents a collection of <see cref="IAction"/>'s.
     /// </summary>
-    public sealed class ActionCollection : AvaloniaList<IAvaloniaObject>
+    public class ActionCollection : AvaloniaList<IAvaloniaObject>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ActionCollection"/> class.

@@ -6,7 +6,7 @@ namespace Avalonia.Xaml.Interactions.Custom
     /// <summary>
     /// Focuses the <see cref="Behavior.AssociatedObject"/> when attached to visual tree.
     /// </summary>
-    public sealed class FocusOnAttachedToVisualTreeBehavior : Behavior<Control>
+    public class FocusOnAttachedToVisualTreeBehavior : Behavior<Control>
     {
         /// <summary>
         /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.

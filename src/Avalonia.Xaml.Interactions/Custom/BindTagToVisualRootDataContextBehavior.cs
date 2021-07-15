@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactions.Custom
     /// <summary>
     /// Binds AssociatedObject object Tag property to root visual DataContext.
     /// </summary>
-    public sealed class BindTagToVisualRootDataContextBehavior : Behavior<Control>
+    public class BindTagToVisualRootDataContextBehavior : Behavior<Control>
     {
         private IDisposable? _disposable;
 

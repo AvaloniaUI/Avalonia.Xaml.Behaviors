@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom
     /// <summary>
     /// Sets <see cref="ListBoxItem.IsSelected"/> property to true of the associated <see cref="ListBoxItem"/> control on <see cref="InputElement.PointerMoved"/> event.
     /// </summary>
-    public sealed class SelectListBoxItemOnPointerMovedBehavior : Behavior<Control>
+    public class SelectListBoxItemOnPointerMovedBehavior : Behavior<Control>
     {
         /// <summary>
         /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.

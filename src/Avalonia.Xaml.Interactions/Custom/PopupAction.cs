@@ -10,7 +10,7 @@ namespace Avalonia.Xaml.Interactions.Custom
     /// An action that displays a <see cref="Popup"/> for the associated control when executed.
     /// </summary>
     /// <remarks>If the associated control is of type <see cref="Control"/> than popup inherits control <see cref="StyledElement.DataContext"/>.</remarks>
-    public sealed class PopupAction : AvaloniaObject, IAction
+    public class PopupAction : AvaloniaObject, IAction
     {
         private Popup? _popup;
 
@@ -36,7 +36,7 @@ namespace Avalonia.Xaml.Interactions.Custom
         /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
         /// <param name="parameter">The value of this parameter is determined by the caller.</param>
         /// <returns>Returns null after executed.</returns>
-        public object? Execute(object? sender, object? parameter)
+        public virtual object? Execute(object? sender, object? parameter)
         {
             if (_popup is null)
             {

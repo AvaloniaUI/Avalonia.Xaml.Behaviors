@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactivity
     /// <summary>
     /// Defines a <see cref="BehaviorCollection"/> attached property and provides a method for executing an <seealso cref="ActionCollection"/>.
     /// </summary>
-    public sealed class Interaction
+    public class Interaction
     {
         static Interaction()
         {

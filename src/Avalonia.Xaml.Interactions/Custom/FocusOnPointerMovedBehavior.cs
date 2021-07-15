@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom
     /// <summary>
     /// Focuses the <see cref="Behavior.AssociatedObject"/> on <see cref="InputElement.PointerMoved"/> event.
     /// </summary>
-    public sealed class FocusOnPointerMovedBehavior : Behavior<Control>
+    public class FocusOnPointerMovedBehavior : Behavior<Control>
     {
         /// <summary>
         /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.

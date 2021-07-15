@@ -10,7 +10,7 @@ namespace Avalonia.Xaml.Interactions.Responsive
     /// <summary>
     /// Observes <see cref="Behavior{T}.AssociatedObject"/> control or <see cref="SourceControl"/> control <see cref="Visual.Bounds"/> property changes and if triggered sets or removes style classes when conditions from <see cref="AdaptiveClassSetter"/> are met.
     /// </summary>
-    public sealed class AdaptiveBehavior : Behavior<Control>
+    public class AdaptiveBehavior : Behavior<Control>
     {
         private IDisposable? _disposable;
         private AvaloniaList<AdaptiveClassSetter>? _setters;

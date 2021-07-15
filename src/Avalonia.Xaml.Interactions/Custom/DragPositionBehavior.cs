@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactions.Custom
     /// <summary>
     /// A behavior that allows controls to be moved around the canvas using RenderTransform of <see cref="Behavior.AssociatedObject"/>.
     /// </summary>
-    public sealed class DragPositionBehavior : Behavior<Control>
+    public class DragPositionBehavior : Behavior<Control>
     {
         private IControl? _parent;
         private Point _previous;

@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom
     /// <summary>
     /// A behavior that displays cursor position on <see cref="InputElement.PointerMoved"/> event for the <see cref="Behavior{T}.AssociatedObject"/> using <see cref="TextBlock.Text"/> property.
     /// </summary>
-    public sealed class ShowPointerPositionBehavior : Behavior<Control>
+    public class ShowPointerPositionBehavior : Behavior<Control>
     {
         /// <summary>
         /// Identifies the <seealso cref="TargetTextBlockProperty"/> avalonia property.
