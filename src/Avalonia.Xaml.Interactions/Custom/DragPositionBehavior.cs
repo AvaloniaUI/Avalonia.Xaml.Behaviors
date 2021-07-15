@@ -44,7 +44,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             {
                 _parent = AssociatedObject.Parent;
 
-                if (!(AssociatedObject.RenderTransform is TranslateTransform))
+                if (AssociatedObject.RenderTransform is not TranslateTransform)
                 {
                     AssociatedObject.RenderTransform = new TranslateTransform();
                 }
