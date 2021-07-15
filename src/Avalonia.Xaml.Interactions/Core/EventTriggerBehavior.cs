@@ -177,7 +177,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 if (_resolvedSource is Control element && !IsElementLoaded(element))
                 {
                     _isLoadedEventRegistered = true;
-                    element.AttachedToVisualTree += Element_AttachedToVisualTree;
+                    element.AttachedToVisualTree += OnEvent;
                 }
             }
         }
@@ -208,12 +208,12 @@ namespace Avalonia.Xaml.Interactions.Core
                 _isLoadedEventRegistered = false;
                 if (_resolvedSource is Control element)
                 {
-                    element.AttachedToVisualTree -= Element_AttachedToVisualTree; 
+                    element.AttachedToVisualTree -= OnEvent; 
                 }
             }
         }
 
-        private void Element_AttachedToVisualTree(object? sender, object eventArgs)
+        public virtual void OnEvent(object? sender, object eventArgs)
         {
             Interaction.ExecuteActions(_resolvedSource, Actions, eventArgs);
         }
