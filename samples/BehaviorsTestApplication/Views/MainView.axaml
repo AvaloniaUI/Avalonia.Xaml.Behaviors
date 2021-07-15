@@ -35,6 +35,9 @@
         <TabItem Header="Custom Behavior">
             <pages:CustomBehaviorView/>
         </TabItem>
+        <TabItem Header="ButtonClickEventTriggerBehaviorView">
+            <pages:ButtonClickEventTriggerBehaviorView/>
+        </TabItem>
         <TabItem Header="Advanced Behavior">
             <pages:AdvancedView/>
         </TabItem>
