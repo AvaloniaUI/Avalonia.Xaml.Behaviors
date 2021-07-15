@@ -157,7 +157,7 @@ namespace Avalonia.Xaml.Interactions.Core
                             sourceObjectType.Name));
                     }
 
-                    var methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
+                    var methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("AttachedToVisualTree");
                     if (methodInfo is { })
                     {
                         var eventHandlerType = eventInfo.EventHandlerType;
@@ -177,7 +177,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 if (_resolvedSource is Control element && !IsElementLoaded(element))
                 {
                     _isLoadedEventRegistered = true;
-                    element.AttachedToVisualTree += OnEvent;
+                    element.AttachedToVisualTree += AttachedToVisualTree;
                 }
             }
         }
@@ -208,12 +208,17 @@ namespace Avalonia.Xaml.Interactions.Core
                 _isLoadedEventRegistered = false;
                 if (_resolvedSource is Control element)
                 {
-                    element.AttachedToVisualTree -= OnEvent; 
+                    element.AttachedToVisualTree -= AttachedToVisualTree; 
                 }
             }
         }
 
-        public virtual void OnEvent(object? sender, object eventArgs)
+        /// <summary>
+        /// Raised when the control is attached to a rooted visual tree.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="eventArgs">The event args.</param>
+        protected virtual void AttachedToVisualTree(object? sender, object eventArgs)
         {
             Interaction.ExecuteActions(_resolvedSource, Actions, eventArgs);
         }
