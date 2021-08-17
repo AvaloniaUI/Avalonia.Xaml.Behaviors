@@ -11,7 +11,7 @@ namespace BehaviorsTestApplication.ViewModels
         private int _value;
         private int _count;
         private double _position;
-        private List<string> _items;
+        private List<string>? _items;
 
         public int Count
         {
@@ -25,7 +25,7 @@ namespace BehaviorsTestApplication.ViewModels
             set => Update(ref _position, value);
         }
 
-        public List<string> Items
+        public List<string>? Items
         {
             get => _items;
             set => Update(ref _items, value);
