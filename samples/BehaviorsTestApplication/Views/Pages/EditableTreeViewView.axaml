@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.EditableTreeViewView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:BehaviorsTestApplication.ViewModels"
+             xmlns:views="clr-namespace:BehaviorsTestApplication.Views"
+             x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
+  <TreeView Items="{Binding Items}">
+    <TreeView.Styles>
+      <Style Selector="TreeViewItem">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+      </Style>
+    </TreeView.Styles>
+    <TreeView.ItemTemplate>
+      <TreeDataTemplate DataType="vm:ItemViewModel" x:CompileBindings="False"
+                        ItemsSource="{Binding Items}">
+        <views:ItemView />
+      </TreeDataTemplate>
+    </TreeView.ItemTemplate>
+  </TreeView>
+</UserControl>
