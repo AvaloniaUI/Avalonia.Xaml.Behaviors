@@ -52,5 +52,11 @@
     <TabItem Header="NthChildBehavior">
       <pages:NthChildBehaviorView />
     </TabItem>
+    <TabItem Header="EditableListBox">
+      <pages:EditableListBoxView />
+    </TabItem>
+    <TabItem Header="EditableTreeView">
+      <pages:EditableTreeViewView />
+    </TabItem>
   </TabControl>
 </UserControl>
