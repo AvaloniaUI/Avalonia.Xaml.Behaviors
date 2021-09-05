@@ -58,7 +58,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             _parent = null;
         }
 
-        private void Source_PointerPressed(object sender, PointerPressedEventArgs e)
+        private void Source_PointerPressed(object? sender, PointerPressedEventArgs e)
         {
             var target = TargetControl ?? AssociatedObject;
             if (target is { })
@@ -79,7 +79,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             }
         }
 
-        private void Parent_PointerMoved(object sender, PointerEventArgs args)
+        private void Parent_PointerMoved(object? sender, PointerEventArgs args)
         {
             var target = TargetControl ?? AssociatedObject;
             if (target is { })
@@ -94,7 +94,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             }
         }
 
-        private void Parent_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void Parent_PointerReleased(object? sender, PointerReleasedEventArgs e)
         {
             if (_parent is { })
             {

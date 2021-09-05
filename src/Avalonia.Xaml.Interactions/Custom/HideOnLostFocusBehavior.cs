@@ -43,7 +43,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             AssociatedObject?.RemoveHandler(InputElement.LostFocusEvent, AssociatedObject_LostFocus);
         }
 
-        private void AssociatedObject_LostFocus(object sender, RoutedEventArgs e)
+        private void AssociatedObject_LostFocus(object? sender, RoutedEventArgs e)
         {
             if (TargetControl is { })
             {

@@ -28,7 +28,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             AssociatedObject?.RemoveHandler(InputElement.GotFocusEvent, AssociatedObject_GotFocus);
         }
 
-        private void AssociatedObject_GotFocus(object sender, GotFocusEventArgs e)
+        private void AssociatedObject_GotFocus(object? sender, GotFocusEventArgs e)
         {
             AssociatedObject?.SelectAll();
         }

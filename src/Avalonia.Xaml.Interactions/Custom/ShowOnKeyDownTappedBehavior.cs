@@ -58,7 +58,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             AssociatedObject?.RemoveHandler(InputElement.KeyDownEvent, AssociatedObject_KeyDown);
         }
 
-        private void AssociatedObject_KeyDown(object sender, KeyEventArgs e)
+        private void AssociatedObject_KeyDown(object? sender, KeyEventArgs e)
         {
             if (e.Key == Key && TargetControl is { IsVisible: false })
             {

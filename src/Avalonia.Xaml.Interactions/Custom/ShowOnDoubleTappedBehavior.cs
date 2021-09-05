@@ -43,7 +43,7 @@ namespace Avalonia.Xaml.Interactions.Custom
             AssociatedObject?.RemoveHandler(Gestures.DoubleTappedEvent, AssociatedObject_DoubleTapped);
         }
 
-        private void AssociatedObject_DoubleTapped(object sender, RoutedEventArgs e)
+        private void AssociatedObject_DoubleTapped(object? sender, RoutedEventArgs e)
         {
             if (TargetControl is { IsVisible: false })
             {
