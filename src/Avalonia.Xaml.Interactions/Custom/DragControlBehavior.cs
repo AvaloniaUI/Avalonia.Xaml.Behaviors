@@ -8,10 +8,25 @@ namespace Avalonia.Xaml.Interactions.Custom
     /// <summary>
     /// A behavior that allows controls to be moved around the canvas using RenderTransform of <see cref="Behavior.AssociatedObject"/>.
     /// </summary>
-    public class DragPositionBehavior : Behavior<Control>
+    public sealed class DragControlBehavior : Behavior<Control>
     {
+        /// <summary>
+        /// Identifies the <seealso cref="TargetControl"/> avalonia property.
+        /// </summary>
+        public static readonly StyledProperty<Control?> TargetControlProperty =
+            AvaloniaProperty.Register<DragControlBehavior, Control?>(nameof(TargetControl));
+
         private IControl? _parent;
         private Point _previous;
+
+        /// <summary>
+        /// Gets or sets the target control to be moved around instead of <see cref="IBehavior.AssociatedObject"/>. This is a avalonia property.
+        /// </summary>
+        public Control? TargetControl
+        {
+            get => GetValue(TargetControlProperty);
+            set => SetValue(TargetControlProperty, value);
+        }
 
         /// <summary>
         /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
@@ -19,9 +34,11 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnAttached()
         {
             base.OnAttached();
-            if (AssociatedObject is { })
+
+            var source = AssociatedObject;
+            if (source is { })
             {
-                AssociatedObject.PointerPressed += AssociatedObject_PointerPressed; 
+                source.PointerPressed += Source_PointerPressed;
             }
         }
 
@@ -31,22 +48,26 @@ namespace Avalonia.Xaml.Interactions.Custom
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            if (AssociatedObject is { })
+
+            var source = AssociatedObject;
+            if (source is { })
             {
-                AssociatedObject.PointerPressed -= AssociatedObject_PointerPressed; 
+                source.PointerPressed -= Source_PointerPressed;
             }
+
             _parent = null;
         }
 
-        private void AssociatedObject_PointerPressed(object? sender, PointerPressedEventArgs e)
+        private void Source_PointerPressed(object sender, PointerPressedEventArgs e)
         {
-            if (AssociatedObject is { })
+            var target = TargetControl ?? AssociatedObject;
+            if (target is { })
             {
-                _parent = AssociatedObject.Parent;
+                _parent = target.Parent;
 
-                if (AssociatedObject.RenderTransform is not TranslateTransform)
+                if (!(target.RenderTransform is TranslateTransform))
                 {
-                    AssociatedObject.RenderTransform = new TranslateTransform();
+                    target.RenderTransform = new TranslateTransform();
                 }
 
                 _previous = e.GetPosition(_parent);
@@ -58,27 +79,28 @@ namespace Avalonia.Xaml.Interactions.Custom
             }
         }
 
-        private void Parent_PointerMoved(object? sender, PointerEventArgs args)
+        private void Parent_PointerMoved(object sender, PointerEventArgs args)
         {
-            if (AssociatedObject is { })
+            var target = TargetControl ?? AssociatedObject;
+            if (target is { })
             {
                 var pos = args.GetPosition(_parent);
-                if (AssociatedObject.RenderTransform is TranslateTransform tr)
+                if (target.RenderTransform is TranslateTransform tr)
                 {
                     tr.X += pos.X - _previous.X;
                     tr.Y += pos.Y - _previous.Y;
                 }
-                _previous = pos; 
+                _previous = pos;
             }
         }
 
-        private void Parent_PointerReleased(object? sender, PointerReleasedEventArgs e)
+        private void Parent_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
             if (_parent is { })
             {
                 _parent.PointerMoved -= Parent_PointerMoved;
                 _parent.PointerReleased -= Parent_PointerReleased;
-                _parent = null; 
+                _parent = null;
             }
         }
     }

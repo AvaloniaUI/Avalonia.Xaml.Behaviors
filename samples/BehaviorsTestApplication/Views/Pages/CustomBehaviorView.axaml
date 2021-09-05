@@ -14,12 +14,12 @@
     <Grid Background="{DynamicResource GrayBrush}" Margin="5">
         <Ellipse Fill="{DynamicResource RedBrush}" Stroke="{DynamicResource BlackBrush}" Height="125" Width="125" StrokeThickness="0" HorizontalAlignment="Left">
             <i:Interaction.Behaviors>
-                <iac:DragPositionBehavior/>
+                <iac:DragControlBehavior/>
             </i:Interaction.Behaviors>
         </Ellipse>
         <Ellipse Fill="{DynamicResource BlueBrush}" Stroke="{DynamicResource BlackBrush}" Height="125" Width="125" StrokeThickness="0" HorizontalAlignment="Right">
             <i:Interaction.Behaviors>
-                <iac:DragPositionBehavior/>
+                <iac:DragControlBehavior/>
             </i:Interaction.Behaviors>
         </Ellipse>
     </Grid>
