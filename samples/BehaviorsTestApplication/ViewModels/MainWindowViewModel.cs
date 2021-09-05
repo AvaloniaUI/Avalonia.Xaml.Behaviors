@@ -11,7 +11,7 @@ namespace BehaviorsTestApplication.ViewModels
         private int _value;
         private int _count;
         private double _position;
-        private List<string>? _items;
+        private List<ItemViewModel>? _items;
 
         public int Count
         {
@@ -25,7 +25,7 @@ namespace BehaviorsTestApplication.ViewModels
             set => Update(ref _position, value);
         }
 
-        public List<string>? Items
+        public List<ItemViewModel>? Items
         {
             get => _items;
             set => Update(ref _items, value);
@@ -46,14 +46,14 @@ namespace BehaviorsTestApplication.ViewModels
             MoveLeftCommand = new Command((param) => Position -= 5.0);
             MoveRightCommand = new Command((param) => Position += 5.0);
             ResetMoveCommand = new Command((param) => Position = 100.0);
-            Items = new List<string>()
+            Items = new List<ItemViewModel>()
             {
-                "First Item",
-                "Second Item",
-                "Third Item",
-                "Fourth Item",
-                "Fifth Item",
-                "Sixth Item"
+                new("First Item"),
+                new("Second Item"),
+                new("Third Item"),
+                new("Fourth Item"),
+                new("Fifth Item"),
+                new("Sixth Item")
             };
             Values = Observable.Interval(TimeSpan.FromSeconds(1)).Select(_ => _value++);
         }
