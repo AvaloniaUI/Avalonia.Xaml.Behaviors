@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 using System.Windows.Input;
 using BehaviorsTestApplication.ViewModels.Core;
@@ -11,7 +12,7 @@ namespace BehaviorsTestApplication.ViewModels
         private int _value;
         private int _count;
         private double _position;
-        private List<ItemViewModel>? _items;
+        private ObservableCollection<ItemViewModel>? _items;
 
         public int Count
         {
@@ -25,7 +26,7 @@ namespace BehaviorsTestApplication.ViewModels
             set => Update(ref _position, value);
         }
 
-        public List<ItemViewModel>? Items
+        public ObservableCollection<ItemViewModel>? Items
         {
             get => _items;
             set => Update(ref _items, value);
@@ -46,14 +47,62 @@ namespace BehaviorsTestApplication.ViewModels
             MoveLeftCommand = new Command((param) => Position -= 5.0);
             MoveRightCommand = new Command((param) => Position += 5.0);
             ResetMoveCommand = new Command((param) => Position = 100.0);
-            Items = new List<ItemViewModel>()
+            Items = new ObservableCollection<ItemViewModel>()
             {
-                new("First Item"),
-                new("Second Item"),
-                new("Third Item"),
-                new("Fourth Item"),
-                new("Fifth Item"),
+                new("First Item")
+                {
+                    Items = new ObservableCollection<ItemViewModel>()
+                    {
+                        new("First Item Sub Item 1"),
+                        new("First Item Sub Item 2"),
+                        new("First Item Sub Item 3"),
+                    }
+                },
+                new("Second Item")
+                {
+                    Items = new ObservableCollection<ItemViewModel>()
+                    {
+                        new("Second Item Sub Item 1"),
+                        new("Second Item Sub Item 2"),
+                        new("Second Item Sub Item 3"),
+                    }
+                },
+                new("Third Item")
+                {
+                    Items = new ObservableCollection<ItemViewModel>()
+                    {
+                        new("Third Item Sub Item 1"),
+                        new("Third Item Sub Item 2"),
+                        new("Third Item Sub Item 3"),
+                    }
+                },
+                new("Fourth Item")
+                {
+                    Items = new ObservableCollection<ItemViewModel>()
+                    {
+                        new("Fourth Item Sub Item 1"),
+                        new("Fourth Item Sub Item 2"),
+                        new("Fourth Item Sub Item 3"),
+                    }
+                },
+                new("Fifth Item")
+                {
+                    Items = new ObservableCollection<ItemViewModel>()
+                    {
+                        new("Fifth Item Sub Item 1"),
+                        new("Fifth Item Sub Item 2"),
+                        new("Fifth Item Sub Item 3"),
+                    }
+                },
                 new("Sixth Item")
+                {
+                    Items = new ObservableCollection<ItemViewModel>()
+                    {
+                        new("Sixth Item Sub Item 1"),
+                        new("Sixth Item Sub Item 2"),
+                        new("Sixth Item Sub Item 3"),
+                    }
+                },
             };
             Values = Observable.Interval(TimeSpan.FromSeconds(1)).Select(_ => _value++);
         }
