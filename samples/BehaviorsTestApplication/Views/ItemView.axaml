@@ -1,0 +1,42 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:BehaviorsTestApplication.ViewModels"
+             x:CompileBindings="True" x:DataType="vm:ItemViewModel"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BehaviorsTestApplication.Views.ItemView">
+  <Panel Background="Transparent">
+    <i:Interaction.Behaviors>
+      <iac:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
+      <iac:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
+    </i:Interaction.Behaviors>
+    <TextBox x:Name="TextBoxEdit"
+             IsVisible="False"
+             Height="{Binding #TextStackPanel.Bounds.Height}"
+             VerticalContentAlignment="Center"
+             VerticalAlignment="Center"
+             Margin="0"
+             Padding="6,0,6,0"
+             BorderThickness="0"
+             Text="{Binding Name, Mode=TwoWay}">
+      <i:Interaction.Behaviors>
+        <iac:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
+        <iac:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
+        <iac:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
+        <iac:SelectAllOnGotFocusBehavior />
+      </i:Interaction.Behaviors>
+    </TextBox>
+    <StackPanel x:Name="TextStackPanel"
+                Orientation="Horizontal"
+                Background="Transparent"
+                Focusable="True"
+                IsVisible="{Binding !#TextBoxEdit.IsVisible}">
+      <TextBlock x:Name="StyleTextBlock"
+                 Text="{Binding Name}"
+                 Margin="6,8,6,8" />
+    </StackPanel>
+  </Panel>
+</UserControl>
