@@ -137,11 +137,13 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
                         return;
                     }
 
-                    Handler?.BeforeDragDrop(sender, _triggerEvent, Context);
+                    var context = Context ?? AssociatedObject?.DataContext;
+                    
+                    Handler?.BeforeDragDrop(sender, _triggerEvent, context);
 
-                    await DoDragDrop(_triggerEvent, Context);
+                    await DoDragDrop(_triggerEvent, context);
 
-                    Handler?.AfterDragDrop(sender, _triggerEvent, Context);
+                    Handler?.AfterDragDrop(sender, _triggerEvent, context);
 
                     _triggerEvent = null;
                 }
