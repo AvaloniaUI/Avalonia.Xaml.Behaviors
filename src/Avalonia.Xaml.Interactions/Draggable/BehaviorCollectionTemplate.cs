@@ -1,21 +1,21 @@
 ﻿using System;
+using Avalonia.Markup.Xaml.Templates;
 using Avalonia.Metadata;
 using Avalonia.Styling;
+using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Draggable
 {
-    // TODO: ObjectTemplate requires https://github.com/AvaloniaUI/Avalonia/pull/5468
-    /*
     /// <summary>
     /// 
     /// </summary>
-    public class ObjectTemplate : ITemplate
+    public class BehaviorCollectionTemplate : ITemplate
     {
         /// <summary>
         /// 
         /// </summary>
         [Content]
-        [TemplateContent]
+        [TemplateContent(TemplateResultType = typeof(BehaviorCollection))]
         public object? Content { get; set; }
 
         /// <summary>
@@ -23,14 +23,6 @@ namespace Avalonia.Xaml.Interactions.Draggable
         /// </summary>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        object? ITemplate.Build()
-        {
-            if (Content is Func<IServiceProvider, object> direct)
-            {
-                return direct(null!);
-            }
-            throw new ArgumentException(nameof(Content));
-        }
+        object? ITemplate.Build() => TemplateContent.Load<BehaviorCollection>(Content).Result;
     }
-    */
 }
