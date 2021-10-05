@@ -1,9 +1,8 @@
 ﻿using Avalonia.Markup.Xaml.Templates;
 using Avalonia.Metadata;
 using Avalonia.Styling;
-using Avalonia.Xaml.Interactivity;
 
-namespace Avalonia.Xaml.Interactions.Draggable
+namespace Avalonia.Xaml.Interactivity
 {
     /// <summary>
     /// 

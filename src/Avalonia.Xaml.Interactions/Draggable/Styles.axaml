@@ -16,11 +16,11 @@
     <Style Selector=":is(TabControl).draggable > :is(TabItem)">
         <Setter Property="ZIndex" Value="0" />
         <Setter Property="(i:Interaction.Behaviors)">
-            <id:BehaviorCollectionTemplate>
+            <i:BehaviorCollectionTemplate>
                 <i:BehaviorCollection>
                     <id:ItemDragBehavior/>
                 </i:BehaviorCollection>
-            </id:BehaviorCollectionTemplate>
+            </i:BehaviorCollectionTemplate>
         </Setter>
     </Style>
 
@@ -43,11 +43,11 @@
     <Style Selector=":is(ListBox).draggable > :is(ListBoxItem)">
         <Setter Property="ZIndex" Value="0" />
         <Setter Property="(i:Interaction.Behaviors)">
-            <id:BehaviorCollectionTemplate>
+            <i:BehaviorCollectionTemplate>
                 <i:BehaviorCollection>
                     <id:ItemDragBehavior Orientation="Vertical"/>
                 </i:BehaviorCollection>
-            </id:BehaviorCollectionTemplate>
+            </i:BehaviorCollectionTemplate>
         </Setter>
     </Style>
 
@@ -59,11 +59,11 @@
 
     <Style Selector=":is(Canvas).draggable > :is(Control)">
         <Setter Property="(i:Interaction.Behaviors)">
-            <id:BehaviorCollectionTemplate>
+            <i:BehaviorCollectionTemplate>
                 <i:BehaviorCollection>
                     <id:CanvasDragBehavior/>
                 </i:BehaviorCollection>
-            </id:BehaviorCollectionTemplate>
+            </i:BehaviorCollectionTemplate>
         </Setter>
     </Style>
 
@@ -71,11 +71,11 @@
 
     <Style Selector=":is(ItemsControl).draggable > :is(ContentPresenter)">
         <Setter Property="(i:Interaction.Behaviors)">
-            <id:BehaviorCollectionTemplate>
+            <i:BehaviorCollectionTemplate>
                 <i:BehaviorCollection>
                     <id:CanvasDragBehavior/>
                 </i:BehaviorCollection>
-            </id:BehaviorCollectionTemplate>
+            </i:BehaviorCollectionTemplate>
         </Setter>
     </Style>
 
