@@ -12,33 +12,45 @@
         Width="450" WindowStartupLocation="CenterScreen"
         Title="DragAndDropSample">
 
-    <Window.Resources>
-        <b:ItemsListBoxDropHandler x:Key="ItemsListBoxDropHandler" />
-    </Window.Resources>
-    
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
 
-    <ListBox Items="{Binding Items}">
-        <i:Interaction.Behaviors>
-            <idd:ContextDropBehavior Context="{Binding}" 
-                                     Handler="{StaticResource ItemsListBoxDropHandler}" />
-        </i:Interaction.Behaviors>
-        <ListBox.Styles>
-            <Style Selector="ListBoxItem">
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            </Style>
-        </ListBox.Styles>
-        <ListBox.ItemTemplate>
-            <DataTemplate DataType="vm:ItemViewModel">
-                <TextBlock Text="{Binding Title}" Background="Transparent">
-                    <i:Interaction.Behaviors>
-                        <idd:ContextDragBehavior Context="{Binding}" />
-                    </i:Interaction.Behaviors>
-                </TextBlock>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+  <Window.Styles>
+
+    <Style Selector="ListBox.ItemsDragAndDrop">
+      <Style.Resources>
+        <b:ItemsListBoxDropHandler x:Key="ItemsListBoxDropHandler" />
+      </Style.Resources>
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <idd:ContextDropBehavior Handler="{StaticResource ItemsListBoxDropHandler}" />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="ListBox.ItemsDragAndDrop ListBoxItem">
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <idd:ContextDragBehavior />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+    </Style>
+
+  </Window.Styles>
+  
+  <ListBox Items="{Binding Items}"
+           Classes="ItemsDragAndDrop">
+    <ListBox.ItemTemplate>
+      <DataTemplate DataType="vm:ItemViewModel">
+        <TextBlock Text="{Binding Title}" />
+      </DataTemplate>
+    </ListBox.ItemTemplate>
+  </ListBox>
 
 </Window>
