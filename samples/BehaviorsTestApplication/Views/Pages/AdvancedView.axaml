@@ -8,24 +8,44 @@
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
              x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-        <Border x:Name="Button" Background="{DynamicResource GreenBrush}" Width="100" Height="50" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5">
-            <i:Interaction.Behaviors>
-                <ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="{Binding #Button}">
-                    <ia:ChangePropertyAction TargetObject="{Binding #Button}" PropertyName="Background" Value="{DynamicResource RedBrush}"/>
-                    <ia:ChangePropertyAction TargetObject="{Binding #Text}" PropertyName="Foreground" Value="{DynamicResource YellowBrush}"/>
-                    <ia:CallMethodAction TargetObject="{Binding}" MethodName="IncrementCount"/>
-                </ia:EventTriggerBehavior>
-                <ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="{Binding #Button}">
-                    <ia:ChangePropertyAction TargetObject="{Binding #Button}" PropertyName="Background" Value="{DynamicResource GreenBrush}"/>
-                    <ia:ChangePropertyAction TargetObject="{Binding #Text}" PropertyName="Foreground" Value="{DynamicResource WhiteBrush}"/>
-                    <ia:CallMethodAction TargetObject="{Binding}" MethodName="DecrementCount"/>
-                </ia:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
-            <TextBlock x:Name="Text" Text="{Binding Count}" Foreground="{DynamicResource WhiteBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        </Border>
-    </Grid>
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
+  <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
+    <Border x:Name="Button" 
+            Background="{DynamicResource GreenBrush}" 
+            Width="100" Height="50" 
+            Grid.Row="1" Grid.Column="0" 
+            Margin="5,0,0,5">
+      <i:Interaction.Behaviors>
+        <ia:EventTriggerBehavior EventName="PointerPressed" 
+                                 SourceObject="{Binding #Button}">
+          <ia:ChangePropertyAction TargetObject="{Binding #Button}" 
+                                   PropertyName="Background"
+                                   Value="{DynamicResource RedBrush}" />
+          <ia:ChangePropertyAction TargetObject="{Binding #Text}" 
+                                   PropertyName="Foreground"
+                                   Value="{DynamicResource YellowBrush}" />
+          <ia:CallMethodAction TargetObject="{Binding}" 
+                               MethodName="IncrementCount" />
+        </ia:EventTriggerBehavior>
+        <ia:EventTriggerBehavior EventName="PointerReleased" 
+                                 SourceObject="{Binding #Button}">
+          <ia:ChangePropertyAction TargetObject="{Binding #Button}" 
+                                   PropertyName="Background"
+                                   Value="{DynamicResource GreenBrush}" />
+          <ia:ChangePropertyAction TargetObject="{Binding #Text}" 
+                                   PropertyName="Foreground"
+                                   Value="{DynamicResource WhiteBrush}" />
+          <ia:CallMethodAction TargetObject="{Binding}"
+                               MethodName="DecrementCount" />
+        </ia:EventTriggerBehavior>
+      </i:Interaction.Behaviors>
+      <TextBlock x:Name="Text" 
+                 Text="{Binding Count}" 
+                 Foreground="{DynamicResource WhiteBrush}"
+                 VerticalAlignment="Center" 
+                 HorizontalAlignment="Center" />
+    </Border>
+  </Grid>
 </UserControl>

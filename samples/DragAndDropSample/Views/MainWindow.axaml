@@ -43,7 +43,7 @@
     </Style>
 
   </Window.Styles>
-  
+
   <ListBox Items="{Binding Items}"
            Classes="ItemsDragAndDrop">
     <ListBox.ItemTemplate>

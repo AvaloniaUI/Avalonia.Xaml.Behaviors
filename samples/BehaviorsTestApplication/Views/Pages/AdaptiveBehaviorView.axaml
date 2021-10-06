@@ -9,112 +9,143 @@
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
              x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450">
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-    <SplitView Name="SplitView">
-        <SplitView.Styles>
-            <Style Selector="SplitView">
-                <Setter Property="PanePlacement" Value="Left"/>
-                <Setter Property="CompactPaneLength" Value="80"/>
-                <Setter Property="OpenPaneLength" Value="200"/>
-                <Setter Property="PaneBackground" Value="Transparent"/>
-                <Setter Property="IsPaneOpen" Value="False"/>
-                <Setter Property="DisplayMode" Value="Inline"/>
-            </Style>
-            <Style Selector="SplitView.small">
-                <Setter Property="IsPaneOpen" Value="False"/>
-                <Setter Property="DisplayMode" Value="Inline"/>
-            </Style>
-            <Style Selector="SplitView.medium">
-                <Setter Property="IsPaneOpen" Value="False"/>
-                <Setter Property="DisplayMode" Value="CompactInline"/>
-            </Style>
-            <Style Selector="SplitView.wide">
-                <Setter Property="IsPaneOpen" Value="True"/>
-                <Setter Property="DisplayMode" Value="Inline"/>
-            </Style>
-        </SplitView.Styles>
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
+  <SplitView Name="SplitView">
+    <SplitView.Styles>
+      <Style Selector="SplitView">
+        <Setter Property="PanePlacement" Value="Left" />
+        <Setter Property="CompactPaneLength" Value="80" />
+        <Setter Property="OpenPaneLength" Value="200" />
+        <Setter Property="PaneBackground" Value="Transparent" />
+        <Setter Property="IsPaneOpen" Value="False" />
+        <Setter Property="DisplayMode" Value="Inline" />
+      </Style>
+      <Style Selector="SplitView.small">
+        <Setter Property="IsPaneOpen" Value="False" />
+        <Setter Property="DisplayMode" Value="Inline" />
+      </Style>
+      <Style Selector="SplitView.medium">
+        <Setter Property="IsPaneOpen" Value="False" />
+        <Setter Property="DisplayMode" Value="CompactInline" />
+      </Style>
+      <Style Selector="SplitView.wide">
+        <Setter Property="IsPaneOpen" Value="True" />
+        <Setter Property="DisplayMode" Value="Inline" />
+      </Style>
+    </SplitView.Styles>
+    <i:Interaction.Behaviors>
+      <ir:AdaptiveBehavior>
+        <ir:AdaptiveClassSetter MinWidth="0" MaxWidth="500" ClassName="small" />
+        <ir:AdaptiveClassSetter MinWidth="500" MaxWidth="900" ClassName="medium" />
+        <ir:AdaptiveClassSetter MinWidth="900" MaxWidth="Infinity" ClassName="wide" />
+      </ir:AdaptiveBehavior>
+    </i:Interaction.Behaviors>
+    <SplitView.Pane>
+      <Border Margin="5" Background="Gray" />
+    </SplitView.Pane>
+    <DockPanel Name="DockPanel" Background="{DynamicResource GrayBrush}" Margin="0,5,0,5">
+      <StackPanel Orientation="Horizontal" Spacing="5" Margin="5" DockPanel.Dock="Bottom">
+        <TextBlock Text="Width: " />
+        <TextBlock Text="{Binding #ResponsiveStackPanel.Bounds.Width}" />
+        <TextBlock Text=" Height: " />
+        <TextBlock Text="{Binding #ResponsiveStackPanel.Bounds.Height}" />
+        <TextBlock Text=" Classes: " />
+        <TextBlock>
+          <TextBlock.Text>
+            <MultiBinding Converter="{x:Static converters:ClassesToStringConverter.Instance}">
+              <Binding ElementName="ResponsiveStackPanel" Path="Classes.Count" />
+              <Binding ElementName="ResponsiveStackPanel" Path="Classes" />
+            </MultiBinding>
+          </TextBlock.Text>
+        </TextBlock>
+      </StackPanel>
+      <StackPanel Name="ResponsiveStackPanel" Margin="5">
+        <StackPanel.Styles>
+          <Style Selector="StackPanel:short">
+            <Setter Property="Background" Value="LightGray" />
+          </Style>
+          <Style Selector="StackPanel:tall">
+            <Setter Property="Background" Value="DarkGray" />
+          </Style>
+          <Style Selector="StackPanel:pointerover:short">
+            <Setter Property="Background" Value="Yellow" />
+          </Style>
+          <Style Selector="StackPanel:pointerover:tall">
+            <Setter Property="Background" Value="Cyan" />
+          </Style>
+          <Style Selector="StackPanel">
+            <Setter Property="Spacing" Value="0" />
+            <Setter Property="(TextBlock.Foreground)" Value="Black" />
+          </Style>
+          <Style Selector="StackPanel.small">
+            <Setter Property="Spacing" Value="10" />
+            <Setter Property="(TextBlock.Foreground)" Value="Purple" />
+          </Style>
+          <Style Selector="StackPanel.medium">
+            <Setter Property="Spacing" Value="20" />
+            <Setter Property="(TextBlock.Foreground)" Value="Red" />
+          </Style>
+          <Style Selector="StackPanel.large">
+            <Setter Property="Spacing" Value="30" />
+            <Setter Property="(TextBlock.Foreground)" Value="Blue" />
+          </Style>
+          <Style Selector="StackPanel.wide">
+            <Setter Property="Spacing" Value="40" />
+            <Setter Property="(TextBlock.Foreground)" Value="Green" />
+          </Style>
+        </StackPanel.Styles>
         <i:Interaction.Behaviors>
-            <ir:AdaptiveBehavior>
-                <ir:AdaptiveClassSetter MinWidth="0" MaxWidth="500" ClassName="small"/>
-                <ir:AdaptiveClassSetter MinWidth="500" MaxWidth="900" ClassName="medium"/>
-                <ir:AdaptiveClassSetter MinWidth="900" MaxWidth="Infinity" ClassName="wide"/>
-            </ir:AdaptiveBehavior>
+          <ir:AdaptiveBehavior SourceControl="{Binding #DockPanel}" 
+                               TargetControl="{Binding #ResponsiveStackPanel}">
+            <ir:AdaptiveClassSetter MinWidth="0" 
+                                    MinWidthOperator="GreaterThanOrEqual" 
+                                    MaxWidth="500" 
+                                    MaxWidthOperator="LessThan" 
+                                    ClassName="small" />
+            <ir:AdaptiveClassSetter MinWidth="500" 
+                                    MinWidthOperator="GreaterThanOrEqual" 
+                                    MaxWidth="700"
+                                    MaxWidthOperator="LessThan"
+                                    ClassName="medium" />
+            <ir:AdaptiveClassSetter MinWidth="700" 
+                                    MinWidthOperator="GreaterThanOrEqual" 
+                                    MaxWidth="900"
+                                    MaxWidthOperator="LessThan" 
+                                    ClassName="large" />
+            <ir:AdaptiveClassSetter MinWidth="900" 
+                                    MinWidthOperator="GreaterThanOrEqual" 
+                                    MaxWidth="Infinity"
+                                    MaxWidthOperator="LessThan" 
+                                    ClassName="wide" />
+            <ir:AdaptiveClassSetter MinHeight="0" 
+                                    MinWidthOperator="GreaterThanOrEqual" 
+                                    MaxHeight="600"
+                                    MaxWidthOperator="LessThan" 
+                                    ClassName=":short"
+                                    IsPseudoClass="True"
+                                    TargetControl="{Binding #ResponsiveStackPanel}" />
+            <ir:AdaptiveClassSetter MinHeight="600" 
+                                    MinWidthOperator="GreaterThanOrEqual" 
+                                    MaxHeight="Infinity"
+                                    MaxWidthOperator="LessThan" 
+                                    ClassName=":tall" 
+                                    IsPseudoClass="True" />
+            <ir:AdaptiveClassSetter MinWidth="1280" 
+                                    MinHeight="720" 
+                                    ClassName=":hd-ready" 
+                                    IsPseudoClass="True" />
+          </ir:AdaptiveBehavior>
         </i:Interaction.Behaviors>
-        <SplitView.Pane>
-            <Border Margin="5" Background="Gray" />
-        </SplitView.Pane>
-        <DockPanel Name="DockPanel" Background="{DynamicResource GrayBrush}" Margin="0,5,0,5">
-            <StackPanel Orientation="Horizontal" Spacing="5" Margin="5" DockPanel.Dock="Bottom">
-                <TextBlock Text="Width: " />
-                <TextBlock Text="{Binding #ResponsiveStackPanel.Bounds.Width}" />
-                <TextBlock Text=" Height: " />
-                <TextBlock Text="{Binding #ResponsiveStackPanel.Bounds.Height}" />
-                <TextBlock Text=" Classes: " />
-                <TextBlock>
-                    <TextBlock.Text>
-                        <MultiBinding Converter="{x:Static converters:ClassesToStringConverter.Instance}">
-                            <Binding ElementName="ResponsiveStackPanel" Path="Classes.Count"/>
-                            <Binding ElementName="ResponsiveStackPanel" Path="Classes"/>
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
-            </StackPanel>
-            <StackPanel Name="ResponsiveStackPanel" Margin="5">
-                <StackPanel.Styles>
-                    <Style Selector="StackPanel:short">
-                        <Setter Property="Background" Value="LightGray"/>
-                    </Style>
-                    <Style Selector="StackPanel:tall">
-                        <Setter Property="Background" Value="DarkGray"/>
-                    </Style>
-                    <Style Selector="StackPanel:pointerover:short">
-                        <Setter Property="Background" Value="Yellow"/>
-                    </Style>
-                    <Style Selector="StackPanel:pointerover:tall">
-                        <Setter Property="Background" Value="Cyan"/>
-                    </Style>
-                    <Style Selector="StackPanel">
-                        <Setter Property="Spacing" Value="0"/>
-                        <Setter Property="(TextBlock.Foreground)" Value="Black"/>
-                    </Style>
-                    <Style Selector="StackPanel.small">
-                        <Setter Property="Spacing" Value="10"/>
-                        <Setter Property="(TextBlock.Foreground)" Value="Purple"/>
-                    </Style>
-                    <Style Selector="StackPanel.medium">
-                        <Setter Property="Spacing" Value="20"/>
-                        <Setter Property="(TextBlock.Foreground)" Value="Red"/>
-                    </Style>
-                    <Style Selector="StackPanel.large">
-                        <Setter Property="Spacing" Value="30"/>
-                        <Setter Property="(TextBlock.Foreground)" Value="Blue"/>
-                    </Style>
-                    <Style Selector="StackPanel.wide">
-                        <Setter Property="Spacing" Value="40"/>
-                        <Setter Property="(TextBlock.Foreground)" Value="Green"/>
-                    </Style>
-                </StackPanel.Styles>
-                <i:Interaction.Behaviors>
-                    <ir:AdaptiveBehavior SourceControl="{Binding #DockPanel}" TargetControl="{Binding #ResponsiveStackPanel}">
-                        <ir:AdaptiveClassSetter MinWidth="0" MinWidthOperator="GreaterThanOrEqual" MaxWidth="500" MaxWidthOperator="LessThan" ClassName="small"/>
-                        <ir:AdaptiveClassSetter MinWidth="500" MinWidthOperator="GreaterThanOrEqual" MaxWidth="700" MaxWidthOperator="LessThan" ClassName="medium"/>
-                        <ir:AdaptiveClassSetter MinWidth="700" MinWidthOperator="GreaterThanOrEqual" MaxWidth="900" MaxWidthOperator="LessThan" ClassName="large"/>
-                        <ir:AdaptiveClassSetter MinWidth="900" MinWidthOperator="GreaterThanOrEqual" MaxWidth="Infinity" MaxWidthOperator="LessThan" ClassName="wide"/>
-                        <ir:AdaptiveClassSetter MinHeight="0" MinWidthOperator="GreaterThanOrEqual" MaxHeight="600" MaxWidthOperator="LessThan" ClassName=":short" IsPseudoClass="True" TargetControl="{Binding #ResponsiveStackPanel}"/>
-                        <ir:AdaptiveClassSetter MinHeight="600" MinWidthOperator="GreaterThanOrEqual" MaxHeight="Infinity" MaxWidthOperator="LessThan" ClassName=":tall" IsPseudoClass="True"/>
-                        <ir:AdaptiveClassSetter MinWidth="1280" MinHeight="720" ClassName=":hd-ready" IsPseudoClass="True"/>
-                    </ir:AdaptiveBehavior>
-                </i:Interaction.Behaviors>
-                <TextBlock Text="Item1"/>
-                <TextBlock Text="Item2"/>
-                <TextBlock Text="Item3"/>
-                <TextBlock Text="Item4"/>
-                <TextBlock Text="Item5"/>
-                <TextBlock Text="Item7"/>
-                <TextBlock Text="Item8"/>
-            </StackPanel>
-        </DockPanel>
-    </SplitView>
+        <TextBlock Text="Item1" />
+        <TextBlock Text="Item2" />
+        <TextBlock Text="Item3" />
+        <TextBlock Text="Item4" />
+        <TextBlock Text="Item5" />
+        <TextBlock Text="Item7" />
+        <TextBlock Text="Item8" />
+      </StackPanel>
+    </DockPanel>
+  </SplitView>
 </UserControl>

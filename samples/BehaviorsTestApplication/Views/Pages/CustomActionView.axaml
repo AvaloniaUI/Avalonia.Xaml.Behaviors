@@ -9,26 +9,45 @@
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
              x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-    <Grid RowDefinitions="Auto,*">
-        <TextBlock Text="Move Pointer" Name="Position" Grid.Row="0" Margin="5" Background="{DynamicResource GrayBrush}" Foreground="{DynamicResource YellowBrush}" FontSize="14" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        <Border Name="Border" Grid.Row="1" Margin="5,0,5,5" Background="{DynamicResource GrayBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <i:Interaction.Behaviors>
-                <iac:ShowPointerPositionBehavior TargetTextBlock="{Binding #Position}"/>
-                <ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="{Binding #Border}">
-                    <iac:PopupAction>
-                        <Border DataContext="{Binding Count}" Width="300" Height="200" Background="Yellow" BorderBrush="Red" BorderThickness="1" Padding="5">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Count: " Foreground="Red"/>
-                                <TextBlock Text="{Binding}" Foreground="Red"/>
-                            </StackPanel>
-                        </Border>
-                    </iac:PopupAction>
-                </ia:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
-            <TextBlock Text="Click Me" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-        </Border>
-    </Grid>
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
+  <Grid RowDefinitions="Auto,*">
+    <TextBlock Text="Move Pointer" 
+               Name="Position"
+               Grid.Row="0" 
+               Margin="5" 
+               Background="{DynamicResource GrayBrush}"
+               Foreground="{DynamicResource YellowBrush}" 
+               FontSize="14" 
+               TextAlignment="Center"
+               HorizontalAlignment="Stretch" 
+               VerticalAlignment="Stretch" />
+    <Border Name="Border" 
+            Grid.Row="1" 
+            Margin="5,0,5,5" 
+            Background="{DynamicResource GrayBrush}"
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch">
+      <i:Interaction.Behaviors>
+        <iac:ShowPointerPositionBehavior TargetTextBlock="{Binding #Position}" />
+        <ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="{Binding #Border}">
+          <iac:PopupAction>
+            <Border DataContext="{Binding Count}" 
+                    Width="300" Height="200" 
+                    Background="Yellow" 
+                    BorderBrush="Red"
+                    BorderThickness="1" 
+                    Padding="5">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Count: " Foreground="Red" />
+                <TextBlock Text="{Binding}" Foreground="Red" />
+              </StackPanel>
+            </Border>
+          </iac:PopupAction>
+        </ia:EventTriggerBehavior>
+      </i:Interaction.Behaviors>
+      <TextBlock Text="Click Me" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" />
+    </Border>
+  </Grid>
 </UserControl>

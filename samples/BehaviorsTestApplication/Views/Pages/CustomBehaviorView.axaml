@@ -8,19 +8,46 @@
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
              x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
+  <StackPanel Orientation="Horizontal">
     <Grid Background="{DynamicResource GrayBrush}" Margin="5">
-        <Ellipse Fill="{DynamicResource RedBrush}" Stroke="{DynamicResource BlackBrush}" Height="125" Width="125" StrokeThickness="0" HorizontalAlignment="Left">
-            <i:Interaction.Behaviors>
-                <iac:DragControlBehavior/>
-            </i:Interaction.Behaviors>
-        </Ellipse>
-        <Ellipse Fill="{DynamicResource BlueBrush}" Stroke="{DynamicResource BlackBrush}" Height="125" Width="125" StrokeThickness="0" HorizontalAlignment="Right">
-            <i:Interaction.Behaviors>
-                <iac:DragControlBehavior/>
-            </i:Interaction.Behaviors>
-        </Ellipse>
+      <Ellipse Fill="{DynamicResource RedBrush}" 
+               Stroke="{DynamicResource BlackBrush}"
+               Height="125" Width="125"
+               StrokeThickness="0" 
+               HorizontalAlignment="Left">
+        <i:Interaction.Behaviors>
+          <iac:DragControlBehavior />
+        </i:Interaction.Behaviors>
+      </Ellipse>
+      <Ellipse Fill="{DynamicResource BlueBrush}" 
+               Stroke="{DynamicResource BlackBrush}" 
+               Height="125" Width="125"
+               StrokeThickness="0" 
+               HorizontalAlignment="Right">
+        <i:Interaction.Behaviors>
+          <iac:DragControlBehavior />
+        </i:Interaction.Behaviors>
+      </Ellipse>
     </Grid>
+    <Canvas Width="300" Height="300" Background="{DynamicResource GrayBrush}" Margin="5">
+      <Canvas.Styles>
+        <Style Selector="Canvas > :is(Control)">
+          <Setter Property="(i:Interaction.Behaviors)">
+            <i:BehaviorCollectionTemplate>
+              <i:BehaviorCollection>
+                <iac:DragControlBehavior />
+              </i:BehaviorCollection>
+            </i:BehaviorCollectionTemplate>
+          </Setter>
+        </Style>
+      </Canvas.Styles>
+      <Rectangle Fill="Blue" Width="60" Height="40" Canvas.Left="20" Canvas.Top="100" />
+      <Ellipse Fill="Red" Width="50" Height="50" Canvas.Left="120" Canvas.Top="30" />
+      <TextBlock Text="Hello from Avalonia" Canvas.Left="40" Canvas.Top="200" />
+      <Panel Background="Purple" Width="80" Height="70" Canvas.Left="200" Canvas.Top="150" />
+    </Canvas>
+  </StackPanel>
 </UserControl>

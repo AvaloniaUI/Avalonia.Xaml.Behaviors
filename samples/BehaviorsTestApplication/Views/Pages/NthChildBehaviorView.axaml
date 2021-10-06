@@ -8,63 +8,63 @@
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
              x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-    <Grid RowDefinitions="*,5,Auto" Margin="5">
-        <ListBox Grid.Row="0" Items="{Binding Items}">
-            <i:Interaction.Behaviors>
-                <iac:NthChildBehavior />
-            </i:Interaction.Behaviors>
-            <ListBox.Styles>
-                <Style Selector="ListBoxItem.nth-first-child">
-                    <Setter Property="Foreground" Value="Red" />
-                </Style>
-                <Style Selector="ListBoxItem.nth-last-child">
-                    <Setter Property="Foreground" Value="Blue" />
-                </Style>
-                <Style Selector="ListBoxItem.nth-odd-child">
-                    <Setter Property="Background" Value="LightGray" />
-                </Style>
-                <Style Selector="ListBoxItem.nth-even-child">
-                    <Setter Property="Background" Value="DarkGray" />
-                </Style>
-            </ListBox.Styles>
-        </ListBox>
-        <ListBox Grid.Row="2" Padding="5">
-            <i:Interaction.Behaviors>
-                <iac:NthChildBehavior />
-            </i:Interaction.Behaviors>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Spacing="1" Orientation="Horizontal"></StackPanel>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.Styles>
-                <Style Selector="ListBoxItem">
-                    <Setter Property="Margin" Value="0" />
-                    <Setter Property="Padding" Value="0" />
-                </Style>
-                <Style Selector="ListBoxItem Button > ContentPresenter">
-                    <Setter Property="Margin" Value="0" />
-                    <Setter Property="CornerRadius" Value="0" />
-                </Style>
-                <Style Selector="ListBoxItem.nth-first-child Button > ContentPresenter">
-                    <Setter Property="CornerRadius" Value="4,0,0,4" />
-                </Style>
-                <Style Selector="ListBoxItem.nth-last-child Button > ContentPresenter">
-                    <Setter Property="CornerRadius" Value="0,4,4,0" />
-                </Style>
-            </ListBox.Styles>
-            <ListBoxItem>
-                <Button Content="Button 1"/>
-            </ListBoxItem>
-            <ListBoxItem>
-                <Button Content="Button 2"/>
-            </ListBoxItem>
-            <ListBoxItem>
-                <Button Content="Button 3"/>
-            </ListBoxItem>
-        </ListBox>
-    </Grid>
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
+  <Grid RowDefinitions="*,5,Auto" Margin="5">
+    <ListBox Grid.Row="0" Items="{Binding Items}">
+      <i:Interaction.Behaviors>
+        <iac:NthChildBehavior />
+      </i:Interaction.Behaviors>
+      <ListBox.Styles>
+        <Style Selector="ListBoxItem.nth-first-child">
+          <Setter Property="Foreground" Value="Red" />
+        </Style>
+        <Style Selector="ListBoxItem.nth-last-child">
+          <Setter Property="Foreground" Value="Blue" />
+        </Style>
+        <Style Selector="ListBoxItem.nth-odd-child">
+          <Setter Property="Background" Value="LightGray" />
+        </Style>
+        <Style Selector="ListBoxItem.nth-even-child">
+          <Setter Property="Background" Value="DarkGray" />
+        </Style>
+      </ListBox.Styles>
+    </ListBox>
+    <ListBox Grid.Row="2" Padding="5">
+      <i:Interaction.Behaviors>
+        <iac:NthChildBehavior />
+      </i:Interaction.Behaviors>
+      <ListBox.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel Spacing="1" Orientation="Horizontal" />
+        </ItemsPanelTemplate>
+      </ListBox.ItemsPanel>
+      <ListBox.Styles>
+        <Style Selector="ListBoxItem">
+          <Setter Property="Margin" Value="0" />
+          <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style Selector="ListBoxItem Button > ContentPresenter">
+          <Setter Property="Margin" Value="0" />
+          <Setter Property="CornerRadius" Value="0" />
+        </Style>
+        <Style Selector="ListBoxItem.nth-first-child Button > ContentPresenter">
+          <Setter Property="CornerRadius" Value="4,0,0,4" />
+        </Style>
+        <Style Selector="ListBoxItem.nth-last-child Button > ContentPresenter">
+          <Setter Property="CornerRadius" Value="0,4,4,0" />
+        </Style>
+      </ListBox.Styles>
+      <ListBoxItem>
+        <Button Content="Button 1" />
+      </ListBoxItem>
+      <ListBoxItem>
+        <Button Content="Button 2" />
+      </ListBoxItem>
+      <ListBoxItem>
+        <Button Content="Button 3" />
+      </ListBoxItem>
+    </ListBox>
+  </Grid>
 </UserControl>
