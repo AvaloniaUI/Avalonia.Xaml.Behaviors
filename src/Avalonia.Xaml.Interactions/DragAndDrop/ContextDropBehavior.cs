@@ -80,7 +80,7 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
         private void DragEnter(object? sender, DragEventArgs e)
         {
             var sourceContext = e.Data.Get(ContextDropBehavior.DataFormat);
-            var targetContext = Context;
+            var targetContext = Context ?? AssociatedObject?.DataContext;
             Handler?.Enter(sender, e, sourceContext, targetContext);
         }
 
@@ -92,14 +92,14 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
         private void DragOver(object? sender, DragEventArgs e)
         {
             var sourceContext = e.Data.Get(ContextDropBehavior.DataFormat);
-            var targetContext = Context;
+            var targetContext = Context ?? AssociatedObject?.DataContext;
             Handler?.Over(sender, e, sourceContext, targetContext);
         }
 
         private void Drop(object? sender, DragEventArgs e)
         {
             var sourceContext = e.Data.Get(ContextDropBehavior.DataFormat);
-            var targetContext = Context;
+            var targetContext = Context ?? AssociatedObject?.DataContext;
             Handler?.Drop(sender, e, sourceContext, targetContext);
         }
     }

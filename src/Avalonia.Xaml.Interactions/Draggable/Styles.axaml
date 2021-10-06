@@ -7,24 +7,20 @@
 
     <Style Selector=":is(TabControl).draggable">
         <Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </Setter.Value>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
         </Setter>
     </Style>
 
     <Style Selector=":is(TabControl).draggable > :is(TabItem)">
         <Setter Property="ZIndex" Value="0" />
         <Setter Property="(i:Interaction.Behaviors)">
-            <id:SharedContentTemplate>
-                <id:SharedContent>
-                    <i:BehaviorCollection>
-                        <id:ItemDragBehavior/>
-                    </i:BehaviorCollection>
-                </id:SharedContent>
-            </id:SharedContentTemplate>
+            <i:BehaviorCollectionTemplate>
+                <i:BehaviorCollection>
+                    <id:ItemDragBehavior/>
+                </i:BehaviorCollection>
+            </i:BehaviorCollectionTemplate>
         </Setter>
     </Style>
 
@@ -47,27 +43,13 @@
     <Style Selector=":is(ListBox).draggable > :is(ListBoxItem)">
         <Setter Property="ZIndex" Value="0" />
         <Setter Property="(i:Interaction.Behaviors)">
-            <id:SharedContentTemplate>
-                <id:SharedContent>
-                    <i:BehaviorCollection>
-                        <id:ItemDragBehavior Orientation="Vertical"/>
-                    </i:BehaviorCollection>
-                </id:SharedContent>
-            </id:SharedContentTemplate>
-        </Setter>
-    </Style>
-
-    <!-- TODO: ObjectTemplate requires https://github.com/AvaloniaUI/Avalonia/pull/5468 -->
-    <!--<Style Selector=":is(ListBox).draggable > :is(ListBoxItem)">
-        <Setter Property="ZIndex" Value="0" />
-        <Setter Property="(i:Interaction.Behaviors)">
-            <id:ObjectTemplate>
+            <i:BehaviorCollectionTemplate>
                 <i:BehaviorCollection>
                     <id:ItemDragBehavior Orientation="Vertical"/>
                 </i:BehaviorCollection>
-            </id:ObjectTemplate>
+            </i:BehaviorCollectionTemplate>
         </Setter>
-    </Style>-->
+    </Style>
 
     <Style Selector=":is(ListBox).draggable > :is(ListBoxItem):pressed">
         <Setter Property="ZIndex" Value="1" />
@@ -77,13 +59,11 @@
 
     <Style Selector=":is(Canvas).draggable > :is(Control)">
         <Setter Property="(i:Interaction.Behaviors)">
-            <id:SharedContentTemplate>
-                <id:SharedContent>
-                    <i:BehaviorCollection>
-                        <id:CanvasDragBehavior/>
-                    </i:BehaviorCollection>
-                </id:SharedContent>
-            </id:SharedContentTemplate>
+            <i:BehaviorCollectionTemplate>
+                <i:BehaviorCollection>
+                    <id:CanvasDragBehavior/>
+                </i:BehaviorCollection>
+            </i:BehaviorCollectionTemplate>
         </Setter>
     </Style>
 
@@ -91,13 +71,11 @@
 
     <Style Selector=":is(ItemsControl).draggable > :is(ContentPresenter)">
         <Setter Property="(i:Interaction.Behaviors)">
-            <id:SharedContentTemplate>
-                <id:SharedContent>
-                    <i:BehaviorCollection>
-                        <id:CanvasDragBehavior/>
-                    </i:BehaviorCollection>
-                </id:SharedContent>
-            </id:SharedContentTemplate>
+            <i:BehaviorCollectionTemplate>
+                <i:BehaviorCollection>
+                    <id:CanvasDragBehavior/>
+                </i:BehaviorCollection>
+            </i:BehaviorCollectionTemplate>
         </Setter>
     </Style>
 
