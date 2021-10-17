@@ -2,7 +2,8 @@
 
 [![Gitter](https://badges.gitter.im/wieslawsoltes/AvaloniaBehaviors.svg)](https://gitter.im/wieslawsoltes/AvaloniaBehaviors?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-[![Build status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/Sources/AvaloniaBehaviors)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=53)
+[![Build Status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/wieslawsoltes.AvaloniaBehaviors?repoName=wieslawsoltes%2FAvaloniaBehaviors&branchName=master)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=90&repoName=wieslawsoltes%2FAvaloniaBehaviors&branchName=master)
+[![CI](https://github.com/wieslawsoltes/AvaloniaBehaviors/actions/workflows/build.yml/badge.svg)](https://github.com/wieslawsoltes/AvaloniaBehaviors/actions/workflows/build.yml)
 
 [![NuGet](https://img.shields.io/nuget/v/Avalonia.Xaml.Behaviors.svg)](https://www.nuget.org/packages/Avalonia.Xaml.Behaviors)
 [![NuGet](https://img.shields.io/nuget/dt/Avalonia.Xaml.Interactivity.svg)](https://www.nuget.org/packages/Avalonia.Xaml.Interactivity)
