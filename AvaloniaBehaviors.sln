@@ -23,7 +23,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{2913483A-3E55-44AE-86BB-88511F372191}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		.nuke = .nuke
 		build\behaviors.public.snk = build\behaviors.public.snk
 		build.ps1 = build.ps1
 		build.sh = build.sh
