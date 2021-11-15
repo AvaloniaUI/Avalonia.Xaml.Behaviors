@@ -25,6 +25,17 @@
 
     <TabItem Header="TabControl">
       <TabControl Classes="draggable custom" Background="LightGray">
+        <TabControl.Styles>
+          <Style Selector="TabItem:not(:dragging)">
+            <Setter Property="Transitions">
+              <Setter.Value>
+                  <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1" />
+                  </Transitions>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </TabControl.Styles>
         <TabItem Header="Tab1">
           <TextBlock Text="Tab1" />
         </TabItem>
