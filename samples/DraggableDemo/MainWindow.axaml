@@ -126,6 +126,10 @@
             <Setter Property="Canvas.Left" Value="{Binding X}" />
             <Setter Property="Canvas.Top" Value="{Binding Y}" />
           </Style>
+          <Style Selector="ItemsControl > ContentPresenter:dragging">
+            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="ZIndex" Value="1" />
+          </Style>
         </ItemsControl.Styles>
         <ItemsControl.ItemsPanel>
           <ItemsPanelTemplate>
