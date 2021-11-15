@@ -1,13 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
-using Avalonia.Media;
+using Avalonia.Media.Transformation;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Draggable
@@ -132,7 +130,7 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 var container = itemsControl.ItemContainerGenerator.ContainerFromIndex(i);
                 if (container is not null)
                 {
-                    container.RenderTransform = new TranslateTransform();
+                    SetTranslateTransform(container, 0, 0);
                 }
   
                 i++;
@@ -153,7 +151,7 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 var container = itemsControl.ItemContainerGenerator.ContainerFromIndex(i);
                 if (container is not null)
                 {
-                    container.RenderTransform = null;
+                    SetTranslateTransform(container, 0, 0);
                 }
   
                 i++;
@@ -190,11 +188,11 @@ namespace Avalonia.Xaml.Interactions.Draggable
 
             if (orientation == Orientation.Horizontal)
             {
-                ((TranslateTransform) _draggedContainer.RenderTransform).X = delta;
+                SetTranslateTransform(_draggedContainer, delta, 0);
             }
             else
             {
-                ((TranslateTransform) _draggedContainer.RenderTransform).Y = delta;
+                SetTranslateTransform(_draggedContainer, 0, delta);
             }
 
             _draggedIndex = _itemsControl.ItemContainerGenerator.IndexFromContainer(_draggedContainer);
@@ -236,11 +234,11 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 {
                     if (orientation == Orientation.Horizontal)
                     {
-                        ((TranslateTransform) targetContainer.RenderTransform).X = -draggedBounds.Width;
+                        SetTranslateTransform(targetContainer, -draggedBounds.Width, 0);
                     }
                     else
                     {
-                        ((TranslateTransform) targetContainer.RenderTransform).Y = -draggedBounds.Height;
+                        SetTranslateTransform(targetContainer, 0, -draggedBounds.Height);
                     }
 
                     _targetIndex = _targetIndex == -1 ? 
@@ -252,11 +250,11 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 {
                     if (orientation == Orientation.Horizontal)
                     {
-                        ((TranslateTransform) targetContainer.RenderTransform).X = draggedBounds.Width;
+                        SetTranslateTransform(targetContainer, draggedBounds.Width, 0);
                     }
                     else
                     {
-                        ((TranslateTransform) targetContainer.RenderTransform).Y = draggedBounds.Height;
+                        SetTranslateTransform(targetContainer, 0, draggedBounds.Height);
                     }
 
                     _targetIndex = _targetIndex == -1 ? 
@@ -268,11 +266,11 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 {
                     if (orientation == Orientation.Horizontal)
                     {
-                        ((TranslateTransform) targetContainer.RenderTransform).X = 0;
+                        SetTranslateTransform(targetContainer, 0, 0);
                     }
                     else
                     {
-                        ((TranslateTransform) targetContainer.RenderTransform).Y = 0;
+                        SetTranslateTransform(targetContainer, 0, 0);
                     }
                 }
 
@@ -280,6 +278,13 @@ namespace Avalonia.Xaml.Interactions.Draggable
             }
 
             Debug.WriteLine($"Moved {_draggedIndex} -> {_targetIndex}");
+        }
+
+        private void SetTranslateTransform(IControl control, double x, double y)
+        {
+            var transformBuilder = new TransformOperations.Builder(1);
+            transformBuilder.AppendTranslate(x, y);
+            control.RenderTransform = transformBuilder.Build();
         }
     }
 }
