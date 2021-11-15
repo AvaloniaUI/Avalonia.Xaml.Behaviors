@@ -92,6 +92,8 @@ namespace Avalonia.Xaml.Interactions.Draggable
             _parent = parent;
             _draggedContainer = AssociatedObject;
 
+            SetDraggingPseudoClasses(_draggedContainer, true);
+
             // AddAdorner(_draggedContainer);
         }
 
@@ -131,9 +133,26 @@ namespace Avalonia.Xaml.Interactions.Draggable
                     // RemoveAdorner(_draggedContainer);
                 }
 
+                if (_draggedContainer is { })
+                {
+                    SetDraggingPseudoClasses(_draggedContainer, false);
+                }
+
                 _enableDrag = false;
                 _parent = null;
                 _draggedContainer = null;
+            }
+        }
+
+        private void SetDraggingPseudoClasses(IControl control, bool isDragging)
+        {
+            if (isDragging)
+            {
+                ((IPseudoClasses)control.Classes).Add(":dragging");
+            }
+            else
+            {
+                ((IPseudoClasses)control.Classes).Remove(":dragging");
             }
         }
     }
