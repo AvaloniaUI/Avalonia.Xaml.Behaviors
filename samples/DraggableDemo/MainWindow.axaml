@@ -49,11 +49,34 @@
     </TabItem>
 
     <TabItem Header="TabControl (Items)">
-      <TabControl Classes="draggable custom" Items="{Binding Items}" Background="LightGray" />
+      <TabControl Classes="draggable custom" Items="{Binding Items}" Background="LightGray" >
+        <TabControl.Styles>
+          <Style Selector="TabItem:not(:dragging)">
+            <Setter Property="Transitions">
+              <Setter.Value>
+                <Transitions>
+                  <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1" />
+                </Transitions>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </TabControl.Styles>
+      </TabControl>
     </TabItem>
 
     <TabItem Header="ListBox">
       <ListBox Classes="draggable">
+        <ListBox.Styles>
+          <Style Selector="ListBoxItem:not(:dragging)">
+            <Setter Property="Transitions">
+              <Setter.Value>
+                <Transitions>
+                  <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1" />
+                </Transitions>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </ListBox.Styles>
         <ListBoxItem>
           <TextBlock Text="Item1" />
         </ListBoxItem>
@@ -67,7 +90,19 @@
     </TabItem>
 
     <TabItem Header="ListBox (Items)">
-      <ListBox Classes="draggable" Items="{Binding Items}" />
+      <ListBox Classes="draggable" Items="{Binding Items}">
+        <ListBox.Styles>
+          <Style Selector="ListBoxItem:not(:dragging)">
+            <Setter Property="Transitions">
+              <Setter.Value>
+                <Transitions>
+                  <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1" />
+                </Transitions>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </ListBox.Styles>
+        </ListBox>
     </TabItem>
 
     <TabItem Header="Canvas">
