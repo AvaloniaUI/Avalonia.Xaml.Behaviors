@@ -79,4 +79,16 @@
     </Setter>
   </Style>
 
+  <!-- Grid Drag Styles -->
+
+  <Style Selector=":is(Grid).draggable > :is(Control)">
+    <Setter Property="(i:Interaction.Behaviors)">
+      <i:BehaviorCollectionTemplate>
+        <i:BehaviorCollection>
+          <id:GridDragBehavior CopyColumn="True" CopyRow="True" CopyColumnSpan="True" CopyRowSpan="True" />
+        </i:BehaviorCollection>
+      </i:BehaviorCollectionTemplate>
+    </Setter>
+  </Style>
+
 </Styles>

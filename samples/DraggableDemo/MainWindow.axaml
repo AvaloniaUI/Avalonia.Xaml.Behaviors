@@ -2,13 +2,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+        xmlns:id="clr-namespace:Avalonia.Xaml.Interactions.Draggable;assembly=Avalonia.Xaml.Interactions"
         xmlns:local="clr-namespace:DraggableDemo"
         xmlns:models="clr-namespace:DraggableDemo.Models"
-        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="550"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="550"
         x:Class="DraggableDemo.MainWindow"
         x:CompileBindings="True" x:DataType="local:MainWindow"
         WindowState="Normal" WindowStartupLocation="CenterScreen"
-        Width="1000" Height="550"
+        Width="1200" Height="550"
         Title="Draggable Controls Demo">
 
   <Window.Styles>
@@ -114,7 +116,7 @@
         </Canvas.Styles>
         <Rectangle Fill="Blue" Width="60" Height="40" Canvas.Left="20" Canvas.Top="10" />
         <Ellipse Fill="Red" Width="50" Height="50" Canvas.Left="120" Canvas.Top="30" />
-        <TextBlock Text="Hello from Avalonia" Canvas.Left="40" Canvas.Top="100" />
+        <TextBlock Text="Hello from Avalonia" Background="Transparent" Canvas.Left="40" Canvas.Top="100" />
         <Panel Background="Purple" Width="80" Height="70" Canvas.Left="250" Canvas.Top="100" />
       </Canvas>
     </TabItem>
@@ -123,8 +125,8 @@
       <ItemsControl Classes="draggable" Items="{Binding Items}" Width="500" Height="300" Background="LightGray">
         <ItemsControl.Styles>
           <Style Selector="ItemsControl > ContentPresenter" x:DataType="models:Item">
-            <Setter Property="Canvas.Left" Value="{Binding X}" />
-            <Setter Property="Canvas.Top" Value="{Binding Y}" />
+            <Setter Property="(Canvas.Left)" Value="{Binding X}" />
+            <Setter Property="(Canvas.Top)" Value="{Binding Y}" />
           </Style>
           <Style Selector="ItemsControl > ContentPresenter:dragging">
             <Setter Property="Opacity" Value="0.5" />
@@ -143,6 +145,61 @@
         </ItemsControl.DataTemplates>
       </ItemsControl>
     </TabItem>
+
+    <TabItem Header="Grid">
+      <Grid Classes="draggable" ColumnDefinitions="*,*,*" RowDefinitions="*,*,*" ShowGridLines="True" Width="500" Height="300" Background="LightGray">
+        <Grid.Styles>
+          <Style Selector="Grid > :is(Control):dragging">
+            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="ZIndex" Value="1" />
+          </Style>
+        </Grid.Styles>
+        <Rectangle Fill="Blue" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" />
+        <Ellipse Fill="Red" Grid.Column="2" Grid.Row="0" />
+        <TextBlock Text="Hello from Avalonia" Background="Transparent" Grid.Column="0" Grid.Row="1" />
+        <Panel Background="Purple" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" />
+        <Ellipse Fill="Cyan" Grid.Column="2" Grid.Row="2" />
+      </Grid>
+    </TabItem>
+
+    <TabItem Header="Grid (Items)">
+      <ItemsControl Items="{Binding Tiles}" Width="800" Height="300" Background="LightGray">
+        <ItemsControl.Styles>
+          <Style Selector=":is(ItemsControl) > :is(ContentPresenter)">
+            <Setter Property="(i:Interaction.Behaviors)">
+              <i:BehaviorCollectionTemplate>
+                <i:BehaviorCollection>
+                  <id:GridDragBehavior CopyColumn="True" CopyRow="True" CopyColumnSpan="True" CopyRowSpan="True" />
+                </i:BehaviorCollection>
+              </i:BehaviorCollectionTemplate>
+            </Setter>
+          </Style>
+          <Style Selector="ItemsControl > ContentPresenter" x:DataType="models:Tile">
+            <Setter Property="(Grid.Column)" Value="{Binding Column}" />
+            <Setter Property="(Grid.Row)" Value="{Binding Row}" />
+            <Setter Property="(Grid.ColumnSpan)" Value="{Binding ColumnSpan}" />
+            <Setter Property="(Grid.RowSpan)" Value="{Binding RowSpan}" />
+          </Style>
+          <Style Selector="ItemsControl > ContentPresenter:dragging">
+            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="ZIndex" Value="1" />
+          </Style>
+        </ItemsControl.Styles>
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <Grid ShowGridLines="True" ColumnDefinitions="*,*,*" RowDefinitions="*,*" />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.DataTemplates>
+          <DataTemplate DataType="models:Tile">
+            <Border Background="{Binding Background}" CornerRadius="6" Margin="6" BorderBrush="Gray" BorderThickness="2">
+              <Label Content="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+          </DataTemplate>
+        </ItemsControl.DataTemplates>
+      </ItemsControl>
+    </TabItem>
+
   </TabControl>
 
 </Window>
