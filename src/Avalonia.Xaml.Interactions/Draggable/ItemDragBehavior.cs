@@ -107,6 +107,11 @@ namespace Avalonia.Xaml.Interactions.Draggable
             {
                 RemoveTransforms(_itemsControl);
 
+                if (_draggedContainer is { })
+                {
+                    SetDraggingPseudoClasses(_draggedContainer, false);
+                }
+
                 if (_draggedIndex >= 0 && _targetIndex >= 0 && _draggedIndex != _targetIndex)
                 {
                     Debug.WriteLine($"MoveItem {_draggedIndex} -> {_targetIndex}");
@@ -118,11 +123,6 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 _enableDrag = false;
                 _itemsControl = null;
 
-                if (_draggedContainer is { })
-                {
-                    SetDraggingPseudoClasses(_draggedContainer, false);
-                }
-                
                 _draggedContainer = null;
             }
         }
