@@ -83,6 +83,11 @@ namespace Avalonia.Xaml.Interactions.Draggable
             _itemsControl = itemsControl;
             _draggedContainer = AssociatedObject;
 
+            if (_draggedContainer is { })
+            {
+                SetDraggingPseudoClasses(_draggedContainer, true);
+            }
+            
             AddTransforms(_itemsControl);
         }
 
@@ -112,6 +117,12 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 _targetIndex = -1;
                 _enableDrag = false;
                 _itemsControl = null;
+
+                if (_draggedContainer is { })
+                {
+                    SetDraggingPseudoClasses(_draggedContainer, false);
+                }
+                
                 _draggedContainer = null;
             }
         }
@@ -278,6 +289,18 @@ namespace Avalonia.Xaml.Interactions.Draggable
             }
 
             Debug.WriteLine($"Moved {_draggedIndex} -> {_targetIndex}");
+        }
+
+        private void SetDraggingPseudoClasses(IControl control, bool isDragging)
+        {
+            if (isDragging)
+            {
+                ((IPseudoClasses)control.Classes).Add(":dragging");
+            }
+            else
+            {
+                ((IPseudoClasses)control.Classes).Remove(":dragging");
+            }
         }
 
         private void SetTranslateTransform(IControl control, double x, double y)
