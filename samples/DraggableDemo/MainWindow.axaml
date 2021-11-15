@@ -107,6 +107,11 @@
 
     <TabItem Header="Canvas">
       <Canvas Classes="draggable" Width="500" Height="300" Background="LightGray">
+        <Canvas.Styles>
+          <Style Selector="Canvas > :is(Control):dragging">
+            <Setter Property="ZIndex" Value="1" />
+          </Style>
+        </Canvas.Styles>
         <Rectangle Fill="Blue" Width="60" Height="40" Canvas.Left="20" Canvas.Top="10" />
         <Ellipse Fill="Red" Width="50" Height="50" Canvas.Left="120" Canvas.Top="30" />
         <TextBlock Text="Hello from Avalonia" Canvas.Left="40" Canvas.Top="100" />
