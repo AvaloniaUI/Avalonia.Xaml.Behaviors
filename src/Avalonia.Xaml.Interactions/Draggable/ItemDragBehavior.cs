@@ -107,22 +107,28 @@ namespace Avalonia.Xaml.Interactions.Draggable
             {
                 RemoveTransforms(_itemsControl);
 
-                foreach (var container in _itemsControl.ItemContainerGenerator.Containers)
+                if (_itemsControl is { })
                 {
-                    SetDraggingPseudoClasses(container.ContainerControl, true);
+                    foreach (var container in _itemsControl.ItemContainerGenerator.Containers)
+                    {
+                        SetDraggingPseudoClasses(container.ContainerControl, true);
+                    }
                 }
-                
+
                 if (_draggedIndex >= 0 && _targetIndex >= 0 && _draggedIndex != _targetIndex)
                 {
                     Debug.WriteLine($"MoveItem {_draggedIndex} -> {_targetIndex}");
                     MoveDraggedItem(_itemsControl, _draggedIndex, _targetIndex);
                 }
 
-                foreach (var container in _itemsControl.ItemContainerGenerator.Containers)
+                if (_itemsControl is { })
                 {
-                    SetDraggingPseudoClasses(container.ContainerControl, false);
+                    foreach (var container in _itemsControl.ItemContainerGenerator.Containers)
+                    {
+                        SetDraggingPseudoClasses(container.ContainerControl, false);
+                    }
                 }
-                
+
                 if (_draggedContainer is { })
                 {
                     SetDraggingPseudoClasses(_draggedContainer, false);
