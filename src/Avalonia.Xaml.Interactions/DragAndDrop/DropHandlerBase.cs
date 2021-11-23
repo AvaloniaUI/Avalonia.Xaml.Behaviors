@@ -39,6 +39,21 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sourceItems"></param>
+        /// <param name="targetItems"></param>
+        /// <param name="sourceIndex"></param>
+        /// <param name="targetIndex"></param>
+        /// <typeparam name="T"></typeparam>
+        protected void MoveItem<T>(IList<T> sourceItems, IList<T> targetItems, int sourceIndex, int targetIndex)
+        {
+            var item = sourceItems[sourceIndex];
+            sourceItems.RemoveAt(sourceIndex);
+            targetItems.Insert(targetIndex, item);
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="items"></param>
         /// <param name="sourceIndex"></param>
         /// <param name="targetIndex"></param>
@@ -49,6 +64,22 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             var item2 = items[targetIndex];
             items[targetIndex] = item1;
             items[sourceIndex] = item2;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sourceItems"></param>
+        /// <param name="targetItems"></param>
+        /// <param name="sourceIndex"></param>
+        /// <param name="targetIndex"></param>
+        /// <typeparam name="T"></typeparam>
+        protected void SwapItem<T>(IList<T> sourceItems, IList<T> targetItems, int sourceIndex, int targetIndex)
+        {
+            var item1 = sourceItems[sourceIndex];
+            var item2 = targetItems[targetIndex];
+            targetItems[targetIndex] = item1;
+            sourceItems[sourceIndex] = item2;
         }
         
         /// <summary>
