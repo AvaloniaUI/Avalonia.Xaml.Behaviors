@@ -26,35 +26,36 @@ namespace DragAndDropSample.Behaviors
                 return false;
             }
 
-            if (e.DragEffects == DragDropEffects.Copy)
+            switch (e.DragEffects)
             {
-                if (bExecute)
+                case DragDropEffects.Copy:
                 {
-                    var clone = new ItemViewModel() { Title = sourceItem.Title + "_copy" };
-                    InsertItem(vm.Items, clone, targetIndex + 1);
+                    if (bExecute)
+                    {
+                        var clone = new ItemViewModel() { Title = sourceItem.Title + "_copy" };
+                        InsertItem(vm.Items, clone, targetIndex + 1);
+                    }
+                    return true;
                 }
-                return true;
-            }
-
-            if (e.DragEffects == DragDropEffects.Move)
-            {
-                if (bExecute)
+                case DragDropEffects.Move:
                 {
-                    MoveItem(vm.Items, sourceIndex, targetIndex);
+                    if (bExecute)
+                    {
+                        MoveItem(vm.Items, sourceIndex, targetIndex);
+                    }
+                    return true;
                 }
-                return true;
-            }
-
-            if (e.DragEffects == DragDropEffects.Link)
-            {
-                if (bExecute)
+                case DragDropEffects.Link:
                 {
-                    SwapItem(vm.Items, sourceIndex, targetIndex);
+                    if (bExecute)
+                    {
+                        SwapItem(vm.Items, sourceIndex, targetIndex);
+                    }
+                    return true;
                 }
-                return true;
+                default:
+                    return false;
             }
-
-            return false;
         }
         
         public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
