@@ -42,15 +42,56 @@
       </Setter>
     </Style>
 
+    <Style Selector="TreeView.NodesDragAndDrop">
+      <Style.Resources>
+        <b:NodesTreeViewDropHandler x:Key="NodesTreeViewDropHandler" />
+      </Style.Resources>
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <idd:ContextDropBehavior Handler="{StaticResource NodesTreeViewDropHandler}" />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="TreeView.NodesDragAndDrop TreeViewItem">
+      <Setter Property="IsExpanded" Value="True" />
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <idd:ContextDragBehavior />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+    </Style>
+    
   </Window.Styles>
 
-  <ListBox Items="{Binding Items}"
-           Classes="ItemsDragAndDrop">
-    <ListBox.ItemTemplate>
-      <DataTemplate DataType="vm:ItemViewModel">
-        <TextBlock Text="{Binding Title}" />
-      </DataTemplate>
-    </ListBox.ItemTemplate>
-  </ListBox>
+  <TabControl>
+
+    <TabItem Header="ListBox">
+      <ListBox Items="{Binding Items}"
+               Classes="ItemsDragAndDrop">
+        <ListBox.ItemTemplate>
+          <DataTemplate DataType="vm:ItemViewModel">
+            <TextBlock Text="{Binding Title}" />
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>  
+    </TabItem>
+
+    <TabItem Header="TreeView">
+      <TreeView Items="{Binding Nodes}"
+                Classes="NodesDragAndDrop">
+        <TreeView.ItemTemplate>
+          <TreeDataTemplate DataType="vm:NodeViewModel" ItemsSource="{Binding Nodes}">
+            <TextBlock Text="{Binding Title}" />
+          </TreeDataTemplate>
+        </TreeView.ItemTemplate>
+      </TreeView>
+    </TabItem>
+
+  </TabControl>
 
 </Window>
