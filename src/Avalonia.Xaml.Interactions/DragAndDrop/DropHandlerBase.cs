@@ -21,8 +21,8 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             if (sourceIndex < targetIndex)
             {
                 var item = items[sourceIndex];
-                items.Insert(targetIndex + 1, item);
                 items.RemoveAt(sourceIndex);
+                items.Insert(targetIndex, item);
             }
             else
             {
@@ -30,8 +30,8 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
                 if (items.Count + 1 > removeIndex)
                 {
                     var item = items[sourceIndex];
+                    items.RemoveAt(removeIndex - 1);
                     items.Insert(targetIndex, item);
-                    items.RemoveAt(removeIndex);
                 }
             }
         }
