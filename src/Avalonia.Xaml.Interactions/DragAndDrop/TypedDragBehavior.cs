@@ -102,8 +102,9 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             if (properties.IsLeftButtonPressed)
             {
                 if (e.Source is IControl control 
+                    && AssociatedObject?.DataContext == control.DataContext
                     && DataType is not null
-                    &&  DataType.IsAssignableFrom(control.DataContext?.GetType()))
+                    && DataType.IsAssignableFrom(control.DataContext?.GetType()))
                 {
                     _dragStartPoint = e.GetPosition(null);
                     _triggerEvent = e;

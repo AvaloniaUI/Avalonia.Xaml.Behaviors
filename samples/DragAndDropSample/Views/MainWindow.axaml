@@ -6,10 +6,10 @@
         xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
         xmlns:b="using:DragAndDropSample.Behaviors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="650" d:DesignHeight="450"
         x:Class="DragAndDropSample.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Width="450" WindowStartupLocation="CenterScreen"
+        Width="650" WindowStartupLocation="CenterScreen"
         Title="DragAndDropSample">
 
   <Design.DataContext>
@@ -42,15 +42,93 @@
       </Setter>
     </Style>
 
+    <Style Selector="ListBox.NodesDragAndDrop">
+      <Style.Resources>
+        <b:NodesListBoxDropHandler x:Key="NodesListBoxDropHandler" />
+      </Style.Resources>
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <idd:ContextDropBehavior Handler="{StaticResource NodesListBoxDropHandler}" />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="ListBox.NodesDragAndDrop ListBoxItem">
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <idd:ContextDragBehavior />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="TreeView.NodesDragAndDrop">
+      <Style.Resources>
+        <b:NodesTreeViewDropHandler x:Key="NodesTreeViewDropHandler" />
+      </Style.Resources>
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <idd:ContextDropBehavior Handler="{StaticResource NodesTreeViewDropHandler}" />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="TreeView.NodesDragAndDrop TreeViewItem">
+      <Setter Property="IsExpanded" Value="True" />
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <idd:ContextDragBehavior />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+    </Style>
+    
   </Window.Styles>
 
-  <ListBox Items="{Binding Items}"
-           Classes="ItemsDragAndDrop">
-    <ListBox.ItemTemplate>
-      <DataTemplate DataType="vm:ItemViewModel">
-        <TextBlock Text="{Binding Title}" />
-      </DataTemplate>
-    </ListBox.ItemTemplate>
-  </ListBox>
+  <TabControl>
+
+    <TabItem Header="TreeView">
+      <Grid ColumnDefinitions="*,8,*">
+        <TreeView Items="{Binding Nodes}"
+                  Classes="NodesDragAndDrop"
+                  Grid.Column="0">
+          <TreeView.ItemTemplate>
+            <TreeDataTemplate DataType="vm:NodeViewModel" ItemsSource="{Binding Nodes}">
+              <TextBlock Text="{Binding Title}" />
+            </TreeDataTemplate>
+          </TreeView.ItemTemplate>
+        </TreeView>
+        <GridSplitter Width="8" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Grid.Column="1"/>
+        <ListBox Items="{Binding Nodes}"
+                 Classes="NodesDragAndDrop"
+                 Grid.Column="2">
+          <ListBox.ItemTemplate>
+            <DataTemplate DataType="vm:NodeViewModel">
+              <TextBlock Text="{Binding Title}" />
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </Grid>
+    </TabItem>
+
+    <TabItem Header="ListBox">
+      <ListBox Items="{Binding Items}"
+               Classes="ItemsDragAndDrop">
+        <ListBox.ItemTemplate>
+          <DataTemplate DataType="vm:ItemViewModel">
+            <TextBlock Text="{Binding Title}" />
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </TabItem>
+
+  </TabControl>
 
 </Window>

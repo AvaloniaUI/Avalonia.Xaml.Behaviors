@@ -6,21 +6,21 @@ using DragAndDropSample.ViewModels;
 
 namespace DragAndDropSample.Behaviors
 {
-    public class ItemsListBoxDropHandler : DropHandlerBase
+    public class NodesListBoxDropHandler : DropHandlerBase
     {
-        private bool Validate<T>(ListBox listBox, DragEventArgs e, object? sourceContext, object? targetContext, bool bExecute) where T : ItemViewModel
+        private bool Validate<T>(ListBox listBox, DragEventArgs e, object? sourceContext, object? targetContext, bool bExecute) where T : NodeViewModel
         {
-            if (sourceContext is not T sourceItem
+            if (sourceContext is not T sourceNode
                 || targetContext is not MainWindowViewModel vm
                 || listBox.GetVisualAt(e.GetPosition(listBox)) is not IControl targetControl
-                || targetControl.DataContext is not T targetItem)
+                || targetControl.DataContext is not T targetNode)
             {
                 return false;
             }
 
-            var items = vm.Items;
-            var sourceIndex = items.IndexOf(sourceItem);
-            var targetIndex = items.IndexOf(targetItem);
+            var nodes = vm.Nodes;
+            var sourceIndex = nodes.IndexOf(sourceNode);
+            var targetIndex = nodes.IndexOf(targetNode);
 
             if (sourceIndex < 0 || targetIndex < 0)
             {
@@ -33,8 +33,8 @@ namespace DragAndDropSample.Behaviors
                 {
                     if (bExecute)
                     {
-                        var clone = new ItemViewModel() { Title = sourceItem.Title + "_copy" };
-                        InsertItem(items, clone, targetIndex + 1);
+                        var clone = new NodeViewModel() { Title = sourceNode.Title + "_copy" };
+                        InsertItem(nodes, clone, targetIndex + 1);
                     }
                     return true;
                 }
@@ -42,7 +42,7 @@ namespace DragAndDropSample.Behaviors
                 {
                     if (bExecute)
                     {
-                        MoveItem(items, sourceIndex, targetIndex);
+                        MoveItem(nodes, sourceIndex, targetIndex);
                     }
                     return true;
                 }
@@ -50,7 +50,7 @@ namespace DragAndDropSample.Behaviors
                 {
                     if (bExecute)
                     {
-                        SwapItem(items, sourceIndex, targetIndex);
+                        SwapItem(nodes, sourceIndex, targetIndex);
                     }
                     return true;
                 }
@@ -63,7 +63,7 @@ namespace DragAndDropSample.Behaviors
         {
             if (e.Source is IControl && sender is ListBox listBox)
             {
-                return Validate<ItemViewModel>(listBox, e, sourceContext, targetContext, false);
+                return Validate<NodeViewModel>(listBox, e, sourceContext, targetContext, false);
             }
             return false;
         }
@@ -72,7 +72,7 @@ namespace DragAndDropSample.Behaviors
         {
             if (e.Source is IControl && sender is ListBox listBox)
             {
-                return Validate<ItemViewModel>(listBox, e, sourceContext, targetContext, true);
+                return Validate<NodeViewModel>(listBox, e, sourceContext, targetContext, true);
             }
             return false;
         }
