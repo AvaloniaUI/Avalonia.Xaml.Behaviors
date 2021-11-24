@@ -26,5 +26,7 @@ namespace DragAndDropSample.ViewModels
             get => _nodes;
             set => this.RaiseAndSetIfChanged(ref _nodes, value);
         }
+
+        public override string? ToString() => _title;
     }
 }
