@@ -55,6 +55,8 @@ namespace DragAndDropSample.Behaviors
                             }
                             else
                             {
+                                sourceNode.Parent = targetParent;
+
                                 MoveItem(sourceNodes, targetNodes, sourceIndex, targetIndex);
                             }
                         }
@@ -71,6 +73,9 @@ namespace DragAndDropSample.Behaviors
                             }
                             else
                             {
+                                sourceNode.Parent = targetParent;
+                                targetNode.Parent = sourceParent;
+
                                 SwapItem(sourceNodes, targetNodes, sourceIndex, targetIndex);
                             }
                         }
