@@ -18,8 +18,9 @@ namespace DragAndDropSample.Behaviors
                 return false;
             }
 
-            var sourceIndex = vm.Items.IndexOf(sourceItem);
-            var targetIndex = vm.Items.IndexOf(targetItem);
+            var items = vm.Items;
+            var sourceIndex = items.IndexOf(sourceItem);
+            var targetIndex = items.IndexOf(targetItem);
 
             if (sourceIndex < 0 || targetIndex < 0)
             {
@@ -33,7 +34,7 @@ namespace DragAndDropSample.Behaviors
                     if (bExecute)
                     {
                         var clone = new ItemViewModel() { Title = sourceItem.Title + "_copy" };
-                        InsertItem(vm.Items, clone, targetIndex + 1);
+                        InsertItem(items, clone, targetIndex + 1);
                     }
                     return true;
                 }
@@ -41,7 +42,7 @@ namespace DragAndDropSample.Behaviors
                 {
                     if (bExecute)
                     {
-                        MoveItem(vm.Items, sourceIndex, targetIndex);
+                        MoveItem(items, sourceIndex, targetIndex);
                     }
                     return true;
                 }
@@ -49,7 +50,7 @@ namespace DragAndDropSample.Behaviors
                 {
                     if (bExecute)
                     {
-                        SwapItem(vm.Items, sourceIndex, targetIndex);
+                        SwapItem(items, sourceIndex, targetIndex);
                     }
                     return true;
                 }
