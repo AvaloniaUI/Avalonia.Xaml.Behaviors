@@ -8,7 +8,7 @@
   <Style Selector=":is(TabControl).draggable">
     <Setter Property="ItemsPanel">
       <ItemsPanelTemplate>
-        <StackPanel Orientation="Horizontal" />
+        <VirtualizingStackPanel Orientation="Horizontal" />
       </ItemsPanelTemplate>
     </Setter>
   </Style>
@@ -34,7 +34,7 @@
     <Setter Property="ItemsPanel">
       <Setter.Value>
         <ItemsPanelTemplate>
-          <StackPanel Orientation="Vertical" />
+          <VirtualizingStackPanel Orientation="Vertical" />
         </ItemsPanelTemplate>
       </Setter.Value>
     </Setter>
