@@ -5,7 +5,7 @@
 
   <!-- TabControl Drag Styles - Non Virtualizing -->
 
-  <Style Selector=":is(TabControl).draggableNonVirtualizing">
+  <Style Selector=":is(TabControl).draggable">
     <Setter Property="ItemsPanel">
       <ItemsPanelTemplate>
         <StackPanel Orientation="Horizontal" />
@@ -13,7 +13,7 @@
     </Setter>
   </Style>
 
-  <Style Selector=":is(TabControl).draggableNonVirtualizing > :is(TabItem)">
+  <Style Selector=":is(TabControl).draggable > :is(TabItem)">
     <Setter Property="ZIndex" Value="0" />
     <Setter Property="(i:Interaction.Behaviors)">
       <i:BehaviorCollectionTemplate>
@@ -24,7 +24,7 @@
     </Setter>
   </Style>
 
-  <Style Selector=":is(TabControl).draggableNonVirtualizing > :is(TabItem):pressed">
+  <Style Selector=":is(TabControl).draggable > :is(TabItem):pressed">
     <Setter Property="ZIndex" Value="1" />
   </Style>
 
@@ -55,7 +55,7 @@
 
   <!-- ItemsPanel Drag Styles - Non Virtualizing -->
 
-  <Style Selector=":is(ListBox).draggableNonVirtualizing">
+  <Style Selector=":is(ListBox).draggable">
     <Setter Property="ItemsPanel">
       <Setter.Value>
         <ItemsPanelTemplate>
@@ -65,7 +65,7 @@
     </Setter>
   </Style>
 
-  <Style Selector=":is(ListBox).draggableNonVirtualizing > :is(ListBoxItem)">
+  <Style Selector=":is(ListBox).draggable > :is(ListBoxItem)">
     <Setter Property="ZIndex" Value="0" />
     <Setter Property="(i:Interaction.Behaviors)">
       <i:BehaviorCollectionTemplate>
@@ -76,7 +76,7 @@
     </Setter>
   </Style>
 
-  <Style Selector=":is(ListBox).draggableNonVirtualizing > :is(ListBoxItem):pressed">
+  <Style Selector=":is(ListBox).draggable > :is(ListBoxItem):pressed">
     <Setter Property="ZIndex" Value="1" />
   </Style>
   

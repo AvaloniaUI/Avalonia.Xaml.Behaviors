@@ -26,7 +26,7 @@
   <TabControl Classes="draggable">
 
     <TabItem Header="TabControl">
-      <TabControl Classes="draggableNonVirtualizing custom" Background="LightGray">
+      <TabControl Classes="draggable custom" Background="LightGray">
         <TabControl.Styles>
           <Style Selector="TabItem:not(:dragging)">
             <Setter Property="Transitions">
@@ -67,7 +67,7 @@
     </TabItem>
 
     <TabItem Header="ListBox">
-      <ListBox Classes="draggableNonVirtualizing">
+      <ListBox Classes="draggable">
         <ListBox.Styles>
           <Style Selector="ListBoxItem:not(:dragging)">
             <Setter Property="Transitions">
