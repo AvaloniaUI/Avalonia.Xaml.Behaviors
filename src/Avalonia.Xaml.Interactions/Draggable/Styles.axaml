@@ -3,9 +3,34 @@
         xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
         xmlns:id="clr-namespace:Avalonia.Xaml.Interactions.Draggable;assembly=Avalonia.Xaml.Interactions">
 
-  <!-- TabItem Drag Styles -->
+  <!-- TabControl Drag Styles - Non Virtualizing -->
 
-  <Style Selector=":is(TabControl).draggable">
+  <Style Selector=":is(TabControl).draggableNonVirtualizing">
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <StackPanel Orientation="Horizontal" />
+      </ItemsPanelTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector=":is(TabControl).draggableNonVirtualizing > :is(TabItem)">
+    <Setter Property="ZIndex" Value="0" />
+    <Setter Property="(i:Interaction.Behaviors)">
+      <i:BehaviorCollectionTemplate>
+        <i:BehaviorCollection>
+          <id:ItemDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
+        </i:BehaviorCollection>
+      </i:BehaviorCollectionTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector=":is(TabControl).draggableNonVirtualizing > :is(TabItem):pressed">
+    <Setter Property="ZIndex" Value="1" />
+  </Style>
+
+  <!-- TabControl Drag Styles - Virtualizing -->
+
+  <Style Selector=":is(TabControl).draggableVirtualizing">
     <Setter Property="ItemsPanel">
       <ItemsPanelTemplate>
         <VirtualizingStackPanel Orientation="Horizontal" />
@@ -13,24 +38,51 @@
     </Setter>
   </Style>
 
-  <Style Selector=":is(TabControl).draggable > :is(TabItem)">
+  <Style Selector=":is(TabControl).draggableVirtualizing > :is(TabItem)">
     <Setter Property="ZIndex" Value="0" />
     <Setter Property="(i:Interaction.Behaviors)">
       <i:BehaviorCollectionTemplate>
         <i:BehaviorCollection>
-          <id:ItemDragBehavior />
+          <id:ItemDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
         </i:BehaviorCollection>
       </i:BehaviorCollectionTemplate>
     </Setter>
   </Style>
 
-  <Style Selector=":is(TabControl).draggable > :is(TabItem):pressed">
+  <Style Selector=":is(TabControl).draggableVirtualizing > :is(TabItem):pressed">
     <Setter Property="ZIndex" Value="1" />
   </Style>
 
-  <!-- ListBoxItem Drag Styles -->
+  <!-- ItemsPanel Drag Styles - Non Virtualizing -->
 
-  <Style Selector=":is(ListBox).draggable">
+  <Style Selector=":is(ListBox).draggableNonVirtualizing">
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <StackPanel Orientation="Vertical" />
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style Selector=":is(ListBox).draggableNonVirtualizing > :is(ListBoxItem)">
+    <Setter Property="ZIndex" Value="0" />
+    <Setter Property="(i:Interaction.Behaviors)">
+      <i:BehaviorCollectionTemplate>
+        <i:BehaviorCollection>
+          <id:ItemDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" Orientation="Vertical" />
+        </i:BehaviorCollection>
+      </i:BehaviorCollectionTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector=":is(ListBox).draggableNonVirtualizing > :is(ListBoxItem):pressed">
+    <Setter Property="ZIndex" Value="1" />
+  </Style>
+  
+  <!-- ListBox Drag Styles - Virtualizing -->
+
+  <Style Selector=":is(ListBox).draggableVirtualizing">
     <Setter Property="ItemsPanel">
       <Setter.Value>
         <ItemsPanelTemplate>
@@ -40,18 +92,18 @@
     </Setter>
   </Style>
 
-  <Style Selector=":is(ListBox).draggable > :is(ListBoxItem)">
+  <Style Selector=":is(ListBox).draggableVirtualizing > :is(ListBoxItem)">
     <Setter Property="ZIndex" Value="0" />
     <Setter Property="(i:Interaction.Behaviors)">
       <i:BehaviorCollectionTemplate>
         <i:BehaviorCollection>
-          <id:ItemDragBehavior Orientation="Vertical" />
+          <id:ItemDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" Orientation="Vertical" />
         </i:BehaviorCollection>
       </i:BehaviorCollectionTemplate>
     </Setter>
   </Style>
 
-  <Style Selector=":is(ListBox).draggable > :is(ListBoxItem):pressed">
+  <Style Selector=":is(ListBox).draggableVirtualizing > :is(ListBoxItem):pressed">
     <Setter Property="ZIndex" Value="1" />
   </Style>
 
