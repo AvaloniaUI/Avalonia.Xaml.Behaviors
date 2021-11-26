@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Diagnostics;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -16,6 +17,7 @@ namespace Avalonia.Xaml.Interactions.Draggable
     public class ItemDragBehavior : Behavior<IControl>
     {
         private bool _enableDrag;
+        private bool _dragStarted;
         private Point _start;
         private int _draggedIndex;
         private int _targetIndex;
@@ -31,10 +33,40 @@ namespace Avalonia.Xaml.Interactions.Draggable
         /// <summary>
         /// 
         /// </summary>
+        public static readonly StyledProperty<double> HorizontalDragThresholdProperty = 
+            AvaloniaProperty.Register<ItemDragBehavior, double>(nameof(HorizontalDragThreshold), 3);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly StyledProperty<double> VerticalDragThresholdProperty =
+            AvaloniaProperty.Register<ItemDragBehavior, double>(nameof(VerticalDragThreshold), 3);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Orientation Orientation
         {
             get => GetValue(OrientationProperty);
             set => SetValue(OrientationProperty, value);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double HorizontalDragThreshold
+        {
+            get => GetValue(HorizontalDragThresholdProperty);
+            set => SetValue(HorizontalDragThresholdProperty, value);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double VerticalDragThreshold
+        {
+            get => GetValue(VerticalDragThresholdProperty);
+            set => SetValue(VerticalDragThresholdProperty, value);
         }
 
         /// <summary>
@@ -77,6 +109,7 @@ namespace Avalonia.Xaml.Interactions.Draggable
             }
 
             _enableDrag = true;
+            _dragStarted = false;
             _start = e.GetPosition(AssociatedObject.Parent);
             _draggedIndex = -1;
             _targetIndex = -1;
@@ -103,44 +136,50 @@ namespace Avalonia.Xaml.Interactions.Draggable
 
         private void Released()
         {
-            if (_enableDrag)
+            if (!_enableDrag)
             {
-                RemoveTransforms(_itemsControl);
+                return;
+            }
 
-                if (_itemsControl is { })
+            RemoveTransforms(_itemsControl);
+
+            if (_itemsControl is { })
+            {
+                foreach (var container in _itemsControl.ItemContainerGenerator.Containers)
                 {
-                    foreach (var container in _itemsControl.ItemContainerGenerator.Containers)
-                    {
-                        SetDraggingPseudoClasses(container.ContainerControl, true);
-                    }
+                    SetDraggingPseudoClasses(container.ContainerControl, true);
                 }
+            }
 
+            if (_dragStarted)
+            {
                 if (_draggedIndex >= 0 && _targetIndex >= 0 && _draggedIndex != _targetIndex)
                 {
                     Debug.WriteLine($"MoveItem {_draggedIndex} -> {_targetIndex}");
                     MoveDraggedItem(_itemsControl, _draggedIndex, _targetIndex);
                 }
-
-                if (_itemsControl is { })
-                {
-                    foreach (var container in _itemsControl.ItemContainerGenerator.Containers)
-                    {
-                        SetDraggingPseudoClasses(container.ContainerControl, false);
-                    }
-                }
-
-                if (_draggedContainer is { })
-                {
-                    SetDraggingPseudoClasses(_draggedContainer, false);
-                }
-
-                _draggedIndex = -1;
-                _targetIndex = -1;
-                _enableDrag = false;
-                _itemsControl = null;
-
-                _draggedContainer = null;
             }
+
+            if (_itemsControl is { })
+            {
+                foreach (var container in _itemsControl.ItemContainerGenerator.Containers)
+                {
+                    SetDraggingPseudoClasses(container.ContainerControl, false);
+                }
+            }
+
+            if (_draggedContainer is { })
+            {
+                SetDraggingPseudoClasses(_draggedContainer, false);
+            }
+
+            _draggedIndex = -1;
+            _targetIndex = -1;
+            _enableDrag = false;
+            _dragStarted = false;
+            _itemsControl = null;
+
+            _draggedContainer = null;
         }
 
         private void AddTransforms(ItemsControl? itemsControl)
@@ -212,6 +251,36 @@ namespace Avalonia.Xaml.Interactions.Draggable
             var orientation = Orientation;
             var position = e.GetPosition(_itemsControl);
             var delta = orientation == Orientation.Horizontal ? position.X - _start.X : position.Y - _start.Y;
+
+            if (!_dragStarted)
+            {
+                var diff = _start - position;
+                var horizontalDragThreshold = HorizontalDragThreshold;
+                var verticalDragThreshold = VerticalDragThreshold;
+
+                if (orientation == Orientation.Horizontal)
+                {
+                    if (Math.Abs(diff.X) > horizontalDragThreshold)
+                    {
+                        _dragStarted = true;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    if (Math.Abs(diff.Y) > verticalDragThreshold)
+                    {
+                        _dragStarted = true;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
 
             if (orientation == Orientation.Horizontal)
             {

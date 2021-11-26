@@ -31,6 +31,18 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
         /// <summary>
         /// 
         /// </summary>
+        public static readonly StyledProperty<double> HorizontalDragThresholdProperty = 
+            AvaloniaProperty.Register<ContextDragBehavior, double>(nameof(HorizontalDragThreshold), 3);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly StyledProperty<double> VerticalDragThresholdProperty =
+            AvaloniaProperty.Register<ContextDragBehavior, double>(nameof(VerticalDragThreshold), 3);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public object? Context
         {
             get => GetValue(ContextProperty);
@@ -45,7 +57,25 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             get => GetValue(HandlerProperty);
             set => SetValue(HandlerProperty, value);
         }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double HorizontalDragThreshold
+        {
+            get => GetValue(HorizontalDragThresholdProperty);
+            set => SetValue(HorizontalDragThresholdProperty, value);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double VerticalDragThreshold
+        {
+            get => GetValue(VerticalDragThresholdProperty);
+            set => SetValue(VerticalDragThresholdProperty, value);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -127,7 +157,10 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop
             {
                 var point = e.GetPosition(null);
                 var diff = _dragStartPoint - point;
-                if (Math.Abs(diff.X) > 3 || Math.Abs(diff.Y) > 3)
+                var horizontalDragThreshold = HorizontalDragThreshold;
+                var verticalDragThreshold = VerticalDragThreshold;
+
+                if (Math.Abs(diff.X) > horizontalDragThreshold || Math.Abs(diff.Y) > verticalDragThreshold)
                 {
                     if (_lock)
                     {

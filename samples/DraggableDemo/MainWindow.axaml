@@ -51,7 +51,7 @@
     </TabItem>
 
     <TabItem Header="TabControl (Items)">
-      <TabControl Classes="draggable custom" Items="{Binding Items}" Background="LightGray" >
+      <TabControl Classes="draggableVirtualizing custom" Items="{Binding Items}" Background="LightGray" >
         <TabControl.Styles>
           <Style Selector="TabItem:not(:dragging)">
             <Setter Property="Transitions">
@@ -92,7 +92,7 @@
     </TabItem>
 
     <TabItem Header="ListBox (Items)">
-      <ListBox Classes="draggable" Items="{Binding Items}">
+      <ListBox Classes="draggableVirtualizing" Items="{Binding Strings}">
         <ListBox.Styles>
           <Style Selector="ListBoxItem:not(:dragging)">
             <Setter Property="Transitions">
