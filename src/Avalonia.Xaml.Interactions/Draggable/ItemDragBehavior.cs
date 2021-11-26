@@ -151,10 +151,13 @@ namespace Avalonia.Xaml.Interactions.Draggable
                 }
             }
 
-            if (_draggedIndex >= 0 && _targetIndex >= 0 && _draggedIndex != _targetIndex)
+            if (_dragStarted)
             {
-                Debug.WriteLine($"MoveItem {_draggedIndex} -> {_targetIndex}");
-                MoveDraggedItem(_itemsControl, _draggedIndex, _targetIndex);
+                if (_draggedIndex >= 0 && _targetIndex >= 0 && _draggedIndex != _targetIndex)
+                {
+                    Debug.WriteLine($"MoveItem {_draggedIndex} -> {_targetIndex}");
+                    MoveDraggedItem(_itemsControl, _draggedIndex, _targetIndex);
+                }
             }
 
             if (_itemsControl is { })
