@@ -93,6 +93,11 @@ namespace Avalonia.Xaml.Interactions.Core
         }
 
         /// <summary>
+        /// Specifies whether the EventArgs of the event that triggered this action should be passed to the Command as a parameter.
+        /// </summary>
+        public bool PassEventArgsToCommand { get; set; }
+
+        /// <summary>
         /// Executes the action.
         /// </summary>
         /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
@@ -105,7 +110,7 @@ namespace Avalonia.Xaml.Interactions.Core
                 return false;
             }
 
-            object? resolvedParameter;
+            object? resolvedParameter = default;
             if (IsSet(CommandParameterProperty))
             {
                 resolvedParameter = CommandParameter;
@@ -122,7 +127,10 @@ namespace Avalonia.Xaml.Interactions.Core
             }
             else
             {
-                resolvedParameter = parameter;
+                if (PassEventArgsToCommand)
+                {
+                    resolvedParameter = parameter;
+                }
             }
 
             if (!Command.CanExecute(resolvedParameter))
