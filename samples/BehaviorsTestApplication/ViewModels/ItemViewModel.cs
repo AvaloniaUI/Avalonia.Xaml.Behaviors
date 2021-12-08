@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using BehaviorsTestApplication.ViewModels.Core;
+using ReactiveUI;
 
 namespace BehaviorsTestApplication.ViewModels
 {
@@ -11,13 +12,13 @@ namespace BehaviorsTestApplication.ViewModels
         public string Name
         {
             get => _name;
-            set => Update(ref _name, value);
+            set => this.RaiseAndSetIfChanged(ref _name, value);
         }
 
         public ObservableCollection<ItemViewModel>? Items
         {
             get => _items;
-            set => Update(ref _items, value);
+            set => this.RaiseAndSetIfChanged(ref _items, value);
         }
 
         public ItemViewModel(string name)

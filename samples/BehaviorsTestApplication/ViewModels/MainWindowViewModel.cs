@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 using System.Windows.Input;
 using BehaviorsTestApplication.ViewModels.Core;
+using ReactiveUI;
 
 namespace BehaviorsTestApplication.ViewModels
 {
@@ -17,19 +18,19 @@ namespace BehaviorsTestApplication.ViewModels
         public int Count
         {
             get => _count;
-            set => Update(ref _count, value);
+            set => this.RaiseAndSetIfChanged(ref _count, value);
         }
 
         public double Position
         {
             get => _position;
-            set => Update(ref _position, value);
+            set => this.RaiseAndSetIfChanged(ref _position, value);
         }
 
         public ObservableCollection<ItemViewModel>? Items
         {
             get => _items;
-            set => Update(ref _items, value);
+            set => this.RaiseAndSetIfChanged(ref _items, value);
         }
 
         public IObservable<int> Values { get; }
@@ -44,9 +45,9 @@ namespace BehaviorsTestApplication.ViewModels
         {
             Count = 0;
             Position = 100.0;
-            MoveLeftCommand = new Command((param) => Position -= 5.0);
-            MoveRightCommand = new Command((param) => Position += 5.0);
-            ResetMoveCommand = new Command((param) => Position = 100.0);
+            MoveLeftCommand = ReactiveCommand.Create(() => Position -= 5.0);
+            MoveRightCommand = ReactiveCommand.Create(() => Position += 5.0);
+            ResetMoveCommand = ReactiveCommand.Create(() => Position = 100.0);
             Items = new ObservableCollection<ItemViewModel>()
             {
                 new("First Item")
