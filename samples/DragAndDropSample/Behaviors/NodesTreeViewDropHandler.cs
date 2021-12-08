@@ -4,106 +4,105 @@ using Avalonia.VisualTree;
 using Avalonia.Xaml.Interactions.DragAndDrop;
 using DragAndDropSample.ViewModels;
 
-namespace DragAndDropSample.Behaviors
+namespace DragAndDropSample.Behaviors;
+
+public class NodesTreeViewDropHandler : DropHandlerBase
 {
-    public class NodesTreeViewDropHandler : DropHandlerBase
+    private bool Validate<T>(TreeView treeView, DragEventArgs e, object? sourceContext, object? targetContext, bool bExecute) where T : NodeViewModel
     {
-        private bool Validate<T>(TreeView treeView, DragEventArgs e, object? sourceContext, object? targetContext, bool bExecute) where T : NodeViewModel
+        if (sourceContext is not T sourceNode
+            || targetContext is not MainWindowViewModel vm
+            || treeView.GetVisualAt(e.GetPosition(treeView)) is not IControl targetControl
+            || targetControl.DataContext is not T targetNode)
         {
-            if (sourceContext is not T sourceNode
-                || targetContext is not MainWindowViewModel vm
-                || treeView.GetVisualAt(e.GetPosition(treeView)) is not IControl targetControl
-                || targetControl.DataContext is not T targetNode)
+            return false;
+        }
+
+        var sourceParent = sourceNode.Parent;
+        var targetParent = targetNode.Parent;
+        var sourceNodes = sourceParent is { } ? sourceParent.Nodes : vm.Nodes;
+        var targetNodes = targetParent is { } ? targetParent.Nodes : vm.Nodes;
+
+        if (sourceNodes is { } && targetNodes is { })
+        {
+            var sourceIndex = sourceNodes.IndexOf(sourceNode);
+            var targetIndex = targetNodes.IndexOf(targetNode);
+
+            if (sourceIndex < 0 || targetIndex < 0)
             {
                 return false;
             }
 
-            var sourceParent = sourceNode.Parent;
-            var targetParent = targetNode.Parent;
-            var sourceNodes = sourceParent is { } ? sourceParent.Nodes : vm.Nodes;
-            var targetNodes = targetParent is { } ? targetParent.Nodes : vm.Nodes;
-
-            if (sourceNodes is { } && targetNodes is { })
+            switch (e.DragEffects)
             {
-                var sourceIndex = sourceNodes.IndexOf(sourceNode);
-                var targetIndex = targetNodes.IndexOf(targetNode);
-
-                if (sourceIndex < 0 || targetIndex < 0)
+                case DragDropEffects.Copy:
                 {
-                    return false;
+                    if (bExecute)
+                    {
+                        var clone = new NodeViewModel() { Title = sourceNode.Title + "_copy" };
+                        InsertItem(targetNodes, clone, targetIndex + 1);
+                    }
+
+                    return true;
                 }
-
-                switch (e.DragEffects)
+                case DragDropEffects.Move:
                 {
-                    case DragDropEffects.Copy:
+                    if (bExecute)
                     {
-                        if (bExecute)
+                        if (sourceNodes == targetNodes)
                         {
-                            var clone = new NodeViewModel() { Title = sourceNode.Title + "_copy" };
-                            InsertItem(targetNodes, clone, targetIndex + 1);
+                            MoveItem(sourceNodes, sourceIndex, targetIndex);
                         }
+                        else
+                        {
+                            sourceNode.Parent = targetParent;
 
-                        return true;
+                            MoveItem(sourceNodes, targetNodes, sourceIndex, targetIndex);
+                        }
                     }
-                    case DragDropEffects.Move:
+
+                    return true;
+                }
+                case DragDropEffects.Link:
+                {
+                    if (bExecute)
                     {
-                        if (bExecute)
+                        if (sourceNodes == targetNodes)
                         {
-                            if (sourceNodes == targetNodes)
-                            {
-                                MoveItem(sourceNodes, sourceIndex, targetIndex);
-                            }
-                            else
-                            {
-                                sourceNode.Parent = targetParent;
-
-                                MoveItem(sourceNodes, targetNodes, sourceIndex, targetIndex);
-                            }
+                            SwapItem(sourceNodes, sourceIndex, targetIndex);
                         }
-
-                        return true;
-                    }
-                    case DragDropEffects.Link:
-                    {
-                        if (bExecute)
+                        else
                         {
-                            if (sourceNodes == targetNodes)
-                            {
-                                SwapItem(sourceNodes, sourceIndex, targetIndex);
-                            }
-                            else
-                            {
-                                sourceNode.Parent = targetParent;
-                                targetNode.Parent = sourceParent;
+                            sourceNode.Parent = targetParent;
+                            targetNode.Parent = sourceParent;
 
-                                SwapItem(sourceNodes, targetNodes, sourceIndex, targetIndex);
-                            }
+                            SwapItem(sourceNodes, targetNodes, sourceIndex, targetIndex);
                         }
-
-                        return true;
                     }
+
+                    return true;
                 }
             }
-
-            return false;
         }
+
+        return false;
+    }
         
-        public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
+    public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
+    {
+        if (e.Source is IControl && sender is TreeView treeView)
         {
-            if (e.Source is IControl && sender is TreeView treeView)
-            {
-                return Validate<NodeViewModel>(treeView, e, sourceContext, targetContext, false);
-            }
-            return false;
+            return Validate<NodeViewModel>(treeView, e, sourceContext, targetContext, false);
         }
+        return false;
+    }
 
-        public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
+    public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
+    {
+        if (e.Source is IControl && sender is TreeView treeView)
         {
-            if (e.Source is IControl && sender is TreeView treeView)
-            {
-                return Validate<NodeViewModel>(treeView, e, sourceContext, targetContext, true);
-            }
-            return false;
+            return Validate<NodeViewModel>(treeView, e, sourceContext, targetContext, true);
         }
+        return false;
     }
 }

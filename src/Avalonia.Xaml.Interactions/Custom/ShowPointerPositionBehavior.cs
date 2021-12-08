@@ -2,58 +2,57 @@
 using Avalonia.Input;
 using Avalonia.Xaml.Interactivity;
 
-namespace Avalonia.Xaml.Interactions.Custom
+namespace Avalonia.Xaml.Interactions.Custom;
+
+/// <summary>
+/// A behavior that displays cursor position on <see cref="InputElement.PointerMoved"/> event for the <see cref="Behavior{T}.AssociatedObject"/> using <see cref="TextBlock.Text"/> property.
+/// </summary>
+public class ShowPointerPositionBehavior : Behavior<Control>
 {
     /// <summary>
-    /// A behavior that displays cursor position on <see cref="InputElement.PointerMoved"/> event for the <see cref="Behavior{T}.AssociatedObject"/> using <see cref="TextBlock.Text"/> property.
+    /// Identifies the <seealso cref="TargetTextBlockProperty"/> avalonia property.
     /// </summary>
-    public class ShowPointerPositionBehavior : Behavior<Control>
+    public static readonly StyledProperty<TextBlock?> TargetTextBlockProperty =
+        AvaloniaProperty.Register<ShowPointerPositionBehavior, TextBlock?>(nameof(TargetTextBlock));
+
+    /// <summary>
+    /// Gets or sets the target TextBlock object in which this behavior displays cursor position on PointerMoved event.
+    /// </summary>
+    public TextBlock? TargetTextBlock
     {
-        /// <summary>
-        /// Identifies the <seealso cref="TargetTextBlockProperty"/> avalonia property.
-        /// </summary>
-        public static readonly StyledProperty<TextBlock?> TargetTextBlockProperty =
-            AvaloniaProperty.Register<ShowPointerPositionBehavior, TextBlock?>(nameof(TargetTextBlock));
+        get => GetValue(TargetTextBlockProperty);
+        set => SetValue(TargetTextBlockProperty, value);
+    }
 
-        /// <summary>
-        /// Gets or sets the target TextBlock object in which this behavior displays cursor position on PointerMoved event.
-        /// </summary>
-        public TextBlock? TargetTextBlock
+    /// <summary>
+    /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
+    /// </summary>
+    protected override void OnAttached()
+    {
+        base.OnAttached();
+        if (AssociatedObject is { })
         {
-            get => GetValue(TargetTextBlockProperty);
-            set => SetValue(TargetTextBlockProperty, value);
+            AssociatedObject.PointerMoved += AssociatedObject_PointerMoved; 
         }
+    }
 
-        /// <summary>
-        /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
-        /// </summary>
-        protected override void OnAttached()
+    /// <summary>
+    /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
+    /// </summary>
+    protected override void OnDetaching()
+    {
+        base.OnDetaching();
+        if (AssociatedObject is { })
         {
-            base.OnAttached();
-            if (AssociatedObject is { })
-            {
-                AssociatedObject.PointerMoved += AssociatedObject_PointerMoved; 
-            }
+            AssociatedObject.PointerMoved -= AssociatedObject_PointerMoved; 
         }
+    }
 
-        /// <summary>
-        /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
-        /// </summary>
-        protected override void OnDetaching()
+    private void AssociatedObject_PointerMoved(object? sender, PointerEventArgs e)
+    {
+        if (TargetTextBlock is { })
         {
-            base.OnDetaching();
-            if (AssociatedObject is { })
-            {
-                AssociatedObject.PointerMoved -= AssociatedObject_PointerMoved; 
-            }
-        }
-
-        private void AssociatedObject_PointerMoved(object? sender, PointerEventArgs e)
-        {
-            if (TargetTextBlock is { })
-            {
-                TargetTextBlock.Text = e.GetPosition(AssociatedObject).ToString();
-            }
+            TargetTextBlock.Text = e.GetPosition(AssociatedObject).ToString();
         }
     }
 }

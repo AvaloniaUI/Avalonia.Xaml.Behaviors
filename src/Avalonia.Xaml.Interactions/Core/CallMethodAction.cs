@@ -5,248 +5,247 @@ using System.Globalization;
 using System.Reflection;
 using Avalonia.Xaml.Interactivity;
 
-namespace Avalonia.Xaml.Interactions.Core
+namespace Avalonia.Xaml.Interactions.Core;
+
+/// <summary>
+/// An action that calls a method on a specified object when invoked.
+/// </summary>
+public class CallMethodAction : AvaloniaObject, IAction
 {
+    private Type? _targetObjectType;
+    private readonly List<MethodDescriptor> _methodDescriptors = new();
+    private MethodDescriptor? _cachedMethodDescriptor;
+
     /// <summary>
-    /// An action that calls a method on a specified object when invoked.
+    /// Identifies the <seealso cref="MethodName"/> avalonia property.
     /// </summary>
-    public class CallMethodAction : AvaloniaObject, IAction
+    public static readonly StyledProperty<string> MethodNameProperty =
+        AvaloniaProperty.Register<CallMethodAction, string>(nameof(MethodName));
+
+    /// <summary>
+    /// Identifies the <seealso cref="TargetObject"/> avalonia property.
+    /// </summary>
+    public static readonly StyledProperty<object?> TargetObjectProperty =
+        AvaloniaProperty.Register<CallMethodAction, object?>(nameof(TargetObject));
+
+    /// <summary>
+    /// Gets or sets the name of the method to invoke. This is a avalonia property.
+    /// </summary>
+    public string MethodName
     {
-        private Type? _targetObjectType;
-        private readonly List<MethodDescriptor> _methodDescriptors = new();
-        private MethodDescriptor? _cachedMethodDescriptor;
+        get => GetValue(MethodNameProperty);
+        set => SetValue(MethodNameProperty, value);
+    }
 
-        /// <summary>
-        /// Identifies the <seealso cref="MethodName"/> avalonia property.
-        /// </summary>
-        public static readonly StyledProperty<string> MethodNameProperty =
-            AvaloniaProperty.Register<CallMethodAction, string>(nameof(MethodName));
+    /// <summary>
+    /// Gets or sets the object that exposes the method of interest. This is a avalonia property.
+    /// </summary>
+    public object? TargetObject
+    {
+        get => GetValue(TargetObjectProperty);
+        set => SetValue(TargetObjectProperty, value);
+    }
 
-        /// <summary>
-        /// Identifies the <seealso cref="TargetObject"/> avalonia property.
-        /// </summary>
-        public static readonly StyledProperty<object?> TargetObjectProperty =
-            AvaloniaProperty.Register<CallMethodAction, object?>(nameof(TargetObject));
-
-        /// <summary>
-        /// Gets or sets the name of the method to invoke. This is a avalonia property.
-        /// </summary>
-        public string MethodName
+    static CallMethodAction()
+    {
+        MethodNameProperty.Changed.Subscribe(e =>
         {
-            get => GetValue(MethodNameProperty);
-            set => SetValue(MethodNameProperty, value);
+            if (e.Sender is CallMethodAction callMethodAction)
+            {
+                callMethodAction.UpdateMethodDescriptors();
+            }
+        });
+
+        TargetObjectProperty.Changed.Subscribe(e =>
+        {
+            if (e.Sender is CallMethodAction callMethodAction)
+            {
+                var newValue = e.NewValue.GetValueOrDefault();
+                if (newValue is { })
+                {
+                    var newType = newValue.GetType();
+                    callMethodAction.UpdateTargetType(newType); 
+                }
+            }
+        });
+    }
+
+    /// <summary>
+    /// Executes the action.
+    /// </summary>
+    /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
+    /// <param name="parameter">The value of this parameter is determined by the caller.</param>
+    /// <returns>True if the method is called; else false.</returns>
+    public virtual object Execute(object? sender, object? parameter)
+    {
+        object? target;
+        if (GetValue(TargetObjectProperty) is { })
+        {
+            target = TargetObject;
+        }
+        else
+        {
+            target = sender;
         }
 
-        /// <summary>
-        /// Gets or sets the object that exposes the method of interest. This is a avalonia property.
-        /// </summary>
-        public object? TargetObject
+        if (target is null || string.IsNullOrEmpty(MethodName))
         {
-            get => GetValue(TargetObjectProperty);
-            set => SetValue(TargetObjectProperty, value);
+            return false;
         }
 
-        static CallMethodAction()
+        UpdateTargetType(target.GetType());
+
+        var methodDescriptor = FindBestMethod(parameter);
+        if (methodDescriptor is null)
         {
-            MethodNameProperty.Changed.Subscribe(e =>
+            if (TargetObject is { })
             {
-                if (e.Sender is CallMethodAction callMethodAction)
-                {
-                    callMethodAction.UpdateMethodDescriptors();
-                }
-            });
-
-            TargetObjectProperty.Changed.Subscribe(e =>
-            {
-                if (e.Sender is CallMethodAction callMethodAction)
-                {
-                    var newValue = e.NewValue.GetValueOrDefault();
-                    if (newValue is { })
-                    {
-                        var newType = newValue.GetType();
-                        callMethodAction.UpdateTargetType(newType); 
-                    }
-                }
-            });
-        }
-
-        /// <summary>
-        /// Executes the action.
-        /// </summary>
-        /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
-        /// <param name="parameter">The value of this parameter is determined by the caller.</param>
-        /// <returns>True if the method is called; else false.</returns>
-        public virtual object Execute(object? sender, object? parameter)
-        {
-            object? target;
-            if (GetValue(TargetObjectProperty) is { })
-            {
-                target = TargetObject;
-            }
-            else
-            {
-                target = sender;
-            }
-
-            if (target is null || string.IsNullOrEmpty(MethodName))
-            {
-                return false;
-            }
-
-            UpdateTargetType(target.GetType());
-
-            var methodDescriptor = FindBestMethod(parameter);
-            if (methodDescriptor is null)
-            {
-                if (TargetObject is { })
-                {
-                    throw new ArgumentException(string.Format(
-                        CultureInfo.CurrentCulture,
-                        "Cannot find method named {0} on object of type {1} that matches the expected signature.",
-                        MethodName,
-                        _targetObjectType));
-                }
-
-                return false;
-            }
-
-            var parameters = methodDescriptor.Parameters;
-            if (parameters.Length == 0)
-            {
-                methodDescriptor.MethodInfo.Invoke(target, null);
-                return true;
-            }
-
-            if (parameters.Length == 2)
-            {
-                methodDescriptor.MethodInfo.Invoke(target, new[] { target, parameter! });
-                return true;
+                throw new ArgumentException(string.Format(
+                    CultureInfo.CurrentCulture,
+                    "Cannot find method named {0} on object of type {1} that matches the expected signature.",
+                    MethodName,
+                    _targetObjectType));
             }
 
             return false;
         }
 
-        private MethodDescriptor? FindBestMethod(object? parameter)
+        var parameters = methodDescriptor.Parameters;
+        if (parameters.Length == 0)
         {
-            if (parameter is null)
-            {
-                return _cachedMethodDescriptor;
-            }
-
-            var parameterTypeInfo = parameter.GetType().GetTypeInfo();
-
-            MethodDescriptor? mostDerivedMethod = null;
-
-            // Loop over the methods looking for the one whose type is closest to the type of the given parameter.
-            foreach (MethodDescriptor currentMethod in _methodDescriptors)
-            {
-                var currentTypeInfo = currentMethod.SecondParameterTypeInfo;
-
-                if (currentTypeInfo is { } && currentTypeInfo.IsAssignableFrom(parameterTypeInfo))
-                {
-                    if (mostDerivedMethod is null || !currentTypeInfo.IsAssignableFrom(mostDerivedMethod.SecondParameterTypeInfo))
-                    {
-                        mostDerivedMethod = currentMethod;
-                    }
-                }
-            }
-
-            return mostDerivedMethod ?? _cachedMethodDescriptor;
+            methodDescriptor.MethodInfo.Invoke(target, null);
+            return true;
         }
 
-        private void UpdateTargetType(Type newTargetType)
+        if (parameters.Length == 2)
         {
-            if (newTargetType == _targetObjectType)
-            {
-                return;
-            }
-
-            _targetObjectType = newTargetType;
-
-            UpdateMethodDescriptors();
+            methodDescriptor.MethodInfo.Invoke(target, new[] { target, parameter! });
+            return true;
         }
 
-        private void UpdateMethodDescriptors()
+        return false;
+    }
+
+    private MethodDescriptor? FindBestMethod(object? parameter)
+    {
+        if (parameter is null)
         {
-            _methodDescriptors.Clear();
-            _cachedMethodDescriptor = null;
+            return _cachedMethodDescriptor;
+        }
 
-            if (string.IsNullOrEmpty(MethodName) || _targetObjectType is null)
-            {
-                return;
-            }
+        var parameterTypeInfo = parameter.GetType().GetTypeInfo();
 
-            // Find all public methods that match the given name  and have either no parameters,
-            // or two parameters where the first is of type Object.
-            foreach (var method in _targetObjectType.GetRuntimeMethods())
+        MethodDescriptor? mostDerivedMethod = null;
+
+        // Loop over the methods looking for the one whose type is closest to the type of the given parameter.
+        foreach (MethodDescriptor currentMethod in _methodDescriptors)
+        {
+            var currentTypeInfo = currentMethod.SecondParameterTypeInfo;
+
+            if (currentTypeInfo is { } && currentTypeInfo.IsAssignableFrom(parameterTypeInfo))
             {
-                if (string.Equals(method.Name, MethodName, StringComparison.Ordinal)
-                    && method.ReturnType == typeof(void)
-                    && method.IsPublic)
+                if (mostDerivedMethod is null || !currentTypeInfo.IsAssignableFrom(mostDerivedMethod.SecondParameterTypeInfo))
                 {
-                    var parameters = method.GetParameters();
-                    if (parameters.Length == 0)
-                    {
-                        // There can be only one parameterless method of the given name.
-                        _cachedMethodDescriptor = new MethodDescriptor(method, parameters);
-                    }
-                    else if (parameters.Length == 2 && parameters[0].ParameterType == typeof(object))
-                    {
-                        _methodDescriptors.Add(new MethodDescriptor(method, parameters));
-                    }
-                }
-            }
-
-            // We didn't find a parameterless method, so we want to find a method that accepts null
-            // as a second parameter, but if we have more than one of these it is ambiguous which
-            // we should call, so we do nothing.
-            if (_cachedMethodDescriptor is null)
-            {
-                foreach (var method in _methodDescriptors)
-                {
-                    var typeInfo = method.SecondParameterTypeInfo;
-                    if (typeInfo is { } && (!typeInfo.IsValueType || (typeInfo.IsGenericType && typeInfo.GetGenericTypeDefinition() == typeof(Nullable<>))))
-                    {
-                        if (_cachedMethodDescriptor is { })
-                        {
-                            _cachedMethodDescriptor = null;
-                            return;
-                        }
-                        else
-                        {
-                            _cachedMethodDescriptor = method;
-                        }
-                    }
+                    mostDerivedMethod = currentMethod;
                 }
             }
         }
 
-        [DebuggerDisplay("{" + nameof(MethodInfo) + "}")]
-        private class MethodDescriptor
+        return mostDerivedMethod ?? _cachedMethodDescriptor;
+    }
+
+    private void UpdateTargetType(Type newTargetType)
+    {
+        if (newTargetType == _targetObjectType)
         {
-            public MethodDescriptor(MethodInfo methodInfo, ParameterInfo[] methodParameters)
+            return;
+        }
+
+        _targetObjectType = newTargetType;
+
+        UpdateMethodDescriptors();
+    }
+
+    private void UpdateMethodDescriptors()
+    {
+        _methodDescriptors.Clear();
+        _cachedMethodDescriptor = null;
+
+        if (string.IsNullOrEmpty(MethodName) || _targetObjectType is null)
+        {
+            return;
+        }
+
+        // Find all public methods that match the given name  and have either no parameters,
+        // or two parameters where the first is of type Object.
+        foreach (var method in _targetObjectType.GetRuntimeMethods())
+        {
+            if (string.Equals(method.Name, MethodName, StringComparison.Ordinal)
+                && method.ReturnType == typeof(void)
+                && method.IsPublic)
             {
-                MethodInfo = methodInfo;
-                Parameters = methodParameters;
-            }
-
-            public MethodInfo MethodInfo { get; private set; }
-
-            public ParameterInfo[] Parameters { get; private set; }
-
-            public int ParameterCount => Parameters.Length;
-
-            public TypeInfo? SecondParameterTypeInfo
-            {
-                get
+                var parameters = method.GetParameters();
+                if (parameters.Length == 0)
                 {
-                    if (ParameterCount < 2)
-                    {
-                        return null;
-                    }
-
-                    return Parameters[1].ParameterType.GetTypeInfo();
+                    // There can be only one parameterless method of the given name.
+                    _cachedMethodDescriptor = new MethodDescriptor(method, parameters);
                 }
+                else if (parameters.Length == 2 && parameters[0].ParameterType == typeof(object))
+                {
+                    _methodDescriptors.Add(new MethodDescriptor(method, parameters));
+                }
+            }
+        }
+
+        // We didn't find a parameterless method, so we want to find a method that accepts null
+        // as a second parameter, but if we have more than one of these it is ambiguous which
+        // we should call, so we do nothing.
+        if (_cachedMethodDescriptor is null)
+        {
+            foreach (var method in _methodDescriptors)
+            {
+                var typeInfo = method.SecondParameterTypeInfo;
+                if (typeInfo is { } && (!typeInfo.IsValueType || (typeInfo.IsGenericType && typeInfo.GetGenericTypeDefinition() == typeof(Nullable<>))))
+                {
+                    if (_cachedMethodDescriptor is { })
+                    {
+                        _cachedMethodDescriptor = null;
+                        return;
+                    }
+                    else
+                    {
+                        _cachedMethodDescriptor = method;
+                    }
+                }
+            }
+        }
+    }
+
+    [DebuggerDisplay("{" + nameof(MethodInfo) + "}")]
+    private class MethodDescriptor
+    {
+        public MethodDescriptor(MethodInfo methodInfo, ParameterInfo[] methodParameters)
+        {
+            MethodInfo = methodInfo;
+            Parameters = methodParameters;
+        }
+
+        public MethodInfo MethodInfo { get; private set; }
+
+        public ParameterInfo[] Parameters { get; private set; }
+
+        public int ParameterCount => Parameters.Length;
+
+        public TypeInfo? SecondParameterTypeInfo
+        {
+            get
+            {
+                if (ParameterCount < 2)
+                {
+                    return null;
+                }
+
+                return Parameters[1].ParameterType.GetTypeInfo();
             }
         }
     }

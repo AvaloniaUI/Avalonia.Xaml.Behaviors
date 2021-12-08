@@ -1,53 +1,52 @@
 ﻿using System.Collections.Generic;
 
-namespace Avalonia.Xaml.Interactivity.UnitTests
+namespace Avalonia.Xaml.Interactivity.UnitTests;
+
+public class StubBehavior : AvaloniaObject, IBehavior
 {
-    public class StubBehavior : AvaloniaObject, IBehavior
+    public int AttachCount
     {
-        public int AttachCount
-        {
-            get;
-            private set;
-        }
+        get;
+        private set;
+    }
 
-        public int DetachCount
-        {
-            get;
-            private set;
-        }
+    public int DetachCount
+    {
+        get;
+        private set;
+    }
 
-        public ActionCollection Actions
-        {
-            get;
-            private set;
-        }
+    public ActionCollection Actions
+    {
+        get;
+        private set;
+    }
 
-        public StubBehavior()
-        {
-            Actions = new ActionCollection();
-        }
+    public StubBehavior()
+    {
+        Actions = new ActionCollection();
+    }
 
-        public IAvaloniaObject? AssociatedObject
-        {
-            get;
-            private set;
-        }
+    public IAvaloniaObject? AssociatedObject
+    {
+        get;
+        private set;
+    }
 
-        public void Attach(IAvaloniaObject? avaloniaObject)
-        {
-            AssociatedObject = avaloniaObject;
-            AttachCount++;
-        }
+    public void Attach(IAvaloniaObject? avaloniaObject)
+    {
+        AssociatedObject = avaloniaObject;
+        AttachCount++;
+    }
 
-        public void Detach()
-        {
-            AssociatedObject = null;
-            DetachCount++;
-        }
+    public void Detach()
+    {
+        AssociatedObject = null;
+        DetachCount++;
+    }
 
-        public IEnumerable<object> Execute(object? sender, object parameter)
-        {
-            return Interaction.ExecuteActions(sender, Actions, parameter);
-        }
+    public IEnumerable<object> Execute(object? sender, object parameter)
+    {
+        return Interaction.ExecuteActions(sender, Actions, parameter);
     }
 }

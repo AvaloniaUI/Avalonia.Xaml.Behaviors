@@ -2,40 +2,39 @@
 using Avalonia.Input;
 using Avalonia.Xaml.Interactivity;
 
-namespace Avalonia.Xaml.Interactions.Custom
+namespace Avalonia.Xaml.Interactions.Custom;
+
+/// <summary>
+/// Focuses the <see cref="Behavior.AssociatedObject"/> on <see cref="InputElement.PointerMoved"/> event.
+/// </summary>
+public class FocusOnPointerMovedBehavior : Behavior<Control>
 {
     /// <summary>
-    /// Focuses the <see cref="Behavior.AssociatedObject"/> on <see cref="InputElement.PointerMoved"/> event.
+    /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
     /// </summary>
-    public class FocusOnPointerMovedBehavior : Behavior<Control>
+    protected override void OnAttached()
     {
-        /// <summary>
-        /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
-        /// </summary>
-        protected override void OnAttached()
+        base.OnAttached();
+        if (AssociatedObject is { })
         {
-            base.OnAttached();
-            if (AssociatedObject is { })
-            {
-                AssociatedObject.PointerMoved += PointerMoved; 
-            }
+            AssociatedObject.PointerMoved += PointerMoved; 
         }
+    }
 
-        /// <summary>
-        /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
-        /// </summary>
-        protected override void OnDetaching()
+    /// <summary>
+    /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
+    /// </summary>
+    protected override void OnDetaching()
+    {
+        base.OnDetaching();
+        if (AssociatedObject is { })
         {
-            base.OnDetaching();
-            if (AssociatedObject is { })
-            {
-                AssociatedObject.PointerMoved -= PointerMoved; 
-            }
+            AssociatedObject.PointerMoved -= PointerMoved; 
         }
+    }
 
-        private void PointerMoved(object? sender, PointerEventArgs args)
-        {
-            AssociatedObject?.Focus();
-        }
+    private void PointerMoved(object? sender, PointerEventArgs args)
+    {
+        AssociatedObject?.Focus();
     }
 }

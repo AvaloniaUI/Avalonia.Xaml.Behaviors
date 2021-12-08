@@ -3,51 +3,50 @@ using Avalonia.Controls;
 using Avalonia.VisualTree;
 using Avalonia.Xaml.Interactivity;
 
-namespace Avalonia.Xaml.Interactions.Custom
+namespace Avalonia.Xaml.Interactions.Custom;
+
+/// <summary>
+/// Binds AssociatedObject object Tag property to root visual DataContext.
+/// </summary>
+public class BindTagToVisualRootDataContextBehavior : Behavior<Control>
 {
-    /// <summary>
-    /// Binds AssociatedObject object Tag property to root visual DataContext.
-    /// </summary>
-    public class BindTagToVisualRootDataContextBehavior : Behavior<Control>
+    private IDisposable? _disposable;
+
+    /// <inheritdoc/>
+    protected override void OnAttached()
     {
-        private IDisposable? _disposable;
-
-        /// <inheritdoc/>
-        protected override void OnAttached()
+        base.OnAttached();
+        if (AssociatedObject is { })
         {
-            base.OnAttached();
-            if (AssociatedObject is { })
-            {
-                AssociatedObject.AttachedToVisualTree += AssociatedObject_AttachedToVisualTree; 
-            }
+            AssociatedObject.AttachedToVisualTree += AssociatedObject_AttachedToVisualTree; 
         }
+    }
 
-        /// <inheritdoc/>
-        protected override void OnDetaching()
+    /// <inheritdoc/>
+    protected override void OnDetaching()
+    {
+        base.OnDetaching();
+        if (AssociatedObject is { })
         {
-            base.OnDetaching();
-            if (AssociatedObject is { })
-            {
-                AssociatedObject.AttachedToVisualTree -= AssociatedObject_AttachedToVisualTree; 
-            }
-            _disposable?.Dispose();
+            AssociatedObject.AttachedToVisualTree -= AssociatedObject_AttachedToVisualTree; 
         }
+        _disposable?.Dispose();
+    }
 
-        private void AssociatedObject_AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
-        {
-            _disposable = BindDataContextToTag((IControl)AssociatedObject.GetVisualRoot(), AssociatedObject);
-        }
+    private void AssociatedObject_AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+    {
+        _disposable = BindDataContextToTag((IControl)AssociatedObject.GetVisualRoot(), AssociatedObject);
+    }
 
-        private static IDisposable? BindDataContextToTag(IControl source, IControl? target)
-        {
-            if (source is null)
-                throw new ArgumentNullException(nameof(source));
+    private static IDisposable? BindDataContextToTag(IControl source, IControl? target)
+    {
+        if (source is null)
+            throw new ArgumentNullException(nameof(source));
 
-            if (target is null)
-                throw new ArgumentNullException(nameof(target));
+        if (target is null)
+            throw new ArgumentNullException(nameof(target));
 
-            var data = source.GetObservable(StyledElement.DataContextProperty);
-            return data is { } ? target.Bind(Control.TagProperty, data) : null;
-        }
+        var data = source.GetObservable(StyledElement.DataContextProperty);
+        return data is { } ? target.Bind(Control.TagProperty, data) : null;
     }
 }

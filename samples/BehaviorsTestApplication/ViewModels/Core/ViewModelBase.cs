@@ -1,8 +1,7 @@
 ﻿using ReactiveUI;
 
-namespace BehaviorsTestApplication.ViewModels.Core
+namespace BehaviorsTestApplication.ViewModels.Core;
+
+public abstract class ViewModelBase : ReactiveObject
 {
-    public abstract class ViewModelBase : ReactiveObject
-    {
-    }
 }

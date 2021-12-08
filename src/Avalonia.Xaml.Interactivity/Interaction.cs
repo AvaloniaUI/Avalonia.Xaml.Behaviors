@@ -2,132 +2,131 @@
 using System.Collections.Generic;
 using Avalonia.Controls;
 
-namespace Avalonia.Xaml.Interactivity
+namespace Avalonia.Xaml.Interactivity;
+
+/// <summary>
+/// Defines a <see cref="BehaviorCollection"/> attached property and provides a method for executing an <seealso cref="ActionCollection"/>.
+/// </summary>
+public class Interaction
 {
-    /// <summary>
-    /// Defines a <see cref="BehaviorCollection"/> attached property and provides a method for executing an <seealso cref="ActionCollection"/>.
-    /// </summary>
-    public class Interaction
+    static Interaction()
     {
-        static Interaction()
+        BehaviorsProperty.Changed.Subscribe(e =>
         {
-            BehaviorsProperty.Changed.Subscribe(e =>
+            var oldCollection = e.OldValue.GetValueOrDefault();
+            var newCollection = e.NewValue.GetValueOrDefault();
+
+            if (oldCollection == newCollection)
             {
-                var oldCollection = e.OldValue.GetValueOrDefault();
-                var newCollection = e.NewValue.GetValueOrDefault();
+                return;
+            }
 
-                if (oldCollection == newCollection)
-                {
-                    return;
-                }
+            if (oldCollection is { } && oldCollection.AssociatedObject is { })
+            {
+                oldCollection.Detach();
+            }
 
-                if (oldCollection is { } && oldCollection.AssociatedObject is { })
-                {
-                    oldCollection.Detach();
-                }
+            if (newCollection is { })
+            {
+                newCollection.Attach(e.Sender);
+            }
+        });
+    }
 
-                if (newCollection is { })
-                {
-                    newCollection.Attach(e.Sender);
-                }
-            });
+    /// <summary>
+    /// Gets or sets the <see cref="BehaviorCollection"/> associated with a specified object.
+    /// </summary>
+    public static readonly AttachedProperty<BehaviorCollection?> BehaviorsProperty =
+        AvaloniaProperty.RegisterAttached<Interaction, IAvaloniaObject, BehaviorCollection?>("Behaviors");
+
+    /// <summary>
+    /// Gets the <see cref="BehaviorCollection"/> associated with a specified object.
+    /// </summary>
+    /// <param name="obj">The <see cref="IAvaloniaObject"/> from which to retrieve the <see cref="BehaviorCollection"/>.</param>
+    /// <returns>A <see cref="BehaviorCollection"/> containing the behaviors associated with the specified object.</returns>
+    public static BehaviorCollection? GetBehaviors(IAvaloniaObject obj)
+    {
+        if (obj is null)
+        {
+            throw new ArgumentNullException(nameof(obj));
         }
 
-        /// <summary>
-        /// Gets or sets the <see cref="BehaviorCollection"/> associated with a specified object.
-        /// </summary>
-        public static readonly AttachedProperty<BehaviorCollection?> BehaviorsProperty =
-            AvaloniaProperty.RegisterAttached<Interaction, IAvaloniaObject, BehaviorCollection?>("Behaviors");
-
-        /// <summary>
-        /// Gets the <see cref="BehaviorCollection"/> associated with a specified object.
-        /// </summary>
-        /// <param name="obj">The <see cref="IAvaloniaObject"/> from which to retrieve the <see cref="BehaviorCollection"/>.</param>
-        /// <returns>A <see cref="BehaviorCollection"/> containing the behaviors associated with the specified object.</returns>
-        public static BehaviorCollection? GetBehaviors(IAvaloniaObject obj)
+        var behaviorCollection = (BehaviorCollection?)obj.GetValue(BehaviorsProperty);
+        if (behaviorCollection is null)
         {
-            if (obj is null)
+            behaviorCollection = new BehaviorCollection();
+            obj.SetValue(BehaviorsProperty, behaviorCollection);
+
+            if (obj is Control control)
             {
-                throw new ArgumentNullException(nameof(obj));
+                control.AttachedToVisualTree -= Control_AttachedToVisualTree;
+                control.AttachedToVisualTree += Control_AttachedToVisualTree;
+                control.DetachedFromVisualTree -= Control_DetachedFromVisualTree;
+                control.DetachedFromVisualTree += Control_DetachedFromVisualTree;
             }
-
-            var behaviorCollection = (BehaviorCollection?)obj.GetValue(BehaviorsProperty);
-            if (behaviorCollection is null)
-            {
-                behaviorCollection = new BehaviorCollection();
-                obj.SetValue(BehaviorsProperty, behaviorCollection);
-
-                if (obj is Control control)
-                {
-                    control.AttachedToVisualTree -= Control_AttachedToVisualTree;
-                    control.AttachedToVisualTree += Control_AttachedToVisualTree;
-                    control.DetachedFromVisualTree -= Control_DetachedFromVisualTree;
-                    control.DetachedFromVisualTree += Control_DetachedFromVisualTree;
-                }
-            }
-
-            return behaviorCollection;
         }
 
-        /// <summary>
-        /// Sets the <see cref="BehaviorCollection"/> associated with a specified object.
-        /// </summary>
-        /// <param name="obj">The <see cref="IAvaloniaObject"/> on which to set the <see cref="BehaviorCollection"/>.</param>
-        /// <param name="value">The <see cref="BehaviorCollection"/> associated with the object.</param>
-        public static void SetBehaviors(IAvaloniaObject obj, BehaviorCollection? value)
+        return behaviorCollection;
+    }
+
+    /// <summary>
+    /// Sets the <see cref="BehaviorCollection"/> associated with a specified object.
+    /// </summary>
+    /// <param name="obj">The <see cref="IAvaloniaObject"/> on which to set the <see cref="BehaviorCollection"/>.</param>
+    /// <param name="value">The <see cref="BehaviorCollection"/> associated with the object.</param>
+    public static void SetBehaviors(IAvaloniaObject obj, BehaviorCollection? value)
+    {
+        if (obj is null)
         {
-            if (obj is null)
-            {
-                throw new ArgumentNullException(nameof(obj));
-            }
-            obj.SetValue(BehaviorsProperty, value);
+            throw new ArgumentNullException(nameof(obj));
         }
+        obj.SetValue(BehaviorsProperty, value);
+    }
 
-        /// <summary>
-        /// Executes all actions in the <see cref="ActionCollection"/> and returns their results.
-        /// </summary>
-        /// <param name="sender">The <see cref="object"/> which will be passed on to the action.</param>
-        /// <param name="actions">The set of actions to execute.</param>
-        /// <param name="parameter">The value of this parameter is determined by the calling behavior.</param>
-        /// <returns>Returns the results of the actions.</returns>
-        public static IEnumerable<object> ExecuteActions(object? sender, ActionCollection? actions, object? parameter)
+    /// <summary>
+    /// Executes all actions in the <see cref="ActionCollection"/> and returns their results.
+    /// </summary>
+    /// <param name="sender">The <see cref="object"/> which will be passed on to the action.</param>
+    /// <param name="actions">The set of actions to execute.</param>
+    /// <param name="parameter">The value of this parameter is determined by the calling behavior.</param>
+    /// <returns>Returns the results of the actions.</returns>
+    public static IEnumerable<object> ExecuteActions(object? sender, ActionCollection? actions, object? parameter)
+    {
+        var results = new List<object>();
+
+        if (actions is null)
         {
-            var results = new List<object>();
-
-            if (actions is null)
-            {
-                return results;
-            }
-
-            foreach (var avaloniaObject in actions)
-            {
-                if (avaloniaObject is IAction action)
-                {
-                    var result = action.Execute(sender, parameter);
-                    if (result is { })
-                    {
-                        results.Add(result);
-                    }
-                }
-            }
-
             return results;
         }
 
-        private static void Control_AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+        foreach (var avaloniaObject in actions)
         {
-            if (sender is IAvaloniaObject d)
+            if (avaloniaObject is IAction action)
             {
-                GetBehaviors(d)?.Attach(d);
+                var result = action.Execute(sender, parameter);
+                if (result is { })
+                {
+                    results.Add(result);
+                }
             }
         }
 
-        private static void Control_DetachedFromVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+        return results;
+    }
+
+    private static void Control_AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+    {
+        if (sender is IAvaloniaObject d)
         {
-            if (sender is IAvaloniaObject d)
-            {
-                GetBehaviors(d)?.Detach();
-            }
+            GetBehaviors(d)?.Attach(d);
+        }
+    }
+
+    private static void Control_DetachedFromVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+    {
+        if (sender is IAvaloniaObject d)
+        {
+            GetBehaviors(d)?.Detach();
         }
     }
 }

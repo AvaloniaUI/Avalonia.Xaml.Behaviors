@@ -1,8 +1,7 @@
 ﻿using ReactiveUI;
 
-namespace DragAndDropSample.ViewModels
+namespace DragAndDropSample.ViewModels;
+
+public class ViewModelBase : ReactiveObject
 {
-    public class ViewModelBase : ReactiveObject
-    {
-    }
 }

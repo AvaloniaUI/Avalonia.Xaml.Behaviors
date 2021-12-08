@@ -5,233 +5,232 @@ using Avalonia.Metadata;
 using Avalonia.Xaml.Interactions.Core;
 using Avalonia.Xaml.Interactivity;
 
-namespace Avalonia.Xaml.Interactions.Responsive
+namespace Avalonia.Xaml.Interactions.Responsive;
+
+/// <summary>
+/// Observes <see cref="Behavior{T}.AssociatedObject"/> control or <see cref="SourceControl"/> control <see cref="Visual.Bounds"/> property changes and if triggered sets or removes style classes when conditions from <see cref="AdaptiveClassSetter"/> are met.
+/// </summary>
+public class AdaptiveBehavior : Behavior<Control>
 {
+    private IDisposable? _disposable;
+    private AvaloniaList<AdaptiveClassSetter>? _setters;
+
     /// <summary>
-    /// Observes <see cref="Behavior{T}.AssociatedObject"/> control or <see cref="SourceControl"/> control <see cref="Visual.Bounds"/> property changes and if triggered sets or removes style classes when conditions from <see cref="AdaptiveClassSetter"/> are met.
+    /// Identifies the <seealso cref="SourceControl"/> avalonia property.
     /// </summary>
-    public class AdaptiveBehavior : Behavior<Control>
+    public static readonly StyledProperty<Control?> SourceControlProperty =
+        AvaloniaProperty.Register<AdaptiveBehavior, Control?>(nameof(SourceControl));
+
+    /// <summary>
+    /// Identifies the <seealso cref="TargetControl"/> avalonia property.
+    /// </summary>
+    public static readonly StyledProperty<Control?> TargetControlProperty =
+        AvaloniaProperty.Register<AdaptiveBehavior, Control?>(nameof(TargetControl));
+
+    /// <summary>
+    /// Identifies the <seealso cref="Setters"/> avalonia property.
+    /// </summary>
+    public static readonly DirectProperty<AdaptiveBehavior, AvaloniaList<AdaptiveClassSetter>> SettersProperty = 
+        AvaloniaProperty.RegisterDirect<AdaptiveBehavior, AvaloniaList<AdaptiveClassSetter>>(nameof(Setters), t => t.Setters);
+
+    /// <summary>
+    /// Gets or sets the the source control that <see cref="Visual.BoundsProperty"/> property are observed from, if not set <see cref="Behavior{T}.AssociatedObject"/> is used. This is a avalonia property.
+    /// </summary>
+    public Control? SourceControl
     {
-        private IDisposable? _disposable;
-        private AvaloniaList<AdaptiveClassSetter>? _setters;
+        get => GetValue(SourceControlProperty);
+        set => SetValue(SourceControlProperty, value);
+    }
 
-        /// <summary>
-        /// Identifies the <seealso cref="SourceControl"/> avalonia property.
-        /// </summary>
-        public static readonly StyledProperty<Control?> SourceControlProperty =
-            AvaloniaProperty.Register<AdaptiveBehavior, Control?>(nameof(SourceControl));
+    /// <summary>
+    /// Gets or sets the target control that class name that should be added or removed when triggered, if not set <see cref="Behavior{T}.AssociatedObject"/> is used or <see cref="AdaptiveClassSetter.TargetControl"/> from <see cref="AdaptiveClassSetter"/>. This is a avalonia property.
+    /// </summary>
+    public Control? TargetControl
+    {
+        get => GetValue(TargetControlProperty);
+        set => SetValue(TargetControlProperty, value);
+    }
 
-        /// <summary>
-        /// Identifies the <seealso cref="TargetControl"/> avalonia property.
-        /// </summary>
-        public static readonly StyledProperty<Control?> TargetControlProperty =
-            AvaloniaProperty.Register<AdaptiveBehavior, Control?>(nameof(TargetControl));
+    /// <summary>
+    /// Gets adaptive class setters collection. This is a avalonia property.
+    /// </summary>
+    [Content]
+    public AvaloniaList<AdaptiveClassSetter> Setters => _setters ??= new AvaloniaList<AdaptiveClassSetter>();
 
-        /// <summary>
-        /// Identifies the <seealso cref="Setters"/> avalonia property.
-        /// </summary>
-        public static readonly DirectProperty<AdaptiveBehavior, AvaloniaList<AdaptiveClassSetter>> SettersProperty = 
-            AvaloniaProperty.RegisterDirect<AdaptiveBehavior, AvaloniaList<AdaptiveClassSetter>>(nameof(Setters), t => t.Setters);
+    /// <summary>
+    /// Called after the behavior is attached to the <see cref="Behavior{T}.AssociatedObject"/>.
+    /// </summary>
+    protected override void OnAttached()
+    {
+        base.OnAttached();
 
-        /// <summary>
-        /// Gets or sets the the source control that <see cref="Visual.BoundsProperty"/> property are observed from, if not set <see cref="Behavior{T}.AssociatedObject"/> is used. This is a avalonia property.
-        /// </summary>
-        public Control? SourceControl
+        if (AssociatedObject is { })
         {
-            get => GetValue(SourceControlProperty);
-            set => SetValue(SourceControlProperty, value);
+            AssociatedObject.AttachedToVisualTree += AssociatedObject_OnAttachedToVisualTree;
+            AssociatedObject.DetachedFromVisualTree += AssociatedObject_OnDetachedFromVisualTree;
+        }
+    }
+
+    /// <summary>
+    /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
+    /// </summary>
+    protected override void OnDetaching()
+    {
+        base.OnDetaching();
+
+        if (AssociatedObject is { })
+        {
+            AssociatedObject.AttachedToVisualTree -= AssociatedObject_OnAttachedToVisualTree;
+            AssociatedObject.DetachedFromVisualTree -= AssociatedObject_OnDetachedFromVisualTree;
+        }
+    }
+
+    private void AssociatedObject_OnAttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+    {
+        StopObserving();
+        StartObserving();
+    }
+
+    private void AssociatedObject_OnDetachedFromVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+    {
+        StopObserving();
+    }
+
+    private void StartObserving()
+    {
+        var sourceControl = GetValue(SourceControlProperty) is { } 
+            ? SourceControl 
+            : AssociatedObject;
+
+        if (sourceControl is not null)
+        {
+            _disposable = ObserveBounds(sourceControl);
+        }
+    }
+
+    private void StopObserving()
+    {
+        _disposable?.Dispose();
+    }
+
+    private IDisposable ObserveBounds(Control sourceControl)
+    {
+        if (sourceControl is null)
+        {
+            throw new ArgumentNullException(nameof(sourceControl));
         }
 
-        /// <summary>
-        /// Gets or sets the target control that class name that should be added or removed when triggered, if not set <see cref="Behavior{T}.AssociatedObject"/> is used or <see cref="AdaptiveClassSetter.TargetControl"/> from <see cref="AdaptiveClassSetter"/>. This is a avalonia property.
-        /// </summary>
-        public Control? TargetControl
+        return sourceControl.GetObservable(Visual.BoundsProperty)
+            .Subscribe(bounds => ValueChanged(sourceControl, Setters, bounds));
+    }
+
+    private void ValueChanged(Control? sourceControl, AvaloniaList<AdaptiveClassSetter>? setters, Rect bounds)
+    {
+        if (sourceControl is null || setters is null)
         {
-            get => GetValue(TargetControlProperty);
-            set => SetValue(TargetControlProperty, value);
+            return;
         }
 
-        /// <summary>
-        /// Gets adaptive class setters collection. This is a avalonia property.
-        /// </summary>
-        [Content]
-        public AvaloniaList<AdaptiveClassSetter> Setters => _setters ??= new AvaloniaList<AdaptiveClassSetter>();
-
-        /// <summary>
-        /// Called after the behavior is attached to the <see cref="Behavior{T}.AssociatedObject"/>.
-        /// </summary>
-        protected override void OnAttached()
+        foreach (var setter in setters)
         {
-            base.OnAttached();
+            var isMinOrMaxWidthSet = setter.IsSet(AdaptiveClassSetter.MinWidthProperty)
+                                     || setter.IsSet(AdaptiveClassSetter.MaxWidthProperty);
+            var widthConditionTriggered = GetResult(setter.MinWidthOperator, bounds.Width, setter.MinWidth)
+                                          && GetResult(setter.MaxWidthOperator, bounds.Width, setter.MaxWidth);
 
-            if (AssociatedObject is { })
+            var isMinOrMaxHeightSet = setter.IsSet(AdaptiveClassSetter.MinHeightProperty)
+                                      || setter.IsSet(AdaptiveClassSetter.MaxHeightProperty);
+            var heightConditionTriggered = GetResult(setter.MinHeightOperator, bounds.Height, setter.MinHeight)
+                                           && GetResult(setter.MaxHeightOperator, bounds.Height, setter.MaxHeight);
+
+            var isAddClassTriggered = false;
+            if (isMinOrMaxWidthSet && !isMinOrMaxHeightSet)
             {
-	            AssociatedObject.AttachedToVisualTree += AssociatedObject_OnAttachedToVisualTree;
-	            AssociatedObject.DetachedFromVisualTree += AssociatedObject_OnDetachedFromVisualTree;
+                isAddClassTriggered = widthConditionTriggered;
             }
-        }
-
-        /// <summary>
-        /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
-        /// </summary>
-        protected override void OnDetaching()
-        {
-            base.OnDetaching();
-
-            if (AssociatedObject is { })
+            else if (!isMinOrMaxWidthSet && isMinOrMaxHeightSet)
             {
-	            AssociatedObject.AttachedToVisualTree -= AssociatedObject_OnAttachedToVisualTree;
-	            AssociatedObject.DetachedFromVisualTree -= AssociatedObject_OnDetachedFromVisualTree;
+                isAddClassTriggered = heightConditionTriggered;
             }
-        }
-
-        private void AssociatedObject_OnAttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
-        {
-	        StopObserving();
-	        StartObserving();
-        }
-
-        private void AssociatedObject_OnDetachedFromVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
-        {
-	        StopObserving();
-        }
-
-        private void StartObserving()
-        {
-            var sourceControl = GetValue(SourceControlProperty) is { } 
-                ? SourceControl 
-                : AssociatedObject;
-
-            if (sourceControl is not null)
+            else if (isMinOrMaxWidthSet && isMinOrMaxHeightSet)
             {
-                _disposable = ObserveBounds(sourceControl);
-            }
-        }
-
-        private void StopObserving()
-        {
-            _disposable?.Dispose();
-        }
-
-        private IDisposable ObserveBounds(Control sourceControl)
-        {
-            if (sourceControl is null)
-            {
-                throw new ArgumentNullException(nameof(sourceControl));
+                isAddClassTriggered = widthConditionTriggered && heightConditionTriggered;
             }
 
-            return sourceControl.GetObservable(Visual.BoundsProperty)
-                                .Subscribe(bounds => ValueChanged(sourceControl, Setters, bounds));
-        }
+            var targetControl = setter.GetValue(AdaptiveClassSetter.TargetControlProperty) is { } 
+                ? setter.TargetControl 
+                : GetValue(TargetControlProperty) is { } 
+                    ? TargetControl 
+                    : AssociatedObject;
 
-        private void ValueChanged(Control? sourceControl, AvaloniaList<AdaptiveClassSetter>? setters, Rect bounds)
-        {
-            if (sourceControl is null || setters is null)
+            if (targetControl is { })
             {
-                return;
-            }
+                var className = setter.ClassName;
+                var isPseudoClass = setter.IsPseudoClass;
 
-            foreach (var setter in setters)
-            {
-                var isMinOrMaxWidthSet = setter.IsSet(AdaptiveClassSetter.MinWidthProperty)
-                                         || setter.IsSet(AdaptiveClassSetter.MaxWidthProperty);
-                var widthConditionTriggered = GetResult(setter.MinWidthOperator, bounds.Width, setter.MinWidth)
-                                              && GetResult(setter.MaxWidthOperator, bounds.Width, setter.MaxWidth);
-
-                var isMinOrMaxHeightSet = setter.IsSet(AdaptiveClassSetter.MinHeightProperty)
-                                           || setter.IsSet(AdaptiveClassSetter.MaxHeightProperty);
-                var heightConditionTriggered = GetResult(setter.MinHeightOperator, bounds.Height, setter.MinHeight)
-                                               && GetResult(setter.MaxHeightOperator, bounds.Height, setter.MaxHeight);
-
-                var isAddClassTriggered = false;
-                if (isMinOrMaxWidthSet && !isMinOrMaxHeightSet)
+                if (isAddClassTriggered)
                 {
-                    isAddClassTriggered = widthConditionTriggered;
-                }
-                else if (!isMinOrMaxWidthSet && isMinOrMaxHeightSet)
-                {
-                    isAddClassTriggered = heightConditionTriggered;
-                }
-                else if (isMinOrMaxWidthSet && isMinOrMaxHeightSet)
-                {
-                    isAddClassTriggered = widthConditionTriggered && heightConditionTriggered;
-                }
-
-                var targetControl = setter.GetValue(AdaptiveClassSetter.TargetControlProperty) is { } 
-                    ? setter.TargetControl 
-                    : GetValue(TargetControlProperty) is { } 
-                        ? TargetControl 
-                        : AssociatedObject;
-
-                if (targetControl is { })
-                {
-                    var className = setter.ClassName;
-                    var isPseudoClass = setter.IsPseudoClass;
-
-                    if (isAddClassTriggered)
-                    {
-                        Add(targetControl, className, isPseudoClass);
-                    }
-                    else
-                    {
-                        Remove(targetControl, className, isPseudoClass);
-                    }
+                    Add(targetControl, className, isPseudoClass);
                 }
                 else
                 {
-                    throw new ArgumentNullException(nameof(targetControl));
+                    Remove(targetControl, className, isPseudoClass);
                 }
             }
-        }
-
-        private bool GetResult(ComparisonConditionType comparisonConditionType, double property, double value)
-        {
-            return comparisonConditionType switch
-            {
-                // ReSharper disable once CompareOfFloatsByEqualityOperator
-                ComparisonConditionType.Equal => property == value,
-                // ReSharper disable once CompareOfFloatsByEqualityOperator
-                ComparisonConditionType.NotEqual => property != value,
-                ComparisonConditionType.LessThan => property < value,
-                ComparisonConditionType.LessThanOrEqual => property <= value,
-                ComparisonConditionType.GreaterThan => property > value,
-                ComparisonConditionType.GreaterThanOrEqual => property >= value,
-                _ => throw new ArgumentOutOfRangeException()
-            };
-        }
-
-        private static void Add(Control targetControl, string? className, bool isPseudoClass)
-        {
-            if (string.IsNullOrEmpty(className) || targetControl.Classes.Contains(className!))
-            {
-                return;
-            }
-
-            if (isPseudoClass)
-            {
-                ((IPseudoClasses) targetControl.Classes).Add(className);
-            }
             else
             {
-                targetControl.Classes.Add(className!);
+                throw new ArgumentNullException(nameof(targetControl));
             }
         }
+    }
 
-        private static void Remove(Control targetControl, string? className, bool isPseudoClass)
+    private bool GetResult(ComparisonConditionType comparisonConditionType, double property, double value)
+    {
+        return comparisonConditionType switch
         {
-            if (string.IsNullOrEmpty(className) || !targetControl.Classes.Contains(className!))
-            {
-                return;
-            }
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            ComparisonConditionType.Equal => property == value,
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            ComparisonConditionType.NotEqual => property != value,
+            ComparisonConditionType.LessThan => property < value,
+            ComparisonConditionType.LessThanOrEqual => property <= value,
+            ComparisonConditionType.GreaterThan => property > value,
+            ComparisonConditionType.GreaterThanOrEqual => property >= value,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    }
 
-            if (isPseudoClass)
-            {
-                ((IPseudoClasses) targetControl.Classes).Remove(className);
-            }
-            else
-            {
-                targetControl.Classes.Remove(className!);
-            }
+    private static void Add(Control targetControl, string? className, bool isPseudoClass)
+    {
+        if (string.IsNullOrEmpty(className) || targetControl.Classes.Contains(className!))
+        {
+            return;
+        }
+
+        if (isPseudoClass)
+        {
+            ((IPseudoClasses) targetControl.Classes).Add(className);
+        }
+        else
+        {
+            targetControl.Classes.Add(className!);
+        }
+    }
+
+    private static void Remove(Control targetControl, string? className, bool isPseudoClass)
+    {
+        if (string.IsNullOrEmpty(className) || !targetControl.Classes.Contains(className!))
+        {
+            return;
+        }
+
+        if (isPseudoClass)
+        {
+            ((IPseudoClasses) targetControl.Classes).Remove(className);
+        }
+        else
+        {
+            targetControl.Classes.Remove(className!);
         }
     }
 }

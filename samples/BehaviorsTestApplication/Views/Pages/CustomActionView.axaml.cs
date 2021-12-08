@@ -1,18 +1,17 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace BehaviorsTestApplication.Views.Pages
-{
-    public class CustomActionView : UserControl
-    {
-        public CustomActionView()
-        {
-            InitializeComponent();
-        }
+namespace BehaviorsTestApplication.Views.Pages;
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+public class CustomActionView : UserControl
+{
+    public CustomActionView()
+    {
+        InitializeComponent();
+    }
+
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
     }
 }

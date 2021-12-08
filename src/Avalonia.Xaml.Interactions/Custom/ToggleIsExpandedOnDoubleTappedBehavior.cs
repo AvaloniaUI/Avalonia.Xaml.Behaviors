@@ -3,43 +3,42 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
 
-namespace Avalonia.Xaml.Interactions.Custom
+namespace Avalonia.Xaml.Interactions.Custom;
+
+/// <summary>
+/// Toggles <see cref="TreeViewItem.IsExpanded"/> property of the associated <see cref="TreeViewItem"/> control on <see cref="InputElement.DoubleTapped"/> event.
+/// </summary>
+public class ToggleIsExpandedOnDoubleTappedBehavior : Behavior<Control>
 {
     /// <summary>
-    /// Toggles <see cref="TreeViewItem.IsExpanded"/> property of the associated <see cref="TreeViewItem"/> control on <see cref="InputElement.DoubleTapped"/> event.
+    /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
     /// </summary>
-    public class ToggleIsExpandedOnDoubleTappedBehavior : Behavior<Control>
+    protected override void OnAttached()
     {
-        /// <summary>
-        /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
-        /// </summary>
-        protected override void OnAttached()
+        base.OnAttached();
+        if (AssociatedObject is { })
         {
-            base.OnAttached();
-            if (AssociatedObject is { })
-            {
-                AssociatedObject.DoubleTapped += DoubleTapped; 
-            }
+            AssociatedObject.DoubleTapped += DoubleTapped; 
         }
+    }
 
-        /// <summary>
-        /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
-        /// </summary>
-        protected override void OnDetaching()
+    /// <summary>
+    /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
+    /// </summary>
+    protected override void OnDetaching()
+    {
+        base.OnDetaching();
+        if (AssociatedObject is { })
         {
-            base.OnDetaching();
-            if (AssociatedObject is { })
-            {
-                AssociatedObject.DoubleTapped -= DoubleTapped; 
-            }
+            AssociatedObject.DoubleTapped -= DoubleTapped; 
         }
+    }
 
-        private void DoubleTapped(object? sender, RoutedEventArgs args)
+    private void DoubleTapped(object? sender, RoutedEventArgs args)
+    {
+        if (AssociatedObject is { } && AssociatedObject.Parent is TreeViewItem item)
         {
-            if (AssociatedObject is { } && AssociatedObject.Parent is TreeViewItem item)
-            {
-                item.IsExpanded = !item.IsExpanded;
-            }
+            item.IsExpanded = !item.IsExpanded;
         }
     }
 }
