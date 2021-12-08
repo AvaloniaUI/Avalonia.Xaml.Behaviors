@@ -1,5 +1,6 @@
 ﻿using System;
 using Avalonia;
+using Avalonia.ReactiveUI;
 using Avalonia.Xaml.Interactions.Core;
 using Avalonia.Xaml.Interactivity;
 
@@ -19,6 +20,7 @@ namespace BehaviorsTestApplication
             GC.KeepAlive(typeof(ComparisonConditionType).Assembly);
             return AppBuilder.Configure<App>()
                 .UsePlatformDetect()
+                .UseReactiveUI()
                 .LogToTrace();
         }
     }
