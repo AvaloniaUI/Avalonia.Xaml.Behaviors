@@ -136,24 +136,32 @@ public class ContextDragBehavior : Behavior<Control>
                 _dragStartPoint = e.GetPosition(null);
                 _triggerEvent = e;
                 _lock = true;
+                e.Pointer.Capture(AssociatedObject);
+                e.Handled = true;
             }
         }
     }
 
     private void AssociatedObject_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        var properties = e.GetCurrentPoint(AssociatedObject).Properties;
-        if (properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased && _triggerEvent is { })
+        if (Equals(e.Pointer.Captured, AssociatedObject))
         {
-            _triggerEvent = null;
-            _lock = false;
+            if (e.InitialPressMouseButton == MouseButton.Left && _triggerEvent is { })
+            {
+                _triggerEvent = null;
+                _lock = false;
+            }
+
+            e.Pointer.Capture(null);
         }
     }
 
     private async void AssociatedObject_PointerMoved(object? sender, PointerEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
-        if (properties.IsLeftButtonPressed && _triggerEvent is { })
+        if (Equals(e.Pointer.Captured, AssociatedObject) 
+            && properties.IsLeftButtonPressed &&
+            _triggerEvent is { })
         {
             var point = e.GetPosition(null);
             var diff = _dragStartPoint - point;
@@ -180,6 +188,7 @@ public class ContextDragBehavior : Behavior<Control>
                 Handler?.AfterDragDrop(sender, _triggerEvent, context);
 
                 _triggerEvent = null;
+                e.Handled = true;
             }
         }
     }

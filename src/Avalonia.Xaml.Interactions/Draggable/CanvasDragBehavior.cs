@@ -82,24 +82,34 @@ public class CanvasDragBehavior : Behavior<Control>
 
     private void Pressed(object? sender, PointerPressedEventArgs e)
     {
-        if (AssociatedObject?.Parent is not { } parent)
+        var properties = e.GetCurrentPoint(AssociatedObject).Properties;
+        if (properties.IsLeftButtonPressed 
+            && AssociatedObject?.Parent is { } parent)
         {
-            return;
+            _enableDrag = true;
+            _start = e.GetPosition(AssociatedObject.Parent);
+            _parent = parent;
+            _draggedContainer = AssociatedObject;
+
+            SetDraggingPseudoClasses(_draggedContainer, true);
+
+            // AddAdorner(_draggedContainer);
+
+            e.Pointer.Capture(AssociatedObject);
         }
-
-        _enableDrag = true;
-        _start = e.GetPosition(AssociatedObject.Parent);
-        _parent = parent;
-        _draggedContainer = AssociatedObject;
-
-        SetDraggingPseudoClasses(_draggedContainer, true);
-
-        // AddAdorner(_draggedContainer);
     }
 
     private void Released(object? sender, PointerReleasedEventArgs e)
     {
-        Released();
+        if (Equals(e.Pointer.Captured, AssociatedObject))
+        {
+            if (e.InitialPressMouseButton == MouseButton.Left)
+            {
+                Released();
+            }
+
+            e.Pointer.Capture(null); 
+        }
     }
 
     private void CaptureLost(object? sender, PointerCaptureLostEventArgs e)
@@ -109,19 +119,24 @@ public class CanvasDragBehavior : Behavior<Control>
 
     private void Moved(object? sender, PointerEventArgs e)
     {
-        if (_parent is null || _draggedContainer is null || !_enableDrag)
+        var properties = e.GetCurrentPoint(AssociatedObject).Properties;
+        if (Equals(e.Pointer.Captured, AssociatedObject)
+            && properties.IsLeftButtonPressed)
         {
-            return;
-        }
+            if (_parent is null || _draggedContainer is null || !_enableDrag)
+            {
+                return;
+            }
 
-        var position = e.GetPosition(_parent);
-        var deltaX = position.X - _start.X;
-        var deltaY = position.Y - _start.Y;
-        _start = position;
-        var left = Canvas.GetLeft(_draggedContainer);
-        var top = Canvas.GetTop(_draggedContainer);
-        Canvas.SetLeft(_draggedContainer, left + deltaX);
-        Canvas.SetTop(_draggedContainer, top + deltaY);
+            var position = e.GetPosition(_parent);
+            var deltaX = position.X - _start.X;
+            var deltaY = position.Y - _start.Y;
+            _start = position;
+            var left = Canvas.GetLeft(_draggedContainer);
+            var top = Canvas.GetTop(_draggedContainer);
+            Canvas.SetLeft(_draggedContainer, left + deltaX);
+            Canvas.SetTop(_draggedContainer, top + deltaY);
+        }
     }
 
     private void Released()

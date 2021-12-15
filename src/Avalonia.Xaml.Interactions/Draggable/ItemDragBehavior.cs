@@ -103,30 +103,40 @@ public class ItemDragBehavior : Behavior<IControl>
 
     private void Pressed(object? sender, PointerPressedEventArgs e)
     {
-        if (AssociatedObject?.Parent is not ItemsControl itemsControl)
+        var properties = e.GetCurrentPoint(AssociatedObject).Properties;
+        if (properties.IsLeftButtonPressed 
+            && AssociatedObject?.Parent is ItemsControl itemsControl)
         {
-            return;
-        }
+            _enableDrag = true;
+            _dragStarted = false;
+            _start = e.GetPosition(AssociatedObject.Parent);
+            _draggedIndex = -1;
+            _targetIndex = -1;
+            _itemsControl = itemsControl;
+            _draggedContainer = AssociatedObject;
 
-        _enableDrag = true;
-        _dragStarted = false;
-        _start = e.GetPosition(AssociatedObject.Parent);
-        _draggedIndex = -1;
-        _targetIndex = -1;
-        _itemsControl = itemsControl;
-        _draggedContainer = AssociatedObject;
+            if (_draggedContainer is { })
+            {
+                SetDraggingPseudoClasses(_draggedContainer, true);
+            }
 
-        if (_draggedContainer is { })
-        {
-            SetDraggingPseudoClasses(_draggedContainer, true);
+            AddTransforms(_itemsControl);
+
+            e.Pointer.Capture(AssociatedObject);
         }
-            
-        AddTransforms(_itemsControl);
     }
 
     private void Released(object? sender, PointerReleasedEventArgs e)
     {
-        Released();
+        if (Equals(e.Pointer.Captured, AssociatedObject))
+        {
+            if (e.InitialPressMouseButton == MouseButton.Left)
+            {
+                Released();
+            }
+
+            e.Pointer.Capture(null); 
+        }
     }
 
     private void CaptureLost(object? sender, PointerCaptureLostEventArgs e)
@@ -243,137 +253,141 @@ public class ItemDragBehavior : Behavior<IControl>
 
     private void Moved(object? sender, PointerEventArgs e)
     {
-        if (_itemsControl?.Items is null || _draggedContainer?.RenderTransform is null || !_enableDrag)
+        var properties = e.GetCurrentPoint(AssociatedObject).Properties;
+        if (Equals(e.Pointer.Captured, AssociatedObject)
+            && properties.IsLeftButtonPressed)
         {
-            return;
-        }
+            if (_itemsControl?.Items is null || _draggedContainer?.RenderTransform is null || !_enableDrag)
+            {
+                return;
+            }
 
-        var orientation = Orientation;
-        var position = e.GetPosition(_itemsControl);
-        var delta = orientation == Orientation.Horizontal ? position.X - _start.X : position.Y - _start.Y;
+            var orientation = Orientation;
+            var position = e.GetPosition(_itemsControl);
+            var delta = orientation == Orientation.Horizontal ? position.X - _start.X : position.Y - _start.Y;
 
-        if (!_dragStarted)
-        {
-            var diff = _start - position;
-            var horizontalDragThreshold = HorizontalDragThreshold;
-            var verticalDragThreshold = VerticalDragThreshold;
+            if (!_dragStarted)
+            {
+                var diff = _start - position;
+                var horizontalDragThreshold = HorizontalDragThreshold;
+                var verticalDragThreshold = VerticalDragThreshold;
+
+                if (orientation == Orientation.Horizontal)
+                {
+                    if (Math.Abs(diff.X) > horizontalDragThreshold)
+                    {
+                        _dragStarted = true;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    if (Math.Abs(diff.Y) > verticalDragThreshold)
+                    {
+                        _dragStarted = true;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
 
             if (orientation == Orientation.Horizontal)
             {
-                if (Math.Abs(diff.X) > horizontalDragThreshold)
-                {
-                    _dragStarted = true;
-                }
-                else
-                {
-                    return;
-                }
+                SetTranslateTransform(_draggedContainer, delta, 0);
             }
             else
             {
-                if (Math.Abs(diff.Y) > verticalDragThreshold)
+                SetTranslateTransform(_draggedContainer, 0, delta);
+            }
+
+            _draggedIndex = _itemsControl.ItemContainerGenerator.IndexFromContainer(_draggedContainer);
+            _targetIndex = -1;
+
+            var draggedBounds = _draggedContainer.Bounds;
+
+            var draggedStart = orientation == Orientation.Horizontal ? draggedBounds.X : draggedBounds.Y;
+
+            var draggedDeltaStart = orientation == Orientation.Horizontal
+                ? draggedBounds.X + delta
+                : draggedBounds.Y + delta;
+
+            var draggedDeltaEnd = orientation == Orientation.Horizontal
+                ? draggedBounds.X + delta + draggedBounds.Width
+                : draggedBounds.Y + delta + draggedBounds.Height;
+
+            var i = 0;
+
+            foreach (var _ in _itemsControl.Items)
+            {
+                var targetContainer = _itemsControl.ItemContainerGenerator.ContainerFromIndex(i);
+                if (targetContainer?.RenderTransform is null || ReferenceEquals(targetContainer, _draggedContainer))
                 {
-                    _dragStarted = true;
+                    i++;
+                    continue;
+                }
+
+                var targetBounds = targetContainer.Bounds;
+
+                var targetStart = orientation == Orientation.Horizontal ? targetBounds.X : targetBounds.Y;
+
+                var targetMid = orientation == Orientation.Horizontal
+                    ? targetBounds.X + targetBounds.Width / 2
+                    : targetBounds.Y + targetBounds.Height / 2;
+
+                var targetIndex = _itemsControl.ItemContainerGenerator.IndexFromContainer(targetContainer);
+
+                if (targetStart > draggedStart && draggedDeltaEnd >= targetMid)
+                {
+                    if (orientation == Orientation.Horizontal)
+                    {
+                        SetTranslateTransform(targetContainer, -draggedBounds.Width, 0);
+                    }
+                    else
+                    {
+                        SetTranslateTransform(targetContainer, 0, -draggedBounds.Height);
+                    }
+
+                    _targetIndex = _targetIndex == -1 ? targetIndex :
+                        targetIndex > _targetIndex ? targetIndex : _targetIndex;
+                    Debug.WriteLine($"Moved Right {_draggedIndex} -> {_targetIndex}");
+                }
+                else if (targetStart < draggedStart && draggedDeltaStart <= targetMid)
+                {
+                    if (orientation == Orientation.Horizontal)
+                    {
+                        SetTranslateTransform(targetContainer, draggedBounds.Width, 0);
+                    }
+                    else
+                    {
+                        SetTranslateTransform(targetContainer, 0, draggedBounds.Height);
+                    }
+
+                    _targetIndex = _targetIndex == -1 ? targetIndex :
+                        targetIndex < _targetIndex ? targetIndex : _targetIndex;
+                    Debug.WriteLine($"Moved Left {_draggedIndex} -> {_targetIndex}");
                 }
                 else
                 {
-                    return;
+                    if (orientation == Orientation.Horizontal)
+                    {
+                        SetTranslateTransform(targetContainer, 0, 0);
+                    }
+                    else
+                    {
+                        SetTranslateTransform(targetContainer, 0, 0);
+                    }
                 }
-            }
-        }
 
-        if (orientation == Orientation.Horizontal)
-        {
-            SetTranslateTransform(_draggedContainer, delta, 0);
-        }
-        else
-        {
-            SetTranslateTransform(_draggedContainer, 0, delta);
-        }
-
-        _draggedIndex = _itemsControl.ItemContainerGenerator.IndexFromContainer(_draggedContainer);
-        _targetIndex = -1;
-
-        var draggedBounds = _draggedContainer.Bounds;
-
-        var draggedStart = orientation == Orientation.Horizontal ? 
-            draggedBounds.X : draggedBounds.Y;
-
-        var draggedDeltaStart = orientation == Orientation.Horizontal ? 
-            draggedBounds.X + delta : draggedBounds.Y + delta;
-
-        var draggedDeltaEnd = orientation == Orientation.Horizontal ?
-            draggedBounds.X + delta + draggedBounds.Width : draggedBounds.Y + delta + draggedBounds.Height;
-
-        var i = 0;
-
-        foreach (var _ in _itemsControl.Items)
-        {
-            var targetContainer = _itemsControl.ItemContainerGenerator.ContainerFromIndex(i);
-            if (targetContainer?.RenderTransform is null || ReferenceEquals(targetContainer, _draggedContainer))
-            {
                 i++;
-                continue;
             }
 
-            var targetBounds = targetContainer.Bounds;
-
-            var targetStart = orientation == Orientation.Horizontal ? 
-                targetBounds.X : targetBounds.Y;
-
-            var targetMid = orientation == Orientation.Horizontal ? 
-                targetBounds.X + targetBounds.Width / 2 : targetBounds.Y + targetBounds.Height / 2;
-
-            var targetIndex = _itemsControl.ItemContainerGenerator.IndexFromContainer(targetContainer);
-
-            if (targetStart > draggedStart && draggedDeltaEnd >= targetMid)
-            {
-                if (orientation == Orientation.Horizontal)
-                {
-                    SetTranslateTransform(targetContainer, -draggedBounds.Width, 0);
-                }
-                else
-                {
-                    SetTranslateTransform(targetContainer, 0, -draggedBounds.Height);
-                }
-
-                _targetIndex = _targetIndex == -1 ? 
-                    targetIndex : 
-                    targetIndex > _targetIndex ? targetIndex : _targetIndex;
-                Debug.WriteLine($"Moved Right {_draggedIndex} -> {_targetIndex}");
-            }
-            else if (targetStart < draggedStart && draggedDeltaStart <= targetMid)
-            {
-                if (orientation == Orientation.Horizontal)
-                {
-                    SetTranslateTransform(targetContainer, draggedBounds.Width, 0);
-                }
-                else
-                {
-                    SetTranslateTransform(targetContainer, 0, draggedBounds.Height);
-                }
-
-                _targetIndex = _targetIndex == -1 ? 
-                    targetIndex : 
-                    targetIndex < _targetIndex ? targetIndex : _targetIndex;
-                Debug.WriteLine($"Moved Left {_draggedIndex} -> {_targetIndex}");
-            }
-            else
-            {
-                if (orientation == Orientation.Horizontal)
-                {
-                    SetTranslateTransform(targetContainer, 0, 0);
-                }
-                else
-                {
-                    SetTranslateTransform(targetContainer, 0, 0);
-                }
-            }
-
-            i++;
+            Debug.WriteLine($"Moved {_draggedIndex} -> {_targetIndex}");
         }
-
-        Debug.WriteLine($"Moved {_draggedIndex} -> {_targetIndex}");
     }
 
     private void SetDraggingPseudoClasses(IControl control, bool isDragging)

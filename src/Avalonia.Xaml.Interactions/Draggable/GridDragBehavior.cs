@@ -140,23 +140,34 @@ public class GridDragBehavior : Behavior<Control>
 
     private void Pressed(object? sender, PointerPressedEventArgs e)
     {
-        if (AssociatedObject?.Parent is not { } parent)
+        var properties = e.GetCurrentPoint(AssociatedObject).Properties;
+        if (properties.IsLeftButtonPressed
+            && AssociatedObject?.Parent is { } parent)
         {
-            return;
+
+            _enableDrag = true;
+            _parent = parent;
+            _draggedContainer = AssociatedObject;
+
+            SetDraggingPseudoClasses(_draggedContainer, true);
+
+            // AddAdorner(_draggedContainer);
+
+            e.Pointer.Capture(AssociatedObject);
         }
-
-        _enableDrag = true;
-        _parent = parent;
-        _draggedContainer = AssociatedObject;
-
-        SetDraggingPseudoClasses(_draggedContainer, true);
-
-        // AddAdorner(_draggedContainer);
     }
 
     private void Released(object? sender, PointerReleasedEventArgs e)
     {
-        Released();
+        if (Equals(e.Pointer.Captured, AssociatedObject))
+        {
+            if (e.InitialPressMouseButton == MouseButton.Left)
+            {
+                Released();
+            }
+
+            e.Pointer.Capture(null); 
+        }
     }
 
     private void CaptureLost(object? sender, PointerCaptureLostEventArgs e)
@@ -166,115 +177,120 @@ public class GridDragBehavior : Behavior<Control>
 
     private void Moved(object? sender, PointerEventArgs e)
     {
-        if (_parent is null || _draggedContainer is null || !_enableDrag)
+        var properties = e.GetCurrentPoint(AssociatedObject).Properties;
+        if (Equals(e.Pointer.Captured, AssociatedObject)
+            && properties.IsLeftButtonPressed)
         {
-            return;
-        }
-
-        var position = e.GetPosition(_parent);
-
-        Control? target = null;
-            
-            
-        if (_parent is Grid grid)
-        {
-            foreach (var child in grid.Children)
+            if (_parent is null || _draggedContainer is null || !_enableDrag)
             {
-                if (Equals(child, _draggedContainer))
-                {
-                    continue;
-                }
+                return;
+            }
 
-                if (child.Bounds.Contains(position) && child is Control control)
+            var position = e.GetPosition(_parent);
+
+            Control? target = null;
+
+
+            if (_parent is Grid grid)
+            {
+                foreach (var child in grid.Children)
                 {
-                    target = control;
+                    if (Equals(child, _draggedContainer))
+                    {
+                        continue;
+                    }
+
+                    if (child.Bounds.Contains(position) && child is Control control)
+                    {
+                        target = control;
+                    }
                 }
             }
-        }
-        else if (_parent is ItemsControl itemsControl)
-        {
-            foreach (var container in itemsControl.ItemContainerGenerator.Containers)
+            else if (_parent is ItemsControl itemsControl)
             {
-                var child = container.ContainerControl;
-                if (child is not Control control)
+                foreach (var container in itemsControl.ItemContainerGenerator.Containers)
                 {
-                    continue;
-                }
-                    
-                if (Equals(control, _draggedContainer))
-                {
-                    continue;
-                }
+                    var child = container.ContainerControl;
+                    if (child is not Control control)
+                    {
+                        continue;
+                    }
 
-                if (child.Bounds.Contains(position))
-                {
-                    target = control;
+                    if (Equals(control, _draggedContainer))
+                    {
+                        continue;
+                    }
+
+                    if (child.Bounds.Contains(position))
+                    {
+                        target = control;
+                    }
                 }
             }
-        }
-        else
-        {
-            return;
-        }
+            else
+            {
+                return;
+            }
 
-        if (target is null)
-        {
-            return;
-        }
+            if (target is null)
+            {
+                return;
+            }
 
-        var copyColumn = CopyColumn;
-        var copyRow = CopyRow;
-        var copyColumnSpan = CopyColumnSpan;
-        var copyRowSpan = CopyRowSpan;
+            var copyColumn = CopyColumn;
+            var copyRow = CopyRow;
+            var copyColumnSpan = CopyColumnSpan;
+            var copyRowSpan = CopyRowSpan;
 
-        var sourceColumn = Grid.GetColumn(_draggedContainer);
-        var sourceRow = Grid.GetRow(_draggedContainer);
-        var sourceColumnSpan = Grid.GetColumnSpan(_draggedContainer);
-        var sourceRowSpan = Grid.GetRowSpan(_draggedContainer);
+            var sourceColumn = Grid.GetColumn(_draggedContainer);
+            var sourceRow = Grid.GetRow(_draggedContainer);
+            var sourceColumnSpan = Grid.GetColumnSpan(_draggedContainer);
+            var sourceRowSpan = Grid.GetRowSpan(_draggedContainer);
 
-        var targetColumn = Grid.GetColumn(target);
-        var targetRow = Grid.GetRow(target);
-        var targetColumnSpan = Grid.GetColumnSpan(target);
-        var targetRowSpan = Grid.GetRowSpan(target);
+            var targetColumn = Grid.GetColumn(target);
+            var targetRow = Grid.GetRow(target);
+            var targetColumnSpan = Grid.GetColumnSpan(target);
+            var targetRowSpan = Grid.GetRowSpan(target);
 
-        if (copyColumn)
-        {
-            Grid.SetColumn(_draggedContainer, targetColumn);
-        }
+            if (copyColumn)
+            {
+                Grid.SetColumn(_draggedContainer, targetColumn);
+            }
 
-        if (copyRow)
-        {
-            Grid.SetRow(_draggedContainer, targetRow);
-        }
+            if (copyRow)
+            {
+                Grid.SetRow(_draggedContainer, targetRow);
+            }
 
-        if (copyColumnSpan)
-        {
-            Grid.SetColumnSpan(_draggedContainer, targetColumnSpan);
-        }
+            if (copyColumnSpan)
+            {
+                Grid.SetColumnSpan(_draggedContainer, targetColumnSpan);
+            }
 
-        if (copyRowSpan)
-        {
-            Grid.SetRowSpan(_draggedContainer, targetRowSpan);
-        }
+            if (copyRowSpan)
+            {
+                Grid.SetRowSpan(_draggedContainer, targetRowSpan);
+            }
 
-        if (copyColumn)
-        {
-            Grid.SetColumn(target, sourceColumn);
-        }
+            if (copyColumn)
+            {
+                Grid.SetColumn(target, sourceColumn);
+            }
 
-        if (copyRow)
-        {
-            Grid.SetRow(target, sourceRow);
-        }
+            if (copyRow)
+            {
+                Grid.SetRow(target, sourceRow);
+            }
 
-        if (copyColumnSpan)
-        {
-            Grid.SetColumnSpan(target, sourceColumnSpan);
-        }
+            if (copyColumnSpan)
+            {
+                Grid.SetColumnSpan(target, sourceColumnSpan);
+            }
 
-        if (copyRowSpan)
-        {
-            Grid.SetRowSpan(target, sourceRowSpan);
+            if (copyRowSpan)
+            {
+                Grid.SetRowSpan(target, sourceRowSpan);
+            }
         }
     }
 
