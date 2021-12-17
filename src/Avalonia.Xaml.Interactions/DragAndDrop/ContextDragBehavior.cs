@@ -137,7 +137,6 @@ public class ContextDragBehavior : Behavior<Control>
                 _triggerEvent = e;
                 _lock = true;
                 e.Pointer.Capture(AssociatedObject);
-                e.Handled = true;
             }
         }
     }
@@ -188,7 +187,6 @@ public class ContextDragBehavior : Behavior<Control>
                 Handler?.AfterDragDrop(sender, _triggerEvent, context);
 
                 _triggerEvent = null;
-                e.Handled = true;
             }
         }
     }
