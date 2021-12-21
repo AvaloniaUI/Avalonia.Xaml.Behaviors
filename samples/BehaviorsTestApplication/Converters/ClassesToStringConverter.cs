@@ -11,9 +11,9 @@ public class ClassesToStringConverter : IMultiValueConverter
 {
     public static ClassesToStringConverter Instance = new();
 
-    public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(IList<object?>? values, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (values.Count == 2 && values[0] is int && values[1] is Classes classes)
+        if (values?.Count == 2 && values[0] is int && values[1] is Classes classes)
         {
             return string.Join(" ", classes);
         }
