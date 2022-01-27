@@ -6,6 +6,7 @@
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <IsPackable>False</IsPackable>
     <Nullable>enable</Nullable>
+    <RootNamespace>BehaviorsTestApplication</RootNamespace>
   </PropertyGroup>
 
   <Import Project="..\..\build\Base.props" />
@@ -17,8 +18,7 @@
   <Import Project="..\..\build\Avalonia.ReactiveUI.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions\Avalonia.Xaml.Interactions.csproj" />
-    <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactivity\Avalonia.Xaml.Interactivity.csproj" />
+    <ProjectReference Include="..\BehaviorsTestApplication.Base\BehaviorsTestApplication.Base.csproj" />
   </ItemGroup>
 
 </Project>
