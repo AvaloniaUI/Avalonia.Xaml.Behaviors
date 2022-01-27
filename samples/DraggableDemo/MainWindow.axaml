@@ -69,6 +69,9 @@
     <TabItem Header="ListBox">
       <ListBox Classes="draggable">
         <ListBox.Styles>
+          <Style Selector="ListBoxItem > TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+          </Style>
           <Style Selector="ListBoxItem:not(:dragging)">
             <Setter Property="Transitions">
               <Setter.Value>
@@ -94,6 +97,9 @@
     <TabItem Header="ListBox (Items)">
       <ListBox Classes="draggableVirtualizing" Items="{Binding Strings}">
         <ListBox.Styles>
+          <Style Selector="ListBoxItem > TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+          </Style>
           <Style Selector="ListBoxItem:not(:dragging)">
             <Setter Property="Transitions">
               <Setter.Value>
@@ -104,7 +110,7 @@
             </Setter>
           </Style>
         </ListBox.Styles>
-        </ListBox>
+      </ListBox>
     </TabItem>
 
     <TabItem Header="Canvas">
