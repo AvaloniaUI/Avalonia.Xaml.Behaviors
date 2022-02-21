@@ -87,6 +87,7 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     /// </remarks>
     protected virtual void OnAttachedToVisualTree()
     {
+        // Debug.WriteLine($"OnAttachedToVisualTree {this}");
     }
 
     /// <summary>
@@ -97,5 +98,6 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     /// </remarks>
     protected virtual void OnDetachedFromVisualTree()
     {
+        // Debug.WriteLine($"OnDetachedFromVisualTree {this}");
     }
 }
