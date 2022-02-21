@@ -29,6 +29,7 @@ public class Interaction
             if (newCollection is { })
             {
                 newCollection.Attach(e.Sender);
+                SetVisualTreeEventHandlers2(e.Sender);
             }
         });
     }
@@ -44,7 +45,7 @@ public class Interaction
     /// </summary>
     /// <param name="obj">The <see cref="IAvaloniaObject"/> from which to retrieve the <see cref="BehaviorCollection"/>.</param>
     /// <returns>A <see cref="BehaviorCollection"/> containing the behaviors associated with the specified object.</returns>
-    public static BehaviorCollection? GetBehaviors(IAvaloniaObject obj)
+    public static BehaviorCollection GetBehaviors(IAvaloniaObject obj)
     {
         if (obj is null)
         {
@@ -56,17 +57,38 @@ public class Interaction
         {
             behaviorCollection = new BehaviorCollection();
             obj.SetValue(BehaviorsProperty, behaviorCollection);
-
-            if (obj is Control control)
-            {
-                control.AttachedToVisualTree -= Control_AttachedToVisualTree;
-                control.AttachedToVisualTree += Control_AttachedToVisualTree;
-                control.DetachedFromVisualTree -= Control_DetachedFromVisualTree;
-                control.DetachedFromVisualTree += Control_DetachedFromVisualTree;
-            }
+            SetVisualTreeEventHandlers1(obj);
         }
 
         return behaviorCollection;
+    }
+
+    private static void SetVisualTreeEventHandlers1(IAvaloniaObject obj)
+    {
+        if (obj is Control control)
+        {
+            control.AttachedToVisualTree -= Control_AttachedToVisualTree2;
+            control.DetachedFromVisualTree -= Control_DetachedFromVisualTree2;
+
+            control.AttachedToVisualTree -= Control_AttachedToVisualTree1;
+            control.AttachedToVisualTree += Control_AttachedToVisualTree1;
+            control.DetachedFromVisualTree -= Control_DetachedFromVisualTree1;
+            control.DetachedFromVisualTree += Control_DetachedFromVisualTree1;
+        }
+    }
+
+    private static void SetVisualTreeEventHandlers2(IAvaloniaObject obj)
+    {
+        if (obj is Control control)
+        {
+            control.AttachedToVisualTree -= Control_AttachedToVisualTree1;
+            control.DetachedFromVisualTree -= Control_DetachedFromVisualTree1;
+
+            control.AttachedToVisualTree -= Control_AttachedToVisualTree2;
+            control.AttachedToVisualTree += Control_AttachedToVisualTree2;
+            control.DetachedFromVisualTree -= Control_DetachedFromVisualTree2;
+            control.DetachedFromVisualTree += Control_DetachedFromVisualTree2;
+        }
     }
 
     /// <summary>
@@ -114,19 +136,37 @@ public class Interaction
         return results;
     }
 
-    private static void Control_AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+    private static void Control_AttachedToVisualTree1(object? sender, VisualTreeAttachmentEventArgs e)
     {
         if (sender is IAvaloniaObject d)
         {
-            GetBehaviors(d)?.Attach(d);
+            GetBehaviors(d).Attach(d);
+            GetBehaviors(d).AttachedToVisualTree();
         }
     }
 
-    private static void Control_DetachedFromVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+    private static void Control_DetachedFromVisualTree1(object? sender, VisualTreeAttachmentEventArgs e)
     {
         if (sender is IAvaloniaObject d)
         {
-            GetBehaviors(d)?.Detach();
+            GetBehaviors(d).Detach();
+            GetBehaviors(d).DetachedFromVisualTree();
+        }
+    }
+ 
+    private static void Control_AttachedToVisualTree2(object? sender, VisualTreeAttachmentEventArgs e)
+    {
+        if (sender is IAvaloniaObject d)
+        {
+            GetBehaviors(d).AttachedToVisualTree();
+        }
+    }
+
+    private static void Control_DetachedFromVisualTree2(object? sender, VisualTreeAttachmentEventArgs e)
+    {
+        if (sender is IAvaloniaObject d)
+        {
+            GetBehaviors(d).DetachedFromVisualTree();
         }
     }
 }

@@ -77,6 +77,30 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
         _oldCollection.Clear();
     }
 
+    internal void AttachedToVisualTree()
+    {
+        foreach (var item in this)
+        {
+            if (item is Behavior behavior)
+            {
+                behavior.AttachedToVisualTree();
+            }
+        }
+    }
+
+    internal void DetachedFromVisualTree()
+    {
+        foreach (var item in this)
+        {
+            if (item is Behavior behavior && behavior.AssociatedObject is { })
+            {
+                behavior.DetachedFromVisualTree();
+            }
+        }
+    }
+
+    
+    
     private void BehaviorCollection_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs eventArgs)
     {
         if (eventArgs.Action == NotifyCollectionChangedAction.Reset)

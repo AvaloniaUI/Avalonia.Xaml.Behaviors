@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using Avalonia.Controls;
 
 namespace Avalonia.Xaml.Interactivity;
 
@@ -65,6 +66,36 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     /// Override this to unhook functionality from the <see cref="AssociatedObject"/>
     /// </remarks>
     protected virtual void OnDetaching()
+    {
+    }
+
+    internal void AttachedToVisualTree()
+    {
+        OnAttachedToVisualTree();
+    }
+
+    internal void DetachedFromVisualTree()
+    {
+        OnDetachedFromVisualTree();
+    }
+
+    /// <summary>
+    /// Called after the <see cref="AssociatedObject"/> is attached to the visual tree.
+    /// </summary>
+    /// <remarks>
+    /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="IControl"/>.
+    /// </remarks>
+    protected virtual void OnAttachedToVisualTree()
+    {
+    }
+
+    /// <summary>
+    /// Called when the <see cref="AssociatedObject"/> is being detached from the visual tree.
+    /// </summary>
+    /// <remarks>
+    /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="IControl"/>.
+    /// </remarks>
+    protected virtual void OnDetachedFromVisualTree()
     {
     }
 }
