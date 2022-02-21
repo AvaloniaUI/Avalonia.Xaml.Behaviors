@@ -149,8 +149,8 @@ public class Interaction
     {
         if (sender is IAvaloniaObject d)
         {
-            GetBehaviors(d).Detach();
             GetBehaviors(d).DetachedFromVisualTree();
+            GetBehaviors(d).Detach();
         }
     }
  
