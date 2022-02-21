@@ -165,7 +165,7 @@ public class ItemDragBehavior : Behavior<IControl>
         {
             if (_draggedIndex >= 0 && _targetIndex >= 0 && _draggedIndex != _targetIndex)
             {
-                Debug.WriteLine($"MoveItem {_draggedIndex} -> {_targetIndex}");
+                // Debug.WriteLine($"MoveItem {_draggedIndex} -> {_targetIndex}");
                 MoveDraggedItem(_itemsControl, _draggedIndex, _targetIndex);
             }
         }
@@ -354,7 +354,7 @@ public class ItemDragBehavior : Behavior<IControl>
 
                     _targetIndex = _targetIndex == -1 ? targetIndex :
                         targetIndex > _targetIndex ? targetIndex : _targetIndex;
-                    Debug.WriteLine($"Moved Right {_draggedIndex} -> {_targetIndex}");
+                    // Debug.WriteLine($"Moved Right {_draggedIndex} -> {_targetIndex}");
                 }
                 else if (targetStart < draggedStart && draggedDeltaStart <= targetMid)
                 {
@@ -369,7 +369,7 @@ public class ItemDragBehavior : Behavior<IControl>
 
                     _targetIndex = _targetIndex == -1 ? targetIndex :
                         targetIndex < _targetIndex ? targetIndex : _targetIndex;
-                    Debug.WriteLine($"Moved Left {_draggedIndex} -> {_targetIndex}");
+                    // Debug.WriteLine($"Moved Left {_draggedIndex} -> {_targetIndex}");
                 }
                 else
                 {
@@ -386,7 +386,7 @@ public class ItemDragBehavior : Behavior<IControl>
                 i++;
             }
 
-            Debug.WriteLine($"Moved {_draggedIndex} -> {_targetIndex}");
+            // Debug.WriteLine($"Moved {_draggedIndex} -> {_targetIndex}");
         }
     }
 
