@@ -99,8 +99,6 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
         }
     }
 
-    
-    
     private void BehaviorCollection_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs eventArgs)
     {
         if (eventArgs.Action == NotifyCollectionChangedAction.Reset)
