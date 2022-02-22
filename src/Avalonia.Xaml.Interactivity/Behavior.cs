@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using Avalonia.Controls;
 
 namespace Avalonia.Xaml.Interactivity;
 
@@ -56,6 +57,7 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     /// </remarks>
     protected virtual void OnAttached()
     {
+        // Debug.WriteLine($"[OnAttached] {this}, {AssociatedObject}");
     }
 
     /// <summary>
@@ -66,5 +68,38 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     /// </remarks>
     protected virtual void OnDetaching()
     {
+        // Debug.WriteLine($"[OnDetaching] {this}, {AssociatedObject}");
+    }
+
+    internal void AttachedToVisualTree()
+    {
+        OnAttachedToVisualTree();
+    }
+
+    internal void DetachedFromVisualTree()
+    {
+        OnDetachedFromVisualTree();
+    }
+
+    /// <summary>
+    /// Called after the <see cref="AssociatedObject"/> is attached to the visual tree.
+    /// </summary>
+    /// <remarks>
+    /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="IControl"/>.
+    /// </remarks>
+    protected virtual void OnAttachedToVisualTree()
+    {
+        // Debug.WriteLine($"[OnAttachedToVisualTree] {this}, {AssociatedObject}");
+    }
+
+    /// <summary>
+    /// Called when the <see cref="AssociatedObject"/> is being detached from the visual tree.
+    /// </summary>
+    /// <remarks>
+    /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="IControl"/>.
+    /// </remarks>
+    protected virtual void OnDetachedFromVisualTree()
+    {
+        // Debug.WriteLine($"[OnDetachedFromVisualTree] {this}, {AssociatedObject}");
     }
 }
