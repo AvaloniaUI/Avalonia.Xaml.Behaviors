@@ -57,6 +57,7 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     /// </remarks>
     protected virtual void OnAttached()
     {
+        // Debug.WriteLine($"[OnAttached] {this}, {AssociatedObject}");
     }
 
     /// <summary>
@@ -67,6 +68,7 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     /// </remarks>
     protected virtual void OnDetaching()
     {
+        // Debug.WriteLine($"[OnDetaching] {this}, {AssociatedObject}");
     }
 
     internal void AttachedToVisualTree()
@@ -87,7 +89,7 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     /// </remarks>
     protected virtual void OnAttachedToVisualTree()
     {
-        // Debug.WriteLine($"OnAttachedToVisualTree {this}");
+        // Debug.WriteLine($"[OnAttachedToVisualTree] {this}, {AssociatedObject}");
     }
 
     /// <summary>
@@ -98,6 +100,6 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     /// </remarks>
     protected virtual void OnDetachedFromVisualTree()
     {
-        // Debug.WriteLine($"OnDetachedFromVisualTree {this}");
+        // Debug.WriteLine($"[OnDetachedFromVisualTree] {this}, {AssociatedObject}");
     }
 }
