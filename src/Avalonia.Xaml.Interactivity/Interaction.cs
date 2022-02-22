@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Avalonia.Controls;
 
 namespace Avalonia.Xaml.Interactivity;
@@ -140,7 +141,9 @@ public class Interaction
     {
         if (sender is IAvaloniaObject d)
         {
+            // Debug.WriteLine($"[Control_AttachedToVisualTree1] Attach() {sender}");
             GetBehaviors(d).Attach(d);
+            // Debug.WriteLine($"[Control_AttachedToVisualTree1] AttachedToVisualTree() {sender}");
             GetBehaviors(d).AttachedToVisualTree();
         }
     }
@@ -149,7 +152,9 @@ public class Interaction
     {
         if (sender is IAvaloniaObject d)
         {
+            // Debug.WriteLine($"[Control_DetachedFromVisualTree1] DetachedFromVisualTree() {sender}");
             GetBehaviors(d).DetachedFromVisualTree();
+            // Debug.WriteLine($"[Control_DetachedFromVisualTree1] Detach() {sender}");
             GetBehaviors(d).Detach();
         }
     }
@@ -158,6 +163,7 @@ public class Interaction
     {
         if (sender is IAvaloniaObject d)
         {
+            // Debug.WriteLine($"[Control_AttachedToVisualTree2] AttachedToVisualTree() {sender}");
             GetBehaviors(d).AttachedToVisualTree();
         }
     }
@@ -166,6 +172,7 @@ public class Interaction
     {
         if (sender is IAvaloniaObject d)
         {
+            // Debug.WriteLine($"[Control_DetachedFromVisualTree2] DetachedFromVisualTree() {sender}");
             GetBehaviors(d).DetachedFromVisualTree();
         }
     }
