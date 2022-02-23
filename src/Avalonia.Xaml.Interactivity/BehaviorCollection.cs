@@ -103,7 +103,6 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
     {
         if (eventArgs.Action == NotifyCollectionChangedAction.Reset)
         {
-            // Debug.WriteLine($"[BehaviorCollection_CollectionChanged] Reset");
             foreach (var behavior in _oldCollection)
             {
                 if (behavior.AssociatedObject is { })
@@ -128,7 +127,6 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
         {
             case NotifyCollectionChangedAction.Add:
             {
-                // Debug.WriteLine($"[BehaviorCollection_CollectionChanged] Add");
                 var eventIndex = eventArgs.NewStartingIndex;
                 var changedItem = eventArgs.NewItems?[0] as IAvaloniaObject;
                 _oldCollection.Insert(eventIndex, VerifiedAttach(changedItem));
@@ -137,7 +135,6 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
 
             case NotifyCollectionChangedAction.Replace:
             {
-                // Debug.WriteLine($"[BehaviorCollection_CollectionChanged] Replace");
                 var eventIndex = eventArgs.OldStartingIndex;
                 eventIndex = eventIndex == -1 ? 0 : eventIndex;
 
@@ -155,7 +152,6 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
 
             case NotifyCollectionChangedAction.Remove:
             {
-                // Debug.WriteLine($"[BehaviorCollection_CollectionChanged] Remove");
                 var eventIndex = eventArgs.OldStartingIndex;
 
                 var oldItem = _oldCollection[eventIndex];
