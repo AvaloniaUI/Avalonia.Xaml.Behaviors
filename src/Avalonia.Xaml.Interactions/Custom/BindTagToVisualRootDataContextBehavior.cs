@@ -13,29 +13,19 @@ public class BindTagToVisualRootDataContextBehavior : Behavior<Control>
     private IDisposable? _disposable;
 
     /// <inheritdoc/>
-    protected override void OnAttached()
+    protected override void OnAttachedToVisualTree()
     {
-        base.OnAttached();
-        if (AssociatedObject is { })
-        {
-            AssociatedObject.AttachedToVisualTree += AssociatedObject_AttachedToVisualTree; 
-        }
+        base.OnAttachedToVisualTree();
+
+        _disposable = BindDataContextToTag((IControl)AssociatedObject.GetVisualRoot(), AssociatedObject);
     }
 
     /// <inheritdoc/>
-    protected override void OnDetaching()
+    protected override void OnDetachedFromVisualTree()
     {
-        base.OnDetaching();
-        if (AssociatedObject is { })
-        {
-            AssociatedObject.AttachedToVisualTree -= AssociatedObject_AttachedToVisualTree; 
-        }
-        _disposable?.Dispose();
-    }
+        base.OnDetachedFromVisualTree();
 
-    private void AssociatedObject_AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
-    {
-        _disposable = BindDataContextToTag((IControl)AssociatedObject.GetVisualRoot(), AssociatedObject);
+        _disposable?.Dispose();
     }
 
     private static IDisposable? BindDataContextToTag(IControl source, IControl? target)
