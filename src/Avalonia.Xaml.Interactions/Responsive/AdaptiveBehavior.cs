@@ -57,42 +57,20 @@ public class AdaptiveBehavior : Behavior<Control>
     [Content]
     public AvaloniaList<AdaptiveClassSetter> Setters => _setters ??= new AvaloniaList<AdaptiveClassSetter>();
 
-    /// <summary>
-    /// Called after the behavior is attached to the <see cref="Behavior{T}.AssociatedObject"/>.
-    /// </summary>
-    protected override void OnAttached()
+    /// <inheritdoc/>
+    protected override void OnAttachedToVisualTree()
     {
-        base.OnAttached();
+        base.OnAttachedToVisualTree();
 
-        if (AssociatedObject is { })
-        {
-            AssociatedObject.AttachedToVisualTree += AssociatedObject_OnAttachedToVisualTree;
-            AssociatedObject.DetachedFromVisualTree += AssociatedObject_OnDetachedFromVisualTree;
-        }
-    }
-
-    /// <summary>
-    /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
-    /// </summary>
-    protected override void OnDetaching()
-    {
-        base.OnDetaching();
-
-        if (AssociatedObject is { })
-        {
-            AssociatedObject.AttachedToVisualTree -= AssociatedObject_OnAttachedToVisualTree;
-            AssociatedObject.DetachedFromVisualTree -= AssociatedObject_OnDetachedFromVisualTree;
-        }
-    }
-
-    private void AssociatedObject_OnAttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
-    {
         StopObserving();
         StartObserving();
     }
 
-    private void AssociatedObject_OnDetachedFromVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+    /// <inheritdoc/>
+    protected override void OnDetachedFromVisualTree()
     {
+        base.OnDetachedFromVisualTree();
+
         StopObserving();
     }
 
