@@ -75,7 +75,7 @@ public class DataTriggerBehavior : Trigger
 
         var leftComparableOperand = leftOperand as IComparable;
         var rightComparableOperand = rightOperand as IComparable;
-        if (leftComparableOperand is { } && (rightComparableOperand is { }))
+        if (leftComparableOperand is { } && rightComparableOperand is { })
         {
             return EvaluateComparable(leftComparableOperand, operatorType, rightComparableOperand);
         }
