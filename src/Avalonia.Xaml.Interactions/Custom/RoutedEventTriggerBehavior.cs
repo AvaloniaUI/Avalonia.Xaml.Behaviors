@@ -19,7 +19,7 @@ public class RoutedEventTriggerBehavior : Trigger<Interactive>
     /// Identifies the <seealso cref="RoutingStrategies"/> avalonia property.
     /// </summary>
     public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty =
-        AvaloniaProperty.Register<RoutedEventTriggerBehavior, RoutingStrategies>(nameof(RoutingStrategies), RoutingStrategies.Direct | RoutingStrategies.Bubble);
+        AvaloniaProperty.Register<RoutedEventTriggerBehavior, RoutingStrategies>(nameof(RoutingStrategies), RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
 
     /// <summary>
     /// Identifies the <seealso cref="SourceInteractive"/> avalonia property.
