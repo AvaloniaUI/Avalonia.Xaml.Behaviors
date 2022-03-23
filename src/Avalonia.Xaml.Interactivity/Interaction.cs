@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Avalonia.Controls;
 
 namespace Avalonia.Xaml.Interactivity;
@@ -9,30 +10,7 @@ namespace Avalonia.Xaml.Interactivity;
 /// </summary>
 public class Interaction
 {
-    static Interaction()
-    {
-        BehaviorsProperty.Changed.Subscribe(e =>
-        {
-            var oldCollection = e.OldValue.GetValueOrDefault();
-            var newCollection = e.NewValue.GetValueOrDefault();
-
-            if (oldCollection == newCollection)
-            {
-                return;
-            }
-
-            if (oldCollection is { AssociatedObject: { } })
-            {
-                oldCollection.Detach();
-            }
-
-            if (newCollection is { })
-            {
-                newCollection.Attach(e.Sender);
-                SetVisualTreeEventHandlersRuntime(e.Sender);
-            }
-        });
-    }
+    static Interaction() => BehaviorsProperty.Changed.Subscribe(BehaviorsChanged);
 
     /// <summary>
     /// Gets or sets the <see cref="BehaviorCollection"/> associated with a specified object.
@@ -61,6 +39,75 @@ public class Interaction
         }
 
         return behaviorCollection;
+    }
+
+    /// <summary>
+    /// Sets the <see cref="BehaviorCollection"/> associated with a specified object.
+    /// </summary>
+    /// <param name="obj">The <see cref="IAvaloniaObject"/> on which to set the <see cref="BehaviorCollection"/>.</param>
+    /// <param name="value">The <see cref="BehaviorCollection"/> associated with the object.</param>
+    public static void SetBehaviors(IAvaloniaObject obj, BehaviorCollection? value)
+    {
+        if (obj is null)
+        {
+            throw new ArgumentNullException(nameof(obj));
+        }
+        obj.SetValue(BehaviorsProperty, value);
+    }
+
+    /// <summary>
+    /// Executes all actions in the <see cref="ActionCollection"/> and returns their results.
+    /// </summary>
+    /// <param name="sender">The <see cref="object"/> which will be passed on to the action.</param>
+    /// <param name="actions">The set of actions to execute.</param>
+    /// <param name="parameter">The value of this parameter is determined by the calling behavior.</param>
+    /// <returns>Returns the results of the actions.</returns>
+    public static IEnumerable<object> ExecuteActions(object? sender, ActionCollection? actions, object? parameter)
+    {
+        if (actions is null)
+        {
+            return Enumerable.Empty<object>();
+        }
+
+        var results = new List<object>();
+
+        foreach (var avaloniaObject in actions)
+        {
+            if (avaloniaObject is not IAction action)
+            {
+                continue;
+            }
+
+            var result = action.Execute(sender, parameter);
+            if (result is { })
+            {
+                results.Add(result);
+            }
+        }
+
+        return results;
+    }
+
+    private static void BehaviorsChanged(AvaloniaPropertyChangedEventArgs<BehaviorCollection?> e)
+    {
+        var oldCollection = e.OldValue.GetValueOrDefault();
+        var newCollection = e.NewValue.GetValueOrDefault();
+
+        if (oldCollection == newCollection)
+        {
+            return;
+        }
+
+        if (oldCollection is { AssociatedObject: { } })
+        {
+            oldCollection.Detach();
+        }
+
+        if (newCollection is { })
+        {
+            newCollection.Attach(e.Sender);
+            SetVisualTreeEventHandlersRuntime(e.Sender);
+        }
     }
 
     private static void SetVisualTreeEventHandlersInitial(IAvaloniaObject obj)
@@ -95,51 +142,6 @@ public class Interaction
 
         control.DetachedFromVisualTree -= Control_DetachedFromVisualTreeRuntime;
         control.DetachedFromVisualTree += Control_DetachedFromVisualTreeRuntime;
-    }
-
-    /// <summary>
-    /// Sets the <see cref="BehaviorCollection"/> associated with a specified object.
-    /// </summary>
-    /// <param name="obj">The <see cref="IAvaloniaObject"/> on which to set the <see cref="BehaviorCollection"/>.</param>
-    /// <param name="value">The <see cref="BehaviorCollection"/> associated with the object.</param>
-    public static void SetBehaviors(IAvaloniaObject obj, BehaviorCollection? value)
-    {
-        if (obj is null)
-        {
-            throw new ArgumentNullException(nameof(obj));
-        }
-        obj.SetValue(BehaviorsProperty, value);
-    }
-
-    /// <summary>
-    /// Executes all actions in the <see cref="ActionCollection"/> and returns their results.
-    /// </summary>
-    /// <param name="sender">The <see cref="object"/> which will be passed on to the action.</param>
-    /// <param name="actions">The set of actions to execute.</param>
-    /// <param name="parameter">The value of this parameter is determined by the calling behavior.</param>
-    /// <returns>Returns the results of the actions.</returns>
-    public static IEnumerable<object> ExecuteActions(object? sender, ActionCollection? actions, object? parameter)
-    {
-        var results = new List<object>();
-
-        if (actions is null)
-        {
-            return results;
-        }
-
-        foreach (var avaloniaObject in actions)
-        {
-            if (avaloniaObject is IAction action)
-            {
-                var result = action.Execute(sender, parameter);
-                if (result is { })
-                {
-                    results.Add(result);
-                }
-            }
-        }
-
-        return results;
     }
 
     private static void Control_AttachedToVisualTreeInitial(object? sender, VisualTreeAttachmentEventArgs e)
