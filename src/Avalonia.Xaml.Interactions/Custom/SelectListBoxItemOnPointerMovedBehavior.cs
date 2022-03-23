@@ -35,7 +35,7 @@ public class SelectListBoxItemOnPointerMovedBehavior : Behavior<Control>
 
     private void PointerMoved(object? sender, PointerEventArgs args)
     {
-        if (AssociatedObject is { } && AssociatedObject.Parent is ListBoxItem item)
+        if (AssociatedObject is { Parent: ListBoxItem item })
         {
             item.IsSelected = true;
             item.Focus();
