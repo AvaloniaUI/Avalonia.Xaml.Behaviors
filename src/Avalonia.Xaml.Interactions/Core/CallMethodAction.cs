@@ -134,7 +134,7 @@ public class CallMethodAction : AvaloniaObject, IAction
         MethodDescriptor? mostDerivedMethod = null;
 
         // Loop over the methods looking for the one whose type is closest to the type of the given parameter.
-        foreach (MethodDescriptor currentMethod in _methodDescriptors)
+        foreach (var currentMethod in _methodDescriptors)
         {
             var currentTypeInfo = currentMethod.SecondParameterTypeInfo;
 
