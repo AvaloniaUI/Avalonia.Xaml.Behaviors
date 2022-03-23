@@ -83,7 +83,7 @@ internal static class TypeConverterHelper
 
     private static string GetScope(string name)
     {
-        int indexOfLastPeriod = name.LastIndexOf('.');
+        var indexOfLastPeriod = name.LastIndexOf('.');
         if (indexOfLastPeriod != name.Length - 1)
         {
             return name.Substring(0, indexOfLastPeriod);
