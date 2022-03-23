@@ -8,10 +8,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// </summary>
 public class ValueChangedTriggerBehavior : Trigger
 {
-    static ValueChangedTriggerBehavior()
-    {
-        BindingProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
-    }
+    static ValueChangedTriggerBehavior() => BindingProperty.Changed.Subscribe(OnValueChanged);
 
     /// <summary>
     /// Identifies the <seealso cref="Binding"/> avalonia property.
@@ -28,9 +25,9 @@ public class ValueChangedTriggerBehavior : Trigger
         set => SetValue(BindingProperty, value);
     }
 
-    private static void OnValueChanged(IAvaloniaObject avaloniaObject, AvaloniaPropertyChangedEventArgs args)
+    private static void OnValueChanged(AvaloniaPropertyChangedEventArgs args)
     {
-        if (avaloniaObject is not ValueChangedTriggerBehavior behavior || behavior.AssociatedObject is null)
+        if (args.Sender is not ValueChangedTriggerBehavior behavior || behavior.AssociatedObject is null)
         {
             return;
         }
