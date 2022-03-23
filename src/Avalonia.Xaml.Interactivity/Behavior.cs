@@ -34,6 +34,7 @@ public abstract class Behavior : AvaloniaObject, IBehavior
                 "An instance of a behavior cannot be attached to more than one object at a time."));
         }
 
+        Debug.Assert(associatedObject is { }, "Cannot attach the behavior to a null object.");
         AssociatedObject = associatedObject ?? throw new ArgumentNullException(nameof(associatedObject));
 
         OnAttached();
