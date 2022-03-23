@@ -11,14 +11,14 @@ public class InteractionTest
     [AppContainerUITestMethod]
     public void SetBehaviors_MultipleBehaviors_AllAttached()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection
+        var behaviorCollection = new BehaviorCollection
         {
             new StubBehavior(),
             new StubBehavior(),
             new StubBehavior()
         };
 
-        Button button = new Button();
+        var button = new Button();
         Interaction.SetBehaviors(button, behaviorCollection);
 
         foreach (StubBehavior behavior in behaviorCollection)
@@ -32,9 +32,9 @@ public class InteractionTest
     [AppContainerUITestMethod]
     public void SetBehaviors_MultipleSets_DoesNotReattach()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection() { new StubBehavior() };
+        var behaviorCollection = new BehaviorCollection() { new StubBehavior() };
 
-        Button button = new Button();
+        var button = new Button();
         Interaction.SetBehaviors(button, behaviorCollection);
         Interaction.SetBehaviors(button, behaviorCollection);
 
@@ -47,9 +47,9 @@ public class InteractionTest
     [AppContainerUITestMethod]
     public void SetBehaviors_CollectionThenNull_DeatchCollection()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection() { new StubBehavior() };
+        var behaviorCollection = new BehaviorCollection() { new StubBehavior() };
 
-        Button button = new Button();
+        var button = new Button();
         Interaction.SetBehaviors(button, behaviorCollection);
         Interaction.SetBehaviors(button, null);
 
@@ -65,7 +65,7 @@ public class InteractionTest
     {
         // As long as this doesn't crash/assert, we're good.
 
-        Button button = new Button();
+        var button = new Button();
         Interaction.SetBehaviors(button, null);
         Interaction.SetBehaviors(button, null);
         Interaction.SetBehaviors(button, null);
@@ -74,14 +74,14 @@ public class InteractionTest
     [AppContainerUITestMethod]
     public void SetBehaviors_ManualDetachThenNull_DoesNotDoubleDetach()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection
+        var behaviorCollection = new BehaviorCollection
         {
             new StubBehavior(),
             new StubBehavior(),
             new StubBehavior()
         };
 
-        Button button = new Button();
+        var button = new Button();
         Interaction.SetBehaviors(button, behaviorCollection);
 
         foreach (StubBehavior behavior in behaviorCollection)
@@ -102,7 +102,7 @@ public class InteractionTest
     public void ExecuteActions_NullParameters_ReturnsEmptyEnumerable()
     {
         // Mostly just want to test that this doesn't throw any exceptions.
-        IEnumerable<object> result = Interaction.ExecuteActions(null, null, null);
+        var result = Interaction.ExecuteActions(null, null, null);
 
         Assert.NotNull(result);
         Assert.Empty(result); // "Calling ExecuteActions with a null ActionCollection should return an empty enumerable."
@@ -111,15 +111,15 @@ public class InteractionTest
     [AppContainerUITestMethod]
     public void ExecuteActions_MultipleActions_AllActionsExecuted()
     {
-        ActionCollection actions = new ActionCollection
+        var actions = new ActionCollection
         {
             new StubAction(),
             new StubAction(),
             new StubAction()
         };
 
-        Button sender = new Button();
-        string parameterString = "TestString";
+        var sender = new Button();
+        var parameterString = "TestString";
 
         Interaction.ExecuteActions(sender, actions, parameterString);
 
@@ -136,18 +136,18 @@ public class InteractionTest
     {
         string[] expectedReturnValues = { "A", "B", "C" };
 
-        ActionCollection actions = new ActionCollection();
+        var actions = new ActionCollection();
 
-        foreach (string returnValue in expectedReturnValues)
+        foreach (var returnValue in expectedReturnValues)
         {
             actions.Add(new StubAction(returnValue));
         }
 
-        List<object> results = Interaction.ExecuteActions(null, actions, null).ToList();
+        var results = Interaction.ExecuteActions(null, actions, null).ToList();
 
         Assert.Equal(expectedReturnValues.Length, results.Count); // "Should have the same number of results as IActions."
 
-        for (int resultIndex = 0; resultIndex < results.Count; resultIndex++)
+        for (var resultIndex = 0; resultIndex < results.Count; resultIndex++)
         {
             Assert.Equal(expectedReturnValues[resultIndex], results[resultIndex]); // "Results should be returned in the order of the actions in the ActionCollection."
         }
