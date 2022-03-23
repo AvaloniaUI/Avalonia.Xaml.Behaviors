@@ -208,16 +208,14 @@ public class CallMethodAction : AvaloniaObject, IAction
                         _cachedMethodDescriptor = null;
                         return;
                     }
-                    else
-                    {
-                        _cachedMethodDescriptor = method;
-                    }
+
+                    _cachedMethodDescriptor = method;
                 }
             }
         }
     }
 
-    [DebuggerDisplay("{" + nameof(MethodInfo) + "}")]
+    [DebuggerDisplay($"{{{nameof(MethodInfo)}}}")]
     private class MethodDescriptor
     {
         public MethodDescriptor(MethodInfo methodInfo, ParameterInfo[] methodParameters)
@@ -234,15 +232,7 @@ public class CallMethodAction : AvaloniaObject, IAction
 
         public TypeInfo? SecondParameterTypeInfo
         {
-            get
-            {
-                if (ParameterCount < 2)
-                {
-                    return null;
-                }
-
-                return Parameters[1].ParameterType.GetTypeInfo();
-            }
+            get => ParameterCount < 2 ? null : Parameters[1].ParameterType.GetTypeInfo();
         }
     }
 }
