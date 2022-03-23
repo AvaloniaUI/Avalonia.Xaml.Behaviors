@@ -109,19 +109,17 @@ public class CallMethodAction : AvaloniaObject, IAction
         }
 
         var parameters = methodDescriptor.Parameters;
-        if (parameters.Length == 0)
+        switch (parameters.Length)
         {
-            methodDescriptor.MethodInfo.Invoke(target, null);
-            return true;
+            case 0:
+                methodDescriptor.MethodInfo.Invoke(target, null);
+                return true;
+            case 2:
+                methodDescriptor.MethodInfo.Invoke(target, new[] { target, parameter! });
+                return true;
+            default:
+                return false;
         }
-
-        if (parameters.Length == 2)
-        {
-            methodDescriptor.MethodInfo.Invoke(target, new[] { target, parameter! });
-            return true;
-        }
-
-        return false;
     }
 
     private MethodDescriptor? FindBestMethod(object? parameter)
