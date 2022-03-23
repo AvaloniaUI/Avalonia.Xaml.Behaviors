@@ -225,6 +225,6 @@ public class EventTriggerBehavior : Trigger
 
     private static bool IsElementLoaded(Control element)
     {
-        return (element.Parent is { });
+        return element.Parent is { };
     }
 }
