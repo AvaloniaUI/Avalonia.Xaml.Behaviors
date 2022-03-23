@@ -36,7 +36,7 @@ public class ToggleIsExpandedOnDoubleTappedBehavior : Behavior<Control>
 
     private void DoubleTapped(object? sender, RoutedEventArgs args)
     {
-        if (AssociatedObject is { } && AssociatedObject.Parent is TreeViewItem item)
+        if (AssociatedObject is { Parent: TreeViewItem item })
         {
             item.IsExpanded = !item.IsExpanded;
         }
