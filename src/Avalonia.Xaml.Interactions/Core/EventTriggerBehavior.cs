@@ -50,39 +50,42 @@ public class EventTriggerBehavior : Trigger
 
     static EventTriggerBehavior()
     {
-        EventNameProperty.Changed.Subscribe(e =>
+        EventNameProperty.Changed.Subscribe(EventNameChanged);
+        SourceObjectProperty.Changed.Subscribe(SourceObjectChanged);
+    }
+
+    private static void EventNameChanged(AvaloniaPropertyChangedEventArgs<string> e)
+    {
+        if (e.Sender is not EventTriggerBehavior behavior)
         {
-            if (e.Sender is not EventTriggerBehavior behavior)
-            {
-                return;
-            }
+            return;
+        }
 
-            if (behavior.AssociatedObject is null || behavior._resolvedSource is null)
-            {
-                return;
-            }
-
-            var oldEventName = e.OldValue.GetValueOrDefault();
-            var newEventName = e.NewValue.GetValueOrDefault();
-
-            if (oldEventName is { })
-            {
-                behavior.UnregisterEvent(oldEventName);
-            }
-
-            if (newEventName is { })
-            {
-                behavior.RegisterEvent(newEventName);
-            }
-        });
-
-        SourceObjectProperty.Changed.Subscribe(e =>
+        if (behavior.AssociatedObject is null || behavior._resolvedSource is null)
         {
-            if (e.Sender is EventTriggerBehavior behavior)
-            {
-                behavior.SetResolvedSource(behavior.ComputeResolvedSource());
-            }
-        });
+            return;
+        }
+
+        var oldEventName = e.OldValue.GetValueOrDefault();
+        var newEventName = e.NewValue.GetValueOrDefault();
+
+        if (oldEventName is { })
+        {
+            behavior.UnregisterEvent(oldEventName);
+        }
+
+        if (newEventName is { })
+        {
+            behavior.RegisterEvent(newEventName);
+        }
+    }
+
+    private static void SourceObjectChanged(AvaloniaPropertyChangedEventArgs<object?> e)
+    {
+        if (e.Sender is EventTriggerBehavior behavior)
+        {
+            behavior.SetResolvedSource(behavior.ComputeResolvedSource());
+        }
     }
 
     /// <summary>
