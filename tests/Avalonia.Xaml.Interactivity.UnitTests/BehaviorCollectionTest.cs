@@ -10,7 +10,7 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void VectorChanged_NonBehaviorAdded_ExceptionThrown()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
+        var behaviorCollection = new BehaviorCollection();
         behaviorCollection.Add(new StubBehavior());
 
         TestUtilities.AssertThrowsInvalidOperationException(() => behaviorCollection.Add(new TextBlock()));
@@ -19,7 +19,7 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void VectorChanged_BehaviorChangedToNonBehavior_ExceptionThrown()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
+        var behaviorCollection = new BehaviorCollection();
         behaviorCollection.Add(new StubBehavior());
             
         TestUtilities.AssertThrowsInvalidOperationException(() => behaviorCollection[0] = new ToggleButton());
@@ -28,8 +28,8 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void VectorChanged_DuplicateAdd_ExceptionThrown()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
-        StubBehavior stub = new StubBehavior();
+        var behaviorCollection = new BehaviorCollection();
+        var stub = new StubBehavior();
         behaviorCollection.Add(stub);
 
         TestUtilities.AssertThrowsInvalidOperationException(() => behaviorCollection.Add(stub));
@@ -39,8 +39,8 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void VectorChanged_AddWhileNotAttached_AttachNotCalled()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
-        StubBehavior stub = new StubBehavior();
+        var behaviorCollection = new BehaviorCollection();
+        var stub = new StubBehavior();
         behaviorCollection.Add(stub);
 
         TestUtilities.AssertNotAttached(stub);
@@ -49,7 +49,7 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void VectorChanged_AddWhileAttached_AllAttached()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
+        var behaviorCollection = new BehaviorCollection();
         behaviorCollection.Attach(new Button());
 
         behaviorCollection.Add(new StubBehavior());
@@ -65,13 +65,13 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void VectorChanged_ReplaceWhileAttached_OldDetachedNewAttached()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
+        var behaviorCollection = new BehaviorCollection();
         behaviorCollection.Attach(new Button());
 
-        StubBehavior first = new StubBehavior();
+        var first = new StubBehavior();
         behaviorCollection.Add(first);
 
-        StubBehavior second = new StubBehavior();
+        var second = new StubBehavior();
 
         behaviorCollection[0] = second;
 
@@ -83,9 +83,9 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void VectorChanged_RemoveWhileNotAttached_DetachNotCalled()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
+        var behaviorCollection = new BehaviorCollection();
 
-        StubBehavior behavior = new StubBehavior();
+        var behavior = new StubBehavior();
         behaviorCollection.Add(behavior);
         behaviorCollection.Remove(behavior);
 
@@ -95,10 +95,10 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void VectorChanged_RemoveWhileAttached_Detached()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
+        var behaviorCollection = new BehaviorCollection();
         behaviorCollection.Attach(new ToggleButton());
 
-        StubBehavior behavior = new StubBehavior();
+        var behavior = new StubBehavior();
         behaviorCollection.Add(behavior);
         behaviorCollection.Remove(behavior);
 
@@ -110,15 +110,15 @@ public class BehaviorCollectionTest
     {
         StubBehavior[] behaviorArray = { new StubBehavior(), new StubBehavior(), new StubBehavior() };
 
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
-        foreach (StubBehavior behavior in behaviorArray)
+        var behaviorCollection = new BehaviorCollection();
+        foreach (var behavior in behaviorArray)
         {
             behaviorCollection.Add(behavior);
         }
 
         behaviorCollection.Clear();
 
-        foreach (StubBehavior behavior in behaviorArray)
+        foreach (var behavior in behaviorArray)
         {
             TestUtilities.AssertNotDetached(behavior);
         }
@@ -129,17 +129,17 @@ public class BehaviorCollectionTest
     {
         StubBehavior[] behaviorArray = { new StubBehavior(), new StubBehavior(), new StubBehavior() };
 
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
+        var behaviorCollection = new BehaviorCollection();
         behaviorCollection.Attach(new Button());
 
-        foreach (StubBehavior behavior in behaviorArray)
+        foreach (var behavior in behaviorArray)
         {
             behaviorCollection.Add(behavior);
         }
 
         behaviorCollection.Clear();
 
-        foreach (StubBehavior behavior in behaviorArray)
+        foreach (var behavior in behaviorArray)
         {
             TestUtilities.AssertDetached(behavior);
         }
@@ -148,12 +148,12 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void Attach_MultipleBehaviors_AllAttached()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
+        var behaviorCollection = new BehaviorCollection();
         behaviorCollection.Add(new StubBehavior());
         behaviorCollection.Add(new StubBehavior());
         behaviorCollection.Add(new StubBehavior());
 
-        Button button = new Button();
+        var button = new Button();
         behaviorCollection.Attach(button);
              
         Assert.Equal(button, behaviorCollection.AssociatedObject); // "Attach should set the AssociatedObject to the given parameter."
@@ -167,7 +167,7 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void Attach_Null_AttachNotCalledOnItems()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
+        var behaviorCollection = new BehaviorCollection();
         behaviorCollection.Add(new StubBehavior());
         behaviorCollection.Add(new StubBehavior());
         behaviorCollection.Add(new StubBehavior());
@@ -183,8 +183,8 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void Attach_MultipleObjects_ExceptionThrown()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
-        StubBehavior stub = new StubBehavior();
+        var behaviorCollection = new BehaviorCollection();
+        var stub = new StubBehavior();
         behaviorCollection.Attach(new Button());
 
         TestUtilities.AssertThrowsInvalidOperationException(() => behaviorCollection.Attach(new StackPanel()));
@@ -193,7 +193,7 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void Attach_NonNullThenNull_ExceptionThrown()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
+        var behaviorCollection = new BehaviorCollection();
         behaviorCollection.Add(new StubBehavior());
 
         behaviorCollection.Attach(new Button());
@@ -204,9 +204,9 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void Attach_MultipleTimeSameObject_AttachCalledOnce()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection() { new StubBehavior() };
+        var behaviorCollection = new BehaviorCollection() { new StubBehavior() };
 
-        Button button = new Button();
+        var button = new Button();
         behaviorCollection.Attach(button);
         behaviorCollection.Attach(button);
 
@@ -217,7 +217,7 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void Detach_NotAttached_DetachNotCalledOnItems()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection() { new StubBehavior() };
+        var behaviorCollection = new BehaviorCollection() { new StubBehavior() };
 
         behaviorCollection.Detach();
 
@@ -227,7 +227,7 @@ public class BehaviorCollectionTest
     [AppContainerUITestMethod]
     public void Detach_Attached_AllItemsDetached()
     {
-        BehaviorCollection behaviorCollection = new BehaviorCollection();
+        var behaviorCollection = new BehaviorCollection();
         behaviorCollection.Add(new StubBehavior());
         behaviorCollection.Add(new StubBehavior());
         behaviorCollection.Add(new StubBehavior());
