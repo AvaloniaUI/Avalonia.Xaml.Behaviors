@@ -147,30 +147,32 @@ public class EventTriggerBehavior : Trigger
 
         if (eventName != EventNameDefaultValue)
         {
-            if (_resolvedSource is { })
+            if (_resolvedSource is null)
             {
-                var sourceObjectType = _resolvedSource.GetType();
-                var eventInfo = sourceObjectType.GetRuntimeEvent(EventName);
-                if (eventInfo is null)
-                {
-                    throw new ArgumentException(string.Format(
-                        CultureInfo.CurrentCulture,
-                        "Cannot find an event named {0} on type {1}.",
-                        EventName,
-                        sourceObjectType.Name));
-                }
+                return;
+            }
+            
+            var sourceObjectType = _resolvedSource.GetType();
+            var eventInfo = sourceObjectType.GetRuntimeEvent(EventName);
+            if (eventInfo is null)
+            {
+                throw new ArgumentException(string.Format(
+                    CultureInfo.CurrentCulture,
+                    "Cannot find an event named {0} on type {1}.",
+                    EventName,
+                    sourceObjectType.Name));
+            }
 
-                var methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("AttachedToVisualTree");
-                if (methodInfo is { })
+            var methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("AttachedToVisualTree");
+            if (methodInfo is { })
+            {
+                var eventHandlerType = eventInfo.EventHandlerType;
+                if (eventHandlerType is { })
                 {
-                    var eventHandlerType = eventInfo.EventHandlerType;
-                    if (eventHandlerType is { })
+                    _eventHandler = methodInfo.CreateDelegate(eventHandlerType, this);
+                    if (_eventHandler is { })
                     {
-                        _eventHandler = methodInfo.CreateDelegate(eventHandlerType, this);
-                        if (_eventHandler is { })
-                        {
-                            eventInfo.AddEventHandler(_resolvedSource, _eventHandler);
-                        }
+                        eventInfo.AddEventHandler(_resolvedSource, _eventHandler);
                     }
                 }
             }
@@ -226,8 +228,5 @@ public class EventTriggerBehavior : Trigger
         Interaction.ExecuteActions(_resolvedSource, Actions, eventArgs);
     }
 
-    private static bool IsElementLoaded(Control element)
-    {
-        return element.Parent is { };
-    }
+    private static bool IsElementLoaded(Control element) => element.Parent is { };
 }
