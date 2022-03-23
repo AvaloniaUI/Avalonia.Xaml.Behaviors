@@ -56,9 +56,9 @@ public class DataTriggerBehavior : Trigger
 
     static DataTriggerBehavior()
     {
-        BindingProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
-        ComparisonConditionProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
-        ValueProperty.Changed.Subscribe(e => OnValueChanged(e.Sender, e));
+        BindingProperty.Changed.Subscribe(OnValueChanged);
+        ComparisonConditionProperty.Changed.Subscribe(OnValueChanged);
+        ValueProperty.Changed.Subscribe(OnValueChanged);
     }
 
     private static bool Compare(object? leftOperand, ComparisonConditionType operatorType, object? rightOperand)
@@ -150,9 +150,9 @@ public class DataTriggerBehavior : Trigger
         };
     }
 
-    private static void OnValueChanged(IAvaloniaObject avaloniaObject, AvaloniaPropertyChangedEventArgs args)
+    private static void OnValueChanged(AvaloniaPropertyChangedEventArgs args)
     {
-        if (avaloniaObject is not DataTriggerBehavior behavior || behavior.AssociatedObject is null)
+        if (args.Sender is not DataTriggerBehavior behavior || behavior.AssociatedObject is null)
         {
             return;
         }
