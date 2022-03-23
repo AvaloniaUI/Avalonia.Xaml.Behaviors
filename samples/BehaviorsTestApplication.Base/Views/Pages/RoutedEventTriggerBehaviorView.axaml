@@ -12,7 +12,7 @@
   <Design.DataContext>
     <vm:MainWindowViewModel />
   </Design.DataContext>
-  <Grid RowDefinitions="Auto,Auto">
+  <Grid RowDefinitions="Auto,*,*">
     <TextBox Name="TextBox" Text="Hello" Grid.Row="0" Margin="5" />
     <Button Name="ChangeProperty" Content="Change Property" Grid.Row="1" Margin="5,0,5,5">
       <i:Interaction.Behaviors>
@@ -23,5 +23,25 @@
         </iac:RoutedEventTriggerBehavior>
       </i:Interaction.Behaviors>
     </Button>
+    <Rectangle Name="Rectangle" 
+               Grid.Row="2" Margin="5"
+               Fill="{DynamicResource BlueBrush}"
+               Stroke="{DynamicResource GrayBrush}"
+               StrokeThickness="5">
+      <i:Interaction.Behaviors>
+        <iac:RoutedEventTriggerBehavior RoutedEvent="{x:Static InputElement.PointerPressedEvent}" 
+                                        RoutingStrategies="Tunnel">
+          <ia:ChangePropertyAction TargetObject="{Binding #Rectangle}" 
+                                   PropertyName="Fill"
+                                   Value="{DynamicResource YellowBrush}" />
+        </iac:RoutedEventTriggerBehavior>
+        <iac:RoutedEventTriggerBehavior RoutedEvent="{x:Static InputElement.PointerReleasedEvent}" 
+                                        RoutingStrategies="Tunnel">
+          <ia:ChangePropertyAction TargetObject="{Binding #Rectangle}" 
+                                   PropertyName="Fill"
+                                   Value="{DynamicResource BlueBrush}" />
+        </iac:RoutedEventTriggerBehavior>
+      </i:Interaction.Behaviors>
+    </Rectangle>
   </Grid>
 </UserControl>
