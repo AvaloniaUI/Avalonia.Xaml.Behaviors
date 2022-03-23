@@ -48,26 +48,33 @@ public class CallMethodAction : AvaloniaObject, IAction
 
     static CallMethodAction()
     {
-        MethodNameProperty.Changed.Subscribe(e =>
-        {
-            if (e.Sender is CallMethodAction callMethodAction)
-            {
-                callMethodAction.UpdateMethodDescriptors();
-            }
-        });
+        MethodNameProperty.Changed.Subscribe(MethodNameChanged);
+        TargetObjectProperty.Changed.Subscribe(TargetObjectChanged);
+    }
 
-        TargetObjectProperty.Changed.Subscribe(e =>
+    private static void MethodNameChanged(AvaloniaPropertyChangedEventArgs<string> e)
+    {
+        if (e.Sender is not CallMethodAction callMethodAction)
         {
-            if (e.Sender is CallMethodAction callMethodAction)
-            {
-                var newValue = e.NewValue.GetValueOrDefault();
-                if (newValue is { })
-                {
-                    var newType = newValue.GetType();
-                    callMethodAction.UpdateTargetType(newType); 
-                }
-            }
-        });
+            return;
+        }
+        
+        callMethodAction.UpdateMethodDescriptors();
+    }
+
+    private static void TargetObjectChanged(AvaloniaPropertyChangedEventArgs<object?> e)
+    {
+        if (e.Sender is not CallMethodAction callMethodAction)
+        {
+            return;
+        }
+
+        var newValue = e.NewValue.GetValueOrDefault();
+        if (newValue is { })
+        {
+            var newType = newValue.GetType();
+            callMethodAction.UpdateTargetType(newType);
+        }
     }
 
     /// <summary>
