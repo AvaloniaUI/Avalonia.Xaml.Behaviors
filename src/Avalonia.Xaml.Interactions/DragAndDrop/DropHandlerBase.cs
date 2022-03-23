@@ -26,7 +26,7 @@ public abstract class DropHandlerBase : IDropHandler
         }
         else
         {
-            int removeIndex = sourceIndex + 1;
+            var removeIndex = sourceIndex + 1;
             if (items.Count + 1 > removeIndex)
             {
                 var item = items[sourceIndex];
