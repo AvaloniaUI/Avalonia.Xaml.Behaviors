@@ -121,19 +121,13 @@ public class AdaptiveBehavior : Behavior<Control>
             var heightConditionTriggered = GetResult(setter.MinHeightOperator, bounds.Height, setter.MinHeight)
                                            && GetResult(setter.MaxHeightOperator, bounds.Height, setter.MaxHeight);
 
-            var isAddClassTriggered = false;
-            if (isMinOrMaxWidthSet && !isMinOrMaxHeightSet)
+            var isAddClassTriggered = isMinOrMaxWidthSet switch
             {
-                isAddClassTriggered = widthConditionTriggered;
-            }
-            else if (!isMinOrMaxWidthSet && isMinOrMaxHeightSet)
-            {
-                isAddClassTriggered = heightConditionTriggered;
-            }
-            else if (isMinOrMaxWidthSet && isMinOrMaxHeightSet)
-            {
-                isAddClassTriggered = widthConditionTriggered && heightConditionTriggered;
-            }
+                true when !isMinOrMaxHeightSet => widthConditionTriggered,
+                false when isMinOrMaxHeightSet => heightConditionTriggered,
+                true when isMinOrMaxHeightSet => widthConditionTriggered && heightConditionTriggered,
+                _ => false
+            };
 
             var targetControl = setter.GetValue(AdaptiveClassSetter.TargetControlProperty) is { } 
                 ? setter.TargetControl 
