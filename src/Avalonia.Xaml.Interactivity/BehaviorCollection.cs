@@ -55,7 +55,7 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
 
         foreach (var item in this)
         {
-            IBehavior behavior = (IBehavior)item;
+            var behavior = (IBehavior)item;
             behavior.Attach(AssociatedObject);
         }
     }
@@ -198,10 +198,10 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
     [Conditional("DEBUG")]
     private void VerifyOldCollectionIntegrity()
     {
-        bool isValid = Count == _oldCollection.Count;
+        var isValid = Count == _oldCollection.Count;
         if (isValid)
         {
-            for (int i = 0; i < Count; i++)
+            for (var i = 0; i < Count; i++)
             {
                 if (!Equals(this[i], _oldCollection[i]))
                 {
