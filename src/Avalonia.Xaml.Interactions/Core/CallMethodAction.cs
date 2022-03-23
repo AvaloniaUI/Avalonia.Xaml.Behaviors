@@ -85,16 +85,7 @@ public class CallMethodAction : AvaloniaObject, IAction
     /// <returns>True if the method is called; else false.</returns>
     public virtual object Execute(object? sender, object? parameter)
     {
-        object? target;
-        if (GetValue(TargetObjectProperty) is { })
-        {
-            target = TargetObject;
-        }
-        else
-        {
-            target = sender;
-        }
-
+        var target = GetValue(TargetObjectProperty) is { } ? TargetObject : sender;
         if (target is null || string.IsNullOrEmpty(MethodName))
         {
             return false;
