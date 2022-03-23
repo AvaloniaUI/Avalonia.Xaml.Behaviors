@@ -21,7 +21,7 @@ public class Interaction
                 return;
             }
 
-            if (oldCollection is { } && oldCollection.AssociatedObject is { })
+            if (oldCollection is { AssociatedObject: { } })
             {
                 oldCollection.Detach();
             }
