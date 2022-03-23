@@ -31,6 +31,9 @@
     <TabItem Header="InvokeCommandAction">
       <pages:InvokeCommandActionView />
     </TabItem>
+    <TabItem Header="RoutedEventTriggerBehavior">
+      <pages:RoutedEventTriggerBehaviorView />
+    </TabItem>
     <TabItem Header="Custom Action">
       <pages:CustomActionView />
     </TabItem>
