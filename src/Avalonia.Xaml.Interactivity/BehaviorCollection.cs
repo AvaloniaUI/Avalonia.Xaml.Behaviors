@@ -67,7 +67,7 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
     {
         foreach (var item in this)
         {
-            if (item is IBehavior behaviorItem && behaviorItem.AssociatedObject is { })
+            if (item is IBehavior { AssociatedObject: { } } behaviorItem)
             {
                 behaviorItem.Detach();
             }
@@ -92,7 +92,7 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
     {
         foreach (var item in this)
         {
-            if (item is Behavior behavior && behavior.AssociatedObject is { })
+            if (item is Behavior { AssociatedObject: { } } behavior)
             {
                 behavior.DetachedFromVisualTree();
             }
