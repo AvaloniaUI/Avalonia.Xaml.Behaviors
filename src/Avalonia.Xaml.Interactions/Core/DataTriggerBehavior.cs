@@ -93,31 +93,20 @@ public class DataTriggerBehavior : Trigger
             case ComparisonConditionType.GreaterThan:
             case ComparisonConditionType.GreaterThanOrEqual:
             {
-                if (leftComparableOperand is null && rightComparableOperand is null)
+                throw leftComparableOperand switch
                 {
-                    throw new ArgumentException(string.Format(
+                    null when rightComparableOperand is null => new ArgumentException(string.Format(
                         CultureInfo.CurrentCulture,
                         "Binding property of type {0} and Value property of type {1} cannot be used with operator {2}.",
-                        leftOperand?.GetType().Name ?? "null",
-                        rightOperand?.GetType().Name ?? "null",
-                        operatorType.ToString()));
-                }
-                else if (leftComparableOperand is null)
-                {
-                    throw new ArgumentException(string.Format(
-                        CultureInfo.CurrentCulture,
+                        leftOperand?.GetType().Name ?? "null", rightOperand?.GetType().Name ?? "null",
+                        operatorType.ToString())),
+                    null => new ArgumentException(string.Format(CultureInfo.CurrentCulture,
                         "Binding property of type {0} cannot be used with operator {1}.",
-                        leftOperand?.GetType().Name ?? "null",
-                        operatorType.ToString()));
-                }
-                else
-                {
-                    throw new ArgumentException(string.Format(
-                        CultureInfo.CurrentCulture,
+                        leftOperand?.GetType().Name ?? "null", operatorType.ToString())),
+                    _ => new ArgumentException(string.Format(CultureInfo.CurrentCulture,
                         "Value property of type {0} cannot be used with operator {1}.",
-                        rightOperand?.GetType().Name ?? "null",
-                        operatorType.ToString()));
-                }
+                        rightOperand?.GetType().Name ?? "null", operatorType.ToString()))
+                };
             }
         }
 
