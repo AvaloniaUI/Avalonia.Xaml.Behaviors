@@ -28,7 +28,8 @@ public class ActionCollection : AvaloniaList<IAvaloniaObject>
                 VerifyType(item);
             }
         }
-        else if (collectionChangedAction is NotifyCollectionChangedAction.Add or NotifyCollectionChangedAction.Replace)
+        else if (collectionChangedAction == NotifyCollectionChangedAction.Add 
+                 || collectionChangedAction == NotifyCollectionChangedAction.Replace)
         {
             var changedItem = eventArgs.NewItems?[0] as IAvaloniaObject;
             VerifyType(changedItem);
