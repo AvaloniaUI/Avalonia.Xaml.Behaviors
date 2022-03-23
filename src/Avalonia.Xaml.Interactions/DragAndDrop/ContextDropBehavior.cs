@@ -45,12 +45,9 @@ public class ContextDropBehavior : Behavior<Control>
         set => SetValue(HandlerProperty, value);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    protected override void OnAttached()
+    /// <inheritdoc />
+    protected override void OnAttachedToVisualTree()
     {
-        base.OnAttached();
         if (AssociatedObject is { })
         {
             DragDrop.SetAllowDrop(AssociatedObject, true);
@@ -61,12 +58,9 @@ public class ContextDropBehavior : Behavior<Control>
         AssociatedObject?.AddHandler(DragDrop.DropEvent, Drop);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    protected override void OnDetaching()
+    /// <inheritdoc />
+    protected override void OnDetachedFromVisualTree()
     {
-        base.OnDetaching();
         if (AssociatedObject is { })
         {
             DragDrop.SetAllowDrop(AssociatedObject, false);

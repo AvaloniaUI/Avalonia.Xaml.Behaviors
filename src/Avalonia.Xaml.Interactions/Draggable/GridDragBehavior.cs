@@ -76,13 +76,9 @@ public class GridDragBehavior : Behavior<Control>
         set => SetValue(CopyRowSpanProperty, value);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    protected override void OnAttached()
+    /// <inheritdoc />
+    protected override void OnAttachedToVisualTree()
     {
-        base.OnAttached();
-
         if (AssociatedObject is { })
         {
             AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, Released, RoutingStrategies.Tunnel);
@@ -92,13 +88,9 @@ public class GridDragBehavior : Behavior<Control>
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    protected override void OnDetaching()
+    /// <inheritdoc />
+    protected override void OnDetachedFromVisualTree()
     {
-        base.OnDetaching();
-
         if (AssociatedObject is { })
         {
             AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, Released);

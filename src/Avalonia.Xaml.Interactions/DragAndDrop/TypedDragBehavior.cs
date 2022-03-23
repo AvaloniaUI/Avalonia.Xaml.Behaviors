@@ -47,23 +47,17 @@ public class TypedDragBehavior : Behavior<Control>
         set => SetValue(HandlerProperty, value);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    protected override void OnAttached()
+    /// <inheritdoc />
+    protected override void OnAttachedToVisualTree()
     {
-        base.OnAttached();
         AssociatedObject?.AddHandler(InputElement.PointerPressedEvent, AssociatedObject_PointerPressed, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
         AssociatedObject?.AddHandler(InputElement.PointerReleasedEvent, AssociatedObject_PointerReleased, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
         AssociatedObject?.AddHandler(InputElement.PointerMovedEvent, AssociatedObject_PointerMoved, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    protected override void OnDetaching()
+    /// <inheritdoc />
+    protected override void OnDetachedFromVisualTree()
     {
-        base.OnDetaching();
         AssociatedObject?.RemoveHandler(InputElement.PointerPressedEvent, AssociatedObject_PointerPressed);
         AssociatedObject?.RemoveHandler(InputElement.PointerReleasedEvent, AssociatedObject_PointerReleased);
         AssociatedObject?.RemoveHandler(InputElement.PointerMovedEvent, AssociatedObject_PointerMoved);

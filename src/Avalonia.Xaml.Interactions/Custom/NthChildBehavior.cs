@@ -18,10 +18,8 @@ namespace Avalonia.Xaml.Interactions.Custom;
 public class NthChildBehavior : Behavior<IControl>
 {
     /// <inheritdoc />
-    protected override void OnAttached()
+    protected override void OnAttachedToVisualTree()
     {
-        base.OnAttached();
-
         if (AssociatedObject is { })
         {
             Enable(true, AssociatedObject);
@@ -29,10 +27,8 @@ public class NthChildBehavior : Behavior<IControl>
     }
 
     /// <inheritdoc />
-    protected override void OnDetaching()
+    protected override void OnDetachedFromVisualTree()
     {
-        base.OnDetaching();
-            
         if (AssociatedObject is { })
         {
             Enable(false, AssociatedObject);

@@ -68,13 +68,9 @@ public class ItemDragBehavior : Behavior<IControl>
         set => SetValue(VerticalDragThresholdProperty, value);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    protected override void OnAttached()
+    /// <inheritdoc />
+    protected override void OnAttachedToVisualTree()
     {
-        base.OnAttached();
-
         if (AssociatedObject is { })
         {
             AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, Released, RoutingStrategies.Tunnel);
@@ -84,13 +80,9 @@ public class ItemDragBehavior : Behavior<IControl>
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    protected override void OnDetaching()
+    /// <inheritdoc />
+    protected override void OnDetachedFromVisualTree()
     {
-        base.OnDetaching();
-
         if (AssociatedObject is { })
         {
             AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, Released);

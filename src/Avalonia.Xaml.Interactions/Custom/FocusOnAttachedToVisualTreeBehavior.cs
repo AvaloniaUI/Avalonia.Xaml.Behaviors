@@ -11,8 +11,6 @@ public class FocusOnAttachedToVisualTreeBehavior : Behavior<Control>
     /// <inheritdoc/>
     protected override void OnAttachedToVisualTree()
     {
-        base.OnAttachedToVisualTree();
-
         AssociatedObject?.Focus();
     }
 }

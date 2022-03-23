@@ -10,21 +10,15 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// </summary>
 public class SelectAllOnGotFocusBehavior : Behavior<TextBox>
 {
-    /// <summary>
-    /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
-    /// </summary>
-    protected override void OnAttached()
+    /// <inheritdoc />
+    protected override void OnAttachedToVisualTree()
     {
-        base.OnAttached();
         AssociatedObject?.AddHandler(InputElement.GotFocusEvent, AssociatedObject_GotFocus, RoutingStrategies.Bubble);
     }
 
-    /// <summary>
-    /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
-    /// </summary>
-    protected override void OnDetaching()
+    /// <inheritdoc />
+    protected override void OnDetachedFromVisualTree()
     {
-        base.OnDetaching();
         AssociatedObject?.RemoveHandler(InputElement.GotFocusEvent, AssociatedObject_GotFocus);
     }
 

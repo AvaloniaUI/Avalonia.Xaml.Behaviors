@@ -27,13 +27,9 @@ public class ButtonClickEventTriggerBehavior : Trigger<Button>
         set => SetValue(KeyModifiersProperty, value);
     }
 
-    /// <summary>
-    /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
-    /// </summary>
-    protected override void OnAttached()
+    /// <inheritdoc />
+    protected override void OnAttachedToVisualTree()
     {
-        base.OnAttached();
-
         if (AssociatedObject is { })
         {
             AssociatedObject.Click += AssociatedObject_OnClick;
@@ -42,13 +38,9 @@ public class ButtonClickEventTriggerBehavior : Trigger<Button>
         }
     }
 
-    /// <summary>
-    /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
-    /// </summary>
-    protected override void OnDetaching()
+    /// <inheritdoc />
+    protected override void OnDetachedFromVisualTree()
     {
-        base.OnDetaching();
-
         if (AssociatedObject is { })
         {
             AssociatedObject.Click -= AssociatedObject_OnClick;
