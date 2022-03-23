@@ -50,7 +50,6 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
                 "An instance of a behavior cannot be attached to more than one object at a time.");
         }
 
-        Debug.Assert(associatedObject is { }, "The previous checks should keep us from ever setting null here.");
         AssociatedObject = associatedObject;
 
         foreach (var item in this)
@@ -165,7 +164,6 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
                 break;
 
             default:
-                Debug.Assert(false, "Unsupported collection operation attempted.");
                 break;
         }
 #if DEBUG
@@ -210,7 +208,5 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
                 }
             }
         }
-
-        Debug.Assert(isValid, "Referential integrity of the collection has been compromised.");
     }
 }
