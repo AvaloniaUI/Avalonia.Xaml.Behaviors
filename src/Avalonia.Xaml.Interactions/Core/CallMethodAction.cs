@@ -205,7 +205,7 @@ public class CallMethodAction : AvaloniaObject, IAction
             foreach (var method in _methodDescriptors)
             {
                 var typeInfo = method.SecondParameterTypeInfo;
-                if (typeInfo is { } && (!typeInfo.IsValueType || (typeInfo.IsGenericType && typeInfo.GetGenericTypeDefinition() == typeof(Nullable<>))))
+                if (typeInfo is { } && (!typeInfo.IsValueType || typeInfo.IsGenericType && typeInfo.GetGenericTypeDefinition() == typeof(Nullable<>)))
                 {
                     if (_cachedMethodDescriptor is { })
                     {
