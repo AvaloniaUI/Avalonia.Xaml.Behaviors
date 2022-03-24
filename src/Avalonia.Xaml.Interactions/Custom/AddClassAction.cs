@@ -1,4 +1,5 @@
-﻿using Avalonia.Xaml.Interactivity;
+﻿using Avalonia.Controls;
+using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
 
@@ -37,6 +38,7 @@ public class AddClassAction : AvaloniaObject, IAction
     /// <summary>
     /// Gets or sets the target styled element that class name that should be added to. This is a avalonia property.
     /// </summary>
+    [ResolveByName]
     public IStyledElement? StyledElement
     {
         get => GetValue(StyledElementProperty);
