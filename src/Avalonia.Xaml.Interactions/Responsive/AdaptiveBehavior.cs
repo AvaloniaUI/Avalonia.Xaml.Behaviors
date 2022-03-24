@@ -36,6 +36,7 @@ public class AdaptiveBehavior : Behavior<Control>
     /// <summary>
     /// Gets or sets the the source control that <see cref="Visual.BoundsProperty"/> property are observed from, if not set <see cref="Behavior{T}.AssociatedObject"/> is used. This is a avalonia property.
     /// </summary>
+    [ResolveByName]
     public Control? SourceControl
     {
         get => GetValue(SourceControlProperty);
