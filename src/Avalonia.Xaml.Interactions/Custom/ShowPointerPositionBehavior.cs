@@ -18,6 +18,7 @@ public class ShowPointerPositionBehavior : Behavior<Control>
     /// <summary>
     /// Gets or sets the target TextBlock object in which this behavior displays cursor position on PointerMoved event.
     /// </summary>
+    [ResolveByName]
     public TextBlock? TargetTextBlock
     {
         get => GetValue(TargetTextBlockProperty);

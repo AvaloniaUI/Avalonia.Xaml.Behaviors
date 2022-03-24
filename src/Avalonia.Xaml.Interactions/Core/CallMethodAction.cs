@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
+using Avalonia.Controls;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Core;
@@ -40,6 +41,7 @@ public class CallMethodAction : AvaloniaObject, IAction
     /// <summary>
     /// Gets or sets the object that exposes the method of interest. This is a avalonia property.
     /// </summary>
+    [ResolveByName]
     public object? TargetObject
     {
         get => GetValue(TargetObjectProperty);

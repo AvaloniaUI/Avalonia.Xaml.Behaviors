@@ -22,6 +22,7 @@ public sealed class DragControlBehavior : Behavior<Control>
     /// <summary>
     /// Gets or sets the target control to be moved around instead of <see cref="IBehavior.AssociatedObject"/>. This is a avalonia property.
     /// </summary>
+    [ResolveByName]
     public Control? TargetControl
     {
         get => GetValue(TargetControlProperty);

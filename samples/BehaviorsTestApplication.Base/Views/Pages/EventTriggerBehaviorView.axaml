@@ -15,8 +15,8 @@
     <TextBox Name="TextBox" Text="Hello" Grid.Row="0" Margin="5" />
     <Button Name="ChangeProperty" Content="Change Property" Grid.Row="1" Margin="5,0,5,5">
       <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #ChangeProperty}">
-          <ia:ChangePropertyAction TargetObject="{Binding #TextBox}" PropertyName="Text" Value="World" />
+        <ia:EventTriggerBehavior EventName="Click" SourceObject="ChangeProperty">
+          <ia:ChangePropertyAction TargetObject="TextBox" PropertyName="Text" Value="World" />
         </ia:EventTriggerBehavior>
       </i:Interaction.Behaviors>
     </Button>

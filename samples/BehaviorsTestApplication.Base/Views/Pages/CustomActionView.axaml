@@ -30,8 +30,8 @@
             HorizontalAlignment="Stretch" 
             VerticalAlignment="Stretch">
       <i:Interaction.Behaviors>
-        <iac:ShowPointerPositionBehavior TargetTextBlock="{Binding #Position}" />
-        <ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="{Binding #Border}">
+        <iac:ShowPointerPositionBehavior TargetTextBlock="Position" />
+        <ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="Border">
           <iac:PopupAction>
             <Border DataContext="{Binding Count}" 
                     Width="300" Height="200" 

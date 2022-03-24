@@ -18,8 +18,8 @@
       <i:Interaction.Behaviors>
         <iac:RoutedEventTriggerBehavior RoutedEvent="{x:Static Button.ClickEvent}" 
                                         RoutingStrategies="Bubble"
-                                        SourceInteractive="{Binding #ChangeProperty}">
-          <ia:ChangePropertyAction TargetObject="{Binding #TextBox}" PropertyName="Text" Value="World" />
+                                        SourceInteractive="ChangeProperty">
+          <ia:ChangePropertyAction TargetObject="TextBox" PropertyName="Text" Value="World" />
         </iac:RoutedEventTriggerBehavior>
       </i:Interaction.Behaviors>
     </Button>
@@ -31,13 +31,13 @@
       <i:Interaction.Behaviors>
         <iac:RoutedEventTriggerBehavior RoutedEvent="{x:Static InputElement.PointerPressedEvent}" 
                                         RoutingStrategies="Tunnel">
-          <ia:ChangePropertyAction TargetObject="{Binding #Rectangle}" 
+          <ia:ChangePropertyAction TargetObject="Rectangle" 
                                    PropertyName="Fill"
                                    Value="{DynamicResource YellowBrush}" />
         </iac:RoutedEventTriggerBehavior>
         <iac:RoutedEventTriggerBehavior RoutedEvent="{x:Static InputElement.PointerReleasedEvent}" 
                                         RoutingStrategies="Tunnel">
-          <ia:ChangePropertyAction TargetObject="{Binding #Rectangle}" 
+          <ia:ChangePropertyAction TargetObject="Rectangle" 
                                    PropertyName="Fill"
                                    Value="{DynamicResource BlueBrush}" />
         </iac:RoutedEventTriggerBehavior>
