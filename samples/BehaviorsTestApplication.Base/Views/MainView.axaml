@@ -34,6 +34,9 @@
     <TabItem Header="RoutedEventTriggerBehavior">
       <pages:RoutedEventTriggerBehaviorView />
     </TabItem>
+    <TabItem Header="ChangeAvaloniaPropertyAction">
+      <pages:ChangeAvaloniaPropertyActionView />
+    </TabItem>
     <TabItem Header="Custom Action">
       <pages:CustomActionView />
     </TabItem>
