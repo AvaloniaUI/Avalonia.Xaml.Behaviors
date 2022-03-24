@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using Avalonia.Controls;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Core;
@@ -83,6 +84,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
     /// Gets or sets the object whose property will be changed.
     /// If <seealso cref="TargetObject"/> is not set or cannot be resolved, the sender of <seealso cref="Execute"/> will be used. This is a avalonia property.
     /// </summary>
+    [ResolveByName]
     public object? TargetObject
     {
         get => GetValue(TargetObjectProperty);
