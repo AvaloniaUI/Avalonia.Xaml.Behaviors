@@ -40,7 +40,7 @@
     <TabItem Header="Custom Behavior">
       <pages:CustomBehaviorView />
     </TabItem>
-    <TabItem Header="ButtonClickEventTriggerBehaviorView">
+    <TabItem Header="ButtonClickEventTriggerBehavior">
       <pages:ButtonClickEventTriggerBehaviorView />
     </TabItem>
     <TabItem Header="Advanced Behavior">
@@ -58,7 +58,7 @@
     <TabItem Header="EditableListBox">
       <pages:EditableListBoxView />
     </TabItem>
-    <TabItem Header="EditableTreeView">
+    <TabItem Header="EditableTree">
       <pages:EditableTreeViewView />
     </TabItem>
   </TabControl>
