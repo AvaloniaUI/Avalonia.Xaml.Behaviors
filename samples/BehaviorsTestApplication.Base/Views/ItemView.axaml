@@ -10,8 +10,8 @@
              x:Class="BehaviorsTestApplication.Views.ItemView">
   <Panel Background="Transparent">
     <i:Interaction.Behaviors>
-      <iac:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
-      <iac:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
+      <iac:ShowOnDoubleTappedBehavior TargetControl="TextBoxEdit" />
+      <iac:ShowOnKeyDownTappedBehavior TargetControl="TextBoxEdit" />
     </i:Interaction.Behaviors>
     <TextBox x:Name="TextBoxEdit"
              IsVisible="False"
@@ -23,9 +23,9 @@
              BorderThickness="0"
              Text="{Binding Name, Mode=TwoWay}">
       <i:Interaction.Behaviors>
-        <iac:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
-        <iac:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
-        <iac:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
+        <iac:HideOnKeyPressedBehavior TargetControl="TextBoxEdit" Key="Escape" />
+        <iac:HideOnKeyPressedBehavior TargetControl="TextBoxEdit" Key="Enter" />
+        <iac:HideOnLostFocusBehavior TargetControl="TextBoxEdit" />
         <iac:SelectAllOnGotFocusBehavior />
       </i:Interaction.Behaviors>
     </TextBox>

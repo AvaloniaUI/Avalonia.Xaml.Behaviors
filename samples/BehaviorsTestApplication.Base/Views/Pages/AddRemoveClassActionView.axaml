@@ -28,13 +28,13 @@
         <ia:DataTriggerBehavior Binding="{Binding #ResponsiveStackPanel.Bounds.Width}" 
                                 ComparisonCondition="LessThan"
                                 Value="500">
-          <iac:AddClassAction StyledElement="{Binding #ResponsiveStackPanel}" 
+          <iac:AddClassAction StyledElement="ResponsiveStackPanel" 
                               ClassName="vertical"
                               RemoveIfExists="True" />
         </ia:DataTriggerBehavior>
         <ia:DataTriggerBehavior Binding="{Binding #ResponsiveStackPanel.Bounds.Width}"
                                 ComparisonCondition="GreaterThanOrEqual" Value="500">
-          <iac:RemoveClassAction StyledElement="{Binding #ResponsiveStackPanel}"
+          <iac:RemoveClassAction StyledElement="ResponsiveStackPanel"
                                  ClassName="vertical" />
         </ia:DataTriggerBehavior>
       </i:Interaction.Behaviors>

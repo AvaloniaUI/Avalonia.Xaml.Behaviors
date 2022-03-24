@@ -97,8 +97,8 @@
           </Style>
         </StackPanel.Styles>
         <i:Interaction.Behaviors>
-          <ir:AdaptiveBehavior SourceControl="{Binding #DockPanel}" 
-                               TargetControl="{Binding #ResponsiveStackPanel}">
+          <ir:AdaptiveBehavior SourceControl="DockPanel" 
+                               TargetControl="ResponsiveStackPanel">
             <ir:AdaptiveClassSetter MinWidth="0" 
                                     MinWidthOperator="GreaterThanOrEqual" 
                                     MaxWidth="500" 
@@ -125,7 +125,7 @@
                                     MaxWidthOperator="LessThan" 
                                     ClassName=":short"
                                     IsPseudoClass="True"
-                                    TargetControl="{Binding #ResponsiveStackPanel}" />
+                                    TargetControl="ResponsiveStackPanel" />
             <ir:AdaptiveClassSetter MinHeight="600" 
                                     MinWidthOperator="GreaterThanOrEqual" 
                                     MaxHeight="Infinity"

@@ -20,8 +20,8 @@
                StrokeThickness="5" />
     <Button Name="PinkButton" Content="Pink" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5">
       <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #PinkButton}">
-          <ia:ChangePropertyAction TargetObject="{Binding #ChangePropertyRectangle}" 
+        <ia:EventTriggerBehavior EventName="Click" SourceObject="PinkButton">
+          <ia:ChangePropertyAction TargetObject="ChangePropertyRectangle" 
                                    PropertyName="Fill"
                                    Value="{DynamicResource PinkBrush}" />
         </ia:EventTriggerBehavior>
@@ -29,8 +29,8 @@
     </Button>
     <Button Name="YellowButton" Content="Yellow" Grid.Row="1" Grid.Column="2" Margin="0,0,5,5">
       <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #YellowButton}">
-          <ia:ChangePropertyAction TargetObject="{Binding #ChangePropertyRectangle}" 
+        <ia:EventTriggerBehavior EventName="Click" SourceObject="YellowButton">
+          <ia:ChangePropertyAction TargetObject="ChangePropertyRectangle" 
                                    PropertyName="Fill"
                                    Value="{DynamicResource YellowBrush}" />
         </ia:EventTriggerBehavior>

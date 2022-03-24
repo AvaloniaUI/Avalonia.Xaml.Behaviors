@@ -21,14 +21,14 @@
         <ia:DataTriggerBehavior Binding="{Binding #Slider.Value}" 
                                 ComparisonCondition="GreaterThan" 
                                 Value="50">
-          <ia:ChangePropertyAction TargetObject="{Binding #DataTriggerRectangle}" 
+          <ia:ChangePropertyAction TargetObject="DataTriggerRectangle" 
                                    PropertyName="Fill"
                                    Value="{DynamicResource YellowBrush}" />
         </ia:DataTriggerBehavior>
         <ia:DataTriggerBehavior Binding="{Binding #Slider.Value}" 
                                 ComparisonCondition="LessThanOrEqual" 
                                 Value="50">
-          <ia:ChangePropertyAction TargetObject="{Binding #DataTriggerRectangle}" 
+          <ia:ChangePropertyAction TargetObject="DataTriggerRectangle" 
                                    PropertyName="Fill"
                                    Value="{DynamicResource BlueBrush}" />
         </ia:DataTriggerBehavior>

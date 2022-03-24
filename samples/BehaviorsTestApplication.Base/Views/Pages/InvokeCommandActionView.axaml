@@ -23,14 +23,14 @@
     </Canvas>
     <Button x:Name="MoveLeftButton" Content="Move Left" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5">
       <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #MoveLeftButton}">
+        <ia:EventTriggerBehavior EventName="Click" SourceObject="MoveLeftButton">
           <ia:InvokeCommandAction Command="{Binding MoveLeftCommand}" />
         </ia:EventTriggerBehavior>
       </i:Interaction.Behaviors>
     </Button>
     <Button x:Name="ResetMoveButton" Content="Reset Move" Grid.Row="1" Grid.Column="2" Margin="0,0,0,5">
       <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #ResetMoveButton}">
+        <ia:EventTriggerBehavior EventName="Click" SourceObject="ResetMoveButton">
           <ia:InvokeCommandAction Command="{Binding ResetMoveCommand}"
                                   CommandParameter="{x:Static reactive:Unit.Default}"  />
         </ia:EventTriggerBehavior>
@@ -38,7 +38,7 @@
     </Button>
     <Button x:Name="MoveRightButton" Content="Move Right" Grid.Row="1" Grid.Column="4" Margin="0,0,5,5">
       <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #MoveRightButton}">
+        <ia:EventTriggerBehavior EventName="Click" SourceObject="MoveRightButton">
           <ia:InvokeCommandAction Command="{Binding MoveRightCommand}" />
         </ia:EventTriggerBehavior>
       </i:Interaction.Behaviors>

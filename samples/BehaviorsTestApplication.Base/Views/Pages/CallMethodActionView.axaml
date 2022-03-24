@@ -25,21 +25,21 @@
     </Border>
     <Button x:Name="DecrementButton" Content="Decrement" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5">
       <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #DecrementButton}">
+        <ia:EventTriggerBehavior EventName="Click" SourceObject="DecrementButton">
           <ia:CallMethodAction TargetObject="{Binding}" MethodName="DecrementCount" />
         </ia:EventTriggerBehavior>
       </i:Interaction.Behaviors>
     </Button>
     <Button Name="ResetButton" Content="Reset" Grid.Row="1" Grid.Column="2" Margin="0,0,0,5">
       <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #ResetButton}">
+        <ia:EventTriggerBehavior EventName="Click" SourceObject="ResetButton">
           <ia:ChangePropertyAction TargetObject="{Binding}" PropertyName="Count" Value="0" />
         </ia:EventTriggerBehavior>
       </i:Interaction.Behaviors>
     </Button>
     <Button x:Name="IncrementButton" Content="Increment" Grid.Row="1" Grid.Column="4" Margin="0,0,5,5">
       <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #IncrementButton}">
+        <ia:EventTriggerBehavior EventName="Click" SourceObject="IncrementButton">
           <ia:CallMethodAction TargetObject="{Binding}" MethodName="IncrementCount" />
         </ia:EventTriggerBehavior>
       </i:Interaction.Behaviors>
