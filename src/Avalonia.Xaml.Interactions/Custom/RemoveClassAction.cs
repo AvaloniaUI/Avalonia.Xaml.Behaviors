@@ -1,3 +1,4 @@
+using Avalonia.Controls;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
@@ -31,6 +32,7 @@ public class RemoveClassAction : AvaloniaObject, IAction
     /// <summary>
     /// Gets or sets the target styled element that class name that should be removed from. This is a avalonia property.
     /// </summary>
+    [ResolveByName]
     public IStyledElement? StyledElement
     {
         get => GetValue(StyledElementProperty);
