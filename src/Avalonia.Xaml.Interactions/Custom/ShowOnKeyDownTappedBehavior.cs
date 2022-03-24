@@ -25,6 +25,7 @@ public class ShowOnKeyDownTappedBehavior : Behavior<Control>
     /// <summary>
     /// Gets or sets the target control. This is a avalonia property.
     /// </summary>
+    [ResolveByName]
     public Control? TargetControl
     {
         get => GetValue(TargetControlProperty);
