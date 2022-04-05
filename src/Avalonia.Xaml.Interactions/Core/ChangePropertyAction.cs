@@ -29,14 +29,11 @@ public class ChangePropertyAction : AvaloniaObject, IAction
         {
             return null;
         }
-        if (propertyNames[0] != targetType.Name)
-        {
-            return null;
-        }
         for (var i = 0; i < registeredAttachedCount; i++)
         {
             var avaloniaProperty = registeredAttached[i];
-            if (avaloniaProperty.Name == propertyNames[1])
+            if (avaloniaProperty.OwnerType.Name == propertyNames[0] 
+                && avaloniaProperty.Name == propertyNames[1])
             {
                 return avaloniaProperty;
             }
