@@ -23,17 +23,14 @@ public class ChangePropertyAction : AvaloniaObject, IAction
         }
         var targetType = targetObject.GetType();
         var registeredAttached = AvaloniaPropertyRegistry.Instance.GetRegisteredAttached(targetType);
-        var registeredAttachedCount = registeredAttached.Count;
         var propertyNames = propertyName.Trim().Trim(s_trimChars).Split(s_separator);
         if (propertyNames.Length != 2)
         {
             return null;
         }
-        for (var i = 0; i < registeredAttachedCount; i++)
+        foreach (var avaloniaProperty in registeredAttached)
         {
-            var avaloniaProperty = registeredAttached[i];
-            if (avaloniaProperty.OwnerType.Name == propertyNames[0] 
-                && avaloniaProperty.Name == propertyNames[1])
+            if (avaloniaProperty.OwnerType.Name == propertyNames[0] && avaloniaProperty.Name == propertyNames[1])
             {
                 return avaloniaProperty;
             }
