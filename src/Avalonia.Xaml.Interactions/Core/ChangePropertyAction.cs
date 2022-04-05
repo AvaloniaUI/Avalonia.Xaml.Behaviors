@@ -25,7 +25,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
         var registeredAttached = AvaloniaPropertyRegistry.Instance.GetRegisteredAttached(targetType);
         var registeredAttachedCount = registeredAttached.Count;
         var propertyNames = propertyName.Trim().Trim(s_trimChars).Split(s_separator);
-        if (propertyNames.Count() != 2)
+        if (propertyNames.Length != 2)
         {
             return null;
         }
