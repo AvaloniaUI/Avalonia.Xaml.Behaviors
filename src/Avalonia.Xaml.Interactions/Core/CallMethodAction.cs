@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Xaml.Interactivity;
 
@@ -179,7 +180,7 @@ public class CallMethodAction : AvaloniaObject, IAction
         foreach (var method in _targetObjectType.GetRuntimeMethods())
         {
             if (string.Equals(method.Name, MethodName, StringComparison.Ordinal)
-                && method.ReturnType == typeof(void)
+                && (method.ReturnType == typeof(void) || method.ReturnType == typeof(Task))
                 && method.IsPublic)
             {
                 var parameters = method.GetParameters();
