@@ -1,4 +1,5 @@
 using System.Reactive.Disposables;
+using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
 
@@ -23,7 +24,7 @@ public abstract class AttachedToVisualTreeBehavior<T> : DisposingBehavior<T> whe
     }
 
     /// <summary>
-    /// Called after the behavior is attached to the <see cref="DisposingBehavior{T}.AssociatedObject"/> visual tree.
+    /// Called after the behavior is attached to the <see cref="Behavior{T}.AssociatedObject"/> visual tree.
     /// </summary>
     /// <param name="disposable">The group of disposable resources that are disposed together</param>
 	protected abstract void OnAttachedToVisualTree(CompositeDisposable disposable);
