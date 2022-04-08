@@ -18,29 +18,6 @@
                StrokeThickness="5" 
                Height="100" Width="100" />
     </Canvas>
-    <!--
-    <Button x:Name="MoveLeftButton" Content="Move Left (Hold Control)" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5">
-      <i:Interaction.Behaviors>
-        <ic:ButtonClickEventTriggerBehavior KeyModifiers="Control">
-          <ia:InvokeCommandAction Command="{Binding MoveLeftCommand}" />
-        </ic:ButtonClickEventTriggerBehavior>
-      </i:Interaction.Behaviors>
-    </Button>
-    <Button x:Name="ResetMoveButton" Content="Reset Move (Hold Control+Shift)" Grid.Row="1" Grid.Column="2" Margin="0,0,0,5">
-      <i:Interaction.Behaviors>
-        <ic:ButtonClickEventTriggerBehavior KeyModifiers="Control,Shift">
-          <ia:InvokeCommandAction Command="{Binding ResetMoveCommand}" />
-        </ic:ButtonClickEventTriggerBehavior>
-      </i:Interaction.Behaviors>
-    </Button>
-    <Button x:Name="MoveRightButton" Content="Move Right (Hold Shift)" Grid.Row="1" Grid.Column="4" Margin="0,0,5,5">
-      <i:Interaction.Behaviors>
-        <ic:ButtonClickEventTriggerBehavior KeyModifiers="Shift">
-          <ia:InvokeCommandAction Command="{Binding MoveRightCommand}" />
-        </ic:ButtonClickEventTriggerBehavior>
-      </i:Interaction.Behaviors>
-    </Button>
-    -->
     <Button Content="Left (Hold Control), Reset (Hold Shift), Right (Hold Control+Shift)" 
             Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" 
             Margin="5,0,0,5">
