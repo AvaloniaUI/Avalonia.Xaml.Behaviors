@@ -92,7 +92,7 @@ public class NthChildBehavior : Behavior<IControl>
         {
             if (owner.IsSet(ItemsControl.ItemCountProperty))
             {
-                return owner.GetValue(ItemsControl.ItemCountProperty);
+                return owner.GetValue(ItemsControl.ItemCountProperty) as int?;
             }
             else
             {
@@ -102,7 +102,7 @@ public class NthChildBehavior : Behavior<IControl>
                     IList list => list.Count,
                     IReadOnlyCollection<object> roc => roc.Count,
                     IEnumerable<object> enumerable => enumerable.Count(),
-                    { } enumerableObj => enumerableObj.OfType<object>().Count(),
+                    IEnumerable enumerableObj => enumerableObj.OfType<object>().Count(),
                     _ => null
                 };
             }

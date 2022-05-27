@@ -38,7 +38,7 @@ public class Interaction
             SetVisualTreeEventHandlersInitial(obj);
         }
 
-        return behaviorCollection;
+        return behaviorCollection as BehaviorCollection;
     }
 
     /// <summary>

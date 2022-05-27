@@ -73,7 +73,7 @@ public class ItemDragBehavior : Behavior<IControl>
     {
         if (AssociatedObject is { })
         {
-            AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, Released, RoutingStrategies.Tunnel);
+            AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, (Action<object?, PointerReleasedEventArgs>)Released, RoutingStrategies.Tunnel);
             AssociatedObject.AddHandler(InputElement.PointerPressedEvent, Pressed, RoutingStrategies.Tunnel);
             AssociatedObject.AddHandler(InputElement.PointerMovedEvent, Moved, RoutingStrategies.Tunnel);
             AssociatedObject.AddHandler(InputElement.PointerCaptureLostEvent, CaptureLost, RoutingStrategies.Tunnel);
@@ -85,7 +85,7 @@ public class ItemDragBehavior : Behavior<IControl>
     {
         if (AssociatedObject is { })
         {
-            AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, Released);
+            AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, (Action<object?, PointerReleasedEventArgs>)Released);
             AssociatedObject.RemoveHandler(InputElement.PointerPressedEvent, Pressed);
             AssociatedObject.RemoveHandler(InputElement.PointerMovedEvent, Moved);
             AssociatedObject.RemoveHandler(InputElement.PointerCaptureLostEvent, CaptureLost);
