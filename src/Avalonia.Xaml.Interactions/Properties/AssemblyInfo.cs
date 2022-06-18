@@ -8,4 +8,5 @@ using Avalonia.Metadata;
 [assembly: XmlnsDefinition("https://github.com/avaloniaui", "Avalonia.Xaml.Interactions.Custom")]
 [assembly: XmlnsDefinition("https://github.com/avaloniaui", "Avalonia.Xaml.Interactions.DragAndDrop")]
 [assembly: XmlnsDefinition("https://github.com/avaloniaui", "Avalonia.Xaml.Interactions.Draggable")]
+[assembly: XmlnsDefinition("https://github.com/avaloniaui", "Avalonia.Xaml.Interactions.Events")]
 [assembly: XmlnsDefinition("https://github.com/avaloniaui", "Avalonia.Xaml.Interactions.Responsive")]
