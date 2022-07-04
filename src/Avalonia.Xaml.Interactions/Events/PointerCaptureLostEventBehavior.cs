@@ -1,5 +1,4 @@
-﻿using Avalonia.Controls;
-using Avalonia.Input;
+﻿using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
 
@@ -8,14 +7,13 @@ namespace Avalonia.Xaml.Interactions.Events;
 /// <summary>
 /// 
 /// </summary>
-/// <typeparam name="T"></typeparam>
-public abstract class PointerCaptureLostEventBehavior<T> : Behavior<T> where T : Control
+public abstract class PointerCaptureLostEventBehavior : Behavior<Interactive>
 {
     /// <summary>
     /// 
     /// </summary>
     public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty = 
-        AvaloniaProperty.Register<PointerCaptureLostEventBehavior<T>, RoutingStrategies>(
+        AvaloniaProperty.Register<PointerCaptureLostEventBehavior, RoutingStrategies>(
             nameof(RoutingStrategies),
             RoutingStrategies.Direct);
 

@@ -1,5 +1,4 @@
-﻿using Avalonia.Controls;
-using Avalonia.Input;
+﻿using Avalonia.Input;
 using Avalonia.Input.TextInput;
 using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
@@ -9,14 +8,13 @@ namespace Avalonia.Xaml.Interactions.Events;
 /// <summary>
 /// 
 /// </summary>
-/// <typeparam name="T"></typeparam>
-public abstract class TextInputOptionsQueryEventBehavior<T> : Behavior<T> where T : Control
+public abstract class TextInputOptionsQueryEventBehavior : Behavior<Interactive>
 {
     /// <summary>
     /// 
     /// </summary>
     public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty = 
-        AvaloniaProperty.Register<TextInputOptionsQueryEventBehavior<T>, RoutingStrategies>(
+        AvaloniaProperty.Register<TextInputOptionsQueryEventBehavior, RoutingStrategies>(
             nameof(RoutingStrategies),
             RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
 

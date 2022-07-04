@@ -1,5 +1,4 @@
-﻿using Avalonia.Controls;
-using Avalonia.Input;
+﻿using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
 
@@ -8,14 +7,13 @@ namespace Avalonia.Xaml.Interactions.Events;
 /// <summary>
 /// 
 /// </summary>
-/// <typeparam name="T"></typeparam>
-public abstract class DoubleTappedEventBehavior<T> : Behavior<T> where T : Control
+public abstract class DoubleTappedEventBehavior : Behavior<Interactive>
 {
     /// <summary>
     /// 
     /// </summary>
     public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty = 
-        AvaloniaProperty.Register<DoubleTappedEventBehavior<T>, RoutingStrategies>(
+        AvaloniaProperty.Register<DoubleTappedEventBehavior, RoutingStrategies>(
             nameof(RoutingStrategies),
             RoutingStrategies.Bubble);
 

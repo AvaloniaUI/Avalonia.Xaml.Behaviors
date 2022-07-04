@@ -1,5 +1,4 @@
-﻿using Avalonia.Controls;
-using Avalonia.Input;
+﻿using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
 
@@ -8,14 +7,13 @@ namespace Avalonia.Xaml.Interactions.Events;
 /// <summary>
 /// 
 /// </summary>
-/// <typeparam name="T"></typeparam>
-public abstract class PointerPressedEventBehavior<T> : Behavior<T> where T : Control
+public abstract class PointerPressedEventBehavior : Behavior<Interactive>
 {
     /// <summary>
     /// 
     /// </summary>
     public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty = 
-        AvaloniaProperty.Register<PointerPressedEventBehavior<T>, RoutingStrategies>(
+        AvaloniaProperty.Register<PointerPressedEventBehavior, RoutingStrategies>(
             nameof(RoutingStrategies),
             RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
 
