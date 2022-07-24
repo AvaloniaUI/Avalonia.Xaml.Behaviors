@@ -73,10 +73,10 @@ public class ItemDragBehavior : Behavior<IControl>
     {
         if (AssociatedObject is { })
         {
-            AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, Released, RoutingStrategies.Tunnel);
-            AssociatedObject.AddHandler(InputElement.PointerPressedEvent, Pressed, RoutingStrategies.Tunnel);
-            AssociatedObject.AddHandler(InputElement.PointerMovedEvent, Moved, RoutingStrategies.Tunnel);
-            AssociatedObject.AddHandler(InputElement.PointerCaptureLostEvent, CaptureLost, RoutingStrategies.Tunnel);
+            AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, PointerReleased, RoutingStrategies.Tunnel);
+            AssociatedObject.AddHandler(InputElement.PointerPressedEvent, PointerPressed, RoutingStrategies.Tunnel);
+            AssociatedObject.AddHandler(InputElement.PointerMovedEvent, PointerMoved, RoutingStrategies.Tunnel);
+            AssociatedObject.AddHandler(InputElement.PointerCaptureLostEvent, PointerCaptureLost, RoutingStrategies.Tunnel);
         }
     }
 
@@ -85,14 +85,14 @@ public class ItemDragBehavior : Behavior<IControl>
     {
         if (AssociatedObject is { })
         {
-            AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, Released);
-            AssociatedObject.RemoveHandler(InputElement.PointerPressedEvent, Pressed);
-            AssociatedObject.RemoveHandler(InputElement.PointerMovedEvent, Moved);
-            AssociatedObject.RemoveHandler(InputElement.PointerCaptureLostEvent, CaptureLost);
+            AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, PointerReleased);
+            AssociatedObject.RemoveHandler(InputElement.PointerPressedEvent, PointerPressed);
+            AssociatedObject.RemoveHandler(InputElement.PointerMovedEvent, PointerMoved);
+            AssociatedObject.RemoveHandler(InputElement.PointerCaptureLostEvent, PointerCaptureLost);
         }
     }
 
-    private void Pressed(object? sender, PointerPressedEventArgs e)
+    private void PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
         if (properties.IsLeftButtonPressed 
@@ -117,7 +117,7 @@ public class ItemDragBehavior : Behavior<IControl>
         }
     }
 
-    private void Released(object? sender, PointerReleasedEventArgs e)
+    private void PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
         if (Equals(e.Pointer.Captured, AssociatedObject))
         {
@@ -130,7 +130,7 @@ public class ItemDragBehavior : Behavior<IControl>
         }
     }
 
-    private void CaptureLost(object? sender, PointerCaptureLostEventArgs e)
+    private void PointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
     {
         Released();
     }
@@ -241,7 +241,7 @@ public class ItemDragBehavior : Behavior<IControl>
         }
     }
 
-    private void Moved(object? sender, PointerEventArgs e)
+    private void PointerMoved(object? sender, PointerEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
         if (Equals(e.Pointer.Captured, AssociatedObject)

@@ -92,11 +92,11 @@ public class NthChildBehavior : Behavior<IControl>
         {
             if (owner.IsSet(ItemsControl.ItemCountProperty))
             {
-                return owner.GetValue(ItemsControl.ItemCountProperty);
+                return (int?)owner.GetValue(ItemsControl.ItemCountProperty);
             }
             else
             {
-                var items = owner.GetValue(ItemsControl.ItemsProperty);
+                var items = (IEnumerable?)owner.GetValue(ItemsControl.ItemsProperty);
                 return items switch
                 {
                     IList list => list.Count,

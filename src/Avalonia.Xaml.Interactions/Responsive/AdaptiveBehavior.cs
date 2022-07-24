@@ -176,7 +176,7 @@ public class AdaptiveBehavior : Behavior<Control>
 
     private static void Add(Control targetControl, string? className, bool isPseudoClass)
     {
-        if (string.IsNullOrEmpty(className) || targetControl.Classes.Contains(className!))
+        if (className is null || string.IsNullOrEmpty(className) || targetControl.Classes.Contains(className!))
         {
             return;
         }
@@ -193,7 +193,7 @@ public class AdaptiveBehavior : Behavior<Control>
 
     private static void Remove(Control targetControl, string? className, bool isPseudoClass)
     {
-        if (string.IsNullOrEmpty(className) || !targetControl.Classes.Contains(className!))
+        if (className is null || string.IsNullOrEmpty(className) || !targetControl.Classes.Contains(className!))
         {
             return;
         }

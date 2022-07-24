@@ -20,5 +20,5 @@ public class BehaviorCollectionTemplate : ITemplate
     /// 
     /// </summary>
     /// <returns></returns>
-    object? ITemplate.Build() => TemplateContent.Load<BehaviorCollection>(Content).Result;
+    object ITemplate.Build() => TemplateContent.Load<BehaviorCollection>(Content).Result;
 }

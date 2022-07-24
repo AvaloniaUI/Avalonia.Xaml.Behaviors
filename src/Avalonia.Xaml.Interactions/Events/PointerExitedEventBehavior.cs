@@ -7,13 +7,13 @@ namespace Avalonia.Xaml.Interactions.Events;
 /// <summary>
 /// 
 /// </summary>
-public abstract class PointerLeaveEventBehavior : Behavior<Interactive>
+public abstract class PointerExitedEventBehavior : Behavior<Interactive>
 {
     /// <summary>
     /// 
     /// </summary>
     public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty = 
-        AvaloniaProperty.Register<PointerLeaveEventBehavior, RoutingStrategies>(
+        AvaloniaProperty.Register<PointerExitedEventBehavior, RoutingStrategies>(
             nameof(RoutingStrategies),
             RoutingStrategies.Direct);
 
@@ -29,13 +29,13 @@ public abstract class PointerLeaveEventBehavior : Behavior<Interactive>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        AssociatedObject?.AddHandler(InputElement.PointerLeaveEvent, PointerLeave, RoutingStrategies);
+        AssociatedObject?.AddHandler(InputElement.PointerExitedEvent, PointerLeave, RoutingStrategies);
     }
 
     /// <inheritdoc />
     protected override void OnDetachedFromVisualTree()
     {
-        AssociatedObject?.RemoveHandler(InputElement.PointerLeaveEvent, PointerLeave);
+        AssociatedObject?.RemoveHandler(InputElement.PointerExitedEvent, PointerLeave);
     }
 
     private void PointerLeave(object? sender, PointerEventArgs e)
