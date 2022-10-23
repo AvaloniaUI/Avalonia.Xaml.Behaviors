@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.ReactiveUI;
 using Avalonia.Web.Blazor;
 
@@ -9,7 +10,8 @@ public partial class App
     {
         base.OnParametersSet();
 
-        WebAppBuilder.Configure<BehaviorsTestApplication.App>()
+        AppBuilder.Configure<BehaviorsTestApplication.App>()
+            .UseBlazor()
             .UseReactiveUI()
             .SetupWithSingleViewLifetime();
     }
