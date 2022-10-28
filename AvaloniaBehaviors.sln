@@ -41,8 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{40A43022
 		build\SourceLink.props = build\SourceLink.props
 		build\XUnit.props = build\XUnit.props
 		build\Avalonia.ReactiveUI.props = build\Avalonia.ReactiveUI.props
-		build\Avalonia.Web.Blazor.props = build\Avalonia.Web.Blazor.props
 		build\Avalonia.Themes.Fluent.props = build\Avalonia.Themes.Fluent.props
+		build\Avalonia.Web.props = build\Avalonia.Web.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{721A55B7-C5B0-44E2-803A-56E291C672FE}"
@@ -71,6 +71,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplication.Desktop", "samples\BehaviorsTestApplication.Desktop\BehaviorsTestApplication.Desktop.csproj", "{51CA7391-F72F-4649-9761-9302EE3AA533}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorsTestApplication.Web", "samples\BehaviorsTestApplication.Web\BehaviorsTestApplication.Web.csproj", "{B32B67A3-D27F-4908-8399-1E0A5D7AA317}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{9D4D9F1A-6EE5-4B7D-8991-0601F80F39CD}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\pages.yml = .github\workflows\pages.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,6 +147,7 @@ Global
 		{D5855901-BEEF-4179-96E8-9DD276C4DAEE} = {9B9E3891-2366-4253-A952-D08BCEB71098}
 		{51CA7391-F72F-4649-9761-9302EE3AA533} = {9B9E3891-2366-4253-A952-D08BCEB71098}
 		{B32B67A3-D27F-4908-8399-1E0A5D7AA317} = {9B9E3891-2366-4253-A952-D08BCEB71098}
+		{9D4D9F1A-6EE5-4B7D-8991-0601F80F39CD} = {2913483A-3E55-44AE-86BB-88511F372191}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E64CD420-15B1-487C-9806-41EBE6DC15A4}
