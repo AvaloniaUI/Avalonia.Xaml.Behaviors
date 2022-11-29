@@ -22,6 +22,7 @@ public class ItemDragBehavior : Behavior<Control>
     private int _targetIndex;
     private ItemsControl? _itemsControl;
     private Control? _draggedContainer;
+    private bool _captured;
 
     /// <summary>
     /// 
@@ -113,26 +114,27 @@ public class ItemDragBehavior : Behavior<Control>
 
             AddTransforms(_itemsControl);
 
-            e.Pointer.Capture(AssociatedObject);
+            _captured = true;
         }
     }
 
     private void PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (Equals(e.Pointer.Captured, AssociatedObject))
+        if (_captured)
         {
             if (e.InitialPressMouseButton == MouseButton.Left)
             {
                 Released();
             }
 
-            e.Pointer.Capture(null); 
+            _captured = false;
         }
     }
 
     private void PointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
     {
         Released();
+        _captured = false;
     }
 
     private void Released()
@@ -244,7 +246,7 @@ public class ItemDragBehavior : Behavior<Control>
     private void PointerMoved(object? sender, PointerEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
-        if (Equals(e.Pointer.Captured, AssociatedObject)
+        if (_captured
             && properties.IsLeftButtonPressed)
         {
             if (_itemsControl?.Items is null || _draggedContainer?.RenderTransform is null || !_enableDrag)
