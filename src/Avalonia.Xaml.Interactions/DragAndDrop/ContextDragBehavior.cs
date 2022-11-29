@@ -15,6 +15,7 @@ public class ContextDragBehavior : Behavior<Control>
     private Point _dragStartPoint;
     private PointerEventArgs? _triggerEvent;
     private bool _lock;
+    private bool _captured;
 
     /// <summary>
     /// 
@@ -82,6 +83,7 @@ public class ContextDragBehavior : Behavior<Control>
         AssociatedObject?.AddHandler(InputElement.PointerPressedEvent, AssociatedObject_PointerPressed, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
         AssociatedObject?.AddHandler(InputElement.PointerReleasedEvent, AssociatedObject_PointerReleased, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
         AssociatedObject?.AddHandler(InputElement.PointerMovedEvent, AssociatedObject_PointerMoved, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+        AssociatedObject?.AddHandler(InputElement.PointerCaptureLostEvent, AssociatedObject_CaptureLost, RoutingStrategies.Direct | RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
     }
 
     /// <inheritdoc />
@@ -90,6 +92,7 @@ public class ContextDragBehavior : Behavior<Control>
         AssociatedObject?.RemoveHandler(InputElement.PointerPressedEvent, AssociatedObject_PointerPressed);
         AssociatedObject?.RemoveHandler(InputElement.PointerReleasedEvent, AssociatedObject_PointerReleased);
         AssociatedObject?.RemoveHandler(InputElement.PointerMovedEvent, AssociatedObject_PointerMoved);
+        AssociatedObject?.RemoveHandler(InputElement.PointerCaptureLostEvent, AssociatedObject_CaptureLost);
     }
 
     private async Task DoDragDrop(PointerEventArgs triggerEvent, object? value)
@@ -119,6 +122,12 @@ public class ContextDragBehavior : Behavior<Control>
         await DragDrop.DoDragDrop(triggerEvent, data, effect);
     }
 
+    private void Released()
+    {
+        _triggerEvent = null;
+        _lock = false;
+    }
+
     private void AssociatedObject_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
@@ -130,29 +139,28 @@ public class ContextDragBehavior : Behavior<Control>
                 _dragStartPoint = e.GetPosition(null);
                 _triggerEvent = e;
                 _lock = true;
-                e.Pointer.Capture(AssociatedObject);
+                _captured = true;
             }
         }
     }
 
     private void AssociatedObject_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (Equals(e.Pointer.Captured, AssociatedObject))
+        if (_captured)
         {
             if (e.InitialPressMouseButton == MouseButton.Left && _triggerEvent is { })
             {
-                _triggerEvent = null;
-                _lock = false;
+                Released();
             }
 
-            e.Pointer.Capture(null);
+            _captured = false;
         }
     }
 
     private async void AssociatedObject_PointerMoved(object? sender, PointerEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
-        if (Equals(e.Pointer.Captured, AssociatedObject) 
+        if (_captured
             && properties.IsLeftButtonPressed &&
             _triggerEvent is { })
         {
@@ -183,5 +191,11 @@ public class ContextDragBehavior : Behavior<Control>
                 _triggerEvent = null;
             }
         }
+    }
+
+    private void AssociatedObject_CaptureLost(object? sender, PointerCaptureLostEventArgs e)
+    {
+        Released();
+        _captured = false;
     }
 }
