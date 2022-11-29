@@ -16,7 +16,7 @@ public sealed class DragControlBehavior : Behavior<Control>
     public static readonly StyledProperty<Control?> TargetControlProperty =
         AvaloniaProperty.Register<DragControlBehavior, Control?>(nameof(TargetControl));
 
-    private IControl? _parent;
+    private Control? _parent;
     private Point _previous;
 
     /// <summary>

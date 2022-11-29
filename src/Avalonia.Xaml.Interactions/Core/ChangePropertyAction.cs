@@ -108,7 +108,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
             return false;
         }
 
-        if (targetObject is IAvaloniaObject avaloniaObject)
+        if (targetObject is AvaloniaObject avaloniaObject)
         {
             if (PropertyName.Contains("."))
             {
@@ -207,7 +207,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
         }
     }
 
-    private void UpdateAvaloniaPropertyValue(IAvaloniaObject avaloniaObject, AvaloniaProperty property)
+    private void UpdateAvaloniaPropertyValue(AvaloniaObject avaloniaObject, AvaloniaProperty property)
     {
         ValidateAvaloniaProperty(property);
 

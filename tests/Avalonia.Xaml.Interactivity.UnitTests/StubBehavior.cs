@@ -27,13 +27,13 @@ public class StubBehavior : AvaloniaObject, IBehavior
         Actions = new ActionCollection();
     }
 
-    public IAvaloniaObject? AssociatedObject
+    public AvaloniaObject? AssociatedObject
     {
         get;
         private set;
     }
 
-    public void Attach(IAvaloniaObject? avaloniaObject)
+    public void Attach(AvaloniaObject? avaloniaObject)
     {
         AssociatedObject = avaloniaObject;
         AttachCount++;

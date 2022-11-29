@@ -4,7 +4,7 @@ using Avalonia.Xaml.Interactivity;
 namespace Avalonia.Xaml.Interactions.Custom;
 
 /// <summary>
-/// Removes a specified <see cref="RemoveClassAction.ClassName"/> from <see cref="IStyledElement.Classes"/> collection when invoked. 
+/// Removes a specified <see cref="RemoveClassAction.ClassName"/> from <see cref="StyledElement.Classes"/> collection when invoked. 
 /// </summary>
 public class RemoveClassAction : AvaloniaObject, IAction
 {
@@ -17,8 +17,8 @@ public class RemoveClassAction : AvaloniaObject, IAction
     /// <summary>
     /// Identifies the <seealso cref="StyledElement"/> avalonia property.
     /// </summary>
-    public static readonly StyledProperty<IStyledElement?> StyledElementProperty =
-        AvaloniaProperty.Register<RemoveClassAction, IStyledElement?>(nameof(StyledElement));
+    public static readonly StyledProperty<StyledElement?> StyledElementProperty =
+        AvaloniaProperty.Register<RemoveClassAction, StyledElement?>(nameof(StyledElement));
 
     /// <summary>
     /// Gets or sets the class name that should be removed. This is a avalonia property.
@@ -33,7 +33,7 @@ public class RemoveClassAction : AvaloniaObject, IAction
     /// Gets or sets the target styled element that class name that should be removed from. This is a avalonia property.
     /// </summary>
     [ResolveByName]
-    public IStyledElement? StyledElement
+    public StyledElement? StyledElement
     {
         get => GetValue(StyledElementProperty);
         set => SetValue(StyledElementProperty, value);
@@ -46,7 +46,7 @@ public class RemoveClassAction : AvaloniaObject, IAction
     /// <returns>True if the class is successfully added; else false.</returns>
     public object Execute(object? sender, object? parameter)
     {
-        var target = GetValue(StyledElementProperty) is { } ? StyledElement : sender as IStyledElement;
+        var target = GetValue(StyledElementProperty) is { } ? StyledElement : sender as StyledElement;
         if (target is null || string.IsNullOrEmpty(ClassName))
         {
             return false;

@@ -15,7 +15,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <remarks>
 /// Supported classes: nth-first-child, nth-last-child, nth-odd-child, nth-even-child
 /// </remarks>
-public class NthChildBehavior : Behavior<IControl>
+public class NthChildBehavior : Behavior<Control>
 {
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
@@ -35,7 +35,7 @@ public class NthChildBehavior : Behavior<IControl>
         }
     }
 
-    private void Enable(bool value, IControl control)
+    private void Enable(bool value, Control control)
     {
         var generator = control switch {
             ItemsPresenter ip => ip.ItemContainerGenerator,

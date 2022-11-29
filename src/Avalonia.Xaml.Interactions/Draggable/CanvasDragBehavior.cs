@@ -14,7 +14,7 @@ public class CanvasDragBehavior : Behavior<Control>
 {
     private bool _enableDrag;
     private Point _start;
-    private IControl? _parent;
+    private Control? _parent;
     private Control? _draggedContainer;
     private Control? _adorner;
 
@@ -151,7 +151,7 @@ public class CanvasDragBehavior : Behavior<Control>
         }
     }
 
-    private void SetDraggingPseudoClasses(IControl control, bool isDragging)
+    private void SetDraggingPseudoClasses(Control control, bool isDragging)
     {
         if (isDragging)
         {

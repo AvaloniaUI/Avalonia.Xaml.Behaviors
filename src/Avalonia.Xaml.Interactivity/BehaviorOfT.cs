@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactivity;
 /// and allow for typed associated objects.
 /// </summary>
 /// <typeparam name="T">The object type to attach to</typeparam>
-public abstract class Behavior<T> : Behavior where T : class, IAvaloniaObject
+public abstract class Behavior<T> : Behavior where T : AvaloniaObject
 {
     /// <summary>
     /// Gets the object to which this behavior is attached.

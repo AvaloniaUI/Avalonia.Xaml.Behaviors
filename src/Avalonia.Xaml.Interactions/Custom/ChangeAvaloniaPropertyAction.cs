@@ -21,8 +21,8 @@ public class ChangeAvaloniaPropertyAction : AvaloniaObject, IAction
     /// <summary>
     /// Identifies the <seealso cref="TargetObject"/> avalonia property.
     /// </summary>
-    public static readonly StyledProperty<IAvaloniaObject?> TargetObjectProperty =
-        AvaloniaProperty.Register<ChangePropertyAction, IAvaloniaObject?>(nameof(TargetObject));
+    public static readonly StyledProperty<AvaloniaObject?> TargetObjectProperty =
+        AvaloniaProperty.Register<ChangePropertyAction, AvaloniaObject?>(nameof(TargetObject));
 
     /// <summary>
     /// Identifies the <seealso cref="Value"/> avalonia property.
@@ -53,7 +53,7 @@ public class ChangeAvaloniaPropertyAction : AvaloniaObject, IAction
     /// If <seealso cref="TargetObject"/> is not set or cannot be resolved, the sender of <seealso cref="Execute"/> will be used. This is a avalonia property.
     /// </summary>
     [ResolveByName]
-    public IAvaloniaObject? TargetObject
+    public AvaloniaObject? TargetObject
     {
         get => GetValue(TargetObjectProperty);
         set => SetValue(TargetObjectProperty, value);
@@ -68,7 +68,7 @@ public class ChangeAvaloniaPropertyAction : AvaloniaObject, IAction
     public virtual object Execute(object? sender, object? parameter)
     {
         var targetObject = GetValue(TargetObjectProperty) is { } ? TargetObject : sender;
-        if (targetObject is IAvaloniaObject avaloniaObject && TargetProperty is { })
+        if (targetObject is AvaloniaObject avaloniaObject && TargetProperty is { })
         {
             UpdateAvaloniaPropertyValue(avaloniaObject, TargetProperty);
             return true;
@@ -77,7 +77,7 @@ public class ChangeAvaloniaPropertyAction : AvaloniaObject, IAction
         return false;
     }
 
-    private void UpdateAvaloniaPropertyValue(IAvaloniaObject targetObject, AvaloniaProperty targetProperty)
+    private void UpdateAvaloniaPropertyValue(AvaloniaObject targetObject, AvaloniaProperty targetProperty)
     {
         ValidateTargetProperty(targetProperty);
 

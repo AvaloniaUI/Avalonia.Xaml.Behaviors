@@ -95,7 +95,7 @@ public class TypedDragBehavior : Behavior<Control>
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
         if (properties.IsLeftButtonPressed)
         {
-            if (e.Source is IControl control 
+            if (e.Source is Control control 
                 && AssociatedObject?.DataContext == control.DataContext
                 && DataType is not null
                 && DataType.IsAssignableFrom(control.DataContext?.GetType()))

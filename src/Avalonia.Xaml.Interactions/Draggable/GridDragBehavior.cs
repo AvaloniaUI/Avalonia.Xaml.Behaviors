@@ -36,7 +36,7 @@ public class GridDragBehavior : Behavior<Control>
         AvaloniaProperty.Register<GridDragBehavior, bool>(nameof(CopyRowSpan));
 
     private bool _enableDrag;
-    private IControl? _parent;
+    private Control? _parent;
     private Control? _draggedContainer;
     private Control? _adorner;
         
@@ -306,7 +306,7 @@ public class GridDragBehavior : Behavior<Control>
         }
     }
 
-    private void SetDraggingPseudoClasses(IControl control, bool isDragging)
+    private void SetDraggingPseudoClasses(Control control, bool isDragging)
     {
         if (isDragging)
         {

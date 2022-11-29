@@ -13,7 +13,7 @@ namespace Avalonia.Xaml.Interactions.Draggable;
 /// <summary>
 /// 
 /// </summary>
-public class ItemDragBehavior : Behavior<IControl>
+public class ItemDragBehavior : Behavior<Control>
 {
     private bool _enableDrag;
     private bool _dragStarted;
@@ -21,7 +21,7 @@ public class ItemDragBehavior : Behavior<IControl>
     private int _draggedIndex;
     private int _targetIndex;
     private ItemsControl? _itemsControl;
-    private IControl? _draggedContainer;
+    private Control? _draggedContainer;
 
     /// <summary>
     /// 
@@ -376,7 +376,7 @@ public class ItemDragBehavior : Behavior<IControl>
         }
     }
 
-    private void SetDraggingPseudoClasses(IControl control, bool isDragging)
+    private void SetDraggingPseudoClasses(Control control, bool isDragging)
     {
         if (isDragging)
         {
@@ -388,7 +388,7 @@ public class ItemDragBehavior : Behavior<IControl>
         }
     }
 
-    private void SetTranslateTransform(IControl control, double x, double y)
+    private void SetTranslateTransform(Control control, double x, double y)
     {
         var transformBuilder = new TransformOperations.Builder(1);
         transformBuilder.AppendTranslate(x, y);
