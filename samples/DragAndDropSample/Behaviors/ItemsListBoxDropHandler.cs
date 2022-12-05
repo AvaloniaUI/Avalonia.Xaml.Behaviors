@@ -12,7 +12,7 @@ public class ItemsListBoxDropHandler : DropHandlerBase
     {
         if (sourceContext is not T sourceItem
             || targetContext is not MainWindowViewModel vm
-            || listBox.GetVisualAt(e.GetPosition(listBox)) is not IControl targetControl
+            || listBox.GetVisualAt(e.GetPosition(listBox)) is not Control targetControl
             || targetControl.DataContext is not T targetItem)
         {
             return false;
@@ -61,7 +61,7 @@ public class ItemsListBoxDropHandler : DropHandlerBase
         
     public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is IControl && sender is ListBox listBox)
+        if (e.Source is Control && sender is ListBox listBox)
         {
             return Validate<ItemViewModel>(listBox, e, sourceContext, targetContext, false);
         }
@@ -70,7 +70,7 @@ public class ItemsListBoxDropHandler : DropHandlerBase
 
     public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is IControl && sender is ListBox listBox)
+        if (e.Source is Control && sender is ListBox listBox)
         {
             return Validate<ItemViewModel>(listBox, e, sourceContext, targetContext, true);
         }

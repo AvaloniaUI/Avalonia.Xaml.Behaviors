@@ -9,7 +9,7 @@ namespace Avalonia.Xaml.Interactivity;
 /// <summary>
 /// Represents a collection of <see cref="IBehavior"/>'s with a shared <see cref="AssociatedObject"/>.
 /// </summary>
-public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
+public class BehaviorCollection : AvaloniaList<AvaloniaObject>
 {
     // After a VectorChanged event we need to compare the current state of the collection
     // with the old collection so that we can call Detach on all removed items.
@@ -24,20 +24,20 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
     }
 
     /// <summary>
-    /// Gets the <see cref="IAvaloniaObject"/> to which the <see cref="BehaviorCollection"/> is attached.
+    /// Gets the <see cref="AvaloniaObject"/> to which the <see cref="BehaviorCollection"/> is attached.
     /// </summary>
-    public IAvaloniaObject? AssociatedObject
+    public AvaloniaObject? AssociatedObject
     {
         get;
         private set;
     }
 
     /// <summary>
-    /// Attaches the collection of behaviors to the specified <see cref="IAvaloniaObject"/>.
+    /// Attaches the collection of behaviors to the specified <see cref="AvaloniaObject"/>.
     /// </summary>
-    /// <param name="associatedObject">The <see cref="IAvaloniaObject"/> to which to attach.</param>
-    /// <exception cref="InvalidOperationException">The <see cref="BehaviorCollection"/> is already attached to a different <see cref="IAvaloniaObject"/>.</exception>
-    public void Attach(IAvaloniaObject? associatedObject)
+    /// <param name="associatedObject">The <see cref="AvaloniaObject"/> to which to attach.</param>
+    /// <exception cref="InvalidOperationException">The <see cref="BehaviorCollection"/> is already attached to a different <see cref="AvaloniaObject"/>.</exception>
+    public void Attach(AvaloniaObject? associatedObject)
     {
         if (Equals(associatedObject, AssociatedObject))
         {
@@ -128,7 +128,7 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
             case NotifyCollectionChangedAction.Add:
             {
                 var eventIndex = eventArgs.NewStartingIndex;
-                var changedItem = eventArgs.NewItems?[0] as IAvaloniaObject;
+                var changedItem = eventArgs.NewItems?[0] as AvaloniaObject;
                 _oldCollection.Insert(eventIndex, VerifiedAttach(changedItem));
             }
                 break;
@@ -138,7 +138,7 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
                 var eventIndex = eventArgs.OldStartingIndex;
                 eventIndex = eventIndex == -1 ? 0 : eventIndex;
 
-                var changedItem = eventArgs.NewItems?[0] as IAvaloniaObject;
+                var changedItem = eventArgs.NewItems?[0] as AvaloniaObject;
 
                 var oldItem = _oldCollection[eventIndex];
                 if (oldItem.AssociatedObject is { })
@@ -173,7 +173,7 @@ public class BehaviorCollection : AvaloniaList<IAvaloniaObject>
 #endif
     }
 
-    private IBehavior VerifiedAttach(IAvaloniaObject? item)
+    private IBehavior VerifiedAttach(AvaloniaObject? item)
     {
         if (!(item is IBehavior behavior))
         {

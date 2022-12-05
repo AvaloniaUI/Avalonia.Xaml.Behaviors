@@ -4,7 +4,7 @@ using Avalonia.Xaml.Interactivity;
 namespace Avalonia.Xaml.Interactions.Custom;
 
 /// <summary>
-/// Adds a specified <see cref="AddClassAction.ClassName"/> to the <see cref="IStyledElement.Classes"/> collection when invoked. 
+/// Adds a specified <see cref="AddClassAction.ClassName"/> to the <see cref="StyledElement.Classes"/> collection when invoked. 
 /// </summary>
 public class AddClassAction : AvaloniaObject, IAction
 {
@@ -17,8 +17,8 @@ public class AddClassAction : AvaloniaObject, IAction
     /// <summary>
     /// Identifies the <seealso cref="StyledElement"/> avalonia property.
     /// </summary>
-    public static readonly StyledProperty<IStyledElement?> StyledElementProperty =
-        AvaloniaProperty.Register<AddClassAction, IStyledElement?>(nameof(StyledElement));
+    public static readonly StyledProperty<StyledElement?> StyledElementProperty =
+        AvaloniaProperty.Register<AddClassAction, StyledElement?>(nameof(StyledElement));
 
     /// <summary>
     /// Identifies the <seealso cref="RemoveIfExists"/> avalonia property.
@@ -39,7 +39,7 @@ public class AddClassAction : AvaloniaObject, IAction
     /// Gets or sets the target styled element that class name that should be added to. This is a avalonia property.
     /// </summary>
     [ResolveByName]
-    public IStyledElement? StyledElement
+    public StyledElement? StyledElement
     {
         get => GetValue(StyledElementProperty);
         set => SetValue(StyledElementProperty, value);
@@ -62,7 +62,7 @@ public class AddClassAction : AvaloniaObject, IAction
     /// <returns>True if the class is successfully added; else false.</returns>
     public object Execute(object? sender, object? parameter)
     {
-        var target = GetValue(StyledElementProperty) is { } ? StyledElement : sender as IStyledElement;
+        var target = GetValue(StyledElementProperty) is { } ? StyledElement : sender as StyledElement;
         if (target is null || string.IsNullOrEmpty(ClassName))
         {
             return false;

@@ -13,7 +13,7 @@ namespace Avalonia.Xaml.Interactions.Draggable;
 /// <summary>
 /// 
 /// </summary>
-public class ItemDragBehavior : Behavior<IControl>
+public class ItemDragBehavior : Behavior<Control>
 {
     private bool _enableDrag;
     private bool _dragStarted;
@@ -21,7 +21,8 @@ public class ItemDragBehavior : Behavior<IControl>
     private int _draggedIndex;
     private int _targetIndex;
     private ItemsControl? _itemsControl;
-    private IControl? _draggedContainer;
+    private Control? _draggedContainer;
+    private bool _captured;
 
     /// <summary>
     /// 
@@ -113,26 +114,27 @@ public class ItemDragBehavior : Behavior<IControl>
 
             AddTransforms(_itemsControl);
 
-            e.Pointer.Capture(AssociatedObject);
+            _captured = true;
         }
     }
 
     private void PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (Equals(e.Pointer.Captured, AssociatedObject))
+        if (_captured)
         {
             if (e.InitialPressMouseButton == MouseButton.Left)
             {
                 Released();
             }
 
-            e.Pointer.Capture(null); 
+            _captured = false;
         }
     }
 
     private void PointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
     {
         Released();
+        _captured = false;
     }
 
     private void Released()
@@ -244,7 +246,7 @@ public class ItemDragBehavior : Behavior<IControl>
     private void PointerMoved(object? sender, PointerEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
-        if (Equals(e.Pointer.Captured, AssociatedObject)
+        if (_captured
             && properties.IsLeftButtonPressed)
         {
             if (_itemsControl?.Items is null || _draggedContainer?.RenderTransform is null || !_enableDrag)
@@ -376,7 +378,7 @@ public class ItemDragBehavior : Behavior<IControl>
         }
     }
 
-    private void SetDraggingPseudoClasses(IControl control, bool isDragging)
+    private void SetDraggingPseudoClasses(Control control, bool isDragging)
     {
         if (isDragging)
         {
@@ -388,7 +390,7 @@ public class ItemDragBehavior : Behavior<IControl>
         }
     }
 
-    private void SetTranslateTransform(IControl control, double x, double y)
+    private void SetTranslateTransform(Control control, double x, double y)
     {
         var transformBuilder = new TransformOperations.Builder(1);
         transformBuilder.AppendTranslate(x, y);

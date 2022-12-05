@@ -49,7 +49,7 @@ public class PopupAction : AvaloniaObject, IAction
                 IsLightDismissEnabled = true
             };
 
-            if (sender is IControl control)
+            if (sender is Control control)
             {
                 BindToDataContext(control, _popup);
             }
@@ -61,7 +61,7 @@ public class PopupAction : AvaloniaObject, IAction
         return null;
     }
 
-    private static void BindToDataContext(IControl source, IControl target)
+    private static void BindToDataContext(Control source, Control target)
     {
         if (source is null)
         {

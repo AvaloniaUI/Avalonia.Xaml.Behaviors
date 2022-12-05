@@ -12,7 +12,7 @@ public class NodesListBoxDropHandler : DropHandlerBase
     {
         if (sourceContext is not T sourceNode
             || targetContext is not MainWindowViewModel vm
-            || listBox.GetVisualAt(e.GetPosition(listBox)) is not IControl targetControl
+            || listBox.GetVisualAt(e.GetPosition(listBox)) is not Control targetControl
             || targetControl.DataContext is not T targetNode)
         {
             return false;
@@ -61,7 +61,7 @@ public class NodesListBoxDropHandler : DropHandlerBase
         
     public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is IControl && sender is ListBox listBox)
+        if (e.Source is Control && sender is ListBox listBox)
         {
             return Validate<NodeViewModel>(listBox, e, sourceContext, targetContext, false);
         }
@@ -70,7 +70,7 @@ public class NodesListBoxDropHandler : DropHandlerBase
 
     public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is IControl && sender is ListBox listBox)
+        if (e.Source is Control && sender is ListBox listBox)
         {
             return Validate<NodeViewModel>(listBox, e, sourceContext, targetContext, true);
         }

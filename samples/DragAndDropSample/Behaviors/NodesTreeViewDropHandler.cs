@@ -12,7 +12,7 @@ public class NodesTreeViewDropHandler : DropHandlerBase
     {
         if (sourceContext is not T sourceNode
             || targetContext is not MainWindowViewModel vm
-            || treeView.GetVisualAt(e.GetPosition(treeView)) is not IControl targetControl
+            || treeView.GetVisualAt(e.GetPosition(treeView)) is not Control targetControl
             || targetControl.DataContext is not T targetNode)
         {
             return false;
@@ -90,7 +90,7 @@ public class NodesTreeViewDropHandler : DropHandlerBase
         
     public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is IControl && sender is TreeView treeView)
+        if (e.Source is Control && sender is TreeView treeView)
         {
             return Validate<NodeViewModel>(treeView, e, sourceContext, targetContext, false);
         }
@@ -99,7 +99,7 @@ public class NodesTreeViewDropHandler : DropHandlerBase
 
     public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is IControl && sender is TreeView treeView)
+        if (e.Source is Control && sender is TreeView treeView)
         {
             return Validate<NodeViewModel>(treeView, e, sourceContext, targetContext, true);
         }
