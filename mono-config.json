@@ -9,6 +9,10 @@
     },
     {
       "behavior": "assembly",
+      "name": "Avalonia.Browser.dll"
+    },
+    {
+      "behavior": "assembly",
       "name": "Avalonia.Controls.DataGrid.dll"
     },
     {
@@ -46,10 +50,6 @@
     {
       "behavior": "assembly",
       "name": "Avalonia.Themes.Simple.dll"
-    },
-    {
-      "behavior": "assembly",
-      "name": "Avalonia.Web.dll"
     },
     {
       "behavior": "assembly",
