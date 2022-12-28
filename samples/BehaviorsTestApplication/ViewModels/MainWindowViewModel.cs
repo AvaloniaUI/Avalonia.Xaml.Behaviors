@@ -105,7 +105,8 @@ public class MainWindowViewModel : ViewModelBase
                 }
             },
         };
-        Values = Observable.Interval(TimeSpan.FromSeconds(1)).Select(_ => _value++);
+        // TODO: https://github.com/AvaloniaUI/Avalonia/issues/9801
+        // Values = Observable.Interval(TimeSpan.FromSeconds(1)).Select(_ => _value++);
     }
 
     public void IncrementCount() => Count++;
