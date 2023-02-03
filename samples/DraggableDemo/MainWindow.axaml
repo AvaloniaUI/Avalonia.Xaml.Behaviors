@@ -14,7 +14,7 @@
         Title="Draggable Controls Demo">
 
   <Window.Styles>
-    <StyleInclude Source="avares://Avalonia.Xaml.Interactions/Draggable/Styles.axaml" />
+    <StyleInclude Source="avares://Avalonia.Xaml.Interactions.Draggable/Styles.axaml" />
     <StyleInclude Source="/Styles/Custom.axaml" />
     <Style Selector="TextBlock">
       <Setter Property="HorizontalAlignment" Value="Center" />
