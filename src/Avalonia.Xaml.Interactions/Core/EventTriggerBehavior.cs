@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Reflection;
 using Avalonia.Xaml.Interactivity;
 using Avalonia.Controls;
+using Avalonia.Reactive;
 
 namespace Avalonia.Xaml.Interactions.Core;
 
@@ -51,8 +52,11 @@ public class EventTriggerBehavior : Trigger
 
     static EventTriggerBehavior()
     {
-        EventNameProperty.Changed.Subscribe(EventNameChanged);
-        SourceObjectProperty.Changed.Subscribe(SourceObjectChanged);
+        EventNameProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<string>>(EventNameChanged));
+
+        SourceObjectProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<object?>>(SourceObjectChanged));
     }
 
     private static void EventNameChanged(AvaloniaPropertyChangedEventArgs<string> e)
