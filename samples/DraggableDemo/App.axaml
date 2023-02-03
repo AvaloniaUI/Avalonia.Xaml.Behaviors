@@ -1,7 +1,9 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="DraggableDemo.App">
+             x:Class="DraggableDemo.App"
+             Name="DraggableDemo"
+             RequestedThemeVariant="Light">
   <Application.Styles>
-    <FluentTheme Mode="Light" />
+    <FluentTheme />
   </Application.Styles>
 </Application>

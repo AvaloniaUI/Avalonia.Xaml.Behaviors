@@ -148,9 +148,9 @@ public class ItemDragBehavior : Behavior<Control>
 
         if (_itemsControl is { })
         {
-            foreach (var container in _itemsControl.ItemContainerGenerator.Containers)
+            foreach (var control in _itemsControl.GetRealizedContainers())
             {
-                SetDraggingPseudoClasses(container.ContainerControl, true);
+                SetDraggingPseudoClasses(control, true);
             }
         }
 
@@ -164,9 +164,9 @@ public class ItemDragBehavior : Behavior<Control>
 
         if (_itemsControl is { })
         {
-            foreach (var container in _itemsControl.ItemContainerGenerator.Containers)
+            foreach (var control in _itemsControl.GetRealizedContainers())
             {
-                SetDraggingPseudoClasses(container.ContainerControl, false);
+                SetDraggingPseudoClasses(control, false);
             }
         }
 

@@ -1,4 +1,4 @@
-﻿namespace Avalonia.Xaml.Interactions.Core;
+﻿namespace Avalonia.Xaml.Interactivity;
 
 /// <summary>
 /// Represents one ternary condition.

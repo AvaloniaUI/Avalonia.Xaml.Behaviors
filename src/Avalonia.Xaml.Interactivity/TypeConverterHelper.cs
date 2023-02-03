@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 
-namespace Avalonia.Xaml.Interactions.Core;
+namespace Avalonia.Xaml.Interactivity;
 
 /// <summary>
 /// A helper class that enables converting values specified in markup (strings) to their object representation.

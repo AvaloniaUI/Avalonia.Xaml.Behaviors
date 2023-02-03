@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Avalonia.Reactive;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
@@ -8,7 +8,11 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// </summary>
 public class ValueChangedTriggerBehavior : Trigger
 {
-    static ValueChangedTriggerBehavior() => BindingProperty.Changed.Subscribe(OnValueChanged);
+    static ValueChangedTriggerBehavior()
+    {
+        BindingProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<object?>>(OnValueChanged));
+    }
 
     /// <summary>
     /// Identifies the <seealso cref="Binding"/> avalonia property.

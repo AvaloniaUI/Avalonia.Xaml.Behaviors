@@ -56,9 +56,6 @@
     <TabItem Header="AdaptiveBehavior">
       <pages:AdaptiveBehaviorView />
     </TabItem>
-    <TabItem Header="NthChildBehavior">
-      <pages:NthChildBehaviorView />
-    </TabItem>
     <TabItem Header="EditableListBox">
       <pages:EditableListBoxView />
     </TabItem>

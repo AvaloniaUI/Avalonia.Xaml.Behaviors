@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions\Avalonia.Xaml.Interactions.csproj" />
+    <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions.Draggable\Avalonia.Xaml.Interactions.Draggable.csproj" />
     <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactivity\Avalonia.Xaml.Interactivity.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
-using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Reactive;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
@@ -62,9 +62,14 @@ public class RoutedEventTriggerBehavior : Trigger<Interactive>
 
     static RoutedEventTriggerBehavior()
     {
-        RoutedEventProperty.Changed.Subscribe(OnValueChanged);
-        RoutingStrategiesProperty.Changed.Subscribe(OnValueChanged);
-        SourceInteractiveProperty.Changed.Subscribe(OnValueChanged);
+        RoutedEventProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<RoutedEvent?>>(OnValueChanged));
+
+        RoutingStrategiesProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<RoutingStrategies>>(OnValueChanged));
+
+        SourceInteractiveProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<Interactive?>>(OnValueChanged));
     }
 
     private static void OnValueChanged(AvaloniaPropertyChangedEventArgs args)

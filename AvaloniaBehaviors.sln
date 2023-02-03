@@ -43,6 +43,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{40A43022
 		build\Avalonia.ReactiveUI.props = build\Avalonia.ReactiveUI.props
 		build\Avalonia.Themes.Fluent.props = build\Avalonia.Themes.Fluent.props
 		build\Avalonia.Web.props = build\Avalonia.Web.props
+		build\System.Reactive.props = build\System.Reactive.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{721A55B7-C5B0-44E2-803A-56E291C672FE}"
@@ -72,6 +73,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{9D4D9F
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build.yml = .github\workflows\build.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.Responsive", "src\Avalonia.Xaml.Interactions.Responsive\Avalonia.Xaml.Interactions.Responsive.csproj", "{BEC165AA-392E-4193-A762-576A1EB8D40E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.Draggable", "src\Avalonia.Xaml.Interactions.Draggable\Avalonia.Xaml.Interactions.Draggable.csproj", "{681EB965-E5B2-4A6F-9938-578FD19E8A15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.DragAndDrop", "src\Avalonia.Xaml.Interactions.DragAndDrop\Avalonia.Xaml.Interactions.DragAndDrop.csproj", "{EF243B1A-FF29-41E9-B44B-2E55A73F6CCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.Reactive", "src\Avalonia.Xaml.Interactions.Reactive\Avalonia.Xaml.Interactions.Reactive.csproj", "{D647E09E-BBF2-4432-A4E0-80FBB921C1EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.Events", "src\Avalonia.Xaml.Interactions.Events\Avalonia.Xaml.Interactions.Events.csproj", "{648FFF6A-A8F5-491C-AC1C-19FC2061D6B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.Custom", "src\Avalonia.Xaml.Interactions.Custom\Avalonia.Xaml.Interactions.Custom.csproj", "{0BB3669E-45E4-41E8-B765-7F4A5201C4E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +128,30 @@ Global
 		{D5855901-BEEF-4179-96E8-9DD276C4DAEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5855901-BEEF-4179-96E8-9DD276C4DAEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5855901-BEEF-4179-96E8-9DD276C4DAEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEC165AA-392E-4193-A762-576A1EB8D40E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEC165AA-392E-4193-A762-576A1EB8D40E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEC165AA-392E-4193-A762-576A1EB8D40E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEC165AA-392E-4193-A762-576A1EB8D40E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{681EB965-E5B2-4A6F-9938-578FD19E8A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{681EB965-E5B2-4A6F-9938-578FD19E8A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{681EB965-E5B2-4A6F-9938-578FD19E8A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{681EB965-E5B2-4A6F-9938-578FD19E8A15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF243B1A-FF29-41E9-B44B-2E55A73F6CCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF243B1A-FF29-41E9-B44B-2E55A73F6CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF243B1A-FF29-41E9-B44B-2E55A73F6CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF243B1A-FF29-41E9-B44B-2E55A73F6CCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D647E09E-BBF2-4432-A4E0-80FBB921C1EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D647E09E-BBF2-4432-A4E0-80FBB921C1EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D647E09E-BBF2-4432-A4E0-80FBB921C1EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D647E09E-BBF2-4432-A4E0-80FBB921C1EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{648FFF6A-A8F5-491C-AC1C-19FC2061D6B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{648FFF6A-A8F5-491C-AC1C-19FC2061D6B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{648FFF6A-A8F5-491C-AC1C-19FC2061D6B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{648FFF6A-A8F5-491C-AC1C-19FC2061D6B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BB3669E-45E4-41E8-B765-7F4A5201C4E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BB3669E-45E4-41E8-B765-7F4A5201C4E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BB3669E-45E4-41E8-B765-7F4A5201C4E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BB3669E-45E4-41E8-B765-7F4A5201C4E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -133,6 +170,12 @@ Global
 		{438F2B54-FEDB-48C4-B14A-E47541DA443F} = {9B9E3891-2366-4253-A952-D08BCEB71098}
 		{D5855901-BEEF-4179-96E8-9DD276C4DAEE} = {9B9E3891-2366-4253-A952-D08BCEB71098}
 		{9D4D9F1A-6EE5-4B7D-8991-0601F80F39CD} = {2913483A-3E55-44AE-86BB-88511F372191}
+		{BEC165AA-392E-4193-A762-576A1EB8D40E} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
+		{681EB965-E5B2-4A6F-9938-578FD19E8A15} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
+		{EF243B1A-FF29-41E9-B44B-2E55A73F6CCE} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
+		{D647E09E-BBF2-4432-A4E0-80FBB921C1EE} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
+		{648FFF6A-A8F5-491C-AC1C-19FC2061D6B4} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
+		{0BB3669E-45E4-41E8-B765-7F4A5201C4E0} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E64CD420-15B1-487C-9806-41EBE6DC15A4}

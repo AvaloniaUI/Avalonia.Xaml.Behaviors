@@ -202,10 +202,9 @@ public class GridDragBehavior : Behavior<Control>
             }
             else if (_parent is ItemsControl itemsControl)
             {
-                foreach (var container in itemsControl.ItemContainerGenerator.Containers)
+                foreach (var control in itemsControl.GetRealizedContainers())
                 {
-                    var child = container.ContainerControl;
-                    if (child is not Control control)
+                    if (control is  null)
                     {
                         continue;
                     }
@@ -215,7 +214,7 @@ public class GridDragBehavior : Behavior<Control>
                         continue;
                     }
 
-                    if (child.Bounds.Contains(position))
+                    if (control.Bounds.Contains(position))
                     {
                         target = control;
                     }

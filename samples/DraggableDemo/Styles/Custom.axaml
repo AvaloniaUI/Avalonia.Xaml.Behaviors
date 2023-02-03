@@ -23,9 +23,7 @@
             <Border Name="PART_ItemsPresenterBorder"
                     DockPanel.Dock="{TemplateBinding TabStripPlacement}">
               <ItemsPresenter Name="PART_ItemsPresenter"
-                              Items="{TemplateBinding Items}"
-                              ItemsPanel="{TemplateBinding ItemsPanel}"
-                              ItemTemplate="{TemplateBinding ItemTemplate}" />
+                              ItemsPanel="{TemplateBinding ItemsPanel}"/>
             </Border>
             <ContentPresenter Name="PART_SelectedContentHost"
                               Margin="{TemplateBinding Padding}"

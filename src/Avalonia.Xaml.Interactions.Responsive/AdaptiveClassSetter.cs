@@ -1,6 +1,5 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Metadata;
-using Avalonia.Xaml.Interactions.Core;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Responsive;

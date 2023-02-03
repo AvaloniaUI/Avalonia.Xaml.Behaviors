@@ -25,9 +25,7 @@
               <DockPanel>
                 <ScrollViewer>
                   <ItemsPresenter Name="PART_ItemsPresenter"
-                                  Items="{TemplateBinding Items}"
                                   ItemsPanel="{TemplateBinding ItemsPanel}"
-                                  ItemTemplate="{TemplateBinding ItemTemplate}"
                                   DockPanel.Dock="{TemplateBinding TabStripPlacement}"/>
                 </ScrollViewer>
                 <ContentPresenter Name="PART_SelectedContentHost"

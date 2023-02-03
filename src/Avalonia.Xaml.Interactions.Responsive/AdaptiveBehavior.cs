@@ -2,7 +2,7 @@
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Metadata;
-using Avalonia.Xaml.Interactions.Core;
+using Avalonia.Reactive;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Responsive;
@@ -101,7 +101,7 @@ public class AdaptiveBehavior : Behavior<Control>
         }
 
         return sourceControl.GetObservable(Visual.BoundsProperty)
-            .Subscribe(bounds => ValueChanged(sourceControl, Setters, bounds));
+            .Subscribe(new AnonymousObserver<Rect>(bounds => ValueChanged(sourceControl, Setters, bounds)));
     }
 
     private void ValueChanged(Control? sourceControl, AvaloniaList<AdaptiveClassSetter>? setters, Rect bounds)
@@ -176,7 +176,7 @@ public class AdaptiveBehavior : Behavior<Control>
 
     private static void Add(Control targetControl, string? className, bool isPseudoClass)
     {
-        if (className is null || string.IsNullOrEmpty(className) || targetControl.Classes.Contains(className!))
+        if (className is null || string.IsNullOrEmpty(className) || targetControl.Classes.Contains(className))
         {
             return;
         }
@@ -187,13 +187,13 @@ public class AdaptiveBehavior : Behavior<Control>
         }
         else
         {
-            targetControl.Classes.Add(className!);
+            targetControl.Classes.Add(className);
         }
     }
 
     private static void Remove(Control targetControl, string? className, bool isPseudoClass)
     {
-        if (className is null || string.IsNullOrEmpty(className) || !targetControl.Classes.Contains(className!))
+        if (className is null || string.IsNullOrEmpty(className) || !targetControl.Classes.Contains(className))
         {
             return;
         }
@@ -204,7 +204,7 @@ public class AdaptiveBehavior : Behavior<Control>
         }
         else
         {
-            targetControl.Classes.Remove(className!);
+            targetControl.Classes.Remove(className);
         }
     }
 }

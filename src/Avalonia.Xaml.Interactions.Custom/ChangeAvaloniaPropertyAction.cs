@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Reflection;
 using Avalonia.Controls;
-using Avalonia.Xaml.Interactions.Core;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
@@ -16,19 +15,19 @@ public class ChangeAvaloniaPropertyAction : AvaloniaObject, IAction
     /// Identifies the <seealso cref="TargetProperty"/> avalonia property.
     /// </summary>
     public static readonly StyledProperty<AvaloniaProperty?> TargetPropertyProperty =
-        AvaloniaProperty.Register<ChangePropertyAction, AvaloniaProperty?>(nameof(TargetProperty));
+        AvaloniaProperty.Register<ChangeAvaloniaPropertyAction, AvaloniaProperty?>(nameof(TargetProperty));
 
     /// <summary>
     /// Identifies the <seealso cref="TargetObject"/> avalonia property.
     /// </summary>
     public static readonly StyledProperty<AvaloniaObject?> TargetObjectProperty =
-        AvaloniaProperty.Register<ChangePropertyAction, AvaloniaObject?>(nameof(TargetObject));
+        AvaloniaProperty.Register<ChangeAvaloniaPropertyAction, AvaloniaObject?>(nameof(TargetObject));
 
     /// <summary>
     /// Identifies the <seealso cref="Value"/> avalonia property.
     /// </summary>
     public static readonly StyledProperty<object?> ValueProperty =
-        AvaloniaProperty.Register<ChangePropertyAction, object?>(nameof(Value));
+        AvaloniaProperty.Register<ChangeAvaloniaPropertyAction, object?>(nameof(Value));
 
     /// <summary>
     /// Gets or sets the name of the Avalonia property to change. This is a avalonia property.
