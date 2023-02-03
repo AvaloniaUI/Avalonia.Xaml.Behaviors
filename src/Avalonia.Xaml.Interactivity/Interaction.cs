@@ -10,7 +10,11 @@ namespace Avalonia.Xaml.Interactivity;
 /// </summary>
 public class Interaction
 {
-    static Interaction() => BehaviorsProperty.Changed.Subscribe(BehaviorsChanged);
+    static Interaction()
+    {
+        BehaviorsProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<BehaviorCollection?>>(BehaviorsChanged));
+    }
 
     /// <summary>
     /// Gets or sets the <see cref="BehaviorCollection"/> associated with a specified object.
