@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Avalonia.Reactive;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Core;
@@ -56,9 +57,14 @@ public class DataTriggerBehavior : Trigger
 
     static DataTriggerBehavior()
     {
-        BindingProperty.Changed.Subscribe(OnValueChanged);
-        ComparisonConditionProperty.Changed.Subscribe(OnValueChanged);
-        ValueProperty.Changed.Subscribe(OnValueChanged);
+        BindingProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<object?>>(OnValueChanged));
+
+        ComparisonConditionProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<ComparisonConditionType>>(OnValueChanged));
+
+        ValueProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<object?>>(OnValueChanged));
     }
 
     private static bool Compare(object? leftOperand, ComparisonConditionType operatorType, object? rightOperand)
