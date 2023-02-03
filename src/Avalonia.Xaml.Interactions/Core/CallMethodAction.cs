@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Reactive;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Core;
@@ -51,8 +52,11 @@ public class CallMethodAction : AvaloniaObject, IAction
 
     static CallMethodAction()
     {
-        MethodNameProperty.Changed.Subscribe(MethodNameChanged);
-        TargetObjectProperty.Changed.Subscribe(TargetObjectChanged);
+        MethodNameProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<string>>(MethodNameChanged));
+
+        TargetObjectProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<object?>>(TargetObjectChanged));
     }
 
     private static void MethodNameChanged(AvaloniaPropertyChangedEventArgs<string> e)
