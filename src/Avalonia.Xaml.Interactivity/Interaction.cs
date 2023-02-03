@@ -30,7 +30,7 @@ public class Interaction
             throw new ArgumentNullException(nameof(obj));
         }
 
-        var behaviorCollection = (BehaviorCollection?)obj.GetValue(BehaviorsProperty);
+        var behaviorCollection = obj.GetValue(BehaviorsProperty);
         if (behaviorCollection is null)
         {
             behaviorCollection = new BehaviorCollection();
