@@ -23,9 +23,6 @@ class Program
         GC.KeepAlive(typeof(ComparisonConditionType).Assembly);
         return AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .With(new Win32PlatformOptions { UseCompositor = true })
-            .With(new X11PlatformOptions { UseCompositor = true })
-            .With(new AvaloniaNativePlatformOptions { UseCompositor = true })
             .LogToTrace()
             .UseReactiveUI();
     }
