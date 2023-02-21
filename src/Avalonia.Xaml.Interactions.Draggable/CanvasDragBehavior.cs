@@ -77,10 +77,10 @@ public class CanvasDragBehavior : Behavior<Control>
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
         if (properties.IsLeftButtonPressed 
-            && AssociatedObject?.Parent is { } parent)
+            && AssociatedObject?.Parent is Control parent)
         {
             _enableDrag = true;
-            _start = e.GetPosition(AssociatedObject.Parent);
+            _start = e.GetPosition(parent);
             _parent = parent;
             _draggedContainer = AssociatedObject;
 

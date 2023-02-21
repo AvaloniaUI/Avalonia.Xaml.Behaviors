@@ -56,7 +56,7 @@ public sealed class DragControlBehavior : Behavior<Control>
         var target = TargetControl ?? AssociatedObject;
         if (target is { })
         {
-            _parent = target.Parent;
+            _parent = target.Parent as Control;
 
             if (!(target.RenderTransform is TranslateTransform))
             {

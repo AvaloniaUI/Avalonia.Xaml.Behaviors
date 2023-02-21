@@ -101,7 +101,7 @@ public class ItemDragBehavior : Behavior<Control>
         {
             _enableDrag = true;
             _dragStarted = false;
-            _start = e.GetPosition(AssociatedObject.Parent);
+            _start = e.GetPosition(itemsControl);
             _draggedIndex = -1;
             _targetIndex = -1;
             _itemsControl = itemsControl;
@@ -195,7 +195,7 @@ public class ItemDragBehavior : Behavior<Control>
 
         foreach (var _ in itemsControl.Items)
         {
-            var container = itemsControl.ItemContainerGenerator.ContainerFromIndex(i);
+            var container = itemsControl.ContainerFromIndex(i);
             if (container is not null)
             {
                 SetTranslateTransform(container, 0, 0);
@@ -216,7 +216,7 @@ public class ItemDragBehavior : Behavior<Control>
 
         foreach (var _ in itemsControl.Items)
         {
-            var container = itemsControl.ItemContainerGenerator.ContainerFromIndex(i);
+            var container = itemsControl.ContainerFromIndex(i);
             if (container is not null)
             {
                 SetTranslateTransform(container, 0, 0);
@@ -297,7 +297,7 @@ public class ItemDragBehavior : Behavior<Control>
                 SetTranslateTransform(_draggedContainer, 0, delta);
             }
 
-            _draggedIndex = _itemsControl.ItemContainerGenerator.IndexFromContainer(_draggedContainer);
+            _draggedIndex = _itemsControl.IndexFromContainer(_draggedContainer);
             _targetIndex = -1;
 
             var draggedBounds = _draggedContainer.Bounds;
@@ -316,7 +316,7 @@ public class ItemDragBehavior : Behavior<Control>
 
             foreach (var _ in _itemsControl.Items)
             {
-                var targetContainer = _itemsControl.ItemContainerGenerator.ContainerFromIndex(i);
+                var targetContainer = _itemsControl.ContainerFromIndex(i);
                 if (targetContainer?.RenderTransform is null || ReferenceEquals(targetContainer, _draggedContainer))
                 {
                     i++;
@@ -331,7 +331,7 @@ public class ItemDragBehavior : Behavior<Control>
                     ? targetBounds.X + targetBounds.Width / 2
                     : targetBounds.Y + targetBounds.Height / 2;
 
-                var targetIndex = _itemsControl.ItemContainerGenerator.IndexFromContainer(targetContainer);
+                var targetIndex = _itemsControl.IndexFromContainer(targetContainer);
 
                 if (targetStart > draggedStart && draggedDeltaEnd >= targetMid)
                 {

@@ -135,7 +135,7 @@ public class GridDragBehavior : Behavior<Control>
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
         if (properties.IsLeftButtonPressed
-            && AssociatedObject?.Parent is { } parent)
+            && AssociatedObject?.Parent is Control parent)
         {
 
             _enableDrag = true;
