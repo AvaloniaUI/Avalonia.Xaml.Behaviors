@@ -7,7 +7,7 @@
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
              x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
-             FontFamily="avares://Avalonia.Themes.Fluent/Assets#Inter">
+             FontFamily="avares://Avalonia.Fonts.Inter/Assets#Inter">
   <UserControl.Styles>
     <Style Selector="TabItem">
       <Setter Property="FontSize" Value="16" />
