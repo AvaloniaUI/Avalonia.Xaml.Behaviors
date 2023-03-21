@@ -22,8 +22,7 @@
       <Setter Property="CompactPaneLength" Value="80" />
       <Setter Property="OpenPaneLength" Value="200" />
       <Setter Property="PaneBackground" Value="Transparent" />
-      <!-- TODO: https://github.com/AvaloniaUI/Avalonia/issues/9800 -->
-      <!-- <Setter Property="IsPaneOpen" Value="False" /> -->
+      <Setter Property="IsPaneOpen" Value="False" />
       <Setter Property="DisplayMode" Value="Inline" />
       <Setter Property="(i:Interaction.Behaviors)">
         <i:BehaviorCollectionTemplate>
@@ -38,18 +37,15 @@
       </Setter>
     </Style>
     <Style Selector="SplitView.small">
-      <!-- TODO: https://github.com/AvaloniaUI/Avalonia/issues/9800 -->
-      <!-- <Setter Property="IsPaneOpen" Value="False" /> -->
+      <Setter Property="IsPaneOpen" Value="False" />
       <Setter Property="DisplayMode" Value="Inline" />
     </Style>
     <Style Selector="SplitView.medium">
-      <!-- TODO: https://github.com/AvaloniaUI/Avalonia/issues/9800 -->
-      <!-- <Setter Property="IsPaneOpen" Value="False" /> -->
+      <Setter Property="IsPaneOpen" Value="False" />
       <Setter Property="DisplayMode" Value="CompactInline" />
     </Style>
     <Style Selector="SplitView.wide">
-      <!-- TODO: https://github.com/AvaloniaUI/Avalonia/issues/9800 -->
-      <!-- <Setter Property="IsPaneOpen" Value="True" /> -->
+      <Setter Property="IsPaneOpen" Value="True" />
       <Setter Property="DisplayMode" Value="Inline" />
     </Style>
 
