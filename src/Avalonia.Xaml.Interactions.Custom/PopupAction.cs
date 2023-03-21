@@ -44,7 +44,7 @@ public class PopupAction : AvaloniaObject, IAction
 
             _popup = new Popup()
             {
-                PlacementMode = PlacementMode.Pointer,
+                Placement = PlacementMode.Pointer,
                 PlacementTarget = parent,
                 IsLightDismissEnabled = true
             };
