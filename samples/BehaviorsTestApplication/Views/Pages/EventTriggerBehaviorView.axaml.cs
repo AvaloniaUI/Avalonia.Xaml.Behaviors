@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace BehaviorsTestApplication.Views.Pages;
 
-public class EventTriggerBehaviorView : UserControl
+public partial class EventTriggerBehaviorView : UserControl
 {
     public EventTriggerBehaviorView()
     {

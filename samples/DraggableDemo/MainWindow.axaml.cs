@@ -7,7 +7,7 @@ using DraggableDemo.Models;
 
 namespace DraggableDemo;
 
-public class MainWindow : Window
+public partial class MainWindow : Window
 {
     public IList<Item> Items { get; set; }
 

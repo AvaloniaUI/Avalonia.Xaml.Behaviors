@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace BehaviorsTestApplication.Views.Pages;
 
-public class AddRemoveClassActionView : UserControl
+public partial class AddRemoveClassActionView : UserControl
 {
     public AddRemoveClassActionView()
     {

@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace BehaviorsTestApplication.Views.Pages;
 
-public class EditableTreeViewView : UserControl
+public partial class EditableTreeViewView : UserControl
 {
     public EditableTreeViewView()
     {

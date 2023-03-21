@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace BehaviorsTestApplication.Views.Pages;
 
-public class AdvancedView : UserControl
+public partial class AdvancedView : UserControl
 {
     public AdvancedView()
     {

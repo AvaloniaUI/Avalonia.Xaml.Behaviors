@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace BehaviorsTestApplication.Views.Pages;
 
-public class ChangeAvaloniaPropertyActionView : UserControl
+public partial class ChangeAvaloniaPropertyActionView : UserControl
 {
     public ChangeAvaloniaPropertyActionView()
     {

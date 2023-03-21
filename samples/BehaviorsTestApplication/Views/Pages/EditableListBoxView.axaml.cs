@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace BehaviorsTestApplication.Views.Pages;
 
-public class EditableListBoxView : UserControl
+public partial class EditableListBoxView : UserControl
 {
     public EditableListBoxView()
     {

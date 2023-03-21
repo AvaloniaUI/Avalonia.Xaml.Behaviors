@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 
 namespace BehaviorsTestApplication.Views;
 
-public class ItemView : UserControl
+public partial class ItemView : UserControl
 {
     public ItemView()
     {
