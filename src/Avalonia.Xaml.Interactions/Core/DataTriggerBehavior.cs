@@ -75,7 +75,14 @@ public class DataTriggerBehavior : Trigger
             var destinationType = leftOperand.GetType();
             if (value is { })
             {
-                rightOperand = TypeConverterHelper.Convert(value, destinationType);
+                try
+                {
+                    rightOperand = TypeConverterHelper.Convert(value, destinationType);
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
             }
         }
 
