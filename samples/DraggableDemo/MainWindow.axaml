@@ -51,7 +51,7 @@
     </TabItem>
 
     <TabItem Header="TabControl (Items)">
-      <TabControl Classes="draggableVirtualizing custom" Items="{Binding Items}" Background="LightGray" >
+      <TabControl Classes="draggableVirtualizing custom" ItemsSource="{Binding Items}" Background="LightGray" >
         <TabControl.Styles>
           <Style Selector="TabItem:not(:dragging)">
             <Setter Property="Transitions">
@@ -95,7 +95,7 @@
     </TabItem>
 
     <TabItem Header="ListBox (Items)">
-      <ListBox Classes="draggableVirtualizing" Items="{Binding Strings}">
+      <ListBox Classes="draggableVirtualizing" ItemsSource="{Binding Strings}">
         <ListBox.Styles>
           <Style Selector="ListBoxItem > TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left" />
@@ -128,7 +128,7 @@
     </TabItem>
 
     <TabItem Header="Canvas (Items)">
-      <ItemsControl Classes="draggable" Items="{Binding Items}" Width="500" Height="300" Background="LightGray">
+      <ItemsControl Classes="draggable" ItemsSource="{Binding Items}" Width="500" Height="300" Background="LightGray">
         <ItemsControl.Styles>
           <Style Selector="ItemsControl > ContentPresenter" x:DataType="models:Item">
             <Setter Property="(Canvas.Left)" Value="{Binding X}" />
@@ -169,7 +169,7 @@
     </TabItem>
 
     <TabItem Header="Grid (Items)">
-      <ItemsControl Items="{Binding Tiles}" Width="800" Height="300" Background="LightGray">
+      <ItemsControl ItemsSource="{Binding Tiles}" Width="800" Height="300" Background="LightGray">
         <ItemsControl.Styles>
           <Style Selector=":is(ItemsControl) > :is(ContentPresenter)">
             <Setter Property="(i:Interaction.Behaviors)">

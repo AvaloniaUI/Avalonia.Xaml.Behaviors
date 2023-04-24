@@ -10,7 +10,7 @@
   <Design.DataContext>
     <vm:MainWindowViewModel />
   </Design.DataContext>
-  <ListBox Items="{Binding Items}">
+  <ListBox ItemsSource="{Binding Items}">
     <ListBox.Styles>
       <Style Selector="ListBoxItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />

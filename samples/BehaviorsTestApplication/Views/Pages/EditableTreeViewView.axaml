@@ -10,7 +10,7 @@
   <Design.DataContext>
     <vm:MainWindowViewModel />
   </Design.DataContext>
-  <TreeView Items="{Binding Items}">
+  <TreeView ItemsSource="{Binding Items}">
     <TreeView.Styles>
       <Style Selector="TreeViewItem">
         <Setter Property="HorizontalAlignment" Value="Stretch" />

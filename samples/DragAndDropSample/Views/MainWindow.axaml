@@ -96,7 +96,7 @@
 
     <TabItem Header="TreeView">
       <Grid ColumnDefinitions="*,8,*">
-        <TreeView Items="{Binding Nodes}"
+        <TreeView ItemsSource="{Binding Nodes}"
                   Classes="NodesDragAndDrop"
                   Grid.Column="0">
           <TreeView.ItemTemplate>
@@ -106,7 +106,7 @@
           </TreeView.ItemTemplate>
         </TreeView>
         <GridSplitter Width="8" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Grid.Column="1"/>
-        <ListBox Items="{Binding Nodes}"
+        <ListBox ItemsSource="{Binding Nodes}"
                  Classes="NodesDragAndDrop"
                  Grid.Column="2">
           <ListBox.ItemTemplate>
@@ -119,7 +119,7 @@
     </TabItem>
 
     <TabItem Header="ListBox">
-      <ListBox Items="{Binding Items}"
+      <ListBox ItemsSource="{Binding Items}"
                Classes="ItemsDragAndDrop">
         <ListBox.ItemTemplate>
           <DataTemplate DataType="vm:ItemViewModel">
