@@ -228,18 +228,30 @@ public class ItemDragBehavior : Behavior<Control>
 
     private void MoveDraggedItem(ItemsControl? itemsControl, int draggedIndex, int targetIndex)
     {
-        if (itemsControl?.Items is not IList items)
+        if (itemsControl?.ItemsSource is IList itemsSource)
         {
-            return;
+            var draggedItem = itemsSource[draggedIndex];
+            itemsSource.RemoveAt(draggedIndex);
+            itemsSource.Insert(targetIndex, draggedItem);
+
+            if (itemsControl is SelectingItemsControl selectingItemsControl)
+            {
+                selectingItemsControl.SelectedIndex = targetIndex;
+            }
         }
-
-        var draggedItem = items[draggedIndex];
-        items.RemoveAt(draggedIndex);
-        items.Insert(targetIndex, draggedItem);
-
-        if (itemsControl is SelectingItemsControl selectingItemsControl)
+        else
         {
-            selectingItemsControl.SelectedIndex = targetIndex;
+            if (itemsControl?.Items is {IsReadOnly: false} itemCollection)
+            {
+                var draggedItem = itemCollection[draggedIndex];
+                itemCollection.RemoveAt(draggedIndex);
+                itemCollection.Insert(targetIndex, draggedItem);
+
+                if (itemsControl is SelectingItemsControl selectingItemsControl)
+                {
+                    selectingItemsControl.SelectedIndex = targetIndex;
+                } 
+            }
         }
     }
 
