@@ -13,10 +13,12 @@
     <PackageTags>Avalonia;Behavior;Action;Behaviors;Actions;Managed;C#;Interaction;Interactivity;Interactions;Xaml</PackageTags>
   </PropertyGroup>
 
-  <Import Project="..\..\build\Base.props" />
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" />
+  </ItemGroup>
+
   <Import Project="..\..\build\SignAssembly.props" />
   <Import Project="..\..\build\SourceLink.props" />
-  <Import Project="..\..\build\ReferenceAssemblies.props" />
-  <Import Project="..\..\build\Avalonia.props" />
 
 </Project>

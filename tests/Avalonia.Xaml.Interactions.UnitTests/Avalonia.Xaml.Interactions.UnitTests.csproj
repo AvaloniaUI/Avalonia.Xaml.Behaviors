@@ -9,7 +9,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <Import Project="..\..\build\Avalonia.props" />
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+  </ItemGroup>
+
   <Import Project="..\..\build\XUnit.props" />
 
   <ItemGroup>
