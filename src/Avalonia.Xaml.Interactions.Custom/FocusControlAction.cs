@@ -4,10 +4,26 @@ using Avalonia.Xaml.Interactivity;
 namespace Avalonia.Xaml.Interactions.Custom;
 
 /// <summary>
-/// Focuses the associated control when executed.
+/// Focuses the associated or target control when executed.
 /// </summary>
 public class FocusControlAction : AvaloniaObject, IAction
 {
+    /// <summary>
+    /// Identifies the <seealso cref="TargetControl"/> avalonia property.
+    /// </summary>
+    public static readonly StyledProperty<Control?> TargetControlProperty =
+        AvaloniaProperty.Register<FocusControlAction, Control?>(nameof(TargetControl));
+
+    /// <summary>
+    /// Gets or sets the target control. This is a avalonia property.
+    /// </summary>
+    [ResolveByName]
+    public Control? TargetControl
+    {
+        get => GetValue(TargetControlProperty);
+        set => SetValue(TargetControlProperty, value);
+    }
+
     /// <summary>
     /// Executes the action.
     /// </summary>
@@ -16,9 +32,16 @@ public class FocusControlAction : AvaloniaObject, IAction
     /// <returns>Returns null after executed.</returns>
     public virtual object? Execute(object? sender, object? parameter)
     {
-        if (sender is Control control)
+        if (TargetControl is not null)
         {
-            control.Focus();
+            TargetControl.Focus();
+        }
+        else
+        {
+            if (sender is Control control)
+            {
+                control.Focus();
+            }
         }
         return null;
     }
