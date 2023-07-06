@@ -16,7 +16,7 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" />
     <PackageReference Include="System.Reactive" />
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" />
   </ItemGroup>
 
   <Import Project="..\..\build\SignAssembly.props" />
