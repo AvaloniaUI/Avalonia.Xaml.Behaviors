@@ -20,4 +20,18 @@ public class ChangePropertyActionTests
 
         Assert.Equal("Updated Text", window.TargetTextBox.Text);
     }
+
+    [AvaloniaFact]
+    public void ChangePropertyAction_002()
+    {
+        var window = new ChangePropertyAction002();
+
+        window.Show();
+
+        // Click
+        window.TargetButton.Focus();
+        window.KeyPress(Key.Enter, RawInputModifiers.None);
+
+        Assert.Equal(12d, window.TargetTextBox.FontSize);
+    }
 }
