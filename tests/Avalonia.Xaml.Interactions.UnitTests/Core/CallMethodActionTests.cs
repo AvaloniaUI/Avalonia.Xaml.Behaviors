@@ -1,0 +1,52 @@
+﻿using Avalonia.Headless;
+using Avalonia.Headless.XUnit;
+using Avalonia.Input;
+using Avalonia.Interactivity;
+using Xunit;
+
+namespace Avalonia.Xaml.Interactions.UnitTests.Core;
+
+public class CallMethodActionTests
+{
+    /// <summary>
+    /// Without parameters.
+    /// </summary>
+    [AvaloniaFact]
+    public void CallMethodAction_001()
+    {
+        var window = new CallMethodAction001();
+
+        window.Show();
+
+        Assert.Null(window.TestProperty);
+        
+        // Click
+        window.TargetButton.Focus();
+        window.KeyPress(Key.Enter, RawInputModifiers.None);
+
+        Assert.Equal("Test String", window.TestProperty);
+    }
+
+    /// <summary>
+    /// With event handler parameters.
+    /// </summary>
+    [AvaloniaFact]
+    public void CallMethodAction_002()
+    {
+        var window = new CallMethodAction002();
+
+        window.Show();
+
+        Assert.Null(window.TestProperty);
+        Assert.Null(window.Sender);
+        Assert.Null(window.Args);
+
+        // Click
+        window.TargetButton.Focus();
+        window.KeyPress(Key.Enter, RawInputModifiers.None);
+
+        Assert.Equal("Test String", window.TestProperty);
+        Assert.Equal(window, window.Sender);
+        Assert.IsType<RoutedEventArgs>(window.Args);
+    }
+}
