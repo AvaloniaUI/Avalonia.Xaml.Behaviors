@@ -3,7 +3,8 @@
         x:Class="Avalonia.Xaml.Interactions.UnitTests.Core.ChangePropertyAction001"
         Title="ChangePropertyAction001">
   <StackPanel>
-    <TextBox Name="TargetTextBox" Text="Initial Text" />
+    <TextBox Name="TargetTextBox" 
+             Text="Initial Text" />
     <Button Name="TargetButton">
       <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Click">
