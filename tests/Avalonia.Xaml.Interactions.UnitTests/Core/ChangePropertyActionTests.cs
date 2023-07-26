@@ -7,6 +7,9 @@ namespace Avalonia.Xaml.Interactions.UnitTests.Core;
 
 public class ChangePropertyActionTests
 {
+    /// <summary>
+    /// Regular property.
+    /// </summary>
     [AvaloniaFact]
     public void ChangePropertyAction_001()
     {
@@ -21,6 +24,9 @@ public class ChangePropertyActionTests
         Assert.Equal("Updated Text", window.TargetTextBox.Text);
     }
 
+    /// <summary>
+    /// Attached property.
+    /// </summary>
     [AvaloniaFact]
     public void ChangePropertyAction_002()
     {
