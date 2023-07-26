@@ -15,26 +15,56 @@ public class ChangePropertyAction : AvaloniaObject, IAction
     private static readonly char[] s_trimChars = { '(', ')' };
     private static readonly char[] s_separator = { '.' };
 
+    private static Type? GetTypeByName(string name)
+    {
+        return
+            AppDomain.CurrentDomain.GetAssemblies()
+                .Reverse()
+                .Select(assembly => assembly.GetType(name))
+                .FirstOrDefault(t => t is not null)
+            ??
+            AppDomain.CurrentDomain.GetAssemblies()
+                .Reverse()
+                .SelectMany(assembly => assembly.GetTypes())
+                .FirstOrDefault(t => t.Name == name);
+    }
+
     private static AvaloniaProperty? FindAttachedProperty(object? targetObject, string propertyName)
     {
         if (targetObject is null)
         {
             return null;
         }
-        var targetType = targetObject.GetType();
-        var registeredAttached = AvaloniaPropertyRegistry.Instance.GetRegisteredAttached(targetType);
+        
         var propertyNames = propertyName.Trim().Trim(s_trimChars).Split(s_separator);
         if (propertyNames.Length != 2)
         {
             return null;
         }
+        var targetPropertyTypeName = propertyNames[0];
+        var targetPropertyName = propertyNames[1];
+        var targetType = GetTypeByName(targetPropertyTypeName) ?? targetObject.GetType();
+
+        var registeredAttached = AvaloniaPropertyRegistry.Instance.GetRegisteredAttached(targetType);
+
         foreach (var avaloniaProperty in registeredAttached)
         {
-            if (avaloniaProperty.OwnerType.Name == propertyNames[0] && avaloniaProperty.Name == propertyNames[1])
+            if (avaloniaProperty.OwnerType.Name == targetPropertyTypeName && avaloniaProperty.Name == targetPropertyName)
             {
                 return avaloniaProperty;
             }
         }
+
+        var registeredInherited = AvaloniaPropertyRegistry.Instance.GetRegisteredInherited(targetType);
+
+        foreach (var avaloniaProperty in registeredInherited)
+        {
+            if (avaloniaProperty.Name == targetPropertyName)
+            {
+                return avaloniaProperty;
+            }
+        }
+
         return null;
     }
 
@@ -110,7 +140,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
 
         if (targetObject is AvaloniaObject avaloniaObject)
         {
-            if (PropertyName.Contains("."))
+            if (PropertyName.Contains('.'))
             {
                 var avaloniaProperty = FindAttachedProperty(targetObject, PropertyName);
                 if (avaloniaProperty is { })
