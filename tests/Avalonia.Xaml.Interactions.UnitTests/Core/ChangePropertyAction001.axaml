@@ -5,7 +5,7 @@
   <StackPanel>
     <TextBox Name="TargetTextBox" 
              Text="Initial Text" />
-    <Button Name="TargetButton">
+    <Button Name="TargetButton" Content="Button">
       <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Click">
           <ChangePropertyAction TargetObject="TargetTextBox"

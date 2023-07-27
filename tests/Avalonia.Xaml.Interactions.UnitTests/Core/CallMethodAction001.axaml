@@ -3,7 +3,7 @@
         x:Class="Avalonia.Xaml.Interactions.UnitTests.Core.CallMethodAction001"
         Title="CallMethodAction001">
   <StackPanel>
-    <Button Name="TargetButton">
+    <Button Name="TargetButton" Content="Button">
       <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Click">
           <CallMethodAction TargetObject="{Binding $parent[Window]}"

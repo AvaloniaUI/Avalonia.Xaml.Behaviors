@@ -6,7 +6,7 @@
     <TextBox Name="TargetTextBox" 
              Text="Initial Text"
              FontSize="10"/>
-    <Button Name="TargetButton">
+    <Button Name="TargetButton" Content="Button">
       <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Click">
           <ChangePropertyAction TargetObject="TargetTextBox"

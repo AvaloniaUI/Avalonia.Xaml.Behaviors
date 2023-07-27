@@ -17,12 +17,15 @@ public class CallMethodActionTests
         var window = new CallMethodAction001();
 
         window.Show();
+        window.CaptureRenderedFrame()?.Save("CallMethodAction_001_0.png");
 
         Assert.Null(window.TestProperty);
         
         // Click
         window.TargetButton.Focus();
         window.KeyPress(Key.Enter, RawInputModifiers.None);
+
+        window.CaptureRenderedFrame()?.Save("CallMethodAction_001_1.png");
 
         Assert.Equal("Test String", window.TestProperty);
     }
@@ -36,6 +39,7 @@ public class CallMethodActionTests
         var window = new CallMethodAction002();
 
         window.Show();
+        window.CaptureRenderedFrame()?.Save("CallMethodAction_002_0.png");
 
         Assert.Null(window.TestProperty);
         Assert.Null(window.Sender);
@@ -44,6 +48,8 @@ public class CallMethodActionTests
         // Click
         window.TargetButton.Focus();
         window.KeyPress(Key.Enter, RawInputModifiers.None);
+
+        window.CaptureRenderedFrame()?.Save("CallMethodAction_002_1.png");
 
         Assert.Equal("Test String", window.TestProperty);
         Assert.Equal(window, window.Sender);

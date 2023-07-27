@@ -13,6 +13,7 @@ public class DataTriggerBehaviorTests
         var window = new DataTriggerBehavior001();
 
         window.Show();
+        window.CaptureRenderedFrame()?.Save("DataTriggerBehavior_001_0.png");
 
         Assert.Equal("Less than or equal 50", window.TargetTextBlock.Text);
         Assert.Equal("0", window.TargetTextBox.Text);
@@ -22,6 +23,8 @@ public class DataTriggerBehaviorTests
         window.KeyPress(Key.Right, RawInputModifiers.None);
         window.KeyPress(Key.Right, RawInputModifiers.None);
         window.KeyPress(Key.Right, RawInputModifiers.None);
+
+        window.CaptureRenderedFrame()?.Save("DataTriggerBehavior_001_1.png");
 
         Assert.Equal("More than 50", window.TargetTextBlock.Text);
         Assert.Equal("75", window.TargetTextBox.Text);
