@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Avalonia.Controls;
-using AppContainerUITestMethod = Xunit.FactAttribute;
+using Avalonia.Headless.XUnit;
 using Xunit;
 
 namespace Avalonia.Xaml.Interactivity.UnitTests;
 
 public class InteractionTest
 {
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void SetBehaviors_MultipleBehaviors_AllAttached()
     {
         var behaviorCollection = new BehaviorCollection
@@ -29,7 +28,7 @@ public class InteractionTest
         }
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void SetBehaviors_MultipleSets_DoesNotReattach()
     {
         var behaviorCollection = new BehaviorCollection() { new StubBehavior() };
@@ -44,7 +43,7 @@ public class InteractionTest
         }
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void SetBehaviors_CollectionThenNull_DeatchCollection()
     {
         var behaviorCollection = new BehaviorCollection() { new StubBehavior() };
@@ -60,7 +59,7 @@ public class InteractionTest
         }
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void SetBehaviors_NullThenNull_NoOp()
     {
         // As long as this doesn't crash/assert, we're good.
@@ -71,7 +70,7 @@ public class InteractionTest
         Interaction.SetBehaviors(button, null);
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void SetBehaviors_ManualDetachThenNull_DoesNotDoubleDetach()
     {
         var behaviorCollection = new BehaviorCollection
@@ -98,7 +97,7 @@ public class InteractionTest
         }
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void ExecuteActions_NullParameters_ReturnsEmptyEnumerable()
     {
         // Mostly just want to test that this doesn't throw any exceptions.
@@ -108,7 +107,7 @@ public class InteractionTest
         Assert.Empty(result); // "Calling ExecuteActions with a null ActionCollection should return an empty enumerable."
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void ExecuteActions_MultipleActions_AllActionsExecuted()
     {
         var actions = new ActionCollection
@@ -131,7 +130,7 @@ public class InteractionTest
         }
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void ExecuteActions_ActionsWithResults_ResultsInActionOrder()
     {
         string[] expectedReturnValues = { "A", "B", "C" };

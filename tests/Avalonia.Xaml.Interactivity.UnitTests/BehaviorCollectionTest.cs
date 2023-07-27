@@ -1,13 +1,13 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using AppContainerUITestMethod = Xunit.FactAttribute;
+using Avalonia.Headless.XUnit;
 using Xunit;
 
 namespace Avalonia.Xaml.Interactivity.UnitTests;
 
 public class BehaviorCollectionTest
 {
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void VectorChanged_NonBehaviorAdded_ExceptionThrown()
     {
         var behaviorCollection = new BehaviorCollection();
@@ -16,7 +16,7 @@ public class BehaviorCollectionTest
         TestUtilities.AssertThrowsInvalidOperationException(() => behaviorCollection.Add(new TextBlock()));
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void VectorChanged_BehaviorChangedToNonBehavior_ExceptionThrown()
     {
         var behaviorCollection = new BehaviorCollection();
@@ -25,7 +25,7 @@ public class BehaviorCollectionTest
         TestUtilities.AssertThrowsInvalidOperationException(() => behaviorCollection[0] = new ToggleButton());
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void VectorChanged_DuplicateAdd_ExceptionThrown()
     {
         var behaviorCollection = new BehaviorCollection();
@@ -36,7 +36,7 @@ public class BehaviorCollectionTest
 
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void VectorChanged_AddWhileNotAttached_AttachNotCalled()
     {
         var behaviorCollection = new BehaviorCollection();
@@ -46,7 +46,7 @@ public class BehaviorCollectionTest
         TestUtilities.AssertNotAttached(stub);
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void VectorChanged_AddWhileAttached_AllAttached()
     {
         var behaviorCollection = new BehaviorCollection();
@@ -62,7 +62,7 @@ public class BehaviorCollectionTest
         }
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void VectorChanged_ReplaceWhileAttached_OldDetachedNewAttached()
     {
         var behaviorCollection = new BehaviorCollection();
@@ -80,7 +80,7 @@ public class BehaviorCollectionTest
         TestUtilities.AssertAttached(second, behaviorCollection.AssociatedObject);
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void VectorChanged_RemoveWhileNotAttached_DetachNotCalled()
     {
         var behaviorCollection = new BehaviorCollection();
@@ -92,7 +92,7 @@ public class BehaviorCollectionTest
         TestUtilities.AssertNotDetached(behavior);
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void VectorChanged_RemoveWhileAttached_Detached()
     {
         var behaviorCollection = new BehaviorCollection();
@@ -105,7 +105,7 @@ public class BehaviorCollectionTest
         TestUtilities.AssertDetached(behavior);
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void VectorChanged_ResetWhileNotAttached_DetachNotCalled()
     {
         StubBehavior[] behaviorArray = { new StubBehavior(), new StubBehavior(), new StubBehavior() };
@@ -124,7 +124,7 @@ public class BehaviorCollectionTest
         }
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void VectorChanged_ResetWhileAttached_AllDetached()
     {
         StubBehavior[] behaviorArray = { new StubBehavior(), new StubBehavior(), new StubBehavior() };
@@ -145,7 +145,7 @@ public class BehaviorCollectionTest
         }
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void Attach_MultipleBehaviors_AllAttached()
     {
         var behaviorCollection = new BehaviorCollection();
@@ -164,7 +164,7 @@ public class BehaviorCollectionTest
         }
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void Attach_Null_AttachNotCalledOnItems()
     {
         var behaviorCollection = new BehaviorCollection();
@@ -180,7 +180,7 @@ public class BehaviorCollectionTest
         }
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void Attach_MultipleObjects_ExceptionThrown()
     {
         var behaviorCollection = new BehaviorCollection();
@@ -190,7 +190,7 @@ public class BehaviorCollectionTest
         TestUtilities.AssertThrowsInvalidOperationException(() => behaviorCollection.Attach(new StackPanel()));
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void Attach_NonNullThenNull_ExceptionThrown()
     {
         var behaviorCollection = new BehaviorCollection();
@@ -201,7 +201,7 @@ public class BehaviorCollectionTest
         TestUtilities.AssertThrowsInvalidOperationException(() => behaviorCollection.Attach(null));
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void Attach_MultipleTimeSameObject_AttachCalledOnce()
     {
         var behaviorCollection = new BehaviorCollection() { new StubBehavior() };
@@ -214,7 +214,7 @@ public class BehaviorCollectionTest
         TestUtilities.AssertAttached((StubBehavior)behaviorCollection[0], button);
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void Detach_NotAttached_DetachNotCalledOnItems()
     {
         var behaviorCollection = new BehaviorCollection() { new StubBehavior() };
@@ -224,7 +224,7 @@ public class BehaviorCollectionTest
         TestUtilities.AssertNotDetached((StubBehavior)behaviorCollection[0]);
     }
 
-    [AppContainerUITestMethod]
+    [AvaloniaFact]
     public void Detach_Attached_AllItemsDetached()
     {
         var behaviorCollection = new BehaviorCollection();
