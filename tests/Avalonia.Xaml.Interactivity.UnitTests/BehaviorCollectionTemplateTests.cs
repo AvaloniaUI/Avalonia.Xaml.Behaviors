@@ -20,20 +20,20 @@ public class BehaviorCollectionTemplateTests
 
         var containers = window.TargetListBox.GetRealizedContainers().Cast<ListBoxItem>().ToList();
 
-        var behaviors0 = containers[0].GetValue(Interaction.BehaviorsProperty);
-        Assert.NotNull(behaviors0);
-        Assert.Single(behaviors0);
-        Assert.Equal(containers[0], behaviors0!.AssociatedObject);
+        var behavior0 = containers[0].GetValue(Interaction.BehaviorsProperty);
+        Assert.NotNull(behavior0);
+        Assert.Single(behavior0);
+        Assert.Equal(containers[0], behavior0!.AssociatedObject);
 
-        var behaviors1 = containers[1].GetValue(Interaction.BehaviorsProperty);
-        Assert.NotNull(behaviors1);
-        Assert.Single(behaviors1);
-        Assert.Equal(containers[1], behaviors1!.AssociatedObject);
+        var behavior1 = containers[1].GetValue(Interaction.BehaviorsProperty);
+        Assert.NotNull(behavior1);
+        Assert.Single(behavior1);
+        Assert.Equal(containers[1], behavior1!.AssociatedObject);
 
-        var behaviors2 = containers[2].GetValue(Interaction.BehaviorsProperty);
-        Assert.NotNull(behaviors2);
-        Assert.Single(behaviors2);
-        Assert.Equal(containers[2], behaviors2!.AssociatedObject);
+        var behavior2 = containers[2].GetValue(Interaction.BehaviorsProperty);
+        Assert.NotNull(behavior2);
+        Assert.Single(behavior2);
+        Assert.Equal(containers[2], behavior2!.AssociatedObject);
 
         Assert.Equal(containers[0].Background, Brushes.Transparent);
         Assert.Equal(containers[1].Background, Brushes.Transparent);
