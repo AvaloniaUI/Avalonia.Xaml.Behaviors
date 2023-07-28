@@ -1,0 +1,20 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Avalonia.Xaml.Interactions.UnitTests.Core.InvokeCommandAction003"
+        xmlns:local="clr-namespace:Avalonia.Xaml.Interactions.UnitTests.Core"
+        Title="InvokeCommandAction003">
+  <StackPanel>
+    <TextBox Name="TargetTextBox" 
+             Text="Initial Text" />
+    <Button Name="TargetButton" Content="Button">
+      <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Click">
+          <InvokeCommandAction Command="{Binding TestCommand}"
+                               InputConverter="{x:Static local:TestValueConverter.Instance}"
+                               InputConverterParameter="{x:Null}"
+                               InputConverterLanguage="en-US"/>
+        </EventTriggerBehavior>
+      </Interaction.Behaviors>
+    </Button>
+  </StackPanel>
+</Window>
