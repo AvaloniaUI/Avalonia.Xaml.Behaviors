@@ -10,6 +10,7 @@
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="11.0.1" />
     <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.0.1" />
     <PackageVersion Include="Avalonia.Browser" Version="11.0.1" />
+    <PackageVersion Include="Avalonia.Headless.XUnit" Version="11.0.1" />
     <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" />
     <PackageVersion Include="System.Reactive" Version="5.0.0" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.0.0" />

@@ -1,0 +1,19 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Avalonia.Xaml.Interactions.UnitTests.Core.ChangePropertyAction002"
+        Title="ChangePropertyAction002">
+  <StackPanel>
+    <TextBox Name="TargetTextBox" 
+             Text="Initial Text"
+             FontSize="10"/>
+    <Button Name="TargetButton" Content="Button">
+      <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Click">
+          <ChangePropertyAction TargetObject="TargetTextBox"
+                                PropertyName="(TextBox.FontSize)"
+                                Value="12" />
+        </EventTriggerBehavior>
+      </Interaction.Behaviors>
+    </Button>
+  </StackPanel>
+</Window>

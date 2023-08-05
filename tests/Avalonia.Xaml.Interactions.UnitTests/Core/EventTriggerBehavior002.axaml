@@ -1,0 +1,18 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Avalonia.Xaml.Interactions.UnitTests.Core.EventTriggerBehavior002"
+        Title="EventTriggerBehavior002">
+  <StackPanel>
+    <TextBox Name="TargetTextBox" 
+             Text="Initial Text" />
+    <Button Name="TargetButton" Content="Button">
+      <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Tapped">
+          <ChangePropertyAction TargetObject="TargetTextBox"
+                                PropertyName="Text"
+                                Value="Tapped Text" />
+        </EventTriggerBehavior>
+      </Interaction.Behaviors>
+    </Button>
+  </StackPanel>
+</Window>
