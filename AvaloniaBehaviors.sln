@@ -5,6 +5,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C5A00AC3-B34C-4564-9BDD-2DA473EF4D8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{9B9E3891-2366-4253-A952-D08BCEB71098}"
+	ProjectSection(SolutionItems) = preProject
+		samples\Directory.Packages.props = samples\Directory.Packages.props
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BehaviorsTestApplication", "samples\BehaviorsTestApplication\BehaviorsTestApplication.csproj", "{EA113F1A-D8D7-4142-9948-353270E7EBAE}"
 EndProject
