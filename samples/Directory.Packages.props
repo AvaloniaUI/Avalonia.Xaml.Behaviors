@@ -12,4 +12,8 @@
     <PackageVersion Include="Avalonia.Browser" Version="11.0.2" />
     <PackageVersion Include="Avalonia.Headless.XUnit" Version="11.0.2" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" />
+    <PackageVersion Include="System.Reactive" Version="5.0.0" />
+  </ItemGroup>
 </Project>
