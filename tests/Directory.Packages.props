@@ -12,4 +12,15 @@
     <PackageVersion Include="Avalonia.Browser" Version="11.0.2" />
     <PackageVersion Include="Avalonia.Headless.XUnit" Version="11.0.2" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="xunit" Version="2.5.0" />
+    <PackageVersion Include="xunit.abstractions" Version="2.0.3" />
+    <PackageVersion Include="xunit.assert" Version="2.5.0" />
+    <PackageVersion Include="xunit.core" Version="2.5.0" />
+    <PackageVersion Include="xunit.extensibility.core" Version="2.5.0" />
+    <PackageVersion Include="xunit.extensibility.execution" Version="2.5.0" />
+    <PackageVersion Include="xunit.runner.console" Version="2.5.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+  </ItemGroup>
 </Project>
