@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.LogicalTree;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.DragAndDrop;
