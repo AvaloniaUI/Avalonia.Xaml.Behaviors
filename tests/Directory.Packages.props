@@ -11,10 +11,10 @@
     <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.0.4" />
     <PackageVersion Include="Avalonia.Browser" Version="11.0.2" />
     <PackageVersion Include="Avalonia.Headless.XUnit" Version="11.0.4" />
-    <PackageVersion Include="Verify.Avalonia" Version="1.0.0" />
+    <PackageVersion Include="Verify.Avalonia" Version="1.0.1" />
     <PackageVersion Include="Verify.DiffPlex" Version="2.2.1" />
     <PackageVersion Include="Verify.ImageMagick" Version="3.2.2" />
-    <PackageVersion Include="Verify.Xunit" Version="20.8.1" />
+    <PackageVersion Include="Verify.Xunit" Version="20.8.2" />
     <PackageVersion Include="xunit" Version="2.5.0" />
     <PackageVersion Include="xunit.abstractions" Version="2.0.3" />
     <PackageVersion Include="xunit.assert" Version="2.5.0" />
