@@ -1,18 +1,22 @@
-﻿using Avalonia.Headless;
+﻿using System.Threading.Tasks;
+using Avalonia.Headless;
 using Avalonia.Headless.XUnit;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using VerifyTests;
+using VerifyXunit;
 using Xunit;
 
 namespace Avalonia.Xaml.Interactions.UnitTests.Core;
 
+[UsesVerify]
 public class CallMethodActionTests
 {
     /// <summary>
     /// Without parameters.
     /// </summary>
     [AvaloniaFact]
-    public void CallMethodAction_001()
+    public Task CallMethodAction_001()
     {
         var window = new CallMethodAction001();
 
@@ -20,7 +24,7 @@ public class CallMethodActionTests
         window.CaptureRenderedFrame()?.Save("CallMethodAction_001_0.png");
 
         Assert.Null(window.TestProperty);
-        
+
         // Click
         window.TargetButton.Focus();
         window.KeyPress(Key.Enter, RawInputModifiers.None);
@@ -28,13 +32,14 @@ public class CallMethodActionTests
         window.CaptureRenderedFrame()?.Save("CallMethodAction_001_1.png");
 
         Assert.Equal("Test String", window.TestProperty);
+        return Verifier.Verify(window);
     }
 
     /// <summary>
     /// With event handler parameters.
     /// </summary>
     [AvaloniaFact]
-    public void CallMethodAction_002()
+    public Task CallMethodAction_002()
     {
         var window = new CallMethodAction002();
 
@@ -54,5 +59,6 @@ public class CallMethodActionTests
         Assert.Equal("Test String", window.TestProperty);
         Assert.Equal(window, window.Sender);
         Assert.IsType<RoutedEventArgs>(window.Args);
+        return Verifier.Verify(window);
     }
 }

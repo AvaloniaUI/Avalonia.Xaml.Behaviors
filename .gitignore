@@ -289,3 +289,6 @@ tools/**
 
 # macOS
 .DS_Store
+
+# VerifyTests
+*.received.*
