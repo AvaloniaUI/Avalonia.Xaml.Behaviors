@@ -1,16 +1,17 @@
 ﻿<Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <AvaloniaVersion>11.0.4</AvaloniaVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Avalonia" Version="11.0.4" />
-    <PackageVersion Include="Avalonia.Desktop" Version="11.0.4" />
-    <PackageVersion Include="Avalonia.Diagnostics" Version="11.0.4" />
-    <PackageVersion Include="Avalonia.ReactiveUI" Version="11.0.4" />
-    <PackageVersion Include="Avalonia.Themes.Fluent" Version="11.0.4" />
-    <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.0.4" />
-    <PackageVersion Include="Avalonia.Browser" Version="11.0.2" />
-    <PackageVersion Include="Avalonia.Headless.XUnit" Version="11.0.2" />
+    <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Browser" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Headless.XUnit" Version="$(AvaloniaVersion)" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" />
