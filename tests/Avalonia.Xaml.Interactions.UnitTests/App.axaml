@@ -4,7 +4,7 @@
   <Application.Styles>
     <FluentTheme />
     <Style Selector="Window">
-      <Setter Property="FontFamily" Value="avares://Avalonia.Fonts.Inter/Assets#Inter" />
+      <Setter Property="FontFamily" Value="resm:Avalonia.Xaml.Interactions.UnitTests.Assets?assembly=Avalonia.Xaml.Interactions.UnitTests#Noto Mono" />
     </Style>
   </Application.Styles>
 </Application>
