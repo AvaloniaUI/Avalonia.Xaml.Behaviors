@@ -8,6 +8,7 @@ public static class ModuleInit
     public static void InitOther()
     {
         VerifierSettings.InitializePlugins();
+        VerifierSettings.UniqueForOSPlatform();
         VerifierSettings.AddExtraSettings(_=>_.PreserveReferencesHandling = PreserveReferencesHandling.Objects );
     }
 }
