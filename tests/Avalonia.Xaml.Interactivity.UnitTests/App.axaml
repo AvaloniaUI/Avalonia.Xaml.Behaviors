@@ -3,5 +3,8 @@
              x:Class="Avalonia.Xaml.Interactivity.UnitTests.App">
   <Application.Styles>
     <FluentTheme />
+    <Style Selector="Window">
+      <Setter Property="FontFamily" Value="avares://Avalonia.Fonts.Inter/Assets#Inter" />
+    </Style>
   </Application.Styles>
 </Application>
