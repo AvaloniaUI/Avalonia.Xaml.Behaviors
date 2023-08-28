@@ -1,0 +1,24 @@
+﻿{
+  Type: EventTriggerBehavior001,
+  Title: EventTriggerBehavior001,
+  PointerOverElement: {
+    Type: AccessText,
+    Text: Button
+  },
+  Content: {
+    Type: StackPanel,
+    Children: [
+      {
+        Type: TextBox,
+        Text: Click Text,
+        Name: TargetTextBox
+      },
+      {
+        Type: Button,
+        Content: Button,
+        Name: TargetButton
+      }
+    ]
+  },
+  IsVisible: true
+}
