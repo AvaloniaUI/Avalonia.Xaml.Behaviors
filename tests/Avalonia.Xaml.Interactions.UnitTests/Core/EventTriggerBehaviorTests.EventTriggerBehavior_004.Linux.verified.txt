@@ -1,0 +1,20 @@
+﻿{
+  Type: EventTriggerBehavior004,
+  Title: EventTriggerBehavior004,
+  Content: {
+    Type: StackPanel,
+    Children: [
+      {
+        Type: TextBox,
+        Text: Loaded Text,
+        Name: TargetTextBox
+      },
+      {
+        Type: Button,
+        Content: Button,
+        Name: TargetButton
+      }
+    ]
+  },
+  IsVisible: true
+}

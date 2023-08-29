@@ -1,0 +1,20 @@
+﻿{
+  Type: ChangePropertyAction001,
+  Title: ChangePropertyAction001,
+  Content: {
+    Type: StackPanel,
+    Children: [
+      {
+        Type: TextBox,
+        Text: Updated Text,
+        Name: TargetTextBox
+      },
+      {
+        Type: Button,
+        Content: Button,
+        Name: TargetButton
+      }
+    ]
+  },
+  IsVisible: true
+}
