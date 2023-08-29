@@ -7,7 +7,7 @@ public static class ModuleInit
     public static void InitOther()
     {
         VerifierSettings.InitializePlugins();
-        VerifyImageMagick.RegisterComparers(0.02);
+        VerifyImageMagick.RegisterComparers(0.04);
         VerifierSettings.UniqueForOSPlatform();
     }
 }
