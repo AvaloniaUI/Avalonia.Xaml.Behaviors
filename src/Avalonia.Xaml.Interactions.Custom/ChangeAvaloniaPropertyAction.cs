@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using Avalonia.Controls;
@@ -66,8 +67,8 @@ public class ChangeAvaloniaPropertyAction : AvaloniaObject, IAction
     /// <returns>True if updating the property value succeeds; else false.</returns>
     public virtual object Execute(object? sender, object? parameter)
     {
-        var targetObject = GetValue(TargetObjectProperty) is { } ? TargetObject : sender;
-        if (targetObject is AvaloniaObject avaloniaObject && TargetProperty is { })
+        var targetObject = GetValue(TargetObjectProperty) is not null ? TargetObject : sender;
+        if (targetObject is AvaloniaObject avaloniaObject && TargetProperty is not null)
         {
             UpdateAvaloniaPropertyValue(avaloniaObject, TargetProperty);
             return true;
@@ -76,6 +77,7 @@ public class ChangeAvaloniaPropertyAction : AvaloniaObject, IAction
         return false;
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private void UpdateAvaloniaPropertyValue(AvaloniaObject targetObject, AvaloniaProperty targetProperty)
     {
         ValidateTargetProperty(targetProperty);
@@ -98,7 +100,7 @@ public class ChangeAvaloniaPropertyAction : AvaloniaObject, IAction
             else
             {
                 var valueAsString = Value.ToString();
-                if (valueAsString is { })
+                if (valueAsString is not null)
                 {
                     result = propertyTypeInfo.IsEnum 
                         ? Enum.Parse(propertyType, valueAsString, false) 
@@ -117,7 +119,7 @@ public class ChangeAvaloniaPropertyAction : AvaloniaObject, IAction
             innerException = e;
         }
 
-        if (innerException is { })
+        if (innerException is not null)
         {
             throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,

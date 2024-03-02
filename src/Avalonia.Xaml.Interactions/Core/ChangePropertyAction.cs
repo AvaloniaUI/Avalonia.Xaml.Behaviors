@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -124,7 +125,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
     public virtual object Execute(object? sender, object? parameter)
     {
         object? targetObject;
-        if (GetValue(TargetObjectProperty) is { })
+        if (GetValue(TargetObjectProperty) is not null)
         {
             targetObject = TargetObject;
         }
@@ -143,7 +144,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
             if (PropertyName.Contains('.'))
             {
                 var avaloniaProperty = FindAttachedProperty(targetObject, PropertyName);
-                if (avaloniaProperty is { })
+                if (avaloniaProperty is not null)
                 {
                     UpdateAvaloniaPropertyValue(avaloniaObject, avaloniaProperty);
                     return true;
@@ -154,7 +155,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
             else
             {
                 var avaloniaProperty = AvaloniaPropertyRegistry.Instance.FindRegistered(avaloniaObject, PropertyName);
-                if (avaloniaProperty is { })
+                if (avaloniaProperty is not null)
                 {
                     UpdateAvaloniaPropertyValue(avaloniaObject, avaloniaProperty);
                     return true;
@@ -166,6 +167,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
         return true;
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private void UpdatePropertyValue(object targetObject)
     {
         var targetType = targetObject.GetType();
@@ -207,7 +209,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
             else
             {
                 var valueAsString = Value.ToString();
-                if (valueAsString is { })
+                if (valueAsString is not null)
                 {
                     result = propertyTypeInfo.IsEnum ? Enum.Parse(propertyType, valueAsString, false) :
                         TypeConverterHelper.Convert(valueAsString, propertyType);
@@ -225,7 +227,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
             innerException = e;
         }
 
-        if (innerException is { })
+        if (innerException is not null)
         {
             throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,
@@ -237,6 +239,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
         }
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private void UpdateAvaloniaPropertyValue(AvaloniaObject avaloniaObject, AvaloniaProperty property)
     {
         ValidateAvaloniaProperty(property);
@@ -259,7 +262,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
             else
             {
                 var valueAsString = Value.ToString();
-                if (valueAsString is { })
+                if (valueAsString is not null)
                 {
                     result = propertyTypeInfo.IsEnum ? Enum.Parse(propertyType, valueAsString, false) :
                         TypeConverterHelper.Convert(valueAsString, propertyType);
@@ -277,7 +280,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
             innerException = e;
         }
 
-        if (innerException is { })
+        if (innerException is not null)
         {
             throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,

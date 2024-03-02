@@ -44,13 +44,13 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
             return;
         }
 
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             throw new InvalidOperationException(
                 "An instance of a behavior cannot be attached to more than one object at a time.");
         }
 
-        Debug.Assert(associatedObject is { }, "The previous checks should keep us from ever setting null here.");
+        Debug.Assert(associatedObject is not null, "The previous checks should keep us from ever setting null here.");
         AssociatedObject = associatedObject;
 
         foreach (var item in this)
@@ -67,7 +67,7 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
     {
         foreach (var item in this)
         {
-            if (item is IBehavior { AssociatedObject: { } } behaviorItem)
+            if (item is IBehavior { AssociatedObject: not null} behaviorItem)
             {
                 behaviorItem.Detach();
             }
@@ -92,7 +92,7 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
     {
         foreach (var item in this)
         {
-            if (item is Behavior { AssociatedObject: { } } behavior)
+            if (item is Behavior { AssociatedObject: not null} behavior)
             {
                 behavior.DetachedFromVisualTree();
             }
@@ -105,7 +105,7 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
         {
             foreach (var behavior in _oldCollection)
             {
-                if (behavior.AssociatedObject is { })
+                if (behavior.AssociatedObject is not null)
                 {
                     behavior.Detach();
                 }
@@ -141,7 +141,7 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
                 var changedItem = eventArgs.NewItems?[0] as AvaloniaObject;
 
                 var oldItem = _oldCollection[eventIndex];
-                if (oldItem.AssociatedObject is { })
+                if (oldItem.AssociatedObject is not null)
                 {
                     oldItem.Detach();
                 }
@@ -155,7 +155,7 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
                 var eventIndex = eventArgs.OldStartingIndex;
 
                 var oldItem = _oldCollection[eventIndex];
-                if (oldItem.AssociatedObject is { })
+                if (oldItem.AssociatedObject is not null)
                 {
                     oldItem.Detach();
                 }
@@ -164,6 +164,8 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
             }
                 break;
 
+            case NotifyCollectionChangedAction.Move:
+            case NotifyCollectionChangedAction.Reset:
             default:
                 Debug.Assert(false, "Unsupported collection operation attempted.");
                 break;
@@ -187,7 +189,7 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
                 $"Cannot add an instance of a behavior to a {nameof(BehaviorCollection)} more than once.");
         }
 
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             behavior.Attach(AssociatedObject);
         }

@@ -55,7 +55,7 @@ public class HideOnKeyPressedBehavior : Behavior<Control>
 
     private void AssociatedObject_KeyDown(object? sender, KeyEventArgs e)
     {
-        if (e.Key == Key && TargetControl is { })
+        if (e.Key == Key && TargetControl is not null)
         {
             TargetControl.IsVisible = false;
         }

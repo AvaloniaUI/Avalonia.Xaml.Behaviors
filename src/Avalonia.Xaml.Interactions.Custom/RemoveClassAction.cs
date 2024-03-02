@@ -46,7 +46,7 @@ public class RemoveClassAction : AvaloniaObject, IAction
     /// <returns>True if the class is successfully added; else false.</returns>
     public object Execute(object? sender, object? parameter)
     {
-        var target = GetValue(StyledElementProperty) is { } ? StyledElement : sender as StyledElement;
+        var target = GetValue(StyledElementProperty) is not null ? StyledElement : sender as StyledElement;
         if (target is null || string.IsNullOrEmpty(ClassName))
         {
             return false;

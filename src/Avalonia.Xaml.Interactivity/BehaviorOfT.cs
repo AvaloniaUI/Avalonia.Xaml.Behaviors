@@ -24,7 +24,7 @@ public abstract class Behavior<T> : Behavior where T : AvaloniaObject
     {
         base.OnAttached();
 
-        if (AssociatedObject is null && base.AssociatedObject is { })
+        if (AssociatedObject is null && base.AssociatedObject is not null)
         {
             var actualType = base.AssociatedObject?.GetType().FullName;
             var expectedType = typeof(T).FullName;

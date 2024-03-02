@@ -22,7 +22,7 @@ public class CanvasDragBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, Released, RoutingStrategies.Tunnel);
             AssociatedObject.AddHandler(InputElement.PointerPressedEvent, Pressed, RoutingStrategies.Tunnel);
@@ -34,7 +34,7 @@ public class CanvasDragBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnDetachedFromVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, Released);
             AssociatedObject.RemoveHandler(InputElement.PointerPressedEvent, Pressed);
@@ -137,12 +137,12 @@ public class CanvasDragBehavior : Behavior<Control>
     {
         if (_enableDrag)
         {
-            if (_parent is { } && _draggedContainer is { })
+            if (_parent is not null && _draggedContainer is not null)
             {
                 // RemoveAdorner(_draggedContainer);
             }
 
-            if (_draggedContainer is { })
+            if (_draggedContainer is not null)
             {
                 SetDraggingPseudoClasses(_draggedContainer, false);
             }

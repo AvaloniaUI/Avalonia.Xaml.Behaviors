@@ -23,7 +23,7 @@ public abstract class Trigger<T> : Trigger where T : AvaloniaObject
     {
         base.OnAttached();
 
-        if (AssociatedObject is null && base.AssociatedObject is { })
+        if (AssociatedObject is null && base.AssociatedObject is not null)
         {
             var actualType = base.AssociatedObject?.GetType().FullName;
             var expectedType = typeof(T).FullName;

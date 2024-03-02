@@ -72,7 +72,7 @@ public class ItemDragBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, PointerReleased, RoutingStrategies.Tunnel);
             AssociatedObject.AddHandler(InputElement.PointerPressedEvent, PointerPressed, RoutingStrategies.Tunnel);
@@ -84,7 +84,7 @@ public class ItemDragBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnDetachedFromVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, PointerReleased);
             AssociatedObject.RemoveHandler(InputElement.PointerPressedEvent, PointerPressed);
@@ -107,7 +107,7 @@ public class ItemDragBehavior : Behavior<Control>
             _itemsControl = itemsControl;
             _draggedContainer = AssociatedObject;
 
-            if (_draggedContainer is { })
+            if (_draggedContainer is not null)
             {
                 SetDraggingPseudoClasses(_draggedContainer, true);
             }
@@ -146,7 +146,7 @@ public class ItemDragBehavior : Behavior<Control>
 
         RemoveTransforms(_itemsControl);
 
-        if (_itemsControl is { })
+        if (_itemsControl is not null)
         {
             foreach (var control in _itemsControl.GetRealizedContainers())
             {
@@ -162,7 +162,7 @@ public class ItemDragBehavior : Behavior<Control>
             }
         }
 
-        if (_itemsControl is { })
+        if (_itemsControl is not null)
         {
             foreach (var control in _itemsControl.GetRealizedContainers())
             {
@@ -170,7 +170,7 @@ public class ItemDragBehavior : Behavior<Control>
             }
         }
 
-        if (_draggedContainer is { })
+        if (_draggedContainer is not null)
         {
             SetDraggingPseudoClasses(_draggedContainer, false);
         }

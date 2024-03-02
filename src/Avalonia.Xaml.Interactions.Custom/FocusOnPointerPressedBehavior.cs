@@ -12,7 +12,7 @@ public class FocusOnPointerPressedBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             AssociatedObject.PointerPressed += PointerPressed; 
         }
@@ -21,7 +21,7 @@ public class FocusOnPointerPressedBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnDetachedFromVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             AssociatedObject.PointerPressed -= PointerPressed; 
         }

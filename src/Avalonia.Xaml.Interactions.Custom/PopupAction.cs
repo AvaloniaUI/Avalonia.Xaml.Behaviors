@@ -74,7 +74,7 @@ public class PopupAction : AvaloniaObject, IAction
         }
 
         var data = source.GetObservable(StyledElement.DataContextProperty);
-        if (data is { })
+        if (data is not null)
         {
             target.Bind(StyledElement.DataContextProperty, data);
         }

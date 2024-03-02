@@ -13,7 +13,7 @@ public class AdaptiveClassSetter : AvaloniaObject
     /// Identifies the <seealso cref="MinWidth"/> avalonia property.
     /// </summary>
     public static readonly StyledProperty<double> MinWidthProperty =
-        AvaloniaProperty.Register<AdaptiveClassSetter, double>(nameof(MinWidth), 0.0);
+        AvaloniaProperty.Register<AdaptiveClassSetter, double>(nameof(MinWidth));
 
     /// <summary>
     /// Identifies the <seealso cref="MinWidthOperator"/> avalonia property.
@@ -37,7 +37,7 @@ public class AdaptiveClassSetter : AvaloniaObject
     /// Identifies the <seealso cref="MinHeight"/> avalonia property.
     /// </summary>
     public static readonly StyledProperty<double> MinHeightProperty =
-        AvaloniaProperty.Register<AdaptiveClassSetter, double>(nameof(MinHeight), 0.0);
+        AvaloniaProperty.Register<AdaptiveClassSetter, double>(nameof(MinHeight));
 
     /// <summary>
     /// Identifies the <seealso cref="MinHeightOperator"/> avalonia property.

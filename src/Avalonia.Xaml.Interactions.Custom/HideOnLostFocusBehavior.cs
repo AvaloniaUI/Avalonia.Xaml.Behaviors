@@ -40,7 +40,7 @@ public class HideOnLostFocusBehavior : Behavior<Control>
 
     private void AssociatedObject_LostFocus(object? sender, RoutedEventArgs e)
     {
-        if (TargetControl is { })
+        if (TargetControl is not null)
         {
             TargetControl.IsVisible = false;
         }

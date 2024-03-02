@@ -33,7 +33,7 @@ public sealed class DragControlBehavior : Behavior<Control>
     protected override void OnAttachedToVisualTree()
     {
         var source = AssociatedObject;
-        if (source is { })
+        if (source is not null)
         {
             source.PointerPressed += Source_PointerPressed;
         }
@@ -43,7 +43,7 @@ public sealed class DragControlBehavior : Behavior<Control>
     protected override void OnDetachedFromVisualTree()
     {
         var source = AssociatedObject;
-        if (source is { })
+        if (source is not null)
         {
             source.PointerPressed -= Source_PointerPressed;
         }
@@ -54,7 +54,7 @@ public sealed class DragControlBehavior : Behavior<Control>
     private void Source_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var target = TargetControl ?? AssociatedObject;
-        if (target is { })
+        if (target is not null)
         {
             _parent = target.Parent as Control;
 
@@ -75,7 +75,7 @@ public sealed class DragControlBehavior : Behavior<Control>
     private void Parent_PointerMoved(object? sender, PointerEventArgs args)
     {
         var target = TargetControl ?? AssociatedObject;
-        if (target is { })
+        if (target is not null)
         {
             var pos = args.GetPosition(_parent);
             if (target.RenderTransform is TranslateTransform tr)
@@ -89,7 +89,7 @@ public sealed class DragControlBehavior : Behavior<Control>
 
     private void Parent_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (_parent is { })
+        if (_parent is not null)
         {
             _parent.PointerMoved -= Parent_PointerMoved;
             _parent.PointerReleased -= Parent_PointerReleased;

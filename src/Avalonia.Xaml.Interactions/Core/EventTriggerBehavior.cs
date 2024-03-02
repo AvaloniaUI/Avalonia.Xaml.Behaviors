@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using Avalonia.Xaml.Interactivity;
@@ -74,12 +75,12 @@ public class EventTriggerBehavior : Trigger
         var oldEventName = e.OldValue.GetValueOrDefault();
         var newEventName = e.NewValue.GetValueOrDefault();
 
-        if (oldEventName is { })
+        if (oldEventName is not null)
         {
             behavior.UnregisterEvent(oldEventName);
         }
 
-        if (newEventName is { })
+        if (newEventName is not null)
         {
             behavior.RegisterEvent(newEventName);
         }
@@ -118,14 +119,14 @@ public class EventTriggerBehavior : Trigger
             return;
         }
 
-        if (_resolvedSource is { })
+        if (_resolvedSource is not null)
         {
             UnregisterEvent(EventName);
         }
 
         _resolvedSource = newSource;
 
-        if (_resolvedSource is { })
+        if (_resolvedSource is not null)
         {
             RegisterEvent(EventName);
         }
@@ -135,7 +136,7 @@ public class EventTriggerBehavior : Trigger
     {
         // If the SourceObject property is set at all, we want to use it. It is possible that it is data
         // bound and bindings haven't been evaluated yet. Plus, this makes the API more predictable.
-        if (GetValue(SourceObjectProperty) is { })
+        if (GetValue(SourceObjectProperty) is not null)
         {
             return SourceObject;
         }
@@ -143,6 +144,7 @@ public class EventTriggerBehavior : Trigger
         return AssociatedObject;
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private void RegisterEvent(string eventName)
     {
         if (string.IsNullOrEmpty(eventName))
@@ -169,13 +171,13 @@ public class EventTriggerBehavior : Trigger
             }
 
             var methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("AttachedToVisualTree");
-            if (methodInfo is { })
+            if (methodInfo is not null)
             {
                 var eventHandlerType = eventInfo.EventHandlerType;
-                if (eventHandlerType is { })
+                if (eventHandlerType is not null)
                 {
                     _eventHandler = methodInfo.CreateDelegate(eventHandlerType, this);
-                    if (_eventHandler is { })
+                    if (_eventHandler is not null)
                     {
                         eventInfo.AddEventHandler(_resolvedSource, _eventHandler);
                     }
@@ -192,6 +194,7 @@ public class EventTriggerBehavior : Trigger
         }
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private void UnregisterEvent(string eventName)
     {
         if (string.IsNullOrEmpty(eventName))
@@ -206,7 +209,7 @@ public class EventTriggerBehavior : Trigger
                 return;
             }
 
-            if (_resolvedSource is { })
+            if (_resolvedSource is not null)
             {
                 var eventInfo = _resolvedSource.GetType().GetRuntimeEvent(eventName);
                 eventInfo?.RemoveEventHandler(_resolvedSource, _eventHandler); 
@@ -233,5 +236,5 @@ public class EventTriggerBehavior : Trigger
         Interaction.ExecuteActions(_resolvedSource, Actions, eventArgs);
     }
 
-    private static bool IsElementLoaded(Control element) => element.Parent is { };
+    private static bool IsElementLoaded(Control element) => element.Parent is not null;
 }

@@ -29,7 +29,7 @@ public abstract class PointerEventsBehavior : Behavior<Interactive>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             AssociatedObject.AddHandler(InputElement.PointerPressedEvent, PointerPressed, RoutingStrategies);
             AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, PointerReleased, RoutingStrategies);
@@ -40,7 +40,7 @@ public abstract class PointerEventsBehavior : Behavior<Interactive>
     /// <inheritdoc />
     protected override void OnDetachedFromVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             AssociatedObject.RemoveHandler(InputElement.PointerPressedEvent, PointerPressed);
             AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, PointerReleased);

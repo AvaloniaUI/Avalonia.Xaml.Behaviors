@@ -111,7 +111,7 @@ public class TypedDragBehavior : Behavior<Control>
     private void AssociatedObject_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
-        if (properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased && _triggerEvent is { })
+        if (properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased && _triggerEvent is not null)
         {
             _triggerEvent = null;
             _value = null;
@@ -122,7 +122,7 @@ public class TypedDragBehavior : Behavior<Control>
     private async void AssociatedObject_PointerMoved(object? sender, PointerEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
-        if (properties.IsLeftButtonPressed && _triggerEvent is { })
+        if (properties.IsLeftButtonPressed && _triggerEvent is not null)
         {
             var point = e.GetPosition(null);
             var diff = _dragStartPoint - point;

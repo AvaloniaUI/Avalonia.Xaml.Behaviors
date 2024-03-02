@@ -13,7 +13,7 @@ public class ToggleIsExpandedOnDoubleTappedBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             AssociatedObject.DoubleTapped += DoubleTapped; 
         }
@@ -22,7 +22,7 @@ public class ToggleIsExpandedOnDoubleTappedBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnDetachedFromVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             AssociatedObject.DoubleTapped -= DoubleTapped; 
         }
