@@ -1,17 +1,9 @@
 ﻿namespace Avalonia.Xaml.Interactivity.UnitTests;
 
-public class StubAction : AvaloniaObject, IAction
+public class StubAction(object? returnValue) : AvaloniaObject, IAction
 {
-    private readonly object? _returnValue;
-
-    public StubAction()
+    public StubAction() : this(null)
     {
-        _returnValue = null;
-    }
-
-    public StubAction(object? returnValue)
-    {
-        this._returnValue = returnValue;
     }
 
     public object? Sender
@@ -37,6 +29,6 @@ public class StubAction : AvaloniaObject, IAction
         ExecuteCount++;
         Sender = sender;
         Parameter = parameter;
-        return _returnValue;
+        return returnValue;
     }
 }

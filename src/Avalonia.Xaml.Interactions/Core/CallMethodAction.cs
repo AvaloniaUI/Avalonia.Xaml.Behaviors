@@ -227,17 +227,11 @@ public class CallMethodAction : AvaloniaObject, IAction
 
     [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     [DebuggerDisplay($"{{{nameof(MethodInfo)}}}")]
-    private class MethodDescriptor
+    private class MethodDescriptor(MethodInfo methodInfo, ParameterInfo[] methodParameters)
     {
-        public MethodDescriptor(MethodInfo methodInfo, ParameterInfo[] methodParameters)
-        {
-            MethodInfo = methodInfo;
-            Parameters = methodParameters;
-        }
+        public MethodInfo MethodInfo { get; private set; } = methodInfo;
 
-        public MethodInfo MethodInfo { get; private set; }
-
-        public ParameterInfo[] Parameters { get; private set; }
+        public ParameterInfo[] Parameters { get; private set; } = methodParameters;
 
         public int ParameterCount => Parameters.Length;
 

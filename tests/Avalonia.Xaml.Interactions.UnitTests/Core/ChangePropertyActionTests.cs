@@ -23,7 +23,7 @@ public class ChangePropertyActionTests
 
         // Click
         window.TargetButton.Focus();
-        window.KeyPress(Key.Enter, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.Enter, RawInputModifiers.None);
 
         window.CaptureRenderedFrame()?.Save("ChangePropertyAction_001_1.png");
 
@@ -44,7 +44,7 @@ public class ChangePropertyActionTests
 
         // Click
         window.TargetButton.Focus();
-        window.KeyPress(Key.Enter, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.Enter, RawInputModifiers.None);
 
         window.CaptureRenderedFrame()?.Save("ChangePropertyAction_002_1.png");
 
