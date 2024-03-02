@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 
@@ -17,6 +18,7 @@ internal static class TypeConverterHelper
     /// <param name="destinationType">The destination type.</param>
     /// <returns>Object representation of the string value.</returns>
     /// <exception cref="ArgumentNullException">destinationType cannot be null.</exception>
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     public static object? Convert(string value, Type destinationType)
     {
         if (destinationType is null)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -90,6 +91,7 @@ public class TypedDragBehavior : Behavior<Control>
         await DragDrop.DoDragDrop(triggerEvent, data, effect);
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private void AssociatedObject_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;

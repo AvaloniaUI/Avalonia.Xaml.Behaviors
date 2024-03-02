@@ -16,6 +16,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
     private static readonly char[] s_trimChars = { '(', ')' };
     private static readonly char[] s_separator = { '.' };
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private static Type? GetTypeByName(string name)
     {
         return
@@ -30,6 +31,7 @@ public class ChangePropertyAction : AvaloniaObject, IAction
                 .FirstOrDefault(t => t.Name == name);
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private static AvaloniaProperty? FindAttachedProperty(object? targetObject, string propertyName)
     {
         if (targetObject is null)

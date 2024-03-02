@@ -60,6 +60,7 @@ public class EventTriggerBehavior : Trigger
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<object?>>(SourceObjectChanged));
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private static void EventNameChanged(AvaloniaPropertyChangedEventArgs<string> e)
     {
         if (e.Sender is not EventTriggerBehavior behavior)

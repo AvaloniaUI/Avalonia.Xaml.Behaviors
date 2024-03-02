@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Avalonia.Reactive;
 using Avalonia.Xaml.Interactivity;
@@ -67,6 +68,7 @@ public class DataTriggerBehavior : Trigger
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<object?>>(OnValueChanged));
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private static bool Compare(object? leftOperand, ComparisonConditionType operatorType, object? rightOperand)
     {
         if (leftOperand is not null && rightOperand is not null)
@@ -122,6 +124,7 @@ public class DataTriggerBehavior : Trigger
     /// <summary>
     /// Evaluates both operands that implement the IComparable interface.
     /// </summary>
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private static bool EvaluateComparable(IComparable leftOperand, ComparisonConditionType operatorType, IComparable rightOperand)
     {
         object? convertedOperand = null;

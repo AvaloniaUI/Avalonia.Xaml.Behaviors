@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Avalonia.Xaml.Interactivity;
 
@@ -19,6 +20,8 @@ public abstract class Trigger<T> : Trigger where T : AvaloniaObject
     /// <remarks>
     /// Override this to hook up functionality to the <see cref="Behavior.AssociatedObject"/>
     /// </remarks>
+    /// 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     protected override void OnAttached()
     {
         base.OnAttached();
