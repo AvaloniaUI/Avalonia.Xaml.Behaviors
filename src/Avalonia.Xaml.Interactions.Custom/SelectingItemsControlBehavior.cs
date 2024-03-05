@@ -20,7 +20,8 @@ public class SelectingItemsControlBehavior
     /// 
     /// </summary>
     public static readonly AttachedProperty<bool> EnableSelectionAnimationProperty =
-        AvaloniaProperty.RegisterAttached<SelectingItemsControl, bool>("EnableSelectionAnimation", typeof(SelectingItemsControlBehavior));
+        AvaloniaProperty.RegisterAttached<SelectingItemsControl, bool>("EnableSelectionAnimation",
+            typeof(SelectingItemsControlBehavior));
 
     /// <summary>
     /// 
@@ -51,13 +52,13 @@ public class SelectingItemsControlBehavior
             args.Property != SelectingItemsControl.SelectedIndexProperty ||
             args.OldValue is not int oldIndex || args.NewValue is not int newIndex)
         {
-	        return;
+            return;
         }
 
         if (selectingItemsControl.ContainerFromIndex(newIndex) is not TemplatedControl newSelection
             || selectingItemsControl.ContainerFromIndex(oldIndex) is not TemplatedControl oldSelection)
         {
-	        return;
+            return;
         }
 
         StartOffsetAnimation(newSelection, oldSelection);
@@ -66,13 +67,14 @@ public class SelectingItemsControlBehavior
     private static void StartOffsetAnimation(TemplatedControl newSelection, TemplatedControl oldSelection)
     {
         // Find the indicator border
-		// NOTE:
-		// The original required putting PART_SelectedPipe in template (e.g. ListBox > ListBoxItem)
-		// and used GetTemplateChildren() instead of GetVisualDescendants()
+        // NOTE:
+        // The original required putting PART_SelectedPipe in template (e.g. ListBox > ListBoxItem)
+        // and used GetTemplateChildren() instead of GetVisualDescendants()
         if (newSelection.GetVisualDescendants().FirstOrDefault(s => s.Name == "PART_SelectedPipe") is not { } borderPipe
-            || oldSelection.GetVisualDescendants().FirstOrDefault(s => s.Name == "PART_SelectedPipe") is not { } oldPipe)
+            || oldSelection.GetVisualDescendants().FirstOrDefault(s => s.Name == "PART_SelectedPipe") is not
+                { } oldPipe)
         {
-	        return;
+            return;
         }
 
         // Clear old implicit animations if any
@@ -84,7 +86,7 @@ public class SelectingItemsControlBehavior
         var oldSelectionVisual = ElementComposition.GetElementVisual(oldSelection);
         if (pipeVisual == null || newSelectionVisual == null || oldSelectionVisual == null)
         {
-	        return;
+            return;
         }
 
         // Calculate the offset between old and new selections
@@ -104,10 +106,10 @@ public class SelectingItemsControlBehavior
         offsetAnimation.Target = "Offset";
         var expression = (offset > 0 ? "+" : "-") + Math.Abs(offset);
         offsetAnimation.InsertExpressionKeyFrame(
-	        0f,
-	        isVerticalOffset
-		        ? $"Vector3(this.FinalValue.X, this.FinalValue.Y{expression}, 0)"
-		        : $"Vector3(this.FinalValue.X{expression}, this.FinalValue.Y, 0)");
+            0f,
+            isVerticalOffset
+                ? $"Vector3(this.FinalValue.X, this.FinalValue.Y{expression}, 0)"
+                : $"Vector3(this.FinalValue.X{expression}, this.FinalValue.Y, 0)");
         offsetAnimation.InsertExpressionKeyFrame(1f, "this.FinalValue");
         offsetAnimation.Duration = TimeSpan.FromMilliseconds(250);
 
@@ -115,7 +117,9 @@ public class SelectingItemsControlBehavior
         var scaleAnimation = compositor.CreateVector3KeyFrameAnimation();
         scaleAnimation.Target = "Scale";
         scaleAnimation.InsertKeyFrame(0f, Vector3.One, quadraticEaseIn);
-        scaleAnimation.InsertKeyFrame(0.5f, new Vector3(1f + (!isVerticalOffset ? 0.75f : 0f), 1f + (isVerticalOffset ? 0.75f : 0f), 1f), quadraticEaseIn);
+        scaleAnimation.InsertKeyFrame(0.5f,
+            new Vector3(1f + (!isVerticalOffset ? 0.75f : 0f), 1f + (isVerticalOffset ? 0.75f : 0f), 1f),
+            quadraticEaseIn);
         scaleAnimation.InsertKeyFrame(1f, Vector3.One, quadraticEaseIn);
         scaleAnimation.Duration = TimeSpan.FromMilliseconds(250);
 
@@ -126,13 +130,13 @@ public class SelectingItemsControlBehavior
         var currentOffset = isVerticalOffset ? pipeVisual.Offset.Y : pipeVisual.Offset.X;
         if (currentOffset == 0)
         {
-	        // Visual first shown, offset not calculated, lets trigger using Offset
-	        pipeVisualImplicitAnimations["Offset"] = compositionAnimationGroup;
+            // Visual first shown, offset not calculated, lets trigger using Offset
+            pipeVisualImplicitAnimations["Offset"] = compositionAnimationGroup;
         }
         else
         {
-	        // Visual already shown, we can't trigger on Offset as it won't change
-	        pipeVisualImplicitAnimations["Visible"] = compositionAnimationGroup;
+            // Visual already shown, we can't trigger on Offset as it won't change
+            pipeVisualImplicitAnimations["Visible"] = compositionAnimationGroup;
         }
 
         pipeVisual.ImplicitAnimations = pipeVisualImplicitAnimations;

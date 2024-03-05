@@ -38,6 +38,7 @@ public class RemoveClassAction : AvaloniaObject, IAction
         get => GetValue(StyledElementProperty);
         set => SetValue(StyledElementProperty, value);
     }
+
     /// <summary>
     /// Executes the action.
     /// </summary>

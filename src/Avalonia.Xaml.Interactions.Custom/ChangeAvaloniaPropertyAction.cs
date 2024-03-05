@@ -102,8 +102,8 @@ public class ChangeAvaloniaPropertyAction : AvaloniaObject, IAction
                 var valueAsString = Value.ToString();
                 if (valueAsString is not null)
                 {
-                    result = propertyTypeInfo.IsEnum 
-                        ? Enum.Parse(propertyType, valueAsString, false) 
+                    result = propertyTypeInfo.IsEnum
+                        ? Enum.Parse(propertyType, valueAsString, false)
                         : TypeConverterHelper.Convert(valueAsString, propertyType);
                 }
             }

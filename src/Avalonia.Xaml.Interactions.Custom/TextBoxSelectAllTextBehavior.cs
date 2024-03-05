@@ -12,8 +12,8 @@ public class TextBoxSelectAllTextBehavior : AttachedToVisualTreeBehavior<TextBox
     /// 
     /// </summary>
     /// <param name="disposable"></param>
-	protected override void OnAttachedToVisualTree(CompositeDisposable disposable)
-	{
-		AssociatedObject?.SelectAll();
-	}
+    protected override void OnAttachedToVisualTree(CompositeDisposable disposable)
+    {
+        AssociatedObject?.SelectAll();
+    }
 }

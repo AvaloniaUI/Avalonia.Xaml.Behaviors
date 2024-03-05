@@ -83,6 +83,7 @@ public sealed class DragControlBehavior : Behavior<Control>
                 tr.X += pos.X - _previous.X;
                 tr.Y += pos.Y - _previous.Y;
             }
+
             _previous = pos;
         }
     }

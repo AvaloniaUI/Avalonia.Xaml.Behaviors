@@ -14,7 +14,7 @@ public class FocusOnPointerMovedBehavior : Behavior<Control>
     {
         if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerMoved += PointerMoved; 
+            AssociatedObject.PointerMoved += PointerMoved;
         }
     }
 
@@ -23,7 +23,7 @@ public class FocusOnPointerMovedBehavior : Behavior<Control>
     {
         if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerMoved -= PointerMoved; 
+            AssociatedObject.PointerMoved -= PointerMoved;
         }
     }
 

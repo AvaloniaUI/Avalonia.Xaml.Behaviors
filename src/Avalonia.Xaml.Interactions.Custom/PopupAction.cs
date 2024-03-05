@@ -44,9 +44,7 @@ public class PopupAction : AvaloniaObject, IAction
 
             _popup = new Popup()
             {
-                Placement = PlacementMode.Pointer,
-                PlacementTarget = parent,
-                IsLightDismissEnabled = true
+                Placement = PlacementMode.Pointer, PlacementTarget = parent, IsLightDismissEnabled = true
             };
 
             if (sender is Control control)
@@ -56,6 +54,7 @@ public class PopupAction : AvaloniaObject, IAction
 
             ((ISetLogicalParent)_popup).SetParent(parent);
         }
+
         _popup.Child = Child;
         _popup.Open();
         return null;

@@ -15,7 +15,7 @@ public class ToggleIsExpandedOnDoubleTappedBehavior : Behavior<Control>
     {
         if (AssociatedObject is not null)
         {
-            AssociatedObject.DoubleTapped += DoubleTapped; 
+            AssociatedObject.DoubleTapped += DoubleTapped;
         }
     }
 
@@ -24,13 +24,13 @@ public class ToggleIsExpandedOnDoubleTappedBehavior : Behavior<Control>
     {
         if (AssociatedObject is not null)
         {
-            AssociatedObject.DoubleTapped -= DoubleTapped; 
+            AssociatedObject.DoubleTapped -= DoubleTapped;
         }
     }
 
     private void DoubleTapped(object? sender, RoutedEventArgs args)
     {
-        if (AssociatedObject is { Parent: TreeViewItem item })
+        if (AssociatedObject is {Parent: TreeViewItem item})
         {
             item.IsExpanded = !item.IsExpanded;
         }

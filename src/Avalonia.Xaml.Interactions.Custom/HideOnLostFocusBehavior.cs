@@ -29,7 +29,8 @@ public class HideOnLostFocusBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        AssociatedObject?.AddHandler(InputElement.LostFocusEvent, AssociatedObject_LostFocus, RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+        AssociatedObject?.AddHandler(InputElement.LostFocusEvent, AssociatedObject_LostFocus,
+            RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
     }
 
     /// <inheritdoc />

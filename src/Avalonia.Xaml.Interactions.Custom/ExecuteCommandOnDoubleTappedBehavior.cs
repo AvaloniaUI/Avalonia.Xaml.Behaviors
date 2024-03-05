@@ -14,36 +14,36 @@ public class ExecuteCommandOnDoubleTappedBehavior : DisposingBehavior<Control>
     /// <summary>
     /// 
     /// </summary>
-	public static readonly StyledProperty<ICommand?> CommandProperty =
-		AvaloniaProperty.Register<ExecuteCommandOnDoubleTappedBehavior, ICommand?>(nameof(Command));
+    public static readonly StyledProperty<ICommand?> CommandProperty =
+        AvaloniaProperty.Register<ExecuteCommandOnDoubleTappedBehavior, ICommand?>(nameof(Command));
 
     /// <summary>
     /// 
     /// </summary>
-	public ICommand? Command
-	{
-		get => GetValue(CommandProperty);
-		set => SetValue(CommandProperty, value);
-	}
+    public ICommand? Command
+    {
+        get => GetValue(CommandProperty);
+        set => SetValue(CommandProperty, value);
+    }
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="disposables"></param>
-	protected override void OnAttached(CompositeDisposable disposables)
-	{
+    protected override void OnAttached(CompositeDisposable disposables)
+    {
         var disposable = Gestures.DoubleTappedEvent.AddClassHandler<InputElement>(
-				(x, _) =>
-				{
-					if (Equals(x, AssociatedObject))
-					{
-						if (Command is { } cmd && cmd.CanExecute(default))
-						{
-							cmd.Execute(default);
-						}
-					}
-				},
-				RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+            (x, _) =>
+            {
+                if (Equals(x, AssociatedObject))
+                {
+                    if (Command is { } cmd && cmd.CanExecute(default))
+                    {
+                        cmd.Execute(default);
+                    }
+                }
+            },
+            RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
         disposables.Add(disposable);
-	}
+    }
 }

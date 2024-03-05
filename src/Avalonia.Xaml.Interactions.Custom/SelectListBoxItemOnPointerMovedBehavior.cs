@@ -14,7 +14,7 @@ public class SelectListBoxItemOnPointerMovedBehavior : Behavior<Control>
     {
         if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerMoved += PointerMoved; 
+            AssociatedObject.PointerMoved += PointerMoved;
         }
     }
 
@@ -23,13 +23,13 @@ public class SelectListBoxItemOnPointerMovedBehavior : Behavior<Control>
     {
         if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerMoved -= PointerMoved; 
+            AssociatedObject.PointerMoved -= PointerMoved;
         }
     }
 
     private void PointerMoved(object? sender, PointerEventArgs args)
     {
-        if (AssociatedObject is { Parent: ListBoxItem item })
+        if (AssociatedObject is {Parent: ListBoxItem item})
         {
             item.IsSelected = true;
             item.Focus();

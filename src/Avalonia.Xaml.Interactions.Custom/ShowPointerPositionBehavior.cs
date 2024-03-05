@@ -30,7 +30,7 @@ public class ShowPointerPositionBehavior : Behavior<Control>
     {
         if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerMoved += AssociatedObject_PointerMoved; 
+            AssociatedObject.PointerMoved += AssociatedObject_PointerMoved;
         }
     }
 
@@ -39,7 +39,7 @@ public class ShowPointerPositionBehavior : Behavior<Control>
     {
         if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerMoved -= AssociatedObject_PointerMoved; 
+            AssociatedObject.PointerMoved -= AssociatedObject_PointerMoved;
         }
     }
 

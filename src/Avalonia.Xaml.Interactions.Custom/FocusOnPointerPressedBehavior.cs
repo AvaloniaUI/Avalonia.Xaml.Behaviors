@@ -14,7 +14,7 @@ public class FocusOnPointerPressedBehavior : Behavior<Control>
     {
         if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerPressed += PointerPressed; 
+            AssociatedObject.PointerPressed += PointerPressed;
         }
     }
 
@@ -23,7 +23,7 @@ public class FocusOnPointerPressedBehavior : Behavior<Control>
     {
         if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerPressed -= PointerPressed; 
+            AssociatedObject.PointerPressed -= PointerPressed;
         }
     }
 
