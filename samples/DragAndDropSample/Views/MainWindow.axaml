@@ -16,6 +16,12 @@
     <vm:MainWindowViewModel />
   </Design.DataContext>
 
+  <Window.Resources>
+    <!-- IconGrabber, MIT License, author: Primer, taken from: https://www.svgrepo.com/svg/347759/grabber -->
+    <PathGeometry x:Key="IconGrabberGeometry">M15 18a1 1 0 100-2 1 1 0 000 2zm1-6a1 1 0 11-2 0 1 1 0 012 0zm-7 6a1 1 0 100-2 1 1 0 000 2zm0-5a1 1 0 100-2 1 1 0 000 2zm7-6a1 1 0 11-2 0 1 1 0 012 0zM9 8a1 1 0 100-2 1 1 0 000 2z</PathGeometry>
+    <GeometryDrawing x:Key="IconGrabber" Brush="Black" Geometry="{StaticResource IconGrabberGeometry}" />
+  </Window.Resources>
+
   <Window.Styles>
 
     <Style Selector="ListBox.ItemsDragAndDrop">
@@ -89,6 +95,49 @@
         </i:BehaviorCollectionTemplate>
       </Setter>
     </Style>
+
+    <Style Selector="DataGrid.DragAndDrop">
+      <Style.Resources>
+        <b:ItemsDataGridDropHandler x:Key="ItemsDataGridDropHandler" />
+      </Style.Resources>
+      <Setter
+        Property="RowHeaderWidth"
+        Value="24" />
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <idd:ContextDropBehavior Handler="{StaticResource ItemsDataGridDropHandler}" />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+    </Style>
+  
+    <!-- This makes only the DataGridRowHeader available for dragging, instead of making the entire row draggable -->
+    <!-- Which prevents a conflict between text selection in a cell and drag-and-drop -->
+    <Style Selector="DataGrid.DragAndDrop DataGridRowHeader">
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <idd:ContextDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+      <Setter Property="Content">
+        <Template>
+          <Image
+            Margin="12,0,12,0"
+            Width="12"
+            Height="12"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center">
+            <Image.Source>
+              <!-- Use your own image here, I used this: https://www.svgrepo.com/svg/347759/grabber -->
+              <DrawingImage Drawing="{StaticResource IconGrabber}" />
+            </Image.Source>
+          </Image>
+        </Template>
+      </Setter>
+    </Style>
     
   </Window.Styles>
 
@@ -127,6 +176,27 @@
           </DataTemplate>
         </ListBox.ItemTemplate>
       </ListBox>
+    </TabItem>
+
+    <TabItem Header="DataGrid">
+      <Grid>
+        <DataGrid
+          AutoGenerateColumns="False"
+          ItemsSource="{Binding Items}"
+          CanUserResizeColumns="True"
+          HeadersVisibility="All"
+          Classes="DragAndDrop">
+          <DataGrid.Columns>
+            <DataGridTextColumn
+              Width="*"
+              Binding="{Binding Title}">
+            <DataGridTextColumn.Header>
+              <TextBlock Text="Title"/>
+            </DataGridTextColumn.Header>
+          </DataGridTextColumn>
+          </DataGrid.Columns>
+        </DataGrid>
+      </Grid>
     </TabItem>
 
   </TabControl>
