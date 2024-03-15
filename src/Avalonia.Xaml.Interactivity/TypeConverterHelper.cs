@@ -86,6 +86,15 @@ internal static class TypeConverterHelper
     private static string GetScope(string name)
     {
         var indexOfLastPeriod = name.LastIndexOf('.');
+#if !NET6_0_OR_GREATER
+        if (indexOfLastPeriod != name.Length - 1)
+        {
+            return name.Substring(0, indexOfLastPeriod);
+        }
+
+        return name;
+#else
         return indexOfLastPeriod != name.Length - 1 ? name[..indexOfLastPeriod] : name;
+#endif
     }
 }
