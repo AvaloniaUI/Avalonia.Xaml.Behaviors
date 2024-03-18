@@ -31,20 +31,27 @@ public class FocusBehavior : DisposingBehavior<Control>
     /// <param name="disposables"></param>
     protected override void OnAttached(CompositeDisposable disposables)
     {
-        base.OnAttached();
-
         if (AssociatedObject is not null)
         {
-            AssociatedObject.AttachedToLogicalTree += (_, _) =>
-                disposables.Add(this.GetObservable(IsFocusedProperty)
-                    .Subscribe(new AnonymousObserver<bool>(
-                        focused =>
+            disposables.Add(AssociatedObject.GetObservable(Avalonia.Input.InputElement.IsFocusedProperty)
+                .Subscribe(new AnonymousObserver<bool>(
+                    focused =>
+                    {
+                        if (!focused)
                         {
-                            if (focused)
-                            {
-                                AssociatedObject.Focus();
-                            }
-                        })));
+                            IsFocused = false;
+                        }
+                    })));
+
+            disposables.Add(this.GetObservable(IsFocusedProperty)
+                .Subscribe(new AnonymousObserver<bool>(
+                    focused =>
+                    {
+                        if (focused)
+                        {
+                            AssociatedObject.Focus();
+                        }
+                    })));
         }
     }
 }
