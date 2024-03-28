@@ -14,7 +14,7 @@ namespace System.Diagnostics.CodeAnalysis
         AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Method |
         AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct,
         Inherited = false)]
-    public sealed class DynamicallyAccessedMembersAttribute : Attribute
+    internal sealed class DynamicallyAccessedMembersAttribute : Attribute
     {
         public DynamicallyAccessedMembersAttribute(DynamicallyAccessedMemberTypes memberTypes)
         {
@@ -25,7 +25,7 @@ namespace System.Diagnostics.CodeAnalysis
     }
     
     [Flags]
-    public enum DynamicallyAccessedMemberTypes
+    internal enum DynamicallyAccessedMemberTypes
     {
         None = 0,
         PublicParameterlessConstructor = 0x0001,
@@ -48,7 +48,7 @@ namespace System.Diagnostics.CodeAnalysis
     [AttributeUsage(
         AttributeTargets.Constructor | AttributeTargets.Field | AttributeTargets.Method,
         AllowMultiple = true, Inherited = false)]
-    public sealed class DynamicDependencyAttribute : Attribute
+    internal sealed class DynamicDependencyAttribute : Attribute
     {
         public DynamicDependencyAttribute(string memberSignature)
         {
@@ -90,7 +90,7 @@ namespace System.Diagnostics.CodeAnalysis
     }
     
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class, Inherited = false)]
-    public sealed class RequiresUnreferencedCodeAttribute : Attribute
+    internal sealed class RequiresUnreferencedCodeAttribute : Attribute
     {
         public RequiresUnreferencedCodeAttribute(string message)
         {
@@ -102,7 +102,7 @@ namespace System.Diagnostics.CodeAnalysis
     }
 
     [AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]
-    public sealed class UnconditionalSuppressMessageAttribute : Attribute
+    internal sealed class UnconditionalSuppressMessageAttribute : Attribute
     {
         public UnconditionalSuppressMessageAttribute(string category, string checkId)
         {
