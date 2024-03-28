@@ -4,15 +4,14 @@ using ReactiveUI;
 
 namespace BehaviorsTestApplication.ViewModels;
 
-public class ItemViewModel : ViewModelBase
+public class ItemViewModel(string name) : ViewModelBase
 {
-    private string _name;
     private ObservableCollection<ItemViewModel>? _items;
 
     public string Name
     {
-        get => _name;
-        set => this.RaiseAndSetIfChanged(ref _name, value);
+        get => name;
+        set => this.RaiseAndSetIfChanged(ref name, value);
     }
 
     public ObservableCollection<ItemViewModel>? Items
@@ -21,10 +20,5 @@ public class ItemViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _items, value);
     }
 
-    public ItemViewModel(string name)
-    {
-        _name = name;
-    }
-
-    public override string ToString() => _name;
+    public override string ToString() => name;
 }

@@ -131,13 +131,14 @@ public class InvokeCommandAction : AvaloniaObject, IAction
         {
             resolvedParameter = CommandParameter;
         }
-        else if (InputConverter is { })
+        else if (InputConverter is not null)
         {
             resolvedParameter = InputConverter.Convert(
                 parameter,
                 typeof(object),
                 InputConverterParameter,
-                InputConverterLanguage is { } ?
+                InputConverterLanguage is not null
+                    ? 
                     new System.Globalization.CultureInfo(InputConverterLanguage)
                     : System.Globalization.CultureInfo.CurrentCulture);
         }

@@ -24,7 +24,7 @@ public class InvokeCommandActionTests
 
         // Click
         window.TargetButton.Focus();
-        window.KeyPress(Key.Enter, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.Enter, RawInputModifiers.None);
 
         window.CaptureRenderedFrame()?.Save("InvokeCommandAction_001_1.png");
 
@@ -44,7 +44,7 @@ public class InvokeCommandActionTests
 
         // Click
         window.TargetButton.Focus();
-        window.KeyPress(Key.Enter, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.Enter, RawInputModifiers.None);
 
         window.CaptureRenderedFrame()?.Save("InvokeCommandAction_002_1.png");
 
@@ -64,7 +64,7 @@ public class InvokeCommandActionTests
 
         // Click
         window.TargetButton.Focus();
-        window.KeyPress(Key.Enter, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.Enter, RawInputModifiers.None);
 
         window.CaptureRenderedFrame()?.Save("InvokeCommandAction_003_1.png");
 
@@ -84,7 +84,7 @@ public class InvokeCommandActionTests
 
         // Click
         window.TargetButton.Focus();
-        window.KeyPress(Key.Enter, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.Enter, RawInputModifiers.None);
 
         window.CaptureRenderedFrame()?.Save("InvokeCommandAction_004_1.png");
 

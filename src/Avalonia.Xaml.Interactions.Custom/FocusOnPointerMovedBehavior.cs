@@ -12,18 +12,18 @@ public class FocusOnPointerMovedBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerMoved += PointerMoved; 
+            AssociatedObject.PointerMoved += PointerMoved;
         }
     }
 
     /// <inheritdoc />
     protected override void OnDetachedFromVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerMoved -= PointerMoved; 
+            AssociatedObject.PointerMoved -= PointerMoved;
         }
     }
 

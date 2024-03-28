@@ -44,7 +44,8 @@ public class HideOnKeyPressedBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        AssociatedObject?.AddHandler(InputElement.KeyDownEvent, AssociatedObject_KeyDown, RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+        AssociatedObject?.AddHandler(InputElement.KeyDownEvent, AssociatedObject_KeyDown,
+            RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
     }
 
     /// <inheritdoc />
@@ -55,7 +56,7 @@ public class HideOnKeyPressedBehavior : Behavior<Control>
 
     private void AssociatedObject_KeyDown(object? sender, KeyEventArgs e)
     {
-        if (e.Key == Key && TargetControl is { })
+        if (e.Key == Key && TargetControl is not null)
         {
             TargetControl.IsVisible = false;
         }

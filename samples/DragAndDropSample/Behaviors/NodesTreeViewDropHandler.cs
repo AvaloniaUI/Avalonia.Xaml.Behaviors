@@ -20,10 +20,10 @@ public class NodesTreeViewDropHandler : DropHandlerBase
 
         var sourceParent = sourceNode.Parent;
         var targetParent = targetNode.Parent;
-        var sourceNodes = sourceParent is { } ? sourceParent.Nodes : vm.Nodes;
-        var targetNodes = targetParent is { } ? targetParent.Nodes : vm.Nodes;
+        var sourceNodes = sourceParent is not null ? sourceParent.Nodes : vm.Nodes;
+        var targetNodes = targetParent is not null ? targetParent.Nodes : vm.Nodes;
 
-        if (sourceNodes is { } && targetNodes is { })
+        if (sourceNodes is not null && targetNodes is not null)
         {
             var sourceIndex = sourceNodes.IndexOf(sourceNode);
             var targetIndex = targetNodes.IndexOf(targetNode);

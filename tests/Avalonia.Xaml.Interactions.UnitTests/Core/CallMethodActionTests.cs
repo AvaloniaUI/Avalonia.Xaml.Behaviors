@@ -27,7 +27,7 @@ public class CallMethodActionTests
 
         // Click
         window.TargetButton.Focus();
-        window.KeyPress(Key.Enter, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.Enter, RawInputModifiers.None);
 
         window.CaptureRenderedFrame()?.Save("CallMethodAction_001_1.png");
 
@@ -52,7 +52,7 @@ public class CallMethodActionTests
 
         // Click
         window.TargetButton.Focus();
-        window.KeyPress(Key.Enter, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.Enter, RawInputModifiers.None);
 
         window.CaptureRenderedFrame()?.Save("CallMethodAction_002_1.png");
 
