@@ -41,19 +41,19 @@ public class BehaviorCollectionTemplateTests
 
         // KeyDown
         containers[0].Focus();
-        window.KeyPress(Key.Enter, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.Enter, RawInputModifiers.None);
 
         Assert.Equal(window.Resources["RedBrush"], containers[0].Background);
 
         // KeyDown
         containers[1].Focus();
-        window.KeyPress(Key.Enter, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.Enter, RawInputModifiers.None);
 
         Assert.Equal(window.Resources["RedBrush"], containers[1].Background);
 
         // KeyDown
         containers[2].Focus();
-        window.KeyPress(Key.Enter, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.Enter, RawInputModifiers.None);
 
         Assert.Equal(window.Resources["RedBrush"], containers[2].Background);
     }

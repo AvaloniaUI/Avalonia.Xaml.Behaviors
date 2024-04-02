@@ -37,7 +37,7 @@ public class ValueChangedTriggerBehavior : Trigger
         }
 
         var binding = behavior.Binding;
-        if (binding is { })
+        if (binding is not null)
         {
             Interaction.ExecuteActions(behavior.AssociatedObject, behavior.Actions, args);
         }

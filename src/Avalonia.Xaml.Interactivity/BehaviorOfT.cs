@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Avalonia.Xaml.Interactivity;
 
@@ -20,11 +21,12 @@ public abstract class Behavior<T> : Behavior where T : AvaloniaObject
     /// <remarks>
     /// Override this to hook up functionality to the <see cref="Behavior.AssociatedObject"/>
     /// </remarks>
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     protected override void OnAttached()
     {
         base.OnAttached();
 
-        if (AssociatedObject is null && base.AssociatedObject is { })
+        if (AssociatedObject is null && base.AssociatedObject is not null)
         {
             var actualType = base.AssociatedObject?.GetType().FullName;
             var expectedType = typeof(T).FullName;

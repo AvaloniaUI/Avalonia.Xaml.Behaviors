@@ -84,7 +84,7 @@ public class Interaction
             }
 
             var result = action.Execute(sender, parameter);
-            if (result is { })
+            if (result is not null)
             {
                 results.Add(result);
             }
@@ -103,12 +103,12 @@ public class Interaction
             return;
         }
 
-        if (oldCollection is { AssociatedObject: { } })
+        if (oldCollection is { AssociatedObject: not null})
         {
             oldCollection.Detach();
         }
 
-        if (newCollection is { })
+        if (newCollection is not null)
         {
             newCollection.Attach(e.Sender);
             SetVisualTreeEventHandlersRuntime(e.Sender);

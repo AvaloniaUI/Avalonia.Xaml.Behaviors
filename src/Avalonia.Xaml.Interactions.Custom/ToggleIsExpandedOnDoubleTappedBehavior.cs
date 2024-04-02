@@ -13,24 +13,24 @@ public class ToggleIsExpandedOnDoubleTappedBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
-            AssociatedObject.DoubleTapped += DoubleTapped; 
+            AssociatedObject.DoubleTapped += DoubleTapped;
         }
     }
 
     /// <inheritdoc />
     protected override void OnDetachedFromVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
-            AssociatedObject.DoubleTapped -= DoubleTapped; 
+            AssociatedObject.DoubleTapped -= DoubleTapped;
         }
     }
 
     private void DoubleTapped(object? sender, RoutedEventArgs args)
     {
-        if (AssociatedObject is { Parent: TreeViewItem item })
+        if (AssociatedObject is {Parent: TreeViewItem item})
         {
             item.IsExpanded = !item.IsExpanded;
         }

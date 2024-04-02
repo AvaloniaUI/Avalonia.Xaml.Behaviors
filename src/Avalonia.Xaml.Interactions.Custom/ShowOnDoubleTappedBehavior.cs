@@ -29,7 +29,8 @@ public class ShowOnDoubleTappedBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        AssociatedObject?.AddHandler(Gestures.DoubleTappedEvent, AssociatedObject_DoubleTapped, RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+        AssociatedObject?.AddHandler(Gestures.DoubleTappedEvent, AssociatedObject_DoubleTapped,
+            RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
     }
 
     /// <inheritdoc />
@@ -40,7 +41,7 @@ public class ShowOnDoubleTappedBehavior : Behavior<Control>
 
     private void AssociatedObject_DoubleTapped(object? sender, RoutedEventArgs e)
     {
-        if (TargetControl is { IsVisible: false })
+        if (TargetControl is {IsVisible: false})
         {
             TargetControl.IsVisible = true;
             TargetControl.Focus();

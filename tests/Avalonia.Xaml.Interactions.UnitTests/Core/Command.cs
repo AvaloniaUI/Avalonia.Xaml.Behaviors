@@ -3,26 +3,20 @@ using System.Windows.Input;
 
 namespace Avalonia.Xaml.Interactions.UnitTests.Core;
 
-internal class Command : ICommand
+internal class Command(Action<object?> execute, Func<object?, bool>? canExecute = null)
+    : ICommand
 {
-    private readonly Action<object?> _execute;
-    private readonly Func<object?, bool>? _canExecute;
-
-    public Command(Action<object?> execute, Func<object?, bool>? canExecute = null)
-    {
-        _execute = execute;
-        _canExecute = canExecute;
-    }
-
     public bool CanExecute(object? parameter)
     {
-        return _canExecute?.Invoke(parameter) ?? true;
+        return canExecute?.Invoke(parameter) ?? true;
     }
 
     public void Execute(object? parameter)
     {
-        _execute.Invoke(parameter);
+        execute.Invoke(parameter);
     }
 
+    #pragma warning disable CS0067
     public event EventHandler? CanExecuteChanged;
+    #pragma warning restore CS0067
 }

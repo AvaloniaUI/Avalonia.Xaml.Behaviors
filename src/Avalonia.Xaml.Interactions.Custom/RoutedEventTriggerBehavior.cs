@@ -20,7 +20,8 @@ public class RoutedEventTriggerBehavior : Trigger<Interactive>
     /// Identifies the <seealso cref="RoutingStrategies"/> avalonia property.
     /// </summary>
     public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty =
-        AvaloniaProperty.Register<RoutedEventTriggerBehavior, RoutingStrategies>(nameof(RoutingStrategies), RoutingStrategies.Direct | RoutingStrategies.Bubble);
+        AvaloniaProperty.Register<RoutedEventTriggerBehavior, RoutingStrategies>(nameof(RoutingStrategies),
+            RoutingStrategies.Direct | RoutingStrategies.Bubble);
 
     /// <summary>
     /// Identifies the <seealso cref="SourceInteractive"/> avalonia property.
@@ -103,7 +104,7 @@ public class RoutedEventTriggerBehavior : Trigger<Interactive>
     private void AddHandler()
     {
         var interactive = ComputeResolvedSourceInteractive();
-        if (interactive is { } && RoutedEvent is { })
+        if (interactive is not null && RoutedEvent is not null)
         {
             interactive.AddHandler(RoutedEvent, Handler, RoutingStrategies);
             _isInitialized = true;
@@ -113,7 +114,7 @@ public class RoutedEventTriggerBehavior : Trigger<Interactive>
     private void RemoveHandler()
     {
         var interactive = ComputeResolvedSourceInteractive();
-        if (interactive is { } && RoutedEvent is { } && _isInitialized)
+        if (interactive is not null && RoutedEvent is not null && _isInitialized)
         {
             interactive.RemoveHandler(RoutedEvent, Handler);
             _isInitialized = false;
@@ -122,13 +123,13 @@ public class RoutedEventTriggerBehavior : Trigger<Interactive>
 
     private Interactive? ComputeResolvedSourceInteractive()
     {
-        return GetValue(SourceInteractiveProperty) is { } ? SourceInteractive : AssociatedObject;
+        return GetValue(SourceInteractiveProperty) is not null ? SourceInteractive : AssociatedObject;
     }
 
     private void Handler(object? sender, RoutedEventArgs e)
     {
         var interactive = ComputeResolvedSourceInteractive();
-        if (interactive is { })
+        if (interactive is not null)
         {
             Interaction.ExecuteActions(interactive, Actions, e);
         }

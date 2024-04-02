@@ -43,6 +43,7 @@ public class FocusControlAction : AvaloniaObject, IAction
                 control.Focus();
             }
         }
+
         return null;
     }
 }

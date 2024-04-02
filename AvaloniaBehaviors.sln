@@ -79,11 +79,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.DragAndDrop", "src\Avalonia.Xaml.Interactions.DragAndDrop\Avalonia.Xaml.Interactions.DragAndDrop.csproj", "{EF243B1A-FF29-41E9-B44B-2E55A73F6CCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.Reactive", "src\Avalonia.Xaml.Interactions.Reactive\Avalonia.Xaml.Interactions.Reactive.csproj", "{D647E09E-BBF2-4432-A4E0-80FBB921C1EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.Custom", "src\Avalonia.Xaml.Interactions.Custom\Avalonia.Xaml.Interactions.Custom.csproj", "{D647E09E-BBF2-4432-A4E0-80FBB921C1EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.Events", "src\Avalonia.Xaml.Interactions.Events\Avalonia.Xaml.Interactions.Events.csproj", "{648FFF6A-A8F5-491C-AC1C-19FC2061D6B4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Xaml.Interactions.Custom", "src\Avalonia.Xaml.Interactions.Custom\Avalonia.Xaml.Interactions.Custom.csproj", "{0BB3669E-45E4-41E8-B765-7F4A5201C4E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,10 +145,6 @@ Global
 		{648FFF6A-A8F5-491C-AC1C-19FC2061D6B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{648FFF6A-A8F5-491C-AC1C-19FC2061D6B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{648FFF6A-A8F5-491C-AC1C-19FC2061D6B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0BB3669E-45E4-41E8-B765-7F4A5201C4E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0BB3669E-45E4-41E8-B765-7F4A5201C4E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0BB3669E-45E4-41E8-B765-7F4A5201C4E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0BB3669E-45E4-41E8-B765-7F4A5201C4E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -174,7 +168,6 @@ Global
 		{EF243B1A-FF29-41E9-B44B-2E55A73F6CCE} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
 		{D647E09E-BBF2-4432-A4E0-80FBB921C1EE} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
 		{648FFF6A-A8F5-491C-AC1C-19FC2061D6B4} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
-		{0BB3669E-45E4-41E8-B765-7F4A5201C4E0} = {84224365-32B6-46AF-85A2-45640E6D7EEB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E64CD420-15B1-487C-9806-41EBE6DC15A4}

@@ -16,16 +16,7 @@ public class StubBehavior : AvaloniaObject, IBehavior
         private set;
     }
 
-    public ActionCollection Actions
-    {
-        get;
-        private set;
-    }
-
-    public StubBehavior()
-    {
-        Actions = new ActionCollection();
-    }
+    public ActionCollection Actions { get; private set; } = new();
 
     public AvaloniaObject? AssociatedObject
     {

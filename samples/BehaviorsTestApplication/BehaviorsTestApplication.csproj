@@ -15,7 +15,6 @@
     <PackageReference Include="Avalonia.Themes.Fluent" />
     <PackageReference Include="Avalonia.Fonts.Inter" />
     <PackageReference Include="Avalonia.ReactiveUI" />
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" />
   </ItemGroup>
 
   <!--<Import Project="..\..\build\SignAssembly.props" />-->
@@ -26,7 +25,6 @@
     <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions.DragAndDrop\Avalonia.Xaml.Interactions.DragAndDrop.csproj" />
     <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions.Draggable\Avalonia.Xaml.Interactions.Draggable.csproj" />
     <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions.Events\Avalonia.Xaml.Interactions.Events.csproj" />
-    <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions.Reactive\Avalonia.Xaml.Interactions.Reactive.csproj" />
     <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions.Responsive\Avalonia.Xaml.Interactions.Responsive.csproj" />
     <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactivity\Avalonia.Xaml.Interactivity.csproj" />
   </ItemGroup>

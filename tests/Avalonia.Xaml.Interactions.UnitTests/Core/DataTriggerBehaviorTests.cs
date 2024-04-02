@@ -23,9 +23,9 @@ public class DataTriggerBehaviorTests
         Assert.Equal(0d, window.TargetSlider.Value);
 
         window.TargetSlider.Focus();
-        window.KeyPress(Key.Right, RawInputModifiers.None);
-        window.KeyPress(Key.Right, RawInputModifiers.None);
-        window.KeyPress(Key.Right, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.ArrowRight, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.ArrowRight, RawInputModifiers.None);
+        window.KeyPressQwerty(PhysicalKey.ArrowRight, RawInputModifiers.None);
 
         window.CaptureRenderedFrame()?.Save("DataTriggerBehavior_001_1.png");
 

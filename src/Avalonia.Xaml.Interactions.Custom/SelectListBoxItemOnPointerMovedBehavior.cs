@@ -12,24 +12,24 @@ public class SelectListBoxItemOnPointerMovedBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerMoved += PointerMoved; 
+            AssociatedObject.PointerMoved += PointerMoved;
         }
     }
 
     /// <inheritdoc />
     protected override void OnDetachedFromVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerMoved -= PointerMoved; 
+            AssociatedObject.PointerMoved -= PointerMoved;
         }
     }
 
     private void PointerMoved(object? sender, PointerEventArgs args)
     {
-        if (AssociatedObject is { Parent: ListBoxItem item })
+        if (AssociatedObject is {Parent: ListBoxItem item})
         {
             item.IsSelected = true;
             item.Focus();
