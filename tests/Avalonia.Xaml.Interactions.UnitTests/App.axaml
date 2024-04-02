@@ -3,5 +3,8 @@
              x:Class="Avalonia.Xaml.Interactions.UnitTests.App">
   <Application.Styles>
     <FluentTheme />
+    <Style Selector="Window">
+      <Setter Property="FontFamily" Value="resm:Avalonia.Xaml.Interactions.UnitTests.Assets?assembly=Avalonia.Xaml.Interactions.UnitTests#Noto Mono" />
+    </Style>
   </Application.Styles>
 </Application>

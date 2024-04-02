@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -90,6 +91,7 @@ public class TypedDragBehavior : Behavior<Control>
         await DragDrop.DoDragDrop(triggerEvent, data, effect);
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private void AssociatedObject_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
@@ -111,7 +113,7 @@ public class TypedDragBehavior : Behavior<Control>
     private void AssociatedObject_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
-        if (properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased && _triggerEvent is { })
+        if (properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased && _triggerEvent is not null)
         {
             _triggerEvent = null;
             _value = null;
@@ -122,7 +124,7 @@ public class TypedDragBehavior : Behavior<Control>
     private async void AssociatedObject_PointerMoved(object? sender, PointerEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
-        if (properties.IsLeftButtonPressed && _triggerEvent is { })
+        if (properties.IsLeftButtonPressed && _triggerEvent is not null)
         {
             var point = e.GetPosition(null);
             var diff = _dragStartPoint - point;

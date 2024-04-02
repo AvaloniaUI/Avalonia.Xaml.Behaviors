@@ -28,24 +28,24 @@ public class ShowPointerPositionBehavior : Behavior<Control>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerMoved += AssociatedObject_PointerMoved; 
+            AssociatedObject.PointerMoved += AssociatedObject_PointerMoved;
         }
     }
 
     /// <inheritdoc />
     protected override void OnDetachedFromVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
-            AssociatedObject.PointerMoved -= AssociatedObject_PointerMoved; 
+            AssociatedObject.PointerMoved -= AssociatedObject_PointerMoved;
         }
     }
 
     private void AssociatedObject_PointerMoved(object? sender, PointerEventArgs e)
     {
-        if (TargetTextBlock is { })
+        if (TargetTextBlock is not null)
         {
             TargetTextBlock.Text = e.GetPosition(AssociatedObject).ToString();
         }

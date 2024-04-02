@@ -1,0 +1,15 @@
+﻿{
+  Type: CallMethodAction002,
+  Title: CallMethodAction002,
+  Content: {
+    Type: StackPanel,
+    Children: [
+      {
+        Type: Button,
+        Content: Button,
+        Name: TargetButton
+      }
+    ]
+  },
+  IsVisible: true
+}

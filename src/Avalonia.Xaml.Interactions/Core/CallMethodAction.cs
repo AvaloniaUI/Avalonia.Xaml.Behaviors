@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -20,6 +21,12 @@ public class CallMethodAction : AvaloniaObject, IAction
     private MethodDescriptor? _cachedMethodDescriptor;
 
     /// <summary>
+    /// Identifies the <seealso cref="IsEnabled"/> avalonia property.
+    /// </summary>
+    public static readonly StyledProperty<bool> IsEnabledProperty =
+        AvaloniaProperty.Register<CallMethodAction, bool>(nameof(IsEnabled), defaultValue: true);
+
+    /// <summary>
     /// Identifies the <seealso cref="MethodName"/> avalonia property.
     /// </summary>
     public static readonly StyledProperty<string> MethodNameProperty =
@@ -30,6 +37,16 @@ public class CallMethodAction : AvaloniaObject, IAction
     /// </summary>
     public static readonly StyledProperty<object?> TargetObjectProperty =
         AvaloniaProperty.Register<CallMethodAction, object?>(nameof(TargetObject));
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this instance is enabled.
+    /// </summary>
+    /// <value><c>true</c> if this instance is enabled; otherwise, <c>false</c>.</value>
+    public bool IsEnabled
+    {
+        get => GetValue(IsEnabledProperty);
+        set => SetValue(IsEnabledProperty, value);
+    }
 
     /// <summary>
     /// Gets or sets the name of the method to invoke. This is a avalonia property.
@@ -69,6 +86,7 @@ public class CallMethodAction : AvaloniaObject, IAction
         callMethodAction.UpdateMethodDescriptors();
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private static void TargetObjectChanged(AvaloniaPropertyChangedEventArgs<object?> e)
     {
         if (e.Sender is not CallMethodAction callMethodAction)
@@ -77,7 +95,7 @@ public class CallMethodAction : AvaloniaObject, IAction
         }
 
         var newValue = e.NewValue.GetValueOrDefault();
-        if (newValue is { })
+        if (newValue is not null)
         {
             var newType = newValue.GetType();
             callMethodAction.UpdateTargetType(newType);
@@ -90,9 +108,15 @@ public class CallMethodAction : AvaloniaObject, IAction
     /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
     /// <param name="parameter">The value of this parameter is determined by the caller.</param>
     /// <returns>True if the method is called; else false.</returns>
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     public virtual object Execute(object? sender, object? parameter)
     {
-        var target = GetValue(TargetObjectProperty) is { } ? TargetObject : sender;
+        if (!IsEnabled)
+        {
+            return false;
+        }
+
+        var target = GetValue(TargetObjectProperty) is not null ? TargetObject : sender;
         if (target is null || string.IsNullOrEmpty(MethodName))
         {
             return false;
@@ -103,7 +127,7 @@ public class CallMethodAction : AvaloniaObject, IAction
         var methodDescriptor = FindBestMethod(parameter);
         if (methodDescriptor is null)
         {
-            if (TargetObject is { })
+            if (TargetObject is not null)
             {
                 throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,
@@ -129,6 +153,7 @@ public class CallMethodAction : AvaloniaObject, IAction
         }
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private MethodDescriptor? FindBestMethod(object? parameter)
     {
         if (parameter is null)
@@ -145,7 +170,7 @@ public class CallMethodAction : AvaloniaObject, IAction
         {
             var currentTypeInfo = currentMethod.SecondParameterTypeInfo;
 
-            if (currentTypeInfo is { } && currentTypeInfo.IsAssignableFrom(parameterTypeInfo))
+            if (currentTypeInfo is not null && currentTypeInfo.IsAssignableFrom(parameterTypeInfo))
             {
                 if (mostDerivedMethod is null || !currentTypeInfo.IsAssignableFrom(mostDerivedMethod.SecondParameterTypeInfo))
                 {
@@ -169,6 +194,7 @@ public class CallMethodAction : AvaloniaObject, IAction
         UpdateMethodDescriptors();
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private void UpdateMethodDescriptors()
     {
         _methodDescriptors.Clear();
@@ -208,9 +234,9 @@ public class CallMethodAction : AvaloniaObject, IAction
             foreach (var method in _methodDescriptors)
             {
                 var typeInfo = method.SecondParameterTypeInfo;
-                if (typeInfo is { } && (!typeInfo.IsValueType || typeInfo.IsGenericType && typeInfo.GetGenericTypeDefinition() == typeof(Nullable<>)))
+                if (typeInfo is not null && (!typeInfo.IsValueType || typeInfo.IsGenericType && typeInfo.GetGenericTypeDefinition() == typeof(Nullable<>)))
                 {
-                    if (_cachedMethodDescriptor is { })
+                    if (_cachedMethodDescriptor is not null)
                     {
                         _cachedMethodDescriptor = null;
                         return;
@@ -222,18 +248,13 @@ public class CallMethodAction : AvaloniaObject, IAction
         }
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     [DebuggerDisplay($"{{{nameof(MethodInfo)}}}")]
-    private class MethodDescriptor
+    private class MethodDescriptor(MethodInfo methodInfo, ParameterInfo[] methodParameters)
     {
-        public MethodDescriptor(MethodInfo methodInfo, ParameterInfo[] methodParameters)
-        {
-            MethodInfo = methodInfo;
-            Parameters = methodParameters;
-        }
+        public MethodInfo MethodInfo { get; private set; } = methodInfo;
 
-        public MethodInfo MethodInfo { get; private set; }
-
-        public ParameterInfo[] Parameters { get; private set; }
+        public ParameterInfo[] Parameters { get; private set; } = methodParameters;
 
         public int ParameterCount => Parameters.Length;
 

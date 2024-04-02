@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <Import Project="..\..\build\XUnit.props" />
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\Avalonia.Xaml.Interactions.UnitTests\*\*.ttf" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Avalonia.Xaml.Interactions\Avalonia.Xaml.Interactions.csproj" />

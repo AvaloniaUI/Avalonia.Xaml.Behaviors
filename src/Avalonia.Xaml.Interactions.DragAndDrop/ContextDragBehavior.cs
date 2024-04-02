@@ -150,7 +150,7 @@ public class ContextDragBehavior : Behavior<Control>
     {
         if (_captured)
         {
-            if (e.InitialPressMouseButton == MouseButton.Left && _triggerEvent is { })
+            if (e.InitialPressMouseButton == MouseButton.Left && _triggerEvent is not null)
             {
                 Released();
             }
@@ -164,7 +164,7 @@ public class ContextDragBehavior : Behavior<Control>
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
         if (_captured
             && properties.IsLeftButtonPressed &&
-            _triggerEvent is { })
+            _triggerEvent is not null)
         {
             var point = e.GetPosition(null);
             var diff = _dragStartPoint - point;

@@ -16,7 +16,7 @@ public class BindTagToVisualRootDataContextBehavior : Behavior<Control>
     protected override void OnAttachedToVisualTree()
     {
         var visualRoot = (Control?)AssociatedObject?.GetVisualRoot();
-        if (visualRoot is { })
+        if (visualRoot is not null)
         {
             _disposable = BindDataContextToTag(visualRoot, AssociatedObject);
         }
@@ -37,6 +37,6 @@ public class BindTagToVisualRootDataContextBehavior : Behavior<Control>
             throw new ArgumentNullException(nameof(target));
 
         var data = source.GetObservable(StyledElement.DataContextProperty);
-        return data is { } ? target.Bind(Control.TagProperty, data) : null;
+        return data is not null ? target.Bind(Control.TagProperty, data) : null;
     }
 }

@@ -30,7 +30,7 @@ public class ButtonClickEventTriggerBehavior : Trigger<Button>
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             AssociatedObject.Click += AssociatedObject_OnClick;
             AssociatedObject.AddHandler(InputElement.KeyDownEvent, Button_OnKeyDown, RoutingStrategies.Tunnel);
@@ -41,7 +41,7 @@ public class ButtonClickEventTriggerBehavior : Trigger<Button>
     /// <inheritdoc />
     protected override void OnDetachedFromVisualTree()
     {
-        if (AssociatedObject is { })
+        if (AssociatedObject is not null)
         {
             AssociatedObject.Click -= AssociatedObject_OnClick;
             AssociatedObject.RemoveHandler(InputElement.KeyDownEvent, Button_OnKeyDown);
@@ -51,7 +51,7 @@ public class ButtonClickEventTriggerBehavior : Trigger<Button>
 
     private void AssociatedObject_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (AssociatedObject is { } && KeyModifiers == _savedKeyModifiers)
+        if (AssociatedObject is not null && KeyModifiers == _savedKeyModifiers)
         {
             Interaction.ExecuteActions(AssociatedObject, Actions, e);
         }

@@ -78,7 +78,7 @@ public class AdaptiveBehavior : Behavior<Control>
 
     private void StartObserving()
     {
-        var sourceControl = GetValue(SourceControlProperty) is { } 
+        var sourceControl = GetValue(SourceControlProperty) is not null
             ? SourceControl 
             : AssociatedObject;
 
@@ -131,13 +131,13 @@ public class AdaptiveBehavior : Behavior<Control>
                 _ => false
             };
 
-            var targetControl = setter.GetValue(AdaptiveClassSetter.TargetControlProperty) is { } 
+            var targetControl = setter.GetValue(AdaptiveClassSetter.TargetControlProperty) is not null
                 ? setter.TargetControl 
-                : GetValue(TargetControlProperty) is { } 
+                : GetValue(TargetControlProperty) is not null
                     ? TargetControl 
                     : AssociatedObject;
 
-            if (targetControl is { })
+            if (targetControl is not null)
             {
                 var className = setter.ClassName;
                 var isPseudoClass = setter.IsPseudoClass;

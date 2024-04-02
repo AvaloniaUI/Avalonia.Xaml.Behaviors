@@ -1,0 +1,28 @@
+﻿{
+  Type: DataTriggerBehavior001,
+  Title: DataTriggerBehavior001,
+  Content: {
+    Type: StackPanel,
+    Children: [
+      {
+        Type: TextBlock,
+        Text: More than 50,
+        Name: TargetTextBlock
+      },
+      {
+        Type: TextBox,
+        Text: 75,
+        Name: TargetTextBox
+      },
+      {
+        Type: Slider,
+        Minimum: 0.0,
+        Maximum: 100.0,
+        Value: 75.0,
+        SmallChange: 25.0,
+        Name: TargetSlider
+      }
+    ]
+  },
+  IsVisible: true
+}

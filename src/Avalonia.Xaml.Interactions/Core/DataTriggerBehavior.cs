@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Avalonia.Reactive;
 using Avalonia.Xaml.Interactivity;
@@ -67,13 +68,14 @@ public class DataTriggerBehavior : Trigger
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<object?>>(OnValueChanged));
     }
 
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private static bool Compare(object? leftOperand, ComparisonConditionType operatorType, object? rightOperand)
     {
-        if (leftOperand is { } && rightOperand is { })
+        if (leftOperand is not null && rightOperand is not null)
         {
             var value = rightOperand.ToString();
             var destinationType = leftOperand.GetType();
-            if (value is { })
+            if (value is not null)
             {
                 rightOperand = TypeConverterHelper.Convert(value, destinationType);
             }
@@ -81,7 +83,7 @@ public class DataTriggerBehavior : Trigger
 
         var leftComparableOperand = leftOperand as IComparable;
         var rightComparableOperand = rightOperand as IComparable;
-        if (leftComparableOperand is { } && rightComparableOperand is { })
+        if (leftComparableOperand is not null && rightComparableOperand is not null)
         {
             return EvaluateComparable(leftComparableOperand, operatorType, rightComparableOperand);
         }
@@ -122,6 +124,7 @@ public class DataTriggerBehavior : Trigger
     /// <summary>
     /// Evaluates both operands that implement the IComparable interface.
     /// </summary>
+    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private static bool EvaluateComparable(IComparable leftOperand, ComparisonConditionType operatorType, IComparable rightOperand)
     {
         object? convertedOperand = null;
@@ -165,7 +168,7 @@ public class DataTriggerBehavior : Trigger
 
         // NOTE: In UWP version binding null check is not present but Avalonia throws exception as Bindings are null when first initialized.
         var binding = behavior.Binding;
-        if (binding is { })
+        if (binding is not null)
         {
             // Some value has changed--either the binding value, reference value, or the comparison condition. Re-evaluate the equation.
             if (Compare(behavior.Binding, behavior.ComparisonCondition, behavior.Value))
