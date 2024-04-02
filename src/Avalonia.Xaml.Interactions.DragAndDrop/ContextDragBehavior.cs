@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.LogicalTree;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.DragAndDrop;
@@ -136,6 +137,7 @@ public class ContextDragBehavior : Behavior<Control>
             if (e.Source is Control control
                 && AssociatedObject?.DataContext == control.DataContext)
             {
+                if ((control as ISelectable ?? control.Parent as ISelectable ?? control.FindLogicalAncestorOfType<ISelectable>())?.IsSelected ?? false) e.Handled = true; //avoid deselection on drag
                 _dragStartPoint = e.GetPosition(null);
                 _triggerEvent = e;
                 _lock = true;
