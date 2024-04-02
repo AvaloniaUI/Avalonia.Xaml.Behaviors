@@ -21,6 +21,12 @@ public class CallMethodAction : AvaloniaObject, IAction
     private MethodDescriptor? _cachedMethodDescriptor;
 
     /// <summary>
+    /// Identifies the <seealso cref="IsEnabled"/> avalonia property.
+    /// </summary>
+    public static readonly StyledProperty<bool> IsEnabledProperty =
+        AvaloniaProperty.Register<CallMethodAction, bool>(nameof(IsEnabled), defaultValue: true);
+
+    /// <summary>
     /// Identifies the <seealso cref="MethodName"/> avalonia property.
     /// </summary>
     public static readonly StyledProperty<string> MethodNameProperty =
@@ -31,6 +37,16 @@ public class CallMethodAction : AvaloniaObject, IAction
     /// </summary>
     public static readonly StyledProperty<object?> TargetObjectProperty =
         AvaloniaProperty.Register<CallMethodAction, object?>(nameof(TargetObject));
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this instance is enabled.
+    /// </summary>
+    /// <value><c>true</c> if this instance is enabled; otherwise, <c>false</c>.</value>
+    public bool IsEnabled
+    {
+        get => GetValue(IsEnabledProperty);
+        set => SetValue(IsEnabledProperty, value);
+    }
 
     /// <summary>
     /// Gets or sets the name of the method to invoke. This is a avalonia property.
@@ -95,6 +111,11 @@ public class CallMethodAction : AvaloniaObject, IAction
     [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     public virtual object Execute(object? sender, object? parameter)
     {
+        if (!IsEnabled)
+        {
+            return false;
+        }
+
         var target = GetValue(TargetObjectProperty) is not null ? TargetObject : sender;
         if (target is null || string.IsNullOrEmpty(MethodName))
         {
