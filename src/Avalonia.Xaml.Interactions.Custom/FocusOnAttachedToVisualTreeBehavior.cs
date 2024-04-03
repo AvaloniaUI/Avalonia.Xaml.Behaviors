@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Threading;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
@@ -11,6 +12,6 @@ public class FocusOnAttachedToVisualTreeBehavior : Behavior<Control>
     /// <inheritdoc/>
     protected override void OnAttachedToVisualTree()
     {
-        AssociatedObject?.Focus();
+        Dispatcher.UIThread.Post(() => AssociatedObject?.Focus());
     }
 }
