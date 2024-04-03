@@ -2,6 +2,7 @@ using System.Reactive;
 using System.Reactive.Disposables;
 using Avalonia.Controls;
 using Avalonia.Data;
+using Avalonia.Threading;
 
 namespace Avalonia.Xaml.Interactions.Custom;
 
@@ -49,7 +50,7 @@ public class FocusBehavior : DisposingBehavior<Control>
 					{
 						if (focused)
 						{
-							AssociatedObject.Focus();
+                            Dispatcher.UIThread.Post(() => AssociatedObject?.Focus());
 						}
 					})));
 		}
