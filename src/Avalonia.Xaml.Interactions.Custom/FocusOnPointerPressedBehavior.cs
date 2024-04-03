@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Threading;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
@@ -29,6 +30,6 @@ public class FocusOnPointerPressedBehavior : Behavior<Control>
 
     private void PointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        AssociatedObject?.Focus();
+        Dispatcher.UIThread.Post(() => AssociatedObject?.Focus());
     }
 }
