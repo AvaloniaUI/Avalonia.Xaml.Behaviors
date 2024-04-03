@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Threading;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
@@ -32,18 +33,8 @@ public class FocusControlAction : AvaloniaObject, IAction
     /// <returns>Returns null after executed.</returns>
     public virtual object? Execute(object? sender, object? parameter)
     {
-        if (TargetControl is not null)
-        {
-            TargetControl.Focus();
-        }
-        else
-        {
-            if (sender is Control control)
-            {
-                control.Focus();
-            }
-        }
-
+        var control = TargetControl ?? sender as Control;
+        Dispatcher.UIThread.Post(() => control?.Focus());
         return null;
     }
 }
