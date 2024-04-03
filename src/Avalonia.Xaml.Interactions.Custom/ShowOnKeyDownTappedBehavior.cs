@@ -1,6 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
@@ -59,7 +60,7 @@ public class ShowOnKeyDownTappedBehavior : Behavior<Control>
         if (e.Key == Key && TargetControl is {IsVisible: false})
         {
             TargetControl.IsVisible = true;
-            TargetControl.Focus();
+            Dispatcher.UIThread.Post(() => TargetControl.Focus());
         }
     }
 }
