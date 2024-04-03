@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Threading;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
@@ -29,6 +30,6 @@ public class FocusOnPointerMovedBehavior : Behavior<Control>
 
     private void PointerMoved(object? sender, PointerEventArgs args)
     {
-        AssociatedObject?.Focus();
+        Dispatcher.UIThread.Post(() => AssociatedObject?.Focus());
     }
 }
