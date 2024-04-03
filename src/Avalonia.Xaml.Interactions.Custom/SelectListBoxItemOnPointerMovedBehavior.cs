@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Threading;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
@@ -32,7 +33,7 @@ public class SelectListBoxItemOnPointerMovedBehavior : Behavior<Control>
         if (AssociatedObject is {Parent: ListBoxItem item})
         {
             item.IsSelected = true;
-            item.Focus();
+            Dispatcher.UIThread.Post(() => item.Focus());
         }
     }
 }
