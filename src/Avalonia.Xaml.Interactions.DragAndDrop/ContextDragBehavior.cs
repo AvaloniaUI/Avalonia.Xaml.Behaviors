@@ -144,6 +144,7 @@ public class ContextDragBehavior : Behavior<Control>
                 _captured = true;
             }
         }
+        e.Handled = false;
     }
 
     private void AssociatedObject_PointerReleased(object? sender, PointerReleasedEventArgs e)
