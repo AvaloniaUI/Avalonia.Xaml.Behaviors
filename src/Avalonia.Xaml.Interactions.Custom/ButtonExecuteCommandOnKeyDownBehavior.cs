@@ -14,23 +14,20 @@ public class ButtonExecuteCommandOnKeyDownBehavior : AttachedToVisualTreeBehavio
     /// <summary>
     /// 
     /// </summary>
-    public static readonly StyledProperty<Key?> KeyProperty =
-        AvaloniaProperty.Register<ButtonExecuteCommandOnKeyDownBehavior, Key?>(nameof(Key));
-
-    /// <summary>
-    /// 
-    /// </summary>
     public static readonly StyledProperty<bool> IsEnabledProperty =
         AvaloniaProperty.Register<ButtonExecuteCommandOnKeyDownBehavior, bool>(nameof(IsEnabled));
 
     /// <summary>
     /// 
     /// </summary>
-    public Key? Key
-    {
-        get => GetValue(KeyProperty);
-        set => SetValue(KeyProperty, value);
-    }
+    public static readonly StyledProperty<Key?> KeyProperty =
+        AvaloniaProperty.Register<ButtonExecuteCommandOnKeyDownBehavior, Key?>(nameof(Key));
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static readonly StyledProperty<KeyGesture?> GestureProperty =
+        AvaloniaProperty.Register<ButtonExecuteCommandOnKeyDownBehavior, KeyGesture?>(nameof(Gesture));
 
     /// <summary>
     /// 
@@ -44,16 +41,28 @@ public class ButtonExecuteCommandOnKeyDownBehavior : AttachedToVisualTreeBehavio
     /// <summary>
     /// 
     /// </summary>
+    public Key? Key
+    {
+        get => GetValue(KeyProperty);
+        set => SetValue(KeyProperty, value);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public KeyGesture? Gesture
+    {
+        get => GetValue(GestureProperty);
+        set => SetValue(GestureProperty, value);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="disposables"></param>
     protected override void OnAttachedToVisualTree(CompositeDisposable disposables)
     {
-        var button = AssociatedObject;
-        if (button is null)
-        {
-            return;
-        }
-
-        if (button.GetVisualRoot() is InputElement inputRoot)
+        if (AssociatedObject?.GetVisualRoot() is InputElement inputRoot)
         {
             var disposable = inputRoot.AddDisposableHandler(InputElement.KeyDownEvent, RootDefaultKeyDown);
             disposables.Add(disposable);
@@ -62,19 +71,38 @@ public class ButtonExecuteCommandOnKeyDownBehavior : AttachedToVisualTreeBehavio
 
     private void RootDefaultKeyDown(object? sender, KeyEventArgs e)
     {
-        var button = AssociatedObject;
-        if (button is null)
+        var haveKey = Key is not null && e.Key == Key;
+        var haveGesture = Gesture is not null && Gesture.Matches(e);
+
+        if (!haveKey && !haveGesture)
         {
             return;
         }
 
-        if (Key is { } && e.Key == Key && button.IsVisible && button.IsEnabled && IsEnabled)
+        if (AssociatedObject is { } button)
         {
-            if (!e.Handled && button.Command?.CanExecute(button.CommandParameter) == true)
-            {
-                button.Command.Execute(button.CommandParameter);
-                e.Handled = true;
-            }
+            ExecuteCommand(button);
         }
+    }
+  
+    private bool ExecuteCommand(Button button)
+    {
+        if (!IsEnabled)
+        {
+            return false;
+        }
+
+        if (button is not { IsVisible: true, IsEnabled: true })
+        {
+            return false;
+        }
+
+        if (button.Command?.CanExecute(button.CommandParameter) != true)
+        {
+            return false;
+        }
+
+        button.Command.Execute(button.CommandParameter);
+        return true;
     }
 }

@@ -1,13 +1,13 @@
-﻿using System.Reactive.Disposables;
+using System.Reactive.Disposables;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
 
 /// <summary>
-/// A behavior that allows to show control on double tapped event.
+/// 
 /// </summary>
-public class ShowOnDoubleTappedBehavior : ShowBehaviorBase
+public class ExecuteCommandOnTappedBehavior : ExecuteCommandBehaviorBase
 {
     /// <summary>
     /// 
@@ -17,8 +17,8 @@ public class ShowOnDoubleTappedBehavior : ShowBehaviorBase
     {
         var dispose = AssociatedObject?
             .AddDisposableHandler(
-                Gestures.DoubleTappedEvent, 
-                AssociatedObject_DoubleTapped, 
+                Gestures.TappedEvent,
+                AssociatedObject_Tapped,
                 RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
 
         if (dispose is not null)
@@ -27,8 +27,16 @@ public class ShowOnDoubleTappedBehavior : ShowBehaviorBase
         }
     }
 
-    private void AssociatedObject_DoubleTapped(object? sender, RoutedEventArgs e)
+    private void AssociatedObject_Tapped(object? sender, RoutedEventArgs e)
     {
-        Show();
+        if (e.Handled)
+        {
+            return;
+        }
+
+        if (ExecuteCommand())
+        {
+            e.Handled = true;
+        }
     }
 }
