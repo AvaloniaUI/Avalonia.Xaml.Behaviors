@@ -8,28 +8,13 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class KeyDownTrigger : DisposingTrigger
+public class KeyDownTrigger : RoutedEventTriggerBase
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public static readonly StyledProperty<RoutingStrategies> EventRoutingStrategyProperty =
-        AvaloniaProperty.Register<KeyDownTrigger, RoutingStrategies>(nameof(EventRoutingStrategy));
-
     /// <summary>
     /// 
     /// </summary>
     public static readonly StyledProperty<Key> KeyProperty =
         AvaloniaProperty.Register<KeyDownTrigger, Key>(nameof(Key));
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public RoutingStrategies EventRoutingStrategy
-    {
-        get => GetValue(EventRoutingStrategyProperty);
-        set => SetValue(EventRoutingStrategyProperty, value);
-    }
 
     /// <summary>
     /// 

@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Threading;
 
 namespace Avalonia.Xaml.Interactions.Custom;
@@ -23,6 +24,12 @@ public abstract class ShowBehaviorBase : AttachedToVisualTreeBehavior<Control>
     /// <summary>
     /// 
     /// </summary>
+    public static readonly StyledProperty<RoutingStrategies> EventRoutingStrategyProperty =
+        AvaloniaProperty.Register<ShowBehaviorBase, RoutingStrategies>(nameof(EventRoutingStrategy), RoutingStrategies.Bubble);
+
+    /// <summary>
+    /// 
+    /// </summary>
     public bool IsEnabled
     {
         get => GetValue(IsEnabledProperty);
@@ -37,6 +44,15 @@ public abstract class ShowBehaviorBase : AttachedToVisualTreeBehavior<Control>
     {
         get => GetValue(TargetControlProperty);
         set => SetValue(TargetControlProperty, value);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public RoutingStrategies EventRoutingStrategy
+    {
+        get => GetValue(EventRoutingStrategyProperty);
+        set => SetValue(EventRoutingStrategyProperty, value);
     }
 
     /// <summary>

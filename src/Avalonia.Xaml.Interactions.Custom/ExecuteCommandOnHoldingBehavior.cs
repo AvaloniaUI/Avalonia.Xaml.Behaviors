@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnHoldingBehavior : ExecuteCommandBehaviorBase
+public class ExecuteCommandOnHoldingBehavior : ExecuteCommandRoutedEventBehaviorBase
 {
     /// <summary>
     /// 
@@ -18,8 +18,8 @@ public class ExecuteCommandOnHoldingBehavior : ExecuteCommandBehaviorBase
         var dispose = AssociatedObject?
             .AddDisposableHandler(
                 Gestures.HoldingEvent,
-                AssociatedObject_Holding,
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                OnHolding,
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {
@@ -27,7 +27,7 @@ public class ExecuteCommandOnHoldingBehavior : ExecuteCommandBehaviorBase
         }
     }
 
-    private void AssociatedObject_Holding(object? sender, RoutedEventArgs e)
+    private void OnHolding(object? sender, RoutedEventArgs e)
     {
         if (e.Handled)
         {
@@ -36,7 +36,7 @@ public class ExecuteCommandOnHoldingBehavior : ExecuteCommandBehaviorBase
 
         if (ExecuteCommand())
         {
-            e.Handled = true;
+            e.Handled = MarkAsHandled;
         }
     }
 }

@@ -19,7 +19,7 @@ public class ShowOnTappedBehavior : ShowBehaviorBase
             .AddDisposableHandler(
                 Gestures.TappedEvent, 
                 AssociatedObject_Tapped, 
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {

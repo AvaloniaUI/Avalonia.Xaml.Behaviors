@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnPointerMovedBehavior : ExecuteCommandRoutedEventBehaviorBase
+public class ExecuteCommandOnKeyUpBehavior : ExecuteCommandOnKeyBehaviorBase
 {
     /// <summary>
     /// 
@@ -17,8 +17,8 @@ public class ExecuteCommandOnPointerMovedBehavior : ExecuteCommandRoutedEventBeh
     {
         var dispose = AssociatedObject?
             .AddDisposableHandler(
-                InputElement.PointerMovedEvent,
-                OnPointerMoved,
+                InputElement.KeyUpEvent,
+                OnKeyUp,
                 EventRoutingStrategy);
 
         if (dispose is not null)
@@ -27,8 +27,16 @@ public class ExecuteCommandOnPointerMovedBehavior : ExecuteCommandRoutedEventBeh
         }
     }
 
-    private void OnPointerMoved(object? sender, RoutedEventArgs e)
+    private void OnKeyUp(object? sender, KeyEventArgs e)
     {
+        var haveKey = Key is not null && e.Key == Key;
+        var haveGesture = Gesture is not null && Gesture.Matches(e);
+
+        if (!haveKey && !haveGesture)
+        {
+            return;
+        }
+
         if (e.Handled)
         {
             return;

@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnRightTappedBehavior : ExecuteCommandBehaviorBase
+public class ExecuteCommandOnRightTappedBehavior : ExecuteCommandRoutedEventBehaviorBase
 {
     /// <summary>
     /// 
@@ -18,8 +18,8 @@ public class ExecuteCommandOnRightTappedBehavior : ExecuteCommandBehaviorBase
         var dispose = AssociatedObject?
             .AddDisposableHandler(
                 Gestures.RightTappedEvent,
-                AssociatedObject_RightTapped,
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                OnRightTapped,
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {
@@ -27,7 +27,7 @@ public class ExecuteCommandOnRightTappedBehavior : ExecuteCommandBehaviorBase
         }
     }
 
-    private void AssociatedObject_RightTapped(object? sender, RoutedEventArgs e)
+    private void OnRightTapped(object? sender, RoutedEventArgs e)
     {
         if (e.Handled)
         {
@@ -36,7 +36,7 @@ public class ExecuteCommandOnRightTappedBehavior : ExecuteCommandBehaviorBase
 
         if (ExecuteCommand())
         {
-            e.Handled = true;
+            e.Handled = MarkAsHandled;
         }
     }
 }

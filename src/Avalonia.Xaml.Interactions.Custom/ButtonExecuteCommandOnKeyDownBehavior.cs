@@ -2,6 +2,7 @@ using System.Reactive.Disposables;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 using Avalonia.VisualTree;
 
 namespace Avalonia.Xaml.Interactions.Custom;
@@ -9,53 +10,8 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ButtonExecuteCommandOnKeyDownBehavior : AttachedToVisualTreeBehavior<Button>
+public class ButtonExecuteCommandOnKeyDownBehavior : ExecuteCommandOnKeyBehaviorBase
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public static readonly StyledProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.Register<ButtonExecuteCommandOnKeyDownBehavior, bool>(nameof(IsEnabled));
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public static readonly StyledProperty<Key?> KeyProperty =
-        AvaloniaProperty.Register<ButtonExecuteCommandOnKeyDownBehavior, Key?>(nameof(Key));
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public static readonly StyledProperty<KeyGesture?> GestureProperty =
-        AvaloniaProperty.Register<ButtonExecuteCommandOnKeyDownBehavior, KeyGesture?>(nameof(Gesture));
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public bool IsEnabled
-    {
-        get => GetValue(IsEnabledProperty);
-        set => SetValue(IsEnabledProperty, value);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public Key? Key
-    {
-        get => GetValue(KeyProperty);
-        set => SetValue(KeyProperty, value);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public KeyGesture? Gesture
-    {
-        get => GetValue(GestureProperty);
-        set => SetValue(GestureProperty, value);
-    }
-
     /// <summary>
     /// 
     /// </summary>
@@ -79,12 +35,12 @@ public class ButtonExecuteCommandOnKeyDownBehavior : AttachedToVisualTreeBehavio
             return;
         }
 
-        if (AssociatedObject is { } button)
+        if (AssociatedObject is Button button)
         {
             ExecuteCommand(button);
         }
     }
-  
+
     private bool ExecuteCommand(Button button)
     {
         if (!IsEnabled)
@@ -102,6 +58,16 @@ public class ButtonExecuteCommandOnKeyDownBehavior : AttachedToVisualTreeBehavio
             return false;
         }
 
+        if (FocusTopLevel)
+        {
+            Dispatcher.UIThread.Post(() => (AssociatedObject?.GetVisualRoot() as TopLevel)?.Focus());
+        }
+
+        if (FocusControl is { } focusControl)
+        {
+            Dispatcher.UIThread.Post(() => focusControl.Focus());
+        }
+        
         button.Command.Execute(button.CommandParameter);
         return true;
     }

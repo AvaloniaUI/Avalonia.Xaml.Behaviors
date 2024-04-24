@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnPinchBehavior : ExecuteCommandBehaviorBase
+public class ExecuteCommandOnPinchBehavior : ExecuteCommandRoutedEventBehaviorBase
 {
     /// <summary>
     /// 
@@ -18,8 +18,8 @@ public class ExecuteCommandOnPinchBehavior : ExecuteCommandBehaviorBase
         var dispose = AssociatedObject?
             .AddDisposableHandler(
                 Gestures.PinchEvent,
-                AssociatedObject_Pinch,
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                OnPinch,
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {
@@ -27,7 +27,7 @@ public class ExecuteCommandOnPinchBehavior : ExecuteCommandBehaviorBase
         }
     }
 
-    private void AssociatedObject_Pinch(object? sender, RoutedEventArgs e)
+    private void OnPinch(object? sender, RoutedEventArgs e)
     {
         if (e.Handled)
         {
@@ -36,7 +36,7 @@ public class ExecuteCommandOnPinchBehavior : ExecuteCommandBehaviorBase
 
         if (ExecuteCommand())
         {
-            e.Handled = true;
+            e.Handled = MarkAsHandled;
         }
     }
 }

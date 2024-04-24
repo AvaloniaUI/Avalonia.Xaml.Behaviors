@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnPointerReleasedBehavior : ExecuteCommandBehaviorBase
+public class ExecuteCommandOnPointerReleasedBehavior : ExecuteCommandRoutedEventBehaviorBase
 {
     /// <summary>
     /// 
@@ -18,8 +18,8 @@ public class ExecuteCommandOnPointerReleasedBehavior : ExecuteCommandBehaviorBas
         var dispose = AssociatedObject?
             .AddDisposableHandler(
                 InputElement.PointerReleasedEvent,
-                AssociatedObject_PointerReleased,
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                OnPointerReleased,
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {
@@ -27,7 +27,7 @@ public class ExecuteCommandOnPointerReleasedBehavior : ExecuteCommandBehaviorBas
         }
     }
 
-    private void AssociatedObject_PointerReleased(object? sender, RoutedEventArgs e)
+    private void OnPointerReleased(object? sender, RoutedEventArgs e)
     {
         if (e.Handled)
         {
@@ -36,7 +36,7 @@ public class ExecuteCommandOnPointerReleasedBehavior : ExecuteCommandBehaviorBas
 
         if (ExecuteCommand())
         {
-            e.Handled = true;
+            e.Handled = MarkAsHandled;
         }
     }
 }

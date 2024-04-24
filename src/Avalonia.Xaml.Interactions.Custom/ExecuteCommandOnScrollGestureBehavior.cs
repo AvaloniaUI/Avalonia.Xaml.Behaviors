@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnScrollGestureBehavior : ExecuteCommandBehaviorBase
+public class ExecuteCommandOnScrollGestureBehavior : ExecuteCommandRoutedEventBehaviorBase
 {
     /// <summary>
     /// 
@@ -18,8 +18,8 @@ public class ExecuteCommandOnScrollGestureBehavior : ExecuteCommandBehaviorBase
         var dispose = AssociatedObject?
             .AddDisposableHandler(
                 Gestures.ScrollGestureEvent,
-                AssociatedObject_ScrollGesture,
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                OnScrollGesture,
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {
@@ -27,7 +27,7 @@ public class ExecuteCommandOnScrollGestureBehavior : ExecuteCommandBehaviorBase
         }
     }
 
-    private void AssociatedObject_ScrollGesture(object? sender, RoutedEventArgs e)
+    private void OnScrollGesture(object? sender, RoutedEventArgs e)
     {
         if (e.Handled)
         {
@@ -36,7 +36,7 @@ public class ExecuteCommandOnScrollGestureBehavior : ExecuteCommandBehaviorBase
 
         if (ExecuteCommand())
         {
-            e.Handled = true;
+            e.Handled = MarkAsHandled;
         }
     }
 }
