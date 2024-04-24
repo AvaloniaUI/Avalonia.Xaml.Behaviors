@@ -1,6 +1,4 @@
 using System.Reactive.Disposables;
-using System.Windows.Input;
-using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 
@@ -9,41 +7,37 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnDoubleTappedBehavior : DisposingBehavior<Control>
+public class ExecuteCommandOnDoubleTappedBehavior : ExecuteCommandBehaviorBase
 {
     /// <summary>
     /// 
     /// </summary>
-    public static readonly StyledProperty<ICommand?> CommandProperty =
-        AvaloniaProperty.Register<ExecuteCommandOnDoubleTappedBehavior, ICommand?>(nameof(Command));
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public ICommand? Command
+    /// <param name="disposable"></param>
+    protected override void OnAttachedToVisualTree(CompositeDisposable disposable)
     {
-        get => GetValue(CommandProperty);
-        set => SetValue(CommandProperty, value);
+        var dispose = AssociatedObject?
+            .AddDisposableHandler(
+                Gestures.DoubleTappedEvent,
+                AssociatedObject_DoubleTapped,
+                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+
+        if (dispose is not null)
+        {
+            disposable.Add(dispose);
+        }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="disposables"></param>
-    protected override void OnAttached(CompositeDisposable disposables)
+    private void AssociatedObject_DoubleTapped(object? sender, RoutedEventArgs e)
     {
-        var disposable = Gestures.DoubleTappedEvent.AddClassHandler<InputElement>(
-            (x, _) =>
-            {
-                if (Equals(x, AssociatedObject))
-                {
-                    if (Command is { } cmd && cmd.CanExecute(default))
-                    {
-                        cmd.Execute(default);
-                    }
-                }
-            },
-            RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
-        disposables.Add(disposable);
+        if (e.Handled)
+        {
+            return;
+        }
+
+        if (ExecuteCommand())
+        {
+            e.Handled = true;
+        }
     }
 }
+

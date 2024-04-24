@@ -1,16 +1,13 @@
 using System.Reactive.Disposables;
-using System.Windows.Input;
-using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.VisualTree;
 
 namespace Avalonia.Xaml.Interactions.Custom;
 
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnKeyDownBehavior : AttachedToVisualTreeBehavior<Control>
+public class ExecuteCommandOnKeyDownBehavior : ExecuteCommandBehaviorBase
 {
     /// <summary>
     /// 
@@ -21,27 +18,8 @@ public class ExecuteCommandOnKeyDownBehavior : AttachedToVisualTreeBehavior<Cont
     /// <summary>
     /// 
     /// </summary>
-    public static readonly StyledProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.Register<ExecuteCommandOnKeyDownBehavior, bool>(nameof(IsEnabled), true);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public static readonly StyledProperty<ICommand> CommandProperty =
-        AvaloniaProperty.Register<ExecuteCommandOnKeyDownBehavior, ICommand>(nameof(Command));
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public static readonly StyledProperty<object> CommandParameterProperty =
-        AvaloniaProperty.Register<ExecuteCommandOnKeyDownBehavior, object>(nameof(CommandParameter));
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public static readonly StyledProperty<RoutingStrategies> EventRoutingStrategyProperty =
-        AvaloniaProperty.Register<ExecuteCommandOnKeyDownBehavior, RoutingStrategies>(nameof(EventRoutingStrategy),
-            RoutingStrategies.Bubble);
+    public static readonly StyledProperty<KeyGesture?> GestureProperty =
+        AvaloniaProperty.Register<ExecuteCommandOnKeyDownBehavior, KeyGesture?>(nameof(Gesture));
 
     /// <summary>
     /// 
@@ -55,74 +33,48 @@ public class ExecuteCommandOnKeyDownBehavior : AttachedToVisualTreeBehavior<Cont
     /// <summary>
     /// 
     /// </summary>
-    public bool IsEnabled
+    public KeyGesture? Gesture
     {
-        get => GetValue(IsEnabledProperty);
-        set => SetValue(IsEnabledProperty, value);
+        get => GetValue(GestureProperty);
+        set => SetValue(GestureProperty, value);
     }
 
     /// <summary>
     /// 
     /// </summary>
-    public ICommand Command
+    /// <param name="disposable"></param>
+    protected override void OnAttachedToVisualTree(CompositeDisposable disposable)
     {
-        get => GetValue(CommandProperty);
-        set => SetValue(CommandProperty, value);
+        var dispose = AssociatedObject?
+            .AddDisposableHandler(
+                InputElement.KeyDownEvent,
+                OnKeyDown,
+                RoutingStrategies.Bubble);
+
+        if (dispose is not null)
+        {
+            disposable.Add(dispose);
+        }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public object CommandParameter
+    private void OnKeyDown(object? sender, KeyEventArgs e)
     {
-        get => GetValue(CommandParameterProperty);
-        set => SetValue(CommandParameterProperty, value);
-    }
+        var haveKey = Key is not null && e.Key == Key;
+        var haveGesture = Gesture is not null && Gesture.Matches(e);
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public RoutingStrategies EventRoutingStrategy
-    {
-        get => GetValue(EventRoutingStrategyProperty);
-        set => SetValue(EventRoutingStrategyProperty, value);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="disposables"></param>
-    protected override void OnAttachedToVisualTree(CompositeDisposable disposables)
-    {
-        var control = AssociatedObject;
-        if (control is null)
+        if (!haveKey && !haveGesture)
         {
             return;
         }
 
-        if (control.GetVisualRoot() is InputElement inputRoot)
-        {
-            var disposable =
-                inputRoot.AddDisposableHandler(InputElement.KeyDownEvent, RootDefaultKeyDown, EventRoutingStrategy);
-            disposables.Add(disposable);
-        }
-    }
-
-    private void RootDefaultKeyDown(object? sender, KeyEventArgs e)
-    {
-        var control = AssociatedObject;
-        if (control is null)
+        if (e.Handled)
         {
             return;
         }
 
-        if (Key is { } && e.Key == Key && control.IsVisible && control.IsEnabled && IsEnabled)
+        if (ExecuteCommand())
         {
-            if (!e.Handled && Command?.CanExecute(CommandParameter) == true)
-            {
-                Command.Execute(CommandParameter);
-                e.Handled = true;
-            }
+            e.Handled = true;
         }
     }
 }
