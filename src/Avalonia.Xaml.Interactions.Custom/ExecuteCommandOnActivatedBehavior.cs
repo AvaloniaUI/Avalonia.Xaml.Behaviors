@@ -20,13 +20,16 @@ public class ExecuteCommandOnActivatedBehavior : ExecuteCommandBehaviorBase
         {
             var mainWindow = lifetime.MainWindow;
 
-            var dispose = Observable
-                .FromEventPattern(mainWindow, nameof(mainWindow.Activated))
-                .Subscribe(new AnonymousObserver<EventPattern<object>>(e =>
-                {
-                    ExecuteCommand();
-                }));
-            disposable.Add(dispose);
+            if (mainWindow is not null)
+            {
+                var dispose = Observable
+                    .FromEventPattern(mainWindow, nameof(mainWindow.Activated))
+                    .Subscribe(new AnonymousObserver<EventPattern<object>>(e =>
+                    {
+                        ExecuteCommand();
+                    }));
+                disposable.Add(dispose);
+            }
         }
     }
 }

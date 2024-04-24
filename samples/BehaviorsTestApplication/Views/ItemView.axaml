@@ -11,7 +11,7 @@
   <Panel Background="Transparent">
     <i:Interaction.Behaviors>
       <iac:ShowOnDoubleTappedBehavior TargetControl="TextBoxEdit" />
-      <iac:ShowOnKeyDownTappedBehavior TargetControl="TextBoxEdit" />
+      <iac:ShowOnKeyDownBehavior TargetControl="TextBoxEdit" Key="F2" />
     </i:Interaction.Behaviors>
     <TextBox x:Name="TextBoxEdit"
              IsVisible="False"
