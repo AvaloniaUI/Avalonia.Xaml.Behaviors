@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnPointerTouchPadGestureSwipeBehavior : ExecuteCommandBehaviorBase
+public class ExecuteCommandOnPointerTouchPadGestureSwipeBehavior : ExecuteCommandRoutedEventBehaviorBase
 {
     /// <summary>
     /// 
@@ -18,8 +18,8 @@ public class ExecuteCommandOnPointerTouchPadGestureSwipeBehavior : ExecuteComman
         var dispose = AssociatedObject?
             .AddDisposableHandler(
                 Gestures.PointerTouchPadGestureSwipeEvent,
-                AssociatedObject_PointerTouchPadGestureSwipe,
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                OnPointerTouchPadGestureSwipe,
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {
@@ -27,7 +27,7 @@ public class ExecuteCommandOnPointerTouchPadGestureSwipeBehavior : ExecuteComman
         }
     }
 
-    private void AssociatedObject_PointerTouchPadGestureSwipe(object? sender, RoutedEventArgs e)
+    private void OnPointerTouchPadGestureSwipe(object? sender, RoutedEventArgs e)
     {
         if (e.Handled)
         {
@@ -36,7 +36,7 @@ public class ExecuteCommandOnPointerTouchPadGestureSwipeBehavior : ExecuteComman
 
         if (ExecuteCommand())
         {
-            e.Handled = true;
+            e.Handled = MarkAsHandled;
         }
     }
 }

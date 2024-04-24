@@ -1,7 +1,7 @@
 ﻿<Project>
   <PropertyGroup>
     <VersionPrefix>11.1.0</VersionPrefix>
-    <VersionSuffix>beta1.3</VersionSuffix>
+    <VersionSuffix>beta1.4</VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
     <Copyright>Copyright © Wiesław Šoltés 2024</Copyright>

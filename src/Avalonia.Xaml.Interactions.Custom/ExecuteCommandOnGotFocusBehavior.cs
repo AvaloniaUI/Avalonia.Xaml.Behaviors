@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnGotFocusBehavior : ExecuteCommandBehaviorBase
+public class ExecuteCommandOnGotFocusBehavior : ExecuteCommandRoutedEventBehaviorBase
 {
     /// <summary>
     /// 
@@ -18,8 +18,8 @@ public class ExecuteCommandOnGotFocusBehavior : ExecuteCommandBehaviorBase
         var dispose = AssociatedObject?
             .AddDisposableHandler(
                 InputElement.GotFocusEvent,
-                AssociatedObject_GotFocus,
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                OnGotFocus,
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {
@@ -27,7 +27,7 @@ public class ExecuteCommandOnGotFocusBehavior : ExecuteCommandBehaviorBase
         }
     }
 
-    private void AssociatedObject_GotFocus(object? sender, RoutedEventArgs e)
+    private void OnGotFocus(object? sender, RoutedEventArgs e)
     {
         if (e.Handled)
         {
@@ -36,7 +36,7 @@ public class ExecuteCommandOnGotFocusBehavior : ExecuteCommandBehaviorBase
 
         if (ExecuteCommand())
         {
-            e.Handled = true;
+            e.Handled = MarkAsHandled;
         }
     }
 }

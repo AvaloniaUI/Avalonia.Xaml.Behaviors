@@ -90,7 +90,7 @@ public abstract class ExecuteCommandBehaviorBase : AttachedToVisualTreeBehavior<
     /// 
     /// </summary>
     /// <returns></returns>
-    protected bool ExecuteCommand()
+    protected virtual bool ExecuteCommand()
     {
         if (!IsEnabled)
         {

@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnScrollGestureInertiaStartingBehavior : ExecuteCommandBehaviorBase
+public class ExecuteCommandOnScrollGestureInertiaStartingBehavior : ExecuteCommandRoutedEventBehaviorBase
 {
     /// <summary>
     /// 
@@ -18,8 +18,8 @@ public class ExecuteCommandOnScrollGestureInertiaStartingBehavior : ExecuteComma
         var dispose = AssociatedObject?
             .AddDisposableHandler(
                 Gestures.ScrollGestureInertiaStartingEvent,
-                AssociatedObject_ScrollGestureInertiaStarting,
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                OnScrollGestureInertiaStarting,
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {
@@ -27,7 +27,7 @@ public class ExecuteCommandOnScrollGestureInertiaStartingBehavior : ExecuteComma
         }
     }
 
-    private void AssociatedObject_ScrollGestureInertiaStarting(object? sender, RoutedEventArgs e)
+    private void OnScrollGestureInertiaStarting(object? sender, RoutedEventArgs e)
     {
         if (e.Handled)
         {
@@ -36,7 +36,7 @@ public class ExecuteCommandOnScrollGestureInertiaStartingBehavior : ExecuteComma
 
         if (ExecuteCommand())
         {
-            e.Handled = true;
+            e.Handled = MarkAsHandled;
         }
     }
 }

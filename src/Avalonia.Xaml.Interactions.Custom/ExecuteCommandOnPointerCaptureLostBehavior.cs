@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnPointerCaptureLostBehavior : ExecuteCommandBehaviorBase
+public class ExecuteCommandOnPointerCaptureLostBehavior : ExecuteCommandRoutedEventBehaviorBase
 {
     /// <summary>
     /// 
@@ -18,8 +18,8 @@ public class ExecuteCommandOnPointerCaptureLostBehavior : ExecuteCommandBehavior
         var dispose = AssociatedObject?
             .AddDisposableHandler(
                 InputElement.PointerCaptureLostEvent,
-                AssociatedObject_PointerCaptureLost,
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                OnPointerCaptureLost,
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {
@@ -27,7 +27,7 @@ public class ExecuteCommandOnPointerCaptureLostBehavior : ExecuteCommandBehavior
         }
     }
 
-    private void AssociatedObject_PointerCaptureLost(object? sender, RoutedEventArgs e)
+    private void OnPointerCaptureLost(object? sender, RoutedEventArgs e)
     {
         if (e.Handled)
         {
@@ -36,7 +36,7 @@ public class ExecuteCommandOnPointerCaptureLostBehavior : ExecuteCommandBehavior
 
         if (ExecuteCommand())
         {
-            e.Handled = true;
+            e.Handled = MarkAsHandled;
         }
     }
 }

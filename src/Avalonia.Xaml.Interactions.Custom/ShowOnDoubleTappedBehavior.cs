@@ -19,7 +19,7 @@ public class ShowOnDoubleTappedBehavior : ShowBehaviorBase
             .AddDisposableHandler(
                 Gestures.DoubleTappedEvent, 
                 AssociatedObject_DoubleTapped, 
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {

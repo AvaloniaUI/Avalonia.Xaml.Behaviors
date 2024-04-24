@@ -49,7 +49,7 @@ public class ShowOnKeyDownBehavior : ShowBehaviorBase
             .AddDisposableHandler(
                 InputElement.KeyDownEvent, 
                 AssociatedObject_KeyDown, 
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {

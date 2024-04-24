@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnPointerTouchPadGestureMagnifyBehavior : ExecuteCommandBehaviorBase
+public class ExecuteCommandOnPointerTouchPadGestureMagnifyBehavior : ExecuteCommandRoutedEventBehaviorBase
 {
     /// <summary>
     /// 
@@ -18,8 +18,8 @@ public class ExecuteCommandOnPointerTouchPadGestureMagnifyBehavior : ExecuteComm
         var dispose = AssociatedObject?
             .AddDisposableHandler(
                 Gestures.PointerTouchPadGestureMagnifyEvent,
-                AssociatedObject_PointerTouchPadGestureMagnify,
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                OnPointerTouchPadGestureMagnify,
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {
@@ -27,7 +27,7 @@ public class ExecuteCommandOnPointerTouchPadGestureMagnifyBehavior : ExecuteComm
         }
     }
 
-    private void AssociatedObject_PointerTouchPadGestureMagnify(object? sender, RoutedEventArgs e)
+    private void OnPointerTouchPadGestureMagnify(object? sender, RoutedEventArgs e)
     {
         if (e.Handled)
         {
@@ -36,7 +36,7 @@ public class ExecuteCommandOnPointerTouchPadGestureMagnifyBehavior : ExecuteComm
 
         if (ExecuteCommand())
         {
-            e.Handled = true;
+            e.Handled = MarkAsHandled;
         }
     }
 }

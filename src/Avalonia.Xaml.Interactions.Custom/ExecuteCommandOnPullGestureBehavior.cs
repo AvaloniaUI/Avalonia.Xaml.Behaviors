@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnPullGestureBehavior : ExecuteCommandBehaviorBase
+public class ExecuteCommandOnPullGestureBehavior : ExecuteCommandRoutedEventBehaviorBase
 {
     /// <summary>
     /// 
@@ -18,8 +18,8 @@ public class ExecuteCommandOnPullGestureBehavior : ExecuteCommandBehaviorBase
         var dispose = AssociatedObject?
             .AddDisposableHandler(
                 Gestures.PullGestureEvent,
-                AssociatedObject_PullGesture,
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                OnPullGesture,
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {
@@ -27,7 +27,7 @@ public class ExecuteCommandOnPullGestureBehavior : ExecuteCommandBehaviorBase
         }
     }
 
-    private void AssociatedObject_PullGesture(object? sender, RoutedEventArgs e)
+    private void OnPullGesture(object? sender, RoutedEventArgs e)
     {
         if (e.Handled)
         {
@@ -36,7 +36,7 @@ public class ExecuteCommandOnPullGestureBehavior : ExecuteCommandBehaviorBase
 
         if (ExecuteCommand())
         {
-            e.Handled = true;
+            e.Handled = MarkAsHandled;
         }
     }
 }

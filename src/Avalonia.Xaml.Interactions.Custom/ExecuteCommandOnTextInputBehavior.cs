@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class ExecuteCommandOnTextInputBehavior : ExecuteCommandBehaviorBase
+public class ExecuteCommandOnTextInputBehavior : ExecuteCommandRoutedEventBehaviorBase
 {
     /// <summary>
     /// 
@@ -18,8 +18,8 @@ public class ExecuteCommandOnTextInputBehavior : ExecuteCommandBehaviorBase
         var dispose = AssociatedObject?
             .AddDisposableHandler(
                 InputElement.TextInputEvent,
-                AssociatedObject_TextInput,
-                RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+                OnTextInput,
+                EventRoutingStrategy);
 
         if (dispose is not null)
         {
@@ -27,7 +27,7 @@ public class ExecuteCommandOnTextInputBehavior : ExecuteCommandBehaviorBase
         }
     }
 
-    private void AssociatedObject_TextInput(object? sender, RoutedEventArgs e)
+    private void OnTextInput(object? sender, RoutedEventArgs e)
     {
         if (e.Handled)
         {
@@ -36,7 +36,7 @@ public class ExecuteCommandOnTextInputBehavior : ExecuteCommandBehaviorBase
 
         if (ExecuteCommand())
         {
-            e.Handled = true;
+            e.Handled = MarkAsHandled;
         }
     }
 }

@@ -32,7 +32,7 @@ public class SelectListBoxItemOnPointerMovedBehavior : Behavior<Control>
     {
         if (AssociatedObject is {Parent: ListBoxItem item})
         {
-            item.IsSelected = true;
+            item.SetCurrentValue(ListBoxItem.IsSelectedProperty, true);
             Dispatcher.UIThread.Post(() => item.Focus());
         }
     }
