@@ -68,6 +68,38 @@ public class DataTriggerBehavior : Trigger
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<object?>>(OnValueChanged));
     }
 
+    protected override void OnAttached()
+    {
+        base.OnAttached();
+
+        if (AssociatedObject is StyledElement styled)
+        {
+            if (styled.IsInitialized)
+                InitialCompare();
+            else
+                styled.Initialized += Styled_Initialized;
+        }
+    }
+
+    protected override void OnDetaching()
+    {
+        base.OnDetaching();
+
+        if (AssociatedObject is StyledElement styled)
+            styled.Initialized -= Styled_Initialized;
+    }
+
+    private void Styled_Initialized(object? sender, System.EventArgs e)
+    {
+        InitialCompare();
+    }
+
+    private void InitialCompare()
+    {
+        if (Compare(Binding, ComparisonCondition, Value))
+            Interaction.ExecuteActions(AssociatedObject, Actions, null);
+    }
+
     [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private static bool Compare(object? leftOperand, ComparisonConditionType operatorType, object? rightOperand)
     {
