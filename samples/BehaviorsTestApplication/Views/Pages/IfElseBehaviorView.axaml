@@ -1,0 +1,96 @@
+<UserControl x:Class="BehaviorsTestApplication.Views.Pages.IfElseBehaviorView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
+             xmlns:vm="using:BehaviorsTestApplication.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="600"
+             x:DataType="vm:MainWindowViewModel"
+             x:CompileBindings="True">
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+  <Grid RowDefinitions="*,Auto">
+    <Rectangle Name="DataTriggerRectangle"
+               Grid.Row="0"
+               Margin="5"
+               Fill="{DynamicResource BlueBrush}"
+               Stroke="{DynamicResource GrayBrush}"
+               StrokeThickness="5">
+      <i:Interaction.Behaviors>
+
+        <iac:IfElseBehavior Binding="{Binding #Slider.Value}">
+
+          <!--If > 50-->
+          <iac:IfAction ComparisonCondition="GreaterThan" Value="50">
+            <!--Make yellow-->
+            <ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource YellowBrush}"/>
+
+            <!--if > 75-->
+            <iac:IfAction ComparisonCondition="GreaterThan" Value="75">
+              <!--if OpacityCheckBox.IsChecked-->
+              <iac:IfAction Binding="{Binding #OpacityCheckBox.IsChecked}" Value="True">
+                <ia:ChangePropertyAction PropertyName="Opacity" Value="0.25"/>
+              </iac:IfAction>
+
+              <!--Else !OpacityCheckBox.IsChecked-->
+              <iac:ElseAction>
+                <ia:ChangePropertyAction PropertyName="Opacity" Value="1"/>
+              </iac:ElseAction>
+            </iac:IfAction>
+
+            <!--Else < 75-->
+            <iac:ElseAction>
+              <ia:ChangePropertyAction PropertyName="Opacity" Value="1"/>
+            </iac:ElseAction>
+          </iac:IfAction>
+
+          <!--Else < 50-->
+          <iac:ElseAction>
+            <!--Make blue-->
+            <ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource BlueBrush}"/>
+
+            <!--if < 25-->
+            <iac:IfAction ComparisonCondition="LessThan" Value="25">
+              <!--if StrokeCheckBox.IsChecked-->
+              <iac:IfAction Binding="{Binding #StrokeCheckBox.IsChecked}" Value="True">
+                <ia:ChangePropertyAction PropertyName="Stroke" Value="Red"/>
+              </iac:IfAction>
+
+              <!--else !StrokeCheckBox.IsChecked-->
+              <iac:ElseAction>
+                <ia:ChangePropertyAction PropertyName="Stroke" Value="Gray"/>
+              </iac:ElseAction>
+            </iac:IfAction>
+
+            <!--else > 25-->
+            <iac:ElseAction>
+              <ia:ChangePropertyAction PropertyName="Stroke" Value="Gray"/>
+            </iac:ElseAction>
+          </iac:ElseAction>
+        </iac:IfElseBehavior>
+      </i:Interaction.Behaviors>
+    </Rectangle>
+    <StackPanel Grid.Row="1"
+                Margin="5,0,5,5" HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Width="50"
+                   VerticalAlignment="Center"
+                   Foreground="{DynamicResource GrayBrush}"
+                   Text="{Binding #Slider.Value}"/>
+        <Slider Name="Slider"
+                Width="400"
+                IsSnapToTickEnabled="True" TickFrequency="1"/>
+
+      </StackPanel>
+      <CheckBox Name="OpacityCheckBox" Content="Opacity if &gt; 75"/>
+      <CheckBox Name="StrokeCheckBox" Content="Stroke if &lt; 25"/>
+    </StackPanel>
+  </Grid>
+</UserControl>
