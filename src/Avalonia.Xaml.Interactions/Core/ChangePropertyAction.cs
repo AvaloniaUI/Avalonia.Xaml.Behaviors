@@ -4,6 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Avalonia.Controls;
+using Avalonia.Data;
+using Avalonia.Media;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Core;
@@ -90,6 +92,12 @@ public class ChangePropertyAction : AvaloniaObject, IAction
         AvaloniaProperty.Register<ChangePropertyAction, object?>(nameof(Value));
 
     /// <summary>
+    /// Identifies the <seealso cref="DynamicResourceName"/> avalonia property.
+    /// </summary>
+    public static readonly StyledProperty<object?> DynamicResourceNameProperty =
+        AvaloniaProperty.Register<ChangePropertyAction, object?>(nameof(DynamicResourceName));
+
+    /// <summary>
     /// Gets or sets the name of the property to change. This is a avalonia property.
     /// </summary>
     public string PropertyName
@@ -105,6 +113,15 @@ public class ChangePropertyAction : AvaloniaObject, IAction
     {
         get => GetValue(ValueProperty);
         set => SetValue(ValueProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the dynamic resource name to bind. This is a avalonia property.
+    /// </summary>
+    public object? DynamicResourceName
+    {
+        get => GetValue(DynamicResourceNameProperty);
+        set => SetValue(DynamicResourceNameProperty, value);
     }
 
     /// <summary>
@@ -252,6 +269,28 @@ public class ChangePropertyAction : AvaloniaObject, IAction
             object? result = null;
             var propertyType = property.PropertyType;
             var propertyTypeInfo = propertyType.GetTypeInfo();
+
+            // First we try to set DynamicResource
+            string? dynamicResourceName = DynamicResourceName?.ToString();
+            if (!string.IsNullOrEmpty(dynamicResourceName) && avaloniaObject is IResourceHost host)
+            {
+                Func<object?, object?>? converter = 
+                    property?.PropertyType == typeof(IBrush)
+                    ? (x) => Markup.Xaml.Converters.ColorToBrushConverter.Convert(x, typeof(IBrush))
+                    : null;
+
+                IObservable<object?>? dynamicResource = host.GetResourceObservable(dynamicResourceName, converter);
+
+                if (dynamicResource is not null)
+                {
+                    var source = InstancedBinding.OneWay(dynamicResource);
+                    BindingOperations.Apply(avaloniaObject, property, source, null);
+                    return;
+                }
+
+                throw new NullReferenceException("DynamicResource is null");
+            }
+
             if (Value is null)
             {
                 // The result can be null if the type is generic (nullable), or the default value of the type in question
