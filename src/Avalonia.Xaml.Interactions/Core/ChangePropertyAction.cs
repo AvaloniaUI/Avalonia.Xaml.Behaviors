@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Avalonia.Controls;
+using Avalonia.Reactive;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Core;
@@ -116,6 +117,23 @@ public class ChangePropertyAction : AvaloniaObject, IAction
     {
         get => GetValue(TargetObjectProperty);
         set => SetValue(TargetObjectProperty, value);
+    }
+
+    static ChangePropertyAction()
+    {
+        ValueProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<object?>>(OnValueChanged));
+    }
+
+    private static void OnValueChanged(AvaloniaPropertyChangedEventArgs<object?> args)
+    {
+        if (args.Sender is not ChangePropertyAction changePropertyAction ||
+            changePropertyAction.TargetObject is null)
+        {
+            return;
+        }
+
+        changePropertyAction.Execute(changePropertyAction.TargetObject, null);
     }
 
     /// <summary>
