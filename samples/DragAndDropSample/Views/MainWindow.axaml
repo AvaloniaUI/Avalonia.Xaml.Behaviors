@@ -90,10 +90,32 @@
       <Setter Property="(i:Interaction.Behaviors)">
         <i:BehaviorCollectionTemplate>
           <i:BehaviorCollection>
-            <idd:ContextDragBehavior />
+            <b:ContextDragWithDirectionBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
           </i:BehaviorCollection>
         </i:BehaviorCollectionTemplate>
       </Setter>
+    </Style>
+
+    <Style Selector="TreeView.NodesDragAndDrop TreeViewItem.DraggingUp">
+      <Setter Property="AdornerLayer.Adorner">
+        <Template>
+          <Border BorderThickness="0 2 0 0" BorderBrush="{DynamicResource SystemAccentColor}"/>
+        </Template>
+      </Setter>
+    </Style>
+
+    <Style Selector="TreeView.NodesDragAndDrop TreeViewItem.DraggingDown">
+      <Setter Property="AdornerLayer.Adorner">
+        <Template>
+          <Border BorderThickness="0 0 0 2" BorderBrush="{DynamicResource SystemAccentColor}"/>
+        </Template>
+      </Setter>
+    </Style>
+
+    <Style Selector="TreeViewItem.TargetHighlight">
+      <Setter
+        Property="Background"
+        Value="{DynamicResource TreeViewItemBackgroundPointerOver}"/>
     </Style>
 
     <Style Selector="DataGrid.DragAndDrop">
@@ -175,6 +197,7 @@
     <TabItem Header="TreeView">
       <Grid ColumnDefinitions="*,8,*">
         <TreeView ItemsSource="{Binding Nodes}"
+                  SelectedItems="{Binding SelectedTreeNodes, Mode=TwoWay}"
                   Classes="NodesDragAndDrop"
                   Grid.Column="0">
           <TreeView.ItemTemplate>
