@@ -1,27 +1,35 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.VisualTree;
-using Avalonia.Xaml.Interactions.DragAndDrop;
 using DragAndDropSample.ViewModels;
 
 namespace DragAndDropSample.Behaviors;
 
-public class NodesTreeViewDropHandler : DropHandlerBase
+public class NodesTreeViewDropHandler : BaseTreeViewDropHandler
 {
-    private bool Validate<T>(TreeView treeView, DragEventArgs e, object? sourceContext, object? targetContext, bool bExecute) where T : NodeViewModel
+    protected override (bool Valid, bool WillSourceItemBeMovedToDifferentParent) Validate(TreeView tv, DragEventArgs e, object? sourceContext, object? targetContext, bool bExecute)
     {
-        if (sourceContext is not T sourceNode
+        if (sourceContext is not NodeViewModel sourceNode
             || targetContext is not MainWindowViewModel vm
-            || treeView.GetVisualAt(e.GetPosition(treeView)) is not Control targetControl
-            || targetControl.DataContext is not T targetNode)
+            || tv.GetVisualAt(e.GetPosition(tv)) is not Control targetControl
+            || targetControl.DataContext is not NodeViewModel targetNode
+            || sourceNode == targetNode
+            || sourceNode.Parent == targetNode
+            || targetNode.IsDescendantOf(sourceNode) // block moving parent to inside child
+            || vm.HasMultipleTreeNodesSelected)
         {
-            return false;
+            // moving multiple items is disabled because 
+            // when an item is clicked to be dragged (whilst pressing Ctrl),
+            // it becomes unselected and won't be considered for movement.
+            // TODO: find how to fix that.
+            return (false, false);
         }
 
         var sourceParent = sourceNode.Parent;
         var targetParent = targetNode.Parent;
         var sourceNodes = sourceParent is not null ? sourceParent.Nodes : vm.Nodes;
         var targetNodes = targetParent is not null ? targetParent.Nodes : vm.Nodes;
+        bool areSourceNodesDifferentThanTargetNodes = sourceNodes != targetNodes;
 
         if (sourceNodes is not null && targetNodes is not null)
         {
@@ -30,7 +38,7 @@ public class NodesTreeViewDropHandler : DropHandlerBase
 
             if (sourceIndex < 0 || targetIndex < 0)
             {
-                return false;
+                return (false, false);
             }
 
             switch (e.DragEffects)
@@ -43,7 +51,7 @@ public class NodesTreeViewDropHandler : DropHandlerBase
                         InsertItem(targetNodes, clone, targetIndex + 1);
                     }
 
-                    return true;
+                    return (true, areSourceNodesDifferentThanTargetNodes);
                 }
                 case DragDropEffects.Move:
                 {
@@ -51,17 +59,30 @@ public class NodesTreeViewDropHandler : DropHandlerBase
                     {
                         if (sourceNodes == targetNodes)
                         {
-                            MoveItem(sourceNodes, sourceIndex, targetIndex);
+                            if (sourceIndex < targetIndex)
+                            {
+                                sourceNodes.RemoveAt(sourceIndex);
+                                sourceNodes.Insert(targetIndex, sourceNode);
+                            }
+                            else
+                            {
+                                int removeIndex = sourceIndex + 1;
+                                if (sourceNodes.Count + 1 > removeIndex)
+                                {
+                                    sourceNodes.RemoveAt(removeIndex - 1);
+                                    sourceNodes.Insert(targetIndex, sourceNode);
+                                }
+                            }
                         }
                         else
                         {
                             sourceNode.Parent = targetParent;
-
-                            MoveItem(sourceNodes, targetNodes, sourceIndex, targetIndex);
+                            sourceNodes.RemoveAt(sourceIndex);
+                            targetNodes.Add(sourceNode); // always adding to the end
                         }
                     }
 
-                    return true;
+                    return (true, areSourceNodesDifferentThanTargetNodes);
                 }
                 case DragDropEffects.Link:
                 {
@@ -80,29 +101,11 @@ public class NodesTreeViewDropHandler : DropHandlerBase
                         }
                     }
 
-                    return true;
+                    return (true, areSourceNodesDifferentThanTargetNodes);
                 }
             }
         }
 
-        return false;
-    }
-        
-    public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
-    {
-        if (e.Source is Control && sender is TreeView treeView)
-        {
-            return Validate<NodeViewModel>(treeView, e, sourceContext, targetContext, false);
-        }
-        return false;
-    }
-
-    public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
-    {
-        if (e.Source is Control && sender is TreeView treeView)
-        {
-            return Validate<NodeViewModel>(treeView, e, sourceContext, targetContext, true);
-        }
-        return false;
+        return (false, false);
     }
 }

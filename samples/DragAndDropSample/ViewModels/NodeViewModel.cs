@@ -28,4 +28,17 @@ public class NodeViewModel : ViewModelBase
     }
 
     public override string? ToString() => _title;
+
+    public bool IsDescendantOf(NodeViewModel possibleAncestor)
+    {
+        var current = Parent;
+        while (current is not null)
+        {
+            if (current == possibleAncestor)
+                return true;
+            else
+                current = current.Parent;
+        }
+        return false;
+    }
 }
