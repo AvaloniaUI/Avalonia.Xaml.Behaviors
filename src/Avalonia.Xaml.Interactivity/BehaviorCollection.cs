@@ -99,6 +99,50 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
         }
     }
 
+    internal void AttachedToLogicalTree()
+    {
+        foreach (var item in this)
+        {
+            if (item is Behavior behavior)
+            {
+                behavior.AttachedToLogicalTree();
+            }
+        }
+    }
+
+    internal void DetachedFromLogicalTree()
+    {
+        foreach (var item in this)
+        {
+            if (item is Behavior { AssociatedObject: not null} behavior)
+            {
+                behavior.DetachedFromLogicalTree();
+            }
+        }
+    }
+
+    internal void Loaded()
+    {
+        foreach (var item in this)
+        {
+            if (item is Behavior behavior)
+            {
+                behavior.Loaded();
+            }
+        }
+    }
+
+    internal void Unloaded()
+    {
+        foreach (var item in this)
+        {
+            if (item is Behavior { AssociatedObject: not null} behavior)
+            {
+                behavior.Unloaded();
+            }
+        }
+    }
+
     private void BehaviorCollection_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs eventArgs)
     {
         if (eventArgs.Action == NotifyCollectionChangedAction.Reset)

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Avalonia.LogicalTree;
 using Avalonia.Reactive;
 
 namespace Avalonia.Xaml.Interactivity;
@@ -122,14 +124,32 @@ public class Interaction
             return;
         }
 
+        // AttachedToVisualTree / DetachedFromVisualTree
+
         control.AttachedToVisualTree -= Control_AttachedToVisualTreeRuntime;
         control.DetachedFromVisualTree -= Control_DetachedFromVisualTreeRuntime;
-
         control.AttachedToVisualTree -= Control_AttachedToVisualTreeInitial;
         control.AttachedToVisualTree += Control_AttachedToVisualTreeInitial;
-
         control.DetachedFromVisualTree -= Control_DetachedFromVisualTreeInitial;
         control.DetachedFromVisualTree += Control_DetachedFromVisualTreeInitial;
+
+        // AttachedToLogicalTree / DetachedFromLogicalTree
+
+        control.AttachedToLogicalTree -= Control_AttachedToLogicalTreeRuntime;
+        control.DetachedFromLogicalTree -= Control_DetachedFromLogicalTreeRuntime;
+        control.AttachedToLogicalTree -= Control_AttachedToLogicalTreeInitial;
+        control.AttachedToLogicalTree += Control_AttachedToLogicalTreeInitial;
+        control.DetachedFromLogicalTree -= Control_DetachedFromLogicalTreeInitial;
+        control.DetachedFromLogicalTree += Control_DetachedFromLogicalTreeInitial;
+
+        // Loaded / Unloaded
+
+        control.Loaded -= Control_LoadedRuntime;
+        control.Unloaded -= Control_UnloadedRuntime;
+        control.Loaded -= Control_LoadedInitial;
+        control.Loaded += Control_LoadedInitial;
+        control.Unloaded -= Control_UnloadedInitial;
+        control.Unloaded += Control_UnloadedInitial;
     }
 
     private static void SetVisualTreeEventHandlersRuntime(AvaloniaObject obj)
@@ -139,47 +159,159 @@ public class Interaction
             return;
         }
 
+        // AttachedToVisualTree / DetachedFromVisualTree
+
         control.AttachedToVisualTree -= Control_AttachedToVisualTreeInitial;
         control.DetachedFromVisualTree -= Control_DetachedFromVisualTreeInitial;
-
         control.AttachedToVisualTree -= Control_AttachedToVisualTreeRuntime;
         control.AttachedToVisualTree += Control_AttachedToVisualTreeRuntime;
-
         control.DetachedFromVisualTree -= Control_DetachedFromVisualTreeRuntime;
         control.DetachedFromVisualTree += Control_DetachedFromVisualTreeRuntime;
+
+        // AttachedToLogicalTree / DetachedFromLogicalTree
+
+        control.AttachedToLogicalTree -= Control_AttachedToLogicalTreeInitial;
+        control.DetachedFromLogicalTree -= Control_DetachedFromLogicalTreeInitial;
+        control.AttachedToLogicalTree -= Control_AttachedToLogicalTreeRuntime;
+        control.AttachedToLogicalTree += Control_AttachedToLogicalTreeRuntime;
+        control.DetachedFromLogicalTree -= Control_DetachedFromLogicalTreeRuntime;
+        control.DetachedFromLogicalTree += Control_DetachedFromLogicalTreeRuntime;
+
+        // Loaded / Unloaded
+
+        control.Loaded -= Control_LoadedInitial;
+        control.Unloaded -= Control_UnloadedInitial;
+        control.Loaded -= Control_LoadedRuntime;
+        control.Loaded += Control_LoadedRuntime;
+        control.Unloaded -= Control_UnloadedRuntime;
+        control.Unloaded += Control_UnloadedRuntime;
     }
+
+    // AttachedToVisualTree / DetachedFromVisualTree
 
     private static void Control_AttachedToVisualTreeInitial(object? sender, VisualTreeAttachmentEventArgs e)
     {
-        if (sender is AvaloniaObject d)
+        if (sender is not AvaloniaObject d)
         {
-            GetBehaviors(d).Attach(d);
-            GetBehaviors(d).AttachedToVisualTree();
+            return;
         }
+
+        GetBehaviors(d).Attach(d);
+        GetBehaviors(d).AttachedToVisualTree();
     }
 
     private static void Control_DetachedFromVisualTreeInitial(object? sender, VisualTreeAttachmentEventArgs e)
     {
-        if (sender is AvaloniaObject d)
+        if (sender is not AvaloniaObject d)
         {
-            GetBehaviors(d).DetachedFromVisualTree();
-            GetBehaviors(d).Detach();
+            return;
         }
+
+        GetBehaviors(d).DetachedFromVisualTree();
+        GetBehaviors(d).Detach();
     }
  
     private static void Control_AttachedToVisualTreeRuntime(object? sender, VisualTreeAttachmentEventArgs e)
     {
-        if (sender is AvaloniaObject d)
+        if (sender is not AvaloniaObject d)
         {
-            GetBehaviors(d).AttachedToVisualTree();
+            return;
         }
+
+        GetBehaviors(d).AttachedToVisualTree();
     }
 
     private static void Control_DetachedFromVisualTreeRuntime(object? sender, VisualTreeAttachmentEventArgs e)
     {
-        if (sender is AvaloniaObject d)
+        if (sender is not AvaloniaObject d)
         {
-            GetBehaviors(d).DetachedFromVisualTree();
+            return;
         }
+
+        GetBehaviors(d).DetachedFromVisualTree();
+    }
+
+    // AttachedToLogicalTree / DetachedFromLogicalTree
+
+    private static void Control_AttachedToLogicalTreeInitial(object? sender, LogicalTreeAttachmentEventArgs e)
+    {
+        if (sender is not AvaloniaObject d)
+        {
+            return;
+        }
+
+        GetBehaviors(d).AttachedToLogicalTree();
+    }
+
+    private static void Control_DetachedFromLogicalTreeInitial(object? sender, LogicalTreeAttachmentEventArgs e)
+    {
+        if (sender is not AvaloniaObject d)
+        {
+            return;
+        }
+
+        GetBehaviors(d).DetachedFromLogicalTree();
+    }
+ 
+    private static void Control_AttachedToLogicalTreeRuntime(object? sender, LogicalTreeAttachmentEventArgs e)
+    {
+        if (sender is not AvaloniaObject d)
+        {
+            return;
+        }
+
+        GetBehaviors(d).AttachedToLogicalTree();
+    }
+
+    private static void Control_DetachedFromLogicalTreeRuntime(object? sender, LogicalTreeAttachmentEventArgs e)
+    {
+        if (sender is not AvaloniaObject d)
+        {
+            return;
+        }
+
+        GetBehaviors(d).DetachedFromLogicalTree();
+    }
+
+    // Loaded / Unloaded
+
+    private static void Control_LoadedInitial(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not AvaloniaObject d)
+        {
+            return;
+        }
+
+        GetBehaviors(d).Loaded();
+    }
+
+    private static void Control_UnloadedInitial(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not AvaloniaObject d)
+        {
+            return;
+        }
+
+        GetBehaviors(d).Unloaded();
+    }
+ 
+    private static void Control_LoadedRuntime(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not AvaloniaObject d)
+        {
+            return;
+        }
+
+        GetBehaviors(d).Loaded();
+    }
+
+    private static void Control_UnloadedRuntime(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not AvaloniaObject d)
+        {
+            return;
+        }
+
+        GetBehaviors(d).Unloaded();
     }
 }

@@ -69,15 +69,17 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     {
     }
 
-    internal void AttachedToVisualTree()
-    {
-        OnAttachedToVisualTree();
-    }
+    internal void AttachedToVisualTree() => OnAttachedToVisualTree();
 
-    internal void DetachedFromVisualTree()
-    {
-        OnDetachedFromVisualTree();
-    }
+    internal void DetachedFromVisualTree() => OnDetachedFromVisualTree();
+
+    internal void AttachedToLogicalTree() => OnAttachedToLogicalTree();
+
+    internal void DetachedFromLogicalTree() => OnDetachedFromLogicalTree();
+
+    internal void Loaded() => OnLoaded();
+
+    internal void Unloaded() => OnUnloaded();
 
     /// <summary>
     /// Called after the <see cref="AssociatedObject"/> is attached to the visual tree.
@@ -96,6 +98,46 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="Control"/>.
     /// </remarks>
     protected virtual void OnDetachedFromVisualTree()
+    {
+    }
+
+    /// <summary>
+    /// Called after the <see cref="AssociatedObject"/> is attached to the logical tree.
+    /// </summary>
+    /// <remarks>
+    /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="Control"/>.
+    /// </remarks>
+    protected virtual void OnAttachedToLogicalTree()
+    {
+    }
+
+    /// <summary>
+    /// Called when the <see cref="AssociatedObject"/> is being detached from the logical tree.
+    /// </summary>
+    /// <remarks>
+    /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="Control"/>.
+    /// </remarks>
+    protected virtual void OnDetachedFromLogicalTree()
+    {
+    }
+
+    /// <summary>
+    /// Called after the <see cref="AssociatedObject"/> is loaded.
+    /// </summary>
+    /// <remarks>
+    /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="Control"/>.
+    /// </remarks>
+    protected virtual void OnLoaded()
+    {
+    }
+
+    /// <summary>
+    /// Called when the <see cref="AssociatedObject"/> is unloaded.
+    /// </summary>
+    /// <remarks>
+    /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="Control"/>.
+    /// </remarks>
+    protected virtual void OnUnloaded()
     {
     }
 }
