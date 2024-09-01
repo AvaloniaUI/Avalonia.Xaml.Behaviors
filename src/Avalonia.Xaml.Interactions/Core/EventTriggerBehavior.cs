@@ -234,6 +234,11 @@ public class EventTriggerBehavior : Trigger
     /// <param name="eventArgs">The event args.</param>
     protected virtual void AttachedToVisualTree(object? sender, object eventArgs)
     {
+        if (!IsEnabled)
+        {
+            return;
+        }
+
         Interaction.ExecuteActions(_resolvedSource, Actions, eventArgs);
     }
 

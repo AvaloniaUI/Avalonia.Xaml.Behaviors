@@ -10,12 +10,6 @@ namespace Avalonia.Xaml.Interactions.Custom;
 public abstract class ShowBehaviorBase : AttachedToVisualTreeBehavior<Control>
 {
     /// <summary>
-    /// 
-    /// </summary>
-    public static readonly StyledProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.Register<ShowBehaviorBase, bool>(nameof(IsEnabled), true);
-
-    /// <summary>
     /// Identifies the <seealso cref="TargetControl"/> avalonia property.
     /// </summary>
     public static readonly StyledProperty<Control?> TargetControlProperty =
@@ -26,15 +20,6 @@ public abstract class ShowBehaviorBase : AttachedToVisualTreeBehavior<Control>
     /// </summary>
     public static readonly StyledProperty<RoutingStrategies> EventRoutingStrategyProperty =
         AvaloniaProperty.Register<ShowBehaviorBase, RoutingStrategies>(nameof(EventRoutingStrategy), RoutingStrategies.Bubble);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public bool IsEnabled
-    {
-        get => GetValue(IsEnabledProperty);
-        set => SetValue(IsEnabledProperty, value);
-    }
 
     /// <summary>
     /// Gets or sets the target control. This is a avalonia property.

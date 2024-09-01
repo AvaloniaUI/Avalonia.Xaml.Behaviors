@@ -29,12 +29,6 @@ public class HorizontalScrollViewerBehavior : Behavior<ScrollViewer>
     /// <summary>
     /// 
     /// </summary>
-    public static readonly StyledProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.Register<HorizontalScrollViewerBehavior, bool>(nameof(IsEnabled), true);
-
-    /// <summary>
-    /// 
-    /// </summary>
     public static readonly StyledProperty<bool> RequireShiftKeyProperty =
         AvaloniaProperty.Register<HorizontalScrollViewerBehavior, bool>(nameof(RequireShiftKey));
 
@@ -43,15 +37,6 @@ public class HorizontalScrollViewerBehavior : Behavior<ScrollViewer>
     /// </summary>
     public static readonly StyledProperty<ChangeSize> ScrollChangeSizeProperty =
         AvaloniaProperty.Register<HorizontalScrollViewerBehavior, ChangeSize>(nameof(ScrollChangeSize));
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public bool IsEnabled
-    {
-        get => GetValue(IsEnabledProperty);
-        set => SetValue(IsEnabledProperty, value);
-    }
 
     /// <summary>
     /// 

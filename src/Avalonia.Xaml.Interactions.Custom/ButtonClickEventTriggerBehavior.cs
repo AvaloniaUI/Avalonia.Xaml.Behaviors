@@ -51,6 +51,11 @@ public class ButtonClickEventTriggerBehavior : Trigger<Button>
 
     private void AssociatedObject_OnClick(object? sender, RoutedEventArgs e)
     {
+        if (!IsEnabled)
+        {
+            return;
+        }
+
         if (AssociatedObject is not null && KeyModifiers == _savedKeyModifiers)
         {
             Interaction.ExecuteActions(AssociatedObject, Actions, e);

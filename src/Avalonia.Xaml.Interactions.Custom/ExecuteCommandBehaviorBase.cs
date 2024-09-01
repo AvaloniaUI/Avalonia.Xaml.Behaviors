@@ -13,12 +13,6 @@ public abstract class ExecuteCommandBehaviorBase : AttachedToVisualTreeBehavior<
     /// <summary>
     /// 
     /// </summary>
-    public static readonly StyledProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.Register<ExecuteCommandBehaviorBase, bool>(nameof(IsEnabled), true);
-    
-    /// <summary>
-    /// 
-    /// </summary>
     public static readonly StyledProperty<ICommand?> CommandProperty =
         AvaloniaProperty.Register<ExecuteCommandBehaviorBase, ICommand?>(nameof(Command));
 
@@ -39,16 +33,7 @@ public abstract class ExecuteCommandBehaviorBase : AttachedToVisualTreeBehavior<
     /// </summary>
     public static readonly StyledProperty<Control?> FocusControlProperty =
         AvaloniaProperty.Register<ExecuteCommandBehaviorBase, Control?>(nameof(CommandParameter));
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public bool IsEnabled
-    {
-        get => GetValue(IsEnabledProperty);
-        set => SetValue(IsEnabledProperty, value);
-    }
-
+    
     /// <summary>
     /// 
     /// </summary>

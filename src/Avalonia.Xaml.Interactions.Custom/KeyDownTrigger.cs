@@ -45,6 +45,11 @@ public class KeyDownTrigger : RoutedEventTriggerBase
 
     private void OnKeyDown(object? sender, KeyEventArgs e)
     {
+        if (!IsEnabled)
+        {
+            return;
+        }
+
         if (e.Key == Key)
         {
             e.Handled = MarkAsHandled;

@@ -128,6 +128,11 @@ public class RoutedEventTriggerBehavior : Trigger<Interactive>
 
     private void Handler(object? sender, RoutedEventArgs e)
     {
+        if (!IsEnabled)
+        {
+            return;
+        }
+
         var interactive = ComputeResolvedSourceInteractive();
         if (interactive is not null)
         {

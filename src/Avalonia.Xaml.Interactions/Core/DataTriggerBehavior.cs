@@ -166,6 +166,11 @@ public class DataTriggerBehavior : Trigger
             return;
         }
 
+        if (!behavior.IsEnabled)
+        {
+            return;
+        }
+
         // NOTE: In UWP version binding null check is not present but Avalonia throws exception as Bindings are null when first initialized.
         var binding = behavior.Binding;
         if (binding is not null)

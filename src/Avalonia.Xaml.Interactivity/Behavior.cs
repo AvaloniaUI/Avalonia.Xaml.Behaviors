@@ -11,9 +11,25 @@ namespace Avalonia.Xaml.Interactivity;
 public abstract class Behavior : AvaloniaObject, IBehavior
 {
     /// <summary>
+    /// Identifies the <seealso cref="IsEnabled"/> avalonia property.
+    /// </summary>
+    public static readonly StyledProperty<bool> IsEnabledProperty =
+        AvaloniaProperty.Register<Behavior, bool>(nameof(IsEnabled), defaultValue: true);
+
+    /// <summary>
     /// Gets the <see cref="AvaloniaObject"/> to which the behavior is attached.
     /// </summary>
     public AvaloniaObject? AssociatedObject { get; private set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this instance is enabled.
+    /// </summary>
+    /// <value><c>true</c> if this instance is enabled; otherwise, <c>false</c>.</value>
+    public bool IsEnabled
+    {
+        get => GetValue(IsEnabledProperty);
+        set => SetValue(IsEnabledProperty, value);
+    }
 
     /// <summary>
     /// Attaches the behavior to the specified <see cref="AvaloniaObject"/>.

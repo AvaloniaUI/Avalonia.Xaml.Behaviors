@@ -36,6 +36,11 @@ public class ValueChangedTriggerBehavior : Trigger
             return;
         }
 
+        if (!behavior.IsEnabled)
+        {
+            return;
+        }
+
         var binding = behavior.Binding;
         if (binding is not null)
         {

@@ -12,12 +12,6 @@ public abstract class FocusBehaviorBase : AttachedToVisualTreeBehavior<Control>
     /// <summary>
     /// 
     /// </summary>
-    public static readonly StyledProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.Register<FocusBehaviorBase, bool>(nameof(IsEnabled), true);
-
-    /// <summary>
-    /// 
-    /// </summary>
     public static readonly StyledProperty<NavigationMethod> NavigationMethodProperty =
         AvaloniaProperty.Register<FocusBehaviorBase, NavigationMethod>(nameof(NavigationMethod));
     
@@ -26,15 +20,6 @@ public abstract class FocusBehaviorBase : AttachedToVisualTreeBehavior<Control>
     /// </summary>
     public static readonly StyledProperty<KeyModifiers> KeyModifiersProperty =
         AvaloniaProperty.Register<FocusBehaviorBase, KeyModifiers>(nameof(KeyModifiers));
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public bool IsEnabled
-    {
-        get => GetValue(IsEnabledProperty);
-        set => SetValue(IsEnabledProperty, value);
-    }
 
     /// <summary>
     /// 
