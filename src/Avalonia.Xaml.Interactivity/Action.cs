@@ -3,13 +3,13 @@ namespace Avalonia.Xaml.Interactivity;
 /// <summary>
 /// A base class for action that calls a method on a specified object when invoked.
 /// </summary>
-public abstract class ActionBase : AvaloniaObject, IAction
+public abstract class Action : AvaloniaObject, IAction
 {
     /// <summary>
     /// Identifies the <seealso cref="IsEnabled"/> avalonia property.
     /// </summary>
     public static readonly StyledProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.Register<ActionBase, bool>(nameof(IsEnabled), defaultValue: true);
+        AvaloniaProperty.Register<Avalonia.Xaml.Interactivity.Action, bool>(nameof(IsEnabled), defaultValue: true);
 
     /// <summary>
     /// Gets or sets a value indicating whether this instance is enabled.

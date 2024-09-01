@@ -10,7 +10,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// An action that displays a <see cref="Popup"/> for the associated control when executed.
 /// </summary>
 /// <remarks>If the associated control is of type <see cref="Control"/> than popup inherits control <see cref="StyledElement.DataContext"/>.</remarks>
-public class PopupAction : ActionBase
+public class PopupAction : Avalonia.Xaml.Interactivity.Action
 {
     private Popup? _popup;
 

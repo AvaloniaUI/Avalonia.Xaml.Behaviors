@@ -14,7 +14,7 @@ namespace Avalonia.Xaml.Interactions.Core;
 /// <summary>
 /// An action that calls a method on a specified object when invoked.
 /// </summary>
-public class CallMethodAction : ActionBase
+public class CallMethodAction : Avalonia.Xaml.Interactivity.Action
 {
     private Type? _targetObjectType;
     private readonly List<MethodDescriptor> _methodDescriptors = new();

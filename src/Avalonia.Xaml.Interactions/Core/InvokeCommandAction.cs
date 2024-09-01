@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Core;
 /// <summary>
 /// Executes a specified <see cref="System.Windows.Input.ICommand"/> when invoked. 
 /// </summary>
-public class InvokeCommandAction : ActionBase
+public class InvokeCommandAction : Avalonia.Xaml.Interactivity.Action
 {
     /// <summary>
     /// Identifies the <seealso cref="Command"/> avalonia property.

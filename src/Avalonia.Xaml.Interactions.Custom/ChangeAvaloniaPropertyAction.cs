@@ -10,7 +10,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// An action that will change a specified Avalonia property to a specified value when invoked.
 /// </summary>
-public class ChangeAvaloniaPropertyAction : ActionBase
+public class ChangeAvaloniaPropertyAction : Avalonia.Xaml.Interactivity.Action
 {
     /// <summary>
     /// Identifies the <seealso cref="TargetProperty"/> avalonia property.

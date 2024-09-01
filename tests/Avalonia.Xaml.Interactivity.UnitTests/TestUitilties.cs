@@ -8,12 +8,12 @@ public static class TestUtilities
     /// <summary>
     /// Handles the difference between InvalidOperationException in managed and native.
     /// </summary>
-    public static void AssertThrowsInvalidOperationException(Action action)
+    public static void AssertThrowsInvalidOperationException(System.Action action)
     {
         Assert.Throws<InvalidOperationException>(action);
     }
 
-    public static void AssertThrowsArgumentException(Action action)
+    public static void AssertThrowsArgumentException(System.Action action)
     {
         Assert.Throws<ArgumentException>(action);
     }

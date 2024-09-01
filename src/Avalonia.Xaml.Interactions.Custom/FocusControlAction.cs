@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// Focuses the associated or target control when executed.
 /// </summary>
-public class FocusControlAction : ActionBase
+public class FocusControlAction : Avalonia.Xaml.Interactivity.Action
 {
     /// <summary>
     /// Identifies the <seealso cref="TargetControl"/> avalonia property.

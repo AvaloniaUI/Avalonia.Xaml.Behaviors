@@ -11,7 +11,7 @@ namespace Avalonia.Xaml.Interactions.Core;
 /// <summary>
 /// An action that will change a specified property to a specified value when invoked.
 /// </summary>
-public class ChangePropertyAction : ActionBase
+public class ChangePropertyAction : Avalonia.Xaml.Interactivity.Action
 {
     private static readonly char[] s_trimChars = { '(', ')' };
     private static readonly char[] s_separator = { '.' };

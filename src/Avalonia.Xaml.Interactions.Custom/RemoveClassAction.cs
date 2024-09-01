@@ -6,7 +6,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// Removes a specified <see cref="RemoveClassAction.ClassName"/> from <see cref="StyledElement.Classes"/> collection when invoked. 
 /// </summary>
-public class RemoveClassAction : ActionBase
+public class RemoveClassAction : Avalonia.Xaml.Interactivity.Action
 {
     /// <summary>
     /// Identifies the <seealso cref="ClassName"/> avalonia property.

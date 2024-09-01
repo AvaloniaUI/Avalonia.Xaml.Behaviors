@@ -6,7 +6,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// Adds a specified <see cref="AddClassAction.ClassName"/> to the <see cref="StyledElement.Classes"/> collection when invoked. 
 /// </summary>
-public class AddClassAction : ActionBase
+public class AddClassAction : Avalonia.Xaml.Interactivity.Action
 {
     /// <summary>
     /// Identifies the <seealso cref="ClassName"/> avalonia property.
