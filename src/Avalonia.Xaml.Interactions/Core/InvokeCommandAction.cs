@@ -7,14 +7,8 @@ namespace Avalonia.Xaml.Interactions.Core;
 /// <summary>
 /// Executes a specified <see cref="System.Windows.Input.ICommand"/> when invoked. 
 /// </summary>
-public class InvokeCommandAction : AvaloniaObject, IAction
+public class InvokeCommandAction : ActionBase
 {
-    /// <summary>
-    /// Identifies the <seealso cref="IsEnabled"/> avalonia property.
-    /// </summary>
-    public static readonly StyledProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.Register<InvokeCommandAction, bool>(nameof(IsEnabled), defaultValue: true);
-
     /// <summary>
     /// Identifies the <seealso cref="Command"/> avalonia property.
     /// </summary>
@@ -45,16 +39,6 @@ public class InvokeCommandAction : AvaloniaObject, IAction
     /// <remarks>The string.Empty used for default value string means the invariant culture.</remarks>
     public static readonly StyledProperty<string?> InputConverterLanguageProperty =
         AvaloniaProperty.Register<InvokeCommandAction, string?>(nameof(InputConverterLanguage), string.Empty);
-
-    /// <summary>
-    /// Gets or sets a value indicating whether this instance is enabled.
-    /// </summary>
-    /// <value><c>true</c> if this instance is enabled; otherwise, <c>false</c>.</value>
-    public bool IsEnabled
-    {
-        get => GetValue(IsEnabledProperty);
-        set => SetValue(IsEnabledProperty, value);
-    }
 
     /// <summary>
     /// Gets or sets the command this action should invoke. This is a avalonia property.
@@ -119,7 +103,7 @@ public class InvokeCommandAction : AvaloniaObject, IAction
     /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
     /// <param name="parameter">The value of this parameter is determined by the caller.</param>
     /// <returns>True if the command is successfully executed; else false.</returns>
-    public virtual object Execute(object? sender, object? parameter)
+    public override object Execute(object? sender, object? parameter)
     {
         if (IsEnabled != true || Command is null)
         {

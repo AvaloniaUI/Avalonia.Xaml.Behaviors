@@ -11,7 +11,7 @@ namespace Avalonia.Xaml.Interactions.Core;
 /// <summary>
 /// An action that will change a specified property to a specified value when invoked.
 /// </summary>
-public class ChangePropertyAction : AvaloniaObject, IAction
+public class ChangePropertyAction : ActionBase
 {
     private static readonly char[] s_trimChars = { '(', ')' };
     private static readonly char[] s_separator = { '.' };
@@ -124,8 +124,13 @@ public class ChangePropertyAction : AvaloniaObject, IAction
     /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
     /// <param name="parameter">The value of this parameter is determined by the caller.</param>
     /// <returns>True if updating the property value succeeds; else false.</returns>
-    public virtual object Execute(object? sender, object? parameter)
+    public override object Execute(object? sender, object? parameter)
     {
+        if (!IsEnabled)
+        {
+            return false;
+        }
+
         object? targetObject;
         if (GetValue(TargetObjectProperty) is not null)
         {

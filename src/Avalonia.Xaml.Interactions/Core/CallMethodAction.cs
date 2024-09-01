@@ -14,7 +14,7 @@ namespace Avalonia.Xaml.Interactions.Core;
 /// <summary>
 /// An action that calls a method on a specified object when invoked.
 /// </summary>
-public class CallMethodAction : AvaloniaObject, IAction
+public class CallMethodAction : ActionBase
 {
     private Type? _targetObjectType;
     private readonly List<MethodDescriptor> _methodDescriptors = new();
@@ -109,7 +109,7 @@ public class CallMethodAction : AvaloniaObject, IAction
     /// <param name="parameter">The value of this parameter is determined by the caller.</param>
     /// <returns>True if the method is called; else false.</returns>
     [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
-    public virtual object Execute(object? sender, object? parameter)
+    public override object Execute(object? sender, object? parameter)
     {
         if (!IsEnabled)
         {

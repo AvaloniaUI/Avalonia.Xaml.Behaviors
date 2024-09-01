@@ -1,6 +1,6 @@
 ﻿namespace Avalonia.Xaml.Interactivity.UnitTests;
 
-public class StubAction(object? returnValue) : AvaloniaObject, IAction
+public class StubAction(object? returnValue) : ActionBase
 {
     public StubAction() : this(null)
     {
@@ -24,7 +24,7 @@ public class StubAction(object? returnValue) : AvaloniaObject, IAction
         private set;
     }
 
-    public object? Execute(object? sender, object? parameter)
+    public override object? Execute(object? sender, object? parameter)
     {
         ExecuteCount++;
         Sender = sender;

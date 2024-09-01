@@ -6,7 +6,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// Adds a specified <see cref="AddClassAction.ClassName"/> to the <see cref="StyledElement.Classes"/> collection when invoked. 
 /// </summary>
-public class AddClassAction : AvaloniaObject, IAction
+public class AddClassAction : ActionBase
 {
     /// <summary>
     /// Identifies the <seealso cref="ClassName"/> avalonia property.
@@ -60,8 +60,13 @@ public class AddClassAction : AvaloniaObject, IAction
     /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
     /// <param name="parameter">The value of this parameter is determined by the caller.</param>
     /// <returns>True if the class is successfully added; else false.</returns>
-    public object Execute(object? sender, object? parameter)
+    public override object Execute(object? sender, object? parameter)
     {
+        if (!IsEnabled)
+        {
+            return false;
+        }
+
         var target = GetValue(StyledElementProperty) is not null ? StyledElement : sender as StyledElement;
         if (target is null || string.IsNullOrEmpty(ClassName))
         {
