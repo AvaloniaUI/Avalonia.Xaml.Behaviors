@@ -21,7 +21,7 @@
     <TreeView.ItemTemplate>
       <TreeDataTemplate DataType="vm:ItemViewModel" x:CompileBindings="False"
                         ItemsSource="{Binding Items}">
-        <controls:EditableItem />
+        <controls:EditableItem Text="{Binding Value}" />
       </TreeDataTemplate>
     </TreeView.ItemTemplate>
   </TreeView>
