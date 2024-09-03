@@ -1,6 +1,5 @@
 ﻿using System;
 using Avalonia;
-using Avalonia.Xaml.Interactions.Core;
 using Avalonia.Xaml.Interactivity;
 
 namespace DraggableDemo;
