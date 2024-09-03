@@ -17,7 +17,7 @@ namespace Avalonia.Xaml.Interactions.Core;
 public class CallMethodAction : Avalonia.Xaml.Interactivity.Action
 {
     private Type? _targetObjectType;
-    private readonly List<MethodDescriptor> _methodDescriptors = new();
+    private readonly List<MethodDescriptor> _methodDescriptors = [];
     private MethodDescriptor? _cachedMethodDescriptor;
 
     /// <summary>
@@ -146,7 +146,7 @@ public class CallMethodAction : Avalonia.Xaml.Interactivity.Action
                 methodDescriptor.MethodInfo.Invoke(target, null);
                 return true;
             case 2:
-                methodDescriptor.MethodInfo.Invoke(target, new[] { target, parameter! });
+                methodDescriptor.MethodInfo.Invoke(target, [target, parameter!]);
                 return true;
             default:
                 return false;

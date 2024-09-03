@@ -40,7 +40,7 @@ public class Interaction
         var behaviorCollection = obj.GetValue(BehaviorsProperty);
         if (behaviorCollection is null)
         {
-            behaviorCollection = new BehaviorCollection();
+            behaviorCollection = [];
             obj.SetValue(BehaviorsProperty, behaviorCollection);
             SetVisualTreeEventHandlersInitial(obj);
         }
@@ -73,7 +73,7 @@ public class Interaction
     {
         if (actions is null)
         {
-            return Enumerable.Empty<object>();
+            return [];
         }
 
         var results = new List<object>();

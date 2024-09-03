@@ -13,8 +13,8 @@ namespace Avalonia.Xaml.Interactions.Core;
 /// </summary>
 public class ChangePropertyAction : Avalonia.Xaml.Interactivity.Action
 {
-    private static readonly char[] s_trimChars = { '(', ')' };
-    private static readonly char[] s_separator = { '.' };
+    private static readonly char[] s_trimChars = ['(', ')'];
+    private static readonly char[] s_separator = ['.'];
 
     [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private static Type? GetTypeByName(string name)
@@ -223,7 +223,7 @@ public class ChangePropertyAction : Avalonia.Xaml.Interactivity.Action
                 }
             }
 
-            propertyInfo.SetValue(targetObject, result, Array.Empty<object>());
+            propertyInfo.SetValue(targetObject, result, []);
         }
         catch (FormatException e)
         {

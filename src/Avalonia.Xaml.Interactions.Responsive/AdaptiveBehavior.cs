@@ -57,7 +57,7 @@ public class AdaptiveBehavior : Behavior<Control>
     /// Gets adaptive class setters collection. This is a avalonia property.
     /// </summary>
     [Content]
-    public AvaloniaList<AdaptiveClassSetter> Setters => _setters ??= new AvaloniaList<AdaptiveClassSetter>();
+    public AvaloniaList<AdaptiveClassSetter> Setters => _setters ??= [];
 
     /// <inheritdoc/>
     protected override void OnAttachedToVisualTree()

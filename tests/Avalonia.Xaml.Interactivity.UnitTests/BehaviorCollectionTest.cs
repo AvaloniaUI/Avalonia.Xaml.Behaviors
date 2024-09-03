@@ -108,7 +108,7 @@ public class BehaviorCollectionTest
     [AvaloniaFact]
     public void VectorChanged_ResetWhileNotAttached_DetachNotCalled()
     {
-        StubBehavior[] behaviorArray = { new StubBehavior(), new StubBehavior(), new StubBehavior() };
+        StubBehavior[] behaviorArray = [new StubBehavior(), new StubBehavior(), new StubBehavior()];
 
         var behaviorCollection = new BehaviorCollection();
         foreach (var behavior in behaviorArray)
@@ -127,7 +127,7 @@ public class BehaviorCollectionTest
     [AvaloniaFact]
     public void VectorChanged_ResetWhileAttached_AllDetached()
     {
-        StubBehavior[] behaviorArray = { new StubBehavior(), new StubBehavior(), new StubBehavior() };
+        StubBehavior[] behaviorArray = [new StubBehavior(), new StubBehavior(), new StubBehavior()];
 
         var behaviorCollection = new BehaviorCollection();
         behaviorCollection.Attach(new Button());
