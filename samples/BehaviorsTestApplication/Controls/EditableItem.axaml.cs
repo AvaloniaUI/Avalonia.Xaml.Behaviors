@@ -1,12 +1,11 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace BehaviorsTestApplication.Views;
+namespace BehaviorsTestApplication.Controls;
 
-public partial class ItemView : UserControl
+public partial class EditableItem : UserControl
 {
-    public ItemView()
+    public EditableItem()
     {
         InitializeComponent();
     }

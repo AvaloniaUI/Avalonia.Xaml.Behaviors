@@ -4,7 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
-             xmlns:views="clr-namespace:BehaviorsTestApplication.Views"
+             xmlns:controls="clr-namespace:BehaviorsTestApplication.Controls"
              x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
   <Design.DataContext>
@@ -21,7 +21,7 @@
     <TreeView.ItemTemplate>
       <TreeDataTemplate DataType="vm:ItemViewModel" x:CompileBindings="False"
                         ItemsSource="{Binding Items}">
-        <views:ItemView />
+        <controls:EditableItem />
       </TreeDataTemplate>
     </TreeView.ItemTemplate>
   </TreeView>
