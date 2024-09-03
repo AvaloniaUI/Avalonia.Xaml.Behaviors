@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 using System.Windows.Input;
-using BehaviorsTestApplication.ViewModels.Core;
 using ReactiveUI;
 
 namespace BehaviorsTestApplication.ViewModels;

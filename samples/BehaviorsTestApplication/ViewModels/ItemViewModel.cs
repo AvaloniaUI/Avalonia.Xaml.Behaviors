@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using BehaviorsTestApplication.ViewModels.Core;
 using ReactiveUI;
 
 namespace BehaviorsTestApplication.ViewModels;
