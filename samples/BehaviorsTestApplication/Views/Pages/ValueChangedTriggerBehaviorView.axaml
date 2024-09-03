@@ -1,9 +1,6 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.ValueChangedTriggerBehaviorView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
@@ -14,13 +11,13 @@
   </Design.DataContext>
   <Grid>
     <TextBlock Name="Text" HorizontalAlignment="Center" VerticalAlignment="Center">
-      <i:Interaction.Behaviors>
-        <iac:ValueChangedTriggerBehavior Binding="{Binding Values^}">
-          <ia:ChangePropertyAction TargetObject="Text" 
+      <Interaction.Behaviors>
+        <ValueChangedTriggerBehavior Binding="{Binding Values^}">
+          <ChangePropertyAction TargetObject="Text" 
                                    PropertyName="Text"
                                    Value="{Binding Values^, StringFormat={} Value: {0}}" />
-        </iac:ValueChangedTriggerBehavior>
-      </i:Interaction.Behaviors>
+        </ValueChangedTriggerBehavior>
+      </Interaction.Behaviors>
     </TextBlock>
   </Grid>
 </UserControl>

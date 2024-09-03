@@ -2,8 +2,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-        xmlns:id="clr-namespace:Avalonia.Xaml.Interactions.Draggable;assembly=Avalonia.Xaml.Interactions.Draggable"
         xmlns:local="clr-namespace:DraggableDemo"
         xmlns:models="clr-namespace:DraggableDemo.Models"
         mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="550"
@@ -172,12 +170,12 @@
       <ItemsControl ItemsSource="{Binding Tiles}" Width="800" Height="300" Background="LightGray">
         <ItemsControl.Styles>
           <Style Selector=":is(ItemsControl) > :is(ContentPresenter)">
-            <Setter Property="(i:Interaction.Behaviors)">
-              <i:BehaviorCollectionTemplate>
-                <i:BehaviorCollection>
-                  <id:GridDragBehavior CopyColumn="True" CopyRow="True" CopyColumnSpan="True" CopyRowSpan="True" />
-                </i:BehaviorCollection>
-              </i:BehaviorCollectionTemplate>
+            <Setter Property="(Interaction.Behaviors)">
+              <BehaviorCollectionTemplate>
+                <BehaviorCollection>
+                  <GridDragBehavior CopyColumn="True" CopyRow="True" CopyColumnSpan="True" CopyRowSpan="True" />
+                </BehaviorCollection>
+              </BehaviorCollectionTemplate>
             </Setter>
           </Style>
           <Style Selector="ItemsControl > ContentPresenter" x:DataType="models:Tile">

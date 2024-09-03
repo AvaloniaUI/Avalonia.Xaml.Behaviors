@@ -1,8 +1,6 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.ChangePropertyActionView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
@@ -19,22 +17,22 @@
                Stroke="{DynamicResource GrayBrush}" 
                StrokeThickness="5" />
     <Button Name="PinkButton" Content="Pink" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5">
-      <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="PinkButton">
-          <ia:ChangePropertyAction TargetObject="ChangePropertyRectangle" 
+      <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Click" SourceObject="PinkButton">
+          <ChangePropertyAction TargetObject="ChangePropertyRectangle" 
                                    PropertyName="Fill"
                                    Value="{DynamicResource PinkBrush}" />
-        </ia:EventTriggerBehavior>
-      </i:Interaction.Behaviors>
+        </EventTriggerBehavior>
+      </Interaction.Behaviors>
     </Button>
     <Button Name="YellowButton" Content="Yellow" Grid.Row="1" Grid.Column="2" Margin="0,0,5,5">
-      <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="YellowButton">
-          <ia:ChangePropertyAction TargetObject="ChangePropertyRectangle" 
+      <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Click" SourceObject="YellowButton">
+          <ChangePropertyAction TargetObject="ChangePropertyRectangle" 
                                    PropertyName="Fill"
                                    Value="{DynamicResource YellowBrush}" />
-        </ia:EventTriggerBehavior>
-      </i:Interaction.Behaviors>
+        </EventTriggerBehavior>
+      </Interaction.Behaviors>
     </Button>
   </Grid>
 </UserControl>

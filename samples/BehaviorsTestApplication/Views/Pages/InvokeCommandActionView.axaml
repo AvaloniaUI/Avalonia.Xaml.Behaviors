@@ -1,8 +1,6 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.InvokeCommandActionView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
@@ -22,26 +20,26 @@
                Height="100" Width="100" />
     </Canvas>
     <Button x:Name="MoveLeftButton" Content="Move Left" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5">
-      <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="MoveLeftButton">
-          <ia:InvokeCommandAction Command="{Binding MoveLeftCommand}" />
-        </ia:EventTriggerBehavior>
-      </i:Interaction.Behaviors>
+      <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Click" SourceObject="MoveLeftButton">
+          <InvokeCommandAction Command="{Binding MoveLeftCommand}" />
+        </EventTriggerBehavior>
+      </Interaction.Behaviors>
     </Button>
     <Button x:Name="ResetMoveButton" Content="Reset Move" Grid.Row="1" Grid.Column="2" Margin="0,0,0,5">
-      <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="ResetMoveButton">
-          <ia:InvokeCommandAction Command="{Binding ResetMoveCommand}"
+      <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Click" SourceObject="ResetMoveButton">
+          <InvokeCommandAction Command="{Binding ResetMoveCommand}"
                                   CommandParameter="{x:Static reactive:Unit.Default}"  />
-        </ia:EventTriggerBehavior>
-      </i:Interaction.Behaviors>
+        </EventTriggerBehavior>
+      </Interaction.Behaviors>
     </Button>
     <Button x:Name="MoveRightButton" Content="Move Right" Grid.Row="1" Grid.Column="4" Margin="0,0,5,5">
-      <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="MoveRightButton">
-          <ia:InvokeCommandAction Command="{Binding MoveRightCommand}" />
-        </ia:EventTriggerBehavior>
-      </i:Interaction.Behaviors>
+      <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Click" SourceObject="MoveRightButton">
+          <InvokeCommandAction Command="{Binding MoveRightCommand}" />
+        </EventTriggerBehavior>
+      </Interaction.Behaviors>
     </Button>
   </Grid>
 </UserControl>

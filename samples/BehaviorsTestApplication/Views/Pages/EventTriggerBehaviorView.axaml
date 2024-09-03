@@ -1,8 +1,6 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.EventTriggerBehaviorView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
@@ -14,11 +12,11 @@
   <Grid RowDefinitions="Auto,Auto">
     <TextBox Name="TextBox" Text="Hello" Grid.Row="0" Margin="5" />
     <Button Name="ChangeProperty" Content="Change Property" Grid.Row="1" Margin="5,0,5,5">
-      <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="ChangeProperty">
-          <ia:ChangePropertyAction TargetObject="TextBox" PropertyName="Text" Value="World" />
-        </ia:EventTriggerBehavior>
-      </i:Interaction.Behaviors>
+      <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Click" SourceObject="ChangeProperty">
+          <ChangePropertyAction TargetObject="TextBox" PropertyName="Text" Value="World" />
+        </EventTriggerBehavior>
+      </Interaction.Behaviors>
     </Button>
   </Grid>
 </UserControl>

@@ -1,8 +1,6 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.CallMethodActionView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
@@ -24,25 +22,25 @@
                  Foreground="{DynamicResource YellowBrush}" />
     </Border>
     <Button x:Name="DecrementButton" Content="Decrement" Grid.Row="1" Grid.Column="0" Margin="5,0,0,5">
-      <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="DecrementButton">
-          <ia:CallMethodAction TargetObject="{Binding}" MethodName="DecrementCount" />
-        </ia:EventTriggerBehavior>
-      </i:Interaction.Behaviors>
+      <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Click" SourceObject="DecrementButton">
+          <CallMethodAction TargetObject="{Binding}" MethodName="DecrementCount" />
+        </EventTriggerBehavior>
+      </Interaction.Behaviors>
     </Button>
     <Button Name="ResetButton" Content="Reset" Grid.Row="1" Grid.Column="2" Margin="0,0,0,5">
-      <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="ResetButton">
-          <ia:ChangePropertyAction TargetObject="{Binding}" PropertyName="Count" Value="0" />
-        </ia:EventTriggerBehavior>
-      </i:Interaction.Behaviors>
+      <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Click" SourceObject="ResetButton">
+          <ChangePropertyAction TargetObject="{Binding}" PropertyName="Count" Value="0" />
+        </EventTriggerBehavior>
+      </Interaction.Behaviors>
     </Button>
     <Button x:Name="IncrementButton" Content="Increment" Grid.Row="1" Grid.Column="4" Margin="0,0,5,5">
-      <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="Click" SourceObject="IncrementButton">
-          <ia:CallMethodAction TargetObject="{Binding}" MethodName="IncrementCount" />
-        </ia:EventTriggerBehavior>
-      </i:Interaction.Behaviors>
+      <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Click" SourceObject="IncrementButton">
+          <CallMethodAction TargetObject="{Binding}" MethodName="IncrementCount" />
+        </EventTriggerBehavior>
+      </Interaction.Behaviors>
     </Button>
   </Grid>
 </UserControl>

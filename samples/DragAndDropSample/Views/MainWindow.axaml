@@ -2,8 +2,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:DragAndDropSample.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-        xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
         xmlns:b="using:DragAndDropSample.Behaviors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="650" d:DesignHeight="450"
@@ -28,23 +26,23 @@
       <Style.Resources>
         <b:ItemsListBoxDropHandler x:Key="ItemsListBoxDropHandler" />
       </Style.Resources>
-      <Setter Property="(i:Interaction.Behaviors)">
-        <i:BehaviorCollectionTemplate>
-          <i:BehaviorCollection>
-            <idd:ContextDropBehavior Handler="{StaticResource ItemsListBoxDropHandler}" />
-          </i:BehaviorCollection>
-        </i:BehaviorCollectionTemplate>
+      <Setter Property="(Interaction.Behaviors)">
+        <BehaviorCollectionTemplate>
+          <BehaviorCollection>
+            <ContextDropBehavior Handler="{StaticResource ItemsListBoxDropHandler}" />
+          </BehaviorCollection>
+        </BehaviorCollectionTemplate>
       </Setter>
     </Style>
 
     <Style Selector="ListBox.ItemsDragAndDrop ListBoxItem">
       <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-      <Setter Property="(i:Interaction.Behaviors)">
-        <i:BehaviorCollectionTemplate>
-          <i:BehaviorCollection>
-            <idd:ContextDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
-          </i:BehaviorCollection>
-        </i:BehaviorCollectionTemplate>
+      <Setter Property="(Interaction.Behaviors)">
+        <BehaviorCollectionTemplate>
+          <BehaviorCollection>
+            <ContextDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
+          </BehaviorCollection>
+        </BehaviorCollectionTemplate>
       </Setter>
     </Style>
 
@@ -52,23 +50,23 @@
       <Style.Resources>
         <b:NodesListBoxDropHandler x:Key="NodesListBoxDropHandler" />
       </Style.Resources>
-      <Setter Property="(i:Interaction.Behaviors)">
-        <i:BehaviorCollectionTemplate>
-          <i:BehaviorCollection>
-            <idd:ContextDropBehavior Handler="{StaticResource NodesListBoxDropHandler}" />
-          </i:BehaviorCollection>
-        </i:BehaviorCollectionTemplate>
+      <Setter Property="(Interaction.Behaviors)">
+        <BehaviorCollectionTemplate>
+          <BehaviorCollection>
+            <ContextDropBehavior Handler="{StaticResource NodesListBoxDropHandler}" />
+          </BehaviorCollection>
+        </BehaviorCollectionTemplate>
       </Setter>
     </Style>
 
     <Style Selector="ListBox.NodesDragAndDrop ListBoxItem">
       <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-      <Setter Property="(i:Interaction.Behaviors)">
-        <i:BehaviorCollectionTemplate>
-          <i:BehaviorCollection>
-            <idd:ContextDragBehavior />
-          </i:BehaviorCollection>
-        </i:BehaviorCollectionTemplate>
+      <Setter Property="(Interaction.Behaviors)">
+        <BehaviorCollectionTemplate>
+          <BehaviorCollection>
+            <ContextDragBehavior />
+          </BehaviorCollection>
+        </BehaviorCollectionTemplate>
       </Setter>
     </Style>
 
@@ -76,23 +74,23 @@
       <Style.Resources>
         <b:NodesTreeViewDropHandler x:Key="NodesTreeViewDropHandler" />
       </Style.Resources>
-      <Setter Property="(i:Interaction.Behaviors)">
-        <i:BehaviorCollectionTemplate>
-          <i:BehaviorCollection>
-            <idd:ContextDropBehavior Handler="{StaticResource NodesTreeViewDropHandler}" />
-          </i:BehaviorCollection>
-        </i:BehaviorCollectionTemplate>
+      <Setter Property="(Interaction.Behaviors)">
+        <BehaviorCollectionTemplate>
+          <BehaviorCollection>
+            <ContextDropBehavior Handler="{StaticResource NodesTreeViewDropHandler}" />
+          </BehaviorCollection>
+        </BehaviorCollectionTemplate>
       </Setter>
     </Style>
 
     <Style Selector="TreeView.NodesDragAndDrop TreeViewItem">
       <Setter Property="IsExpanded" Value="True" />
-      <Setter Property="(i:Interaction.Behaviors)">
-        <i:BehaviorCollectionTemplate>
-          <i:BehaviorCollection>
-            <idd:ContextDragBehavior />
-          </i:BehaviorCollection>
-        </i:BehaviorCollectionTemplate>
+      <Setter Property="(Interaction.Behaviors)">
+        <BehaviorCollectionTemplate>
+          <BehaviorCollection>
+            <ContextDragBehavior />
+          </BehaviorCollection>
+        </BehaviorCollectionTemplate>
       </Setter>
     </Style>
 
@@ -103,12 +101,12 @@
       <Setter
         Property="RowHeaderWidth"
         Value="24" />
-      <Setter Property="(i:Interaction.Behaviors)">
-        <i:BehaviorCollectionTemplate>
-          <i:BehaviorCollection>
-            <idd:ContextDropBehavior Handler="{StaticResource ItemsDataGridDropHandler}" />
-          </i:BehaviorCollection>
-        </i:BehaviorCollectionTemplate>
+      <Setter Property="(Interaction.Behaviors)">
+        <BehaviorCollectionTemplate>
+          <BehaviorCollection>
+            <ContextDropBehavior Handler="{StaticResource ItemsDataGridDropHandler}" />
+          </BehaviorCollection>
+        </BehaviorCollectionTemplate>
       </Setter>
     </Style>
 
@@ -131,12 +129,12 @@
     <!-- This makes only the DataGridRowHeader available for dragging, instead of making the entire row draggable -->
     <!-- Which prevents a conflict between text selection in a cell and drag-and-drop -->
     <Style Selector="DataGrid.DragAndDrop DataGridRowHeader">
-      <Setter Property="(i:Interaction.Behaviors)">
-        <i:BehaviorCollectionTemplate>
-          <i:BehaviorCollection>
+      <Setter Property="(Interaction.Behaviors)">
+        <BehaviorCollectionTemplate>
+          <BehaviorCollection>
             <b:ContextDragWithDirectionBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
-          </i:BehaviorCollection>
-        </i:BehaviorCollectionTemplate>
+          </BehaviorCollection>
+        </BehaviorCollectionTemplate>
       </Setter>
       <Setter Property="Content">
         <Template>
@@ -159,12 +157,12 @@
       <Style.Resources>
         <b:ItemsDataGridDropHandler x:Key="ItemsDataGridDropHandler" />
       </Style.Resources>
-      <Setter Property="(i:Interaction.Behaviors)">
-        <i:BehaviorCollectionTemplate>
-          <i:BehaviorCollection>
-            <idd:ContextDropBehavior Handler="{StaticResource ItemsDataGridDropHandler}" />
-          </i:BehaviorCollection>
-        </i:BehaviorCollectionTemplate>
+      <Setter Property="(Interaction.Behaviors)">
+        <BehaviorCollectionTemplate>
+          <BehaviorCollection>
+            <ContextDropBehavior Handler="{StaticResource ItemsDataGridDropHandler}" />
+          </BehaviorCollection>
+        </BehaviorCollectionTemplate>
       </Setter>
     </Style>
     

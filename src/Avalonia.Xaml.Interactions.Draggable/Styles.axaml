@@ -1,6 +1,5 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
         xmlns:id="clr-namespace:Avalonia.Xaml.Interactions.Draggable;assembly=Avalonia.Xaml.Interactions.Draggable">
 
   <!-- TabControl Drag Styles - Non Virtualizing -->
@@ -15,12 +14,12 @@
 
   <Style Selector=":is(TabControl).draggable > :is(TabItem)">
     <Setter Property="ZIndex" Value="0" />
-    <Setter Property="(i:Interaction.Behaviors)">
-      <i:BehaviorCollectionTemplate>
-        <i:BehaviorCollection>
-          <id:ItemDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
-        </i:BehaviorCollection>
-      </i:BehaviorCollectionTemplate>
+    <Setter Property="(Interaction.Behaviors)">
+      <BehaviorCollectionTemplate>
+        <BehaviorCollection>
+          <ItemDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
+        </BehaviorCollection>
+      </BehaviorCollectionTemplate>
     </Setter>
   </Style>
 
@@ -40,12 +39,12 @@
 
   <Style Selector=":is(TabControl).draggableVirtualizing > :is(TabItem)">
     <Setter Property="ZIndex" Value="0" />
-    <Setter Property="(i:Interaction.Behaviors)">
-      <i:BehaviorCollectionTemplate>
-        <i:BehaviorCollection>
-          <id:ItemDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
-        </i:BehaviorCollection>
-      </i:BehaviorCollectionTemplate>
+    <Setter Property="(Interaction.Behaviors)">
+      <BehaviorCollectionTemplate>
+        <BehaviorCollection>
+          <ItemDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
+        </BehaviorCollection>
+      </BehaviorCollectionTemplate>
     </Setter>
   </Style>
 
@@ -67,12 +66,12 @@
 
   <Style Selector=":is(ListBox).draggable > :is(ListBoxItem)">
     <Setter Property="ZIndex" Value="0" />
-    <Setter Property="(i:Interaction.Behaviors)">
-      <i:BehaviorCollectionTemplate>
-        <i:BehaviorCollection>
-          <id:ItemDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" Orientation="Vertical" />
-        </i:BehaviorCollection>
-      </i:BehaviorCollectionTemplate>
+    <Setter Property="(Interaction.Behaviors)">
+      <BehaviorCollectionTemplate>
+        <BehaviorCollection>
+          <ItemDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" Orientation="Vertical" />
+        </BehaviorCollection>
+      </BehaviorCollectionTemplate>
     </Setter>
   </Style>
 
@@ -94,12 +93,12 @@
 
   <Style Selector=":is(ListBox).draggableVirtualizing > :is(ListBoxItem)">
     <Setter Property="ZIndex" Value="0" />
-    <Setter Property="(i:Interaction.Behaviors)">
-      <i:BehaviorCollectionTemplate>
-        <i:BehaviorCollection>
-          <id:ItemDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" Orientation="Vertical" />
-        </i:BehaviorCollection>
-      </i:BehaviorCollectionTemplate>
+    <Setter Property="(Interaction.Behaviors)">
+      <BehaviorCollectionTemplate>
+        <BehaviorCollection>
+          <ItemDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" Orientation="Vertical" />
+        </BehaviorCollection>
+      </BehaviorCollectionTemplate>
     </Setter>
   </Style>
 
@@ -110,36 +109,36 @@
   <!-- Canvas Drag Styles -->
 
   <Style Selector=":is(Canvas).draggable > :is(Control)">
-    <Setter Property="(i:Interaction.Behaviors)">
-      <i:BehaviorCollectionTemplate>
-        <i:BehaviorCollection>
-          <id:CanvasDragBehavior />
-        </i:BehaviorCollection>
-      </i:BehaviorCollectionTemplate>
+    <Setter Property="(Interaction.Behaviors)">
+      <BehaviorCollectionTemplate>
+        <BehaviorCollection>
+          <CanvasDragBehavior />
+        </BehaviorCollection>
+      </BehaviorCollectionTemplate>
     </Setter>
   </Style>
 
   <!-- ItemsControl Canvas Drag Styles -->
 
   <Style Selector=":is(ItemsControl).draggable > :is(ContentPresenter)">
-    <Setter Property="(i:Interaction.Behaviors)">
-      <i:BehaviorCollectionTemplate>
-        <i:BehaviorCollection>
-          <id:CanvasDragBehavior />
-        </i:BehaviorCollection>
-      </i:BehaviorCollectionTemplate>
+    <Setter Property="(Interaction.Behaviors)">
+      <BehaviorCollectionTemplate>
+        <BehaviorCollection>
+          <CanvasDragBehavior />
+        </BehaviorCollection>
+      </BehaviorCollectionTemplate>
     </Setter>
   </Style>
 
   <!-- Grid Drag Styles -->
 
   <Style Selector=":is(Grid).draggable > :is(Control)">
-    <Setter Property="(i:Interaction.Behaviors)">
-      <i:BehaviorCollectionTemplate>
-        <i:BehaviorCollection>
-          <id:GridDragBehavior CopyColumn="True" CopyRow="True" CopyColumnSpan="True" CopyRowSpan="True" />
-        </i:BehaviorCollection>
-      </i:BehaviorCollectionTemplate>
+    <Setter Property="(Interaction.Behaviors)">
+      <BehaviorCollectionTemplate>
+        <BehaviorCollection>
+          <GridDragBehavior CopyColumn="True" CopyRow="True" CopyColumnSpan="True" CopyRowSpan="True" />
+        </BehaviorCollection>
+      </BehaviorCollectionTemplate>
     </Setter>
   </Style>
 

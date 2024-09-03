@@ -1,8 +1,6 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.AdvancedView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
@@ -17,30 +15,30 @@
             Width="100" Height="50" 
             Grid.Row="1" Grid.Column="0" 
             Margin="5,0,0,5">
-      <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="PointerPressed" 
+      <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="PointerPressed" 
                                  SourceObject="Button">
-          <ia:ChangePropertyAction TargetObject="Button" 
+          <ChangePropertyAction TargetObject="Button" 
                                    PropertyName="Background"
                                    Value="{DynamicResource RedBrush}" />
-          <ia:ChangePropertyAction TargetObject="Text" 
+          <ChangePropertyAction TargetObject="Text" 
                                    PropertyName="Foreground"
                                    Value="{DynamicResource YellowBrush}" />
-          <ia:CallMethodAction TargetObject="{Binding}" 
+          <CallMethodAction TargetObject="{Binding}" 
                                MethodName="IncrementCount" />
-        </ia:EventTriggerBehavior>
-        <ia:EventTriggerBehavior EventName="PointerReleased" 
+        </EventTriggerBehavior>
+        <EventTriggerBehavior EventName="PointerReleased" 
                                  SourceObject="Button">
-          <ia:ChangePropertyAction TargetObject="Button" 
+          <ChangePropertyAction TargetObject="Button" 
                                    PropertyName="Background"
                                    Value="{DynamicResource GreenBrush}" />
-          <ia:ChangePropertyAction TargetObject="Text" 
+          <ChangePropertyAction TargetObject="Text" 
                                    PropertyName="Foreground"
                                    Value="{DynamicResource WhiteBrush}" />
-          <ia:CallMethodAction TargetObject="{Binding}"
+          <CallMethodAction TargetObject="{Binding}"
                                MethodName="DecrementCount" />
-        </ia:EventTriggerBehavior>
-      </i:Interaction.Behaviors>
+        </EventTriggerBehavior>
+      </Interaction.Behaviors>
       <TextBlock x:Name="Text" 
                  Text="{Binding Count}" 
                  Foreground="{DynamicResource WhiteBrush}"

@@ -1,8 +1,6 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.AdaptiveBehaviorView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ir="clr-namespace:Avalonia.Xaml.Interactions.Responsive;assembly=Avalonia.Xaml.Interactions.Responsive"
              xmlns:converters="using:BehaviorsTestApplication.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -24,16 +22,16 @@
       <Setter Property="PaneBackground" Value="Transparent" />
       <Setter Property="IsPaneOpen" Value="False" />
       <Setter Property="DisplayMode" Value="Inline" />
-      <Setter Property="(i:Interaction.Behaviors)">
-        <i:BehaviorCollectionTemplate>
-          <i:BehaviorCollection>
-            <ir:AdaptiveBehavior SourceControl="{Binding $parent[TopLevel]}">
-              <ir:AdaptiveClassSetter MinWidth="0" MaxWidth="500" ClassName="small" />
-              <ir:AdaptiveClassSetter MinWidth="500" MaxWidth="900" ClassName="medium" />
-              <ir:AdaptiveClassSetter MinWidth="900" MaxWidth="Infinity" ClassName="wide" />
-            </ir:AdaptiveBehavior>
-          </i:BehaviorCollection>
-        </i:BehaviorCollectionTemplate>
+      <Setter Property="(Interaction.Behaviors)">
+        <BehaviorCollectionTemplate>
+          <BehaviorCollection>
+            <AdaptiveBehavior SourceControl="{Binding $parent[TopLevel]}">
+              <AdaptiveClassSetter MinWidth="0" MaxWidth="500" ClassName="small" />
+              <AdaptiveClassSetter MinWidth="500" MaxWidth="900" ClassName="medium" />
+              <AdaptiveClassSetter MinWidth="900" MaxWidth="Infinity" ClassName="wide" />
+            </AdaptiveBehavior>
+          </BehaviorCollection>
+        </BehaviorCollectionTemplate>
       </Setter>
     </Style>
     <Style Selector="SplitView.small">
@@ -52,20 +50,20 @@
     <!-- Responsive StackPanel -->
 
     <Style Selector="StackPanel.responsive">
-      <Setter Property="(i:Interaction.Behaviors)">
-        <i:BehaviorCollectionTemplate>
-          <i:BehaviorCollection>
-            <ir:AdaptiveBehavior SourceControl="{Binding $parent[TopLevel]}">
-            <ir:AdaptiveClassSetter MinWidth="0" MinWidthOperator="GreaterThanOrEqual" MaxWidth="500" MaxWidthOperator="LessThan" ClassName="small" />
-            <ir:AdaptiveClassSetter MinWidth="500" MinWidthOperator="GreaterThanOrEqual" MaxWidth="700" MaxWidthOperator="LessThan" ClassName="medium" />
-            <ir:AdaptiveClassSetter MinWidth="700" MinWidthOperator="GreaterThanOrEqual" MaxWidth="900" MaxWidthOperator="LessThan" ClassName="large" />
-            <ir:AdaptiveClassSetter MinWidth="900" MinWidthOperator="GreaterThanOrEqual" MaxWidth="Infinity" MaxWidthOperator="LessThan" ClassName="wide" />
-            <ir:AdaptiveClassSetter MinHeight="0" MinWidthOperator="GreaterThanOrEqual" MaxHeight="600" MaxWidthOperator="LessThan" ClassName=":short" IsPseudoClass="True" />
-            <ir:AdaptiveClassSetter MinHeight="600" MinWidthOperator="GreaterThanOrEqual" MaxHeight="Infinity" MaxWidthOperator="LessThan" ClassName=":tall" IsPseudoClass="True" />
-            <ir:AdaptiveClassSetter MinWidth="1280" MinHeight="720" ClassName=":hd-ready" IsPseudoClass="True" />
-            </ir:AdaptiveBehavior>
-          </i:BehaviorCollection>
-        </i:BehaviorCollectionTemplate>
+      <Setter Property="(Interaction.Behaviors)">
+        <BehaviorCollectionTemplate>
+          <BehaviorCollection>
+            <AdaptiveBehavior SourceControl="{Binding $parent[TopLevel]}">
+            <AdaptiveClassSetter MinWidth="0" MinWidthOperator="GreaterThanOrEqual" MaxWidth="500" MaxWidthOperator="LessThan" ClassName="small" />
+            <AdaptiveClassSetter MinWidth="500" MinWidthOperator="GreaterThanOrEqual" MaxWidth="700" MaxWidthOperator="LessThan" ClassName="medium" />
+            <AdaptiveClassSetter MinWidth="700" MinWidthOperator="GreaterThanOrEqual" MaxWidth="900" MaxWidthOperator="LessThan" ClassName="large" />
+            <AdaptiveClassSetter MinWidth="900" MinWidthOperator="GreaterThanOrEqual" MaxWidth="Infinity" MaxWidthOperator="LessThan" ClassName="wide" />
+            <AdaptiveClassSetter MinHeight="0" MinWidthOperator="GreaterThanOrEqual" MaxHeight="600" MaxWidthOperator="LessThan" ClassName=":short" IsPseudoClass="True" />
+            <AdaptiveClassSetter MinHeight="600" MinWidthOperator="GreaterThanOrEqual" MaxHeight="Infinity" MaxWidthOperator="LessThan" ClassName=":tall" IsPseudoClass="True" />
+            <AdaptiveClassSetter MinWidth="1280" MinHeight="720" ClassName=":hd-ready" IsPseudoClass="True" />
+            </AdaptiveBehavior>
+          </BehaviorCollection>
+        </BehaviorCollectionTemplate>
       </Setter>
     </Style>
     <Style Selector="StackPanel:short">
