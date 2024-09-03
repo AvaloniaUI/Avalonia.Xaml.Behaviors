@@ -74,8 +74,8 @@ public class ChangePropertyAction : Avalonia.Xaml.Interactivity.Action
     /// <summary>
     /// Identifies the <seealso cref="PropertyName"/> avalonia property.
     /// </summary>
-    public static readonly StyledProperty<string> PropertyNameProperty =
-        AvaloniaProperty.Register<ChangePropertyAction, string>(nameof(PropertyName));
+    public static readonly StyledProperty<string?> PropertyNameProperty =
+        AvaloniaProperty.Register<ChangePropertyAction, string?>(nameof(PropertyName));
 
     /// <summary>
     /// Identifies the <seealso cref="TargetObject"/> avalonia property.
@@ -92,7 +92,7 @@ public class ChangePropertyAction : Avalonia.Xaml.Interactivity.Action
     /// <summary>
     /// Gets or sets the name of the property to change. This is a avalonia property.
     /// </summary>
-    public string PropertyName
+    public string? PropertyName
     {
         get => GetValue(PropertyNameProperty);
         set => SetValue(PropertyNameProperty, value);
@@ -146,11 +146,17 @@ public class ChangePropertyAction : Avalonia.Xaml.Interactivity.Action
             return false;
         }
 
+        var propertyName = PropertyName;
+        if (propertyName is null)
+        {
+            return false;
+        }
+
         if (targetObject is AvaloniaObject avaloniaObject)
         {
-            if (PropertyName.Contains('.'))
+            if (propertyName.Contains('.'))
             {
-                var avaloniaProperty = FindAttachedProperty(targetObject, PropertyName);
+                var avaloniaProperty = FindAttachedProperty(targetObject, propertyName);
                 if (avaloniaProperty is not null)
                 {
                     UpdateAvaloniaPropertyValue(avaloniaObject, avaloniaProperty);
@@ -161,7 +167,7 @@ public class ChangePropertyAction : Avalonia.Xaml.Interactivity.Action
             }
             else
             {
-                var avaloniaProperty = AvaloniaPropertyRegistry.Instance.FindRegistered(avaloniaObject, PropertyName);
+                var avaloniaProperty = AvaloniaPropertyRegistry.Instance.FindRegistered(avaloniaObject, propertyName);
                 if (avaloniaProperty is not null)
                 {
                     UpdateAvaloniaPropertyValue(avaloniaObject, avaloniaProperty);
@@ -177,16 +183,22 @@ public class ChangePropertyAction : Avalonia.Xaml.Interactivity.Action
     [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private void UpdatePropertyValue(object targetObject)
     {
+        var propertyName = PropertyName;
+        if (propertyName is null)
+        {
+            return;
+        }
+
         var targetType = targetObject.GetType();
         var targetTypeName = targetType.Name;
-        var propertyInfo = targetType.GetRuntimeProperty(PropertyName);
+        var propertyInfo = targetType.GetRuntimeProperty(propertyName);
 
         if (propertyInfo is null)
         {
             throw new ArgumentException(string.Format(
                 CultureInfo.CurrentCulture,
                 "Cannot find a property named {0} on type {1}.",
-                PropertyName,
+                propertyName,
                 targetTypeName));
         }
         else if (!propertyInfo.CanWrite)
@@ -194,7 +206,7 @@ public class ChangePropertyAction : Avalonia.Xaml.Interactivity.Action
             throw new ArgumentException(string.Format(
                 CultureInfo.CurrentCulture,
                 "Cannot find a property named {0} on type {1}.",
-                PropertyName,
+                propertyName,
                 targetTypeName));
         }
 
@@ -240,7 +252,7 @@ public class ChangePropertyAction : Avalonia.Xaml.Interactivity.Action
                     CultureInfo.CurrentCulture,
                     "Cannot assign value of type {0} to property {1} of type {2}. The {1} property can be assigned only values of type {2}.",
                     Value?.GetType().Name ?? "null",
-                    PropertyName,
+                    propertyName,
                     propertyInfo.PropertyType.Name),
                 innerException);
         }

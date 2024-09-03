@@ -23,8 +23,8 @@ public class CallMethodAction : Avalonia.Xaml.Interactivity.Action
     /// <summary>
     /// Identifies the <seealso cref="MethodName"/> avalonia property.
     /// </summary>
-    public static readonly StyledProperty<string> MethodNameProperty =
-        AvaloniaProperty.Register<CallMethodAction, string>(nameof(MethodName));
+    public static readonly StyledProperty<string?> MethodNameProperty =
+        AvaloniaProperty.Register<CallMethodAction, string?>(nameof(MethodName));
 
     /// <summary>
     /// Identifies the <seealso cref="TargetObject"/> avalonia property.
@@ -35,7 +35,7 @@ public class CallMethodAction : Avalonia.Xaml.Interactivity.Action
     /// <summary>
     /// Gets or sets the name of the method to invoke. This is a avalonia property.
     /// </summary>
-    public string MethodName
+    public string? MethodName
     {
         get => GetValue(MethodNameProperty);
         set => SetValue(MethodNameProperty, value);

@@ -18,8 +18,8 @@ public class EventTriggerBehavior : Trigger
     /// <summary>
     /// Identifies the <seealso cref="EventName"/> avalonia property.
     /// </summary>
-    public static readonly StyledProperty<string> EventNameProperty =
-        AvaloniaProperty.Register<EventTriggerBehavior, string>(nameof(EventName), EventNameDefaultValue);
+    public static readonly StyledProperty<string?> EventNameProperty =
+        AvaloniaProperty.Register<EventTriggerBehavior, string?>(nameof(EventName), EventNameDefaultValue);
 
     /// <summary>
     /// Identifies the <seealso cref="SourceObject"/> avalonia property.
@@ -34,7 +34,7 @@ public class EventTriggerBehavior : Trigger
     /// <summary>
     /// Gets or sets the name of the event to listen for. This is a avalonia property.
     /// </summary>
-    public string EventName
+    public string? EventName
     {
         get => GetValue(EventNameProperty);
         set => SetValue(EventNameProperty, value);
@@ -156,6 +156,11 @@ public class EventTriggerBehavior : Trigger
         if (eventName != EventNameDefaultValue)
         {
             if (_resolvedSource is null)
+            {
+                return;
+            }
+
+            if (EventName is null)
             {
                 return;
             }
