@@ -1,6 +1,7 @@
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 
 namespace Avalonia.Xaml.Interactions.Custom;
@@ -18,7 +19,7 @@ public class ExecuteCommandOnActivatedBehavior : ExecuteCommandBehaviorBase
     {
         if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime lifetime)
         {
-            var mainWindow = lifetime.MainWindow;
+            var mainWindow = SourceControl as Window ?? lifetime.MainWindow;
 
             if (mainWindow is not null)
             {

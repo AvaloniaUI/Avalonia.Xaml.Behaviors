@@ -15,7 +15,8 @@ public class ExecuteCommandOnPinchBehavior : ExecuteCommandRoutedEventBehaviorBa
     /// <param name="disposable"></param>
     protected override void OnAttachedToVisualTree(CompositeDisposable disposable)
     {
-        var dispose = AssociatedObject?
+        var control = SourceControl ?? AssociatedObject;
+        var dispose = control?
             .AddDisposableHandler(
                 Gestures.PinchEvent,
                 OnPinch,

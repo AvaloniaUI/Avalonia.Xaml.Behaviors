@@ -9,13 +9,21 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// </summary>
 public class ExecuteCommandOnGotFocusBehavior : ExecuteCommandRoutedEventBehaviorBase
 {
+    static ExecuteCommandOnGotFocusBehavior()
+    {
+        EventRoutingStrategyProperty.OverrideMetadata<ExecuteCommandOnGotFocusBehavior>(
+            new StyledPropertyMetadata<RoutingStrategies>(
+                defaultValue: RoutingStrategies.Tunnel | RoutingStrategies.Bubble));
+    }
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="disposable"></param>
     protected override void OnAttachedToVisualTree(CompositeDisposable disposable)
     {
-        var dispose = AssociatedObject?
+        var control = SourceControl ?? AssociatedObject;
+        var dispose = control?
             .AddDisposableHandler(
                 InputElement.GotFocusEvent,
                 OnGotFocus,
