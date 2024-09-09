@@ -7,23 +7,13 @@ namespace Avalonia.Xaml.Interactions.Events;
 /// <summary>
 /// 
 /// </summary>
-public abstract class PointerEventsBehavior : Behavior<Interactive>
+public abstract class PointerEventsBehavior : InteractiveBehaviorBase
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty = 
-        AvaloniaProperty.Register<PointerEventsBehavior, RoutingStrategies>(
-            nameof(RoutingStrategies), 
-            RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public RoutingStrategies RoutingStrategies
+    static PointerEventsBehavior()
     {
-        get => GetValue(RoutingStrategiesProperty);
-        set => SetValue(RoutingStrategiesProperty, value);
+        RoutingStrategiesProperty.OverrideMetadata<PointerWheelChangedEventBehavior>(
+            new StyledPropertyMetadata<RoutingStrategies>(
+                defaultValue: RoutingStrategies.Tunnel | RoutingStrategies.Bubble));
     }
 
     /// <inheritdoc />
