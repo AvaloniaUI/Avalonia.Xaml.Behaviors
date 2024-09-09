@@ -36,5 +36,4 @@ public abstract class ExecuteCommandOnKeyBehaviorBase : ExecuteCommandRoutedEven
         get => GetValue(GestureProperty);
         set => SetValue(GestureProperty, value);
     }
-
 }
