@@ -11,7 +11,7 @@ public abstract class PointerEnteredEventBehavior : InteractiveBehaviorBase
 {
     static PointerEnteredEventBehavior()
     {
-        RoutingStrategiesProperty.OverrideMetadata<PointerWheelChangedEventBehavior>(
+        RoutingStrategiesProperty.OverrideMetadata<PointerEnteredEventBehavior>(
             new StyledPropertyMetadata<RoutingStrategies>(
                 defaultValue: RoutingStrategies.Direct));
     }

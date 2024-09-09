@@ -11,7 +11,7 @@ public abstract class PointerCaptureLostEventBehavior : InteractiveBehaviorBase
 {
     static PointerCaptureLostEventBehavior()
     {
-        RoutingStrategiesProperty.OverrideMetadata<PointerWheelChangedEventBehavior>(
+        RoutingStrategiesProperty.OverrideMetadata<PointerCaptureLostEventBehavior>(
             new StyledPropertyMetadata<RoutingStrategies>(
                 defaultValue: RoutingStrategies.Direct));
     }

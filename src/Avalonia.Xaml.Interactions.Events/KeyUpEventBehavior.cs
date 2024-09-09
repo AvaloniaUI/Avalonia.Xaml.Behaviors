@@ -11,7 +11,7 @@ public abstract class KeyUpEventBehavior : InteractiveBehaviorBase
 {
     static KeyUpEventBehavior()
     {
-        RoutingStrategiesProperty.OverrideMetadata<PointerWheelChangedEventBehavior>(
+        RoutingStrategiesProperty.OverrideMetadata<KeyUpEventBehavior>(
             new StyledPropertyMetadata<RoutingStrategies>(
                 defaultValue: RoutingStrategies.Tunnel | RoutingStrategies.Bubble));
     }

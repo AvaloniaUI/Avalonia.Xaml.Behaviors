@@ -11,7 +11,7 @@ public abstract class PointerEventsBehavior : InteractiveBehaviorBase
 {
     static PointerEventsBehavior()
     {
-        RoutingStrategiesProperty.OverrideMetadata<PointerWheelChangedEventBehavior>(
+        RoutingStrategiesProperty.OverrideMetadata<PointerEventsBehavior>(
             new StyledPropertyMetadata<RoutingStrategies>(
                 defaultValue: RoutingStrategies.Tunnel | RoutingStrategies.Bubble));
     }

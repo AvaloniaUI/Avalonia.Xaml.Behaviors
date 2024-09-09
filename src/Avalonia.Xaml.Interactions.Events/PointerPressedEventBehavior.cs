@@ -11,7 +11,7 @@ public abstract class PointerPressedEventBehavior : InteractiveBehaviorBase
 {
     static PointerPressedEventBehavior()
     {
-        RoutingStrategiesProperty.OverrideMetadata<PointerWheelChangedEventBehavior>(
+        RoutingStrategiesProperty.OverrideMetadata<PointerPressedEventBehavior>(
             new StyledPropertyMetadata<RoutingStrategies>(
                 defaultValue: RoutingStrategies.Tunnel | RoutingStrategies.Bubble));
     }

@@ -11,7 +11,7 @@ public abstract class PointerExitedEventBehavior : InteractiveBehaviorBase
 {
     static PointerExitedEventBehavior()
     {
-        RoutingStrategiesProperty.OverrideMetadata<PointerWheelChangedEventBehavior>(
+        RoutingStrategiesProperty.OverrideMetadata<PointerExitedEventBehavior>(
             new StyledPropertyMetadata<RoutingStrategies>(
                 defaultValue: RoutingStrategies.Direct));
     }

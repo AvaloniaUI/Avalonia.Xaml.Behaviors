@@ -12,7 +12,7 @@ public abstract class TextInputMethodClientRequestedEventBehavior : InteractiveB
 {
     static TextInputMethodClientRequestedEventBehavior()
     {
-        RoutingStrategiesProperty.OverrideMetadata<PointerWheelChangedEventBehavior>(
+        RoutingStrategiesProperty.OverrideMetadata<TextInputMethodClientRequestedEventBehavior>(
             new StyledPropertyMetadata<RoutingStrategies>(
                 defaultValue: RoutingStrategies.Tunnel | RoutingStrategies.Bubble));
     }
