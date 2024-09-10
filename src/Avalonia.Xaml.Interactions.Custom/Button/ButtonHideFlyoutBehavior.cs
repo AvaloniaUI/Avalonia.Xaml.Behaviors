@@ -7,13 +7,13 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class HideButtonFlyoutBehavior : DisposingBehavior<Button>
+public class ButtonHideFlyoutBehavior : DisposingBehavior<Button>
 {
     /// <summary>
     /// 
     /// </summary>
     public static readonly StyledProperty<bool> IsFlyoutOpenProperty =
-        AvaloniaProperty.Register<HideButtonFlyoutBehavior, bool>(nameof(IsFlyoutOpen));
+        AvaloniaProperty.Register<ButtonHideFlyoutBehavior, bool>(nameof(IsFlyoutOpen));
 
     /// <summary>
     /// 

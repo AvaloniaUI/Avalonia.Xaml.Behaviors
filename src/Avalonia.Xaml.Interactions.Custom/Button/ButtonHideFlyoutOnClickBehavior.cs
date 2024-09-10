@@ -11,7 +11,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class HideButtonFlyoutOnClickBehavior : AttachedToVisualTreeBehavior<Button>
+public class ButtonHideFlyoutOnClickBehavior : AttachedToVisualTreeBehavior<Button>
 {
     /// <summary>
     /// 

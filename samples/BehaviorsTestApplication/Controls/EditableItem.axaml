@@ -23,7 +23,7 @@
         <HideOnKeyPressedBehavior TargetControl="TextBoxEdit" Key="Escape" />
         <HideOnKeyPressedBehavior TargetControl="TextBoxEdit" Key="Enter" />
         <HideOnLostFocusBehavior TargetControl="TextBoxEdit" />
-        <SelectAllOnGotFocusBehavior />
+        <TextBoxSelectAllOnGotFocusBehavior />
       </Interaction.Behaviors>
     </TextBox>
     <StackPanel x:Name="TextStackPanel"
