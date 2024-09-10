@@ -1,40 +1,36 @@
 using System;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.VisualTree;
-using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
 
 /// <summary>
 /// 
 /// </summary>
-public class HideFlyoutOnClickBehavior : Behavior<RadioButton>
+public class HideButtonFlyoutOnClickBehavior : AttachedToVisualTreeBehavior<Button>
 {
-	private IDisposable? _subscription;
-
     /// <summary>
     /// 
     /// </summary>
-	protected override void OnAttachedToVisualTree()
-	{
-		base.OnAttachedToVisualTree();
-
-		if (AssociatedObject == null)
+    /// <param name="disposables"></param>
+    protected override void OnAttachedToVisualTree(CompositeDisposable disposables)
+    {
+		if (AssociatedObject is null)
 		{
 			return;
 		}
         
-		var fp = AssociatedObject.FindAncestorOfType<FlyoutPresenter>();
-
-		if (fp?.Parent is not Popup popup)
+		var flyoutPresenter = AssociatedObject.FindAncestorOfType<FlyoutPresenter>();
+		if (flyoutPresenter?.Parent is not Popup popup)
 		{
 			return;
 		}
-        
-		_subscription = Observable
+
+		var disposable = Observable
 			.FromEventPattern<RoutedEventArgs>(handler => AssociatedObject.Click += handler, handler => AssociatedObject.Click -= handler)
 			.Do(_ =>
 			{
@@ -45,15 +41,8 @@ public class HideFlyoutOnClickBehavior : Behavior<RadioButton>
 				}
 				popup.Close();
 			})
-			.Subscribe();
-	}
-
-    /// <summary>
-    /// 
-    /// </summary>
-	protected override void OnDetachedFromVisualTree()
-	{
-		base.OnDetachedFromVisualTree();
-		_subscription?.Dispose();
+            .Subscribe();
+        
+        disposables.Add(disposable);
 	}
 }
