@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Numerics;
-using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Rendering.Composition;

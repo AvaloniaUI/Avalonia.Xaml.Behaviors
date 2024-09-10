@@ -1,6 +1,5 @@
 ﻿using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Events;
 

@@ -2,7 +2,6 @@
 using System.Reactive.Disposables;
 using Avalonia.Controls;
 using Avalonia.VisualTree;
-using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
 
