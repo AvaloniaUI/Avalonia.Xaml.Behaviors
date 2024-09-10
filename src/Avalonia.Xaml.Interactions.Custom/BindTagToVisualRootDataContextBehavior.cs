@@ -28,8 +28,15 @@ public class BindTagToVisualRootDataContextBehavior : DisposingBehavior<ContentC
 
     private static IDisposable BindDataContextToTag(Control source, Control? target)
     {
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
+        if (source is null)
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+
+        if (target is null)
+        {
+            throw new ArgumentNullException(nameof(target));
+        }
 
         return target.Bind(
             Control.TagProperty, 
