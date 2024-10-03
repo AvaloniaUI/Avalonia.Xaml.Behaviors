@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using System.Linq;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
@@ -52,6 +53,7 @@ public class ContextDropBehavior : Behavior<Control>
         {
             DragDrop.SetAllowDrop(AssociatedObject, true);
         }
+
         AssociatedObject?.AddHandler(DragDrop.DragEnterEvent, DragEnter);
         AssociatedObject?.AddHandler(DragDrop.DragLeaveEvent, DragLeave);
         AssociatedObject?.AddHandler(DragDrop.DragOverEvent, DragOver);
@@ -65,6 +67,7 @@ public class ContextDropBehavior : Behavior<Control>
         {
             DragDrop.SetAllowDrop(AssociatedObject, false);
         }
+
         AssociatedObject?.RemoveHandler(DragDrop.DragEnterEvent, DragEnter);
         AssociatedObject?.RemoveHandler(DragDrop.DragLeaveEvent, DragLeave);
         AssociatedObject?.RemoveHandler(DragDrop.DragOverEvent, DragOver);
@@ -73,6 +76,11 @@ public class ContextDropBehavior : Behavior<Control>
 
     private void DragEnter(object? sender, DragEventArgs e)
     {
+        if (!IsExpectedFormatAvailable(e))
+        {
+            return;
+        }
+
         var sourceContext = e.Data.Get(ContextDropBehavior.DataFormat);
         var targetContext = Context ?? AssociatedObject?.DataContext;
         Handler?.Enter(sender, e, sourceContext, targetContext);
@@ -85,6 +93,11 @@ public class ContextDropBehavior : Behavior<Control>
 
     private void DragOver(object? sender, DragEventArgs e)
     {
+        if (!IsExpectedFormatAvailable(e))
+        {
+            return;
+        }
+
         var sourceContext = e.Data.Get(ContextDropBehavior.DataFormat);
         var targetContext = Context ?? AssociatedObject?.DataContext;
         Handler?.Over(sender, e, sourceContext, targetContext);
@@ -92,8 +105,27 @@ public class ContextDropBehavior : Behavior<Control>
 
     private void Drop(object? sender, DragEventArgs e)
     {
+        if (!IsExpectedFormatAvailable(e))
+        {
+            return;
+        }
+        
         var sourceContext = e.Data.Get(ContextDropBehavior.DataFormat);
         var targetContext = Context ?? AssociatedObject?.DataContext;
         Handler?.Drop(sender, e, sourceContext, targetContext);
+    }
+
+
+    private static bool IsExpectedFormatAvailable(DragEventArgs e)
+    {
+        var availableFormats = e.Data.GetDataFormats();
+        if (availableFormats.Contains(ContextDropBehavior.DataFormat))
+        {
+            return true;
+        }
+
+        e.Handled = true;
+        e.DragEffects = DragDropEffects.None;
+        return false;
     }
 }
