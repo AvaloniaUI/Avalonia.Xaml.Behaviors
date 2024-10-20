@@ -1,8 +1,14 @@
-﻿using Avalonia;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
+using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.VisualTree;
 using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Draggable;
@@ -18,16 +24,95 @@ public class CanvasDragBehavior : Behavior<Control>
     private Control? _draggedContainer;
     private Control? _adorner;
     private bool _captured;
+    private Control? _rootControl;
+    private IEnumerable<Visual>? _dragHandles;
+
+    /// <summary>
+    /// Determines if a control may be dragged. True by default.
+    /// </summary>
+    public static readonly AttachedProperty<bool> IsDraggableProperty = AvaloniaProperty.RegisterAttached<CanvasDragBehavior, Interactive, bool>("IsDraggable", true, false, BindingMode.TwoWay);
+
+    /// <summary>
+    /// Sets the value of the IsDraggable attached property for a control.
+    /// </summary>
+    /// <param name="element">The control.</param>
+    /// <param name="isDraggableValue">The value to be set.</param>
+    public static void SetIsDraggable(AvaloniaObject element, bool isDraggableValue)
+    {
+        element.SetValue(IsDraggableProperty, isDraggableValue);
+    }
+
+    /// <summary>
+    /// Gets the value of the IsDraggable attached property for a control.
+    /// </summary>
+    /// <param name="element">The control.</param>
+    public static bool GetIsDraggable(AvaloniaObject element)
+    {
+        return element.GetValue(IsDraggableProperty);
+    }
+
+
+    /// <summary>
+    /// Determines if a control is a draghandle for a draggable ancestor.
+    /// If at least one control has this property set to true, the draggable ancestor can only be moved via the specified drafhandles.
+    /// False by default.
+    /// </summary>
+    public static readonly AttachedProperty<bool> IsDragHandleProperty = AvaloniaProperty.RegisterAttached<CanvasDragBehavior, Interactive, bool>("IsDragHandle", false, false, BindingMode.TwoWay);
+
+    /// <summary>
+    /// Sets the value of the IsDragHandle attached property for a control.
+    /// </summary>
+    /// <param name="element">The control.</param>
+    /// <param name="isDragHandleValue">The value to be set.</param>
+    public static void SetIsDragHandle(AvaloniaObject element, bool isDragHandleValue)
+    {
+        element.SetValue(IsDragHandleProperty, isDragHandleValue);
+    }
+
+    /// <summary>
+    /// Gets the value of the IsDragHandle attached property for a control.
+    /// <param name="element">The control.</param>
+    /// </summary>
+    public static bool GetIsDragHandle(AvaloniaObject element)
+    {
+        return element.GetValue(IsDragHandleProperty);
+    }
+
 
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {
         if (AssociatedObject is not null)
         {
-            AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, Released, RoutingStrategies.Tunnel);
-            AssociatedObject.AddHandler(InputElement.PointerPressedEvent, Pressed, RoutingStrategies.Tunnel);
-            AssociatedObject.AddHandler(InputElement.PointerMovedEvent, Moved, RoutingStrategies.Tunnel);
-            AssociatedObject.AddHandler(InputElement.PointerCaptureLostEvent, CaptureLost, RoutingStrategies.Tunnel);
+            AssociatedObject.Loaded += OnLoaded;
+        }
+    }
+
+    private void OnLoaded(object? sender, RoutedEventArgs e)
+    {
+        if (AssociatedObject is not null)
+        {
+            _rootControl = AssociatedObject is ContentPresenter presenter ? presenter.Child : AssociatedObject;
+
+            _dragHandles = AssociatedObject.GetVisualDescendants().Where(d => d.GetValue(IsDragHandleProperty));
+
+            if (_dragHandles.Any())
+            {
+                foreach (Control dragHandle in _dragHandles)
+                {
+                    dragHandle.AddHandler(InputElement.PointerReleasedEvent, Released, RoutingStrategies.Tunnel);
+                    dragHandle.AddHandler(InputElement.PointerPressedEvent, Pressed, RoutingStrategies.Tunnel);
+                    dragHandle.AddHandler(InputElement.PointerMovedEvent, Moved, RoutingStrategies.Tunnel);
+                    dragHandle.AddHandler(InputElement.PointerCaptureLostEvent, CaptureLost, RoutingStrategies.Tunnel);
+                }
+            }
+            else
+            {
+                AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, Released, RoutingStrategies.Tunnel);
+                AssociatedObject.AddHandler(InputElement.PointerPressedEvent, Pressed, RoutingStrategies.Tunnel);
+                AssociatedObject.AddHandler(InputElement.PointerMovedEvent, Moved, RoutingStrategies.Tunnel);
+                AssociatedObject.AddHandler(InputElement.PointerCaptureLostEvent, CaptureLost, RoutingStrategies.Tunnel);
+            }
         }
     }
 
@@ -36,10 +121,23 @@ public class CanvasDragBehavior : Behavior<Control>
     {
         if (AssociatedObject is not null)
         {
-            AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, Released);
-            AssociatedObject.RemoveHandler(InputElement.PointerPressedEvent, Pressed);
-            AssociatedObject.RemoveHandler(InputElement.PointerMovedEvent, Moved);
-            AssociatedObject.RemoveHandler(InputElement.PointerCaptureLostEvent, CaptureLost);
+            if (_dragHandles.Any())
+            {
+                foreach (Control dragHandle in _dragHandles)
+                {
+                    dragHandle.RemoveHandler(InputElement.PointerReleasedEvent, Released);
+                    dragHandle.RemoveHandler(InputElement.PointerPressedEvent, Pressed);
+                    dragHandle.RemoveHandler(InputElement.PointerMovedEvent, Moved);
+                    dragHandle.RemoveHandler(InputElement.PointerCaptureLostEvent, CaptureLost);
+                }
+            }
+            else
+            {
+                AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, Released);
+                AssociatedObject.RemoveHandler(InputElement.PointerPressedEvent, Pressed);
+                AssociatedObject.RemoveHandler(InputElement.PointerMovedEvent, Moved);
+                AssociatedObject.RemoveHandler(InputElement.PointerCaptureLostEvent, CaptureLost);
+            }
         }
     }
 
@@ -77,7 +175,9 @@ public class CanvasDragBehavior : Behavior<Control>
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
         if (properties.IsLeftButtonPressed 
-            && AssociatedObject?.Parent is Control parent)
+            && AssociatedObject?.Parent is Control parent
+            && _rootControl?.GetValue(IsDraggableProperty) == true
+            )
         {
             _enableDrag = true;
             _start = e.GetPosition(parent);
