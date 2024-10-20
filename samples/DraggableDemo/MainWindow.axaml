@@ -152,6 +152,74 @@
       </ItemsControl>
     </TabItem>
 
+    <TabItem Header="Canvas (Advanced)">
+      <Grid Margin="20" ColumnDefinitions="*,*" RowDefinitions="Auto,*">
+        <TextBlock Grid.Column="0" Grid.Row="0" Width="500" TextWrapping="Wrap">
+          Set a control's draggability by setting or binding to AttachedProperty:<LineBreak />
+          id:CanvasDragBehavior.IsDraggable=&quot;True/False&quot;<LineBreak /><LineBreak />
+          This property must be set on a direct child of your Canvas or the Root-Control of your DataTemplate if used in an ItemsControl.
+        </TextBlock>
+        <Canvas Classes="draggable" Grid.Column="0" Grid.Row="1" Width="500" Height="300" Background="LightGray">
+          <Canvas.Styles>
+            <Style Selector="Canvas > :is(Control):dragging">
+              <Setter Property="ZIndex" Value="1" />
+            </Style>
+          </Canvas.Styles>
+          <Rectangle Fill="Blue" Width="60" Height="40" Canvas.Left="20" Canvas.Top="10" />
+          <Ellipse Fill="Red" Width="50" Height="50" Canvas.Left="120" Canvas.Top="30" />
+          <TextBlock Text="You can drag me!" Background="Transparent" Canvas.Left="40" Canvas.Top="140" />
+          <TextBlock Text="You can't drag me at all!" id:CanvasDragBehavior.IsDraggable="False" Background="Transparent" Canvas.Left="40" Canvas.Top="160" />
+          <StackPanel Orientation="Horizontal" Background="Transparent" id:CanvasDragBehavior.IsDraggable="{Binding #Draggable_Toggle_1.IsChecked}" Canvas.Left="40" Canvas.Top="180">
+            <TextBlock Text="You can toggle my draggabillity!" id:CanvasDragBehavior.IsDragHandle="True" />
+            <ToggleSwitch x:Name="Draggable_Toggle_1" />
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+
+          </StackPanel>
+          <Panel Background="Purple" Width="80" Height="70" Canvas.Left="250" Canvas.Top="100" />
+        </Canvas>
+        <StackPanel Grid.Column="1" Grid.Row="0"  Width="500">
+          <TextBlock TextWrapping="Wrap">
+            Specifiy a child/descendant Control as DragHandle with AttachedProperty:<LineBreak />
+            id:CanvasDragBehavior.IsDragHandle=&quot;True/False&quot;<LineBreak /><LineBreak />
+            If at least one descendant has this property set to true, the control can only be dragged by that DragHandle.<LineBreak />
+            Multiple DragHandles can be defined on the same Object!<LineBreak />
+          </TextBlock>
+          <StackPanel Orientation="Horizontal" Spacing="5" Background="Transparent" HorizontalAlignment="Center">
+            <TextBlock Text="Toggle draggabillity for all items!" />
+            <ToggleSwitch x:Name="Draggable_Toggle_2" IsChecked="True" />
+          </StackPanel>
+        </StackPanel>
+        <ItemsControl Classes="draggable" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Items}" Width="500" Height="300" Background="LightGray">
+          <ItemsControl.Styles>
+            <Style Selector="ItemsControl > ContentPresenter" x:DataType="models:Item">
+              <Setter Property="(Canvas.Left)" Value="{Binding X}" />
+              <Setter Property="(Canvas.Top)" Value="{Binding Y}" />
+            </Style>
+            <Style Selector="ItemsControl > ContentPresenter:dragging">
+              <Setter Property="Opacity" Value="0.5" />
+              <Setter Property="ZIndex" Value="1" />
+            </Style>
+          </ItemsControl.Styles>
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <Canvas />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.DataTemplates>
+            <DataTemplate DataType="models:Item">
+              <Panel id:CanvasDragBehavior.IsDraggable="{Binding #Draggable_Toggle_2.IsChecked}">
+                <Rectangle Fill="Black" Width="50" Height="50" />
+                <TextBlock Text="M" id:CanvasDragBehavior.IsDragHandle="True" Background="AliceBlue" Width="15" Height="15" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                <TextBlock Text="M" id:CanvasDragBehavior.IsDragHandle="True" Background="AliceBlue" Width="15" Height="15" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+              </Panel>
+            </DataTemplate>
+          </ItemsControl.DataTemplates>
+        </ItemsControl>
+      </Grid>
+
+    </TabItem>
+
     <TabItem Header="Grid">
       <Grid Classes="draggable" ColumnDefinitions="*,*,*" RowDefinitions="*,*,*" ShowGridLines="True" Width="500" Height="300" Background="LightGray">
         <Grid.Styles>
