@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using Avalonia.Controls;
+using Avalonia.LogicalTree;
 using Avalonia.Reactive;
 
 namespace Avalonia.Xaml.Interactivity;
@@ -63,6 +64,12 @@ public abstract class StyledElementBehavior : StyledElement, IBehavior, IInterna
 
         _dataContextDisposable = SynchronizeDataContext(associatedObject);
 
+        if (associatedObject is StyledElement styledElement)
+        {
+            ((ISetLogicalParent)this).SetParent(null);
+            ((ISetLogicalParent)this).SetParent(styledElement);
+        }
+
         OnAttached();
     }
 
@@ -73,6 +80,12 @@ public abstract class StyledElementBehavior : StyledElement, IBehavior, IInterna
     {
         OnDetaching();
         _dataContextDisposable?.Dispose();
+
+        if (AssociatedObject is StyledElement)
+        {
+            ((ISetLogicalParent)this).SetParent(null);
+        }
+
         AssociatedObject = null;
     }
 
