@@ -24,7 +24,7 @@ public abstract class DisposingBehavior<T> : Behavior<T> where T : AvaloniaObjec
     }
 
     /// <summary>
-    /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
+    /// Called after the behavior is attached to the <see cref="IBehavior.AssociatedObject"/>.
     /// </summary>
     /// <param name="disposables">The group of disposable resources that are disposed together.</param>
     protected abstract void OnAttached(CompositeDisposable disposables);

@@ -42,7 +42,7 @@ public class EventTriggerBehavior : Trigger
 
     /// <summary>
     /// Gets or sets the source object from which this behavior listens for events.
-    /// If <seealso cref="SourceObject"/> is not set, the source will default to <seealso cref="Behavior.AssociatedObject"/>. This is a avalonia property.
+    /// If <seealso cref="SourceObject"/> is not set, the source will default to <seealso cref="IBehavior.AssociatedObject"/>. This is a avalonia property.
     /// </summary>
     [ResolveByName]
     public object? SourceObject
@@ -96,7 +96,7 @@ public class EventTriggerBehavior : Trigger
     }
 
     /// <summary>
-    /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
+    /// Called after the behavior is attached to the <see cref="IBehavior.AssociatedObject"/>.
     /// </summary>
     protected override void OnAttached()
     {
@@ -105,7 +105,7 @@ public class EventTriggerBehavior : Trigger
     }
 
     /// <summary>
-    /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
+    /// Called when the behavior is being detached from its <see cref="IBehavior.AssociatedObject"/>.
     /// </summary>
     protected override void OnDetaching()
     {

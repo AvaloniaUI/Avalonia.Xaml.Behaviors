@@ -16,10 +16,10 @@ public abstract class Behavior<T> : Behavior where T : AvaloniaObject
     public new T? AssociatedObject => base.AssociatedObject as T;
 
     /// <summary>
-    /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
+    /// Called after the behavior is attached to the <see cref="IBehavior.AssociatedObject"/>.
     /// </summary>
     /// <remarks>
-    /// Override this to hook up functionality to the <see cref="Behavior.AssociatedObject"/>
+    /// Override this to hook up functionality to the <see cref="IBehavior.AssociatedObject"/>
     /// </remarks>
     [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     protected override void OnAttached()

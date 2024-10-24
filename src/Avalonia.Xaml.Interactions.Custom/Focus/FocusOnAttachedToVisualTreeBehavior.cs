@@ -5,7 +5,7 @@ using Avalonia.Xaml.Interactivity;
 namespace Avalonia.Xaml.Interactions.Custom;
 
 /// <summary>
-/// Focuses the <see cref="Behavior.AssociatedObject"/> when attached to visual tree.
+/// Focuses the <see cref="IBehavior.AssociatedObject"/> when attached to visual tree.
 /// </summary>
 public class FocusOnAttachedToVisualTreeBehavior : Behavior<Control>
 {

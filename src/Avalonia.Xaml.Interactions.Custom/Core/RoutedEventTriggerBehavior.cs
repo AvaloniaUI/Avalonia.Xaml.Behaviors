@@ -52,7 +52,7 @@ public class RoutedEventTriggerBehavior : Trigger<Interactive>
 
     /// <summary>
     /// Gets or sets the source object from which this behavior listens for events.
-    /// If <seealso cref="SourceInteractive"/> is not set, the source will default to <seealso cref="Behavior.AssociatedObject"/>. This is a avalonia property.
+    /// If <seealso cref="SourceInteractive"/> is not set, the source will default to <seealso cref="IBehavior.AssociatedObject"/>. This is a avalonia property.
     /// </summary>
     [ResolveByName]
     public Interactive? SourceInteractive
