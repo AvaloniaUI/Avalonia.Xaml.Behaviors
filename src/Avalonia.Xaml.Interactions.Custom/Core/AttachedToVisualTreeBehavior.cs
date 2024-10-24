@@ -24,7 +24,7 @@ public abstract class AttachedToVisualTreeBehavior<T> : DisposingBehavior<T> whe
     }
 
     /// <summary>
-    /// Called after the <see cref="Behavior{T}.AssociatedObject"/> is attached to the visual tree.
+    /// Called after the <see cref="StyledElementBehavior{T}.AssociatedObject"/> is attached to the visual tree.
     /// </summary>
     /// <param name="disposable">The group of disposable resources that are disposed together</param>
 	protected abstract void OnAttachedToVisualTree(CompositeDisposable disposable);

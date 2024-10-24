@@ -6,9 +6,9 @@ using Avalonia.Xaml.Interactivity;
 namespace Avalonia.Xaml.Interactions.Custom;
 
 /// <summary>
-/// Focuses the <see cref="Behavior{T}.AssociatedObject"/> on <see cref="InputElement.PointerPressed"/> event.
+/// Focuses the <see cref="StyledElementBehavior{T}.AssociatedObject"/> on <see cref="InputElement.PointerPressed"/> event.
 /// </summary>
-public class FocusOnPointerPressedBehavior : Behavior<Control>
+public class FocusOnPointerPressedBehavior : StyledElementBehavior<Control>
 {
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()

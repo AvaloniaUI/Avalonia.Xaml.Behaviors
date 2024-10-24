@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// A behavior that listens for a <see cref="RoutedEvent"/> event on its source and executes its actions when that event is fired.
 /// </summary>
-public class RoutedEventTriggerBehavior : Trigger<Interactive>
+public class RoutedEventTriggerBehavior : StyledElementTrigger<Interactive>
 {
     /// <summary>
     /// Identifies the <seealso cref="RoutedEvent"/> avalonia property.

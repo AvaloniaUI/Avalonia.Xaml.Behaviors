@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// A behavior that allows to hide control on lost focus event.
 /// </summary>
-public class HideOnLostFocusBehavior : Behavior<Control>
+public class HideOnLostFocusBehavior : StyledElementBehavior<Control>
 {
     /// <summary>
     /// Identifies the <seealso cref="TargetControl"/> avalonia property.

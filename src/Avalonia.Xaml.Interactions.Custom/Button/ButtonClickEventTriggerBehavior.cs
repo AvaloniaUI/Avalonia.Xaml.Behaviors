@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// A behavior that listens for a <see cref="Button.ClickEvent"/> event on its source and executes its actions when that event is fired.
 /// </summary>
-public class ButtonClickEventTriggerBehavior : Trigger<Button>
+public class ButtonClickEventTriggerBehavior : StyledElementTrigger<Button>
 {
     private KeyModifiers _savedKeyModifiers = KeyModifiers.None;
 

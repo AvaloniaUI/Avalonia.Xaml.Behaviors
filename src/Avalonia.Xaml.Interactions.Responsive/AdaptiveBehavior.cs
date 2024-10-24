@@ -8,9 +8,9 @@ using Avalonia.Xaml.Interactivity;
 namespace Avalonia.Xaml.Interactions.Responsive;
 
 /// <summary>
-/// Observes <see cref="Behavior{T}.AssociatedObject"/> control or <see cref="SourceControl"/> control <see cref="Visual.Bounds"/> property changes and if triggered sets or removes style classes when conditions from <see cref="AdaptiveClassSetter"/> are met.
+/// Observes <see cref="StyledElementBehavior{T}.AssociatedObject"/> control or <see cref="SourceControl"/> control <see cref="Visual.Bounds"/> property changes and if triggered sets or removes style classes when conditions from <see cref="AdaptiveClassSetter"/> are met.
 /// </summary>
-public class AdaptiveBehavior : Behavior<Control>
+public class AdaptiveBehavior : StyledElementBehavior<Control>
 {
     private IDisposable? _disposable;
     private AvaloniaList<AdaptiveClassSetter>? _setters;
@@ -34,7 +34,7 @@ public class AdaptiveBehavior : Behavior<Control>
         AvaloniaProperty.RegisterDirect<AdaptiveBehavior, AvaloniaList<AdaptiveClassSetter>>(nameof(Setters), t => t.Setters);
 
     /// <summary>
-    /// Gets or sets the the source control that <see cref="Visual.BoundsProperty"/> property are observed from, if not set <see cref="Behavior{T}.AssociatedObject"/> is used. This is a avalonia property.
+    /// Gets or sets the the source control that <see cref="Visual.BoundsProperty"/> property are observed from, if not set <see cref="StyledElementBehavior{T}.AssociatedObject"/> is used. This is a avalonia property.
     /// </summary>
     [ResolveByName]
     public Control? SourceControl
@@ -44,7 +44,7 @@ public class AdaptiveBehavior : Behavior<Control>
     }
 
     /// <summary>
-    /// Gets or sets the target control that class name that should be added or removed when triggered, if not set <see cref="Behavior{T}.AssociatedObject"/> is used or <see cref="AdaptiveClassSetter.TargetControl"/> from <see cref="AdaptiveClassSetter"/>. This is a avalonia property.
+    /// Gets or sets the target control that class name that should be added or removed when triggered, if not set <see cref="StyledElementBehavior{T}.AssociatedObject"/> is used or <see cref="AdaptiveClassSetter.TargetControl"/> from <see cref="AdaptiveClassSetter"/>. This is a avalonia property.
     /// </summary>
     [ResolveByName]
     public Control? TargetControl

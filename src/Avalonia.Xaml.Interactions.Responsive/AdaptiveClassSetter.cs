@@ -167,7 +167,7 @@ public class AdaptiveClassSetter : AvaloniaObject
     }
 
     /// <summary>
-    /// Gets or sets the target control that class name that should be added or removed when triggered, if not set <see cref="Behavior{T}.AssociatedObject"/> is used or <see cref="AdaptiveBehavior.TargetControl"/> from <see cref="AdaptiveBehavior"/>. This is a avalonia property.
+    /// Gets or sets the target control that class name that should be added or removed when triggered, if not set <see cref="StyledElementBehavior{T}.AssociatedObject"/> is used or <see cref="AdaptiveBehavior.TargetControl"/> from <see cref="AdaptiveBehavior"/>. This is a avalonia property.
     /// </summary>
     [ResolveByName]
     public Control? TargetControl

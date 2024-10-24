@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop;
 /// <summary>
 /// 
 /// </summary>
-public class ContextDropBehavior : Behavior<Control>
+public class ContextDropBehavior : StyledElementBehavior<Control>
 {
     /// <summary>
     /// 

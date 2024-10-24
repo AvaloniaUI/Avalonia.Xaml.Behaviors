@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public class HorizontalScrollViewerBehavior : Behavior<ScrollViewer>
+public class HorizontalScrollViewerBehavior : StyledElementBehavior<ScrollViewer>
 {
     /// <summary>
     /// 

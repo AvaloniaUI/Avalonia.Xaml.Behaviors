@@ -12,7 +12,7 @@ namespace DragAndDropSample.Behaviors;
 /// <summary>
 /// 
 /// </summary>
-public sealed class ContextDragWithDirectionBehavior : Behavior<Control>
+public sealed class ContextDragWithDirectionBehavior : StyledElementBehavior<Control>
 {
     private Point _dragStartPoint;
     private PointerEventArgs? _triggerEvent;
