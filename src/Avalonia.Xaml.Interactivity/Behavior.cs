@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Reactive.Disposables;
 using Avalonia.Controls;
+using ReactiveUI;
 
 namespace Avalonia.Xaml.Interactivity;
 
 /// <summary>
 /// A base class for behaviors, implementing the basic plumbing of <see cref="IBehavior"/>.
 /// </summary>
-public abstract class Behavior : AvaloniaObject, IBehavior
+public abstract class Behavior : StyledElement, IBehavior
 {
+    private IDisposable? _dataContextSyncer;
+
     /// <summary>
     /// Gets the <see cref="AvaloniaObject"/> to which the behavior is attached.
     /// </summary>
@@ -37,7 +41,19 @@ public abstract class Behavior : AvaloniaObject, IBehavior
         Debug.Assert(associatedObject is not null, "Cannot attach the behavior to a null object.");
         AssociatedObject = associatedObject ?? throw new ArgumentNullException(nameof(associatedObject));
 
+        _dataContextSyncer = SyncDataContextFrom(associatedObject);
+
         OnAttached();
+    }
+
+    private IDisposable SyncDataContextFrom(AvaloniaObject associatedObject)
+    {
+        if (associatedObject is StyledElement styledElement)
+        {
+            return styledElement.WhenAnyValue(x => x.DataContext).BindTo(this, x => x.DataContext);
+        }
+
+        return Disposable.Empty;
     }
 
     /// <summary>
@@ -47,6 +63,7 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     {
         OnDetaching();
         AssociatedObject = null;
+        _dataContextSyncer?.Dispose();
     }
 
     /// <summary>
