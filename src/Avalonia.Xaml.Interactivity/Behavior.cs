@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Reactive.Linq;
 using Avalonia.Controls;
 
 namespace Avalonia.Xaml.Interactivity;
@@ -10,10 +11,50 @@ namespace Avalonia.Xaml.Interactivity;
 /// </summary>
 public abstract class Behavior : AvaloniaObject, IBehavior
 {
+    private AvaloniaObject? _associatedObject;
+
+    private readonly IDisposable _associatedDataContextUpdater;
+
+    /// <summary>
+    /// <see cref="AvaloniaProperty"/> associated to <see cref="AssociatedObject"/>
+    /// </summary>
+    public static readonly DirectProperty<Behavior, AvaloniaObject?> AssociatedObjectProperty = AvaloniaProperty.RegisterDirect<Behavior, AvaloniaObject?>(
+        nameof(AssociatedObject), o => o.AssociatedObject, (o, v) => o.AssociatedObject = v);
+
+    /// <summary>
+    /// Avalonia Property associated to <see cref="AssociatedDataContext"/>
+    /// </summary>
+    public static readonly StyledProperty<object?> AssociatedDataContextProperty = AvaloniaProperty.Register<Behavior, object?>(
+        nameof(AssociatedDataContext));
+
+    /// <summary>
+    /// Initialize the Behavior
+    /// </summary>
+    protected Behavior()
+    {
+        _associatedDataContextUpdater = this.GetObservable(AssociatedObjectProperty)
+            .Where(o => o != null).Select(o => o!)
+            .OfType<StyledElement>().Select(o => AssociatedDataContext = o.DataContext)
+            .Subscribe();
+    }
+
+    /// <summary>
+    /// Gets the DataContext of the <see cref="AssociatedObject"/>
+    /// </summary>
+    public object? AssociatedDataContext
+    {
+        get => GetValue(AssociatedDataContextProperty);
+        private set => SetValue(AssociatedDataContextProperty, value);
+    }
+
     /// <summary>
     /// Gets the <see cref="AvaloniaObject"/> to which the behavior is attached.
     /// </summary>
-    public AvaloniaObject? AssociatedObject { get; private set; }
+    public AvaloniaObject? AssociatedObject
+    {
+        get => _associatedObject;
+        private set => SetAndRaise(AssociatedObjectProperty, ref _associatedObject, value);
+    }
 
     /// <summary>
     /// Attaches the behavior to the specified <see cref="AvaloniaObject"/>.
@@ -47,6 +88,7 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     {
         OnDetaching();
         AssociatedObject = null;
+        _associatedDataContextUpdater.Dispose();
     }
 
     /// <summary>
