@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Globalization;
 using Avalonia.Controls;
-using Avalonia.LogicalTree;
 using Avalonia.Reactive;
 
 namespace Avalonia.Xaml.Interactivity;
@@ -61,14 +60,7 @@ public abstract class StyledElementBehavior : StyledElement, IBehavior, IInterna
 
         Debug.Assert(associatedObject is not null, "Cannot attach the behavior to a null object.");
         AssociatedObject = associatedObject ?? throw new ArgumentNullException(nameof(associatedObject));
-
         _dataContextDisposable = SynchronizeDataContext(associatedObject);
-
-        if (associatedObject is StyledElement styledElement)
-        {
-            ((ISetLogicalParent)this).SetParent(null);
-            ((ISetLogicalParent)this).SetParent(styledElement);
-        }
 
         OnAttached();
     }
@@ -80,12 +72,6 @@ public abstract class StyledElementBehavior : StyledElement, IBehavior, IInterna
     {
         OnDetaching();
         _dataContextDisposable?.Dispose();
-
-        if (AssociatedObject is StyledElement)
-        {
-            ((ISetLogicalParent)this).SetParent(null);
-        }
-
         AssociatedObject = null;
     }
 
@@ -113,9 +99,17 @@ public abstract class StyledElementBehavior : StyledElement, IBehavior, IInterna
 
     void IInternalBehavior.DetachedFromVisualTreeImpl() => OnDetachedFromVisualTree();
 
-    void IInternalBehavior.AttachedToLogicalTreeImpl() => OnAttachedToLogicalTree();
+    void IInternalBehavior.AttachedToLogicalTreeImpl()
+    {
+        AttachToLogicalTree();
+        OnAttachedToLogicalTree();
+    }
 
-    void IInternalBehavior.DetachedFromLogicalTreeImpl() => OnDetachedFromLogicalTree();
+    void IInternalBehavior.DetachedFromLogicalTreeImpl()
+    {
+        DetachFromLogicalTree();
+        OnDetachedFromLogicalTree();
+    }
 
     void IInternalBehavior.LoadedImpl() => OnLoaded();
 
@@ -179,6 +173,22 @@ public abstract class StyledElementBehavior : StyledElement, IBehavior, IInterna
     /// </remarks>
     protected virtual void OnUnloaded()
     {
+    }
+
+    private void AttachToLogicalTree()
+    {
+        if (AssociatedObject is not StyledElement styledElement)
+        {
+            return;
+        }
+
+        ((ISetLogicalParent)this).SetParent(null);
+        ((ISetLogicalParent)this).SetParent(styledElement);
+    }
+
+    private void DetachFromLogicalTree()
+    {
+        ((ISetLogicalParent)this).SetParent(null);
     }
 
     private IDisposable? SynchronizeDataContext(AvaloniaObject associatedObject)
