@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactivity;
 /// <summary>
 /// A base class for behaviors, implementing the basic plumbing of <see cref="IBehavior"/>.
 /// </summary>
-public abstract class StyledElementBehavior : StyledElement, IBehavior
+public abstract class StyledElementBehavior : StyledElement, IBehavior, IInternalBehavior
 {
     /// <summary>
     /// Identifies the <seealso cref="IsEnabled"/> avalonia property.
@@ -90,17 +90,17 @@ public abstract class StyledElementBehavior : StyledElement, IBehavior
     {
     }
 
-    internal void AttachedToVisualTreeImpl() => OnAttachedToVisualTree();
+    void IInternalBehavior.AttachedToVisualTreeImpl() => OnAttachedToVisualTree();
 
-    internal void DetachedFromVisualTreeImpl() => OnDetachedFromVisualTree();
+    void IInternalBehavior.DetachedFromVisualTreeImpl() => OnDetachedFromVisualTree();
 
-    internal void AttachedToLogicalTreeImpl() => OnAttachedToLogicalTree();
+    void IInternalBehavior.AttachedToLogicalTreeImpl() => OnAttachedToLogicalTree();
 
-    internal void DetachedFromLogicalTreeImpl() => OnDetachedFromLogicalTree();
+    void IInternalBehavior.DetachedFromLogicalTreeImpl() => OnDetachedFromLogicalTree();
 
-    internal void LoadedImpl() => OnLoaded();
+    void IInternalBehavior.LoadedImpl() => OnLoaded();
 
-    internal void UnloadedImpl() => OnUnloaded();
+    void IInternalBehavior.UnloadedImpl() => OnUnloaded();
 
     /// <summary>
     /// Called after the <see cref="AssociatedObject"/> is attached to the visual tree.
