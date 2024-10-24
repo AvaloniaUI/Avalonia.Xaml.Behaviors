@@ -5,7 +5,7 @@ using Avalonia.Styling;
 namespace Avalonia.Xaml.Interactivity;
 
 /// <summary>
-/// A template for creating a collection of <see cref="Behavior"/> objects.
+/// A template for creating a collection of <see cref="IBehavior"/> objects.
 /// </summary>
 public class BehaviorCollectionTemplate : ITemplate
 {

@@ -11,7 +11,7 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop;
 /// <summary>
 /// 
 /// </summary>
-public class ContextDragBehavior : Behavior<Control>
+public class ContextDragBehavior : StyledElementBehavior<Control>
 {
     private Point _dragStartPoint;
     private PointerEventArgs? _triggerEvent;

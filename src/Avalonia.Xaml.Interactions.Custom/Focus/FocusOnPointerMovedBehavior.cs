@@ -6,9 +6,9 @@ using Avalonia.Xaml.Interactivity;
 namespace Avalonia.Xaml.Interactions.Custom;
 
 /// <summary>
-/// Focuses the <see cref="Behavior.AssociatedObject"/> on <see cref="InputElement.PointerMoved"/> event.
+/// Focuses the <see cref="IBehavior.AssociatedObject"/> on <see cref="InputElement.PointerMoved"/> event.
 /// </summary>
-public class FocusOnPointerMovedBehavior : Behavior<Control>
+public class FocusOnPointerMovedBehavior : StyledElementBehavior<Control>
 {
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()

@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// Toggles <see cref="TreeViewItem.IsExpanded"/> property of the associated <see cref="TreeViewItem"/> control on <see cref="InputElement.DoubleTapped"/> event.
 /// </summary>
-public class ToggleIsExpandedOnDoubleTappedBehavior : Behavior<Control>
+public class ToggleIsExpandedOnDoubleTappedBehavior : StyledElementBehavior<Control>
 {
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()

@@ -25,7 +25,7 @@ public abstract class LoadedBehavior<T> : DisposingBehavior<T> where T : Control
     }
 
     /// <summary>
-    /// Called after the <see cref="Behavior{T}.AssociatedObject"/> is loaded.
+    /// Called after the <see cref="StyledElementBehavior{T}.AssociatedObject"/> is loaded.
     /// </summary>
     /// <param name="disposable">The group of disposable resources that are disposed together</param>
     protected abstract void OnLoaded(CompositeDisposable disposable);

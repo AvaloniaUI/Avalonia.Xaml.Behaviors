@@ -6,7 +6,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// A behavior that performs actions when the bound data produces new value.
 /// </summary>
-public class ValueChangedTriggerBehavior : Trigger
+public class ValueChangedTriggerBehavior : StyledElementTrigger
 {
     static ValueChangedTriggerBehavior()
     {

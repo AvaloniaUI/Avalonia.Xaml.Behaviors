@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// A behavior that allows to select all <see cref="TextBox"/> text on got focus event.
 /// </summary>
-public class TextBoxSelectAllOnGotFocusBehavior : Behavior<TextBox>
+public class TextBoxSelectAllOnGotFocusBehavior : StyledElementBehavior<TextBox>
 {
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()

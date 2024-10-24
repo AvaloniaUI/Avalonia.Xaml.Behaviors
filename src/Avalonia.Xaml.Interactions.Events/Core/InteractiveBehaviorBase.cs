@@ -6,7 +6,7 @@ namespace Avalonia.Xaml.Interactions.Events;
 /// <summary>
 /// 
 /// </summary>
-public abstract class InteractiveBehaviorBase : Behavior<Interactive>
+public abstract class InteractiveBehaviorBase : StyledElementBehavior<Interactive>
 {
     /// <summary>
     /// 

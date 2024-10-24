@@ -7,7 +7,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// A base class for behaviors with disposable resources.
 /// </summary>
 /// <typeparam name="T">The object type to attach to</typeparam>
-public abstract class DisposingBehavior<T> : Behavior<T> where T : AvaloniaObject
+public abstract class DisposingBehavior<T> : StyledElementBehavior<T> where T : AvaloniaObject
 {
     private CompositeDisposable? _disposables;
 
@@ -24,7 +24,7 @@ public abstract class DisposingBehavior<T> : Behavior<T> where T : AvaloniaObjec
     }
 
     /// <summary>
-    /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
+    /// Called after the behavior is attached to the <see cref="IBehavior.AssociatedObject"/>.
     /// </summary>
     /// <param name="disposables">The group of disposable resources that are disposed together.</param>
     protected abstract void OnAttached(CompositeDisposable disposables);

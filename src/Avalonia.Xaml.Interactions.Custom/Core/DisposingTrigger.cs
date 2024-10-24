@@ -6,7 +6,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// 
 /// </summary>
-public abstract class DisposingTrigger : Trigger
+public abstract class DisposingTrigger : StyledElementTrigger
 {
     private readonly CompositeDisposable _disposables = new();
 

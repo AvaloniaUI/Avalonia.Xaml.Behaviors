@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// A behavior that allows to hide control on key down event.
 /// </summary>
-public class HideOnKeyPressedBehavior : Behavior<Control>
+public class HideOnKeyPressedBehavior : StyledElementBehavior<Control>
 {
     /// <summary>
     /// Identifies the <seealso cref="TargetControl"/> avalonia property.

@@ -2,24 +2,32 @@
 using System.Diagnostics;
 using System.Globalization;
 using Avalonia.Controls;
+using Avalonia.Reactive;
 
 namespace Avalonia.Xaml.Interactivity;
 
 /// <summary>
 /// A base class for behaviors, implementing the basic plumbing of <see cref="IBehavior"/>.
 /// </summary>
-public abstract class Behavior : AvaloniaObject, IBehavior, IInternalBehavior
+public abstract class StyledElementBehavior : StyledElement, IBehavior, IInternalBehavior
 {
+    private IDisposable? _dataContextDisposable;
+
     /// <summary>
     /// Identifies the <seealso cref="IsEnabled"/> avalonia property.
     /// </summary>
     public static readonly StyledProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.Register<Behavior, bool>(nameof(IsEnabled), defaultValue: true);
+        AvaloniaProperty.Register<StyledElementBehavior, bool>(nameof(IsEnabled), defaultValue: true);
 
     /// <summary>
     /// Gets the <see cref="AvaloniaObject"/> to which the behavior is attached.
     /// </summary>
     public AvaloniaObject? AssociatedObject { get; private set; }
+
+    /// <summary>
+    /// Gets the <see cref="StyledElement"/> to which this behavior is attached.
+    /// </summary>
+    public StyledElement? AssociatedStyledElement => AssociatedObject as StyledElement;
 
     /// <summary>
     /// Gets or sets a value indicating whether this instance is enabled.
@@ -53,6 +61,8 @@ public abstract class Behavior : AvaloniaObject, IBehavior, IInternalBehavior
         Debug.Assert(associatedObject is not null, "Cannot attach the behavior to a null object.");
         AssociatedObject = associatedObject ?? throw new ArgumentNullException(nameof(associatedObject));
 
+        _dataContextDisposable = SynchronizeDataContext(associatedObject);
+
         OnAttached();
     }
 
@@ -62,6 +72,7 @@ public abstract class Behavior : AvaloniaObject, IBehavior, IInternalBehavior
     public void Detach()
     {
         OnDetaching();
+        _dataContextDisposable?.Dispose();
         AssociatedObject = null;
     }
 
@@ -155,5 +166,17 @@ public abstract class Behavior : AvaloniaObject, IBehavior, IInternalBehavior
     /// </remarks>
     protected virtual void OnUnloaded()
     {
+    }
+
+    private IDisposable? SynchronizeDataContext(AvaloniaObject associatedObject)
+    {
+        if (associatedObject is StyledElement styledElement)
+        {
+            return styledElement
+                .GetObservable(DataContextProperty)
+                .Subscribe(new AnonymousObserver<object?>(x => SetCurrentValue(DataContextProperty, x)));
+        }
+
+        return default;
     }
 }

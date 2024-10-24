@@ -81,9 +81,9 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
     {
         foreach (var item in this)
         {
-            if (item is Behavior behavior)
+            if (item is IInternalBehavior behavior)
             {
-                behavior.AttachedToVisualTree();
+                behavior.AttachedToVisualTreeImpl();
             }
         }
     }
@@ -92,9 +92,9 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
     {
         foreach (var item in this)
         {
-            if (item is Behavior { AssociatedObject: not null} behavior)
+            if (item is IInternalBehavior behavior and IBehavior { AssociatedObject: not null})
             {
-                behavior.DetachedFromVisualTree();
+                behavior.DetachedFromVisualTreeImpl();
             }
         }
     }
@@ -103,9 +103,9 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
     {
         foreach (var item in this)
         {
-            if (item is Behavior behavior)
+            if (item is IInternalBehavior behavior)
             {
-                behavior.AttachedToLogicalTree();
+                behavior.AttachedToLogicalTreeImpl();
             }
         }
     }
@@ -114,9 +114,9 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
     {
         foreach (var item in this)
         {
-            if (item is Behavior { AssociatedObject: not null} behavior)
+            if (item is IInternalBehavior behavior and IBehavior { AssociatedObject: not null})
             {
-                behavior.DetachedFromLogicalTree();
+                behavior.DetachedFromLogicalTreeImpl();
             }
         }
     }
@@ -125,9 +125,9 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
     {
         foreach (var item in this)
         {
-            if (item is Behavior behavior)
+            if (item is IInternalBehavior behavior)
             {
-                behavior.Loaded();
+                behavior.LoadedImpl();
             }
         }
     }
@@ -136,9 +136,9 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
     {
         foreach (var item in this)
         {
-            if (item is Behavior { AssociatedObject: not null} behavior)
+            if (item is IInternalBehavior behavior and IBehavior { AssociatedObject: not null})
             {
-                behavior.Unloaded();
+                behavior.UnloadedImpl();
             }
         }
     }

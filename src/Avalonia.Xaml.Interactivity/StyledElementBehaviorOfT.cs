@@ -8,7 +8,7 @@ namespace Avalonia.Xaml.Interactivity;
 /// and allow for typed associated objects.
 /// </summary>
 /// <typeparam name="T">The object type to attach to</typeparam>
-public abstract class Behavior<T> : Behavior where T : AvaloniaObject
+public abstract class StyledElementBehavior<T> : StyledElementBehavior where T : AvaloniaObject
 {
     /// <summary>
     /// Gets the object to which this behavior is attached.
@@ -16,10 +16,10 @@ public abstract class Behavior<T> : Behavior where T : AvaloniaObject
     public new T? AssociatedObject => base.AssociatedObject as T;
 
     /// <summary>
-    /// Called after the behavior is attached to the <see cref="IBehavior.AssociatedObject"/>.
+    /// Called after the behavior is attached to the <see cref="StyledElementBehavior.AssociatedObject"/>.
     /// </summary>
     /// <remarks>
-    /// Override this to hook up functionality to the <see cref="IBehavior.AssociatedObject"/>
+    /// Override this to hook up functionality to the <see cref="StyledElementBehavior.AssociatedObject"/>
     /// </remarks>
     [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     protected override void OnAttached()
