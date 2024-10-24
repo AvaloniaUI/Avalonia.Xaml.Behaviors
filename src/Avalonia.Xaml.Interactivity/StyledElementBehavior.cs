@@ -187,7 +187,10 @@ public abstract class StyledElementBehavior : StyledElement, IBehavior, IInterna
         {
             return styledElement
                 .GetObservable(DataContextProperty)
-                .Subscribe(new AnonymousObserver<object?>(x => SetCurrentValue(DataContextProperty, x)));
+                .Subscribe(new AnonymousObserver<object?>(x =>
+                {
+                    SetCurrentValue(DataContextProperty, x);
+                }));
         }
 
         return default;
