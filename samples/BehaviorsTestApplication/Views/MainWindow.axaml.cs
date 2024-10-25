@@ -11,7 +11,9 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = new MainWindowViewModel();
+#if DEBUG
         this.AttachDevTools();
+#endif
     }
 
     private void InitializeComponent()
