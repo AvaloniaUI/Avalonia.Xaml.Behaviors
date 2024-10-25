@@ -6,6 +6,7 @@
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <IsPackable>False</IsPackable>
     <Nullable>enable</Nullable>
+    <PublishAot>true</PublishAot>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +18,13 @@
     <PackageReference Include="Avalonia.ReactiveUI" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- This project contains several pages using reflection based behaviors/actions. Make sure all sample types are preserved. -->
+    <TrimmerRootAssembly Include="BehaviorsTestApplication" />
+    <!-- It's necessary, so reflection based behaviors/actions can access Avalonia members. Such as Button.Click. -->
+    <TrimmerRootAssembly Include="Avalonia.Base" />
+    <TrimmerRootAssembly Include="Avalonia.Controls" />
+  </ItemGroup>
   <!--<Import Project="..\..\build\SignAssembly.props" />-->
 
   <ItemGroup>
