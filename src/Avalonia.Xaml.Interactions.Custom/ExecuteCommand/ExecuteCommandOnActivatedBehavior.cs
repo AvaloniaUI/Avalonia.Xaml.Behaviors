@@ -1,6 +1,5 @@
-using System.Reactive;
+using System;
 using System.Reactive.Disposables;
-using System.Reactive.Linq;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 
@@ -23,14 +22,14 @@ public class ExecuteCommandOnActivatedBehavior : ExecuteCommandBehaviorBase
 
             if (mainWindow is not null)
             {
-                var dispose = Observable
-                    .FromEventPattern(mainWindow, nameof(mainWindow.Activated))
-                    .Subscribe(new AnonymousObserver<EventPattern<object>>(e =>
-                    {
-                        ExecuteCommand();
-                    }));
-                disposable.Add(dispose);
+                mainWindow.Activated += WindowOnActivated;
+                disposable.Add(Disposable.Create(() => mainWindow.Activated -= WindowOnActivated));
             }
         }
+    }
+
+    private void WindowOnActivated(object? sender, EventArgs e)
+    {
+        ExecuteCommand();
     }
 }
