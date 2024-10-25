@@ -11,6 +11,7 @@ namespace Avalonia.Xaml.Interactions.Core;
 /// <summary>
 /// An action that will change a specified property to a specified value when invoked.
 /// </summary>
+[RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
 public class ChangePropertyAction : Avalonia.Xaml.Interactivity.Action
 {
     private static readonly char[] s_trimChars = ['(', ')'];

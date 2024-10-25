@@ -9,6 +9,7 @@ namespace Avalonia.Xaml.Interactions.Core;
 /// <summary>
 /// A behavior that performs actions when the bound data meets a specified condition.
 /// </summary>
+[RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
 public class DataTriggerBehavior : StyledElementTrigger
 {
     /// <summary>
@@ -68,7 +69,6 @@ public class DataTriggerBehavior : StyledElementTrigger
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<object?>>(OnValueChanged));
     }
 
-    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private static bool Compare(object? leftOperand, ComparisonConditionType operatorType, object? rightOperand)
     {
         if (leftOperand is not null && rightOperand is not null)
@@ -124,7 +124,6 @@ public class DataTriggerBehavior : StyledElementTrigger
     /// <summary>
     /// Evaluates both operands that implement the IComparable interface.
     /// </summary>
-    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private static bool EvaluateComparable(IComparable leftOperand, ComparisonConditionType operatorType, IComparable rightOperand)
     {
         object? convertedOperand = null;
