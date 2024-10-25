@@ -10,6 +10,7 @@ namespace Avalonia.Xaml.Interactions.Custom;
 /// <summary>
 /// An action that will change a specified Avalonia property to a specified value when invoked.
 /// </summary>
+[RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
 public class ChangeAvaloniaPropertyAction : Avalonia.Xaml.Interactivity.Action
 {
     /// <summary>
@@ -82,7 +83,6 @@ public class ChangeAvaloniaPropertyAction : Avalonia.Xaml.Interactivity.Action
         return false;
     }
 
-    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private void UpdateAvaloniaPropertyValue(AvaloniaObject targetObject, AvaloniaProperty targetProperty)
     {
         ValidateTargetProperty(targetProperty);
