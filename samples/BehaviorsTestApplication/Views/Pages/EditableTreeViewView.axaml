@@ -19,7 +19,7 @@
       </Style>
     </TreeView.Styles>
     <TreeView.ItemTemplate>
-      <TreeDataTemplate DataType="vm:ItemViewModel" x:CompileBindings="False"
+      <TreeDataTemplate DataType="vm:ItemViewModel"
                         ItemsSource="{Binding Items}">
         <controls:EditableItem Text="{Binding Value}" />
       </TreeDataTemplate>

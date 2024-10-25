@@ -6,7 +6,7 @@
         xmlns:models="clr-namespace:DraggableDemo.Models"
         mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="550"
         x:Class="DraggableDemo.MainWindow"
-        x:CompileBindings="True" x:DataType="local:MainWindow"
+        x:DataType="local:MainWindow"
         WindowState="Normal" WindowStartupLocation="CenterScreen"
         Width="1200" Height="550"
         Title="Draggable Controls Demo">

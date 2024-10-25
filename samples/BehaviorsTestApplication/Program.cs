@@ -18,6 +18,7 @@ class Program
         GC.KeepAlive(typeof(Interaction).Assembly);
         GC.KeepAlive(typeof(ComparisonConditionType).Assembly);
         return AppBuilder.Configure<App>()
+            .WithInterFont()
             .UsePlatformDetect()
             .UseReactiveUI()
             .LogToTrace();

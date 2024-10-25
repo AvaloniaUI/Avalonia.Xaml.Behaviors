@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
+             xmlns:vm="clr-namespace:BehaviorsTestApplication.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+             x:DataType="vm:MainWindowViewModel">
   <Grid RowDefinitions="*,Auto" ColumnDefinitions="30*,5,30*,5,30*">
     <Canvas Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" 
             Margin="5" 

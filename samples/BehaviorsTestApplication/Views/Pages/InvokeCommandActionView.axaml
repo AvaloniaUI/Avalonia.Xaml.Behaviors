@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
              xmlns:reactive="using:System.Reactive"
-             x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
+             x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
   <Design.DataContext>
     <vm:MainWindowViewModel />
