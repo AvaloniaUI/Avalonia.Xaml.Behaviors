@@ -1,7 +1,9 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:core="clr-namespace:Avalonia.Xaml.Interactions.UnitTests.Core"
         x:Class="Avalonia.Xaml.Interactions.UnitTests.Core.InvokeCommandAction004"
-        Title="InvokeCommandAction004">
+        Title="InvokeCommandAction004"
+        x:DataType="core:InvokeCommandAction004">
   <StackPanel>
     <TextBox Name="TargetTextBox" 
              Text="Initial Text" />

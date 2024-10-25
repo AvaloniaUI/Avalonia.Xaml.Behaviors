@@ -2,7 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="Avalonia.Xaml.Interactions.UnitTests.Core.InvokeCommandAction003"
         xmlns:local="clr-namespace:Avalonia.Xaml.Interactions.UnitTests.Core"
-        Title="InvokeCommandAction003">
+        Title="InvokeCommandAction003"
+        x:DataType="local:InvokeCommandAction003">
   <StackPanel>
     <TextBox Name="TargetTextBox" 
              Text="Initial Text" />
