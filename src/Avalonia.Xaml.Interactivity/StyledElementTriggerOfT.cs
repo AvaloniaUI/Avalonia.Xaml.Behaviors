@@ -22,7 +22,6 @@ public abstract class StyledElementTrigger<T> : StyledElementTrigger where T : A
     /// Override this to hook up functionality to the <see cref="IBehavior.AssociatedObject"/>
     /// </remarks>
     /// 
-    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     protected override void OnAttached()
     {
         base.OnAttached();

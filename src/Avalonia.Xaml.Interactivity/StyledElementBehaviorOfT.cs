@@ -21,7 +21,6 @@ public abstract class StyledElementBehavior<T> : StyledElementBehavior where T :
     /// <remarks>
     /// Override this to hook up functionality to the <see cref="StyledElementBehavior.AssociatedObject"/>
     /// </remarks>
-    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     protected override void OnAttached()
     {
         base.OnAttached();
