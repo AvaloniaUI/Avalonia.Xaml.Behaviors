@@ -14,23 +14,18 @@ namespace Avalonia.Xaml.Interactions.Core;
 /// <summary>
 /// An action that calls a method on a specified object when invoked.
 /// </summary>
-public class CallMethodAction : AvaloniaObject, IAction
+[RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
+public class CallMethodAction : Avalonia.Xaml.Interactivity.Action
 {
     private Type? _targetObjectType;
-    private readonly List<MethodDescriptor> _methodDescriptors = new();
+    private readonly List<MethodDescriptor> _methodDescriptors = [];
     private MethodDescriptor? _cachedMethodDescriptor;
-
-    /// <summary>
-    /// Identifies the <seealso cref="IsEnabled"/> avalonia property.
-    /// </summary>
-    public static readonly StyledProperty<bool> IsEnabledProperty =
-        AvaloniaProperty.Register<CallMethodAction, bool>(nameof(IsEnabled), defaultValue: true);
 
     /// <summary>
     /// Identifies the <seealso cref="MethodName"/> avalonia property.
     /// </summary>
-    public static readonly StyledProperty<string> MethodNameProperty =
-        AvaloniaProperty.Register<CallMethodAction, string>(nameof(MethodName));
+    public static readonly StyledProperty<string?> MethodNameProperty =
+        AvaloniaProperty.Register<CallMethodAction, string?>(nameof(MethodName));
 
     /// <summary>
     /// Identifies the <seealso cref="TargetObject"/> avalonia property.
@@ -39,19 +34,9 @@ public class CallMethodAction : AvaloniaObject, IAction
         AvaloniaProperty.Register<CallMethodAction, object?>(nameof(TargetObject));
 
     /// <summary>
-    /// Gets or sets a value indicating whether this instance is enabled.
-    /// </summary>
-    /// <value><c>true</c> if this instance is enabled; otherwise, <c>false</c>.</value>
-    public bool IsEnabled
-    {
-        get => GetValue(IsEnabledProperty);
-        set => SetValue(IsEnabledProperty, value);
-    }
-
-    /// <summary>
     /// Gets or sets the name of the method to invoke. This is a avalonia property.
     /// </summary>
-    public string MethodName
+    public string? MethodName
     {
         get => GetValue(MethodNameProperty);
         set => SetValue(MethodNameProperty, value);
@@ -108,8 +93,7 @@ public class CallMethodAction : AvaloniaObject, IAction
     /// <param name="sender">The <see cref="object"/> that is passed to the action by the behavior. Generally this is <seealso cref="IBehavior.AssociatedObject"/> or a target object.</param>
     /// <param name="parameter">The value of this parameter is determined by the caller.</param>
     /// <returns>True if the method is called; else false.</returns>
-    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
-    public virtual object Execute(object? sender, object? parameter)
+    public override object Execute(object? sender, object? parameter)
     {
         if (!IsEnabled)
         {
@@ -146,7 +130,7 @@ public class CallMethodAction : AvaloniaObject, IAction
                 methodDescriptor.MethodInfo.Invoke(target, null);
                 return true;
             case 2:
-                methodDescriptor.MethodInfo.Invoke(target, new[] { target, parameter! });
+                methodDescriptor.MethodInfo.Invoke(target, [target, parameter!]);
                 return true;
             default:
                 return false;

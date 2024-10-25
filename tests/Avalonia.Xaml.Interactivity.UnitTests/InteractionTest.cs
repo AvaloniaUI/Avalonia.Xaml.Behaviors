@@ -133,7 +133,7 @@ public class InteractionTest
     [AvaloniaFact]
     public void ExecuteActions_ActionsWithResults_ResultsInActionOrder()
     {
-        string[] expectedReturnValues = { "A", "B", "C" };
+        string[] expectedReturnValues = ["A", "B", "C"];
 
         var actions = new ActionCollection();
 

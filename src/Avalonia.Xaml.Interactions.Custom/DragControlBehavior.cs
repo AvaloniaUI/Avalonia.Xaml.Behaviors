@@ -6,9 +6,9 @@ using Avalonia.Xaml.Interactivity;
 namespace Avalonia.Xaml.Interactions.Custom;
 
 /// <summary>
-/// A behavior that allows controls to be moved around the canvas using RenderTransform of <see cref="Behavior.AssociatedObject"/>.
+/// A behavior that allows controls to be moved around the canvas using RenderTransform of <see cref="IBehavior.AssociatedObject"/>.
 /// </summary>
-public sealed class DragControlBehavior : Behavior<Control>
+public sealed class DragControlBehavior : StyledElementBehavior<Control>
 {
     /// <summary>
     /// Identifies the <seealso cref="TargetControl"/> avalonia property.

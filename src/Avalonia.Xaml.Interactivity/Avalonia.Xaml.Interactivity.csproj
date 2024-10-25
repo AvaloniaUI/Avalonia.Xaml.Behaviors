@@ -19,5 +19,6 @@
 
   <Import Project="..\..\build\SignAssembly.props" />
   <Import Project="..\..\build\SourceLink.props" />
+  <Import Project="..\..\build\TrimmingEnable.targets" />
 
 </Project>

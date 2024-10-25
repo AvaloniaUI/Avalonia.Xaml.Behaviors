@@ -1,29 +1,18 @@
 ﻿using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Events;
 
 /// <summary>
 /// 
 /// </summary>
-public abstract class TextInputEventBehavior : Behavior<Interactive>
+public abstract class TextInputEventBehavior : InteractiveBehaviorBase
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty = 
-        AvaloniaProperty.Register<TextInputEventBehavior, RoutingStrategies>(
-            nameof(RoutingStrategies),
-            RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public RoutingStrategies RoutingStrategies
+    static TextInputEventBehavior()
     {
-        get => GetValue(RoutingStrategiesProperty);
-        set => SetValue(RoutingStrategiesProperty, value);
+        RoutingStrategiesProperty.OverrideMetadata<TextInputEventBehavior>(
+            new StyledPropertyMetadata<RoutingStrategies>(
+                defaultValue: RoutingStrategies.Tunnel | RoutingStrategies.Bubble));
     }
 
     /// <inheritdoc />

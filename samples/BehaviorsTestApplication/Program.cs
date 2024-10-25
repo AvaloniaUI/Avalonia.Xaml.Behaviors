@@ -1,7 +1,6 @@
 ﻿using System;
 using Avalonia;
 using Avalonia.ReactiveUI;
-using Avalonia.Xaml.Interactions.Core;
 using Avalonia.Xaml.Interactivity;
 
 namespace BehaviorsTestApplication;
@@ -19,6 +18,7 @@ class Program
         GC.KeepAlive(typeof(Interaction).Assembly);
         GC.KeepAlive(typeof(ComparisonConditionType).Assembly);
         return AppBuilder.Configure<App>()
+            .WithInterFont()
             .UsePlatformDetect()
             .UseReactiveUI()
             .LogToTrace();

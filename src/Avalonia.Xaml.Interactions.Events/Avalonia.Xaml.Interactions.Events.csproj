@@ -19,6 +19,7 @@
 
   <Import Project="..\..\build\SignAssembly.props" />
   <Import Project="..\..\build\SourceLink.props" />
+  <Import Project="..\..\build\TrimmingEnable.targets" />
 
   <ItemGroup>
     <ProjectReference Include="..\Avalonia.Xaml.Interactivity\Avalonia.Xaml.Interactivity.csproj" />

@@ -13,7 +13,7 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
 {
     // After a VectorChanged event we need to compare the current state of the collection
     // with the old collection so that we can call Detach on all removed items.
-    private readonly List<IBehavior> _oldCollection = new();
+    private readonly List<IBehavior> _oldCollection = [];
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BehaviorCollection"/> class.
@@ -81,9 +81,9 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
     {
         foreach (var item in this)
         {
-            if (item is Behavior behavior)
+            if (item is IInternalBehavior behavior)
             {
-                behavior.AttachedToVisualTree();
+                behavior.AttachedToVisualTreeImpl();
             }
         }
     }
@@ -92,9 +92,53 @@ public class BehaviorCollection : AvaloniaList<AvaloniaObject>
     {
         foreach (var item in this)
         {
-            if (item is Behavior { AssociatedObject: not null} behavior)
+            if (item is IInternalBehavior behavior and IBehavior { AssociatedObject: not null})
             {
-                behavior.DetachedFromVisualTree();
+                behavior.DetachedFromVisualTreeImpl();
+            }
+        }
+    }
+
+    internal void AttachedToLogicalTree()
+    {
+        foreach (var item in this)
+        {
+            if (item is IInternalBehavior behavior)
+            {
+                behavior.AttachedToLogicalTreeImpl();
+            }
+        }
+    }
+
+    internal void DetachedFromLogicalTree()
+    {
+        foreach (var item in this)
+        {
+            if (item is IInternalBehavior behavior and IBehavior { AssociatedObject: not null})
+            {
+                behavior.DetachedFromLogicalTreeImpl();
+            }
+        }
+    }
+
+    internal void Loaded()
+    {
+        foreach (var item in this)
+        {
+            if (item is IInternalBehavior behavior)
+            {
+                behavior.LoadedImpl();
+            }
+        }
+    }
+
+    internal void Unloaded()
+    {
+        foreach (var item in this)
+        {
+            if (item is IInternalBehavior behavior and IBehavior { AssociatedObject: not null})
+            {
+                behavior.UnloadedImpl();
             }
         }
     }

@@ -11,15 +11,16 @@ namespace Avalonia.Xaml.Interactions.Core;
 /// <summary>
 /// A behavior that listens for a specified event on its source and executes its actions when that event is fired.
 /// </summary>
-public class EventTriggerBehavior : Trigger
+[RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
+public class EventTriggerBehavior : StyledElementTrigger
 {
     private const string EventNameDefaultValue = "AttachedToVisualTree";
 
     /// <summary>
     /// Identifies the <seealso cref="EventName"/> avalonia property.
     /// </summary>
-    public static readonly StyledProperty<string> EventNameProperty =
-        AvaloniaProperty.Register<EventTriggerBehavior, string>(nameof(EventName), EventNameDefaultValue);
+    public static readonly StyledProperty<string?> EventNameProperty =
+        AvaloniaProperty.Register<EventTriggerBehavior, string?>(nameof(EventName), EventNameDefaultValue);
 
     /// <summary>
     /// Identifies the <seealso cref="SourceObject"/> avalonia property.
@@ -34,7 +35,7 @@ public class EventTriggerBehavior : Trigger
     /// <summary>
     /// Gets or sets the name of the event to listen for. This is a avalonia property.
     /// </summary>
-    public string EventName
+    public string? EventName
     {
         get => GetValue(EventNameProperty);
         set => SetValue(EventNameProperty, value);
@@ -42,7 +43,7 @@ public class EventTriggerBehavior : Trigger
 
     /// <summary>
     /// Gets or sets the source object from which this behavior listens for events.
-    /// If <seealso cref="SourceObject"/> is not set, the source will default to <seealso cref="Behavior.AssociatedObject"/>. This is a avalonia property.
+    /// If <seealso cref="SourceObject"/> is not set, the source will default to <seealso cref="IBehavior.AssociatedObject"/>. This is a avalonia property.
     /// </summary>
     [ResolveByName]
     public object? SourceObject
@@ -96,7 +97,7 @@ public class EventTriggerBehavior : Trigger
     }
 
     /// <summary>
-    /// Called after the behavior is attached to the <see cref="Behavior.AssociatedObject"/>.
+    /// Called after the behavior is attached to the <see cref="IBehavior.AssociatedObject"/>.
     /// </summary>
     protected override void OnAttached()
     {
@@ -105,7 +106,7 @@ public class EventTriggerBehavior : Trigger
     }
 
     /// <summary>
-    /// Called when the behavior is being detached from its <see cref="Behavior.AssociatedObject"/>.
+    /// Called when the behavior is being detached from its <see cref="IBehavior.AssociatedObject"/>.
     /// </summary>
     protected override void OnDetaching()
     {
@@ -156,6 +157,11 @@ public class EventTriggerBehavior : Trigger
         if (eventName != EventNameDefaultValue)
         {
             if (_resolvedSource is null)
+            {
+                return;
+            }
+
+            if (EventName is null)
             {
                 return;
             }
@@ -234,6 +240,11 @@ public class EventTriggerBehavior : Trigger
     /// <param name="eventArgs">The event args.</param>
     protected virtual void AttachedToVisualTree(object? sender, object eventArgs)
     {
+        if (!IsEnabled)
+        {
+            return;
+        }
+
         Interaction.ExecuteActions(_resolvedSource, Actions, eventArgs);
     }
 

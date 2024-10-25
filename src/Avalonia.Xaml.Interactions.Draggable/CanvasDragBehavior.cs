@@ -1,5 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -10,7 +9,7 @@ namespace Avalonia.Xaml.Interactions.Draggable;
 /// <summary>
 /// 
 /// </summary>
-public class CanvasDragBehavior : Behavior<Control>
+public class CanvasDragBehavior : StyledElementBehavior<Control>
 {
     private bool _enableDrag;
     private Point _start;

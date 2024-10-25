@@ -9,6 +9,7 @@ namespace Avalonia.Xaml.Interactivity;
 /// <summary>
 /// A helper class that enables converting values specified in markup (strings) to their object representation.
 /// </summary>
+[RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
 internal static class TypeConverterHelper
 {
     /// <summary>
@@ -18,8 +19,8 @@ internal static class TypeConverterHelper
     /// <param name="destinationType">The destination type.</param>
     /// <returns>Object representation of the string value.</returns>
     /// <exception cref="ArgumentNullException">destinationType cannot be null.</exception>
-    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
-    public static object? Convert(string value, Type destinationType)
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "DynamicallyAccessedMembers handles most of the problems.")]
+    public static object? Convert(string value, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type destinationType)
     {
         if (destinationType is null)
         {

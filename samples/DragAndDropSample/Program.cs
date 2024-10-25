@@ -1,8 +1,6 @@
 ﻿using System;
 using Avalonia;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.ReactiveUI;
-using Avalonia.Xaml.Interactions.Core;
 using Avalonia.Xaml.Interactivity;
 
 namespace DragAndDropSample;

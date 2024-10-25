@@ -1,0 +1,39 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BehaviorsTestApplication.Controls.EditableItem"
+             Name="EditableItemUserControl">
+  <Panel Background="Transparent">
+    <Interaction.Behaviors>
+      <ShowOnDoubleTappedBehavior TargetControl="TextBoxEdit" />
+      <ShowOnKeyDownBehavior TargetControl="TextBoxEdit" Key="F2" />
+    </Interaction.Behaviors>
+    <TextBox x:Name="TextBoxEdit"
+             IsVisible="False"
+             Height="{Binding #TextStackPanel.Bounds.Height}"
+             VerticalContentAlignment="Center"
+             VerticalAlignment="Center"
+             Margin="0"
+             Padding="6,0,6,0"
+             BorderThickness="0"
+             Text="{Binding #EditableItemUserControl.Text, Mode=TwoWay}">
+      <Interaction.Behaviors>
+        <HideOnKeyPressedBehavior TargetControl="TextBoxEdit" Key="Escape" />
+        <HideOnKeyPressedBehavior TargetControl="TextBoxEdit" Key="Enter" />
+        <HideOnLostFocusBehavior TargetControl="TextBoxEdit" />
+        <TextBoxSelectAllOnGotFocusBehavior />
+      </Interaction.Behaviors>
+    </TextBox>
+    <StackPanel x:Name="TextStackPanel"
+                Orientation="Horizontal"
+                Background="Transparent"
+                Focusable="True"
+                IsVisible="{Binding !#TextBoxEdit.IsVisible}">
+      <TextBlock x:Name="StyleTextBlock"
+                 Text="{Binding #EditableItemUserControl.Text}"
+                 Margin="6,8,6,8" />
+    </StackPanel>
+  </Panel>
+</UserControl>

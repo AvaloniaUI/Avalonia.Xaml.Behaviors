@@ -9,7 +9,7 @@ namespace Avalonia.Xaml.Interactions.Draggable;
 /// <summary>
 /// 
 /// </summary>
-public class GridDragBehavior : Behavior<Control>
+public class GridDragBehavior : StyledElementBehavior<Control>
 {
     /// <summary>
     /// 

@@ -13,7 +13,7 @@ namespace Avalonia.Xaml.Interactions.Draggable;
 /// <summary>
 /// 
 /// </summary>
-public class ItemDragBehavior : Behavior<Control>
+public class ItemDragBehavior : StyledElementBehavior<Control>
 {
     private bool _enableDrag;
     private bool _dragStarted;

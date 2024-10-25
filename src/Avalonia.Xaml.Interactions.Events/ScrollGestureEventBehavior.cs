@@ -1,31 +1,12 @@
 ﻿using Avalonia.Input;
-using Avalonia.Interactivity;
-using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Events;
 
 /// <summary>
 /// 
 /// </summary>
-public abstract class ScrollGestureEventBehavior : Behavior<Interactive>
+public abstract class ScrollGestureEventBehavior : InteractiveBehaviorBase
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty = 
-        AvaloniaProperty.Register<ScrollGestureEventBehavior, RoutingStrategies>(
-            nameof(RoutingStrategies),
-            RoutingStrategies.Bubble);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public RoutingStrategies RoutingStrategies
-    {
-        get => GetValue(RoutingStrategiesProperty);
-        set => SetValue(RoutingStrategiesProperty, value);
-    }
-
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()
     {

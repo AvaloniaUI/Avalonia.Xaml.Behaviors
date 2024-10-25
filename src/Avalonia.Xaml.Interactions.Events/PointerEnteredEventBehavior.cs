@@ -1,29 +1,18 @@
 ﻿using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Events;
 
 /// <summary>
 /// 
 /// </summary>
-public abstract class PointerEnteredEventBehavior : Behavior<Interactive>
+public abstract class PointerEnteredEventBehavior : InteractiveBehaviorBase
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty = 
-        AvaloniaProperty.Register<PointerEnteredEventBehavior, RoutingStrategies>(
-            nameof(RoutingStrategies),
-            RoutingStrategies.Direct);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public RoutingStrategies RoutingStrategies
+    static PointerEnteredEventBehavior()
     {
-        get => GetValue(RoutingStrategiesProperty);
-        set => SetValue(RoutingStrategiesProperty, value);
+        RoutingStrategiesProperty.OverrideMetadata<PointerEnteredEventBehavior>(
+            new StyledPropertyMetadata<RoutingStrategies>(
+                defaultValue: RoutingStrategies.Direct));
     }
 
     /// <inheritdoc />

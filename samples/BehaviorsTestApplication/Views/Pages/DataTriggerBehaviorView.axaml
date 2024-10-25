@@ -1,12 +1,10 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.DataTriggerBehaviorView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
-             x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
+             x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
   <Design.DataContext>
     <vm:MainWindowViewModel />
@@ -17,22 +15,22 @@
                Fill="{DynamicResource BlueBrush}"
                Stroke="{DynamicResource GrayBrush}"
                StrokeThickness="5">
-      <i:Interaction.Behaviors>
-        <ia:DataTriggerBehavior Binding="{Binding #Slider.Value}" 
+      <Interaction.Behaviors>
+        <DataTriggerBehavior Binding="{Binding #Slider.Value}" 
                                 ComparisonCondition="GreaterThan" 
                                 Value="50">
-          <ia:ChangePropertyAction TargetObject="DataTriggerRectangle" 
+          <ChangePropertyAction TargetObject="DataTriggerRectangle" 
                                    PropertyName="Fill"
                                    Value="{DynamicResource YellowBrush}" />
-        </ia:DataTriggerBehavior>
-        <ia:DataTriggerBehavior Binding="{Binding #Slider.Value}" 
+        </DataTriggerBehavior>
+        <DataTriggerBehavior Binding="{Binding #Slider.Value}" 
                                 ComparisonCondition="LessThanOrEqual" 
                                 Value="50">
-          <ia:ChangePropertyAction TargetObject="DataTriggerRectangle" 
+          <ChangePropertyAction TargetObject="DataTriggerRectangle" 
                                    PropertyName="Fill"
                                    Value="{DynamicResource BlueBrush}" />
-        </ia:DataTriggerBehavior>
-      </i:Interaction.Behaviors>
+        </DataTriggerBehavior>
+      </Interaction.Behaviors>
     </Rectangle>
     <StackPanel Grid.Row="1" 
                 Margin="5,0,5,5" 

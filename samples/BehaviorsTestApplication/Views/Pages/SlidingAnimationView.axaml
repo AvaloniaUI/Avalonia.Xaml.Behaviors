@@ -1,0 +1,66 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BehaviorsTestApplication.Views.Pages.SlidingAnimationView">
+  <TabControl>
+    <TabItem Header="Left">
+      <Panel ClipToBounds="True">
+        <Border Name="Border1" 
+                Background="Transparent" 
+                SlidingAnimation.Left="500">
+          <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="6">
+            <TextBlock Text="TextBlock"/>
+            <CheckBox IsChecked="True" Content="CheckBox" />
+            <TextBlock Text="TextBlock"/>
+            <TextBox Text="TextBox"/>
+          </StackPanel>
+        </Border>
+      </Panel>
+    </TabItem>
+    <TabItem Header="Right">
+      <Panel ClipToBounds="True">
+        <Border Name="Border2" 
+                Background="Transparent" 
+                SlidingAnimation.Right="500">
+          <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="6">
+            <TextBlock Text="TextBlock"/>
+            <CheckBox IsChecked="True" Content="CheckBox" />
+            <TextBlock Text="TextBlock"/>
+            <TextBox Text="TextBox"/>
+          </StackPanel>
+        </Border>
+      </Panel>
+    </TabItem>
+    <TabItem Header="Top">
+      <Panel ClipToBounds="True">
+        <Border Name="Border3" 
+                Background="Transparent" 
+                SlidingAnimation.Top="500">
+          <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="6">
+            <TextBlock Text="TextBlock"/>
+            <CheckBox IsChecked="True" Content="CheckBox" />
+            <TextBlock Text="TextBlock"/>
+            <TextBox Text="TextBox"/>
+          </StackPanel>
+        </Border>
+      </Panel>
+    </TabItem>
+    <TabItem Header="Bottom">
+      <Panel ClipToBounds="True">
+        <Border Name="Border4" 
+                Background="Transparent" 
+                SlidingAnimation.Bottom="500">
+          <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="6">
+            <TextBlock Text="TextBlock"/>
+            <CheckBox IsChecked="True" Content="CheckBox" />
+            <TextBlock Text="TextBlock"/>
+            <TextBox Text="TextBox"/>
+          </StackPanel>
+        </Border>
+      </Panel>
+    </TabItem>
+  </TabControl>
+</UserControl>
+

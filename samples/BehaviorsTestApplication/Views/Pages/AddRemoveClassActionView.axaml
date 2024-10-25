@@ -1,13 +1,10 @@
 ﻿<UserControl x:Class="BehaviorsTestApplication.Views.Pages.AddRemoveClassActionView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:BehaviorsTestApplication.ViewModels"
-             x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
+             x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450">
   <Design.DataContext>
     <vm:MainWindowViewModel />
@@ -24,20 +21,20 @@
           <Setter Property="Orientation" Value="Vertical" />
         </Style>
       </StackPanel.Styles>
-      <i:Interaction.Behaviors>
-        <ia:DataTriggerBehavior Binding="{Binding #ResponsiveStackPanel.Bounds.Width}" 
+      <Interaction.Behaviors>
+        <DataTriggerBehavior Binding="{Binding #ResponsiveStackPanel.Bounds.Width}" 
                                 ComparisonCondition="LessThan"
                                 Value="500">
-          <iac:AddClassAction StyledElement="ResponsiveStackPanel" 
+          <AddClassAction StyledElement="ResponsiveStackPanel" 
                               ClassName="vertical"
                               RemoveIfExists="True" />
-        </ia:DataTriggerBehavior>
-        <ia:DataTriggerBehavior Binding="{Binding #ResponsiveStackPanel.Bounds.Width}"
+        </DataTriggerBehavior>
+        <DataTriggerBehavior Binding="{Binding #ResponsiveStackPanel.Bounds.Width}"
                                 ComparisonCondition="GreaterThanOrEqual" Value="500">
-          <iac:RemoveClassAction StyledElement="ResponsiveStackPanel"
+          <RemoveClassAction StyledElement="ResponsiveStackPanel"
                                  ClassName="vertical" />
-        </ia:DataTriggerBehavior>
-      </i:Interaction.Behaviors>
+        </DataTriggerBehavior>
+      </Interaction.Behaviors>
       <TextBlock Text="Item1" />
       <TextBlock Text="Item2" />
       <TextBlock Text="Item3" />

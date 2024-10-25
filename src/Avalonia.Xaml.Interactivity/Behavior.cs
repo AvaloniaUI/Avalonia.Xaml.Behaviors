@@ -8,12 +8,28 @@ namespace Avalonia.Xaml.Interactivity;
 /// <summary>
 /// A base class for behaviors, implementing the basic plumbing of <see cref="IBehavior"/>.
 /// </summary>
-public abstract class Behavior : AvaloniaObject, IBehavior
+public abstract class Behavior : AvaloniaObject, IBehavior, IInternalBehavior
 {
+    /// <summary>
+    /// Identifies the <seealso cref="IsEnabled"/> avalonia property.
+    /// </summary>
+    public static readonly StyledProperty<bool> IsEnabledProperty =
+        AvaloniaProperty.Register<Behavior, bool>(nameof(IsEnabled), defaultValue: true);
+
     /// <summary>
     /// Gets the <see cref="AvaloniaObject"/> to which the behavior is attached.
     /// </summary>
     public AvaloniaObject? AssociatedObject { get; private set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this instance is enabled.
+    /// </summary>
+    /// <value><c>true</c> if this instance is enabled; otherwise, <c>false</c>.</value>
+    public bool IsEnabled
+    {
+        get => GetValue(IsEnabledProperty);
+        set => SetValue(IsEnabledProperty, value);
+    }
 
     /// <summary>
     /// Attaches the behavior to the specified <see cref="AvaloniaObject"/>.
@@ -69,15 +85,17 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     {
     }
 
-    internal void AttachedToVisualTree()
-    {
-        OnAttachedToVisualTree();
-    }
+    void IInternalBehavior.AttachedToVisualTreeImpl() => OnAttachedToVisualTree();
 
-    internal void DetachedFromVisualTree()
-    {
-        OnDetachedFromVisualTree();
-    }
+    void IInternalBehavior.DetachedFromVisualTreeImpl() => OnDetachedFromVisualTree();
+
+    void IInternalBehavior.AttachedToLogicalTreeImpl() => OnAttachedToLogicalTree();
+
+    void IInternalBehavior.DetachedFromLogicalTreeImpl() => OnDetachedFromLogicalTree();
+
+    void IInternalBehavior.LoadedImpl() => OnLoaded();
+
+    void IInternalBehavior.UnloadedImpl() => OnUnloaded();
 
     /// <summary>
     /// Called after the <see cref="AssociatedObject"/> is attached to the visual tree.
@@ -96,6 +114,46 @@ public abstract class Behavior : AvaloniaObject, IBehavior
     /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="Control"/>.
     /// </remarks>
     protected virtual void OnDetachedFromVisualTree()
+    {
+    }
+
+    /// <summary>
+    /// Called after the <see cref="AssociatedObject"/> is attached to the logical tree.
+    /// </summary>
+    /// <remarks>
+    /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="Control"/>.
+    /// </remarks>
+    protected virtual void OnAttachedToLogicalTree()
+    {
+    }
+
+    /// <summary>
+    /// Called when the <see cref="AssociatedObject"/> is being detached from the logical tree.
+    /// </summary>
+    /// <remarks>
+    /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="Control"/>.
+    /// </remarks>
+    protected virtual void OnDetachedFromLogicalTree()
+    {
+    }
+
+    /// <summary>
+    /// Called after the <see cref="AssociatedObject"/> is loaded.
+    /// </summary>
+    /// <remarks>
+    /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="Control"/>.
+    /// </remarks>
+    protected virtual void OnLoaded()
+    {
+    }
+
+    /// <summary>
+    /// Called when the <see cref="AssociatedObject"/> is unloaded.
+    /// </summary>
+    /// <remarks>
+    /// Invoked only when the <see cref="AssociatedObject"/> is of type <see cref="Control"/>.
+    /// </remarks>
+    protected virtual void OnUnloaded()
     {
     }
 }

@@ -11,7 +11,7 @@ namespace Avalonia.Xaml.Interactions.DragAndDrop;
 /// <summary>
 /// 
 /// </summary>
-public class TypedDragBehavior : Behavior<Control>
+public class TypedDragBehavior : StyledElementBehavior<Control>
 {
     private Point _dragStartPoint;
     private PointerEventArgs? _triggerEvent;
@@ -91,7 +91,6 @@ public class TypedDragBehavior : Behavior<Control>
         await DragDrop.DoDragDrop(triggerEvent, data, effect);
     }
 
-    [RequiresUnreferencedCode("This functionality is not compatible with trimming.")]
     private void AssociatedObject_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var properties = e.GetCurrentPoint(AssociatedObject).Properties;
@@ -100,7 +99,7 @@ public class TypedDragBehavior : Behavior<Control>
             if (e.Source is Control control 
                 && AssociatedObject?.DataContext == control.DataContext
                 && DataType is not null
-                && DataType.IsAssignableFrom(control.DataContext?.GetType()))
+                && DataType.IsInstanceOfType(control.DataContext))
             {
                 _dragStartPoint = e.GetPosition(null);
                 _triggerEvent = e;

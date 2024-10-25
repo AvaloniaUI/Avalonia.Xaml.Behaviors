@@ -1,30 +1,20 @@
 ﻿using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Events;
 
 /// <summary>
 /// 
 /// </summary>
-public abstract class PointerExitedEventBehavior : Behavior<Interactive>
+public abstract class PointerExitedEventBehavior : InteractiveBehaviorBase
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty = 
-        AvaloniaProperty.Register<PointerExitedEventBehavior, RoutingStrategies>(
-            nameof(RoutingStrategies),
-            RoutingStrategies.Direct);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public RoutingStrategies RoutingStrategies
+    static PointerExitedEventBehavior()
     {
-        get => GetValue(RoutingStrategiesProperty);
-        set => SetValue(RoutingStrategiesProperty, value);
+        RoutingStrategiesProperty.OverrideMetadata<PointerExitedEventBehavior>(
+            new StyledPropertyMetadata<RoutingStrategies>(
+                defaultValue: RoutingStrategies.Direct));
     }
+
 
     /// <inheritdoc />
     protected override void OnAttachedToVisualTree()

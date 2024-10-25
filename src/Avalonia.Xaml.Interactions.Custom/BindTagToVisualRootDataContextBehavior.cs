@@ -1,42 +1,44 @@
 ﻿using System;
+using System.Reactive.Disposables;
 using Avalonia.Controls;
 using Avalonia.VisualTree;
-using Avalonia.Xaml.Interactivity;
 
 namespace Avalonia.Xaml.Interactions.Custom;
 
 /// <summary>
 /// Binds AssociatedObject object Tag property to root visual DataContext.
 /// </summary>
-public class BindTagToVisualRootDataContextBehavior : Behavior<Control>
+public class BindTagToVisualRootDataContextBehavior : DisposingBehavior<Control>
 {
-    private IDisposable? _disposable;
-
-    /// <inheritdoc/>
-    protected override void OnAttachedToVisualTree()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="disposables"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    protected override void OnAttached(CompositeDisposable disposables)
     {
         var visualRoot = (Control?)AssociatedObject?.GetVisualRoot();
         if (visualRoot is not null)
         {
-            _disposable = BindDataContextToTag(visualRoot, AssociatedObject);
+            var disposable = BindDataContextToTag(visualRoot, AssociatedObject);
+            disposables.Add(disposable);
         }
     }
 
-    /// <inheritdoc/>
-    protected override void OnDetachedFromVisualTree()
-    {
-        _disposable?.Dispose();
-    }
-
-    private static IDisposable? BindDataContextToTag(Control source, Control? target)
+    private static IDisposable BindDataContextToTag(Control source, Control? target)
     {
         if (source is null)
+        {
             throw new ArgumentNullException(nameof(source));
+        }
 
         if (target is null)
+        {
             throw new ArgumentNullException(nameof(target));
+        }
 
-        var data = source.GetObservable(StyledElement.DataContextProperty);
-        return data is not null ? target.Bind(Control.TagProperty, data) : null;
+        return target.Bind(
+            Control.TagProperty, 
+            source.GetObservable(StyledElement.DataContextProperty));
     }
 }
