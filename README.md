@@ -1,3 +1,7 @@
+# Repository was moved!
+
+New location is https://github.com/wieslawsoltes/Avalonia.Xaml.Behaviors
+
 # Avalonia XAML Behaviors
 
 [![Gitter](https://badges.gitter.im/wieslawsoltes/AvaloniaBehaviors.svg)](https://gitter.im/wieslawsoltes/AvaloniaBehaviors?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
